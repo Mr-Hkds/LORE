@@ -1,9 +1,40 @@
 {
-  "shared_delusion": ["burari_deaths_001", "asch_conformity_002"],
-  "family_systems_collapse": ["burari_deaths_001"],
-  "ritualistic_behavior": ["burari_deaths_001", "dyatlov_pass_003"],
-  "conformity_pressure": ["asch_conformity_002"],
-  "obedience_to_authority": ["asch_conformity_002"],
-  "unexplained_deaths": ["dyatlov_pass_003"],
-  "government_coverup": ["dyatlov_pass_003"]
+  "shared_delusion": [
+    "burari_deaths_001",
+    "asch_conformity_002"
+  ],
+  "family_systems_collapse": [
+    "burari_deaths_001"
+  ],
+  "ritualistic_behavior": [
+    "burari_deaths_001",
+    "dyatlov_pass_003"
+  ],
+  "conformity_pressure": [
+    "asch_conformity_002"
+  ],
+  "obedience_to_authority": [
+    "asch_conformity_002"
+  ],
+  "unexplained_deaths": [
+    "dyatlov_pass_003"
+  ],
+  "government_coverup": [
+    "dyatlov_pass_003"
+  ],
+  "mass_psychosis": [
+    "bermuda_triangle_001"
+  ],
+  "confirmation_bias": [
+    "bermuda_triangle_001"
+  ],
+  "narrative_construction": [
+    "bermuda_triangle_001"
+  ],
+  "fear_of_the_unknown": [
+    "bermuda_triangle_001"
+  ],
+  "human_error": [
+    "bermuda_triangle_001"
+  ]
 }
