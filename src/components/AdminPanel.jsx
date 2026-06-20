@@ -1,6 +1,44 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import LoreMark from './LoreMark';
 
+function cleanAndParseJSON(text) {
+  if (!text) throw new Error('Input text is empty');
+  let cleaned = text.trim();
+  
+  // Remove markdown code block wrapping (e.g. ```json ... ``` or ``` ... ```)
+  const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/i;
+  const match = cleaned.match(codeBlockRegex);
+  if (match) {
+    cleaned = match[1].trim();
+  }
+
+  // Find first '{' or '[' and last '}' or ']'
+  const firstBrace = cleaned.indexOf('{');
+  const firstBracket = cleaned.indexOf('[');
+  let startIdx = -1;
+  let endToken = '';
+  
+  if (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) {
+    startIdx = firstBrace;
+    endToken = '}';
+  } else if (firstBracket !== -1) {
+    startIdx = firstBracket;
+    endToken = ']';
+  }
+  
+  if (startIdx !== -1) {
+    const lastIdx = cleaned.lastIndexOf(endToken);
+    if (lastIdx !== -1 && lastIdx > startIdx) {
+      cleaned = cleaned.substring(startIdx, lastIdx + 1);
+    }
+  }
+
+  // Remove trailing commas in arrays/objects (very common in AI outputs)
+  cleaned = cleaned.replace(/,\s*([\]}])/g, '$1');
+
+  return JSON.parse(cleaned);
+}
+
 export default function AdminPanel({ stories, localStories, setLocalStories, onBack }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
@@ -116,6 +154,11 @@ Severity Level: ${genSeverity}
 
 You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
 
+CRITICAL JSON FORMATTING RULES:
+1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
+2. Ensure there are no trailing commas in arrays or objects.
+3. The response must be strictly valid, clean JSON that can be parsed by JSON.parse() without errors.
+
 Structure the story exactly in the following JSON format:
 {
   "story_id": "lowercase_slug_with_underscores",
@@ -212,7 +255,7 @@ Ensure the output is strictly valid JSON only. Do not wrap it in markdown code b
       setProgress(80);
       addLog(`Parsing story structure...`);
       
-      const storyObj = JSON.parse(textResponse.trim());
+      const storyObj = cleanAndParseJSON(textResponse);
       
       // Auto-fill added_date if not present
       if (!storyObj.added_date) {
@@ -306,7 +349,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
         });
         const data = await res.json();
         const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        topicsToRun = JSON.parse(text);
+        topicsToRun = cleanAndParseJSON(text);
         addLog(`AI selected topics: ${JSON.stringify(topicsToRun)}`);
       } catch (err) {
         addLog(`Failed to get automated topics: ${err.message}. Falling back to default topics.`);

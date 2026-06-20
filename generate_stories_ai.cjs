@@ -59,6 +59,44 @@ async function callGemini(prompt) {
   return text.trim();
 }
 
+function cleanAndParseJSON(text) {
+  if (!text) throw new Error('Input text is empty');
+  let cleaned = text.trim();
+  
+  // Remove markdown code block wrapping (e.g. ```json ... ``` or ``` ... ```)
+  const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/i;
+  const match = cleaned.match(codeBlockRegex);
+  if (match) {
+    cleaned = match[1].trim();
+  }
+
+  // Find first '{' or '[' and last '}' or ']'
+  const firstBrace = cleaned.indexOf('{');
+  const firstBracket = cleaned.indexOf('[');
+  let startIdx = -1;
+  let endToken = '';
+  
+  if (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) {
+    startIdx = firstBrace;
+    endToken = '}';
+  } else if (firstBracket !== -1) {
+    startIdx = firstBracket;
+    endToken = ']';
+  }
+  
+  if (startIdx !== -1) {
+    const lastIdx = cleaned.lastIndexOf(endToken);
+    if (lastIdx !== -1 && lastIdx > startIdx) {
+      cleaned = cleaned.substring(startIdx, lastIdx + 1);
+    }
+  }
+
+  // Remove trailing commas in arrays/objects (very common in AI outputs)
+  cleaned = cleaned.replace(/,\s*([\]}])/g, '$1');
+
+  return JSON.parse(cleaned);
+}
+
 async function run() {
   console.log('--- STARTING AI CONTENT ENGINE ---');
   
@@ -90,7 +128,7 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
   {"topic": "The Mariana Web", "category": "cyber_mysteries"}
 ]`;
       const aiResponse = await callGemini(selectPrompt);
-      const chosen = JSON.parse(aiResponse);
+      const chosen = cleanAndParseJSON(aiResponse);
       topicsToGenerate = chosen.map(c => ({
         topic: c.topic,
         category: c.category,
@@ -118,6 +156,11 @@ Category: ${item.category}
 Severity Level: unsettling, disturbing, or extreme
 
 You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
+
+CRITICAL JSON FORMATTING RULES:
+1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
+2. Ensure there are no trailing commas in arrays or objects.
+3. The response must be strictly valid, clean JSON that can be parsed by JSON.parse() without errors.
 
 Structure the story exactly in the following JSON format:
 {
@@ -186,7 +229,7 @@ ${storiesSummary}
 Ensure the output is strictly valid JSON only. Output raw JSON.`;
 
       const aiResponse = await callGemini(prompt);
-      const storyObj = JSON.parse(aiResponse.trim());
+      const storyObj = cleanAndParseJSON(aiResponse);
       
       storyObj.added_date = new Date().toISOString().split('T')[0];
 
