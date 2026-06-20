@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
     # Allows manual trigger from GitHub Actions tab
 
+permissions:
+  contents: write
+  issues: write
+
 jobs:
   build-and-generate:
     runs-on: ubuntu-latest
@@ -28,8 +32,7 @@ jobs:
       - name: Run Content Engine
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.VITE_GEMINI_API_KEY }}
-          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
-          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node generate_stories_ai.cjs
 
       - name: Commit and Push Archive Updates
