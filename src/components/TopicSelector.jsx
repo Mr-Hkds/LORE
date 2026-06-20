@@ -12,6 +12,27 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
   const [recommendation, setRecommendation] = useState('');
   const [submitStatus, setSubmitStatus] = useState(null); // 'submitting' | 'success' | 'error'
 
+  // Secret admin tap gesture state
+  const [lastTap, setLastTap] = useState(0);
+  const [tapCount, setTapCount] = useState(0);
+
+  const handleLogoTap = () => {
+    const now = Date.now();
+    if (now - lastTap > 1500) {
+      // Reset if more than 1.5s has passed since last tap
+      setTapCount(1);
+    } else {
+      const next = tapCount + 1;
+      if (next >= 5) {
+        window.location.hash = '#console';
+        setTapCount(0);
+      } else {
+        setTapCount(next);
+      }
+    }
+    setLastTap(now);
+  };
+
   const handleRecommendSubmit = async (e) => {
     e.preventDefault();
     if (!recommendation.trim()) return;
@@ -71,10 +92,14 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
           className="mx-auto h-14 flex items-center justify-between"
           style={{ maxWidth: '780px' }}
         >
-          <div className="flex items-center gap-[10px]">
+          <div 
+            className="flex items-center gap-[10px] cursor-pointer" 
+            onClick={handleLogoTap}
+            title="Tap 5 times to open Admin Console"
+          >
             <LoreMark size={18} color={fg} />
             <span
-              className="text-[10px] font-bold tracking-[0.32em] uppercase"
+              className="text-[10px] font-bold tracking-[0.32em] uppercase select-none"
               style={{ color: fg, opacity: 0.85 }}
             >
               LORE
