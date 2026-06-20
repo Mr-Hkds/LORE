@@ -187,6 +187,36 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Route 5: DELETE /api/stories/:id
+  if (req.method === 'DELETE' && pathname.startsWith('/api/stories/')) {
+    const id = pathname.split('/').pop();
+    
+    // 1. Remove from stories.json
+    const storiesData = readJson(STORIES_FILE) || { stories: [] };
+    const initialLen = storiesData.stories.length;
+    storiesData.stories = storiesData.stories.filter(s => s.story_id !== id);
+    if (storiesData.stories.length < initialLen) {
+      writeJson(STORIES_FILE, storiesData);
+    }
+    
+    // 2. Remove from concept_index.json
+    const conceptIndex = readJson(CONCEPTS_FILE) || {};
+    let changed = false;
+    Object.keys(conceptIndex).forEach(concept => {
+      const filtered = conceptIndex[concept].filter(storyId => storyId !== id);
+      if (filtered.length !== conceptIndex[concept].length) {
+        changed = true;
+        conceptIndex[concept] = filtered;
+        if (filtered.length === 0) delete conceptIndex[concept];
+      }
+    });
+    if (changed) writeJson(CONCEPTS_FILE, conceptIndex);
+    
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+    return;
+  }
+
   // Catch-all
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ error: 'Not Found' }));

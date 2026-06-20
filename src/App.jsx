@@ -12,7 +12,9 @@ const TOTAL_LAYERS = 7;
 
 export default function App() {
   // Phase: 'select' → 'catalog' → 'reading' → 'admin'
-  const [phase, setPhase] = useState('select');
+  const [phase, setPhase] = useState(() => {
+    return window.location.hash === '#console' ? 'admin' : 'select';
+  });
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentStory, setCurrentStory] = useState(null);
   const [activeLayer, setActiveLayer] = useState(1);
@@ -135,21 +137,35 @@ export default function App() {
     setActiveLayer(1);
   }, []);
   const handleExitAdmin = useCallback(() => {
+    window.location.hash = '';
     setPhase('select');
   }, []);
 
   // Listen for secret hotkey (Ctrl + Shift + A) to open admin portal
+  // Also listen for hash changes
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
         e.preventDefault();
+        window.location.hash = '#console';
+      }
+    };
+
+    const handleHashChange = () => {
+      if (window.location.hash === '#console') {
         setPhase('admin');
+      } else if (phase === 'admin') {
+        setPhase('select');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [phase]);
 
   // ---------- RENDER ----------
 

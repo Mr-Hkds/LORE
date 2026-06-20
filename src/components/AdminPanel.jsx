@@ -107,17 +107,31 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
     loadRecommendations();
   }, [loadRecommendations]);
 
-  // Handle deleting a custom story
-  const handleDeleteStory = (storyId) => {
-    if (!window.confirm('Are you sure you want to delete this story from your local catalog?')) return;
+  // Handle deleting a story
+  const handleDeleteStory = async (storyId) => {
+    if (!window.confirm('Are you sure you want to permanently delete this story from the archive? (Requires Local Server)')) return;
     
+    // Try to delete from local server
+    try {
+      const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
+      if (res.ok) {
+        addLog(`Successfully deleted story: ${storyId}`);
+        // Reload to sync the static content
+        setTimeout(() => window.location.reload(), 500);
+      } else {
+        alert('Could not delete story. Are you running the local server?');
+      }
+    } catch (e) {
+      console.warn(e);
+      alert('Could not connect to the local server to delete the story.');
+    }
+    
+    // Also remove from local localStorage if present
     const updated = localStories.filter(s => s.story_id !== storyId);
     setLocalStories(updated);
     try {
       localStorage.setItem('lore:custom_stories', JSON.stringify(updated));
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) {}
   };
 
   // Add a message to the console logger
@@ -409,13 +423,22 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
               ARCHIVE ENGINE CONSOLE
             </span>
           </div>
-          <button
-            onClick={onBack}
-            className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 border rounded-lg hover:opacity-60 transition-opacity cursor-pointer"
-            style={{ borderColor: ru }}
-          >
-            ← Exit Console
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => window.location.reload()}
+              className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 border rounded-lg hover:bg-white/5 transition-colors cursor-pointer text-[#9E7B4C]"
+              style={{ borderColor: ru }}
+            >
+              ⟳ Refresh Data
+            </button>
+            <button
+              onClick={onBack}
+              className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 border rounded-lg hover:opacity-60 transition-opacity cursor-pointer"
+              style={{ borderColor: ru }}
+            >
+              ← Exit Console
+            </button>
+          </div>
         </div>
       </header>
 
@@ -539,14 +562,12 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
                       >
                         {expandedStoryId === story.story_id ? 'Hide Layers' : 'Inspect 7 Layers'}
                       </button>
-                      {localStories.some(s => s.story_id === story.story_id) && (
-                        <button
-                          onClick={() => handleDeleteStory(story.story_id)}
-                          className="text-[10px] font-bold tracking-wider uppercase text-red-500 hover:underline cursor-pointer ml-auto"
-                        >
-                          Delete Local
-                        </button>
-                      )}
+                      <button
+                        onClick={() => handleDeleteStory(story.story_id)}
+                        className="text-[10px] font-bold tracking-wider uppercase text-red-500 hover:underline cursor-pointer ml-auto"
+                      >
+                        Delete Story
+                      </button>
                     </div>
 
                     {/* Expanded Layer View */}
