@@ -1,0 +1,68 @@
+// Layer configuration — colors, text, button labels per layer
+export const LAYERS = [
+  {
+    num: 1,
+    name: 'The Whisper',
+    bg: '#F5F0E8',
+    text: '#1A1815',
+    muted: '#8A8480',
+    border: 'rgba(26,24,21,0.09)',
+    buttonLabel: 'I want to know more',
+  },
+  {
+    num: 2,
+    name: 'The Pattern',
+    bg: '#E8E0D0',
+    text: '#1A1815',
+    muted: '#7D7770',
+    border: 'rgba(26,24,21,0.10)',
+    buttonLabel: 'Keep going',
+  },
+  {
+    num: 3,
+    name: 'The Incident',
+    bg: '#C8BFB0',
+    text: '#1A1815',
+    muted: '#6D6760',
+    border: 'rgba(26,24,21,0.12)',
+    buttonLabel: 'Show me the system',
+  },
+  {
+    num: 4,
+    name: 'The System',
+    bg: '#6B6560',
+    text: '#F0EBE2',
+    muted: '#C5C0B8',
+    border: 'rgba(240,235,226,0.12)',
+    buttonLabel: 'What are they hiding',
+  },
+  {
+    num: 5,
+    name: 'The Research',
+    bg: '#3D3835',
+    text: '#EDE8DF',
+    muted: '#9A9590',
+    border: 'rgba(237,232,223,0.10)',
+    buttonLabel: 'Go darker',
+  },
+  {
+    num: 6,
+    name: 'The Abyss',
+    bg: '#1A1815',
+    text: '#EDE8DF',
+    muted: '#6A6560',
+    border: 'rgba(237,232,223,0.08)',
+    buttonLabel: 'I need to know everything',
+  },
+  {
+    num: 7,
+    name: 'The Dark Corner',
+    bg: '#000000',
+    text: '#E8E3DA',
+    muted: '#4A4745',
+    border: 'rgba(232,227,218,0.06)',
+    buttonLabel: null,
+  },
+];
+
+export const getLayer = (layerNum) => LAYERS[layerNum - 1] ?? LAYERS[0];
