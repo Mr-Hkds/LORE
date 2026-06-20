@@ -151,38 +151,7 @@ export default function LayerReader({
                 </div>
               )}
 
-              {/* Declassified Evidence Section */}
-              {evidenceLinks.length > 0 && (
-                <div 
-                  className="mb-8 p-5 rounded-xl border border-dashed text-left" 
-                  style={{ 
-                    borderColor: `${accentColor}33`, 
-                    backgroundColor: isLight ? 'rgba(158, 123, 76, 0.04)' : 'rgba(0,0,0,0.2)' 
-                  }}
-                >
-                  <span
-                    className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-3"
-                    style={{ color: '#9E7B4C' }}
-                  >
-                    SECURE ARCHIVE // DECLASSIFIED EVIDENCE
-                  </span>
-                  <ul className="space-y-2">
-                    {evidenceLinks.map((link, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-xs select-none">📄</span>
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-sans text-[12px] text-[#9E7B4C] hover:text-[#c49b65] transition-colors underline tracking-wide font-medium"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+
 
               {/* Cliffhanger */}
               {cliffhangerText && (

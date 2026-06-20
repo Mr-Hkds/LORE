@@ -248,7 +248,6 @@ export default function App() {
       cards,
       imageUrl: null,
       wikipediaSearchQuery: '',
-      evidenceLinks: layerData.evidence_links || [],
     };
   };
 

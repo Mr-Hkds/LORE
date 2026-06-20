@@ -35,7 +35,6 @@ function ensureFiles() {
 ensureFiles();
 
 // Load data
-const recommendations = JSON.parse(fs.readFileSync(RECS_FILE, 'utf-8'));
 const storiesData = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf-8'));
 const conceptIndex = JSON.parse(fs.readFileSync(CONCEPTS_FILE, 'utf-8'));
 
@@ -99,6 +98,53 @@ function cleanAndParseJSON(text) {
 
 async function run() {
   console.log('--- STARTING AI CONTENT ENGINE ---');
+
+  // Vercel KV REST Config
+  const kvUrl = process.env.KV_REST_API_URL;
+  const kvToken = process.env.KV_REST_API_TOKEN;
+  const isKvEnabled = !!(kvUrl && kvToken);
+
+  async function getRecommendations() {
+    if (isKvEnabled) {
+      console.log('Vercel KV is enabled. Fetching recommendations from database...');
+      try {
+        const response = await fetch(kvUrl, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${kvToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(['GET', 'lore:recommendations'])
+        });
+        const data = await response.json();
+        return data.result ? JSON.parse(data.result) : [];
+      } catch (err) {
+        console.warn('Failed to fetch recommendations from Vercel KV, falling back to local file. Error:', err.message);
+      }
+    }
+    return JSON.parse(fs.readFileSync(RECS_FILE, 'utf-8'));
+  }
+
+  async function saveRecommendations(recsList) {
+    if (isKvEnabled) {
+      console.log('Saving updated recommendations list to Vercel KV database...');
+      try {
+        await fetch(kvUrl, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${kvToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(['SET', 'lore:recommendations', JSON.stringify(recsList)])
+        });
+      } catch (err) {
+        console.error('Failed to save recommendations to Vercel KV. Error:', err.message);
+      }
+    }
+    fs.writeFileSync(RECS_FILE, JSON.stringify(recsList, null, 2));
+  }
+
+  const recommendations = await getRecommendations();
   
   // 1. Identify topics to run
   const pendingRecs = recommendations.filter(r => r.status === 'pending');
@@ -152,7 +198,7 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
       const storiesSummary = storiesData.stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
       
       const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${item.topic}".
-Category: ${item.category}
+Suggested Category: ${item.category} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
 Severity Level: unsettling, disturbing, or extreme
 
 You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
@@ -166,7 +212,7 @@ Structure the story exactly in the following JSON format:
 {
   "story_id": "lowercase_slug_with_underscores",
   "title": "A compelling, title for the dossier",
-  "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries",
+  "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
   "severity": "unsettling | disturbing | extreme",
@@ -270,7 +316,7 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
   // 3. Write back to files
   fs.writeFileSync(STORIES_FILE, JSON.stringify(storiesData, null, 2));
   fs.writeFileSync(CONCEPTS_FILE, JSON.stringify(conceptIndex, null, 2));
-  fs.writeFileSync(RECS_FILE, JSON.stringify(recommendations, null, 2));
+  await saveRecommendations(recommendations);
   console.log('\n--- ARCHIVE REPOSITORY FILES UPDATED SUCCESSFULLY ---');
 }
 

@@ -149,7 +149,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
     const storiesSummary = stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
     
     const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${topic}".
-Category: ${genCategory}
+Suggested Category: ${genCategory} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
 Severity Level: ${genSeverity}
 
 You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
@@ -163,7 +163,7 @@ Structure the story exactly in the following JSON format:
 {
   "story_id": "lowercase_slug_with_underscores",
   "title": "A compelling, title for the dossier",
-  "category": "${genCategory}",
+  "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
   "severity": "${genSeverity}",
