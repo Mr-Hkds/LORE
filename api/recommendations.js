@@ -1,39 +1,46 @@
 /**
  * Vercel Serverless Function: /api/recommendations
- * Interacts with Vercel KV (Upstash Redis) using native fetch REST commands.
- * Zero-dependency, lightweight, and robust.
+ * Uses GitHub Issues as a 100% free, zero-config global database.
+ * Open issues with the 'recommendation' label represent pending topics.
+ * Closed issues represent already generated topics.
  */
 export default async function handler(req, res) {
-  const url = process.env.KV_REST_API_URL;
-  const token = process.env.KV_REST_API_TOKEN;
+  const token = process.env.GITHUB_TOKEN || process.env.VITE_GITHUB_TOKEN;
+  const repoOwner = 'Mr-Hkds';
+  const repoName = 'LORE';
 
-  if (!url || !token) {
-    console.error('Vercel KV environment variables (KV_REST_API_URL / KV_REST_API_TOKEN) are missing.');
-    return res.status(500).json({ error: 'Database configuration missing. Please link a KV database on Vercel.' });
+  if (!token) {
+    console.error('GITHUB_TOKEN environment variable is missing.');
+    return res.status(500).json({ error: 'GitHub API authentication token is missing. Please set GITHUB_TOKEN on Vercel.' });
   }
 
-  // Helper to execute Upstash Redis command
-  async function execRedis(command) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(command)
-    });
-    if (!response.ok) {
-      throw new Error(`Upstash API returned ${response.status}: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data.result;
-  }
+  const headers = {
+    Authorization: `token ${token}`,
+    Accept: 'application/vnd.github.v3+json',
+    'User-Agent': 'LORE-App'
+  };
 
   // Handle request methods
   if (req.method === 'GET') {
     try {
-      const raw = await execRedis(['GET', 'lore:recommendations']);
-      const recs = raw ? JSON.parse(raw) : [];
+      const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues?labels=recommendation&state=all&per_page=100`, { headers });
+      if (!response.ok) {
+        throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`);
+      }
+      const issues = await response.json();
+      
+      // Map GitHub issues to our recommendation format
+      const recs = issues.map(issue => ({
+        id: String(issue.number), // use issue number as the recommendation ID
+        topic: issue.title,
+        date: new Date(issue.created_at).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }),
+        status: issue.state === 'open' ? 'pending' : 'generated'
+      }));
+
       return res.status(200).json(recs);
     } catch (err) {
       return res.status(500).json({ error: err.message });
@@ -42,21 +49,41 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const newRec = req.body;
-      if (!newRec || !newRec.id || !newRec.topic) {
-        return res.status(400).json({ error: 'Invalid recommendation data' });
+      const { topic } = req.body || {};
+      if (!topic) {
+        return res.status(400).json({ error: 'Missing topic parameter' });
       }
 
-      const raw = await execRedis(['GET', 'lore:recommendations']);
-      let recs = raw ? JSON.parse(raw) : [];
+      // Check if an issue already exists for this topic to avoid duplicates
+      const checkRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues?labels=recommendation&state=all`, { headers });
+      const allIssues = checkRes.ok ? await checkRes.json() : [];
+      const existingIssue = allIssues.find(issue => issue.title.toLowerCase() === topic.toLowerCase());
 
-      // Avoid duplicates
-      if (!recs.some(r => r.id === newRec.id)) {
-        recs.push(newRec);
-        await execRedis(['SET', 'lore:recommendations', JSON.stringify(recs)]);
+      if (existingIssue) {
+        return res.status(200).json({
+          success: true,
+          duplicate: true,
+          status: existingIssue.state === 'open' ? 'pending' : 'generated'
+        });
       }
 
-      return res.status(200).json({ success: true, recommendation: newRec });
+      if (!existingIssue) {
+        const createRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            title: topic.trim(),
+            body: `User recommendation submitted via LORE website.`,
+            labels: ['recommendation']
+          })
+        });
+        if (!createRes.ok) {
+          const errText = await createRes.text();
+          throw new Error(`Failed to create GitHub issue: ${createRes.status} - ${errText}`);
+        }
+      }
+
+      return res.status(200).json({ success: true });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -69,17 +96,49 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing id or status' });
       }
 
-      const raw = await execRedis(['GET', 'lore:recommendations']);
-      let recs = raw ? JSON.parse(raw) : [];
+      // Map 'generated' to 'closed' and 'pending' to 'open'
+      const state = status === 'generated' ? 'closed' : 'open';
 
-      const updated = recs.map(r => r.id === id ? { ...r, status } : r);
-      await execRedis(['SET', 'lore:recommendations', JSON.stringify(updated)]);
+      const updateRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues/${id}`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({ state })
+      });
+
+      if (!updateRes.ok) {
+        throw new Error(`Failed to update GitHub issue: ${updateRes.status}`);
+      }
 
       return res.status(200).json({ success: true });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
   }
+
+  if (req.method === 'DELETE') {
+    try {
+      const id = req.query?.id || req.body?.id;
+      if (!id) {
+        return res.status(400).json({ error: 'Missing id' });
+      }
+
+      // Close the issue as 'not_planned'
+      const updateRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues/${id}`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({ state: 'closed', state_reason: 'not_planned' })
+      });
+
+      if (!updateRes.ok) {
+        throw new Error(`Failed to delete GitHub issue: ${updateRes.status}`);
+      }
+
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();

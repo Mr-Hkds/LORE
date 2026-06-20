@@ -99,46 +99,62 @@ function cleanAndParseJSON(text) {
 async function run() {
   console.log('--- STARTING AI CONTENT ENGINE ---');
 
-  // Vercel KV REST Config
-  const kvUrl = process.env.KV_REST_API_URL;
-  const kvToken = process.env.KV_REST_API_TOKEN;
-  const isKvEnabled = !!(kvUrl && kvToken);
+  // GitHub Issues Database Config
+  const githubToken = process.env.GITHUB_TOKEN || process.env.VITE_GITHUB_TOKEN;
+  const isGithubEnabled = !!githubToken;
+  const repoOwner = 'Mr-Hkds';
+  const repoName = 'LORE';
+
+  const ghHeaders = {
+    Authorization: `token ${githubToken}`,
+    Accept: 'application/vnd.github.v3+json',
+    'User-Agent': 'LORE-App'
+  };
 
   async function getRecommendations() {
-    if (isKvEnabled) {
-      console.log('Vercel KV is enabled. Fetching recommendations from database...');
+    if (isGithubEnabled) {
+      console.log('GitHub Token is enabled. Fetching recommendations from GitHub Issues...');
       try {
-        const response = await fetch(kvUrl, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${kvToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(['GET', 'lore:recommendations'])
+        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues?labels=recommendation&state=all&per_page=100`, {
+          headers: ghHeaders
         });
-        const data = await response.json();
-        return data.result ? JSON.parse(data.result) : [];
+        if (!response.ok) {
+          throw new Error(`GitHub API returned ${response.status}: ${response.statusText}`);
+        }
+        const issues = await response.json();
+        return issues.map(issue => ({
+          id: String(issue.number),
+          topic: issue.title,
+          date: new Date(issue.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          }),
+          status: issue.state === 'open' ? 'pending' : 'generated'
+        }));
       } catch (err) {
-        console.warn('Failed to fetch recommendations from Vercel KV, falling back to local file. Error:', err.message);
+        console.warn('Failed to fetch recommendations from GitHub Issues, falling back to local file. Error:', err.message);
       }
     }
     return JSON.parse(fs.readFileSync(RECS_FILE, 'utf-8'));
   }
 
   async function saveRecommendations(recsList) {
-    if (isKvEnabled) {
-      console.log('Saving updated recommendations list to Vercel KV database...');
+    if (isGithubEnabled) {
+      console.log('Updating recommendation states on GitHub Issues...');
       try {
-        await fetch(kvUrl, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${kvToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(['SET', 'lore:recommendations', JSON.stringify(recsList)])
-        });
+        for (const item of topicsToGenerate) {
+          if (item.recId) {
+            console.log(`Closing GitHub Issue #${item.recId}...`);
+            await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues/${item.recId}`, {
+              method: 'PATCH',
+              headers: ghHeaders,
+              body: JSON.stringify({ state: 'closed' })
+            });
+          }
+        }
       } catch (err) {
-        console.error('Failed to save recommendations to Vercel KV. Error:', err.message);
+        console.error('Failed to update GitHub issue states. Error:', err.message);
       }
     }
     fs.writeFileSync(RECS_FILE, JSON.stringify(recsList, null, 2));

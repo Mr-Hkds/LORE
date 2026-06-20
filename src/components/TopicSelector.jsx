@@ -67,7 +67,12 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
         body: JSON.stringify(newRec),
       });
       if (res.ok) {
-        setSubmitStatus('success');
+        const data = await res.json();
+        if (data.duplicate) {
+          setSubmitStatus(data.status === 'generated' ? 'duplicate_generated' : 'duplicate_pending');
+        } else {
+          setSubmitStatus('success');
+        }
       } else {
         setSubmitStatus('success'); // Fallback to local success
       }
@@ -77,7 +82,7 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
     }
 
     setRecommendation('');
-    setTimeout(() => setSubmitStatus(null), 3000);
+    setTimeout(() => setSubmitStatus(null), 4000);
   };
 
   return (
@@ -264,15 +269,33 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
               >
                 {submitStatus === 'submitting' ? 'Submitting...' : 'File Recommendation'}
               </button>
+              {submitStatus === 'success' && (
+                <p className="absolute -bottom-6 left-0 text-[10px] text-[#9E7B4C] font-mono tracking-widest uppercase fade-in">
+                  Topic logged. The archive is expanding.
+                </p>
+              )}
+              {submitStatus === 'duplicate_pending' && (
+                <p className="absolute -bottom-6 left-0 text-[10px] text-[#8B2F2F] font-mono tracking-widest uppercase fade-in">
+                  Already in queue. The engine is investigating.
+                </p>
+              )}
+              {submitStatus === 'duplicate_generated' && (
+                <p className="absolute -bottom-6 left-0 text-[10px] text-[#6A6560] font-mono tracking-widest uppercase fade-in">
+                  Archive already contains this topic.
+                </p>
+              )}
             </form>
-            {submitStatus === 'success' && (
-              <p className="text-xs font-mono mt-3" style={{ color: ac }}>
-                ✓ Recommendation successfully logged to archive engine.
-              </p>
-            )}
           </div>
 
         </div>
+
+        {/* Footer */}
+        <footer className="mt-24 pt-8 border-t flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.25em] uppercase" style={{ borderColor: ru, color: mu }}>
+          <p>© {new Date().getFullYear()} LORE ARCHIVE</p>
+          <p className="mt-2 sm:mt-0 opacity-70">
+            MADE BY <span className="font-bold text-[#9E7B4C]">BLACK_LOTUS</span>
+          </p>
+        </footer>
       </main>
     </div>
   );

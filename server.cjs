@@ -101,15 +101,20 @@ const server = http.createServer(async (req, res) => {
 
       const recs = readJson(RECS_FILE) || [];
       // Prevent duplicates
-      if (!recs.some(r => r.topic.toLowerCase() === newRec.topic.toLowerCase())) {
-        recs.push({
-          id: newRec.id || 'rec_' + Date.now(),
-          topic: newRec.topic,
-          date: newRec.date || new Date().toLocaleDateString(),
-          status: 'pending'
-        });
-        writeJson(RECS_FILE, recs);
+      const existing = recs.find(r => r.topic.toLowerCase() === newRec.topic.toLowerCase());
+      if (existing) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, duplicate: true, status: existing.status }));
+        return;
       }
+      
+      recs.push({
+        id: newRec.id || 'rec_' + Date.now(),
+        topic: newRec.topic,
+        date: newRec.date || new Date().toLocaleDateString(),
+        status: 'pending'
+      });
+      writeJson(RECS_FILE, recs);
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
@@ -138,7 +143,25 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Route 4: POST /api/stories/add
+  // Route 4: DELETE /api/recommendations/:id (or query parameter ?id=)
+  if (req.method === 'DELETE' && pathname.startsWith('/api/recommendations/')) {
+    const id = pathname.split('/').pop();
+    const recs = readJson(RECS_FILE) || [];
+    const index = recs.findIndex(r => r.id === id);
+
+    if (index !== -1) {
+      recs.splice(index, 1);
+      writeJson(RECS_FILE, recs);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Recommendation not found' }));
+    }
+    return;
+  }
+
+  // Route 5: POST /api/stories/add
   if (req.method === 'POST' && pathname === '/api/stories/add') {
     try {
       const newStory = await getJsonBody(req);

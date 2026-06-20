@@ -136,7 +136,29 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
 
   // Add a message to the console logger
   const addLog = (msg) => {
-    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+    const time = new Date().toLocaleTimeString([], { hour12: false });
+    setLogs(prev => [...prev, `[${time}] ${msg}`]);
+  };
+
+  // Handle deleting a recommendation
+  const handleDeleteRecommendation = async (recId) => {
+    if (!window.confirm('Are you sure you want to remove this recommendation?')) return;
+    
+    try {
+      const res = await fetch(`/api/recommendations?id=${recId}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        addLog(`Successfully removed recommendation: ${recId}`);
+        // Reload to sync
+        setTimeout(() => window.location.reload(), 500);
+      } else {
+        alert('Could not delete recommendation. API returned an error.');
+      }
+    } catch (e) {
+      console.warn(e);
+      alert('Network error while deleting recommendation.');
+    }
   };
 
   // Run the Gemini story generation client-side
@@ -630,17 +652,27 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
                           </span>
                         </div>
                       </div>
-                      {rec.status !== 'generated' && (
+                      <div className="flex flex-col gap-2">
+                        {rec.status !== 'generated' && (
+                          <button
+                            onClick={() => {
+                              setActiveTab('generator');
+                              setGenTopic(rec.topic);
+                            }}
+                            className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-white/5 uppercase transition-colors whitespace-nowrap cursor-pointer"
+                            style={{ borderColor: ru, color: ac }}
+                          >
+                            Send to Engine
+                          </button>
+                        )}
                         <button
-                          onClick={() => {
-                            setGenTopic(rec.topic);
-                            setActiveTab('generator');
-                          }}
-                          className="px-3 py-1.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-wider uppercase rounded hover:bg-[#b08c5c] cursor-pointer"
+                          onClick={() => handleDeleteRecommendation(rec.id)}
+                          className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-red-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer"
+                          style={{ borderColor: 'rgba(139, 47, 47, 0.4)', color: '#8B2F2F' }}
                         >
-                          AI Generate
+                          Delete
                         </button>
-                      )}
+                      </div>
                     </div>
                   ))}
                 </div>
