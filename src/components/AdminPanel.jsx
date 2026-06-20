@@ -55,8 +55,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
 
   // Generator form state
   const [genTopic, setGenTopic] = useState('');
-  const [genCategory, setGenCategory] = useState('psychology');
-  const [genSeverity, setGenSeverity] = useState('unsettling');
+  const [genCategory, setGenCategory] = useState('auto');
+  const [genSeverity, setGenSeverity] = useState('auto');
   const [apiKey, setApiKey] = useState('');
   
   // Console logging state
@@ -179,14 +179,15 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
     setActiveTab('generator');
 
     addLog(`Initiating Content Engine for topic: "${topic}"...`);
-    addLog(`Target Category: ${genCategory} | Severity: ${genSeverity}`);
+    addLog(`Target Category: ${genCategory.toUpperCase()} | Severity: ${genSeverity.toUpperCase()}`);
+    addLog(`Estimated time to completion: ~15-20 seconds...`);
     
     // Prepare list of existing stories so AI can connect them
     const storiesSummary = stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
     
     const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${topic}".
-Suggested Category: ${genCategory} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
-Severity Level: ${genSeverity}
+${genCategory !== 'auto' ? `Suggested Category: ${genCategory}` : 'You MUST auto-classify the topic into the single most appropriate category from the valid categories list below based on the topic.'}
+${genSeverity !== 'auto' ? `Severity Level: ${genSeverity}` : 'You MUST auto-determine the severity level (e.g. unsettling, disturbing, extreme) based on the topic.'}
 
 You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
 
@@ -369,12 +370,12 @@ Ensure the output is strictly valid JSON only. Do not wrap it in markdown code b
       addLog(`No user recommendations found. Generating automated search queries...`);
       addLog(`Calling AI to find 2 creepy or dark topics...`);
       try {
-        const prompt = `Find 2 creepy, disturbing, or highly engaging real historical mysteries, psychology concepts, hidden government experiments, digital shadows, or paranormal cases that are NOT in this list:
+        const prompt = `Find 2 highly obscure, disturbing, or unique real historical mysteries, psychology concepts, hidden government experiments, digital shadows, or paranormal cases.
+Do NOT include any cases from the following list:
 ${stories.map(s => s.title).join(', ')}
 
-CRITICAL: You must choose well-documented, established historical, scientific, or psychological cases that have a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
-
-Return a JSON array of strings containing only the topic names. Example: ["The Dyatlov Pass Incident", "The Asch Conformity Experiments"]`;
+CRITICAL: Pick cases that are extremely deep in the shadows, obscure, or geographically/chronologically distant. Ensure they are not common internet urban legends.
+Return a JSON array of strings containing only the topic names. Example: ["The 1948 Tamam Shud Case", "The Ghost Rockets of Scandinavia"]`;
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -569,13 +570,12 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
                     
                     <p className="text-xs text-[#6A6560] mb-4 leading-relaxed max-w-3xl">{story.hook}</p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {story.concepts?.map(c => (
-                        <span key={c} className="text-[9px] font-mono text-[#6A6560] bg-neutral-900 border px-2 py-0.5 rounded" style={{ borderColor: ru }}>
-                          #{c.replace(/_/g, ' ')}
-                        </span>
-                      ))}
-                    </div>
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {(story.concepts || []).map(c => (
+                                  <span key={c} className="text-[9px] font-mono tracking-[0.1em] uppercase px-2 py-[2px] rounded" style={{ color: '#D4B88D', backgroundColor: 'rgba(158,123,76,0.1)', border: '1px solid rgba(158,123,76,0.3)' }}>
+                                    {c.replace(/_/g, ' ')}
+                                  </span>
+                                ))}              </div>
 
                     <div className="flex items-center gap-3 pt-3 border-t" style={{ borderColor: ru }}>
                       <button
@@ -720,6 +720,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
                       style={{ borderColor: ru }}
                       disabled={isGenerating}
                     >
+                      <option value="auto">Auto-Detect</option>
                       {Object.entries(CATEGORY_LABELS).map(([val, label]) => (
                         <option key={val} value={val}>{label}</option>
                       ))}
@@ -737,6 +738,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The D
                       style={{ borderColor: ru }}
                       disabled={isGenerating}
                     >
+                      <option value="auto">Auto-Detect</option>
                       <option value="unsettling">Unsettling</option>
                       <option value="disturbing">Disturbing</option>
                       <option value="extreme">Extreme</option>

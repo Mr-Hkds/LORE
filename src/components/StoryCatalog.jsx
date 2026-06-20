@@ -196,15 +196,15 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                     </span>
 
                     {/* Concept tags */}
-                    <div className="flex flex-wrap gap-2 mt-1">
+                    <div className="flex flex-wrap gap-2 mt-3">
                       {(story.concepts || []).map((concept) => (
                         <span
                           key={concept}
-                          className="text-[8px] font-mono tracking-[0.1em] uppercase px-2 py-[2px] rounded"
+                          className="text-[9px] font-mono tracking-[0.15em] uppercase px-2.5 py-1 rounded transition-colors"
                           style={{
-                            color: ac,
-                            opacity: 0.6,
-                            border: `1px solid ${ac}22`,
+                            color: '#D4B88D',
+                            backgroundColor: 'rgba(158,123,76,0.1)',
+                            border: `1px solid rgba(158,123,76,0.3)`,
                           }}
                         >
                           {concept.replace(/_/g, ' ')}
