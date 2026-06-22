@@ -56,9 +56,9 @@ const CATEGORY_LABELS = {
 
 export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
 
-  const bg = '#1A1815';
+  const bg = '#0D0C0A'; // Darker, premium charcoal background
   const fg = '#EDE8DF';
-  const mu = '#6A6560';
+  const mu = '#8F8A82'; // Higher contrast gray for readability
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 
@@ -240,10 +240,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
           {/* Eyebrow */}
           <p
-            className="text-[10px] font-semibold tracking-[0.26em] uppercase"
-            style={{ color: ac, opacity: 0.85, marginBottom: '32px' }}
+            className="text-[11px] sm:text-xs font-semibold tracking-[0.26em] uppercase"
+            style={{ color: ac, opacity: 0.95, marginBottom: '24px' }}
           >
-            Select Category
+            Select your rabbit hole
           </p>
 
           {/* Title */}
@@ -258,7 +258,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '48px',
             }}
           >
-            How deep are you<br className="hidden sm:inline" /> willing to go?
+            Documented truths.<br className="hidden sm:inline" /> Forbidden history.
           </h1>
 
           {/* Subtitle */}
@@ -283,7 +283,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               <div className="flex items-center gap-6 mb-5 border-b border-neutral-900/60 pb-0">
                 <button 
                   onClick={() => setActiveTab('top-rated')} 
-                  className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                  className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
                   style={{ 
                     color: activeTab === 'top-rated' ? ac : mu,
                     borderBottom: activeTab === 'top-rated' ? `2px solid ${ac}` : '2px solid transparent',
@@ -294,7 +294,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 </button>
                 <button 
                   onClick={() => setActiveTab('editors-picks')} 
-                  className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                  className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
                   style={{ 
                     color: activeTab === 'editors-picks' ? ac : mu,
                     borderBottom: activeTab === 'editors-picks' ? `2px solid ${ac}` : '2px solid transparent',
@@ -306,7 +306,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {forYouStories.length > 0 && (
                   <button 
                     onClick={() => setActiveTab('recents')} 
-                    className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                    className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
                     style={{ 
                       color: activeTab === 'recents' ? ac : mu,
                       borderBottom: activeTab === 'recents' ? `2px solid ${ac}` : '2px solid transparent',
@@ -369,7 +369,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                         <div>
                           {/* Eyebrow: Category & Resume hint */}
-                          <div className="flex items-center gap-2 mb-1.5 text-[8px] font-mono tracking-[0.12em] uppercase">
+                          <div className="flex items-center gap-2 mb-1.5 text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase">
                             <span style={{ color: ac }} className="font-bold opacity-85">{catLabel}</span>
                             <span className="text-neutral-800">·</span>
                             <span style={{ color: mu }}>
@@ -383,7 +383,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                           </h4>
 
                           {/* Hook */}
-                          <p className="font-sans text-[11.5px] text-neutral-500 line-clamp-1 mt-1 opacity-80">
+                          <p className="font-sans text-xs sm:text-[13px] text-neutral-400 line-clamp-1 mt-1">
                             {story.hook}
                           </p>
                         </div>
@@ -456,7 +456,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 <span
                   className="font-serif italic flex-1 leading-snug"
                   style={{
-                    fontSize: 'clamp(1.4rem, 4vw, 2rem)',
+                    fontSize: 'clamp(1.5rem, 4.5vw, 2.2rem)',
                     fontWeight: 300,
                     color: fg,
                     letterSpacing: '-0.02em',
@@ -469,8 +469,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {/* Dossier count */}
                 {count > 0 && (
                   <span
-                    className="text-[9px] font-mono tracking-[0.1em] flex-shrink-0"
-                    style={{ color: ac, opacity: 0.7 }}
+                    className="text-[10.5px] sm:text-xs font-mono tracking-[0.1em] flex-shrink-0"
+                    style={{ color: ac, opacity: 0.9 }}
                   >
                     {count} {count === 1 ? 'dossier' : 'dossiers'}
                   </span>
@@ -481,7 +481,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                   className="text-[10px] font-normal tracking-[0.1em] uppercase hidden sm:block flex-shrink-0"
                   style={{
                     color: mu,
-                    opacity: 0.6,
+                    opacity: 0.8,
                     maxWidth: '24ch',
                     textAlign: 'right',
                     flex: 1,

@@ -22,6 +22,14 @@ export default function App() {
   const [currentStory, setCurrentStory] = useState(null);
   const [activeLayer, setActiveLayer] = useState(1);
   const [localStories, setLocalStories] = useState([]);
+  const [deletedStories, setDeletedStories] = useState(() => {
+    try {
+      const stored = localStorage.getItem('lore:deleted_stories');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
   
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(() => {
     try {
@@ -57,7 +65,7 @@ export default function App() {
     }
   }, []);
 
-  // Merge static and locally generated stories
+  // Merge static and locally generated stories, filtering out deleted ones
   const stories = useMemo(() => {
     // Avoid duplicates by checking story_id
     const combined = [...allStories];
@@ -66,8 +74,8 @@ export default function App() {
         combined.push(ls);
       }
     });
-    return combined;
-  }, [allStories, localStories]);
+    return combined.filter(s => !deletedStories.includes(s.story_id));
+  }, [allStories, localStories, deletedStories]);
 
   const categoryCounts = useMemo(() => {
     const counts = {};
@@ -333,6 +341,16 @@ export default function App() {
         setLocalStories={setLocalStories}
         refetchStories={refetchStories}
         onBack={handleExitAdmin}
+        onStoryDeleted={(deletedId) => {
+          setDeletedStories(prev => {
+            if (prev.includes(deletedId)) return prev;
+            const next = [...prev, deletedId];
+            try {
+              localStorage.setItem('lore:deleted_stories', JSON.stringify(next));
+            } catch { /* ignore */ }
+            return next;
+          });
+        }}
       />
     );
   }
@@ -341,7 +359,9 @@ export default function App() {
   if (!currentStory) return null;
 
   const layers = currentStory.layers || [];
-  const connections = getConnectedStories(currentStory.story_id);
+  const connections = getConnectedStories(currentStory.story_id).filter(
+    conn => !deletedStories.includes(conn.story_id)
+  );
 
   // Build layer data in the format LayerReader expects
   const getLayerData = (layerNum) => {

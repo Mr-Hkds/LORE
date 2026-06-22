@@ -39,7 +39,7 @@ function cleanAndParseJSON(text) {
   return JSON.parse(cleaned);
 }
 
-export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack }) {
+export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#6A6560';
@@ -399,28 +399,52 @@ Do not wrap in markdown. Output raw JSON only.`;
 
   // Handle deleting a story
   const handleDeleteStory = async (storyId) => {
-    if (!window.confirm('Are you sure you want to permanently delete this story from the archive? (Requires Local Server)')) return;
+    if (!window.confirm('Are you sure you want to delete this story from the archive?')) return;
     
+    let serverDeleted = false;
     // Try to delete from local server
     try {
       const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
       if (res.ok) {
-        addLog(`Successfully deleted story: ${storyId}`);
+        addLog(`Successfully deleted story from server: ${storyId}`);
+        serverDeleted = true;
         if (refetchStories) refetchStories();
       } else {
-        alert('Could not delete story. Are you running the local server?');
+        addLog(`Server delete failed for story: ${storyId}. Removing locally.`);
       }
     } catch (e) {
-      console.warn(e);
-      alert('Could not connect to the local server to delete the story.');
+      console.warn('Local server delete failed:', e);
+      addLog(`Could not connect to local server to delete story: ${storyId}. Removing locally.`);
     }
     
-    // Also remove from local localStorage if present
+    // Always remove from local localStorage if present
     const updated = localStories.filter(s => s.story_id !== storyId);
     setLocalStories(updated);
     try {
       localStorage.setItem('lore:custom_stories', JSON.stringify(updated));
     } catch { /* ignore */ }
+
+    // Always add to local blacklist in localStorage
+    try {
+      const stored = localStorage.getItem('lore:deleted_stories');
+      const list = stored ? JSON.parse(stored) : [];
+      if (!list.includes(storyId)) {
+        list.push(storyId);
+        localStorage.setItem('lore:deleted_stories', JSON.stringify(list));
+      }
+    } catch (e) {
+      console.warn('Failed to save deleted story blacklist:', e);
+    }
+
+    // Call callback prop if provided to update the parent state
+    if (onStoryDeleted) {
+      onStoryDeleted(storyId);
+    }
+    
+    alert(serverDeleted 
+      ? 'Story permanently deleted from server.' 
+      : 'Story deleted locally (removed from your browser view).'
+    );
   };
 
   // Add a message to the console logger

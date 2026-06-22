@@ -105,18 +105,25 @@ const STATIC_FALLBACKS = {
   }
 };
 
-const STATUSES = [
-  { id: 'factual', label: 'Open Archive', desc: 'Factual record. Documented evidence is fully public and verified.' },
-  { id: 'unresolved', label: 'Active Inquiry', desc: 'Unresolved record. Ongoing research is tracking open loopholes.' },
-  { id: 'classified', label: 'Classified Hold', desc: 'Restricted record. High likelihood of information suppression.' }
-];
+// Deterministic hash to generate consistent mock initial reaction counts
+function getSeedCounts(dateStr, title) {
+  const combinedStr = `${dateStr || ''}-${title || ''}`;
+  const seed = combinedStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return {
+    gripping: (seed % 47) + 12,
+    scared: (seed % 31) + 5,
+    mindblown: (seed % 71) + 24
+  };
+}
 
 export default function TodayInShadows() {
   const [dossier, setDossier] = useState(null);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [userVerdict, setUserVerdict] = useState('unresolved');
   const [imgFailed, setImgFailed] = useState(false);
+
+  const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0 });
+  const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | null
 
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
@@ -159,24 +166,19 @@ export default function TodayInShadows() {
     return () => { active = false; };
   }, [dayOfWeek, activeTheme.name]);
 
-  // Load custom verdict value when dossier is loaded
+  // Load custom reaction values when dossier is loaded
   useEffect(() => {
     if (dossier) {
       setImgFailed(false);
-      const stored = localStorage.getItem(`lore:dossier:verdict:${dossier.date}`);
-      if (stored !== null) {
-        setUserVerdict(stored);
-      } else {
-        // Map defaultSuspicion to a default verdict as a fallback
-        const suspicion = dossier.defaultSuspicion || 50;
-        if (suspicion > 85) {
-          setUserVerdict('classified');
-        } else if (suspicion < 70) {
-          setUserVerdict('factual');
-        } else {
-          setUserVerdict('unresolved');
-        }
-      }
+      const baseCounts = getSeedCounts(dossier.date, dossier.title);
+      const storedReaction = localStorage.getItem(`lore:dossier:reaction:${dossier.date}`);
+      
+      setUserReaction(storedReaction);
+      setReactions({
+        gripping: baseCounts.gripping + (storedReaction === 'gripping' ? 1 : 0),
+        scared: baseCounts.scared + (storedReaction === 'scared' ? 1 : 0),
+        mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0)
+      });
     }
   }, [dossier]);
 
@@ -191,11 +193,26 @@ export default function TodayInShadows() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  const handleVerdictChange = (val) => {
-    setUserVerdict(val);
-    if (dossier) {
-      localStorage.setItem(`lore:dossier:verdict:${dossier.date}`, val);
+  const handleReact = (type) => {
+    if (!dossier) return;
+    
+    let newReaction = type;
+    if (userReaction === type) {
+      // Toggle off
+      newReaction = null;
+      localStorage.removeItem(`lore:dossier:reaction:${dossier.date}`);
+    } else {
+      localStorage.setItem(`lore:dossier:reaction:${dossier.date}`, type);
     }
+    
+    setUserReaction(newReaction);
+    
+    const baseCounts = getSeedCounts(dossier.date, dossier.title);
+    setReactions({
+      gripping: baseCounts.gripping + (newReaction === 'gripping' ? 1 : 0),
+      scared: baseCounts.scared + (newReaction === 'scared' ? 1 : 0),
+      mindblown: baseCounts.mindblown + (newReaction === 'mindblown' ? 1 : 0)
+    });
   };
 
   if (loading) {
@@ -238,24 +255,24 @@ export default function TodayInShadows() {
         )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
-            <span className="text-[8px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-sm">
+            <span className="text-[9.5px] sm:text-[10px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-sm">
               WHAT HAPPENED TODAY IN HISTORY · {dossier.theme?.toUpperCase()}
             </span>
             {dossier.year && (
-              <span className="text-[9px] font-mono text-neutral-500 tracking-wider">
+              <span className="text-[10px] font-mono text-neutral-400 tracking-wider">
                 YEAR: {dossier.year}
               </span>
             )}
           </div>
-          <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-neutral-400 mb-1">
+          <h4 className="font-sans font-bold text-[13px] uppercase tracking-wider text-neutral-300 mb-1">
             {dossier.title}
           </h4>
-          <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.9 }}>
+          <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.95 }}>
             {dossier.text}
           </p>
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-1.5 text-[9px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
+            className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
           >
             Read Entry <span className="text-xs">→</span>
           </button>
@@ -281,13 +298,13 @@ export default function TodayInShadows() {
             {/* Header */}
             <div className="flex justify-between items-start border-b border-neutral-900 pb-4 relative z-10">
               <div className="space-y-1">
-                <span className="text-[8px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm">
+                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm">
                   Today in History
                 </span>
                 <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-light pt-1">
                   {dossier.title}
                 </h3>
-                <div className="flex items-center gap-2 text-[9px] font-mono text-neutral-500 pt-0.5">
+                <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-400 pt-0.5">
                   <span>THEME: {dossier.theme?.toUpperCase()}</span>
                   <span>·</span>
                   <span>YEAR: {dossier.year}</span>
@@ -295,7 +312,7 @@ export default function TodayInShadows() {
               </div>
               <button
                 onClick={() => setModalOpen(false)}
-                className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-[10px] font-mono tracking-widest uppercase focus:outline-none border border-neutral-800 hover:border-neutral-700 px-2.5 py-1 rounded"
+                className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-[11px] font-mono tracking-widest uppercase focus:outline-none border border-neutral-800 hover:border-neutral-700 px-2.5 py-1 rounded"
               >
                 Close [Esc]
               </button>
@@ -306,10 +323,10 @@ export default function TodayInShadows() {
               
               {/* Intel Briefing */}
               <div className="space-y-2">
-                <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l border-[#9E7B4C] pl-2">
+                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
                   Wikipedia Summary
                 </h5>
-                <p className="font-serif text-[13px] md:text-sm leading-relaxed text-neutral-400">
+                <p className="font-serif text-sm md:text-base leading-relaxed text-neutral-300">
                   {dossier.wikiSummary || dossier.text}
                 </p>
               </div>
@@ -317,7 +334,7 @@ export default function TodayInShadows() {
               {/* Classified Theories */}
               {dossier.theories && dossier.theories.length > 0 && (
                 <div className="space-y-3 pt-2">
-                  <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l border-[#9E7B4C] pl-2">
+                  <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
                     Alternative Theories
                   </h5>
                   <div className="grid grid-cols-1 gap-3">
@@ -326,10 +343,10 @@ export default function TodayInShadows() {
                         key={idx}
                         className="p-3.5 rounded-lg border bg-neutral-950/40 border-neutral-900/60"
                       >
-                        <span className="text-[9px] font-mono text-[#9E7B4C] uppercase tracking-wider block mb-1">
+                        <span className="text-[10.5px] font-mono text-[#9E7B4C] uppercase tracking-wider block mb-1 font-bold">
                           Theory {idx + 1}: {theory.name}
                         </span>
-                        <p className="font-serif italic text-xs leading-relaxed text-[#EDE8DF]">
+                        <p className="font-serif italic text-xs sm:text-sm leading-relaxed text-[#EDE8DF]">
                           {theory.explanation}
                         </p>
                       </div>
@@ -338,33 +355,33 @@ export default function TodayInShadows() {
                 </div>
               )}
 
-              {/* Professional Archival Status */}
+              {/* Simple Reaction Toolbar */}
               <div className="space-y-3 pt-2">
-                <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l border-[#9E7B4C] pl-2">
-                  Archival Clearance Status
+                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
+                  Reader Sentiment
                 </h5>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {STATUSES.map((v) => {
-                    const isSelected = userVerdict === v.id;
+                <div className="flex gap-3">
+                  {[
+                    { id: 'gripping', label: 'Gripping', emoji: '👁️' },
+                    { id: 'scared', label: 'Scared', emoji: '😨' },
+                    { id: 'mindblown', label: 'Mindblown', emoji: '🤯' }
+                  ].map((r) => {
+                    const isSelected = userReaction === r.id;
+                    const count = reactions[r.id] || 0;
                     return (
                       <button
-                        key={v.id}
-                        onClick={() => handleVerdictChange(v.id)}
-                        className="p-3 rounded-lg border text-left transition-all duration-200 cursor-pointer focus:outline-none flex flex-col justify-between active:scale-95"
+                        key={r.id}
+                        onClick={() => handleReact(r.id)}
+                        className="flex-1 py-3 px-4 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-2 hover:border-[#9E7B4C]/40 active:scale-95 text-xs sm:text-sm font-medium"
                         style={{
                           backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
                           borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
                           color: isSelected ? '#EDE8DF' : '#6A6560'
                         }}
                       >
-                        <div>
-                          <span className="text-[9px] font-mono tracking-wider block mb-1 uppercase" style={{ color: isSelected ? '#9E7B4C' : '#6A6560' }}>
-                            {isSelected ? '● ' : '○ '}{v.label}
-                          </span>
-                          <p className="text-[10.5px] font-sans leading-snug font-normal">
-                            {v.desc}
-                          </p>
-                        </div>
+                        <span>{r.emoji}</span>
+                        <span className="hidden xs:inline">{r.label}</span>
+                        <span className="text-[10.5px] sm:text-xs font-mono opacity-60">({count})</span>
                       </button>
                     );
                   })}
@@ -380,14 +397,14 @@ export default function TodayInShadows() {
                   href={dossier.wikiUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors"
+                  className="inline-flex items-center gap-1 text-[11px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors"
                 >
                   Read Wikipedia Article <span className="text-xs">→</span>
                 </a>
               )}
               <button
                 onClick={() => setModalOpen(false)}
-                className="w-full sm:w-auto px-5 py-2 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-[0.25em] uppercase rounded hover:bg-[#b08c5c] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
+                className="w-full sm:w-auto px-5 py-2 bg-[#9E7B4C] text-white text-[11px] font-bold tracking-[0.25em] uppercase rounded hover:bg-[#b08c5c] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
               >
                 Close File
               </button>
