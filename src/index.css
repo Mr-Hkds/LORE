@@ -175,14 +175,14 @@ body {
   display: inline-block;
   position: relative;
   
-  /* Red shimmer gradient background */
+  /* Red shimmer gradient background (no gold) */
   background: linear-gradient(
     90deg,
-    #9E7B4C 0%,
-    #dfc699 25%,
+    #8F8A82 0%,
+    #EDE8DF 25%,
     #ef4444 50%,
-    #dfc699 75%,
-    #9E7B4C 100%
+    #EDE8DF 75%,
+    #8F8A82 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

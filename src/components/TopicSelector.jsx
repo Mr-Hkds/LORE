@@ -547,22 +547,22 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               >
                 {submitStatus === 'submitting' ? 'Submitting...' : 'File Recommendation'}
               </button>
-              {submitStatus === 'success' && (
-                <p className="absolute -bottom-6 left-0 text-[10px] text-[#9E7B4C] font-mono tracking-widest uppercase fade-in">
-                  Topic logged. The archive is expanding.
-                </p>
-              )}
-              {submitStatus === 'duplicate_pending' && (
-                <p className="absolute -bottom-6 left-0 text-[10px] text-[#8B2F2F] font-mono tracking-widest uppercase fade-in">
-                  Already in queue. The engine is investigating.
-                </p>
-              )}
-              {submitStatus === 'duplicate_generated' && (
-                <p className="absolute -bottom-6 left-0 text-[10px] text-[#6A6560] font-mono tracking-widest uppercase fade-in">
-                  Archive already contains this topic.
-                </p>
-              )}
             </form>
+            {submitStatus === 'success' && (
+              <div className="mt-3 text-[11px] text-[#9E7B4C] font-mono tracking-widest uppercase fade-in">
+                ✓ Success: Topic logged. The archive is expanding.
+              </div>
+            )}
+            {submitStatus === 'duplicate_pending' && (
+              <div className="mt-3 text-[11px] text-[#C4644A] font-mono tracking-widest uppercase fade-in">
+                ⚠ Already in queue. The engine is investigating.
+              </div>
+            )}
+            {submitStatus === 'duplicate_generated' && (
+              <div className="mt-3 text-[11px] text-[#8F8A82] font-mono tracking-widest uppercase fade-in">
+                🛈 Archive already contains this topic.
+              </div>
+            )}
           </div>
 
         </div>
