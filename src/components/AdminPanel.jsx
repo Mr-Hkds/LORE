@@ -39,7 +39,7 @@ function cleanAndParseJSON(text) {
   return JSON.parse(cleaned);
 }
 
-export default function AdminPanel({ stories, localStories, setLocalStories, onBack }) {
+export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#6A6560';
@@ -52,6 +52,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
   // Custom stories state
   const [recommendations, setRecommendations] = useState([]);
   const [expandedStoryId, setExpandedStoryId] = useState(null);
+  const [selectedRecIds, setSelectedRecIds] = useState([]);
 
   // Generator form state
   const [genTopic, setGenTopic] = useState('');
@@ -69,6 +70,199 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
     const envKey = import.meta.env.VITE_GEMINI_API_KEY || '';
     setApiKey(envKey);
   }, []);
+
+  const [isCleaning, setIsCleaning] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (isGenerating) {
+      setElapsedTime(0);
+      interval = setInterval(() => {
+        setElapsedTime(prev => prev + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isGenerating]);
+
+  // Helper to fetch papers from OpenAlex scholarly database
+  const fetchOpenAlexPapers = async (topic) => {
+    try {
+      const response = await fetch(`https://api.openalex.org/works?search=${encodeURIComponent(topic)}&filter=is_oa:true&per_page=3`);
+      if (response.ok) {
+        const data = await response.json();
+        return (data.results || []).map(work => {
+          const authors = (work.authorships || []).map(a => a.author?.display_name).filter(Boolean).slice(0, 2).join(', ');
+          return {
+            label: `${work.display_name || 'Scholarly Article'} (${authors ? authors + ', ' : ''}${work.publication_year || 'N/A'})`,
+            url: work.best_oa_location?.pdf_url || work.primary_location?.landing_page_url || `https://doi.org/${work.doi}`
+          };
+        });
+      }
+    } catch (err) {
+      console.warn('Failed to fetch related PDFs from OpenAlex:', err);
+    }
+    return [];
+  };
+
+  // Helper to fetch high-quality real historical image from Wikipedia (Free, SOTA)
+  const fetchWikipediaImage = async (topic) => {
+    try {
+      const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&generator=search&gsrsearch=${encodeURIComponent(topic)}&gsrlimit=1&origin=*`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        const pages = data.query?.pages;
+        if (pages) {
+          const firstPageId = Object.keys(pages)[0];
+          const imageUrl = pages[firstPageId]?.thumbnail?.source;
+          return imageUrl || null;
+        }
+      }
+    } catch (e) {
+      console.warn('Wikipedia image fetch failed:', e);
+    }
+    return null;
+  };
+
+  const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
+  const [autoLogs, setAutoLogs] = useState([]);
+
+  // Fetch status and logs from server
+  const fetchAutomationData = useCallback(async () => {
+    try {
+      const resStatus = await fetch('/api/automation/status');
+      if (resStatus.ok) {
+        const status = await resStatus.json();
+        setAutoStatus(status);
+      }
+      const resLogs = await fetch('/api/automation/logs');
+      if (resLogs.ok) {
+        const logsData = await resLogs.json();
+        setAutoLogs(logsData);
+      }
+    } catch (err) {
+      console.warn('Failed to fetch automation data:', err);
+    }
+  }, []);
+
+  // Poll automation logs and status every 2500ms
+  useEffect(() => {
+    fetchAutomationData();
+    const interval = setInterval(fetchAutomationData, 2500);
+    return () => clearInterval(interval);
+  }, [fetchAutomationData]);
+
+  const [isHarvesting, setIsHarvesting] = useState(false);
+
+  const handleHarvestWebTrends = async () => {
+    setIsHarvesting(true);
+    addLog('📡 Triggering server-side trends harvest (Reddit)...');
+    try {
+      const res = await fetch('/api/harvest');
+      if (!res.ok) throw new Error('Server returned an error');
+      const data = await res.json();
+      
+      addLog(`📡 Harvest completed. Server discovered ${data.count || 0} new topics.`);
+      await loadRecommendations();
+      await fetchAutomationData();
+      alert(`Harvest complete! Discovered ${data.count || 0} new trending topics.`);
+    } catch (err) {
+      console.error(err);
+      addLog(`📡 Harvest error: ${err.message}`);
+      alert('Failed to harvest trends: ' + err.message);
+    } finally {
+      setIsHarvesting(false);
+    }
+  };
+
+  const handleAiAutoClean = async () => {
+    if (!apiKey) {
+      alert('Gemini API Key is required to run the AI Auto-Clean.');
+      return;
+    }
+    const pending = recommendations.filter(r => r.status === 'pending');
+    if (pending.length === 0) {
+      alert('No pending recommendations to clean.');
+      return;
+    }
+
+    if (!window.confirm(`AI will analyze ${pending.length} pending recommendations to find and delete spam, test inputs, or gibberish. Proceed?`)) return;
+
+    setIsCleaning(true);
+    addLog('✨ Starting AI Auto-Clean of recommendations queue...');
+
+    try {
+      const prompt = `Analyze the following list of user-recommended topics for a dark mystery, historical, or psychological archive website.
+Identify which topics are completely irrelevant, spam, test inputs, gibberish (e.g. "asdf", "test"), blank, inappropriate, or nonsense.
+
+Recommendations list:
+${pending.map(r => `- ID: ${r.id}, Topic: "${r.topic}"`).join('\n')}
+
+Return a JSON array containing ONLY the IDs (strings) of the recommendations that are spam or irrelevant and should be deleted.
+If all recommendations are valid and relevant, return an empty array: [].
+Do not wrap in markdown. Output raw JSON only.`;
+
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: 'application/json' }
+        })
+      });
+
+      if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
+      const data = await res.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error('Empty response from AI.');
+
+      const spamIds = cleanAndParseJSON(text);
+      if (!Array.isArray(spamIds)) throw new Error('Invalid response structure from AI.');
+
+      addLog(`✨ AI identified ${spamIds.length} spam/irrelevant recommendations.`);
+
+      let deletedCount = 0;
+      for (const id of spamIds) {
+        try {
+          const delRes = await fetch(`/api/recommendations?id=${id}`, { method: 'DELETE' });
+          if (delRes.ok) {
+            deletedCount++;
+          }
+        } catch (e) {
+          console.error(`Failed to delete spam recommendation: ${id}`, e);
+        }
+      }
+
+      addLog(`✨ AI Auto-Clean completed. Removed ${deletedCount} spam recommendations.`);
+      await loadRecommendations();
+      alert(`AI Auto-Clean complete! Removed ${deletedCount} spam/irrelevant topics.`);
+    } catch (err) {
+      console.error(err);
+      addLog(`✨ Auto-Clean error: ${err.message}`);
+      alert(`Auto-Clean failed: ${err.message}`);
+    } finally {
+      setIsCleaning(false);
+    }
+  };
+
+  const handleTriggerAutomation = async () => {
+    try {
+      addLog('🚀 Triggering server-side automated cron run...');
+      const res = await fetch('/api/automation/run', { method: 'POST' });
+      if (res.ok) {
+        addLog('🚀 Automated background run triggered. Watch server logs below.');
+        fetchAutomationData();
+      } else {
+        alert('Could not trigger automation. Verify server status.');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Network error while triggering automation.');
+    }
+  };
 
   // Fetch recommendations from API / localStorage
   const loadRecommendations = useCallback(async () => {
@@ -116,8 +310,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
       const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
       if (res.ok) {
         addLog(`Successfully deleted story: ${storyId}`);
-        // Reload to sync the static content
-        setTimeout(() => window.location.reload(), 500);
+        if (refetchStories) refetchStories();
       } else {
         alert('Could not delete story. Are you running the local server?');
       }
@@ -150,8 +343,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
       });
       if (res.ok) {
         addLog(`Successfully removed recommendation: ${recId}`);
-        // Reload to sync
-        setTimeout(() => window.location.reload(), 500);
+        loadRecommendations();
       } else {
         alert('Could not delete recommendation. API returned an error.');
       }
@@ -159,6 +351,28 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
       console.warn(e);
       alert('Network error while deleting recommendation.');
     }
+  };
+
+  // Handle bulk deleting selected recommendations
+  const handleDeleteMultipleRecommendations = async () => {
+    if (selectedRecIds.length === 0) return;
+    if (!window.confirm(`Are you sure you want to permanently delete the ${selectedRecIds.length} selected recommendations?`)) return;
+
+    addLog(`Bulk deleting ${selectedRecIds.length} recommendations...`);
+    let count = 0;
+    for (const id of selectedRecIds) {
+      try {
+        const res = await fetch(`/api/recommendations?id=${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          count++;
+        }
+      } catch (err) {
+        console.error(`Failed to delete recommendation ${id}:`, err);
+      }
+    }
+    addLog(`Bulk delete finished. Removed ${count} recommendations.`);
+    setSelectedRecIds([]);
+    await loadRecommendations();
   };
 
   // Run the Gemini story generation client-side
@@ -185,11 +399,17 @@ export default function AdminPanel({ stories, localStories, setLocalStories, onB
     // Prepare list of existing stories so AI can connect them
     const storiesSummary = stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
     
+    const severityVal = genSeverity === 'auto' ? 'unsettling | disturbing | extreme (auto-detect based on topic intensity)' : genSeverity;
     const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${topic}".
 ${genCategory !== 'auto' ? `Suggested Category: ${genCategory}` : 'You MUST auto-classify the topic into the single most appropriate category from the valid categories list below based on the topic.'}
 ${genSeverity !== 'auto' ? `Severity Level: ${genSeverity}` : 'You MUST auto-determine the severity level (e.g. unsettling, disturbing, extreme) based on the topic.'}
 
-You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
+CRITICAL EDITORIAL AND FACTUAL RULES:
+1. ONLY TRUE & DOCUMENTED EVENTS: This website documents strictly true, historically verified cases that actually happened. Absolutely NO human-made fantasy, creepypastas, internet urban legends, or rumors. Every single claim, fact, and event mentioned must be historically accurate and documented.
+2. IMMERSIVE NARRATIVE STRUCTURE ("THE RIDE"): Do NOT write this like a dry blog post or encyclopedic entry. It must feel like an immersive, terrifying ride. 
+   - Layer 1 MUST start with a thought-provoking, engaging hook question in Hinglish like: "Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur jo is baat ko sach kar de..."
+   - Put the reader inside the story using vivid details, terrifying examples, and atmospheric narrative pacing. Draw them in progressively layer by layer (Layer 1 is the whisper, Layer 7 is the absolute darkest truth).
+3. HINGLISH LANGUAGE RULE: Write all story content (including title, hook, layer names, layer content, cliffhangers, and transition lines) in high-quality, engaging Hinglish (Hindi written in the English/Latin alphabet, naturally blended with English words as spoken by urban Indians). For example, write "Living room mein family ke 11 members hanging position mein mile" instead of "Eleven family members were found hanging in the living room." The tone should be extremely dark, conversational, and dramatic, like a local podcast host or YouTube narrator telling a mystery story in Hinglish. Keep the facts accurate and historically true; do NOT fabricate.
 
 CRITICAL JSON FORMATTING RULES:
 1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
@@ -203,12 +423,12 @@ Structure the story exactly in the following JSON format:
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
-  "severity": "${genSeverity}",
+  "severity": "${severityVal}",
   "layers": [
     {
       "layer": 1,
       "layer_name": "Name of Layer 1 (The Whisper - introducing the mystery)",
-      "content": "Fully-written narrative for Layer 1. Must be 2-3 detailed paragraphs. Use double newlines \\n\\n between paragraphs.",
+      "content": "Fully-written narrative for Layer 1. Must start with the Hinglish ride introduction: 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain...' followed by 2-3 detailed paragraphs. Use double newlines \\n\\n between paragraphs.",
       "cliffhanger": "A gripping cliffhanger sentence pointing to the next layer."
     },
     {
@@ -300,6 +520,65 @@ Ensure the output is strictly valid JSON only. Do not wrap it in markdown code b
       }
 
       addLog(`Story generated: "${storyObj.title}" (${storyObj.story_id})`);
+      
+      // Fetch related scholarly research PDFs from OpenAlex
+      addLog(`Fetching related open-access research papers and PDFs from OpenAlex...`);
+      try {
+        const papers = await fetchOpenAlexPapers(topic);
+        if (papers && papers.length > 0) {
+          addLog(`Found ${papers.length} scholarly papers. Attaching to dossier evidence files.`);
+          storyObj.evidence_links = papers;
+        }
+      } catch (err) {
+        console.warn('OpenAlex fetch failed:', err);
+      }
+      
+      // Fetch SOTA historical imagery from Wikipedia API if an iconic real photo exists
+      addLog(`Evaluating if topic has an iconic real photo...`);
+      let hasPerfectPhoto = false;
+      try {
+        const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
+Reply with YES only if such a specific, famous, iconic, and visually striking real photo exists.
+Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
+Output YES or NO only. Do not include markdown or explanations.`;
+
+        const checkRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: checkPrompt }] }]
+          })
+        });
+        if (checkRes.ok) {
+          const checkData = await checkRes.json();
+          const decision = checkData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toUpperCase() || 'NO';
+          hasPerfectPhoto = decision.includes('YES');
+          addLog(`AI evaluation of real photo: ${decision}`);
+        }
+      } catch (err) {
+        console.warn('Perfect photo evaluation failed:', err);
+      }
+
+      if (hasPerfectPhoto) {
+        addLog(`Fetching real historical evidence imagery from Wikipedia...`);
+        try {
+          const imageUrl = await fetchWikipediaImage(topic);
+          if (imageUrl) {
+            addLog(`Found verified historical image. Attaching to dossier.`);
+            storyObj.hero_image = imageUrl;
+          } else {
+            addLog(`No verified historical image found. Fallback to AI generation...`);
+            storyObj.hero_image = 'auto';
+          }
+        } catch (err) {
+          console.warn('Wikipedia fetch failed:', err);
+          storyObj.hero_image = 'auto';
+        }
+      } else {
+        addLog(`No perfect iconic real photo exists. Requesting AI cover generation...`);
+        storyObj.hero_image = 'auto';
+      }
+
       addLog(`Successfully wrote ${storyObj.layers?.length || 0} layers.`);
       
       // Save locally (append to localStories)
@@ -323,19 +602,24 @@ Ensure the output is strictly valid JSON only. Do not wrap it in markdown code b
         addLog(`Running in standalone client mode. Saved to browser storage.`);
       }
 
-      // Mark the recommendation as completed if it matches
+      // Mark the recommendation as completed or auto-delete it
       const matchedRec = recommendations.find(r => r.topic.toLowerCase() === topic.toLowerCase());
       if (matchedRec) {
-        const updatedRecs = recommendations.map(r => r.id === matchedRec.id ? { ...r, status: 'generated' } : r);
+        addLog(`Auto-deleting generated recommendation from queue...`);
+        const updatedRecs = recommendations.filter(r => r.id !== matchedRec.id);
         setRecommendations(updatedRecs);
         localStorage.setItem('lore:recommendations', JSON.stringify(updatedRecs));
         try {
-          await fetch(`/api/recommendations/${matchedRec.id}`, { method: 'PUT' });
+          await fetch(`/api/recommendations?id=${matchedRec.id}`, {
+            method: 'DELETE'
+          });
         } catch (e) { /* ignore */ }
       }
 
       setProgress(100);
       addLog(`Success! Folder updated. Story compiled.`);
+      if (refetchStories) refetchStories();
+      loadRecommendations();
       setIsGenerating(false);
       setGenTopic('');
     } catch (err) {
@@ -448,7 +732,11 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
           </div>
           <div className="flex items-center gap-4">
             <button
-              onClick={() => window.location.reload()}
+              onClick={async () => {
+                if (refetchStories) refetchStories();
+                await loadRecommendations();
+                addLog('Archive logs and recommendations refreshed.');
+              }}
               className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 border rounded-lg hover:bg-white/5 transition-colors cursor-pointer text-[#9E7B4C]"
               style={{ borderColor: ru }}
             >
@@ -500,7 +788,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
         {/* Sidebar Nav */}
         <aside className="w-full md:w-[240px] flex-shrink-0 flex flex-col gap-2 mb-8 md:mb-0 md:pr-8">
           <button
-            onClick={() => setActiveTab('catalog')}
+            onClick={() => { setActiveTab('catalog'); setSelectedRecIds([]); }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'catalog' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
@@ -508,7 +796,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
             Archive Catalog
           </button>
           <button
-            onClick={() => setActiveTab('recommendations')}
+            onClick={() => { setActiveTab('recommendations'); setSelectedRecIds([]); }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors relative cursor-pointer ${
               activeTab === 'recommendations' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
@@ -521,7 +809,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
             )}
           </button>
           <button
-            onClick={() => setActiveTab('generator')}
+            onClick={() => { setActiveTab('generator'); setSelectedRecIds([]); }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'generator' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
@@ -558,10 +846,10 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="font-serif italic text-lg text-[#EDE8DF]">{story.title}</span>
-                        <span className="text-[8px] font-mono tracking-widest px-2 py-0.5 rounded bg-neutral-900 border" style={{ borderColor: ru, color: ac }}>
+                        <span className="text-[10px] font-mono tracking-widest px-3 py-1 rounded bg-[#1C1A17] text-[#EDE8DF]">
                           {CATEGORY_LABELS[story.category] || story.category}
                         </span>
-                        <span className="text-[8px] font-mono uppercase tracking-widest px-2 py-0.5 rounded bg-red-950/20 text-red-400 border border-red-900/30">
+                        <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded bg-red-950/30 text-red-400">
                           {story.severity}
                         </span>
                       </div>
@@ -572,7 +860,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
 
                               <div className="flex flex-wrap gap-2 mt-2">
                                 {(story.concepts || []).map(c => (
-                                  <span key={c} className="text-[9px] font-mono tracking-[0.1em] uppercase px-2 py-[2px] rounded" style={{ color: '#D4B88D', backgroundColor: 'rgba(158,123,76,0.1)', border: '1px solid rgba(158,123,76,0.3)' }}>
+                                  <span key={c} className="text-[10px] font-mono tracking-[0.05em] uppercase px-3 py-1 rounded bg-[#161412] text-amber-200">
                                     {c.replace(/_/g, ' ')}
                                   </span>
                                 ))}              </div>
@@ -621,11 +909,31 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
           {/* Tab 2: Recommendations */}
           {activeTab === 'recommendations' && (
             <div className="space-y-6">
-              <div className="border-b pb-4" style={{ borderColor: ru }}>
-                <h2 className="font-serif italic text-2xl">User Recommended Topics</h2>
-                <p className="text-xs text-[#6A6560] mt-1">
-                  Topics recommended by users browsing the website.
-                </p>
+              <div className="border-b pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" style={{ borderColor: ru }}>
+                <div>
+                  <h2 className="font-serif italic text-2xl">User Recommended Topics</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">
+                    Topics recommended by users browsing the website.
+                  </p>
+                </div>
+                <div className="flex gap-2 self-start sm:self-auto flex-wrap">
+                  <button
+                    onClick={handleHarvestWebTrends}
+                    disabled={isHarvesting || isGenerating}
+                    className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-emerald-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
+                    style={{ borderColor: 'rgba(52, 211, 153, 0.4)', color: '#34d399' }}
+                  >
+                    {isHarvesting ? '📡 Scanning...' : '📡 Harvest Web Trends'}
+                  </button>
+                  <button
+                    onClick={handleAiAutoClean}
+                    disabled={isCleaning || isGenerating}
+                    className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-amber-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
+                    style={{ borderColor: 'rgba(158, 123, 76, 0.4)', color: '#9E7B4C' }}
+                  >
+                    {isCleaning ? '✨ Cleaning...' : '✨ AI Auto-Clean'}
+                  </button>
+                </div>
               </div>
 
               {recommendations.length === 0 ? (
@@ -635,21 +943,65 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
                 </div>
               ) : (
                 <div className="space-y-3">
+                  {/* Bulk Actions Bar */}
+                  <div className="flex items-center gap-4 p-3 bg-neutral-950/40 rounded-lg border mb-4 justify-between flex-wrap" style={{ borderColor: ru }}>
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedRecIds.length === recommendations.length && recommendations.length > 0}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedRecIds(recommendations.map(r => r.id));
+                          } else {
+                            setSelectedRecIds([]);
+                          }
+                        }}
+                        className="w-4 h-4 rounded border border-neutral-700 bg-neutral-900 text-[#9E7B4C] focus:ring-0 cursor-pointer"
+                      />
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+                        {selectedRecIds.length} of {recommendations.length} Selected
+                      </span>
+                    </div>
+                    {selectedRecIds.length > 0 && (
+                      <button
+                        onClick={handleDeleteMultipleRecommendations}
+                        className="px-3 py-1.5 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-red-950/20 uppercase transition-colors text-red-500 cursor-pointer"
+                        style={{ borderColor: 'rgba(139, 47, 47, 0.4)' }}
+                      >
+                        Delete Selected ({selectedRecIds.length})
+                      </button>
+                    )}
+                  </div>
+
                   {recommendations.map(rec => (
                     <div
                       key={rec.id}
                       className="p-4 rounded-xl border flex items-center justify-between gap-4"
                       style={{ borderColor: ru, backgroundColor: '#110F0D' }}
                     >
-                      <div>
-                        <span className="font-serif italic text-base block text-[#EDE8DF]">{rec.topic}</span>
-                        <div className="flex gap-2 items-center mt-1">
-                          <span className="text-[9px] font-mono text-[#6A6560]">Logged: {rec.date}</span>
-                          <span className={`text-[8px] font-mono tracking-widest px-2 py-0.5 rounded ${
-                            rec.status === 'generated' ? 'bg-emerald-950/20 text-emerald-400 border border-emerald-900/30' : 'bg-amber-950/20 text-amber-400 border border-amber-900/30'
-                          }`}>
-                            {rec.status?.toUpperCase()}
-                          </span>
+                      <div className="flex items-center gap-4">
+                        <input
+                          type="checkbox"
+                          checked={selectedRecIds.includes(rec.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedRecIds(prev => [...prev, rec.id]);
+                            } else {
+                              setSelectedRecIds(prev => prev.filter(id => id !== rec.id));
+                            }
+                          }}
+                          className="w-4 h-4 rounded border border-neutral-700 bg-neutral-900 text-[#9E7B4C] focus:ring-0 cursor-pointer"
+                        />
+                        <div>
+                          <span className="font-serif italic text-base block text-[#EDE8DF]">{rec.topic}</span>
+                          <div className="flex gap-2 items-center mt-1">
+                            <span className="text-[9px] font-mono text-[#6A6560]">Logged: {rec.date}</span>
+                            <span className={`text-[8px] font-mono tracking-widest px-2 py-0.5 rounded ${
+                              rec.status === 'generated' ? 'bg-emerald-950/20 text-emerald-400 border border-emerald-900/30' : 'bg-amber-950/20 text-amber-400 border border-amber-900/30'
+                            }`}>
+                              {rec.status?.toUpperCase()}
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="flex flex-col gap-2">
@@ -768,55 +1120,59 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
                   <div className="pt-4 flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => handleGenerateStory()}
-                      disabled={isGenerating || !genTopic}
+                      disabled={isGenerating || autoStatus.isRunning || !genTopic}
                       className="flex-1 py-3 bg-[#9E7B4C] text-white text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-[#b08c5c] active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
                     >
                       Generate Story
                     </button>
                     <button
-                      onClick={handleAutoRunNightly}
-                      disabled={isGenerating}
+                      onClick={handleTriggerAutomation}
+                      disabled={isGenerating || autoStatus.isRunning}
                       className="flex-1 py-3 border text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-white/5 active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
                       style={{ borderColor: ru }}
                     >
-                      Trigger Nightly Run
+                      {autoStatus.isRunning ? '⚡ Running...' : 'Trigger Full Automation'}
                     </button>
                   </div>
                 </div>
               </div>
 
               {/* Progress and Logger console */}
-              {(isGenerating || logs.length > 0) && (
+              {(isGenerating || autoStatus.isRunning || autoLogs.length > 0 || logs.length > 0) && (
                 <div className="space-y-3">
                   <div className="flex justify-between text-[10px] font-mono text-[#6A6560]">
-                    <span>Content Engine Process Logs</span>
-                    <span>{progress}%</span>
+                    <span>
+                      {isGenerating ? `Manual Generation Logs (Elapsed: ${elapsedTime}s)` : 'Server Automated Engine Logs'}
+                    </span>
+                    <span>{isGenerating ? `${progress}%` : autoStatus.isRunning ? 'RUNNING' : 'STANDBY'}</span>
                   </div>
                   
                   {/* Progress bar */}
-                  <div className="w-full h-[3px] bg-neutral-900 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#9E7B4C] transition-all duration-300"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
+                  {isGenerating && (
+                    <div className="w-full h-[3px] bg-neutral-900 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#9E7B4C] transition-all duration-300"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  )}
 
                   {/* Terminal console */}
                   <div className="p-4 bg-black rounded-lg border font-mono text-[11px] leading-relaxed space-y-1 h-[240px] overflow-y-auto" style={{ borderColor: ru }}>
-                    {logs.map((log, idx) => (
+                    {(isGenerating ? logs : autoLogs).map((log, idx) => (
                       <div
                         key={idx}
                         className={
-                          log.includes('ERROR') ? 'text-red-400' :
-                          log.includes('Success') || log.includes('SUCCESS') ? 'text-emerald-400' :
-                          log.includes('Generating Story') ? 'text-[#9E7B4C] font-bold mt-2' :
+                          log.includes('ERROR') || log.includes('warning') || log.includes('Warning') ? 'text-red-400' :
+                          log.includes('SUCCESS') || log.includes('SUCCESS:') || log.includes('Success') || log.includes('AI Cleaned:') ? 'text-emerald-400' :
+                          log.includes('Starting generation') || log.includes('Phase') || log.includes('Generating Story') ? 'text-[#9E7B4C] font-bold mt-2' :
                           'text-neutral-300'
                         }
                       >
                         {log}
                       </div>
                     ))}
-                    {isGenerating && (
+                    {(isGenerating || autoStatus.isRunning) && (
                       <div className="text-neutral-500 animate-pulse mt-1">▋ Executing engine thread...</div>
                     )}
                   </div>

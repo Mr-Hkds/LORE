@@ -289,10 +289,10 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
 
         </div>
 
-        <footer className="mt-24 pt-8 border-t flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.25em] uppercase transition-colors duration-500" style={{ borderColor: ru, color: mu }}>
+        <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase transition-colors duration-500" style={{ borderColor: ru, color: mu }}>
           <p className="opacity-60">© {new Date().getFullYear()} LORE ARCHIVE</p>
-          <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-90">
-            MADE BY <span className="font-bold tracking-[0.3em] ml-1 transition-all duration-300" style={{ color: '#9E7B4C', textShadow: '0 0 12px rgba(158,123,76,0.4)', fontSize: '10px' }}>BLACK_LOTUS</span>
+          <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
+            MADE BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
           </p>
         </footer>
       </main>

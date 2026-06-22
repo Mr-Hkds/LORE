@@ -1,40 +1,94 @@
 {
   "shared_delusion": [
     "burari_deaths_001",
-    "asch_conformity_002"
+    "the_asch_conformity_experiments"
   ],
-  "family_systems_collapse": [
+  "family_systems": [
     "burari_deaths_001"
   ],
-  "ritualistic_behavior": [
-    "burari_deaths_001",
-    "dyatlov_pass_003"
+  "ritual": [
+    "burari_deaths_001"
   ],
-  "conformity_pressure": [
-    "asch_conformity_002"
+  "conformity": [
+    "the_asch_conformity_experiments"
   ],
-  "obedience_to_authority": [
-    "asch_conformity_002"
+  "groupthink": [
+    "the_asch_conformity_experiments"
+  ],
+  "social_pressure": [
+    "the_asch_conformity_experiments"
   ],
   "unexplained_deaths": [
-    "dyatlov_pass_003"
+    "the_dyatlov_pass_incident"
   ],
-  "government_coverup": [
-    "dyatlov_pass_003"
+  "wilderness_horror": [
+    "the_dyatlov_pass_incident"
   ],
-  "mass_psychosis": [
-    "bermuda_triangle_001"
+  "government_secrecy": [
+    "the_dyatlov_pass_incident"
   ],
-  "confirmation_bias": [
-    "bermuda_triangle_001"
+  "minority_rights": [
+    "fakhraddin_aboszoda_001"
   ],
-  "narrative_construction": [
-    "bermuda_triangle_001"
+  "political_persecution": [
+    "fakhraddin_aboszoda_001",
+    "aman_andom_001"
   ],
-  "fear_of_the_unknown": [
-    "bermuda_triangle_001"
+  "state_sponsored_abduction": [
+    "fakhraddin_aboszoda_001"
   ],
-  "human_error": [
-    "bermuda_triangle_001"
+  "suspicious_death": [
+    "fakhraddin_aboszoda_001",
+    "said_s_bedair_001"
+  ],
+  "human_rights": [
+    "fakhraddin_aboszoda_001"
+  ],
+  "power_struggle": [
+    "aman_andom_001"
+  ],
+  "state_violence": [
+    "aman_andom_001",
+    "facundo_astudillo_castro_001"
+  ],
+  "revolution_betrayal": [
+    "aman_andom_001"
+  ],
+  "forced_disappearance": [
+    "facundo_astudillo_castro_001"
+  ],
+  "police_brutality": [
+    "facundo_astudillo_castro_001"
+  ],
+  "unexplained_death": [
+    "facundo_astudillo_castro_001",
+    "uwe_barschel_001"
+  ],
+  "justice_denial": [
+    "facundo_astudillo_castro_001"
+  ],
+  "political_intrigue": [
+    "uwe_barschel_001"
+  ],
+  "state_secrecy": [
+    "uwe_barschel_001"
+  ],
+  "conspiracy_theories": [
+    "uwe_barschel_001"
+  ],
+  "media_manipulation": [
+    "uwe_barschel_001"
+  ],
+  "state_secrets": [
+    "said_s_bedair_001"
+  ],
+  "intelligence_operations": [
+    "said_s_bedair_001"
+  ],
+  "geopolitical_intrigue": [
+    "said_s_bedair_001"
+  ],
+  "nuclear_proliferation": [
+    "said_s_bedair_001"
   ]
 }

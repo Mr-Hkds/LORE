@@ -7,6 +7,7 @@ import LayerReader from './components/LayerReader';
 import DepthMeter from './components/DepthMeter';
 import AdminPanel from './components/AdminPanel';
 import LoreMark from './components/LoreMark';
+import { TOPICS } from './constants/topics';
 
 const TOTAL_LAYERS = 7;
 
@@ -34,6 +35,7 @@ export default function App() {
     error: storiesError,
     getConnectedStories,
     getCategoryCounts,
+    refetchStories,
   } = useStaticContent();
 
 
@@ -99,50 +101,137 @@ export default function App() {
 
   // Phase 1: Select a category
   const handleSelectTopic = useCallback((topic) => {
-    setSelectedCategory(topic);
-    setPhase('catalog');
+    window.location.hash = `#category-${topic.id}`;
   }, []);
 
   // Phase 2: Select a story from catalog
   const handleSelectStory = useCallback((story) => {
-    setCurrentStory(story);
-    setActiveLayer(1);
-    setPhase('reading');
+    window.location.hash = `#story-${story.story_id}-layer-1`;
   }, []);
 
   // Navigate to a connected story
   const handleSelectConnectedStory = useCallback((storyId) => {
-    const story = getStoryById(storyId);
-    if (story) {
-      setCurrentStory(story);
-      setActiveLayer(1);
-      // Scroll snap container back to top
-      const container = document.querySelector('.snap-container');
-      if (container) container.scrollTo({ top: 0, behavior: 'instant' });
-    }
-  }, [getStoryById]);
+    window.location.hash = `#story-${storyId}-layer-1`;
+    // Scroll snap container back to top
+    const container = document.querySelector('.snap-container');
+    if (container) container.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   // Go back to catalog
   const handleBackToCatalog = useCallback(() => {
-    setPhase('catalog');
-    setCurrentStory(null);
-    setActiveLayer(1);
-  }, []);
+    if (selectedCategory) {
+      window.location.hash = `#category-${selectedCategory.id}`;
+    } else {
+      window.location.hash = '';
+    }
+  }, [selectedCategory]);
 
   // Go back to topic selection
   const handleBackToTopics = useCallback(() => {
-    setPhase('select');
-    setSelectedCategory(null);
-    setCurrentStory(null);
-    setActiveLayer(1);
-  }, []);
-  const handleExitAdmin = useCallback(() => {
     window.location.hash = '';
-    setPhase('select');
   }, []);
 
-  // Listen for secret hotkey (Ctrl + Shift + A) to open admin portal
-  // Also listen for hash changes
+  const handleExitAdmin = useCallback(() => {
+    window.location.hash = '';
+  }, []);
+
+  // Sync state from hash routing
+  const syncStateFromHash = useCallback(() => {
+    const hash = window.location.hash;
+    if (!hash || hash === '#') {
+      setPhase('select');
+      setSelectedCategory(null);
+      setCurrentStory(null);
+      setActiveLayer(1);
+    } else if (hash === '#console') {
+      setPhase('admin');
+    } else if (hash.startsWith('#category-')) {
+      const catId = hash.replace('#category-', '');
+      const matchedTopic = TOPICS.find(t => t.id === catId);
+      if (matchedTopic) {
+        setSelectedCategory(matchedTopic);
+        setPhase('catalog');
+        setCurrentStory(null);
+        setActiveLayer(1);
+      } else {
+        setPhase('select');
+      }
+    } else if (hash.startsWith('#story-')) {
+      const parts = hash.replace('#story-', '').split('-layer-');
+      const storyId = parts[0];
+      const layerNum = parts[1] ? parseInt(parts[1], 10) : 1;
+      
+      const story = stories.find(s => s.story_id === storyId);
+      if (story) {
+        const categoryMapInverse = {
+          'psychology': 'psychology',
+          'mythology': 'mythology',
+          'true_crime': 'true-crime',
+          'gov_experiments': 'gov-experiments',
+          'paranormal': 'paranormal-reports',
+          'conspiracy': 'conspiracy',
+          'cyber_mysteries': 'cyber-mysteries',
+        };
+        const catId = categoryMapInverse[story.category] || story.category;
+        const matchedTopic = TOPICS.find(t => t.id === catId);
+        
+        setSelectedCategory(matchedTopic || { id: catId, label: catId });
+        setCurrentStory(story);
+        setActiveLayer(layerNum);
+        setPhase('reading');
+      } else {
+        if (stories.length > 0) {
+          setPhase('select');
+        }
+      }
+    }
+  }, [stories]);
+
+  // Handle hash updates on mount and reload
+  useEffect(() => {
+    if (stories.length > 0) {
+      syncStateFromHash();
+    }
+  }, [stories, syncStateFromHash]);
+
+  // Listen for hashchange event for back/forward navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      syncStateFromHash();
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [syncStateFromHash]);
+
+  // Sync current reading layer to history hash (replaceState to avoid polluting back history)
+  useEffect(() => {
+    if (phase === 'reading' && currentStory) {
+      const targetHash = `#story-${currentStory.story_id}-layer-${activeLayer}`;
+      if (window.location.hash !== targetHash) {
+        window.history.replaceState(null, '', targetHash);
+      }
+    }
+  }, [phase, currentStory, activeLayer]);
+
+  // Scroll to active layer when changed (e.g. from hash change or initial load)
+  useEffect(() => {
+    if (phase === 'reading' && currentStory) {
+      const container = document.querySelector('.snap-container');
+      if (container) {
+        const children = container.children;
+        const targetIndex = activeLayer - 1;
+        const targetEl = children && children[targetIndex];
+        if (targetEl) {
+          const rect = targetEl.getBoundingClientRect();
+          if (Math.abs(rect.top) > 50) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
+  }, [phase, currentStory, activeLayer]);
+
+  // Keyboard shortcut Ctrl+Shift+A for Admin Console
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
@@ -150,22 +239,9 @@ export default function App() {
         window.location.hash = '#console';
       }
     };
-
-    const handleHashChange = () => {
-      if (window.location.hash === '#console') {
-        setPhase('admin');
-      } else if (phase === 'admin') {
-        setPhase('select');
-      }
-    };
-
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('hashchange', handleHashChange);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, [phase]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // ---------- RENDER ----------
 
@@ -223,6 +299,7 @@ export default function App() {
         stories={stories}
         localStories={localStories}
         setLocalStories={setLocalStories}
+        refetchStories={refetchStories}
         onBack={handleExitAdmin}
       />
     );
@@ -260,9 +337,12 @@ export default function App() {
     }
 
     return {
+      storyId: currentStory.story_id,
+      reactions: currentStory.reactions || { heart: 0, scared: 0, mindblown: 0 },
       layerName: layerData.layer_name || null,
       cards,
-      imageUrl: null,
+      imageUrl: layerNum === 1 ? currentStory.hero_image : null,
+      evidenceLinks: layerNum === 1 ? currentStory.evidence_links : [],
       wikipediaSearchQuery: '',
     };
   };

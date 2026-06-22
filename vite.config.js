@@ -8,12 +8,11 @@ export default defineConfig({
     react(),
   ],
   server: {
+    watch: {
+      ignored: ['**/public/content/**'],
+    },
     proxy: {
-      '/api/recommendations': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-      },
-      '/api/stories': {
+      '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
       },

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 // Helper to find API key
 function getApiKey() {
@@ -14,6 +15,155 @@ function getApiKey() {
     if (match) return match[1];
   }
   return '';
+}
+
+// Native HTTPS helper to fetch JSON
+function fetchUrl(url, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const defaultHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*',
+      'Accept-Language': 'en-US,en;q=0.9'
+    };
+    const options = {
+      headers: { ...defaultHeaders, ...headers }
+    };
+    https.get(url, options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`Failed to parse JSON: ${e.message}`));
+          }
+        } else {
+          reject(new Error(`HTTP Error ${res.statusCode}: ${res.statusMessage}`));
+        }
+      });
+    }).on('error', (err) => {
+      reject(err);
+    });
+  });
+}
+
+// Native helper to download an image from a URL and save it locally
+function downloadImage(url, destPath) {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(destPath);
+    const client = url.startsWith('https') ? https : require('http');
+    
+    client.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+      }
+    }, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to download image: Status ${response.statusCode}`));
+        return;
+      }
+      response.pipe(file);
+      file.on('finish', () => {
+        file.close(resolve);
+      });
+    }).on('error', (err) => {
+      fs.unlink(destPath, () => {});
+      reject(err);
+    });
+  });
+}
+
+// Fetch from Wikipedia or fall back to Pollinations AI to generate and save a story cover image
+async function generateAndSaveImage(storyId, topic, apiKey) {
+  const imagesDir = path.join(__dirname, 'public', 'content', 'images');
+  if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+  }
+  const localPath = path.join(imagesDir, `${storyId}.jpg`);
+  const relativePath = `/content/images/${storyId}.jpg`;
+
+  let hasPerfectPhoto = false;
+  if (apiKey) {
+    try {
+      const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
+Reply with YES only if such a specific, famous, iconic, and visually striking real photo exists.
+Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
+Output YES or NO only. Do not include markdown or explanations.`;
+      
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: checkPrompt }] }]
+        })
+      });
+      if (response.ok) {
+        const checkData = await response.json();
+        const decision = checkData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toUpperCase() || 'NO';
+        hasPerfectPhoto = decision.includes('YES');
+        console.log(`[IMAGE ENGINE] Gemini decision on perfect real photo for "${topic}": ${decision}`);
+      }
+    } catch (err) {
+      console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
+    }
+  }
+
+  // Step 1: Try Wikipedia first if iconic real photo exists
+  if (hasPerfectPhoto) {
+    try {
+      const imgRes = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&generator=search&gsrsearch=${encodeURIComponent(topic)}&gsrlimit=1&origin=*`);
+      const pages = imgRes.query?.pages;
+      if (pages) {
+        const firstPageId = Object.keys(pages)[0];
+        const imageUrl = pages[firstPageId]?.thumbnail?.source;
+        if (imageUrl) {
+          console.log(`[IMAGE ENGINE] Downloading Wikipedia image for ${topic}...`);
+          await downloadImage(imageUrl, localPath);
+          return relativePath;
+        }
+      }
+    } catch (err) {
+      console.warn(`[IMAGE ENGINE] Wikipedia image search failed for ${topic}:`, err.message);
+    }
+  }
+
+  // Step 2: Fallback to Pollinations AI
+  console.log(`[IMAGE ENGINE] No perfect real photo available for ${topic}. Generating AI cover image...`);
+  try {
+    const promptInstructions = `Create a highly descriptive, visually stunning image generation prompt for the dark historical/psychological topic: "${topic}".
+This image will be the main cover art of a thriller/mystery story. Design an attractive, clickable, eye-catching concept.
+Write a single descriptive sentence for a cinematic, atmospheric photo. Keep it highly realistic, dark, moody, with dramatic lighting, deep shadows, and rich textures, highlighting a mysterious and suspenseful focal point that makes the reader curious to click and read.
+Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. Output the prompt text only.`;
+    
+    let aiPrompt = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
+    if (apiKey) {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: promptInstructions }] }]
+        })
+      });
+      if (response.ok) {
+        const geminiRes = await response.json();
+        const generated = geminiRes?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (generated) {
+          aiPrompt = generated;
+        }
+      }
+    }
+    
+    aiPrompt = aiPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+    
+    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(aiPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+    console.log(`[IMAGE ENGINE] Downloading Pollinations AI image from: ${pollinationsUrl}`);
+    await downloadImage(pollinationsUrl, localPath);
+    return relativePath;
+  } catch (err) {
+    console.error(`[IMAGE ENGINE] AI Image generation failed for ${topic}:`, err.message);
+    return `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
+  }
 }
 
 const apiKey = getApiKey();
@@ -56,6 +206,26 @@ async function callGemini(prompt) {
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!text) throw new Error('Empty response from Gemini.');
   return text.trim();
+}
+
+async function fetchOpenAlexPapers(topic) {
+  try {
+    const url = `https://api.openalex.org/works?search=${encodeURIComponent(topic)}&filter=is_oa:true&per_page=3`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      return (data.results || []).map(work => {
+        const authors = (work.authorships || []).map(a => a.author?.display_name).filter(Boolean).slice(0, 2).join(', ');
+        return {
+          label: `${work.display_name || 'Scholarly Article'} (${authors ? authors + ', ' : ''}${work.publication_year || 'N/A'})`,
+          url: work.best_oa_location?.pdf_url || work.primary_location?.landing_page_url || `https://doi.org/${work.doi}`
+        };
+      });
+    }
+  } catch (err) {
+    console.warn('Failed to fetch related PDFs from OpenAlex:', err.message);
+  }
+  return [];
 }
 
 function cleanAndParseJSON(text) {
@@ -217,7 +387,7 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
 Suggested Category: ${item.category} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
 Severity Level: unsettling, disturbing, or extreme
 
-You must write a true, documented historical, scientific, or psychological case. Do NOT fabricate facts. Keep the language simple, easy to understand, and follow a dramatic, engaging, documentary-style voice (like reading a script for a true crime or mystery documentary). Avoid unnecessary quotes, introductions, or generic fluff.
+CRITICAL LANGUAGE RULE: Write all story content (including title, hook, layer names, layer content, cliffhangers, and transition lines) in high-quality, engaging Hinglish (Hindi written in the English/Latin alphabet, naturally blended with English words as spoken by urban Indians). For example, write "Living room mein family ke 11 members hanging position mein mile" instead of "Eleven family members were found hanging in the living room." The tone should be extremely dark, conversational, and dramatic, like a local podcast host or YouTube narrator telling a mystery story in Hinglish. Keep it facts-based and true; do NOT fabricate.
 
 CRITICAL JSON FORMATTING RULES:
 1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
@@ -294,6 +464,28 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       const storyObj = cleanAndParseJSON(aiResponse);
       
       storyObj.added_date = new Date().toISOString().split('T')[0];
+
+      // Fetch related scholarly research PDFs from OpenAlex
+      console.log('Fetching related research PDFs from OpenAlex...');
+      try {
+        const papers = await fetchOpenAlexPapers(item.topic);
+        if (papers && papers.length > 0) {
+          console.log(`Found ${papers.length} scholarly papers. Attaching to dossier.`);
+          storyObj.evidence_links = papers;
+        }
+      } catch (err) {
+        console.warn('OpenAlex fetch failed:', err.message);
+      }
+
+      // Fetch and generate cover image (Wikipedia with AI generation fallback)
+      console.log('Resolving cover image (Wikipedia with AI generation fallback)...');
+      try {
+        const heroImg = await generateAndSaveImage(storyObj.story_id, item.topic, apiKey);
+        storyObj.hero_image = heroImg;
+        console.log('Cover image compiled and saved locally.');
+      } catch (imgErr) {
+        console.warn('Cover image generation failed:', imgErr.message);
+      }
 
       // Add to stories array
       storiesData.stories = storiesData.stories.filter(s => s.story_id !== storyObj.story_id);

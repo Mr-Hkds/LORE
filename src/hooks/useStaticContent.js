@@ -17,7 +17,20 @@ async function fetchWikipediaImage(query) {
   } catch (e) { /* ignore */ }
 
   try {
-    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=${encodeURIComponent(query)}&origin=*`;
+    let resolvedTitle = query;
+
+    // Search Wikipedia first to find the best matching article title
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
+    const searchRes = await fetch(searchUrl);
+    if (searchRes.ok) {
+      const searchData = await searchRes.json();
+      const firstResult = searchData?.query?.search?.[0];
+      if (firstResult?.title) {
+        resolvedTitle = firstResult.title;
+      }
+    }
+
+    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=${encodeURIComponent(resolvedTitle)}&origin=*`;
     const res = await fetch(url);
     const data = await res.json();
     const pages = data?.query?.pages;
@@ -44,31 +57,24 @@ export function useStaticContent() {
   const [error, setError] = useState(null);
   const imageCache = useRef({}); // In-memory image URL cache
 
-  // Load stories.json once on mount
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadStories() {
-      try {
-        const res = await fetch('/content/stories.json');
-        if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
-        const data = await res.json();
-        if (!cancelled) {
-          setAllStories(data.stories || []);
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error('Failed to load stories.json:', err);
-        if (!cancelled) {
-          setError('Failed to load the archive. Please refresh.');
-          setLoading(false);
-        }
-      }
+  const loadStories = useCallback(async () => {
+    try {
+      const res = await fetch('/content/stories.json');
+      if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
+      const data = await res.json();
+      setAllStories(data.stories || []);
+      setLoading(false);
+    } catch (err) {
+      console.error('Failed to load stories.json:', err);
+      setError('Failed to load the archive. Please refresh.');
+      setLoading(false);
     }
-
-    loadStories();
-    return () => { cancelled = true; };
   }, []);
+
+  // Load stories.json on mount
+  useEffect(() => {
+    loadStories();
+  }, [loadStories]);
 
   // Get all stories for a given category
   const getStoriesByCategory = useCallback((categoryId) => {
@@ -153,5 +159,6 @@ export function useStaticContent() {
     getCategoryCounts,
     getStoryImage,
     getImageByQuery,
+    refetchStories: loadStories,
   };
 }

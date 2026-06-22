@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function LayerReader({
   topic,
@@ -12,6 +12,51 @@ export default function LayerReader({
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
   const accentColor = '#9E7B4C';
+
+  const [reactions, setReactions] = useState(() => {
+    return data?.reactions || { heart: 0, scared: 0, mindblown: 0 };
+  });
+  const [reacted, setReacted] = useState({});
+  const [animatingReaction, setAnimatingReaction] = useState(null);
+
+  useEffect(() => {
+    if (data?.reactions) {
+      setReactions(data.reactions);
+    }
+  }, [data]);
+
+  const handleReact = async (type) => {
+    if (!data?.storyId) return;
+    
+    const isUndo = !!reacted[type];
+    
+    setReacted(prev => ({ ...prev, [type]: !isUndo }));
+    setReactions(prev => ({ 
+      ...prev, 
+      [type]: isUndo ? Math.max(0, (prev[type] || 1) - 1) : (prev[type] || 0) + 1 
+    }));
+
+    if (!isUndo) {
+      setAnimatingReaction(type);
+      setTimeout(() => setAnimatingReaction(null), 800);
+    }
+
+    try {
+      const res = await fetch('/api/stories/react', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ story_id: data.storyId, reaction_type: type, undo: isUndo })
+      });
+      if (res.ok) {
+        const result = await res.json();
+        if (result.reactions) {
+          setReactions(result.reactions);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to record reaction:', e);
+    }
+  };
 
   const cards = data?.cards || [];
   const layerName = data?.layerName || null;
@@ -109,6 +154,13 @@ export default function LayerReader({
           >
             {/* Single column layout for maximum reading focus */}
             <div className="max-w-2xl mx-auto w-full">
+              {/* SOTA Wikipedia Hero Image */}
+              {data.imageUrl && (
+                <div className="mb-8 w-full rounded-xl overflow-hidden border" style={{ borderColor: cardBorder }}>
+                  <img src={data.imageUrl} alt={topic.label} className="w-full h-auto object-cover max-h-[400px]" loading="lazy" />
+                </div>
+              )}
+
               {/* Hook text */}
               {hookText && (
                 <p
@@ -174,6 +226,97 @@ export default function LayerReader({
                   >
                     {cliffhangerText}
                   </p>
+                </div>
+              )}
+
+              {/* Evidence Links (OpenAlex PDFs) */}
+              {evidenceLinks && evidenceLinks.length > 0 && (
+                <div className="mt-8 pt-6 border-t" style={{ borderColor: layer.border }}>
+                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase block mb-4" style={{ color: accentColor }}>
+                    Attached Evidence / Research Papers
+                  </span>
+                  <div className="space-y-3">
+                    {evidenceLinks.map((link, idx) => (
+                      <a
+                        key={idx}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block p-3 rounded-lg border transition-all hover:bg-black/20"
+                        style={{ borderColor: layer.border, backgroundColor: isLight ? 'rgba(0,0,0,0.02)' : 'rgba(255,255,255,0.02)' }}
+                      >
+                        <span className="text-xs font-mono block mb-1" style={{ color: accentColor }}>[PDF Evidence {idx + 1}]</span>
+                        <span className="text-sm font-sans" style={{ color: cardTextPrimary }}>{link.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Feedback Widget at Layer 7 */}
+              {isLastLayer && (
+                <div className="mt-10 pt-8 border-t text-center" style={{ borderColor: layer.border }}>
+                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase block mb-4" style={{ color: accentColor }}>
+                    DO YOU BELIEVE IT? RATE THIS DOSSIER
+                  </span>
+                  <p className="text-xs font-sans mb-6" style={{ color: cardTextSecondary }}>
+                    Share your reaction to update the global archive's ratings.
+                  </p>
+                  <div className="flex justify-center gap-4 flex-wrap">
+                    <div className="relative">
+                      {animatingReaction === 'heart' && (
+                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
+                          🖤
+                        </span>
+                      )}
+                      <button
+                        onClick={() => handleReact('heart')}
+                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
+                          reacted['heart']
+                            ? 'bg-amber-900/20 border-[#9E7B4C] text-[#EDE8DF]'
+                            : 'hover:bg-white/5 border-neutral-800'
+                        } ${animatingReaction === 'heart' ? 'reaction-pop-heart' : ''}`}
+                      >
+                        HEART ({reactions.heart || 0})
+                      </button>
+                    </div>
+
+                    <div className="relative">
+                      {animatingReaction === 'scared' && (
+                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
+                          💀
+                        </span>
+                      )}
+                      <button
+                        onClick={() => handleReact('scared')}
+                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
+                          reacted['scared']
+                            ? 'bg-red-950/20 border-red-800 text-red-400'
+                            : 'hover:bg-white/5 border-neutral-800'
+                        } ${animatingReaction === 'scared' ? 'reaction-pop-scared' : ''}`}
+                      >
+                        TERRIFYING ({reactions.scared || 0})
+                      </button>
+                    </div>
+
+                    <div className="relative">
+                      {animatingReaction === 'mindblown' && (
+                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
+                          🤯
+                        </span>
+                      )}
+                      <button
+                        onClick={() => handleReact('mindblown')}
+                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
+                          reacted['mindblown']
+                            ? 'bg-cyan-950/20 border-cyan-800 text-cyan-400'
+                            : 'hover:bg-white/5 border-neutral-800'
+                        } ${animatingReaction === 'mindblown' ? 'reaction-pop-mindblown' : ''}`}
+                      >
+                        MIND-BLOWN ({reactions.mindblown || 0})
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
