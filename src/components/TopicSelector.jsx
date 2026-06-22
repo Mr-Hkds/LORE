@@ -250,8 +250,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <h1
             className="font-serif italic leading-none tracking-tight"
             style={{
-              fontSize: 'clamp(3.2rem, 10vw, 7.5rem)',
-              fontWeight: 700,
+              fontSize: 'clamp(2rem, 6.5vw, 3.6rem)',
+              fontWeight: 400,
               color: fg,
               letterSpacing: '-0.04em',
               lineHeight: 0.95,

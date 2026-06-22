@@ -65,10 +65,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [activeTab, setActiveTab] = useState('catalog');
 
   // GitHub Sync Configuration States
-  const [ghOwner, setGhOwner] = useState(() => localStorage.getItem('lore:github:owner') || 'Mr-Hkds');
-  const [ghRepo, setGhRepo] = useState(() => localStorage.getItem('lore:github:repo') || 'LORE');
-  const [ghBranch, setGhBranch] = useState(() => localStorage.getItem('lore:github:branch') || 'main');
-  const [ghToken, setGhToken] = useState(() => localStorage.getItem('lore:github:token') || '');
+  const [ghOwner, setGhOwner] = useState(() => localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds');
+  const [ghRepo, setGhRepo] = useState(() => localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE');
+  const [ghBranch, setGhBranch] = useState(() => localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main');
+  const [ghToken, setGhToken] = useState(() => localStorage.getItem('lore:github:token') || import.meta.env.VITE_GITHUB_TOKEN || '');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
 
@@ -115,7 +115,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
   const [autoLogs, setAutoLogs] = useState([]);
   const [serverOffline, setServerOffline] = useState(false);
-  const [consecutiveFailures, setConsecutiveFailures] = useState(0);
+  const consecutiveFailuresRef = useRef(0);
 
   // Read apiKey from env on load
   useEffect(() => {
@@ -213,7 +213,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const status = await resStatus.json();
         setAutoStatus(status);
         setServerOffline(false);
-        setConsecutiveFailures(0);
+        consecutiveFailuresRef.current = 0;
       } else {
         throw new Error('Server returned non-ok status');
       }
@@ -225,13 +225,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       }
     } catch (err) {
       console.warn('Failed to fetch automation data:', err);
-      setConsecutiveFailures(prev => {
-        const next = prev + 1;
-        if (next >= 3) {
-          setServerOffline(true);
-        }
-        return next;
-      });
+      consecutiveFailuresRef.current += 1;
+      if (consecutiveFailuresRef.current >= 3) {
+        setServerOffline(true);
+      }
     }
   }, []);
 
@@ -1273,27 +1270,6 @@ Keep responses concise. Be direct and useful.`;
 
         {/* Content Area */}
         <main className="flex-1 min-w-0 bg-[#110F0D] border rounded-2xl p-6 md:p-8" style={{ borderColor: ru }}>
-          {serverOffline && (
-            <div className="mb-6 p-4 rounded-xl border border-[#8B2F2F]/40 bg-[#8B2F2F]/5 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className="text-lg">⚠️</span>
-                <div className="text-left">
-                  <p className="text-xs font-bold text-[#EDE8DF] uppercase tracking-wide">Local API Server Offline</p>
-                  <p className="text-[10px] text-[#EDE8DF]/60 mt-0.5">Vite proxy target (port 3001) is unreachable (failed {consecutiveFailures} times). Run "npm run dev:full" or "npm run server" to start it.</p>
-                </div>
-              </div>
-              <button 
-                onClick={() => {
-                  setConsecutiveFailures(0);
-                  setServerOffline(false);
-                  fetchAutomationData();
-                }}
-                className="px-3.5 py-1.5 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded active:scale-95 transition-all duration-200 cursor-pointer"
-              >
-                Retry Connection
-              </button>
-            </div>
-          )}
           
           {/* Tab 1: Catalog */}
           {activeTab === 'catalog' && (

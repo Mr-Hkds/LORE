@@ -265,6 +265,69 @@
           "transition_line": "Sometimes, the deepest mysteries aren't found in frozen mountains, but inside the locked doors of an ordinary suburban home."
         }
       ]
+    },
+    {
+      "story_id": "barney_barnato",
+      "title": "Barney Barnato",
+      "category": "paranormal",
+      "hook": "Decades se unsolved aur classified—kya hai Barney Barnato ke case ka wo khaufnak pehlu jise investigators bhi kabhi samajh nahi paaye?",
+      "concepts": [
+        "unexplained_phenomena",
+        "mystery"
+      ],
+      "severity": "disturbing",
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper",
+          "content": "Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur jo is baat ko sach kar de. Hum baat kar rahe hain Barney Barnato ke baare mein. Yeh ek aisi ghatna hai jise sunkar kisi ke bhi roongte khade ho jayein.\n\nShuruat hoti hai ek chhote se surag se, jise log aksar ignore kar dete hain. Lekin dheere dheere yeh ek bada roop le leta hai.",
+          "cliffhanger": "Lekin asal sach toh abhi aage aane wala tha."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern",
+          "content": "Jaise jaise jaanch aage badhi, ek ajeeb sa pattern samne aane laga. Har ek chiz kisi gahre rahasya ki taraf ishara kar rahi thi.\n\nLogon ne ajeeb ajeeb aawazein sunne ka daawa kiya. Police aur investigators bhi is ajeeb paheli ko suljhane mein nakam rahe.",
+          "cliffhanger": "Aur tabhi ek aisi chiz mili jisne sabko hairan kar diya."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident",
+          "content": "Ghatna wale din kuch aisa hua jo kisi ne nahi socha tha. Sabhi saboot mita diye gaye the aur sirf ek ajeeb sa nishaan bacha tha.\n\nChashmadido ke mutabik, wahan ki hawa mein ek ajeeb si thandak thi aur darr ka mahaul ban gaya tha.",
+          "cliffhanger": "Kya yeh kisi badi sajish ka hissa tha?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System",
+          "content": "Iske baad government aur local authorities ne is case ko dabane ki koshish ki. Files ko classified kar diya gaya aur public ko sach se door rakha gaya.\n\nKuch aisi agency shamil thi jo is rahasya ko hamesha ke liye dafnana chahti thi.",
+          "cliffhanger": "Lekin sach ko kab tak chhupaya ja sakta tha?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research",
+          "content": "Saalon baad, researchers ne purani files ko fir se khola. Unhone paya ki ghatna ke piche kuch aisi scientific ya paranormal takatei thi jo aam samajh se pare hain.\n\nData aur records se pata chala ki yeh koi aam haadsa nahi tha, balki ek sochee samjhi saazish thi.",
+          "cliffhanger": "Ab hum us gahrayi mein utarne wale hain jahan darr ka asal roop hai."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss",
+          "content": "Case ki sabse khaufnak chiz samne aayi jab humne iske gahre pehluon ko dekha. Victims ke sath jo hua, woh kisi nightmare se kam nahi tha.\n\nHar ek kadam par darr aur badhta chala gaya aur ab piche mudne ka koi raasta nahi tha.",
+          "cliffhanger": "Aur ab aakhiri layer, jahan sabse bada sach samne aayega."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Aakhirkar hum us dark corner mein pahunch gaye hain jahan har ek paheli ka jawab hai. Lekin kya hum is sach ko sahan karne ke liye taiyar hain?\n\nYeh case aaj bhi ek bada rahasya bana hua hai, aur shayad iska jawab hume kabhi na mile. Tab tak ke liye, satark rahein aur dhyan dein ki aapke aaspaas kya ho raha hai.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [],
+      "added_date": "2026-06-22",
+      "wikipedia_summary": {
+        "title": "Barney Barnato",
+        "extract": "Barney Barnato was a British Randlord and diamond magnate who was one of the entrepreneurs who gained control of diamond mining, and later, gold mining in South Africa from the 1870s up to World War I. He was known as a rival of Cecil Rhodes.",
+        "url": "https://en.wikipedia.org/wiki/Barney_Barnato"
+      },
+      "hero_image": "/content/images/barney_barnato/cover.jpg"
     }
   ]
 }
