@@ -83,6 +83,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [progress, setProgress] = useState(0);
   const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
   const [autoLogs, setAutoLogs] = useState([]);
+  const [serverOffline, setServerOffline] = useState(false);
+  const [consecutiveFailures, setConsecutiveFailures] = useState(0);
 
   // Read apiKey from env on load
   useEffect(() => {
@@ -179,7 +181,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       if (resStatus.ok) {
         const status = await resStatus.json();
         setAutoStatus(status);
+        setServerOffline(false);
+        setConsecutiveFailures(0);
+      } else {
+        throw new Error('Server returned non-ok status');
       }
+      
       const resLogs = await fetch('/api/automation/logs');
       if (resLogs.ok) {
         const logsData = await resLogs.json();
@@ -187,15 +194,23 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       }
     } catch (err) {
       console.warn('Failed to fetch automation data:', err);
+      setConsecutiveFailures(prev => {
+        const next = prev + 1;
+        if (next >= 3) {
+          setServerOffline(true);
+        }
+        return next;
+      });
     }
   }, []);
 
-  // Poll automation logs and status every 2500ms
+  // Poll automation logs and status
   useEffect(() => {
     fetchAutomationData();
-    const interval = setInterval(fetchAutomationData, 2500);
+    const intervalTime = serverOffline ? 30000 : 2500; // Slow down polling when offline to stop spamming console
+    const interval = setInterval(fetchAutomationData, intervalTime);
     return () => clearInterval(interval);
-  }, [fetchAutomationData]);
+  }, [fetchAutomationData, serverOffline]);
 
   const [isHarvesting, setIsHarvesting] = useState(false);
 
@@ -1023,7 +1038,7 @@ Keep responses concise. Be direct and useful.`;
           <button
             onClick={() => setActiveTab('catalog')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'catalog' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'catalog' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             Case Archive ({stories.length})
@@ -1031,7 +1046,7 @@ Keep responses concise. Be direct and useful.`;
           <button
             onClick={() => setActiveTab('recommendations')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors relative cursor-pointer ${
-              activeTab === 'recommendations' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'recommendations' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             Topic Suggestions ({recommendations.filter(r => r.status === 'pending').length})
@@ -1039,7 +1054,7 @@ Keep responses concise. Be direct and useful.`;
           <button
             onClick={() => setActiveTab('generator')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'generator' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'generator' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             Write a Dossier
@@ -1047,7 +1062,7 @@ Keep responses concise. Be direct and useful.`;
           <button
             onClick={() => setActiveTab('automation')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'automation' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'automation' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             Automated Writer
@@ -1060,7 +1075,7 @@ Keep responses concise. Be direct and useful.`;
               setFeedbackLoading(false);
             }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'feedback' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'feedback' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             User Feedback ({feedbackItems.filter(f => !f.addressed).length})
@@ -1068,7 +1083,7 @@ Keep responses concise. Be direct and useful.`;
           <button
             onClick={() => setActiveTab('ai-editor')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'ai-editor' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+              activeTab === 'ai-editor' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
             AI Editor
@@ -1077,6 +1092,27 @@ Keep responses concise. Be direct and useful.`;
 
         {/* Content Area */}
         <main className="flex-1 min-w-0 bg-[#110F0D] border rounded-2xl p-6 md:p-8" style={{ borderColor: ru }}>
+          {serverOffline && (
+            <div className="mb-6 p-4 rounded-xl border border-[#8B2F2F]/40 bg-[#8B2F2F]/5 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="text-lg">⚠️</span>
+                <div className="text-left">
+                  <p className="text-xs font-bold text-[#EDE8DF] uppercase tracking-wide">Local API Server Offline</p>
+                  <p className="text-[10px] text-[#EDE8DF]/60 mt-0.5">Vite proxy target (port 3001) is unreachable (failed {consecutiveFailures} times). Run "npm run dev:full" or "npm run server" to start it.</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => {
+                  setConsecutiveFailures(0);
+                  setServerOffline(false);
+                  fetchAutomationData();
+                }}
+                className="px-3.5 py-1.5 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded active:scale-95 transition-all duration-200 cursor-pointer"
+              >
+                Retry Connection
+              </button>
+            </div>
+          )}
           
           {/* Tab 1: Catalog */}
           {activeTab === 'catalog' && (
