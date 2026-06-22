@@ -251,7 +251,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             className="font-serif italic leading-none tracking-tight"
             style={{
               fontSize: 'clamp(3.2rem, 10vw, 7.5rem)',
-              fontWeight: 300,
+              fontWeight: 700,
               color: fg,
               letterSpacing: '-0.04em',
               lineHeight: 0.95,
@@ -266,7 +266,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             className="font-serif leading-relaxed"
             style={{
               fontSize: 'clamp(1.05rem, 2.2vw, 1.22rem)',
-              fontWeight: 300,
+              fontWeight: 400,
               lineHeight: 1.85,
               color: fg,
               opacity: 0.88, // Increased opacity for better mobile contrast
@@ -457,7 +457,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                   className="font-serif italic flex-1 leading-snug"
                   style={{
                     fontSize: 'clamp(1.5rem, 4.5vw, 2.2rem)',
-                    fontWeight: 300,
+                    fontWeight: 400,
                     color: fg,
                     letterSpacing: '-0.02em',
                     lineHeight: 1.15,
@@ -507,7 +507,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <div className="mt-16 pt-10 border-t" style={{ borderColor: ru }}>
             <h3
               className="font-serif italic text-lg mb-4"
-              style={{ color: fg, fontWeight: 300, letterSpacing: '-0.01em' }}
+              style={{ color: fg, fontWeight: 400, letterSpacing: '-0.01em' }}
             >
               Recommend a topic for the archive
             </h3>

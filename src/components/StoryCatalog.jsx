@@ -266,7 +266,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
           {/* Title row */}
           <div className="flex items-end justify-between mb-3 gap-4">
             <h1 className="font-serif italic leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 300, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
+              style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 600, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
               {categoryLabel}
             </h1>
             {stories.length > 1 && (
@@ -277,7 +277,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
           </div>
 
           <p className="font-serif leading-relaxed mb-12"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', fontWeight: 300, color: fg, opacity: 0.35, maxWidth: '48ch' }}>
+            style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', fontWeight: 400, color: fg, opacity: 0.35, maxWidth: '48ch' }}>
             Each file descends seven layers. The deeper you go, the harder it becomes to unsee.
           </p>
 

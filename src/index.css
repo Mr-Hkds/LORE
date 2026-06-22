@@ -57,7 +57,7 @@ body {
   right: -24px;
   font-family: var(--font-serif);
   font-size: clamp(16rem, 34vw, 30rem);
-  font-weight: 300;
+  font-weight: 400;
   font-style: italic;
   line-height: 1;
   opacity: 0.028;
