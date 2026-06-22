@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
+import { useReadingProgress } from '../hooks/useReadingProgress';
 
-export default function TopicSelector({ onSelect, onAdminClick, categoryCounts = {} }) {
+export default function TopicSelector({ onSelect, onAdminClick, categoryCounts = {}, allStories = [] }) {
+
   const bg = '#1A1815';
   const fg = '#EDE8DF';
   const mu = '#6A6560';
@@ -10,11 +12,20 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
   const ru = 'rgba(237,232,223,0.07)';
 
   const [recommendation, setRecommendation] = useState('');
-  const [submitStatus, setSubmitStatus] = useState(null); // 'submitting' | 'success' | 'error'
-
-  // Secret admin tap gesture state
-  const [lastTap, setLastTap] = useState(0);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
+  const [forYouStories, setForYouStories] = useState([]);
+
+  const { getForYouStories, getProgress } = useReadingProgress();
+
+  // Compute For You list on mount (reading history is synchronous from localStorage)
+  useEffect(() => {
+    if (allStories.length > 0) {
+      const fory = getForYouStories(allStories, 3);
+      setForYouStories(fory);
+    }
+  }, [allStories, getForYouStories]);
 
   const handleLogoTap = () => {
     const now = Date.now();
@@ -162,6 +173,47 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
             Seven layers of real, documented knowledge.<br />
             Each one darker than the last.
           </p>
+
+          {/* ── For You section — only when reading history exists ── */}
+          {forYouStories.length > 0 && (
+            <div className="mb-16 pt-2">
+              <p className="text-[9px] font-mono font-bold tracking-[0.24em] uppercase mb-5" style={{ color: ac, opacity: 0.7 }}>◉ For You</p>
+              <div className="flex flex-col gap-3">
+                {forYouStories.map(story => {
+                  const prog = getProgress(story.story_id);
+                  return (
+                    <button
+                      key={story.story_id}
+                      onClick={() => {
+                        // Navigate directly to the story's category then story
+                        const catMap = { psychology:'psychology', mythology:'mythology', true_crime:'true-crime', gov_experiments:'gov-experiments', paranormal:'paranormal-reports', conspiracy:'conspiracy', cyber_mysteries:'cyber-mysteries' };
+                        onSelect({ id: catMap[story.category] || story.category, label: story.category }, story.story_id);
+                      }}
+                      className="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl border transition-all duration-200 hover:border-[rgba(158,123,76,0.25)] group"
+                      style={{ background: 'rgba(158,123,76,0.04)', borderColor: 'rgba(237,232,223,0.06)' }}
+                    >
+                      {/* progress indicator */}
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center" style={{ borderColor: ac + '33' }}>
+                        {prog?.completed
+                          ? <span style={{ color: ac, fontSize: '10px' }}>✓</span>
+                          : prog?.lastLayer
+                            ? <span style={{ color: ac, fontSize: '9px', fontWeight: 700 }}>{prog.lastLayer}</span>
+                            : <span style={{ color: mu, fontSize: '8px' }}>→</span>
+                        }
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-serif italic text-sm leading-snug truncate group-hover:text-[#9E7B4C] transition-colors" style={{ color: fg }}>{story.title}</p>
+                        <p className="text-[9px] font-mono mt-0.5" style={{ color: mu }}>
+                          {prog?.completed ? 'Completed' : prog?.lastLayer ? `Resume — Layer ${prog.lastLayer}/7` : 'Not started'}
+                        </p>
+                      </div>
+                      <span className="text-sm flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" style={{ color: ac, opacity: 0.4 }}>→</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Topic list */}
           <div style={{ borderTop: `1px solid ${ru}` }}>

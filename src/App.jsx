@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useStaticContent } from './hooks/useStaticContent';
+import { useReadingProgress } from './hooks/useReadingProgress';
 import { getLayer } from './constants/layers';
 import TopicSelector from './components/TopicSelector';
 import StoryCatalog from './components/StoryCatalog';
@@ -7,6 +8,7 @@ import LayerReader from './components/LayerReader';
 import DepthMeter from './components/DepthMeter';
 import AdminPanel from './components/AdminPanel';
 import LoreMark from './components/LoreMark';
+import SiteFeedback from './components/SiteFeedback';
 import { TOPICS } from './constants/topics';
 
 const TOTAL_LAYERS = 7;
@@ -37,6 +39,13 @@ export default function App() {
     getCategoryCounts,
     refetchStories,
   } = useStaticContent();
+
+  const {
+    trackLayerRead,
+    startTimeTracking,
+    stopTimeTracking,
+    getProgress,
+  } = useReadingProgress();
 
 
 
@@ -203,6 +212,23 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [syncStateFromHash]);
 
+  // Track reading progress when layer changes
+  useEffect(() => {
+    if (phase === 'reading' && currentStory && activeLayer) {
+      trackLayerRead(currentStory.story_id, activeLayer, currentStory.category);
+    }
+  }, [phase, currentStory, activeLayer, trackLayerRead]);
+
+  // Start/stop time tracking when entering/leaving reading phase
+  useEffect(() => {
+    if (phase === 'reading' && currentStory) {
+      startTimeTracking(currentStory.story_id);
+    } else {
+      stopTimeTracking();
+    }
+    return () => stopTimeTracking();
+  }, [phase, currentStory?.story_id, startTimeTracking, stopTimeTracking]);
+
   // Sync current reading layer to history hash (replaceState to avoid polluting back history)
   useEffect(() => {
     if (phase === 'reading' && currentStory) {
@@ -248,10 +274,14 @@ export default function App() {
   // Phase: Select topic
   if (phase === 'select') {
     return (
-      <TopicSelector
-        onSelect={handleSelectTopic}
-        categoryCounts={getCategoryCounts()}
-      />
+      <>
+        <TopicSelector
+          onSelect={handleSelectTopic}
+          categoryCounts={getCategoryCounts()}
+          allStories={stories}
+        />
+        <SiteFeedback />
+      </>
     );
   }
 
@@ -271,12 +301,15 @@ export default function App() {
     const categoryStories = getStoriesByCategory(selectedCategory?.id);
 
     return (
-      <StoryCatalog
-        category={mappedCategory}
-        stories={categoryStories}
-        onSelectStory={handleSelectStory}
-        onBack={handleBackToTopics}
-      />
+      <>
+        <StoryCatalog
+          category={mappedCategory}
+          stories={categoryStories}
+          onSelectStory={handleSelectStory}
+          onBack={handleBackToTopics}
+        />
+        <SiteFeedback />
+      </>
     );
   }
 
@@ -342,7 +375,8 @@ export default function App() {
       layerName: layerData.layer_name || null,
       cards,
       imageUrl: layerNum === 1 ? currentStory.hero_image : null,
-      evidenceLinks: layerNum === 1 ? currentStory.evidence_links : [],
+      contextImage: (currentStory.context_images || []).find(ci => ci.layer === layerNum) || null,
+      evidenceLinks: layerNum === 7 ? (currentStory.evidence_links || []) : [],
       wikipediaSearchQuery: '',
     };
   };

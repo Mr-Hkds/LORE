@@ -4,9 +4,10 @@ const path = require('path');
 const https = require('https');
 
 const PORT = 3001;
-const RECS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
-const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
+const RECS_FILE     = path.join(__dirname, 'public', 'content', 'recommendations.json');
+const STORIES_FILE  = path.join(__dirname, 'public', 'content', 'stories.json');
 const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
+const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 
 // Load environment variables manually
 function loadEnv() {
@@ -43,6 +44,9 @@ function ensureFiles() {
   }
   if (!fs.existsSync(CONCEPTS_FILE)) {
     fs.writeFileSync(CONCEPTS_FILE, JSON.stringify({}, null, 2));
+  }
+  if (!fs.existsSync(FEEDBACK_FILE)) {
+    fs.writeFileSync(FEEDBACK_FILE, JSON.stringify([], null, 2));
   }
 }
 
@@ -823,7 +827,100 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+
+  // ── Feedback Routes ───────────────────────────────────────────────────────
+
+  // GET /api/feedback — return all site feedback (admin only)
+  if (req.method === 'GET' && pathname === '/api/feedback') {
+    const fb = readJson(FEEDBACK_FILE) || [];
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(fb));
+    return;
+  }
+
+  // POST /api/feedback — submit new site feedback
+  if (req.method === 'POST' && pathname === '/api/feedback') {
+    try {
+      const entry = await getJsonBody(req);
+      if (!entry.rating) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Rating required' }));
+        return;
+      }
+      entry.id = entry.id || ('fb_' + Date.now());
+      entry.timestamp = entry.timestamp || new Date().toISOString();
+      entry.addressed = false;
+      const feedback = readJson(FEEDBACK_FILE) || [];
+      feedback.unshift(entry);
+      writeJson(FEEDBACK_FILE, feedback);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // DELETE /api/feedback?id=... — delete one feedback item
+  if (req.method === 'DELETE' && pathname === '/api/feedback') {
+    const id = new URLSearchParams(rawQuery).get('id');
+    if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
+    let feedback = readJson(FEEDBACK_FILE) || [];
+    feedback = feedback.filter(f => f.id !== id);
+    writeJson(FEEDBACK_FILE, feedback);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+    return;
+  }
+
+  // PATCH /api/feedback?id=... — mark as addressed/unaddressed
+  if (req.method === 'PATCH' && pathname === '/api/feedback') {
+    const id = new URLSearchParams(rawQuery).get('id');
+    if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
+    const body = await getJsonBody(req);
+    const feedback = readJson(FEEDBACK_FILE) || [];
+    const item = feedback.find(f => f.id === id);
+    if (item) {
+      item.addressed = body.addressed !== undefined ? body.addressed : !item.addressed;
+      writeJson(FEEDBACK_FILE, feedback);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, addressed: item.addressed }));
+    } else {
+      res.writeHead(404); res.end('{"error":"Not found"}');
+    }
+    return;
+  }
+
+  // ── Story PUT — AI Co-Editor full story field update ──────────────────────
+  // PUT /api/stories/:id  — update any field of a story (used by AI Co-Editor)
+  const storyPutMatch = pathname.match(/^\/api\/stories\/([^/]+)$/);
+  if (req.method === 'PUT' && storyPutMatch) {
+    try {
+      const storyId = storyPutMatch[1];
+      const updates = await getJsonBody(req);
+      const storiesData = readJson(STORIES_FILE) || { stories: [] };
+      const storyIdx = storiesData.stories.findIndex(s => s.story_id === storyId);
+      if (storyIdx === -1) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Story not found' }));
+        return;
+      }
+      // Deep merge: allow updating any field including nested layers
+      storiesData.stories[storyIdx] = { ...storiesData.stories[storyIdx], ...updates };
+      writeJson(STORIES_FILE, storiesData);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, story: storiesData.stories[storyIdx] }));
+      console.log(`[AI-EDITOR] Updated story: ${storyId}`);
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Route 1: GET /api/recommendations
+
   if (req.method === 'GET' && pathname === '/api/recommendations') {
     const recs = readJson(RECS_FILE) || [];
     res.writeHead(200, { 'Content-Type': 'application/json' });

@@ -46,9 +46,21 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 
-  // Tabs: 'catalog' | 'recommendations' | 'generator'
+  // Tabs: 'catalog' | 'recommendations' | 'generator' | 'feedback' | 'ai-editor'
   const [activeTab, setActiveTab] = useState('catalog');
   
+  // Feedback tab state
+  const [feedbackItems, setFeedbackItems] = useState([]);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+
+  // AI Co-Editor state
+  const [aiMessages, setAiMessages] = useState([
+    { role: 'assistant', text: 'Hello! I\'m your LORE Co-Editor. I have access to all stories, user feedback, and the image system.\n\nTell me what to improve:\n• "Change the hero image for Burari Deaths to [URL or describe]"\n• "Rewrite Layer 3 of the Asch story to be shorter"\n• "Find OpenAlex papers for the Dyatlov Pass story"\n• "Which story has the lowest reaction score?"' }
+  ]);
+  const [aiInput, setAiInput]     = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiProposal, setAiProposal] = useState(null);
+
   // Custom stories state
   const [recommendations, setRecommendations] = useState([]);
   const [expandedStoryId, setExpandedStoryId] = useState(null);
@@ -689,8 +701,126 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
     addLog(`Nightly Automated Content Run Completed. Added ${topicsToRun.length} stories.`);
   };
 
+  // ── AI Co-Editor handler ──────────────────────────────────────────────────
+  const handleAiCoEdit = async () => {
+    if (!aiInput.trim() || aiLoading) return;
+    const userMsg = aiInput.trim();
+    setAiInput('');
+    setAiMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setAiLoading(true);
+    setAiProposal(null);
+
+    try {
+      if (!apiKey) throw new Error('No Gemini API key set. Go to the generator tab to configure it.');
+
+      // Build rich context for the AI
+      const storySummaries = stories.map(s => ({
+        id: s.story_id,
+        title: s.title,
+        category: s.category,
+        severity: s.severity,
+        hero_image: s.hero_image,
+        reactions: s.reactions,
+        layers: (s.layers || []).map(l => ({ layer: l.layer, name: l.layer_name, content_preview: (l.content || '').slice(0, 80) })),
+      }));
+
+      let feedbackContext = '';
+      try {
+        const fbRes = await fetch('/api/feedback');
+        if (fbRes.ok) {
+          const fb = await fbRes.json();
+          feedbackContext = fb.slice(0, 10).map(f => `rating:${f.rating} tags:[${(f.tags||[]).join(',')}] note:"${f.note || 'none'}"`).join('\n');
+        }
+      } catch {}
+
+      const systemPrompt = `You are the AI Co-Editor for LORE — a dark archive of stories.
+
+You have access to all stories and user feedback below.
+
+STORIES (summary):
+${JSON.stringify(storySummaries, null, 1)}
+
+RECENT FEEDBACK (up to 10):
+${feedbackContext || 'No feedback yet.'}
+
+Your capabilities:
+1. ANSWER questions about stories, feedback, engagement.
+2. PROPOSE story edits — respond with a JSON block like:
+   {"action":"edit","story_id":"xxx","field":"hero_image","value":"/content/images/xxx.jpg","description":"Change hero image"}
+   or for layer content:
+   {"action":"edit","story_id":"xxx","field":"layers","value":[...full layers array...],"description":"Rewrote Layer 3"}
+3. GENERATE IMAGE — if user wants a new image:
+   {"action":"image","story_id":"xxx","prompt":"cinematic dark scene...","description":"Generate new cover image"}
+4. FETCH EVIDENCE — tell user to use the Backfill or suggest OpenAlex query.
+
+For image changes, if user gives a direct URL, propose:
+   {"action":"url_image","story_id":"xxx","url":"https://...","description":"Set image from URL"}
+
+Always respond with plain text explanation FIRST, then the JSON block on a new line if applicable.
+Keep responses concise. Be direct and useful.`;
+
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\nUser request: ' + userMsg }] }],
+          generationConfig: { temperature: 0.4 },
+        }),
+      });
+
+      const data = await res.json();
+      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
+
+      // Try to extract JSON action from response
+      const jsonMatch = rawText.match(/\{[\s\S]*?"action"\s*:[\s\S]*?\}/);
+      const plainText = rawText.replace(/```[\s\S]*?```/g, '').replace(/\{[\s\S]*?"action"[\s\S]*?\}/g, '').trim();
+
+      setAiMessages(prev => [...prev, { role: 'assistant', text: plainText || rawText }]);
+
+      if (jsonMatch) {
+        try {
+          const action = JSON.parse(jsonMatch[0]);
+          if (action.action === 'edit') {
+            setAiProposal({
+              storyId: action.story_id,
+              field: action.field,
+              value: action.value,
+              description: action.description,
+              preview: typeof action.value === 'string' ? action.value : action.value,
+            });
+          } else if (action.action === 'image') {
+            // Generate via Pollinations and propose
+            const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(action.prompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+            setAiMessages(prev => [...prev, { role: 'assistant', text: `Generating image from prompt...\nURL: ${imgUrl}\n\nNote: You can "Apply" to set this as the hero image. The image will be served from Pollinations (external). To save locally, use the Backfill button after applying.` }]);
+            setAiProposal({
+              storyId: action.story_id,
+              field: 'hero_image',
+              value: imgUrl,
+              description: action.description || 'Generated new hero image from AI prompt.',
+              preview: imgUrl,
+            });
+          } else if (action.action === 'url_image') {
+            // Save remote URL as hero image, server will download it on next backfill
+            setAiProposal({
+              storyId: action.story_id,
+              field: 'hero_image',
+              value: action.url,
+              description: action.description || 'Set hero image from provided URL.',
+              preview: action.url,
+            });
+          }
+        } catch {}
+      }
+    } catch (err) {
+      setAiMessages(prev => [...prev, { role: 'assistant', text: `Error: ${err.message}` }]);
+    }
+
+    setAiLoading(false);
+  };
+
   // Export merged stories to file
   const handleExportJSON = () => {
+
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ stories }, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
@@ -815,6 +945,31 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
             }`}
           >
             Content Engine Console
+          </button>
+          <button
+            onClick={async () => {
+              setActiveTab('feedback');
+              setSelectedRecIds([]);
+              setFeedbackLoading(true);
+              try {
+                const res = await fetch('/api/feedback');
+                if (res.ok) setFeedbackItems(await res.json());
+              } catch { /* server may be down */ }
+              setFeedbackLoading(false);
+            }}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'feedback' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+            }`}
+          >
+            User Feedback
+          </button>
+          <button
+            onClick={() => { setActiveTab('ai-editor'); setSelectedRecIds([]); }}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'ai-editor' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+            }`}
+          >
+            🤖 AI Co-Editor
           </button>
         </aside>
 
@@ -1206,6 +1361,219 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
                 </div>
               )}
 
+            </div>
+          )}
+
+          {/* ── Tab: User Feedback ── */}
+          {activeTab === 'feedback' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
+                <div>
+                  <h2 className="font-serif italic text-2xl">User Feedback</h2>
+                  <p className="text-xs font-mono mt-1" style={{ color: mu }}>Site-wide ratings and notes from visitors</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  {feedbackItems.length > 0 && (
+                    <span className="text-xs font-mono" style={{ color: ac }}>
+                      {feedbackItems.filter(f => !f.addressed).length} unaddressed
+                    </span>
+                  )}
+                  <button
+                    onClick={async () => {
+                      setFeedbackLoading(true);
+                      try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch {}
+                      setFeedbackLoading(false);
+                    }}
+                    className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer" style={{ borderColor: ru }}
+                  >⟳ Refresh</button>
+                </div>
+              </div>
+
+              {feedbackLoading ? (
+                <div className="text-center py-16 text-[#6A6560] font-mono text-xs animate-pulse">Loading feedback...</div>
+              ) : feedbackItems.length === 0 ? (
+                <div className="text-center py-16">
+                  <p className="font-serif italic text-xl opacity-40">No feedback filed yet.</p>
+                  <p className="text-[10px] font-mono uppercase tracking-widest mt-2 opacity-20">The archive awaits your first visitor's voice.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {feedbackItems.map(fb => (
+                    <div key={fb.id}
+                      className="p-4 rounded-xl border"
+                      style={{ borderColor: fb.addressed ? 'rgba(237,232,223,0.04)' : 'rgba(158,123,76,0.2)', backgroundColor: fb.addressed ? 'rgba(255,255,255,0.01)' : 'rgba(158,123,76,0.03)', opacity: fb.addressed ? 0.5 : 1 }}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          {/* Rating dots */}
+                          <div className="flex items-center gap-1.5 mb-2">
+                            {[1,2,3,4,5].map(n => (
+                              <div key={n} className="w-2 h-2 rounded-full" style={{ backgroundColor: n <= fb.rating ? ac : 'rgba(237,232,223,0.1)' }} />
+                            ))}
+                            <span className="text-[10px] font-mono ml-2" style={{ color: mu }}>{fb.rating}/5</span>
+                            {fb.addressed && <span className="text-[9px] font-mono ml-3 px-2 py-0.5 rounded" style={{ color: ac, backgroundColor: `${ac}15` }}>ADDRESSED</span>}
+                          </div>
+                          {/* Tags */}
+                          {fb.tags && fb.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mb-2">
+                              {fb.tags.map(t => (
+                                <span key={t} className="text-[8px] font-mono px-2 py-0.5 rounded border" style={{ borderColor: 'rgba(237,232,223,0.08)', color: mu }}>
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          {/* Note */}
+                          {fb.note && <p className="text-xs font-sans italic leading-relaxed" style={{ color: fg, opacity: 0.8 }}>"{fb.note}"</p>}
+                          {/* Meta */}
+                          <p className="text-[9px] font-mono mt-2 opacity-35" style={{ color: mu }}>
+                            {new Date(fb.timestamp).toLocaleString()} · {fb.page}
+                          </p>
+                        </div>
+                        {/* Actions */}
+                        <div className="flex flex-col gap-1.5 flex-shrink-0">
+                          <button
+                            onClick={async () => {
+                              try {
+                                await fetch(`/api/feedback?id=${fb.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+                                setFeedbackItems(prev => prev.map(f => f.id === fb.id ? { ...f, addressed: !f.addressed } : f));
+                              } catch {}
+                            }}
+                            className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer whitespace-nowrap"
+                            style={{ borderColor: 'rgba(158,123,76,0.3)', color: ac }}
+                          >{fb.addressed ? 'Reopen' : '✓ Address'}</button>
+                          <button
+                            onClick={async () => {
+                              if (!window.confirm('Delete this feedback?')) return;
+                              try {
+                                await fetch(`/api/feedback?id=${fb.id}`, { method: 'DELETE' });
+                                setFeedbackItems(prev => prev.filter(f => f.id !== fb.id));
+                              } catch {}
+                            }}
+                            className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer"
+                            style={{ borderColor: 'rgba(139,47,47,0.3)', color: '#8B2F2F' }}
+                          >Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── Tab: AI Co-Editor ── */}
+          {activeTab === 'ai-editor' && (
+            <div className="flex flex-col h-full" style={{ minHeight: '600px' }}>
+              <div className="border-b pb-4 mb-4" style={{ borderColor: ru }}>
+                <h2 className="font-serif italic text-2xl">AI Co-Editor</h2>
+                <p className="text-xs font-mono mt-1" style={{ color: mu }}>
+                  Reads all stories + feedback. Can edit, regenerate images, fetch evidence.
+                </p>
+              </div>
+
+              {/* Message thread */}
+              <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" style={{ maxHeight: '400px' }}>
+                {aiMessages.map((msg, i) => (
+                  <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div
+                      className="max-w-[85%] px-4 py-3 rounded-xl text-sm font-sans leading-relaxed whitespace-pre-wrap"
+                      style={{
+                        backgroundColor: msg.role === 'user' ? 'rgba(158,123,76,0.15)' : 'rgba(255,255,255,0.04)',
+                        borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '4px 16px 16px 16px',
+                        color: fg,
+                        border: `1px solid ${msg.role === 'user' ? 'rgba(158,123,76,0.25)' : 'rgba(237,232,223,0.06)'}`,
+                      }}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+                {aiLoading && (
+                  <div className="flex justify-start">
+                    <div className="px-4 py-3 rounded-xl text-xs font-mono animate-pulse" style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: mu }}>
+                      Analyzing archive...
+                    </div>
+                  </div>
+                )}
+                {/* Proposal card */}
+                {aiProposal && (
+                  <div className="p-4 rounded-xl border" style={{ borderColor: 'rgba(158,123,76,0.4)', backgroundColor: 'rgba(158,123,76,0.06)' }}>
+                    <p className="text-[10px] font-mono tracking-wider uppercase mb-2" style={{ color: ac }}>Proposed Change</p>
+                    <p className="text-sm font-sans leading-relaxed mb-3" style={{ color: fg }}>{aiProposal.description}</p>
+                    {aiProposal.preview && (
+                      <pre className="text-[11px] font-mono p-3 rounded mb-3 overflow-x-auto" style={{ backgroundColor: 'rgba(0,0,0,0.3)', color: mu, maxHeight: '120px' }}>
+                        {typeof aiProposal.preview === 'string' ? aiProposal.preview : JSON.stringify(aiProposal.preview, null, 2)}
+                      </pre>
+                    )}
+                    <div className="flex gap-3">
+                      <button
+                        onClick={async () => {
+                          try {
+                            const r = await fetch(`/api/stories/${aiProposal.storyId}`, {
+                              method: 'PUT',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ [aiProposal.field]: aiProposal.value }),
+                            });
+                            if (r.ok) {
+                              if (refetchStories) refetchStories();
+                              setAiMessages(prev => [...prev, { role: 'assistant', text: `✓ Applied! The change to "${aiProposal.storyId}" is now live. Refresh the site to see it.` }]);
+                              setAiProposal(null);
+                            } else {
+                              setAiMessages(prev => [...prev, { role: 'assistant', text: 'Failed to apply — is the server running?' }]);
+                            }
+                          } catch (err) {
+                            setAiMessages(prev => [...prev, { role: 'assistant', text: `Error: ${err.message}` }]);
+                          }
+                        }}
+                        className="px-4 py-2 rounded-lg text-[10px] font-mono tracking-wider uppercase cursor-pointer"
+                        style={{ backgroundColor: 'rgba(158,123,76,0.2)', border: '1px solid rgba(158,123,76,0.4)', color: ac }}
+                      >
+                        ✓ Apply Changes
+                      </button>
+                      <button
+                        onClick={() => setAiProposal(null)}
+                        className="px-4 py-2 rounded-lg text-[10px] font-mono tracking-wider uppercase cursor-pointer hover:bg-white/5"
+                        style={{ border: '1px solid rgba(237,232,223,0.08)', color: mu }}
+                      >
+                        Discard
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Input */}
+              <div className="flex gap-3 mt-auto">
+                <textarea
+                  value={aiInput}
+                  onChange={e => setAiInput(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      if (aiInput.trim() && !aiLoading) handleAiCoEdit();
+                    }
+                  }}
+                  placeholder="Tell the AI what to change... (Enter to send, Shift+Enter for newline)"
+                  rows={2}
+                  className="flex-1 px-4 py-3 text-sm rounded-xl border resize-none focus:outline-none transition-colors"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.03)',
+                    borderColor: 'rgba(237,232,223,0.08)',
+                    color: fg,
+                    caretColor: ac,
+                  }}
+                  onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.3)'; }}
+                  onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.08)'; }}
+                />
+                <button
+                  onClick={handleAiCoEdit}
+                  disabled={!aiInput.trim() || aiLoading}
+                  className="px-4 py-3 rounded-xl text-xs font-mono tracking-wider uppercase transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
+                  style={{ backgroundColor: 'rgba(158,123,76,0.15)', border: '1px solid rgba(158,123,76,0.3)', color: ac }}
+                >
+                  Send
+                </button>
+              </div>
             </div>
           )}
 
