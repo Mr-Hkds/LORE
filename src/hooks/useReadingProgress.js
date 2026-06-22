@@ -109,7 +109,7 @@ export function useReadingProgress() {
     const scored = allStories.map(s => {
       const affinityScore = hasAffinity ? (affinity[s.category] || 0) * 3 : 0;
       const rx = s.reactions || {};
-      const reactionScore = (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
+      const reactionScore = (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
       const prog = lsGet(KEY_PROGRESS(s.story_id), null);
       // Don't recommend completed stories
       const penalty = prog?.completed ? -100 : 0;

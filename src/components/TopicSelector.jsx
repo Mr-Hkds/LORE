@@ -7,8 +7,10 @@ import TodayInShadows from './TodayInShadows';
 // Mini image helper using local or Wikipedia cover art
 function StoryMiniImage({ story }) {
   const [fetchedUrl, setFetchedUrl] = useState(null);
+  const [imgFailed, setImgFailed] = useState(false);
 
   useEffect(() => {
+    setImgFailed(false);
     if (story.hero_image) return;
     const query = story.image_query || story.title;
     if (!query) return;
@@ -37,14 +39,20 @@ function StoryMiniImage({ story }) {
   const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
   const displayUrl = story.hero_image || (isDirectUrl ? story.image_query : null) || fetchedUrl;
 
-  if (!displayUrl) {
-    return <div className="w-full h-full bg-neutral-950/60 animate-pulse" />;
+  if (!displayUrl || imgFailed) {
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+        <LoreMark size={16} color="currentColor" />
+        <span className="text-[7px] font-mono tracking-[0.1em] uppercase mt-1">CLASSIFIED</span>
+      </div>
+    );
   }
 
   return (
     <img 
       src={displayUrl} 
       alt="" 
+      onError={() => setImgFailed(true)}
       className="w-full h-full object-cover grayscale opacity-65 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
       loading="lazy" 
     />
@@ -104,24 +112,24 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       if (!allStories || allStories.length === 0) return [];
       const flagged = allStories.filter(s => s.editors_pick === true);
       if (flagged.length > 0) {
-        return flagged.slice(0, 3);
+        return flagged.slice(0, 10);
       }
       const fallbacks = ['burari_deaths_001', 'the_dyatlov_pass_incident', 'the_asch_conformity_experiments'];
-      return allStories.filter(s => fallbacks.includes(s.story_id)).slice(0, 3);
+      return allStories.filter(s => fallbacks.includes(s.story_id)).slice(0, 10);
     }
 
     // Default to 'top-rated'
     if (!allStories || allStories.length === 0) return [];
     return [...allStories]
       .sort((a, b) => {
-        const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0);
-        const bReactions = (b.reactions?.gripping || 0) + (b.reactions?.scared || 0) + (b.reactions?.mindblown || 0);
+        const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0) + (a.reactions?.like || 0);
+        const bReactions = (b.reactions?.gripping || 0) + (b.reactions?.scared || 0) + (b.reactions?.mindblown || 0) + (b.reactions?.like || 0);
         if (bReactions !== aReactions) {
           return bReactions - aReactions;
         }
         return (b.added_date || '').localeCompare(a.added_date || '');
       })
-      .slice(0, 3);
+      .slice(0, 10);
   }, [activeTab, allStories, forYouStories]);
 
   const handleLogoTap = () => {
@@ -265,7 +273,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '48px',
             }}
           >
-            What history tried<br className="hidden sm:inline" /> to bury in silence.
+            What do you want<br className="hidden sm:inline" /> to explore today?
           </h1>
 
           {/* Subtitle */}

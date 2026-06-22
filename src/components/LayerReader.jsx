@@ -16,7 +16,7 @@ export default function LayerReader({
 
   // ── Reaction state: reactions counts come from server data ──────────────
   const [reactions, setReactions] = useState(() => {
-    return data?.reactions || { gripping: 0, scared: 0, mindblown: 0 };
+    return data?.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 };
   });
 
   // ── Per-user vote state: persisted to localStorage so one-vote-per-user ──
@@ -177,9 +177,9 @@ export default function LayerReader({
             <div className="max-w-2xl mx-auto w-full">
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
-                <div className="mb-8 w-full rounded-xl overflow-hidden border flex items-center justify-center min-h-[200px]" style={{ borderColor: cardBorder }}>
+                <div className="mb-8 w-full rounded-xl overflow-hidden border flex items-center justify-center min-h-[150px] md:min-h-[200px]" style={{ borderColor: cardBorder }}>
                   {imgFailed ? (
-                    <div className="w-full py-16 flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+                    <div className="w-full py-12 md:py-16 flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                       <LoreMark size={24} color="currentColor" />
                       <span className="text-[9px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
                     </div>
@@ -188,7 +188,7 @@ export default function LayerReader({
                       src={data.imageUrl}
                       alt={topic.label}
                       onError={() => setImgFailed(true)}
-                      className="w-full h-auto object-contain max-h-[400px]"
+                      className="w-full h-auto object-contain max-h-[240px] md:max-h-[400px]"
                       loading="lazy"
                     />
                   )}
@@ -276,11 +276,31 @@ export default function LayerReader({
                   </p>
                   <div className="flex justify-center gap-3 flex-wrap">
 
-                    {/* GRIPPING — replaces heart */}
+                    {/* LIKE */}
+                    <div className="relative">
+                      {animatingReaction === 'like' && (
+                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
+                          ❤️
+                        </span>
+                      )}
+                      <button
+                        onClick={() => handleReact('like')}
+                        title={reacted['like'] ? 'Click again to undo your vote' : 'Mark as Like'}
+                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
+                          reacted['like']
+                            ? 'bg-rose-950/30 border-rose-700/70 text-rose-300 shadow-[0_0_12px_rgba(244,63,94,0.2)]'
+                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-rose-900/50 hover:text-rose-400'
+                        } ${animatingReaction === 'like' ? 'scale-110' : ''}`}
+                      >
+                        ❤️ LIKE <span className="opacity-60">({reactions.like || 0})</span>
+                      </button>
+                    </div>
+
+                    {/* GRIPPING */}
                     <div className="relative">
                       {animatingReaction === 'gripping' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          ❤️
+                          🔥
                         </span>
                       )}
                       <button
@@ -292,7 +312,7 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-orange-800/50 hover:text-orange-400'
                         } ${animatingReaction === 'gripping' ? 'scale-110' : ''}`}
                       >
-                        ❤️🔥 GRIPPING <span className="opacity-60">({reactions.gripping || 0})</span>
+                        🔥 GRIPPING <span className="opacity-60">({reactions.gripping || 0})</span>
                       </button>
                     </div>
 
@@ -300,7 +320,7 @@ export default function LayerReader({
                     <div className="relative">
                       {animatingReaction === 'scared' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          ❤️
+                          💀
                         </span>
                       )}
                       <button
@@ -312,7 +332,7 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-red-900/50 hover:text-red-400'
                         } ${animatingReaction === 'scared' ? 'scale-110' : ''}`}
                       >
-                        ❤️💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
+                        💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
                       </button>
                     </div>
 
@@ -320,7 +340,7 @@ export default function LayerReader({
                     <div className="relative">
                       {animatingReaction === 'mindblown' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          ❤️
+                          🤯
                         </span>
                       )}
                       <button
@@ -332,14 +352,11 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-violet-900/50 hover:text-violet-400'
                         } ${animatingReaction === 'mindblown' ? 'scale-110' : ''}`}
                       >
-                        ❤️🤯 MIND-BLOWN <span className="opacity-60">({reactions.mindblown || 0})</span>
+                        🤯 MIND-BLOWN <span className="opacity-60">({reactions.mindblown || 0})</span>
                       </button>
                     </div>
 
                   </div>
-                  <p className="text-[9px] font-mono tracking-[0.15em] mt-4 opacity-30" style={{ color: cardTextSecondary }}>
-                    ONE VOTE PER USER · CLICK AGAIN TO UNDO
-                  </p>
                 </div>
               )}
             </div>

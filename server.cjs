@@ -1423,7 +1423,7 @@ const server = http.createServer(async (req, res) => {
       const story = storiesData.stories.find(s => s.story_id === story_id);
       if (story) {
         if (!story.reactions) {
-          story.reactions = { gripping: 0, scared: 0, mindblown: 0 };
+          story.reactions = { gripping: 0, scared: 0, mindblown: 0, like: 0 };
         }
         // Ensure gripping key exists (migrate from old 'heart' key)
         if (story.reactions.heart !== undefined && story.reactions.gripping === undefined) {

@@ -151,28 +151,33 @@ function EngagementBar({ reactions }) {
   const gripping = rx.gripping || rx.heart || 0;
   const scared   = rx.scared   || 0;
   const mindblown = rx.mindblown || 0;
+  const like = rx.like || 0;
 
   let maxCount = 0;
   let dominant = null;
 
+  if (like > maxCount) {
+    maxCount = like;
+    dominant = { label: 'LIKE', emoji: '❤️', color: '#E11D48' };
+  }
   if (gripping > maxCount) {
     maxCount = gripping;
-    dominant = { label: 'GRIPPING', emoji: '♥', color: '#9E7B4C' };
+    dominant = { label: 'GRIPPING', emoji: '🔥', color: '#D97706' };
   }
   if (scared > maxCount) {
     maxCount = scared;
-    dominant = { label: 'TERRIFYING', emoji: '☠', color: '#C4644A' };
+    dominant = { label: 'TERRIFYING', emoji: '💀', color: '#EF4444' };
   }
   if (mindblown > maxCount) {
     maxCount = mindblown;
-    dominant = { label: 'MIND-BLOWN', emoji: '✦', color: '#9E7B4C' };
+    dominant = { label: 'MIND-BLOWN', emoji: '🤯', color: '#8B5CF6' };
   }
 
   if (!dominant || maxCount === 0) return null;
 
   return (
     <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
-      <span style={{ color: dominant.color }}>{dominant.emoji}</span>
+      <span>{dominant.emoji}</span>
       <span className="uppercase">{dominant.label} ({maxCount})</span>
     </div>
   );
@@ -209,7 +214,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
 
   const getTotalReactions = (s) => {
     const rx = s.reactions || {};
-    return (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
+    return (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
   };
 
   const isNewArrival = (addedDate) => {

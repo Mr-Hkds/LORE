@@ -11,6 +11,7 @@
         "ritual"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/burari_family.jpg",
       "image_query": "/content/images/burari_family.jpg",
       "added_date": "2026-06-20",
       "layers": [
@@ -107,6 +108,7 @@
         "social_pressure"
       ],
       "severity": "unsettling",
+      "hero_image": "/content/images/the_asch_conformity_experiments.jpg",
       "image_query": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Asch_experiment.png",
       "added_date": "2026-06-20",
       "layers": [
@@ -197,6 +199,7 @@
         "government_secrecy"
       ],
       "severity": "disturbing",
+      "hero_image": "/content/images/the_dyatlov_pass_incident.jpg",
       "image_query": "https://upload.wikimedia.org/wikipedia/commons/d/df/Dyatlov_Pass_incident_02.jpg",
       "added_date": "2026-06-20",
       "layers": [
