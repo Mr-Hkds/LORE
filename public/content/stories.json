@@ -76,7 +76,8 @@
         "heart": 46,
         "scared": 24,
         "mindblown": 1
-      }
+      },
+      "hero_image": "/content/images/burari_deaths_001.jpg"
     },
     {
       "story_id": "the_asch_conformity_experiments",
@@ -153,8 +154,10 @@
       "reactions": {
         "heart": 1,
         "scared": 1,
-        "mindblown": 0
-      }
+        "mindblown": 0,
+        "gripping": 7
+      },
+      "hero_image": "/content/images/the_asch_conformity_experiments.jpg"
     },
     {
       "story_id": "the_dyatlov_pass_incident",
@@ -227,7 +230,8 @@
           "category": "true_crime",
           "transition_line": "Jab akelepan mein dimaag aur andhera milte hain, toh delusions hi sach ban jaate hain, jaise Burari mein hua."
         }
-      ]
+      ],
+      "hero_image": "/content/images/the_dyatlov_pass_incident.jpg"
     },
     {
       "story_id": "fakhraddin_aboszoda_001",
@@ -292,7 +296,8 @@
         "title": "Fakhraddin Aboszoda",
         "extract": "Fakhraddin Aboszoda was a Talysh rights activist and historian. He was a leader of the Talysh national movement. He was a chairman of the majlis (parliament) of the Talysh-Mughan Autonomous Republic within the Republic of Azerbaijan.",
         "url": "https://en.wikipedia.org/wiki/Fakhraddin_Aboszoda"
-      }
+      },
+      "hero_image": "/content/images/fakhraddin_aboszoda_001.jpg"
     },
     {
       "story_id": "aman_andom_001",
@@ -362,7 +367,7 @@
         "extract": "Aman Mikael Andom was an Ethiopian military officer and politician who was the first post-imperial head of state of Ethiopia. Aman was also the first Chairman of the Derg. He was appointed to this position following the coup d'état that ousted Emperor Haile Selassie on 12 September 1974, and served until his assassination in a shootout with his former supporters.",
         "url": "https://en.wikipedia.org/wiki/Aman_Andom"
       },
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Aman_andom.png"
+      "hero_image": "/content/images/aman_andom_001.jpg"
     },
     {
       "story_id": "facundo_astudillo_castro_001",
@@ -447,7 +452,8 @@
           "label": "Negative Effects of Forest Extractivism on the Water Crisis in Rural Mapuche Territories: Mapuche Knowledge and Sociocultural Activities to Preserve Water (Juan Carlos Beltran-Véliz, Fabián Muñoz, 2026)",
           "url": "https://www.mdpi.com/2073-4441/18/4/521/pdf"
         }
-      ]
+      ],
+      "hero_image": "/content/images/facundo_astudillo_castro_001.jpg"
     },
     {
       "story_id": "uwe_barschel_001",

@@ -826,13 +826,40 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
                 <h2 className="font-serif italic text-2xl">Archived Case Files</h2>
-                <button
-                  onClick={handleExportJSON}
-                  className="px-4 py-2 border rounded text-xs font-mono hover:bg-white/5 cursor-pointer"
-                  style={{ borderColor: ru }}
-                >
-                  Export stories.json
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={async () => {
+                      addLog('🖼️ Triggering image backfill for all stories missing covers...');
+                      try {
+                        const res = await fetch('/api/stories/backfill-images', { method: 'POST' });
+                        if (res.ok) {
+                          const data = await res.json();
+                          addLog(`🖼️ ${data.message}`);
+                          if (data.queued === 0) {
+                            alert('All stories already have local cover images!');
+                          } else {
+                            alert(`Image backfill started for ${data.queued} stories. This runs in the background — check server logs.`);
+                          }
+                        } else {
+                          addLog('🖼️ Backfill request failed. Is the server running?');
+                        }
+                      } catch (err) {
+                        addLog(`🖼️ Backfill error: ${err.message}`);
+                      }
+                    }}
+                    className="px-4 py-2 border rounded text-xs font-mono hover:bg-white/5 cursor-pointer"
+                    style={{ borderColor: 'rgba(158, 123, 76, 0.4)', color: '#9E7B4C' }}
+                  >
+                    🖼️ Backfill Images
+                  </button>
+                  <button
+                    onClick={handleExportJSON}
+                    className="px-4 py-2 border rounded text-xs font-mono hover:bg-white/5 cursor-pointer"
+                    style={{ borderColor: ru }}
+                  >
+                    Export stories.json
+                  </button>
+                </div>
               </div>
 
               {/* Table / List */}

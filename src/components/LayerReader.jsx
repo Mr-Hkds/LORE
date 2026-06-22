@@ -13,45 +13,69 @@ export default function LayerReader({
   const isLastLayer = layerNum === 7;
   const accentColor = '#9E7B4C';
 
+  // ── Reaction state: reactions counts come from server data ──────────────
   const [reactions, setReactions] = useState(() => {
-    return data?.reactions || { heart: 0, scared: 0, mindblown: 0 };
+    return data?.reactions || { gripping: 0, scared: 0, mindblown: 0 };
   });
-  const [reacted, setReacted] = useState({});
+
+  // ── Per-user vote state: persisted to localStorage so one-vote-per-user ──
+  const getStoredReacted = () => {
+    if (!data?.storyId) return {};
+    try {
+      const raw = localStorage.getItem(`lore:voted:${data.storyId}`);
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  };
+
+  const [reacted, setReacted] = useState(getStoredReacted);
   const [animatingReaction, setAnimatingReaction] = useState(null);
 
+  // Sync reactions counts when data updates
   useEffect(() => {
     if (data?.reactions) {
       setReactions(data.reactions);
     }
   }, [data]);
 
+  // Re-load persisted votes when storyId changes (user navigates to different story)
+  useEffect(() => {
+    setReacted(getStoredReacted());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.storyId]);
+
   const handleReact = async (type) => {
     if (!data?.storyId) return;
-    
+
     const isUndo = !!reacted[type];
-    
-    setReacted(prev => ({ ...prev, [type]: !isUndo }));
-    setReactions(prev => ({ 
-      ...prev, 
-      [type]: isUndo ? Math.max(0, (prev[type] || 1) - 1) : (prev[type] || 0) + 1 
+
+    // Update local state optimistically
+    const newReacted = { ...reacted, [type]: !isUndo };
+    setReacted(newReacted);
+
+    // Persist to localStorage so the vote survives refresh
+    try {
+      localStorage.setItem(`lore:voted:${data.storyId}`, JSON.stringify(newReacted));
+    } catch { /* ignore quota errors */ }
+
+    setReactions(prev => ({
+      ...prev,
+      [type]: isUndo ? Math.max(0, (prev[type] || 1) - 1) : (prev[type] || 0) + 1,
     }));
 
     if (!isUndo) {
       setAnimatingReaction(type);
-      setTimeout(() => setAnimatingReaction(null), 800);
+      setTimeout(() => setAnimatingReaction(null), 900);
     }
 
     try {
       const res = await fetch('/api/stories/react', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ story_id: data.storyId, reaction_type: type, undo: isUndo })
+        body: JSON.stringify({ story_id: data.storyId, reaction_type: type, undo: isUndo }),
       });
       if (res.ok) {
         const result = await res.json();
-        if (result.reactions) {
-          setReactions(result.reactions);
-        }
+        if (result.reactions) setReactions(result.reactions);
       }
     } catch (e) {
       console.warn('Failed to record reaction:', e);
@@ -262,61 +286,72 @@ export default function LayerReader({
                   <p className="text-xs font-sans mb-6" style={{ color: cardTextSecondary }}>
                     Share your reaction to update the global archive's ratings.
                   </p>
-                  <div className="flex justify-center gap-4 flex-wrap">
+                  <div className="flex justify-center gap-3 flex-wrap">
+
+                    {/* GRIPPING — replaces heart */}
                     <div className="relative">
-                      {animatingReaction === 'heart' && (
-                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
-                          🖤
+                      {animatingReaction === 'gripping' && (
+                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
+                          🔥
                         </span>
                       )}
                       <button
-                        onClick={() => handleReact('heart')}
-                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
-                          reacted['heart']
-                            ? 'bg-amber-900/20 border-[#9E7B4C] text-[#EDE8DF]'
-                            : 'hover:bg-white/5 border-neutral-800'
-                        } ${animatingReaction === 'heart' ? 'reaction-pop-heart' : ''}`}
+                        onClick={() => handleReact('gripping')}
+                        title={reacted['gripping'] ? 'Click again to undo your vote' : 'Mark as Gripping'}
+                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
+                          reacted['gripping']
+                            ? 'bg-orange-950/30 border-orange-700/70 text-orange-300 shadow-[0_0_12px_rgba(251,146,60,0.2)]'
+                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-orange-800/50 hover:text-orange-400'
+                        } ${animatingReaction === 'gripping' ? 'scale-110' : ''}`}
                       >
-                        HEART ({reactions.heart || 0})
+                        🔥 GRIPPING <span className="opacity-60">({reactions.gripping || 0})</span>
                       </button>
                     </div>
 
+                    {/* TERRIFYING */}
                     <div className="relative">
                       {animatingReaction === 'scared' && (
-                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
+                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
                           💀
                         </span>
                       )}
                       <button
                         onClick={() => handleReact('scared')}
-                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
+                        title={reacted['scared'] ? 'Click again to undo your vote' : 'Mark as Terrifying'}
+                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
                           reacted['scared']
-                            ? 'bg-red-950/20 border-red-800 text-red-400'
-                            : 'hover:bg-white/5 border-neutral-800'
-                        } ${animatingReaction === 'scared' ? 'reaction-pop-scared' : ''}`}
+                            ? 'bg-red-950/30 border-red-700/70 text-red-300 shadow-[0_0_12px_rgba(239,68,68,0.2)]'
+                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-red-900/50 hover:text-red-400'
+                        } ${animatingReaction === 'scared' ? 'scale-110' : ''}`}
                       >
-                        TERRIFYING ({reactions.scared || 0})
+                        💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
                       </button>
                     </div>
 
+                    {/* MIND-BLOWN */}
                     <div className="relative">
                       {animatingReaction === 'mindblown' && (
-                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none text-lg animate-float-up-fade">
+                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
                           🤯
                         </span>
                       )}
                       <button
                         onClick={() => handleReact('mindblown')}
-                        className={`px-4 py-2 border rounded-lg text-xs font-mono transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2 ${
+                        title={reacted['mindblown'] ? 'Click again to undo your vote' : 'Mark as Mind-Blown'}
+                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
                           reacted['mindblown']
-                            ? 'bg-cyan-950/20 border-cyan-800 text-cyan-400'
-                            : 'hover:bg-white/5 border-neutral-800'
-                        } ${animatingReaction === 'mindblown' ? 'reaction-pop-mindblown' : ''}`}
+                            ? 'bg-violet-950/30 border-violet-600/70 text-violet-300 shadow-[0_0_12px_rgba(139,92,246,0.2)]'
+                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-violet-900/50 hover:text-violet-400'
+                        } ${animatingReaction === 'mindblown' ? 'scale-110' : ''}`}
                       >
-                        MIND-BLOWN ({reactions.mindblown || 0})
+                        🤯 MIND-BLOWN <span className="opacity-60">({reactions.mindblown || 0})</span>
                       </button>
                     </div>
+
                   </div>
+                  <p className="text-[9px] font-mono tracking-[0.15em] mt-4 opacity-30" style={{ color: cardTextSecondary }}>
+                    ONE VOTE PER USER · CLICK AGAIN TO UNDO
+                  </p>
                 </div>
               )}
             </div>

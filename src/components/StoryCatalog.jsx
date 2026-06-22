@@ -22,22 +22,32 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
-function StoryCardImage({ query, alt }) {
+function StoryCardImage({ story, alt }) {
   const { getImageByQuery } = useStaticContent();
   const [imgUrl, setImgUrl] = useState(null);
 
   useEffect(() => {
     let active = true;
+
+    // Priority 1: Use locally saved hero_image if available
+    if (story.hero_image) {
+      if (active) setImgUrl(story.hero_image);
+      return;
+    }
+
+    // Priority 2: Fetch from Wikipedia using image_query or title
+    const query = story.image_query || story.title;
     getImageByQuery(query).then(url => {
       if (active) setImgUrl(url);
     });
+
     return () => { active = false; };
-  }, [query, getImageByQuery]);
+  }, [story, getImageByQuery]);
 
   if (!imgUrl) {
     return (
       <div className="w-full h-full bg-neutral-950/80 animate-pulse flex items-center justify-center border border-neutral-900/60 rounded-xl">
-        <span className="text-[8px] font-mono tracking-widest text-neutral-700">RESOLVING IMAGE...</span>
+        <span className="text-[8px] font-mono tracking-widest text-neutral-700">LOADING DOSSIER IMAGE...</span>
       </div>
     );
   }
@@ -85,27 +95,27 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
   };
 
   const getTotalReactions = (story) => {
-    const rx = story.reactions || { heart: 0, scared: 0, mindblown: 0 };
-    return (rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
+    const rx = story.reactions || { gripping: 0, scared: 0, mindblown: 0 };
+    // Support legacy 'heart' field
+    return (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
   };
 
   const getBeliefIndex = (story) => {
     const total = getTotalReactions(story);
     if (total === 0) {
-      // Stable pseudo-random rating based on story title to keep it looking realistic and premium
       const hash = story.story_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
       return 90 + (hash % 10);
     }
-    const rx = story.reactions || { heart: 0, scared: 0, mindblown: 0 };
-    const positive = (rx.heart || 0) * 0.9 + (rx.scared || 0) * 1.0 + (rx.mindblown || 0) * 0.95;
+    const rx = story.reactions || { gripping: 0, scared: 0, mindblown: 0 };
+    const positive = (rx.gripping || rx.heart || 0) * 0.9 + (rx.scared || 0) * 1.0 + (rx.mindblown || 0) * 0.95;
     const ratio = Math.min(100, Math.round((positive / total) * 100));
     return Math.max(75, ratio);
   };
 
   const getStoryScore = (story, type = 'total') => {
-    const rx = story.reactions || { heart: 0, scared: 0, mindblown: 0 };
+    const rx = story.reactions || { gripping: 0, scared: 0, mindblown: 0 };
     if (type === 'scared') return rx.scared || 0;
-    return (rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
+    return (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0);
   };
 
   const isRecent = (addedDate) => {
@@ -301,7 +311,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                   >
                     {/* Left/Top: Image Container */}
                     <div className="w-full md:w-[190px] h-[130px] md:h-[135px] rounded-xl overflow-hidden flex-shrink-0 border border-neutral-900/60 relative">
-                      <StoryCardImage query={story.image_query || story.title} alt={story.title} />
+                      <StoryCardImage story={story} alt={story.title} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     </div>
 

@@ -797,7 +797,12 @@ const server = http.createServer(async (req, res) => {
       const story = storiesData.stories.find(s => s.story_id === story_id);
       if (story) {
         if (!story.reactions) {
-          story.reactions = { heart: 0, scared: 0, mindblown: 0 };
+          story.reactions = { gripping: 0, scared: 0, mindblown: 0 };
+        }
+        // Ensure gripping key exists (migrate from old 'heart' key)
+        if (story.reactions.heart !== undefined && story.reactions.gripping === undefined) {
+          story.reactions.gripping = story.reactions.heart;
+          delete story.reactions.heart;
         }
         if (undo) {
           story.reactions[reaction_type] = Math.max(0, (story.reactions[reaction_type] || 1) - 1);
@@ -995,7 +1000,54 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Catch-all
+  // Route: POST /api/stories/backfill-images
+  // Trigger background image generation for all stories that are missing hero images
+  if (req.method === 'POST' && pathname === '/api/stories/backfill-images') {
+    const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    const storiesData = readJson(STORIES_FILE) || { stories: [] };
+    const missing = storiesData.stories.filter(s => {
+      if (!s.hero_image) return true;
+      if (s.hero_image.startsWith('http')) return true; // remote, should be local
+      const localPath = path.join(__dirname, 'public', s.hero_image);
+      return !fs.existsSync(localPath);
+    });
+    
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true, queued: missing.length, message: `Backfilling images for ${missing.length} stories in background.` }));
+    
+    // Run in background (don't await)
+    (async () => {
+      for (const story of missing) {
+        try {
+          const localPath = path.join(__dirname, 'public', 'content', 'images', `${story.story_id}.jpg`);
+          
+          // If it's a remote URL, try downloading it
+          if (story.hero_image && story.hero_image.startsWith('http')) {
+            try {
+              await downloadImage(story.hero_image, localPath);
+              story.hero_image = `/content/images/${story.story_id}.jpg`;
+              writeJson(STORIES_FILE, storiesData);
+              console.log(`[BACKFILL] Downloaded remote image for ${story.story_id}`);
+              continue;
+            } catch {}
+          }
+          
+          // Generate or fetch fresh image
+          const topic = story.image_query || story.title;
+          const relativePath = await generateAndSaveImage(story.story_id, topic, apiKey);
+          story.hero_image = relativePath;
+          writeJson(STORIES_FILE, storiesData);
+          console.log(`[BACKFILL] Image saved for ${story.story_id}: ${relativePath}`);
+        } catch (err) {
+          console.error(`[BACKFILL] Failed for ${story.story_id}:`, err.message);
+        }
+      }
+      console.log('[BACKFILL] All done.');
+    })();
+    return;
+  }
+
+
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ error: 'Not Found' }));
 });
