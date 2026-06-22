@@ -36,6 +36,8 @@ body {
   pointer-events: none;
   z-index: 300;
   background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+  transform: translate3d(0, 0, 0); /* Force hardware GPU layer */
+  will-change: transform;
 }
 
 /* Progress bar — thin line at very top */
@@ -120,7 +122,7 @@ body {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Momentum scroll on iOS */
   /* Hide scrollbar for cleaner look */
   scrollbar-width: none; 
   -ms-overflow-style: none;
@@ -130,7 +132,7 @@ body {
 }
 
 .snap-child {
-  min-height: 100dvh;
+  min-height: 100vh; /* Prevent address bar resize jank */
   height: auto;
   width: 100%;
   scroll-snap-align: start;

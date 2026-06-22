@@ -108,7 +108,7 @@ function SortDropdown({ value, onChange, color }) {
               onClick={() => { onChange(opt.value); setOpen(false); }}
               className="w-full text-left px-4 py-2.5 text-[10px] font-mono tracking-[0.14em] uppercase transition-colors cursor-pointer hover:bg-white/5"
               style={{
-                color: opt.value === value ? '#9E7B4C' : '#6A6560',
+                color: opt.value === value ? '#9E7B4C' : '#8F8A82',
                 borderBottom: '1px solid rgba(237,232,223,0.04)',
               }}
             >
@@ -184,7 +184,7 @@ const MODULE_LOAD_TIME = Date.now();
 export default function StoryCatalog({ category, stories, onSelectStory, onBack }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
-  const mu = '#6A6560';
+  const mu = '#8F8A82';
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 

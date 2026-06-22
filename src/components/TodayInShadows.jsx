@@ -112,7 +112,8 @@ function getSeedCounts(dateStr, title) {
   return {
     gripping: (seed % 47) + 12,
     scared: (seed % 31) + 5,
-    mindblown: (seed % 71) + 24
+    mindblown: (seed % 71) + 24,
+    like: (seed % 89) + 42
   };
 }
 
@@ -122,8 +123,8 @@ export default function TodayInShadows() {
   const [modalOpen, setModalOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
 
-  const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0 });
-  const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | null
+  const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0, like: 0 });
+  const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | 'like' | null
 
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
@@ -177,7 +178,8 @@ export default function TodayInShadows() {
       setReactions({
         gripping: baseCounts.gripping + (storedReaction === 'gripping' ? 1 : 0),
         scared: baseCounts.scared + (storedReaction === 'scared' ? 1 : 0),
-        mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0)
+        mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0),
+        like: baseCounts.like + (storedReaction === 'like' ? 1 : 0)
       });
     }
   }, [dossier]);
@@ -211,7 +213,8 @@ export default function TodayInShadows() {
     setReactions({
       gripping: baseCounts.gripping + (newReaction === 'gripping' ? 1 : 0),
       scared: baseCounts.scared + (newReaction === 'scared' ? 1 : 0),
-      mindblown: baseCounts.mindblown + (newReaction === 'mindblown' ? 1 : 0)
+      mindblown: baseCounts.mindblown + (newReaction === 'mindblown' ? 1 : 0),
+      like: baseCounts.like + (newReaction === 'like' ? 1 : 0)
     });
   };
 
@@ -360,8 +363,9 @@ export default function TodayInShadows() {
                 <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
                   Reader Sentiment
                 </h5>
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
                   {[
+                    { id: 'like', label: 'Like', emoji: '👍' },
                     { id: 'gripping', label: 'Gripping', emoji: '👁️' },
                     { id: 'scared', label: 'Scared', emoji: '😨' },
                     { id: 'mindblown', label: 'Mindblown', emoji: '🤯' }
@@ -372,11 +376,11 @@ export default function TodayInShadows() {
                       <button
                         key={r.id}
                         onClick={() => handleReact(r.id)}
-                        className="flex-1 py-3 px-4 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-2 hover:border-[#9E7B4C]/40 active:scale-95 text-xs sm:text-sm font-medium"
+                        className="flex-1 py-2.5 px-3 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-xs font-medium min-w-[70px]"
                         style={{
                           backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
                           borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
-                          color: isSelected ? '#EDE8DF' : '#6A6560'
+                          color: isSelected ? '#EDE8DF' : '#8F8A82' // Brighter unselected text for visibility
                         }}
                       >
                         <span>{r.emoji}</span>

@@ -472,7 +472,7 @@ function PasscodeScreen({ onUnlock, onCancel }) {
           <h2 className="font-serif italic text-2xl tracking-wide">
             {error ? 'ACCESS DENIED' : 'SECURE CONSOLE'}
           </h2>
-          <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6A6560]">
+          <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]">
             {error ? 'AUTHORIZATION CODE INVALID' : 'ENTER SYSTEM DECRYPTION KEY'}
           </p>
         </div>
@@ -492,7 +492,7 @@ function PasscodeScreen({ onUnlock, onCancel }) {
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 py-2.5 border border-neutral-800 text-[#6A6560] text-[10px] font-bold tracking-widest uppercase rounded hover:bg-white/5 active:scale-95 transition-all cursor-pointer"
+              className="flex-1 py-2.5 border border-neutral-800 text-[#8F8A82] text-[10px] font-bold tracking-widest uppercase rounded hover:bg-white/5 active:scale-95 transition-all cursor-pointer"
             >
               Cancel
             </button>

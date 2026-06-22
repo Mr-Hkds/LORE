@@ -269,7 +269,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               fontWeight: 300,
               lineHeight: 1.85,
               color: fg,
-              opacity: 0.48,
+              opacity: 0.75, // Better text contrast
               maxWidth: '42ch',
               marginBottom: '64px',
             }}
