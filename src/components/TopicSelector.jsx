@@ -10,9 +10,15 @@ function StoryMiniImage({ story }) {
 
   useEffect(() => {
     if (story.hero_image) return;
-    let active = true;
     const query = story.image_query || story.title;
-    
+    if (!query) return;
+
+    // Bypassing Wikipedia API search if it is a direct image URL or path
+    if (query.startsWith('http') || query.startsWith('/')) {
+      return;
+    }
+
+    let active = true;
     fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
       .then(res => res.json())
       .then(data => {
@@ -28,7 +34,8 @@ function StoryMiniImage({ story }) {
     return () => { active = false; };
   }, [story.hero_image, story.image_query, story.title]);
 
-  const displayUrl = story.hero_image || fetchedUrl;
+  const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
+  const displayUrl = story.hero_image || (isDirectUrl ? story.image_query : null) || fetchedUrl;
 
   if (!displayUrl) {
     return <div className="w-full h-full bg-neutral-950/60 animate-pulse" />;

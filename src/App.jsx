@@ -249,6 +249,7 @@ export default function App() {
   // Scroll to active layer when changed (e.g. from hash change or initial load)
   useEffect(() => {
     if (phase === 'reading' && currentStory) {
+      if (window.innerWidth <= 768) return; // Prevent jumpy scrolls on mobile
       const container = document.querySelector('.snap-container');
       if (container) {
         const children = container.children;

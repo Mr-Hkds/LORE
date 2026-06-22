@@ -188,7 +188,7 @@ export default function LayerReader({
                       src={data.imageUrl}
                       alt={topic.label}
                       onError={() => setImgFailed(true)}
-                      className="w-full h-auto object-cover max-h-[400px]"
+                      className="w-full h-auto object-contain max-h-[400px]"
                       loading="lazy"
                     />
                   )}

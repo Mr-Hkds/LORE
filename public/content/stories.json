@@ -179,7 +179,12 @@
           "category": "paranormal",
           "transition_line": "While the mind can distort reality from within, sometimes reality itself breaks down in the freezing wilderness."
         }
-      ]
+      ],
+      "reactions": {
+        "gripping": 0,
+        "scared": 0,
+        "mindblown": 0
+      }
     },
     {
       "story_id": "the_dyatlov_pass_incident",

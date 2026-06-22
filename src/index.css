@@ -110,10 +110,15 @@ body {
 }
 
 /* Mobile adjustments */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .ghost-num { opacity: 0.02; right: -8px; }
+  .snap-container {
+    scroll-snap-type: none !important;
+  }
   .snap-child {
-    padding: 72px 0.75rem 32px 0.75rem;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: unset !important;
+    padding: 96px 0.75rem 32px 0.75rem !important;
   }
 }
 
