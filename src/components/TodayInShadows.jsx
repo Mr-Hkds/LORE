@@ -122,6 +122,7 @@ export default function TodayInShadows() {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
+  const [wikiImgUrl, setWikiImgUrl] = useState(null);
 
   const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0, like: 0 });
   const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | 'like' | null
@@ -171,6 +172,7 @@ export default function TodayInShadows() {
   useEffect(() => {
     if (dossier) {
       setImgFailed(false);
+      setWikiImgUrl(null);
       const baseCounts = getSeedCounts(dossier.date, dossier.title);
       const storedReaction = localStorage.getItem(`lore:dossier:reaction:${dossier.date}`);
       
@@ -181,6 +183,32 @@ export default function TodayInShadows() {
         mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0),
         like: baseCounts.like + (storedReaction === 'like' ? 1 : 0)
       });
+
+      // Client-side fetch for default Wikipedia image
+      let active = true;
+      const query = dossier.wikiQuery || dossier.title;
+      if (query) {
+        fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=thumbnail&pithumbsize=800&titles=${encodeURIComponent(query)}&origin=*`)
+          .then(res => {
+            if (res.ok) return res.json();
+            throw new Error('Wiki fetch failed');
+          })
+          .then(data => {
+            const pages = data?.query?.pages;
+            if (pages && active) {
+               const firstPage = Object.values(pages)[0];
+               const imgUrl = firstPage?.thumbnail?.source;
+               if (imgUrl) {
+                 setWikiImgUrl(imgUrl);
+               }
+            }
+          })
+          .catch(err => {
+            console.warn('[WikiImage] Failed to fetch wiki image:', err.message);
+          });
+      }
+
+      return () => { active = false; };
     }
   }, [dossier]);
 
@@ -248,7 +276,7 @@ export default function TodayInShadows() {
               </div>
             ) : (
               <img
-                src={dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : ''}
+                src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
                 alt={dossier.title}
                 onError={() => setImgFailed(true)}
                 className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
@@ -273,12 +301,42 @@ export default function TodayInShadows() {
           <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.95 }}>
             {dossier.text}
           </p>
-          <button
-            onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
-          >
-            Read Entry <span className="text-xs">→</span>
-          </button>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4 pt-4 border-t border-neutral-900/40">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
+            >
+              Read Entry <span className="text-xs">→</span>
+            </button>
+            
+            <div className="flex gap-2 items-center flex-wrap">
+              {[
+                { id: 'like', emoji: '❤️', label: 'Like' },
+                { id: 'gripping', emoji: '👁️', label: 'Gripping' },
+                { id: 'scared', emoji: '😨', label: 'Scared' },
+                { id: 'mindblown', emoji: '🤯', label: 'Mindblown' }
+              ].map((r) => {
+                const isSelected = userReaction === r.id;
+                const count = reactions[r.id] || 0;
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => handleReact(r.id)}
+                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1 hover:border-[#9E7B4C]/40 active:scale-95 text-[11px]"
+                    style={{
+                      backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
+                      borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
+                      color: isSelected ? '#EDE8DF' : '#8F8A82'
+                    }}
+                    title={r.label}
+                  >
+                    <span>{r.emoji}</span>
+                    <span className="text-[10px] font-mono opacity-70">({count})</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -365,7 +423,7 @@ export default function TodayInShadows() {
                 </h5>
                 <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
                   {[
-                    { id: 'like', label: 'Like', emoji: '👍' },
+                    { id: 'like', label: 'Like', emoji: '❤️' },
                     { id: 'gripping', label: 'Gripping', emoji: '👁️' },
                     { id: 'scared', label: 'Scared', emoji: '😨' },
                     { id: 'mindblown', label: 'Mindblown', emoji: '🤯' }

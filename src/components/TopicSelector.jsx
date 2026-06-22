@@ -250,7 +250,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <h1
             className="font-serif italic leading-none tracking-tight"
             style={{
-              fontSize: 'clamp(3.2rem, 10vw, 7rem)',
+              fontSize: 'clamp(3.2rem, 10vw, 7.5rem)',
               fontWeight: 300,
               color: fg,
               letterSpacing: '-0.04em',
@@ -258,7 +258,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '48px',
             }}
           >
-            Documented truths.<br className="hidden sm:inline" /> Forbidden history.
+            What history tried<br className="hidden sm:inline" /> to bury in silence.
           </h1>
 
           {/* Subtitle */}
@@ -269,7 +269,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               fontWeight: 300,
               lineHeight: 1.85,
               color: fg,
-              opacity: 0.75, // Better text contrast
+              opacity: 0.88, // Increased opacity for better mobile contrast
               maxWidth: '42ch',
               marginBottom: '64px',
             }}

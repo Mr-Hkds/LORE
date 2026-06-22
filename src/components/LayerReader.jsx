@@ -280,7 +280,7 @@ export default function LayerReader({
                     <div className="relative">
                       {animatingReaction === 'gripping' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          🔥
+                          ❤️
                         </span>
                       )}
                       <button
@@ -292,7 +292,7 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-orange-800/50 hover:text-orange-400'
                         } ${animatingReaction === 'gripping' ? 'scale-110' : ''}`}
                       >
-                        🔥 GRIPPING <span className="opacity-60">({reactions.gripping || 0})</span>
+                        ❤️🔥 GRIPPING <span className="opacity-60">({reactions.gripping || 0})</span>
                       </button>
                     </div>
 
@@ -300,7 +300,7 @@ export default function LayerReader({
                     <div className="relative">
                       {animatingReaction === 'scared' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          💀
+                          ❤️
                         </span>
                       )}
                       <button
@@ -312,7 +312,7 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-red-900/50 hover:text-red-400'
                         } ${animatingReaction === 'scared' ? 'scale-110' : ''}`}
                       >
-                        💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
+                        ❤️💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
                       </button>
                     </div>
 
@@ -320,7 +320,7 @@ export default function LayerReader({
                     <div className="relative">
                       {animatingReaction === 'mindblown' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          🤯
+                          ❤️
                         </span>
                       )}
                       <button
@@ -332,7 +332,7 @@ export default function LayerReader({
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-violet-900/50 hover:text-violet-400'
                         } ${animatingReaction === 'mindblown' ? 'scale-110' : ''}`}
                       >
-                        🤯 MIND-BLOWN <span className="opacity-60">({reactions.mindblown || 0})</span>
+                        ❤️🤯 MIND-BLOWN <span className="opacity-60">({reactions.mindblown || 0})</span>
                       </button>
                     </div>
 
