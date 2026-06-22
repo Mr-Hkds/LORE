@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 
-export default function TopicSelector({ onSelect, onAdminClick, categoryCounts = {}, allStories = [] }) {
+export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
 
   const bg = '#1A1815';
   const fg = '#EDE8DF';
@@ -15,16 +15,12 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
   const [submitStatus, setSubmitStatus] = useState(null);
   const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
-  const [forYouStories, setForYouStories] = useState([]);
 
   const { getForYouStories, getProgress } = useReadingProgress();
 
-  // Compute For You list on mount (reading history is synchronous from localStorage)
-  useEffect(() => {
-    if (allStories.length > 0) {
-      const fory = getForYouStories(allStories, 3);
-      setForYouStories(fory);
-    }
+  // Compute For You list (reading history is synchronous from localStorage)
+  const forYouStories = useMemo(() => {
+    return allStories.length > 0 ? getForYouStories(allStories, 3) : [];
   }, [allStories, getForYouStories]);
 
   const handleLogoTap = () => {
@@ -233,7 +229,6 @@ export default function TopicSelector({ onSelect, onAdminClick, categoryCounts =
                 onClick={() => onSelect(topic)}
                 className="w-full text-left flex items-baseline gap-5 transition-opacity duration-200 hover:opacity-55 active:opacity-35"
                 style={{
-                  borderBottom: `1px solid ${ru}`,
                   padding: '32px 0',
                   background: 'none',
                   border: 'none',

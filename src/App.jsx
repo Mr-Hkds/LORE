@@ -26,15 +26,13 @@ export default function App() {
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(() => {
     try {
       return sessionStorage.getItem('lore:admin_unlocked') === 'true';
-    } catch (e) {
+    } catch {
       return false;
     }
   });
 
   const {
     allStories,
-    loading: storiesLoading,
-    error: storiesError,
     getConnectedStories,
     getCategoryCounts,
     refetchStories,
@@ -44,7 +42,6 @@ export default function App() {
     trackLayerRead,
     startTimeTracking,
     stopTimeTracking,
-    getProgress,
   } = useReadingProgress();
 
 
@@ -101,11 +98,6 @@ export default function App() {
     };
     const mapped = categoryMap[categoryId] || categoryId;
     return stories.filter(s => s.category === mapped);
-  }, [stories]);
-
-  // Get a single story by ID (merged list)
-  const getStoryById = useCallback((storyId) => {
-    return stories.find(s => s.story_id === storyId) || null;
   }, [stories]);
 
   // Phase 1: Select a category
@@ -227,7 +219,7 @@ export default function App() {
       stopTimeTracking();
     }
     return () => stopTimeTracking();
-  }, [phase, currentStory?.story_id, startTimeTracking, stopTimeTracking]);
+  }, [phase, currentStory, startTimeTracking, stopTimeTracking]);
 
   // Sync current reading layer to history hash (replaceState to avoid polluting back history)
   useEffect(() => {
@@ -320,7 +312,7 @@ export default function App() {
         <PasscodeScreen
           onUnlock={() => {
             setIsAdminUnlocked(true);
-            try { sessionStorage.setItem('lore:admin_unlocked', 'true'); } catch (e) {}
+            try { sessionStorage.setItem('lore:admin_unlocked', 'true'); } catch { /* ignore */ }
           }}
           onCancel={handleExitAdmin}
         />

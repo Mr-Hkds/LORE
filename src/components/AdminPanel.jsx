@@ -302,7 +302,7 @@ Do not wrap in markdown. Output raw JSON only.`;
         setRecommendations(combined);
         return;
       }
-    } catch (err) {
+    } catch {
       console.warn('Could not connect to local server for recommendations, using local state.');
     }
 
@@ -336,7 +336,7 @@ Do not wrap in markdown. Output raw JSON only.`;
     setLocalStories(updated);
     try {
       localStorage.setItem('lore:custom_stories', JSON.stringify(updated));
-    } catch (e) {}
+    } catch { /* ignore */ }
   };
 
   // Add a message to the console logger
@@ -424,7 +424,7 @@ CRITICAL EDITORIAL AND FACTUAL RULES:
 3. HINGLISH LANGUAGE RULE: Write all story content (including title, hook, layer names, layer content, cliffhangers, and transition lines) in high-quality, engaging Hinglish (Hindi written in the English/Latin alphabet, naturally blended with English words as spoken by urban Indians). For example, write "Living room mein family ke 11 members hanging position mein mile" instead of "Eleven family members were found hanging in the living room." The tone should be extremely dark, conversational, and dramatic, like a local podcast host or YouTube narrator telling a mystery story in Hinglish. Keep the facts accurate and historically true; do NOT fabricate.
 
 CRITICAL JSON FORMATTING RULES:
-1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
+1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of "Bermuda Triangle").
 2. Ensure there are no trailing commas in arrays or objects.
 3. The response must be strictly valid, clean JSON that can be parsed by JSON.parse() without errors.
 
@@ -610,7 +610,7 @@ Output YES or NO only. Do not include markdown or explanations.`;
           body: JSON.stringify(storyObj),
         });
         addLog(`Synchronized story with public/content/stories.json file.`);
-      } catch (err) {
+      } catch {
         addLog(`Running in standalone client mode. Saved to browser storage.`);
       }
 
@@ -625,7 +625,7 @@ Output YES or NO only. Do not include markdown or explanations.`;
           await fetch(`/api/recommendations?id=${matchedRec.id}`, {
             method: 'DELETE'
           });
-        } catch (e) { /* ignore */ }
+        } catch { /* ignore */ }
       }
 
       setProgress(100);
@@ -640,65 +640,6 @@ Output YES or NO only. Do not include markdown or explanations.`;
       setIsGenerating(false);
       setProgress(0);
     }
-  };
-
-  // Run the nightly trigger simulation (generates 2 stories from recommendations or searches)
-  const handleAutoRunNightly = async () => {
-    if (!apiKey) {
-      alert('Gemini API key is required.');
-      return;
-    }
-    
-    setIsGenerating(true);
-    setLogs([]);
-    setProgress(5);
-    setActiveTab('generator');
-    addLog(`Starting Nightly Automated Content Engine Run...`);
-
-    // Get pending recommendations
-    const pending = recommendations.filter(r => r.status === 'pending');
-    let topicsToRun = [];
-
-    if (pending.length > 0) {
-      addLog(`Found ${pending.length} pending user topic recommendations.`);
-      topicsToRun = pending.slice(0, 2).map(r => r.topic);
-    } else {
-      addLog(`No user recommendations found. Generating automated search queries...`);
-      addLog(`Calling AI to find 2 creepy or dark topics...`);
-      try {
-        const prompt = `Find 2 highly obscure, disturbing, or unique real historical mysteries, psychology concepts, hidden government experiments, digital shadows, or paranormal cases.
-Do NOT include any cases from the following list:
-${stories.map(s => s.title).join(', ')}
-
-CRITICAL: Pick cases that are extremely deep in the shadows, obscure, or geographically/chronologically distant. Ensure they are not common internet urban legends.
-Return a JSON array of strings containing only the topic names. Example: ["The 1948 Tamam Shud Case", "The Ghost Rockets of Scandinavia"]`;
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-            generationConfig: { responseMimeType: 'application/json' }
-          })
-        });
-        const data = await res.json();
-        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        topicsToRun = cleanAndParseJSON(text);
-        addLog(`AI selected topics: ${JSON.stringify(topicsToRun)}`);
-      } catch (err) {
-        addLog(`Failed to get automated topics: ${err.message}. Falling back to default topics.`);
-        topicsToRun = ['Project MKUltra', 'The Salem Witch Trials'];
-      }
-    }
-
-    for (let i = 0; i < topicsToRun.length; i++) {
-      const topic = topicsToRun[i];
-      addLog(`----------------------------------------`);
-      addLog(`Generating Story ${i + 1}/${topicsToRun.length}: ${topic}...`);
-      await handleGenerateStory(topic);
-    }
-
-    addLog(`========================================`);
-    addLog(`Nightly Automated Content Run Completed. Added ${topicsToRun.length} stories.`);
   };
 
   // ── AI Co-Editor handler ──────────────────────────────────────────────────
@@ -731,7 +672,7 @@ Return a JSON array of strings containing only the topic names. Example: ["The 1
           const fb = await fbRes.json();
           feedbackContext = fb.slice(0, 10).map(f => `rating:${f.rating} tags:[${(f.tags||[]).join(',')}] note:"${f.note || 'none'}"`).join('\n');
         }
-      } catch {}
+      } catch { /* ignore */ }
 
       const systemPrompt = `You are the AI Co-Editor for LORE — a dark archive of stories.
 
@@ -809,7 +750,7 @@ Keep responses concise. Be direct and useful.`;
               preview: action.url,
             });
           }
-        } catch {}
+        } catch { /* ignore */ }
       }
     } catch (err) {
       setAiMessages(prev => [...prev, { role: 'assistant', text: `Error: ${err.message}` }]);
@@ -1381,7 +1322,7 @@ Keep responses concise. Be direct and useful.`;
                   <button
                     onClick={async () => {
                       setFeedbackLoading(true);
-                      try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch {}
+                      try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
                       setFeedbackLoading(false);
                     }}
                     className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer" style={{ borderColor: ru }}
@@ -1436,7 +1377,7 @@ Keep responses concise. Be direct and useful.`;
                               try {
                                 await fetch(`/api/feedback?id=${fb.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: '{}' });
                                 setFeedbackItems(prev => prev.map(f => f.id === fb.id ? { ...f, addressed: !f.addressed } : f));
-                              } catch {}
+                              } catch { /* ignore */ }
                             }}
                             className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer whitespace-nowrap"
                             style={{ borderColor: 'rgba(158,123,76,0.3)', color: ac }}
@@ -1447,7 +1388,7 @@ Keep responses concise. Be direct and useful.`;
                               try {
                                 await fetch(`/api/feedback?id=${fb.id}`, { method: 'DELETE' });
                                 setFeedbackItems(prev => prev.filter(f => f.id !== fb.id));
-                              } catch {}
+                              } catch { /* ignore */ }
                             }}
                             className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer"
                             style={{ borderColor: 'rgba(139,47,47,0.3)', color: '#8B2F2F' }}

@@ -14,7 +14,7 @@ async function fetchWikipediaImage(query) {
   try {
     const cached = localStorage.getItem(cacheKey);
     if (cached) return cached === 'null' ? null : cached;
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
 
   try {
     let resolvedTitle = query;
@@ -38,7 +38,7 @@ async function fetchWikipediaImage(query) {
       const pageId = Object.keys(pages)[0];
       const source = pages[pageId]?.original?.source || null;
       // Cache the result (even null, to avoid re-fetching)
-      try { localStorage.setItem(cacheKey, source || 'null'); } catch (e) { /* ignore */ }
+      try { localStorage.setItem(cacheKey, source || 'null'); } catch { /* ignore */ }
       return source;
     }
   } catch (err) {

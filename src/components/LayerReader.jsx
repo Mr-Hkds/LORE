@@ -84,16 +84,12 @@ export default function LayerReader({
 
   const cards = data?.cards || [];
   const layerName = data?.layerName || null;
-  const wikipediaSearchQuery = data?.wikipediaSearchQuery || '';
 
   const isLight = layerNum <= 3;
   const cardBg = isLight ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.4)';
   const cardBorder = layer.border;
   const cardTextPrimary = layer.text;
   const cardTextSecondary = layer.muted;
-  const cardTextMuted = layer.muted;
-  const photoCardBg = isLight ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.5)';
-  const photoCardBorder = layer.border;
 
   // Extract structured narrative
   const hookText = cards[0]?.text || '';

@@ -864,7 +864,7 @@ const server = http.createServer(async (req, res) => {
 
   // DELETE /api/feedback?id=... — delete one feedback item
   if (req.method === 'DELETE' && pathname === '/api/feedback') {
-    const id = new URLSearchParams(rawQuery).get('id');
+    const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
     let feedback = readJson(FEEDBACK_FILE) || [];
     feedback = feedback.filter(f => f.id !== id);
@@ -876,7 +876,7 @@ const server = http.createServer(async (req, res) => {
 
   // PATCH /api/feedback?id=... — mark as addressed/unaddressed
   if (req.method === 'PATCH' && pathname === '/api/feedback') {
-    const id = new URLSearchParams(rawQuery).get('id');
+    const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
     const body = await getJsonBody(req);
     const feedback = readJson(FEEDBACK_FILE) || [];

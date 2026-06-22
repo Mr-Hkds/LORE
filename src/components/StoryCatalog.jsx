@@ -24,17 +24,19 @@ const CATEGORY_LABELS = {
 // ── Story card image with priority: local hero_image > Wikipedia ──────────
 function StoryCardImage({ story, alt }) {
   const { getImageByQuery } = useStaticContent();
-  const [imgUrl, setImgUrl] = useState(null);
+  const [fetchedUrl, setFetchedUrl] = useState(null);
 
   useEffect(() => {
+    if (story.hero_image) return;
     let active = true;
-    if (story.hero_image) { if (active) setImgUrl(story.hero_image); return; }
     const query = story.image_query || story.title;
-    getImageByQuery(query).then(url => { if (active) setImgUrl(url); });
+    getImageByQuery(query).then(url => { if (active) setFetchedUrl(url); });
     return () => { active = false; };
-  }, [story, getImageByQuery]);
+  }, [story.hero_image, story.image_query, story.title, getImageByQuery]);
 
-  if (!imgUrl) {
+  const displayUrl = story.hero_image || fetchedUrl;
+
+  if (!displayUrl) {
     return (
       <div className="w-full h-full bg-neutral-950/80 animate-pulse flex items-center justify-center">
         <div className="w-6 h-6 border border-neutral-800 rounded-full opacity-30" />
@@ -42,7 +44,7 @@ function StoryCardImage({ story, alt }) {
     );
   }
   return (
-    <img src={imgUrl} alt={alt}
+    <img src={displayUrl} alt={alt}
       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy" />
   );
@@ -153,6 +155,8 @@ function EngagementBar({ reactions }) {
   );
 }
 
+const MODULE_LOAD_TIME = Date.now();
+
 // ── Main catalog component ────────────────────────────────────────────────
 export default function StoryCatalog({ category, stories, onSelectStory, onBack }) {
   const bg = '#0D0B08';
@@ -187,7 +191,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
 
   const isNewArrival = (addedDate) => {
     if (!addedDate) return false;
-    return (Date.now() - new Date(addedDate)) < 1000 * 60 * 60 * 24 * 3; // 3 days
+    return (MODULE_LOAD_TIME - new Date(addedDate)) < 1000 * 60 * 60 * 24 * 3; // 3 days
   };
 
   const sortedStories = [...stories].sort((a, b) => {
