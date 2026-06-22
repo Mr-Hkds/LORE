@@ -1192,7 +1192,8 @@ Output raw JSON only. Do not wrap in markdown or add explanations.`;
         resolvedWiki = {
           title: summaryData.title,
           extract: summaryData.extract,
-          url: summaryData.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(matchedTitle.replace(/ /g, '_'))}`
+          url: summaryData.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(matchedTitle.replace(/ /g, '_'))}`,
+          imageUrl: summaryData.thumbnail?.source || null
         };
       }
     }
@@ -1206,28 +1207,46 @@ Output raw JSON only. Do not wrap in markdown or add explanations.`;
     resolvedWiki = {
       title: dossierObj.title,
       extract: dossierObj.text,
-      url: `https://en.wikipedia.org/wiki/${encodeURIComponent(query.replace(/ /g, '_'))}`
+      url: `https://en.wikipedia.org/wiki/${encodeURIComponent(query.replace(/ /g, '_'))}`,
+      imageUrl: null
     };
   }
 
-  // Generate cover image via Pollinations Image API and save it locally on the server
-  console.log(`[DAILY ENGINE] Generating Pollinations Image for: ${dossierObj.title}`);
   const destDir = path.join(__dirname, 'public', 'content', 'images');
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
   }
   const localImgPath = path.join(destDir, 'daily_dossier.jpg');
   const relativeImgPath = `/content/images/daily_dossier.jpg`;
+  let imageDownloaded = false;
 
-  try {
-    const imagePrompt = `A cinematic, dramatic, high-contrast, low-key photograph representing ${dossierObj.title}, dark ambient lighting, deep shadows, gold and bronze color tones, mystery, high detail, 35mm photograph, chiaroscuro`;
-    const imageApiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
-    await downloadImage(imageApiUrl, localImgPath);
-    dossierObj.thumbnail = relativeImgPath;
-    console.log('[DAILY ENGINE] Cover image generated and saved locally.');
-  } catch (err) {
-    console.error('[DAILY ENGINE] Image generation failed:', err.message);
-    dossierObj.thumbnail = `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
+  // Try Wikipedia image first if available
+  if (resolvedWiki.imageUrl) {
+    try {
+      console.log(`[DAILY ENGINE] Downloading Wikipedia cover image: ${resolvedWiki.imageUrl}`);
+      await downloadImage(resolvedWiki.imageUrl, localImgPath);
+      dossierObj.thumbnail = relativeImgPath;
+      imageDownloaded = true;
+      console.log('[DAILY ENGINE] Wikipedia cover image saved locally.');
+    } catch (err) {
+      console.warn('[DAILY ENGINE] Wikipedia image download failed, falling back to AI:', err.message);
+    }
+  }
+
+  // Fallback to Pollinations AI image if Wikipedia image failed or doesn't exist
+  if (!imageDownloaded) {
+    try {
+      console.log(`[DAILY ENGINE] Generating Pollinations Image for: ${dossierObj.title}`);
+      const imagePrompt = `A cinematic, dramatic, high-contrast, low-key photograph representing ${dossierObj.title}, dark ambient lighting, deep shadows, gold and bronze color tones, mystery, high detail, 35mm photograph, chiaroscuro`;
+      const imageApiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+      await downloadImage(imageApiUrl, localImgPath);
+      dossierObj.thumbnail = relativeImgPath;
+      imageDownloaded = true;
+      console.log('[DAILY ENGINE] Fallback cover image generated and saved locally.');
+    } catch (err) {
+      console.error('[DAILY ENGINE] Fallback image generation failed:', err.message);
+      dossierObj.thumbnail = `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
+    }
   }
 
   dossierObj.wikiUrl = resolvedWiki.url;

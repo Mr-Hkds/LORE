@@ -217,12 +217,20 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               PREMIUM TESTING ACCESS
             </span>
           </div>
-          <span
-            className="text-[10px] font-medium tracking-[0.12em] uppercase"
-            style={{ color: mu }}
-          >
-            A guided descent
-          </span>
+          <div className="flex items-center gap-3">
+            <span
+              className="text-[9px] font-mono tracking-[0.15em] uppercase text-neutral-500 hidden sm:inline"
+            >
+              {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase()}
+            </span>
+            <span className="text-neutral-800 hidden sm:inline">·</span>
+            <span
+              className="text-[10px] font-medium tracking-[0.12em] uppercase"
+              style={{ color: mu }}
+            >
+              A guided descent
+            </span>
+          </div>
         </div>
       </header>
 
@@ -242,15 +250,15 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <h1
             className="font-serif italic leading-none tracking-tight"
             style={{
-              fontSize: 'clamp(3.6rem, 11vw, 7.5rem)',
+              fontSize: 'clamp(3.2rem, 10vw, 7rem)',
               fontWeight: 300,
               color: fg,
               letterSpacing: '-0.04em',
-              lineHeight: 0.93,
+              lineHeight: 0.95,
               marginBottom: '48px',
             }}
           >
-            Depths of the Unknown
+            How deep are you<br className="hidden sm:inline" /> willing to go?
           </h1>
 
           {/* Subtitle */}

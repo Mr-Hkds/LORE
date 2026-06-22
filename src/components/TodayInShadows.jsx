@@ -239,7 +239,7 @@ export default function TodayInShadows() {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
             <span className="text-[8px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-sm">
-              DAILY DOSSIER · {dossier.theme?.toUpperCase()}
+              WHAT HAPPENED TODAY IN HISTORY · {dossier.theme?.toUpperCase()}
             </span>
             {dossier.year && (
               <span className="text-[9px] font-mono text-neutral-500 tracking-wider">
@@ -257,7 +257,7 @@ export default function TodayInShadows() {
             onClick={() => setModalOpen(true)}
             className="inline-flex items-center gap-1.5 text-[9px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
           >
-            Read Dossier <span className="text-xs">→</span>
+            Read Entry <span className="text-xs">→</span>
           </button>
         </div>
       </div>
@@ -282,7 +282,7 @@ export default function TodayInShadows() {
             <div className="flex justify-between items-start border-b border-neutral-900 pb-4 relative z-10">
               <div className="space-y-1">
                 <span className="text-[8px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm">
-                  Daily Dossier
+                  Today in History
                 </span>
                 <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-light pt-1">
                   {dossier.title}
