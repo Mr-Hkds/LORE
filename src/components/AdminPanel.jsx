@@ -115,7 +115,16 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
   const [autoLogs, setAutoLogs] = useState([]);
   const [serverOffline, setServerOffline] = useState(false);
+  const [toast, setToast] = useState(null);
   const consecutiveFailuresRef = useRef(0);
+
+  // Auto-dismiss toast notification after 5 seconds
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   // Read apiKey from env on load
   useEffect(() => {
@@ -496,7 +505,14 @@ Do not wrap in markdown. Output raw JSON only.`;
       if (res.ok) {
         addLog(`Successfully saved & pushed changes for story: ${storyId}`);
         serverSaved = true;
-        const updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+        // Also update local overrides list if it's already there
+        const exists = localStories.some(s => s.story_id === storyId);
+        let updatedLocal;
+        if (exists) {
+          updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+        } else {
+          updatedLocal = localStories;
+        }
         setLocalStories(updatedLocal);
         localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
         if (refetchStories) refetchStories();
@@ -507,8 +523,19 @@ Do not wrap in markdown. Output raw JSON only.`;
     }
 
     if (!serverSaved) {
-      // Local fallback
-      const updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+      // Local fallback: update existing custom story, or copy static story to local override list
+      let updatedLocal;
+      const exists = localStories.some(s => s.story_id === storyId);
+      if (exists) {
+        updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+      } else {
+        const originalStory = stories.find(s => s.story_id === storyId);
+        if (originalStory) {
+          updatedLocal = [...localStories, { ...originalStory, ...editForm }];
+        } else {
+          updatedLocal = [...localStories, { story_id: storyId, ...editForm }];
+        }
+      }
       setLocalStories(updatedLocal);
       try {
         localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
@@ -526,15 +553,15 @@ Do not wrap in markdown. Output raw JSON only.`;
         ];
         try {
           await commitFilesToGitHub(filesToCommit, `admin: edit story ${storyId} via GitHub Sync`);
-          alert('Story successfully updated and committed to GitHub live site!');
+          setToast({ text: 'Story successfully updated and committed to GitHub live site!', type: 'success' });
         } catch (err) {
-          alert(`Failed to commit changes to GitHub: ${err.message}`);
+          setToast({ text: `Failed to commit changes to GitHub: ${err.message}`, type: 'error' });
         }
       } else {
-        alert('Local API server is offline. Changes were saved locally to your browser only. Configure GitHub Sync in Settings to push changes live.');
+        setToast({ text: 'Saved locally to browser cache. Configure GitHub Sync in Settings to push edits live.', type: 'warning' });
       }
     } else {
-      alert('Story successfully updated on the local server.');
+      setToast({ text: 'Story successfully updated on the local server.', type: 'success' });
     }
   };
 
@@ -593,15 +620,15 @@ Do not wrap in markdown. Output raw JSON only.`;
         ];
         try {
           await commitFilesToGitHub(filesToCommit, `admin: delete story ${storyId} via GitHub Sync`);
-          alert('Story successfully deleted and changes committed to GitHub live site!');
+          setToast({ text: 'Story successfully deleted and committed to GitHub live site!', type: 'success' });
         } catch (err) {
-          alert(`Failed to commit deletion to GitHub: ${err.message}`);
+          setToast({ text: `Failed to commit deletion to GitHub: ${err.message}`, type: 'error' });
         }
       } else {
-        alert('Story deleted locally (removed from your browser view). Configure GitHub Sync in Settings to delete it permanently from the live website.');
+        setToast({ text: 'Deleted locally from browser view. Configure GitHub Sync in Settings to push edits live.', type: 'warning' });
       }
     } else {
-      alert('Story permanently deleted from server.');
+      setToast({ text: 'Story permanently deleted from server.', type: 'success' });
     }
   };
 
@@ -1171,6 +1198,39 @@ Keep responses concise. Be direct and useful.`;
         </div>
       </header>
 
+      {/* Offline Alert Box */}
+      {serverOffline && (
+        <div className="mx-auto w-full mt-6 px-10" style={{ maxWidth: '1000px' }}>
+          <div 
+            className="p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all duration-300"
+            style={{ 
+              backgroundColor: 'rgba(196, 100, 74, 0.05)', 
+              borderColor: 'rgba(196, 100, 74, 0.25)', 
+              boxShadow: '0 8px 32px rgba(196, 100, 74, 0.05)'
+            }}
+          >
+            <div className="flex gap-3">
+              <span className="text-lg mt-0.5 select-none" style={{ color: '#C4644A' }}>⚠</span>
+              <div className="text-left">
+                <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#C4644A' }}>
+                  Local API Server Offline
+                </p>
+                <p className="text-[11px] font-sans mt-1 leading-relaxed" style={{ color: fg, opacity: 0.75 }}>
+                  Changes are being saved locally to your browser only. Configure **GitHub Sync** in Settings to push edits live directly to the website.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setActiveTab('github-sync')}
+              className="px-4 py-2 border text-[9px] font-mono tracking-widest uppercase rounded-lg transition-all duration-200 hover:bg-[#C4644A]/10 active:scale-95 cursor-pointer flex-shrink-0"
+              style={{ color: '#C4644A', borderColor: 'rgba(196, 100, 74, 0.35)' }}
+            >
+              Configure GitHub Sync
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Main Stats bar */}
       <div className="bg-[#12100E] border-b py-6 px-10" style={{ borderColor: ru }}>
         <div className="mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center" style={{ maxWidth: '1000px' }}>
@@ -1196,7 +1256,9 @@ Keep responses concise. Be direct and useful.`;
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
               Engine Status
             </span>
-            <span className="text-xs font-mono font-bold text-emerald-600 block mt-2">● ONLINE</span>
+            <span className="text-xs font-mono font-bold block mt-2" style={{ color: serverOffline ? '#C4644A' : '#10B981' }}>
+              {serverOffline ? '● OFFLINE' : '● ONLINE'}
+            </span>
           </div>
         </div>
       </div>
@@ -2015,6 +2077,31 @@ Keep responses concise. Be direct and useful.`;
 
         </main>
       </div>
+
+      {/* Floating Toast Notification overlay */}
+      {toast && (
+        <div 
+          className="fixed bottom-6 right-6 z-[9999] px-6 py-4 rounded-xl border backdrop-blur-md flex items-center gap-3 animate-fade-in transition-all duration-300 max-w-sm shadow-xl"
+          style={{ 
+            backgroundColor: toast.type === 'error' ? 'rgba(239,68,68,0.1)' : toast.type === 'warning' ? 'rgba(196,100,74,0.1)' : 'rgba(158,123,76,0.1)', 
+            borderColor: toast.type === 'error' ? '#EF4444' : toast.type === 'warning' ? '#C4644A' : '#9E7B4C',
+          }}
+        >
+          <span className="text-sm select-none">
+            {toast.type === 'error' ? '❌' : toast.type === 'warning' ? '⚠' : '✓'}
+          </span>
+          <p className="text-xs font-mono tracking-wider uppercase leading-relaxed text-left" style={{ color: fg }}>
+            {toast.text}
+          </p>
+          <button 
+            onClick={() => setToast(null)} 
+            className="text-[9px] font-mono tracking-widest uppercase hover:opacity-60 cursor-pointer ml-auto"
+            style={{ color: mu }}
+          >
+            [Close]
+          </button>
+        </div>
+      )}
     </div>
   );
 }
