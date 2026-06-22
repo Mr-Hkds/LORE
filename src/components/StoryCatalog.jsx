@@ -366,7 +366,12 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
           {/* Footer */}
           <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase"
             style={{ borderColor: ru, color: mu }}>
-            <p className="opacity-60">© {new Date().getFullYear()} LORE ARCHIVE</p>
+            <p className="opacity-60">
+              © {new Date().getFullYear()} LORE ARCHIVE ·{' '}
+              <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
+                CONSOLE
+              </a>
+            </p>
             <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
               MADE BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
             </p>

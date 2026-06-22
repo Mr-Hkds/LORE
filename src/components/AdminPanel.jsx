@@ -66,6 +66,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [expandedStoryId, setExpandedStoryId] = useState(null);
   const [selectedRecIds, setSelectedRecIds] = useState([]);
 
+  // Story editing state
+  const [editingStoryId, setEditingStoryId] = useState(null);
+  const [editForm, setEditForm] = useState({ title: '', hero_image: '', hook: '' });
+
   // Generator form state
   const [genTopic, setGenTopic] = useState('');
   const [genCategory, setGenCategory] = useState('auto');
@@ -312,6 +316,39 @@ Do not wrap in markdown. Output raw JSON only.`;
   useEffect(() => {
     loadRecommendations();
   }, [loadRecommendations]);
+
+  // Handle editing a story fields inline
+  const startEditing = (story) => {
+    setEditingStoryId(story.story_id);
+    setEditForm({
+      title: story.title || '',
+      hero_image: story.hero_image || '',
+      hook: story.hook || '',
+    });
+  };
+
+  const handleSaveStory = async (storyId) => {
+    try {
+      const res = await fetch(`/api/stories/${storyId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editForm),
+      });
+      if (res.ok) {
+        addLog(`Successfully saved & pushed changes for story: ${storyId}`);
+        const updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+        setLocalStories(updatedLocal);
+        localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
+        if (refetchStories) refetchStories();
+        setEditingStoryId(null);
+      } else {
+        alert('Could not update story. Is the local server running?');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network error while saving story changes.');
+    }
+  };
 
   // Handle deleting a story
   const handleDeleteStory = async (storyId) => {
@@ -966,27 +1003,75 @@ Keep responses concise. Be direct and useful.`;
                     className="p-5 rounded-xl border transition-all duration-350"
                     style={{ borderColor: ru, backgroundColor: '#110F0D' }}
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-serif italic text-lg text-[#EDE8DF]">{story.title}</span>
-                        <span className="text-[10px] font-mono tracking-widest px-3 py-1 rounded bg-[#1C1A17] text-[#EDE8DF]">
-                          {CATEGORY_LABELS[story.category] || story.category}
-                        </span>
-                        <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded bg-red-950/30 text-red-400">
-                          {story.severity}
-                        </span>
+                    {editingStoryId === story.story_id ? (
+                      <div className="space-y-4 my-3 p-4 rounded-lg bg-black/40 border border-neutral-800">
+                        <div>
+                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Dossier Title</label>
+                          <input
+                            type="text"
+                            value={editForm.title}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
+                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-sans"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Thumbnail URL / Local Image Path</label>
+                          <input
+                            type="text"
+                            value={editForm.hero_image}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, hero_image: e.target.value }))}
+                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Dossier Hook (Narrative Intro)</label>
+                          <textarea
+                            value={editForm.hook}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, hook: e.target.value }))}
+                            rows={3}
+                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none font-sans leading-relaxed"
+                          />
+                        </div>
+                        <div className="flex gap-2 justify-end pt-2">
+                          <button
+                            onClick={() => setEditingStoryId(null)}
+                            className="px-3 py-1.5 border border-neutral-800 text-[#6A6560] text-[10px] font-bold tracking-wider uppercase rounded hover:bg-white/5 cursor-pointer"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => handleSaveStory(story.story_id)}
+                            className="px-3 py-1.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-wider uppercase rounded hover:bg-[#b08c5c] cursor-pointer"
+                          >
+                            Save & Push Live
+                          </button>
+                        </div>
                       </div>
-                      <span className="text-[10px] font-mono text-[#6A6560]">Added: {story.added_date}</span>
-                    </div>
-                    
-                    <p className="text-xs text-[#6A6560] mb-4 leading-relaxed max-w-3xl">{story.hook}</p>
+                    ) : (
+                      <>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-serif italic text-lg text-[#EDE8DF]">{story.title}</span>
+                            <span className="text-[10px] font-mono tracking-widest px-3 py-1 rounded bg-[#1C1A17] text-[#EDE8DF]">
+                              {CATEGORY_LABELS[story.category] || story.category}
+                            </span>
+                            <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded bg-red-950/30 text-red-400">
+                              {story.severity}
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-mono text-[#6A6560]">Added: {story.added_date}</span>
+                        </div>
+                        
+                        <p className="text-xs text-[#6A6560] mb-4 leading-relaxed max-w-3xl">{story.hook}</p>
+                      </>
+                    )}
 
-                              <div className="flex flex-wrap gap-2 mt-2">
-                                {(story.concepts || []).map(c => (
-                                  <span key={c} className="text-[10px] font-mono tracking-[0.05em] uppercase px-3 py-1 rounded bg-[#161412] text-amber-200">
-                                    {c.replace(/_/g, ' ')}
-                                  </span>
-                                ))}              </div>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {(story.concepts || []).map(c => (
+                        <span key={c} className="text-[10px] font-mono tracking-[0.05em] uppercase px-3 py-1 rounded bg-[#161412] text-amber-200">
+                          {c.replace(/_/g, ' ')}
+                        </span>
+                      ))}              </div>
 
                     <div className="flex items-center gap-3 pt-3 border-t" style={{ borderColor: ru }}>
                       <button
@@ -995,6 +1080,16 @@ Keep responses concise. Be direct and useful.`;
                       >
                         {expandedStoryId === story.story_id ? 'Hide Layers' : 'Inspect 7 Layers'}
                       </button>
+
+                      {editingStoryId !== story.story_id && (
+                        <button
+                          onClick={() => startEditing(story)}
+                          className="text-[10px] font-bold tracking-wider uppercase text-[#9E7B4C] hover:underline cursor-pointer"
+                        >
+                          ✎ Edit Case Details
+                        </button>
+                      )}
+
                       <button
                         onClick={() => handleDeleteStory(story.story_id)}
                         className="text-[10px] font-bold tracking-wider uppercase text-red-500 hover:underline cursor-pointer ml-auto"
