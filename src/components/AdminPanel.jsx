@@ -69,6 +69,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [ghRepo, setGhRepo] = useState(() => localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE');
   const [ghBranch, setGhBranch] = useState(() => localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main');
   const [ghToken, setGhToken] = useState(() => localStorage.getItem('lore:github:token') || import.meta.env.VITE_GITHUB_TOKEN || '');
+  const [ghSyncSuccess, setGhSyncSuccess] = useState(() => localStorage.getItem('lore:github:success') === 'true');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
 
@@ -305,11 +306,15 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       }
       setPublishStatus('Publish successful!');
       addLog(`🚀 Successfully committed updates directly to GitHub repo ${ghOwner}/${ghRepo} on branch ${ghBranch}`);
+      setGhSyncSuccess(true);
+      localStorage.setItem('lore:github:success', 'true');
       return true;
     } catch (err) {
       console.error('GitHub Sync failed:', err);
       setPublishStatus(`Error: ${err.message}`);
       addLog(`❌ GitHub Commit Sync Failed: ${err.message}`);
+      setGhSyncSuccess(false);
+      localStorage.setItem('lore:github:success', 'false');
       throw err;
     } finally {
       setTimeout(() => {
@@ -1198,8 +1203,8 @@ Keep responses concise. Be direct and useful.`;
         </div>
       </header>
 
-      {/* Offline Alert Box */}
-      {serverOffline && (
+      {/* Offline Alert Box - Unconfigured/Not Successful */}
+      {serverOffline && !ghSyncSuccess && (
         <div className="mx-auto w-full mt-6 px-10" style={{ maxWidth: '1000px' }}>
           <div 
             className="p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all duration-300"
@@ -1226,6 +1231,39 @@ Keep responses concise. Be direct and useful.`;
               style={{ color: '#C4644A', borderColor: 'rgba(196, 100, 74, 0.35)' }}
             >
               Configure GitHub Sync
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Offline Alert Box - GitHub Sync Active */}
+      {serverOffline && ghSyncSuccess && (
+        <div className="mx-auto w-full mt-6 px-10" style={{ maxWidth: '1000px' }}>
+          <div 
+            className="p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all duration-300"
+            style={{ 
+              backgroundColor: 'rgba(16, 185, 129, 0.03)', 
+              borderColor: 'rgba(16, 185, 129, 0.2)', 
+              boxShadow: '0 8px 32px rgba(16, 185, 129, 0.02)'
+            }}
+          >
+            <div className="flex gap-3">
+              <span className="text-lg mt-0.5 select-none" style={{ color: '#10B981' }}>✓</span>
+              <div className="text-left">
+                <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#10B981' }}>
+                  GitHub Sync Active
+                </p>
+                <p className="text-[11px] font-sans mt-1 leading-relaxed" style={{ color: fg, opacity: 0.75 }}>
+                  Local API server is offline, but **GitHub Sync** is successfully connected. Edits will save locally and push live automatically.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setActiveTab('github-sync')}
+              className="px-4 py-2 border text-[9px] font-mono tracking-widest uppercase rounded-lg transition-all duration-200 hover:bg-[#10B981]/10 active:scale-95 cursor-pointer flex-shrink-0"
+              style={{ color: '#10B981', borderColor: 'rgba(16, 185, 129, 0.3)' }}
+            >
+              Manage Connection
             </button>
           </div>
         </div>
@@ -1326,7 +1364,7 @@ Keep responses concise. Be direct and useful.`;
               activeTab === 'github-sync' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
-            GitHub Sync {ghToken ? '✓' : '⚠️'}
+            GitHub Sync {ghSyncSuccess ? '✓' : '⚠️'}
           </button>
         </aside>
 
@@ -1988,7 +2026,11 @@ Keep responses concise. Be direct and useful.`;
                   <input
                     type="text"
                     value={ghOwner}
-                    onChange={e => setGhOwner(e.target.value)}
+                    onChange={e => {
+                      setGhOwner(e.target.value);
+                      setGhSyncSuccess(false);
+                      localStorage.setItem('lore:github:success', 'false');
+                    }}
                     placeholder="e.g. Mr-Hkds"
                     className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
                   />
@@ -1999,7 +2041,11 @@ Keep responses concise. Be direct and useful.`;
                   <input
                     type="text"
                     value={ghRepo}
-                    onChange={e => setGhRepo(e.target.value)}
+                    onChange={e => {
+                      setGhRepo(e.target.value);
+                      setGhSyncSuccess(false);
+                      localStorage.setItem('lore:github:success', 'false');
+                    }}
                     placeholder="e.g. LORE"
                     className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
                   />
@@ -2010,7 +2056,11 @@ Keep responses concise. Be direct and useful.`;
                   <input
                     type="text"
                     value={ghBranch}
-                    onChange={e => setGhBranch(e.target.value)}
+                    onChange={e => {
+                      setGhBranch(e.target.value);
+                      setGhSyncSuccess(false);
+                      localStorage.setItem('lore:github:success', 'false');
+                    }}
                     placeholder="e.g. main"
                     className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
                   />
@@ -2021,7 +2071,11 @@ Keep responses concise. Be direct and useful.`;
                   <input
                     type="password"
                     value={ghToken}
-                    onChange={e => setGhToken(e.target.value)}
+                    onChange={e => {
+                      setGhToken(e.target.value);
+                      setGhSyncSuccess(false);
+                      localStorage.setItem('lore:github:success', 'false');
+                    }}
                     placeholder="ghp_..."
                     className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
                   />
@@ -2047,13 +2101,19 @@ Keep responses concise. Be direct and useful.`;
                           }
                         });
                         if (res.ok) {
-                          alert(`Success! Successfully connected to repository ${ghOwner}/${ghRepo}.`);
+                          setToast({ text: `Success! Connected to repository ${ghOwner}/${ghRepo}.`, type: 'success' });
+                          setGhSyncSuccess(true);
+                          localStorage.setItem('lore:github:success', 'true');
                         } else {
                           const errData = await res.json();
-                          alert(`Failed: ${errData.message || res.statusText}`);
+                          setToast({ text: `Connection failed: ${errData.message || res.statusText}`, type: 'error' });
+                          setGhSyncSuccess(false);
+                          localStorage.setItem('lore:github:success', 'false');
                         }
                       } catch (err) {
-                        alert(`Connection error: ${err.message}`);
+                        setToast({ text: `Connection error: ${err.message}`, type: 'error' });
+                        setGhSyncSuccess(false);
+                        localStorage.setItem('lore:github:success', 'false');
                       } finally {
                         setIsPublishing(false);
                         setPublishStatus('');
