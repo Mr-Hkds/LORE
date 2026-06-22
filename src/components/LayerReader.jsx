@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import LoreMark from './LoreMark';
 
 export default function LayerReader({
   topic,
@@ -29,6 +30,7 @@ export default function LayerReader({
 
   const [reacted, setReacted] = useState(getStoredReacted);
   const [animatingReaction, setAnimatingReaction] = useState(null);
+  const [imgFailed, setImgFailed] = useState(false);
 
   // Sync reactions counts when data updates
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function LayerReader({
   // Re-load persisted votes when storyId changes (user navigates to different story)
   useEffect(() => {
     setReacted(getStoredReacted());
+    setImgFailed(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.storyId]);
 
@@ -174,8 +177,21 @@ export default function LayerReader({
             <div className="max-w-2xl mx-auto w-full">
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
-                <div className="mb-8 w-full rounded-xl overflow-hidden border" style={{ borderColor: cardBorder }}>
-                  <img src={data.imageUrl} alt={topic.label} className="w-full h-auto object-cover max-h-[400px]" loading="lazy" />
+                <div className="mb-8 w-full rounded-xl overflow-hidden border flex items-center justify-center min-h-[200px]" style={{ borderColor: cardBorder }}>
+                  {imgFailed ? (
+                    <div className="w-full py-16 flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+                      <LoreMark size={24} color="currentColor" />
+                      <span className="text-[9px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={data.imageUrl}
+                      alt={topic.label}
+                      onError={() => setImgFailed(true)}
+                      className="w-full h-auto object-cover max-h-[400px]"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
               )}
 

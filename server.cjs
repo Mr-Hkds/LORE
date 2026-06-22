@@ -466,6 +466,22 @@ function validateStoryStructure(story) {
   return { valid: errors.length === 0, errors };
 }
 
+function isDuplicateStory(topic, existingStories) {
+  const normalizedTopic = topic.toLowerCase();
+  return existingStories.some(s => {
+    const normalizedTitle = s.title.toLowerCase();
+    if (normalizedTitle === normalizedTopic) return true;
+    if (normalizedTitle.includes(normalizedTopic) || normalizedTopic.includes(normalizedTitle)) return true;
+    
+    const stopWords = new Set(['the', 'of', 'and', 'in', 'incident', 'case', 'mystery', 'conspiracy', 'experiments', 'project', 'experiment', 'deaths', 'death', 'disappearance', 'disappearances', 'trials', 'trial', 'incident', 'pass', 'forest']);
+    const topicWords = normalizedTopic.split(/[\s_\- ',."]+/).filter(w => w.length > 2 && !stopWords.has(w));
+    const titleWords = normalizedTitle.split(/[\s_\- ',."]+/).filter(w => w.length > 2 && !stopWords.has(w));
+    
+    const overlap = topicWords.filter(w => titleWords.includes(w));
+    return overlap.length > 0;
+  });
+}
+
 // Generate a valid fallback story object locally if all AI APIs fail completely
 function getStaticFallbackStory(topic) {
   const cleanTopic = topic || 'The Unsolved Case';
@@ -474,11 +490,18 @@ function getStaticFallbackStory(topic) {
     .replace(/_+/g, '_')
     .replace(/^_+|_+$/g, '');
   
+  const hookTemplates = [
+    `Official archives se lekar ajeeb theories tak—kya hai ${cleanTopic} ka asal rahasya aur iske piche chhupe ankahe sach?`,
+    `Documents ki suppression aur mysterious events—kya hai ${cleanTopic} ki files mein chhupa wo chilling truth jise public se chhupaya gaya?`,
+    `Decades se unsolved aur classified—kya hai ${cleanTopic} ke case ka wo khaufnak pehlu jise investigators bhi kabhi samajh nahi paaye?`
+  ];
+  const hook = hookTemplates[Math.floor(Math.random() * hookTemplates.length)];
+  
   return {
     story_id: id || 'fallback_story_' + Date.now(),
     title: cleanTopic,
     category: 'paranormal',
-    hook: `Ek aisi ansuljhi dastan jisne sabko hairan kar diya. Kya hai iska sach?`,
+    hook,
     concepts: ['unexplained_phenomena', 'mystery'],
     severity: 'disturbing',
     layers: [
@@ -671,19 +694,27 @@ Do not wrap in markdown. Output raw JSON only.`;
     const finalPending = finalRecs.filter(r => r.status === 'pending');
     
     let topicsToGen = [];
+    const storiesObj = readJson(STORIES_FILE) || { stories: [] };
+    const existingStoriesList = storiesObj.stories || [];
+
     if (finalPending.length > 0) {
-      topicsToGen = finalPending.slice(0, 1).map(r => r.topic);
-      addAutomationLog(`Selected 1 pending user topic for compilation: "${topicsToGen[0]}"`);
+      // Find first pending recommendation that is not a duplicate of existing stories
+      const nonDuplicateRec = finalPending.find(r => !isDuplicateStory(r.topic, existingStoriesList));
+      if (nonDuplicateRec) {
+        topicsToGen = [nonDuplicateRec.topic];
+        addAutomationLog(`Selected pending user topic for compilation: "${topicsToGen[0]}"`);
+      } else {
+        addAutomationLog(`All pending user topics are duplicates of existing stories. Skipping queue.`);
+      }
     } else {
       addAutomationLog('No pending topics. Requesting AI to suggest 1 high-quality obscure case based on category balance...');
       try {
-        const storiesObj = readJson(STORIES_FILE) || { stories: [] };
-        const existingTitles = storiesObj.stories.map(s => s.title).join(', ');
+        const existingTitles = existingStoriesList.map(s => s.title).join(', ');
         
         const categoryList = ['psychology', 'true_crime', 'paranormal', 'mythology', 'gov_experiments', 'conspiracy', 'cyber_mysteries'];
         const counts = {};
         categoryList.forEach(cat => { counts[cat] = 0; });
-        (storiesObj.stories || []).forEach(s => {
+        existingStoriesList.forEach(s => {
           if (s.category && counts[s.category] !== undefined) {
             counts[s.category]++;
           }
@@ -723,8 +754,12 @@ Return a JSON object with 'topic' (string). Example:
         const suggestText = await callAI(suggestPrompt, 'You are a dark history curator. Output raw JSON only.', { expectJSON: true });
         const suggestion = cleanAndParseJSON(suggestText);
         if (suggestion && suggestion.topic) {
-          topicsToGen = [suggestion.topic];
-          addAutomationLog(`AI balanced suggestion for "${targetCategory}": "${suggestion.topic}"`);
+          if (!isDuplicateStory(suggestion.topic, existingStoriesList)) {
+            topicsToGen = [suggestion.topic];
+            addAutomationLog(`AI balanced suggestion for "${targetCategory}": "${suggestion.topic}"`);
+          } else {
+            addAutomationLog(`AI suggested a duplicate topic: "${suggestion.topic}". Skipping.`);
+          }
         }
       } catch (err) {
         addAutomationLog(`Warning: Failed to get AI balanced suggestion: ${err.message}`);
@@ -760,7 +795,7 @@ Structure the story exactly in the following JSON format:
   "story_id": "lowercase_slug_with_underscores",
   "title": "A compelling, title for the dossier",
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
-  "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
+  "hook": "A highly-professional, specific, and compelling 1-2 sentence teaser (max 150 chars) in Hinglish for the catalog card. CRITICAL: The hook must be completely custom and specific to the case details (e.g., mention specific locations, names, or key anomalies). Never write generic hooks like 'Ek aisi ansuljhi dastan...' or 'Kya hai iska sach?'.",
   "concepts": ["concept1", "concept2", "concept3"],
   "severity": "unsettling | disturbing | chilling",
   "layers": [

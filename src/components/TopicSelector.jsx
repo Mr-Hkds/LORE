@@ -250,7 +250,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '48px',
             }}
           >
-            Archive Index
+            Depths of the Unknown
           </h1>
 
           {/* Subtitle */}

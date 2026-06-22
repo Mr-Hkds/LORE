@@ -105,10 +105,10 @@ const STATIC_FALLBACKS = {
   }
 };
 
-const VERDICTS = [
-  { id: 'factual', label: 'Factual Ledger', desc: 'Verified by primary documentation and historical consensus.' },
-  { id: 'unresolved', label: 'Unresolved Mystery', desc: 'Official investigations are inconclusive or leave open loopholes.' },
-  { id: 'classified', label: 'Classified Enigma', desc: 'High likelihood of information suppression or institutional cover-up.' }
+const STATUSES = [
+  { id: 'factual', label: 'Open Archive', desc: 'Factual record. Documented evidence is fully public and verified.' },
+  { id: 'unresolved', label: 'Active Inquiry', desc: 'Unresolved record. Ongoing research is tracking open loopholes.' },
+  { id: 'classified', label: 'Classified Hold', desc: 'Restricted record. High likelihood of information suppression.' }
 ];
 
 export default function TodayInShadows() {
@@ -338,13 +338,13 @@ export default function TodayInShadows() {
                 </div>
               )}
 
-              {/* Professional Case Assessment */}
+              {/* Professional Archival Status */}
               <div className="space-y-3 pt-2">
                 <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l border-[#9E7B4C] pl-2">
-                  Case Assessment
+                  Archival Clearance Status
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {VERDICTS.map((v) => {
+                  {STATUSES.map((v) => {
                     const isSelected = userVerdict === v.id;
                     return (
                       <button

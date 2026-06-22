@@ -35,8 +35,10 @@ const SIGNAL_LABELS = {
 function StoryCardImage({ story, alt }) {
   const { getImageByQuery } = useStaticContent();
   const [fetchedUrl, setFetchedUrl] = useState(null);
+  const [imgFailed, setImgFailed] = useState(false);
 
   useEffect(() => {
+    setImgFailed(false);
     if (story.hero_image) return;
     let active = true;
     const query = story.image_query || story.title;
@@ -46,15 +48,17 @@ function StoryCardImage({ story, alt }) {
 
   const displayUrl = story.hero_image || fetchedUrl;
 
-  if (!displayUrl) {
+  if (!displayUrl || imgFailed) {
     return (
-      <div className="w-full h-full bg-neutral-950/80 animate-pulse flex items-center justify-center">
-        <div className="w-6 h-6 border border-neutral-800 rounded-full opacity-30" />
+      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+        <LoreMark size={20} color="currentColor" />
+        <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
       </div>
     );
   }
   return (
     <img src={displayUrl} alt={alt}
+      onError={() => setImgFailed(true)}
       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy" />
   );

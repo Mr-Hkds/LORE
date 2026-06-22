@@ -506,7 +506,6 @@ Do not wrap in markdown. Output raw JSON only.`;
     reader.readAsDataURL(file);
   };
 
-  // Run the Gemini story generation client-side
   const handleGenerateStory = async (topicOverride = null) => {
     const topic = (topicOverride || genTopic).trim();
     if (!topic) {
@@ -515,6 +514,26 @@ Do not wrap in markdown. Output raw JSON only.`;
     }
     if (!apiKey) {
       alert('A Gemini API Key is required to run the content engine. Please input one or set it in your .env file.');
+      return;
+    }
+
+    // Duplicate and overlap check before generating
+    const normalizedTopic = topic.toLowerCase();
+    const hasDuplicate = stories.some(s => {
+      const normalizedTitle = s.title.toLowerCase();
+      if (normalizedTitle === normalizedTopic) return true;
+      if (normalizedTitle.includes(normalizedTopic) || normalizedTopic.includes(normalizedTitle)) return true;
+      
+      const stopWords = new Set(['the', 'of', 'and', 'in', 'incident', 'case', 'mystery', 'conspiracy', 'experiments', 'project', 'experiment', 'deaths', 'death', 'disappearance', 'disappearances', 'trials', 'trial', 'incident', 'pass', 'forest']);
+      const topicWords = normalizedTopic.split(/[\s_\- ',."]+/).filter(w => w.length > 2 && !stopWords.has(w));
+      const titleWords = normalizedTitle.split(/[\s_\- ',."]+/).filter(w => w.length > 2 && !stopWords.has(w));
+      
+      const overlap = topicWords.filter(w => titleWords.includes(w));
+      return overlap.length > 0;
+    });
+
+    if (hasDuplicate) {
+      alert(`A similar or duplicate case relating to "${topic}" already exists in the archive.`);
       return;
     }
 
@@ -551,8 +570,9 @@ Structure the story exactly in the following JSON format:
   "story_id": "lowercase_slug_with_underscores",
   "title": "A compelling, title for the dossier",
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
-  "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
+  "hook": "A highly-professional, specific, and compelling 1-2 sentence teaser (max 150 chars) in Hinglish for the catalog card. CRITICAL: The hook must be completely custom and specific to the case details (e.g., mention specific locations, names, or key anomalies). Never write generic hooks like 'Ek aisi ansuljhi dastan...' or 'Kya hai iska sach?'.",
   "concepts": ["concept1", "concept2", "concept3"],
+  "severity": "${severityVal}",ncept3"],
   "severity": "${severityVal}",
   "layers": [
     {
