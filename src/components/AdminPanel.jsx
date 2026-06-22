@@ -39,6 +39,21 @@ function cleanAndParseJSON(text) {
   return JSON.parse(cleaned);
 }
 
+function rebuildConceptIndex(storiesArray) {
+  const index = {};
+  storiesArray.forEach(story => {
+    (story.concepts || []).forEach(concept => {
+      if (!index[concept]) {
+        index[concept] = [];
+      }
+      if (!index[concept].includes(story.story_id)) {
+        index[concept].push(story.story_id);
+      }
+    });
+  });
+  return index;
+}
+
 export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
@@ -46,8 +61,24 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 
-  // Tabs: 'catalog' | 'recommendations' | 'generator' | 'automation' | 'feedback' | 'ai-editor'
+  // Tabs: 'catalog' | 'recommendations' | 'generator' | 'automation' | 'feedback' | 'ai-editor' | 'github-sync'
   const [activeTab, setActiveTab] = useState('catalog');
+
+  // GitHub Sync Configuration States
+  const [ghOwner, setGhOwner] = useState(() => localStorage.getItem('lore:github:owner') || 'Mr-Hkds');
+  const [ghRepo, setGhRepo] = useState(() => localStorage.getItem('lore:github:repo') || 'LORE');
+  const [ghBranch, setGhBranch] = useState(() => localStorage.getItem('lore:github:branch') || 'main');
+  const [ghToken, setGhToken] = useState(() => localStorage.getItem('lore:github:token') || '');
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [publishStatus, setPublishStatus] = useState('');
+
+  // Save to localStorage when changed
+  useEffect(() => {
+    localStorage.setItem('lore:github:owner', ghOwner);
+    localStorage.setItem('lore:github:repo', ghRepo);
+    localStorage.setItem('lore:github:branch', ghBranch);
+    localStorage.setItem('lore:github:token', ghToken);
+  }, [ghOwner, ghRepo, ghBranch, ghToken]);
 
   // Image uploading state
   const [uploadingState, setUploadingState] = useState('idle'); // 'idle' | 'uploading'
@@ -213,6 +244,74 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   }, [fetchAutomationData, serverOffline]);
 
   const [isHarvesting, setIsHarvesting] = useState(false);
+
+  const commitFilesToGitHub = async (filesToCommit, commitMessage) => {
+    if (!ghToken) {
+      throw new Error('GitHub Personal Access Token is required. Please set it in GitHub Sync Settings.');
+    }
+    setIsPublishing(true);
+    setPublishStatus('Initializing GitHub publish...');
+    try {
+      for (const file of filesToCommit) {
+        setPublishStatus(`Fetching metadata for ${file.path}...`);
+        const url = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}?ref=${ghBranch}`;
+        
+        let sha = null;
+        try {
+          const res = await fetch(url, {
+            headers: {
+              'Authorization': `token ${ghToken}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            sha = data.sha;
+          }
+        } catch (err) {
+          console.warn(`File ${file.path} might be new:`, err);
+        }
+
+        setPublishStatus(`Committing ${file.path}...`);
+        const body = {
+          message: commitMessage,
+          content: btoa(unescape(encodeURIComponent(file.content))),
+          branch: ghBranch
+        };
+        if (sha) {
+          body.sha = sha;
+        }
+
+        const putRes = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!putRes.ok) {
+          const errorData = await putRes.json();
+          throw new Error(`GitHub API Error for ${file.path}: ${errorData.message || putRes.statusText}`);
+        }
+      }
+      setPublishStatus('Publish successful!');
+      addLog(`🚀 Successfully committed updates directly to GitHub repo ${ghOwner}/${ghRepo} on branch ${ghBranch}`);
+      return true;
+    } catch (err) {
+      console.error('GitHub Sync failed:', err);
+      setPublishStatus(`Error: ${err.message}`);
+      addLog(`❌ GitHub Commit Sync Failed: ${err.message}`);
+      throw err;
+    } finally {
+      setTimeout(() => {
+        setIsPublishing(false);
+        setPublishStatus('');
+      }, 3000);
+    }
+  };
 
   const handleHarvestWebTrends = async () => {
     setIsHarvesting(true);
@@ -390,6 +489,7 @@ Do not wrap in markdown. Output raw JSON only.`;
   };
 
   const handleSaveStory = async (storyId) => {
+    let serverSaved = false;
     try {
       const res = await fetch(`/api/stories/${storyId}`, {
         method: 'PUT',
@@ -398,17 +498,46 @@ Do not wrap in markdown. Output raw JSON only.`;
       });
       if (res.ok) {
         addLog(`Successfully saved & pushed changes for story: ${storyId}`);
+        serverSaved = true;
         const updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
         setLocalStories(updatedLocal);
         localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
         if (refetchStories) refetchStories();
         setEditingStoryId(null);
-      } else {
-        alert('Could not update story. Is the local server running?');
       }
     } catch (err) {
-      console.error(err);
-      alert('Network error while saving story changes.');
+      console.warn('Local server save failed:', err);
+    }
+
+    if (!serverSaved) {
+      // Local fallback
+      const updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+      setLocalStories(updatedLocal);
+      try {
+        localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
+      } catch { /* ignore */ }
+      if (refetchStories) refetchStories();
+      setEditingStoryId(null);
+
+      // GitHub Sync integration
+      if (ghToken) {
+        const updatedStories = stories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+        const newConceptIndex = rebuildConceptIndex(updatedStories);
+        const filesToCommit = [
+          { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+        ];
+        try {
+          await commitFilesToGitHub(filesToCommit, `admin: edit story ${storyId} via GitHub Sync`);
+          alert('Story successfully updated and committed to GitHub live site!');
+        } catch (err) {
+          alert(`Failed to commit changes to GitHub: ${err.message}`);
+        }
+      } else {
+        alert('Local API server is offline. Changes were saved locally to your browser only. Configure GitHub Sync in Settings to push changes live.');
+      }
+    } else {
+      alert('Story successfully updated on the local server.');
     }
   };
 
@@ -455,11 +584,28 @@ Do not wrap in markdown. Output raw JSON only.`;
     if (onStoryDeleted) {
       onStoryDeleted(storyId);
     }
-    
-    alert(serverDeleted 
-      ? 'Story permanently deleted from server.' 
-      : 'Story deleted locally (removed from your browser view).'
-    );
+
+    if (!serverDeleted) {
+      // GitHub Sync integration
+      if (ghToken) {
+        const updatedStories = stories.filter(s => s.story_id !== storyId);
+        const newConceptIndex = rebuildConceptIndex(updatedStories);
+        const filesToCommit = [
+          { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+        ];
+        try {
+          await commitFilesToGitHub(filesToCommit, `admin: delete story ${storyId} via GitHub Sync`);
+          alert('Story successfully deleted and changes committed to GitHub live site!');
+        } catch (err) {
+          alert(`Failed to commit deletion to GitHub: ${err.message}`);
+        }
+      } else {
+        alert('Story deleted locally (removed from your browser view). Configure GitHub Sync in Settings to delete it permanently from the live website.');
+      }
+    } else {
+      alert('Story permanently deleted from server.');
+    }
   };
 
   // Add a message to the console logger
@@ -780,15 +926,42 @@ Output YES or NO only. Do not include markdown or explanations.`;
       localStorage.setItem('lore:custom_stories', JSON.stringify(filtered));
 
       // Try writing to local server if running
+      let serverSaved = false;
       try {
-        await fetch('/api/stories/add', {
+        const res = await fetch('/api/stories/add', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(storyObj),
         });
-        addLog(`Synchronized story with public/content/stories.json file.`);
-      } catch {
+        if (res.ok) {
+          addLog(`Synchronized story with public/content/stories.json file.`);
+          serverSaved = true;
+        }
+      } catch (err) {
+        console.warn('Local server save failed:', err);
+      }
+
+      if (!serverSaved) {
         addLog(`Running in standalone client mode. Saved to browser storage.`);
+        if (ghToken) {
+          addLog('GitHub Sync configured. Preparing repository push...');
+          const updatedStories = [...stories];
+          const filtered = updatedStories.filter(s => s.story_id !== storyObj.story_id);
+          filtered.push(storyObj);
+
+          const newConceptIndex = rebuildConceptIndex(filtered);
+          const filesToCommit = [
+            { path: 'public/content/stories.json', content: JSON.stringify({ stories: filtered }, null, 2) },
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+          ];
+
+          try {
+            await commitFilesToGitHub(filesToCommit, `admin: generate story "${storyObj.title}" via GitHub Sync`);
+            addLog('🚀 Successfully committed generated story to GitHub!');
+          } catch (err) {
+            addLog(`❌ Failed to commit to GitHub: ${err.message}`);
+          }
+        }
       }
 
       // Mark the recommendation as completed or auto-delete it
@@ -1087,6 +1260,14 @@ Keep responses concise. Be direct and useful.`;
             }`}
           >
             AI Editor
+          </button>
+          <button
+            onClick={() => setActiveTab('github-sync')}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'github-sync' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            GitHub Sync {ghToken ? '✓' : '⚠️'}
           </button>
         </aside>
 
@@ -1752,6 +1933,107 @@ Keep responses concise. Be direct and useful.`;
                   Send
                 </button>
               </div>
+            </div>
+          )}
+
+          {/* Tab 7: GitHub Sync Settings */}
+          {activeTab === 'github-sync' && (
+            <div className="space-y-6">
+              <div className="border-b pb-4 text-left" style={{ borderColor: ru }}>
+                <h2 className="font-serif italic text-2xl">GitHub Sync Settings</h2>
+                <p className="text-xs text-[#6A6560] mt-1">Configure publishing directly to your GitHub repository when the local API server is offline.</p>
+              </div>
+
+              <div className="space-y-4 max-w-xl">
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">GitHub Username / Owner</label>
+                  <input
+                    type="text"
+                    value={ghOwner}
+                    onChange={e => setGhOwner(e.target.value)}
+                    placeholder="e.g. Mr-Hkds"
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Repository Name</label>
+                  <input
+                    type="text"
+                    value={ghRepo}
+                    onChange={e => setGhRepo(e.target.value)}
+                    placeholder="e.g. LORE"
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Target Branch</label>
+                  <input
+                    type="text"
+                    value={ghBranch}
+                    onChange={e => setGhBranch(e.target.value)}
+                    placeholder="e.g. main"
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Personal Access Token (PAT)</label>
+                  <input
+                    type="password"
+                    value={ghToken}
+                    onChange={e => setGhToken(e.target.value)}
+                    placeholder="ghp_..."
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
+                  />
+                  <p className="text-[9px] text-[#6A6560] leading-relaxed">
+                    Token is stored purely inside your browser's local storage and is never sent anywhere except directly to GitHub's REST API. Required scope: <code>repo</code> or <code>contents:write</code>.
+                  </p>
+                </div>
+
+                <div className="pt-2 text-left">
+                  <button
+                    onClick={async () => {
+                      if (!ghToken) {
+                        alert('Please provide a token first.');
+                        return;
+                      }
+                      setIsPublishing(true);
+                      setPublishStatus('Testing connection...');
+                      try {
+                        const res = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}`, {
+                          headers: {
+                            'Authorization': `token ${ghToken}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                          }
+                        });
+                        if (res.ok) {
+                          alert(`Success! Successfully connected to repository ${ghOwner}/${ghRepo}.`);
+                        } else {
+                          const errData = await res.json();
+                          alert(`Failed: ${errData.message || res.statusText}`);
+                        }
+                      } catch (err) {
+                        alert(`Connection error: ${err.message}`);
+                      } finally {
+                        setIsPublishing(false);
+                        setPublishStatus('');
+                      }
+                    }}
+                    disabled={isPublishing}
+                    className="px-4 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-mono font-bold uppercase rounded active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer"
+                  >
+                    {isPublishing ? 'Testing...' : 'Test Sync Connection'}
+                  </button>
+                </div>
+              </div>
+
+              {isPublishing && (
+                <div className="p-4 rounded-xl border border-[#9E7B4C]/20 bg-[#9E7B4C]/5 text-[#EDE8DF] text-xs font-mono animate-pulse text-left">
+                  {publishStatus}
+                </div>
+              )}
             </div>
           )}
 
