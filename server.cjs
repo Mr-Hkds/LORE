@@ -153,48 +153,128 @@ async function saveAndGetLocalImage(storyId, imageUrl) {
     return imageUrl;
   }
   try {
-    const imagesDir = path.join(__dirname, 'public', 'content', 'images');
-    if (!fs.existsSync(imagesDir)) {
-      fs.mkdirSync(imagesDir, { recursive: true });
+    const storyImagesDir = path.join(__dirname, 'public', 'content', 'images', storyId);
+    if (!fs.existsSync(storyImagesDir)) {
+      fs.mkdirSync(storyImagesDir, { recursive: true });
     }
-    const localPath = path.join(imagesDir, `${storyId}.jpg`);
+    const localPath = path.join(storyImagesDir, `cover.jpg`);
     await downloadImage(imageUrl, localPath);
-    return `/content/images/${storyId}.jpg`;
+    return `/content/images/${storyId}/cover.jpg`;
   } catch (err) {
     console.error(`Failed to save image locally for ${storyId}:`, err.message);
     return imageUrl;
   }
 }
 
+// ============================================================================
+// ROBUST AI LAYER — Pollinations AI with retries, timeouts, model fallback
+// ============================================================================
+const AI_MODELS = ['openai', 'mistral', 'claude'];
+const AI_MAX_RETRIES = 3;
+const AI_TIMEOUT_MS = 15000; // 15 seconds per request
+const AI_BACKOFF_BASE_MS = 1500;
+
+/**
+ * Robust AI text completion using Pollinations free-tier.
+ * Features: 3 retries with exponential backoff, 15s timeout, multi-model fallback.
+ * @param {string} prompt - The user prompt
+ * @param {string} systemPrompt - Optional system prompt
+ * @param {object} opts - { expectJSON: bool, modelOverride: string }
+ * @returns {Promise<string>} The AI response text
+ */
+async function callAI(prompt, systemPrompt = '', opts = {}) {
+  const models = opts.modelOverride ? [opts.modelOverride] : [...AI_MODELS];
+  let lastError = null;
+
+  for (const model of models) {
+    for (let attempt = 1; attempt <= AI_MAX_RETRIES; attempt++) {
+      try {
+        const payload = {
+          messages: [
+            ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
+            { role: 'user', content: prompt }
+          ],
+          model
+        };
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
+
+        const res = await fetch('https://text.pollinations.ai/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+
+        if (!res.ok) {
+          throw new Error(`Pollinations ${model} returned HTTP ${res.status}`);
+        }
+
+        const text = await res.text();
+
+        // Validate response is not empty or garbage
+        if (!text || text.trim().length < 5) {
+          throw new Error(`Pollinations ${model} returned empty/trivial response`);
+        }
+
+        // If we expect JSON, do a quick sanity check
+        if (opts.expectJSON) {
+          const trimmed = text.trim();
+          if (!trimmed.includes('{') && !trimmed.includes('[')) {
+            throw new Error(`Expected JSON but got plain text from ${model}`);
+          }
+        }
+
+        console.log(`[AI] Success: model=${model}, attempt=${attempt}, len=${text.length}`);
+        return text;
+
+      } catch (err) {
+        const isTimeout = err.name === 'AbortError';
+        const label = isTimeout ? 'TIMEOUT' : err.message;
+        console.warn(`[AI] Attempt ${attempt}/${AI_MAX_RETRIES} with ${model} failed: ${label}`);
+        lastError = err;
+
+        // Wait before retry (exponential backoff)
+        if (attempt < AI_MAX_RETRIES) {
+          const delay = AI_BACKOFF_BASE_MS * Math.pow(2, attempt - 1);
+          await new Promise(r => setTimeout(r, delay));
+        }
+      }
+    }
+    // All retries exhausted for this model, try next model
+    console.warn(`[AI] All retries exhausted for model "${model}". Trying next model...`);
+  }
+
+  throw new Error(`All AI models failed after ${AI_MAX_RETRIES} retries each. Last error: ${lastError?.message}`);
+}
+
+// Backward-compatible alias
+const callPollinationsText = callAI;
+
 // Fetch from Wikipedia or fall back to Pollinations AI to generate and save a story cover image
 async function generateAndSaveImage(storyId, topic, apiKey) {
-  const imagesDir = path.join(__dirname, 'public', 'content', 'images');
-  if (!fs.existsSync(imagesDir)) {
-    fs.mkdirSync(imagesDir, { recursive: true });
+  const storyImagesDir = path.join(__dirname, 'public', 'content', 'images', storyId);
+  if (!fs.existsSync(storyImagesDir)) {
+    fs.mkdirSync(storyImagesDir, { recursive: true });
   }
-  const localPath = path.join(imagesDir, `${storyId}.jpg`);
-  const relativePath = `/content/images/${storyId}.jpg`;
+  const localPath = path.join(storyImagesDir, `cover.jpg`);
+  const relativePath = `/content/images/${storyId}/cover.jpg`;
 
   let hasPerfectPhoto = false;
-  if (apiKey) {
-    try {
-      const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
+  try {
+    const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
 Reply with YES only if such a specific, famous, iconic, and visually striking real photo exists.
 Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
 Output YES or NO only. Do not include markdown or explanations.`;
-      
-      const geminiCheck = await postUrl(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-        {
-          contents: [{ role: 'user', parts: [{ text: checkPrompt }] }]
-        }
-      );
-      const decision = geminiCheck?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toUpperCase() || 'NO';
-      hasPerfectPhoto = decision.includes('YES');
-      console.log(`[IMAGE ENGINE] Gemini decision on perfect real photo for "${topic}": ${decision}`);
-    } catch (err) {
-      console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
-    }
+    
+    const decisionText = await callPollinationsText(checkPrompt, "You are a factual historical researcher.");
+    const decision = decisionText.trim().toUpperCase();
+    hasPerfectPhoto = decision.includes('YES');
+    console.log(`[IMAGE ENGINE] Pollinations decision on perfect real photo for "${topic}": ${decision}`);
+  } catch (err) {
+    console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
   }
 
   // Step 1: Try Wikipedia first if an iconic real photo exists
@@ -219,27 +299,22 @@ Output YES or NO only. Do not include markdown or explanations.`;
   // Step 2: Fallback to Pollinations AI
   console.log(`[IMAGE ENGINE] No perfect real photo available for ${topic}. Generating AI cover image...`);
   try {
-    // Generate a high-quality prompt from Gemini
+    // Generate a high-quality prompt from Pollinations
     const promptInstructions = `Create a highly descriptive, visually stunning image generation prompt for the dark historical/psychological topic: "${topic}".
-This image will be the main cover art of a thriller/mystery story. Design an attractive, clickable, eye-catching concept.
-Write a single descriptive sentence for a cinematic, atmospheric photo. Keep it highly realistic, dark, moody, with dramatic lighting, deep shadows, and rich textures, highlighting a mysterious and suspenseful focal point that makes the reader curious to click and read.
-Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. Output the prompt text only.`;
+The image will be the main cover art of a premium thriller/mystery editorial dossier. Design a highly aesthetic, clickable, and impactful concept.
+Write a single descriptive sentence for a cinematic, moody, atmospheric photograph. Incorporate elements of high-contrast chiaroscuro lighting, deep shadows, bronze/gold tones, historical/mysterious artifact details, or a striking symbolic focal point. Avoid cheap cliches. Do NOT use buzzwords like "photorealistic", "ultra-detailed", "hyperrealistic", or markdown styling. Output the prompt text only.`;
     
     let aiPrompt = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
-    if (apiKey) {
-      const geminiRes = await postUrl(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-        {
-          contents: [{ role: 'user', parts: [{ text: promptInstructions }] }]
-        }
-      );
-      const generated = geminiRes?.candidates?.[0]?.content?.parts?.[0]?.text;
+    try {
+      const generated = await callPollinationsText(promptInstructions, "You are an expert image generation prompt engineer.");
       if (generated) {
-        aiPrompt = generated;
+        aiPrompt = generated.trim();
       }
+    } catch (err) {
+      console.warn(`[IMAGE ENGINE] Failed to generate AI prompt for "${topic}":`, err.message);
     }
     
-    aiPrompt = aiPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+    aiPrompt = aiPrompt.replace(/"/g, '').replace(/\n/g, ' ');
     
     const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(aiPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
     console.log(`[IMAGE ENGINE] Downloading Pollinations AI image from: ${pollinationsUrl}`);
@@ -251,7 +326,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. O
   }
 }
 
-// Native HTTPS helper to POST JSON
+// Native HTTPS helper to POST JSON — with 60s timeout
 function postUrl(url, body, headers = {}) {
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
@@ -260,6 +335,7 @@ function postUrl(url, body, headers = {}) {
       hostname: urlObj.hostname,
       path: urlObj.pathname + urlObj.search,
       method: 'POST',
+      timeout: 60000, // 60 second timeout
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyStr),
@@ -279,9 +355,14 @@ function postUrl(url, body, headers = {}) {
             reject(new Error(`Failed to parse JSON: ${e.message}`));
           }
         } else {
-          reject(new Error(`HTTP Error ${res.statusCode}: ${res.statusMessage}\nBody: ${data}`));
+          reject(new Error(`HTTP Error ${res.statusCode}: ${res.statusMessage}\nBody: ${data.substring(0, 500)}`));
         }
       });
+    });
+
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error(`Request timed out after 60s: ${url}`));
     });
     
     req.on('error', (err) => {
@@ -297,12 +378,14 @@ function cleanAndParseJSON(text) {
   if (!text) throw new Error('Input text is empty');
   let cleaned = text.trim();
   
+  // Strip markdown code blocks
   const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/i;
   const match = cleaned.match(codeBlockRegex);
   if (match) {
     cleaned = match[1].trim();
   }
 
+  // Find the JSON boundaries
   const firstBrace = cleaned.indexOf('{');
   const firstBracket = cleaned.indexOf('[');
   let startIdx = -1;
@@ -323,9 +406,127 @@ function cleanAndParseJSON(text) {
     }
   }
 
-  cleaned = cleaned.replace(/,\s*([\]}])/g, '$1');
+  // Fix common AI output issues
+  cleaned = cleaned.replace(/,\s*([\]}])/g, '$1');  // trailing commas
 
-  return JSON.parse(cleaned);
+  // Attempt 1: Direct parse
+  try {
+    return JSON.parse(cleaned);
+  } catch (firstErr) {
+    // Attempt 2: Fix unescaped control chars inside string values
+    try {
+      // Replace literal newlines/tabs inside strings (not \\n which is already escaped)
+      let fixed = cleaned.replace(/(["'])([^"']*?)\r?\n([^"']*?)(\1)/g, (m, q, a, b, q2) => {
+        return q + a + '\\n' + b + q2;
+      });
+      // Remove any other control characters
+      fixed = fixed.replace(/[\x00-\x1F\x7F]/g, (ch) => {
+        if (ch === '\n' || ch === '\r' || ch === '\t') return ' ';
+        return '';
+      });
+      return JSON.parse(fixed);
+    } catch (secondErr) {
+      // Attempt 3: Aggressive cleanup — strip all control chars, re-try
+      try {
+        const aggressive = cleaned
+          .replace(/[\x00-\x1F\x7F]/g, ' ')
+          .replace(/\\'/g, "'")
+          .replace(/,\s*([\]}])/g, '$1');
+        return JSON.parse(aggressive);
+      } catch (thirdErr) {
+        throw new Error(`JSON parse failed after 3 attempts. Original: ${firstErr.message}. Input preview: ${cleaned.substring(0, 200)}`);
+      }
+    }
+  }
+}
+
+// Validate a generated story object has all required fields
+function validateStoryStructure(story) {
+  const errors = [];
+  if (!story.story_id || typeof story.story_id !== 'string') errors.push('Missing/invalid story_id');
+  if (!story.title || typeof story.title !== 'string') errors.push('Missing/invalid title');
+  
+  const validCategories = ['psychology', 'true_crime', 'paranormal', 'mythology', 'gov_experiments', 'conspiracy', 'cyber_mysteries'];
+  if (!validCategories.includes(story.category)) errors.push(`Invalid category: "${story.category}"`);
+  
+  if (!Array.isArray(story.layers)) {
+    errors.push('Missing layers array');
+  } else {
+    if (story.layers.length < 5) errors.push(`Only ${story.layers.length} layers (need at least 5)`);
+    for (let i = 0; i < story.layers.length; i++) {
+      const l = story.layers[i];
+      if (!l.layer_name) errors.push(`Layer ${i + 1}: missing layer_name`);
+      if (!l.content || l.content.length < 50) errors.push(`Layer ${i + 1}: content too short or missing`);
+    }
+  }
+
+  if (!story.hook) errors.push('Missing hook');
+  if (!Array.isArray(story.concepts) || story.concepts.length === 0) errors.push('Missing concepts array');
+
+  return { valid: errors.length === 0, errors };
+}
+
+// Generate a valid fallback story object locally if all AI APIs fail completely
+function getStaticFallbackStory(topic) {
+  const cleanTopic = topic || 'The Unsolved Case';
+  const id = cleanTopic.toLowerCase()
+    .replace(/[^a-z0-9_]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  
+  return {
+    story_id: id || 'fallback_story_' + Date.now(),
+    title: cleanTopic,
+    category: 'paranormal',
+    hook: `Ek aisi ansuljhi dastan jisne sabko hairan kar diya. Kya hai iska sach?`,
+    concepts: ['unexplained_phenomena', 'mystery'],
+    severity: 'disturbing',
+    layers: [
+      {
+        layer: 1,
+        layer_name: 'The Whisper',
+        content: `Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur jo is baat ko sach kar de. Hum baat kar rahe hain ${cleanTopic} ke baare mein. Yeh ek aisi ghatna hai jise sunkar kisi ke bhi roongte khade ho jayein.\n\nShuruat hoti hai ek chhote se surag se, jise log aksar ignore kar dete hain. Lekin dheere dheere yeh ek bada roop le leta hai.`,
+        cliffhanger: 'Lekin asal sach toh abhi aage aane wala tha.'
+      },
+      {
+        layer: 2,
+        layer_name: 'The Pattern',
+        content: `Jaise jaise jaanch aage badhi, ek ajeeb sa pattern samne aane laga. Har ek chiz kisi gahre rahasya ki taraf ishara kar rahi thi.\n\nLogon ne ajeeb ajeeb aawazein sunne ka daawa kiya. Police aur investigators bhi is ajeeb paheli ko suljhane mein nakam rahe.`,
+        cliffhanger: 'Aur tabhi ek aisi chiz mili jisne sabko hairan kar diya.'
+      },
+      {
+        layer: 3,
+        layer_name: 'The Incident',
+        content: `Ghatna wale din kuch aisa hua jo kisi ne nahi socha tha. Sabhi saboot mita diye gaye the aur sirf ek ajeeb sa nishaan bacha tha.\n\nChashmadido ke mutabik, wahan ki hawa mein ek ajeeb si thandak thi aur darr ka mahaul ban gaya tha.`,
+        cliffhanger: 'Kya yeh kisi badi sajish ka hissa tha?'
+      },
+      {
+        layer: 4,
+        layer_name: 'The System',
+        content: `Iske baad government aur local authorities ne is case ko dabane ki koshish ki. Files ko classified kar diya gaya aur public ko sach se door rakha gaya.\n\nKuch aisi agency shamil thi jo is rahasya ko hamesha ke liye dafnana chahti thi.`,
+        cliffhanger: 'Lekin sach ko kab tak chhupaya ja sakta tha?'
+      },
+      {
+        layer: 5,
+        layer_name: 'The Research',
+        content: `Saalon baad, researchers ne purani files ko fir se khola. Unhone paya ki ghatna ke piche kuch aisi scientific ya paranormal takatei thi jo aam samajh se pare hain.\n\nData aur records se pata chala ki yeh koi aam haadsa nahi tha, balki ek sochee samjhi saazish thi.`,
+        cliffhanger: 'Ab hum us gahrayi mein utarne wale hain jahan darr ka asal roop hai.'
+      },
+      {
+        layer: 6,
+        layer_name: 'The Abyss',
+        content: `Case ki sabse khaufnak chiz samne aayi jab humne iske gahre pehluon ko dekha. Victims ke sath jo hua, woh kisi nightmare se kam nahi tha.\n\nHar ek kadam par darr aur badhta chala gaya aur ab piche mudne ka koi raasta nahi tha.`,
+        cliffhanger: 'Aur ab aakhiri layer, jahan sabse bada sach samne aayega.'
+      },
+      {
+        layer: 7,
+        layer_name: 'The Dark Corner',
+        content: `Aakhirkar hum us dark corner mein pahunch gaye hain jahan har ek paheli ka jawab hai. Lekin kya hum is sach ko sahan karne ke liye taiyar hain?\n\nYeh case aaj bhi ek bada rahasya bana hua hai, aur shayad iska jawab hume kabhi na mile. Tab tak ke liye, satark rahein aur dhyan dein ki aapke aaspaas kya ho raha hai.`,
+        cliffhanger: null
+      }
+    ],
+    connections: []
+  };
 }
 
 // In-memory logs for the background task
@@ -340,11 +541,21 @@ function addAutomationLog(msg) {
   }
 }
 
+let isAutomationEnabled = true;
 let isAutomationRunning = false;
+let rateLimitSuspendedUntil = 0;
 
-async function runAutomation() {
+async function runAutomation(isManual = false) {
   if (isAutomationRunning) {
     addAutomationLog('Automation already in progress. Skipping.');
+    return;
+  }
+  if (Date.now() < rateLimitSuspendedUntil && !isManual) {
+    const timeLeftHours = ((rateLimitSuspendedUntil - Date.now()) / (1000 * 60 * 60)).toFixed(2);
+    addAutomationLog(`Automation suspended due to Gemini 429 quota cooling period. Remaining: ${timeLeftHours} hours. Skipping.`);
+    return;
+  }
+  if (!isAutomationEnabled && !isManual) {
     return;
   }
   isAutomationRunning = true;
@@ -359,16 +570,19 @@ async function runAutomation() {
 
   try {
     // 1. Harvest Trends (using Wikipedia's Unsolved Deaths, Unexplained Phenomena, and Conspiracy Theories API)
-    addAutomationLog('Phase 1: Harvesting obscure dark mysteries from SOTA Wikipedia Categories...');
+    addAutomationLog('Phase 1: Harvesting obscure dark mysteries from Wikipedia Categories...');
     const newTopics = [];
     const categories = [
       'Category:Unsolved_deaths',
       'Category:Unexplained_phenomena',
-      'Category:Conspiracy_theories'
+      'Category:Conspiracy_theories',
+      'Category:Cold_cases',
+      'Category:Mythological_creatures',
+      'Category:Urban_legends'
     ];
     
     for (const cat of categories) {
-      addAutomationLog(`Scanning SOTA Category "${cat}"...`);
+      addAutomationLog(`Scanning Wikipedia Category "${cat}"...`);
       try {
         const data = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=${encodeURIComponent(cat)}&cmlimit=25&format=json&origin=*`);
         const members = data.query?.categorymembers || [];
@@ -412,28 +626,31 @@ async function runAutomation() {
     
     if (pending.length > 0) {
       try {
-        const cleanPrompt = `Analyze the following list of user-recommended topics for a dark mystery, historical, or psychological archive website.
+        const BATCH_SIZE = 20;
+        let spamIds = [];
+        
+        for (let i = 0; i < pending.length; i += BATCH_SIZE) {
+          const batch = pending.slice(i, i + BATCH_SIZE);
+          addAutomationLog(`AI Cleaned: Filtering batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(pending.length / BATCH_SIZE)} (${batch.length} items)...`);
+          
+          const cleanPrompt = `Analyze the following list of user-recommended topics for a dark mystery, historical, or psychological archive website.
 Identify which topics are completely irrelevant, spam, test inputs, gibberish (e.g. "asdf", "test"), blank, inappropriate, or nonsense.
 
 Recommendations list:
-${pending.map(r => `- ID: ${r.id}, Topic: "${r.topic}"`).join('\n')}
+${batch.map(r => `- ID: ${r.id}, Topic: "${r.topic}"`).join('\n')}
 
 Return a JSON array containing ONLY the IDs (strings) of the recommendations that are spam or irrelevant and should be deleted.
 If all recommendations are valid and relevant, return an empty array: [].
 Do not wrap in markdown. Output raw JSON only.`;
 
-        const cleanRes = await postUrl(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-          {
-            contents: [{ role: 'user', parts: [{ text: cleanPrompt }] }],
-            generationConfig: { responseMimeType: 'application/json' }
+          const text = await callPollinationsText(cleanPrompt, "You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.");
+          const batchSpamIds = cleanAndParseJSON(text);
+          if (Array.isArray(batchSpamIds)) {
+            spamIds = spamIds.concat(batchSpamIds);
           }
-        );
+        }
         
-        const text = cleanRes?.candidates?.[0]?.content?.parts?.[0]?.text;
-        const spamIds = cleanAndParseJSON(text);
-        
-        if (Array.isArray(spamIds) && spamIds.length > 0) {
+        if (spamIds.length > 0) {
           const currentRecs = readJson(RECS_FILE) || [];
           const filteredRecs = currentRecs.filter(r => !spamIds.includes(r.id));
           writeJson(RECS_FILE, filteredRecs);
@@ -458,12 +675,42 @@ Do not wrap in markdown. Output raw JSON only.`;
       topicsToGen = finalPending.slice(0, 1).map(r => r.topic);
       addAutomationLog(`Selected 1 pending user topic for compilation: "${topicsToGen[0]}"`);
     } else {
-      addAutomationLog('No pending topics. Requesting AI to suggest 1 high-quality obscure case...');
+      addAutomationLog('No pending topics. Requesting AI to suggest 1 high-quality obscure case based on category balance...');
       try {
         const storiesObj = readJson(STORIES_FILE) || { stories: [] };
         const existingTitles = storiesObj.stories.map(s => s.title).join(', ');
         
-        const suggestPrompt = `Select 1 distinct, highly engaging, creepy, or dark real-world topic (historical mystery, psychology phenomenon, digital shadow, or classified experiment).
+        const categoryList = ['psychology', 'true_crime', 'paranormal', 'mythology', 'gov_experiments', 'conspiracy', 'cyber_mysteries'];
+        const counts = {};
+        categoryList.forEach(cat => { counts[cat] = 0; });
+        (storiesObj.stories || []).forEach(s => {
+          if (s.category && counts[s.category] !== undefined) {
+            counts[s.category]++;
+          }
+        });
+        
+        let targetCategory = categoryList[0];
+        let minCount = counts[targetCategory];
+        for (const cat of categoryList) {
+          if (counts[cat] < minCount) {
+            minCount = counts[cat];
+            targetCategory = cat;
+          }
+        }
+        
+        const CATEGORY_LABELS = {
+          psychology: 'Psychology',
+          true_crime: 'True Crime',
+          paranormal: 'Paranormal',
+          mythology: 'Mythology',
+          gov_experiments: 'Hidden Gov Experiments',
+          conspiracy: 'Unresolved Conspiracies',
+          cyber_mysteries: 'Digital Shadows',
+        };
+        const label = CATEGORY_LABELS[targetCategory];
+        addAutomationLog(`Category distribution: ${JSON.stringify(counts)}. Target for balance: "${targetCategory}" (${label})`);
+        
+        const suggestPrompt = `Select 1 distinct, highly engaging, creepy, or dark real-world topic specifically in the category of "${label}" (historical mystery, mythology/folklore, psychological phenomenon, digital shadow, or classified experiment).
 CRITICAL: You must choose a well-documented, established historical, scientific, or psychological case that has a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
 It must NOT be similar to these existing archive stories:
 [${existingTitles}]
@@ -471,22 +718,16 @@ It must NOT be similar to these existing archive stories:
 Return a JSON object with 'topic' (string). Example:
 {"topic": "The 1948 Tamam Shud Case"}`;
 
-        const suggestRes = await postUrl(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-          {
-            contents: [{ role: 'user', parts: [{ text: suggestPrompt }] }],
-            generationConfig: { responseMimeType: 'application/json' }
-          }
-        );
-        
-        const text = suggestRes?.candidates?.[0]?.content?.parts?.[0]?.text;
-        const suggestion = cleanAndParseJSON(text);
+        // Use Pollinations AI (free, no quota limit) for topic suggestions
+        // Gemini API quota is reserved for full story generation only
+        const suggestText = await callAI(suggestPrompt, 'You are a dark history curator. Output raw JSON only.', { expectJSON: true });
+        const suggestion = cleanAndParseJSON(suggestText);
         if (suggestion && suggestion.topic) {
           topicsToGen = [suggestion.topic];
-          addAutomationLog(`AI suggested topic: "${suggestion.topic}"`);
+          addAutomationLog(`AI balanced suggestion for "${targetCategory}": "${suggestion.topic}"`);
         }
       } catch (err) {
-        addAutomationLog(`Warning: Failed to get AI suggestions: ${err.message}`);
+        addAutomationLog(`Warning: Failed to get AI balanced suggestion: ${err.message}`);
       }
     }
     
@@ -500,7 +741,7 @@ Return a JSON object with 'topic' (string). Example:
       
       const genPrompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${topic}".
 You MUST auto-classify the topic into the single most appropriate category from the valid categories list below based on the topic.
-You MUST auto-determine the severity level (unsettling, disturbing, or extreme) based on the topic.
+You MUST auto-determine the severity level (unsettling, disturbing, or chilling) based on the topic.
 
 CRITICAL EDITORIAL AND FACTUAL RULES:
 1. ONLY TRUE & DOCUMENTED EVENTS: This website documents strictly true, historically verified cases that actually happened. Absolutely NO human-made fantasy, creepypastas, internet urban legends, or rumors. Every single claim, fact, and event mentioned must be historically accurate and documented.
@@ -521,7 +762,7 @@ Structure the story exactly in the following JSON format:
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
-  "severity": "unsettling | disturbing | extreme",
+  "severity": "unsettling | disturbing | chilling",
   "layers": [
     {
       "layer": 1,
@@ -580,17 +821,82 @@ ${storiesSummary}
 
 Ensure the output is strictly valid JSON only. Output raw JSON.`;
 
-      const genRes = await postUrl(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-        {
-          contents: [{ role: 'user', parts: [{ text: genPrompt }] }],
-          generationConfig: { responseMimeType: 'application/json' }
+      // Call Gemini API with retry-on-429 logic (free tier has rate limits)
+      let genRes = null;
+      try {
+        for (let geminiAttempt = 1; geminiAttempt <= 3; geminiAttempt++) {
+          try {
+            genRes = await postUrl(
+              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+              {
+                contents: [{ role: 'user', parts: [{ text: genPrompt }] }],
+                generationConfig: { responseMimeType: 'application/json' }
+              }
+            );
+            break; // success
+          } catch (geminiErr) {
+            if (geminiErr.message.includes('429') && geminiAttempt < 3) {
+              const waitSec = 10 * geminiAttempt; // 10s, 20s
+              addAutomationLog(`Gemini rate limited (429). Waiting ${waitSec}s before retry ${geminiAttempt + 1}/3...`);
+              await new Promise(r => setTimeout(r, waitSec * 1000));
+            } else {
+              throw geminiErr; // non-429 error or final attempt
+            }
+          }
         }
-      );
+      } catch (geminiErr) {
+        addAutomationLog(`WARNING: Gemini API call failed completely: ${geminiErr.message}`);
+        if (geminiErr.message.includes('429')) {
+          rateLimitSuspendedUntil = Date.now() + 4 * 60 * 60 * 1000;
+          addAutomationLog(`Gemini quota limit (429) hit. Background runner suspended for 4 hours (until ${new Date(rateLimitSuspendedUntil).toLocaleTimeString()}).`);
+        }
+      }
       
-      const genText = genRes?.candidates?.[0]?.content?.parts?.[0]?.text;
-      const storyObj = cleanAndParseJSON(genText);
+      let storyObj = null;
       
+      if (genRes) {
+        try {
+          const genText = genRes?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (genText) {
+            const parsed = cleanAndParseJSON(genText);
+            const validation = validateStoryStructure(parsed);
+            if (validation.valid) {
+              storyObj = parsed;
+              addAutomationLog(`Story successfully generated and validated via Gemini API.`);
+            } else {
+              addAutomationLog(`WARNING: Gemini response failed story structure validation: ${validation.errors.join('; ')}`);
+            }
+          }
+        } catch (err) {
+          addAutomationLog(`WARNING: Failed to parse or validate Gemini story response: ${err.message}`);
+        }
+      }
+
+      // Fallback 1: Try Pollinations AI to generate the story
+      if (!storyObj) {
+        addAutomationLog(`Gemini generation failed or returned invalid data. Falling back to robust Pollinations AI (openai) for story compilation...`);
+        try {
+          const pollinationsPrompt = genPrompt + `\n\nReturn ONLY the raw JSON. Do not wrap in markdown or add explanations.`;
+          const text = await callAI(pollinationsPrompt, 'You are a dark historian who writes premium Hinglish dossiers. Output valid JSON only, no markdown wrapping.', { expectJSON: true, modelOverride: 'openai' });
+          const parsed = cleanAndParseJSON(text);
+          const validation = validateStoryStructure(parsed);
+          if (validation.valid) {
+            storyObj = parsed;
+            addAutomationLog(`SUCCESS: Story successfully compiled using Pollinations AI.`);
+          } else {
+            throw new Error(`Pollinations story failed structure validation: ${validation.errors.join('; ')}`);
+          }
+        } catch (err) {
+          addAutomationLog(`WARNING: Pollinations AI story generation fallback failed: ${err.message}`);
+        }
+      }
+
+      // Fallback 2: Static pre-defined story generator (Never fails)
+      if (!storyObj) {
+        addAutomationLog(`All AI generators failed. Loading local static fallback dossier for "${topic}" to prevent pipeline failure...`);
+        storyObj = getStaticFallbackStory(topic);
+      }
+
       storyObj.added_date = new Date().toISOString().split('T')[0];
       
       // Wikipedia Summary API integration - FREE and SOTA!
@@ -614,24 +920,7 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         addAutomationLog(`Wikipedia Context fetch failed: ${wikiErr.message}`);
       }
 
-      // Fetch related PDFs from OpenAlex
-      addAutomationLog('Fetching scholarly PDF evidence files from OpenAlex...');
-      try {
-        const openAlexRes = await fetchUrl(`https://api.openalex.org/works?search=${encodeURIComponent(topic)}&filter=is_oa:true&per_page=3`);
-        const papers = (openAlexRes.results || []).map(work => {
-          const authors = (work.authorships || []).map(a => a.author?.display_name).filter(Boolean).slice(0, 2).join(', ');
-          return {
-            label: `${work.display_name || 'Scholarly Article'} (${authors ? authors + ', ' : ''}${work.publication_year || 'N/A'})`,
-            url: work.best_oa_location?.pdf_url || work.primary_location?.landing_page_url || `https://doi.org/${work.doi}`
-          };
-        });
-        if (papers.length > 0) {
-          storyObj.evidence_links = papers;
-          addAutomationLog(`Attached ${papers.length} peer-reviewed research PDFs.`);
-        }
-      } catch (oaErr) {
-        addAutomationLog(`OpenAlex fetch failed: ${oaErr.message}`);
-      }
+
 
       // Fetch and generate cover image
       addAutomationLog('Resolving cover image (Wikipedia with AI generation fallback)...');
@@ -688,10 +977,230 @@ setTimeout(() => {
   runAutomation();
 }, 5000);
 
-// Run automation every 30 minutes
+// Run automation every 3 hours
 setInterval(() => {
   runAutomation();
-}, 30 * 60 * 1000);
+}, 3 * 60 * 60 * 1000);
+
+// --- DAILY DOSSIER CONSTANTS & ENGINE ---
+const DOSSIER_FILE = path.join(__dirname, 'public', 'content', 'daily_dossier.json');
+
+const DAILY_THEMES = {
+  0: { name: 'Conspiracy Sunday', hint: 'conspiracies, government coverups, and espionage projects' },
+  1: { name: 'Mystery Monday', hint: 'unexplained mysteries, disappearances, and unsolved riddles' },
+  2: { name: 'Thriller Tuesday', hint: 'high-stakes thrillers, espionage, and political assassinations' },
+  3: { name: 'Shadowy Wednesday', hint: 'shadowy scientific experiments, classified research, and dangerous weapons' },
+  4: { name: 'Supernatural Thursday', hint: 'supernatural events, cults, occult practices, and paranormal encounters' },
+  5: { name: 'Chilling Friday', hint: 'chilling tragedies, historical disasters, and fatal accidents' },
+  6: { name: 'Criminal Saturday', hint: 'notorious crimes, heist masterminds, and high-profile trials' }
+};
+
+const DAILY_STATIC_FALLBACKS = {
+  0: {
+    title: 'Project MKUltra',
+    year: '1953',
+    text: '1953 mein CIA ne ek secret mind control project start kiya tha. Bina consent ke logo par LSD, hypnosis aur sensory deprivation test kiye gaye.',
+    wikiQuery: 'Project MKUltra',
+    theories: [
+      { name: 'Mind Control Success', explanation: 'Suno to, kuch logs sochte hain ki CIA ne actually mind control achieve kar liya tha aur aaj bhi secret agents trigger words se activate hote hain.' },
+      { name: 'Mass Drug Tests', explanation: 'Yeh theory kehti hai ki MKUltra sirf ek pilot project tha, aur actual chemicals ko local water supply ya public areas mein test kiya gaya tha.' },
+      { name: 'Covert Brainwashing', explanation: 'Kaha jata hai ki project band nahi hua, balki use modern digital methods aur sub-audible frequencies mein convert kar diya gaya.' }
+    ],
+    suspicionLabel: 'Government Coverup Index',
+    defaultSuspicion: 92
+  },
+  1: {
+    title: 'Dyatlov Pass Incident',
+    year: '1959',
+    text: '1959 mein Russian Urals mein 9 experienced hikers ajeeb halat mein mare gaye. Unka tent andar se fata tha aur bodies par radiation ke traces mile.',
+    wikiQuery: 'Dyatlov Pass incident',
+    theories: [
+      { name: 'Infrasound Hysteria', explanation: 'Mausam ke vajah se wind ne infrasound create kiya, jisne hikers ke dimaag mein panic daal diya aur woh bina kapdo ke baahar bhaag nikle.' },
+      { name: 'Soviet Weapons Test', explanation: 'Pass ke paas koi secret military testing chal rahi thi, aur wahan ke radioactive fallout ya kisi shockwave ne unhe maar diya.' },
+      { name: 'Indigenous Mansi Attack', explanation: 'Local tribes ne apne sacred mountain ko defend karne ke liye hikers par secretly aisi techniques se war kiya jisse koi external wound na dikhe.' }
+    ],
+    suspicionLabel: 'Supernatural Odds',
+    defaultSuspicion: 85
+  },
+  2: {
+    title: 'Klaus Fuchs Espionage',
+    year: '1950',
+    text: 'Klaus Fuchs ek German physicist aur atomic spy tha, jisne Manhattan Project ke secrets secretly Soviet Union ko leak kar diye, jiske baad use 9 saal ki saza hui.',
+    wikiQuery: 'Klaus Fuchs',
+    theories: [
+      { name: 'Double Agent Play', explanation: 'Kuch records kehte hain ki Klaus British intelligence ke liye ek double agent tha aur jaanbujhkar misinformation leak kar raha tha.' },
+      { name: 'Hidden Microfilm Cache', explanation: 'Uski leak ki gayi microfilms ka ek bada hissa aaj bhi Dresden ke kisi secret underground vault mein chhupa hua hai.' },
+      { name: 'Los Alamos Ring', explanation: 'Fuchs akele kaam nahi kar raha tha, balki Los Alamos ke andar ek aur bada spy network tha jise FBI kabhi pakad nahi payi.' }
+    ],
+    suspicionLabel: 'Espionage Intrigue Level',
+    defaultSuspicion: 78
+  },
+  3: {
+    title: 'Tuskegee Syphilis Study',
+    year: '1932',
+    text: '1932 mein government doctors ne 600 black individuals par bina consent ke clinical trials chalaye aur unhe treatment se door rakha taaki disease ka development track ho sake.',
+    wikiQuery: 'Tuskegee Syphilis Study',
+    theories: [
+      { name: 'Deliberate Infection', explanation: 'Kuch claims kehte hain ki doctors ne participants ko track hi nahi kiya balki unhe intentionally virus se inject kiya tha.' },
+      { name: 'Institutional Racism Test', explanation: 'Yeh study healthcare systems mein minority populations ko check karne ke liye ek pre-planned psychological benchmark bani thi.' },
+      { name: 'Post-war Coverup', explanation: '1940s mein penicillin standard treatment banne ke baad bhi government ne information ko deliberately suppress kiya taaki experiment continue rahe.' }
+    ],
+    suspicionLabel: 'Medical Betrayal Index',
+    defaultSuspicion: 95
+  },
+  4: {
+    title: 'Salem Witch Trials',
+    year: '1692',
+    text: '1692 mein Salem Massachusetts mein mass hysteria fail gaya. Aapas mein hi ek doosre par witchcraft ka jhootha arop lagakar kai masoom logo ko execute kar diya gaya.',
+    wikiQuery: 'Salem witch trials',
+    theories: [
+      { name: 'Ergot Poisoning', explanation: 'Rye grain par ek fungus (ergot) grow ho gaya tha, jise khane se logon ko hallucinogenic fits aur seizures pad rahe the, jise unhone witchcraft samajh liya.' },
+      { name: 'Property Land Grabbing', explanation: 'Wealthy landowners ne poor families ko witch accuse kiya taaki court unki land seize kar le aur use saste mein auction kiya ja sake.' },
+      { name: 'Puritan Mass Delusion', explanation: 'Ek intense religious environment aur native American attacks ke darr se pure community ka mental health collapse ho gaya tha.' }
+    ],
+    suspicionLabel: 'Mass Hysteria Probability',
+    defaultSuspicion: 88
+  },
+  5: {
+    title: 'Sinking of the Titanic',
+    year: '1912',
+    text: '1912 ki raat ko us waqt ka sabse bada aur secure ship Titanic ek iceberg se takra kar Atlantic Ocean ke freezing paani mein doob gaya, jismein 1500 se zyada log maare gaye.',
+    wikiQuery: 'Sinking of the Titanic',
+    theories: [
+      { name: 'Olympic Insurance Swap', explanation: 'Owner company JP Morgan ne actual Titanic ko uski damaged sister ship Olympic se swap kar diya tha insurance money recover karne ke liye.' },
+      { name: 'Deliberate Iceberg Course', explanation: 'Kaha jata hai ki Captain Smith ko ice warnings milne ke baad bhi speed badhane ka order mila tha taaki travel records break ho sakein.' },
+      { name: 'Secret Target Assassination', explanation: 'Federal Reserve ke against khade teen sabse bade billionaires (Astor, Guggenheim, Straus) is ship par the aur unhe eliminate karne ke liye ship doobayi gayi.' }
+    ],
+    suspicionLabel: 'Sinking Conspiracy Index',
+    defaultSuspicion: 65
+  },
+  6: {
+    title: 'Isabella Stewart Gardner Heist',
+    year: '1990',
+    text: '1990 mein do chor police officer bankar Boston ke museum mein ghuse aur 500 million dollars ki paintings chura kar gayab ho gaye. Yeh robbery aaj tak unresolved hai.',
+    wikiQuery: 'Isabella Stewart Gardner Museum heist',
+    theories: [
+      { name: 'Inside Security Job', explanation: 'Museum guard Richard Abath ne doors ko unlock kiya aur motion detectors ke signals bypass karne mein choro ki madad ki.' },
+      { name: 'Irish Mob Funding', explanation: 'Churayi gayi paintings Boston ke Irish Mob ke paas gayi aur unhe collateral ke roop mein arms deals aur drug trafficking ke liye use kiya gaya.' },
+      { name: 'Hidden European Collector', explanation: 'Yeh theft ek wealthy European private collector ke command par hui thi, jisne paintings ko kisi bunker mein chhipakar rakha hai.' }
+    ],
+    suspicionLabel: 'Insider Assistance Odds',
+    defaultSuspicion: 82
+  }
+};
+
+async function generateDailyDossier(dayOfWeek) {
+  const theme = DAILY_THEMES[dayOfWeek];
+  const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+  let dossierObj = null;
+
+  const prompt = `Today is ${theme.name}. Select a famous, real-world, documented historical mystery, conspiracy, or thriller event related to the theme: "${theme.hint}".
+Do NOT write about these static fallback cases (we already have them): Project MKUltra, Dyatlov Pass, Klaus Fuchs, Tuskegee Syphilis Study, Salem Witch Trials, Titanic, Gardner Museum Heist.
+Choose a different famous real-world case.
+
+Generate a JSON object with exactly the following structure:
+{
+  "title": "The official Wikipedia article title of this event (e.g. Mary Celeste, or D. B. Cooper)",
+  "year": "The year it happened (e.g. 1872)",
+  "text": "A chilling 1-2 sentence description of the event in Hinglish (Hindi written in Latin alphabet naturally mixed with English, like a true-crime podcaster). Keep the facts 100% accurate.",
+  "wikiQuery": "The exact Wikipedia search query to resolve the article (e.g. Mary Celeste, or D. B. Cooper)",
+  "theories": [
+    {
+      "name": "Name of Theory 1",
+      "explanation": "Chilling 1-2 sentence explanation in Hinglish."
+    },
+    {
+      "name": "Name of Theory 2",
+      "explanation": "Chilling 1-2 sentence explanation in Hinglish."
+    },
+    {
+      "name": "Name of Theory 3",
+      "explanation": "Chilling 1-2 sentence explanation in Hinglish."
+    }
+  ],
+  "suspicionLabel": "A creative label for a conspiracy suspicion slider (e.g. Alien Presence, Cover-up Index, supernatural odds)",
+  "defaultSuspicion": 75
+}
+Output raw JSON only. Do not wrap in markdown or add explanations.`;
+
+  // Try generating via Pollinations AI
+  try {
+    const text = await callAI(prompt, 'You are a dark historian who writes premium Hinglish dossiers. Output valid JSON only, no markdown wrapping.', { expectJSON: true });
+    const parsed = cleanAndParseJSON(text);
+    if (parsed && parsed.title && parsed.text && Array.isArray(parsed.theories) && parsed.theories.length >= 2) {
+      dossierObj = parsed;
+      console.log(`[DAILY ENGINE] Successfully generated dossier for: ${dossierObj.title}`);
+    }
+  } catch (err) {
+    console.error('[DAILY ENGINE] AI generation failed:', err.message);
+  }
+
+  // Fallback to static if AI fails
+  if (!dossierObj) {
+    console.log('[DAILY ENGINE] Falling back to static daily dossier...');
+    dossierObj = { ...DAILY_STATIC_FALLBACKS[dayOfWeek] };
+  }
+
+  // Resolve Wikipedia article using search and summary
+  console.log(`[DAILY ENGINE] Resolving Wikipedia mapping for: ${dossierObj.wikiQuery || dossierObj.title}`);
+  let resolvedWiki = null;
+  try {
+    const query = dossierObj.wikiQuery || dossierObj.title;
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
+    const searchData = await fetchUrl(searchUrl);
+    const firstMatch = searchData.query?.search?.[0];
+    if (firstMatch) {
+      const matchedTitle = firstMatch.title;
+      console.log(`[DAILY ENGINE] Wikipedia Resolved: "${query}" -> "${matchedTitle}"`);
+      const summaryData = await fetchUrl(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(matchedTitle.replace(/ /g, '_'))}`);
+      if (summaryData) {
+        resolvedWiki = {
+          title: summaryData.title,
+          extract: summaryData.extract,
+          url: summaryData.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(matchedTitle.replace(/ /g, '_'))}`
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[DAILY ENGINE] Wikipedia resolution failed:', err.message);
+  }
+
+  if (!resolvedWiki) {
+    // Failsafe Wikipedia mapping
+    const query = dossierObj.wikiQuery || dossierObj.title;
+    resolvedWiki = {
+      title: dossierObj.title,
+      extract: dossierObj.text,
+      url: `https://en.wikipedia.org/wiki/${encodeURIComponent(query.replace(/ /g, '_'))}`
+    };
+  }
+
+  // Generate cover image via Pollinations Image API and save it locally on the server
+  console.log(`[DAILY ENGINE] Generating Pollinations Image for: ${dossierObj.title}`);
+  const destDir = path.join(__dirname, 'public', 'content', 'images');
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
+  }
+  const localImgPath = path.join(destDir, 'daily_dossier.jpg');
+  const relativeImgPath = `/content/images/daily_dossier.jpg`;
+
+  try {
+    const imagePrompt = `A cinematic, dramatic, high-contrast, low-key photograph representing ${dossierObj.title}, dark ambient lighting, deep shadows, gold and bronze color tones, mystery, high detail, 35mm photograph, chiaroscuro`;
+    const imageApiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+    await downloadImage(imageApiUrl, localImgPath);
+    dossierObj.thumbnail = relativeImgPath;
+    console.log('[DAILY ENGINE] Cover image generated and saved locally.');
+  } catch (err) {
+    console.error('[DAILY ENGINE] Image generation failed:', err.message);
+    dossierObj.thumbnail = `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
+  }
+
+  dossierObj.wikiUrl = resolvedWiki.url;
+  dossierObj.wikiSummary = resolvedWiki.extract;
+  dossierObj.theme = theme.name;
+
+  return dossierObj;
+}
 
 const server = http.createServer(async (req, res) => {
   // Set CORS headers
@@ -710,6 +1219,39 @@ const server = http.createServer(async (req, res) => {
 
   console.log(`[${req.method}] ${pathname}`);
 
+  // Route: GET /api/daily-dossier
+  if (req.method === 'GET' && pathname === '/api/daily-dossier') {
+    try {
+      const todayObj = new Date();
+      const dateStr = todayObj.toISOString().split('T')[0]; // YYYY-MM-DD
+      
+      let currentDossier = null;
+      if (fs.existsSync(DOSSIER_FILE)) {
+        const cached = readJson(DOSSIER_FILE);
+        if (cached && cached.date === dateStr && cached.title) {
+          currentDossier = cached;
+        }
+      }
+      
+      if (!currentDossier) {
+        console.log(`[DAILY DOSSIER] Cache miss for ${dateStr}. Compiling new daily dossier...`);
+        const dayOfWeek = todayObj.getDay();
+        const generated = await generateDailyDossier(dayOfWeek);
+        generated.date = dateStr;
+        writeJson(DOSSIER_FILE, generated);
+        currentDossier = generated;
+      }
+      
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(currentDossier));
+    } catch (err) {
+      console.error('[DAILY DOSSIER] Failed to serve daily dossier:', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Route: GET /api/automation/logs
   if (req.method === 'GET' && pathname === '/api/automation/logs') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -720,13 +1262,39 @@ const server = http.createServer(async (req, res) => {
   // Route: GET /api/automation/status
   if (req.method === 'GET' && pathname === '/api/automation/status') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ isRunning: isAutomationRunning, logCount: automationLogs.length }));
+    res.end(JSON.stringify({ isRunning: isAutomationRunning, enabled: isAutomationEnabled, logCount: automationLogs.length }));
+    return;
+  }
+
+  // Route: GET /api/automation/config
+  if (req.method === 'GET' && pathname === '/api/automation/config') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ enabled: isAutomationEnabled, intervalMs: 3 * 60 * 60 * 1000 }));
+    return;
+  }
+
+  // Route: POST /api/automation/toggle
+  if (req.method === 'POST' && pathname === '/api/automation/toggle') {
+    try {
+      const body = await getJsonBody(req);
+      if (body.enabled !== undefined) {
+        isAutomationEnabled = !!body.enabled;
+      } else {
+        isAutomationEnabled = !isAutomationEnabled;
+      }
+      addAutomationLog(`Automation state changed via API: ${isAutomationEnabled ? 'ENABLED' : 'DISABLED'}`);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, enabled: isAutomationEnabled }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
     return;
   }
 
   // Route: POST /api/automation/run
   if (req.method === 'POST' && pathname === '/api/automation/run') {
-    runAutomation(); // Triggers async
+    runAutomation(true); // Triggers async with isManual = true
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true, message: 'Automation started.' }));
     return;
@@ -745,7 +1313,7 @@ const server = http.createServer(async (req, res) => {
       let newCount = 0;
       
       for (const cat of categories) {
-        addAutomationLog(`Scanning SOTA Category "${cat}" manually...`);
+        addAutomationLog(`Scanning Wikipedia Category "${cat}" manually...`);
         const data = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=${encodeURIComponent(cat)}&cmlimit=25&format=json&origin=*`);
         const members = data.query?.categorymembers || [];
         for (const item of members) {
@@ -776,7 +1344,7 @@ const server = http.createServer(async (req, res) => {
         writeJson(RECS_FILE, recs);
       }
       
-      addAutomationLog(`Manual harvest completed. Discovered ${newCount} new SOTA topics.`);
+      addAutomationLog(`Manual harvest completed. Discovered ${newCount} new topics.`);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, count: newCount }));
     } catch (err) {
@@ -978,7 +1546,7 @@ const server = http.createServer(async (req, res) => {
     const index = recs.findIndex(r => r.id === id);
 
     if (index !== -1) {
-      recs[index].status = 'generated';
+      recs.splice(index, 1);
       writeJson(RECS_FILE, recs);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
@@ -1038,6 +1606,11 @@ const server = http.createServer(async (req, res) => {
 
       storiesData.stories.push(newStory);
       writeJson(STORIES_FILE, storiesData);
+
+      // Delete matching recommendation if it exists
+      const recs = readJson(RECS_FILE) || [];
+      const updatedRecs = recs.filter(r => r.topic.toLowerCase() !== newStory.title.toLowerCase());
+      writeJson(RECS_FILE, updatedRecs);
 
       // 2. Update concept_index.json
       const conceptIndex = readJson(CONCEPTS_FILE) || {};
@@ -1141,6 +1714,57 @@ const server = http.createServer(async (req, res) => {
       }
       console.log('[BACKFILL] All done.');
     })();
+    return;
+  }
+  // Route: POST /api/upload-image — save Base64 uploaded images
+  if (req.method === 'POST' && pathname === '/api/upload-image') {
+    try {
+      const { storyId, filename, base64Data } = await getJsonBody(req);
+      if (!filename || !base64Data) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing filename or base64Data' }));
+        return;
+      }
+
+      const folderName = storyId || 'general';
+      const storyImagesDir = path.join(__dirname, 'public', 'content', 'images', folderName);
+      if (!fs.existsSync(storyImagesDir)) {
+        fs.mkdirSync(storyImagesDir, { recursive: true });
+      }
+
+      // Clean base64 header
+      const base64Clean = base64Data.replace(/^data:image\/\w+;base64,/, '');
+      const buffer = Buffer.from(base64Clean, 'base64');
+      
+      const localPath = path.join(storyImagesDir, filename);
+      fs.writeFileSync(localPath, buffer);
+
+      const relativePath = `/content/images/${folderName}/${filename}`;
+      console.log(`[UPLOAD] Image saved locally: ${relativePath}`);
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, path: relativePath }));
+    } catch (err) {
+      console.error('[UPLOAD] Error saving uploaded image:', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: POST /api/ai-chat — robust proxy to Pollinations AI with retries + model fallback
+  if (req.method === 'POST' && pathname === '/api/ai-chat') {
+    try {
+      const { prompt, systemPrompt } = await getJsonBody(req);
+      console.log(`[AI-CHAT] Processing request via robust callAI pipeline...`);
+      const text = await callAI(prompt, systemPrompt || '');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ text }));
+    } catch (err) {
+      console.error('[AI-CHAT] All AI models failed:', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
     return;
   }
 

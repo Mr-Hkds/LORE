@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 /* Global base */
@@ -110,6 +110,9 @@ body {
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .ghost-num { opacity: 0.02; right: -8px; }
+  .snap-child {
+    padding: 72px 0.75rem 32px 0.75rem;
+  }
 }
 
 /* Abyss Scroll - Snap Utilities */
@@ -156,21 +159,54 @@ body {
   animation: rollUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Premium Black Lotus styling with red-gold shimmer effect */
+/* Animated Premium signature effect (Classy typewriter style) */
 .black-lotus-premium {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: normal;
   font-weight: 700;
-  letter-spacing: 0.35em;
-  text-shadow: 0 0 10px rgba(187, 47, 47, 0.4);
-  background: linear-gradient(90deg, #8B2F2F 0%, #E23A3A 25%, #EDE8DF 50%, #E23A3A 75%, #8B2F2F 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 4s linear infinite;
+  letter-spacing: 0.18em;
   display: inline-block;
+  position: relative;
+  color: #dfc699;
+  text-shadow: 0 0 10px rgba(223, 198, 153, 0.3);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
-@keyframes shine {
-  to { background-position: 200% center; }
+.black-lotus-premium::after {
+  content: '_';
+  display: inline-block;
+  margin-left: 3px;
+  color: #dfc699;
+  animation: typewriterBlink 1.2s step-end infinite;
+}
+
+.black-lotus-premium:hover {
+  transform: translateY(-2px);
+  color: #EDE8DF;
+  text-shadow: 0 0 18px rgba(223, 198, 153, 0.8), 0 0 30px rgba(158, 123, 76, 0.4);
+  letter-spacing: 0.24em;
+}
+
+@keyframes typewriterBlink {
+  from, to { color: transparent }
+  50% { color: #dfc699 }
+}
+
+/* CRT scanline effect for terminal console */
+.crt-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.crt-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 999;
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
 }
 
 /* Premium reaction feedback animation */

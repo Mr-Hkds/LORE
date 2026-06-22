@@ -9,9 +9,9 @@ import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
 
 const SEVERITY_CONFIG = {
-  unsettling: { label: 'CLASSIFIED', dot: '#9E7B4C', glow: 'rgba(158,123,76,0.12)' },
-  disturbing:  { label: 'RESTRICTED', dot: '#C4644A', glow: 'rgba(196,100,74,0.12)' },
-  extreme:     { label: 'EYES ONLY',  dot: '#8B2F2F', glow: 'rgba(139,47,47,0.14)' },
+  unsettling: { label: 'UNSETTLING', dot: '#9E7B4C', glow: 'rgba(158,123,76,0.12)' },
+  disturbing: { label: 'DISTURBING', dot: '#C4644A', glow: 'rgba(196,100,74,0.12)' },
+  chilling:   { label: 'CHILLING',   dot: '#8B2F2F', glow: 'rgba(139,47,47,0.14)' },
 };
 
 const CATEGORY_LABELS = {
@@ -19,6 +19,16 @@ const CATEGORY_LABELS = {
   paranormal: 'Paranormal', mythology: 'Mythology',
   gov_experiments: 'Hidden Gov Experiments',
   conspiracy: 'Unresolved Conspiracies', cyber_mysteries: 'Digital Shadows',
+};
+
+const SIGNAL_LABELS = {
+  psychology: 'PSYCHOLOGY',
+  true_crime: 'TRUE CRIME',
+  paranormal: 'PARANORMAL',
+  mythology: 'MYTHOLOGY',
+  gov_experiments: 'GOV SECRETS',
+  conspiracy: 'CONSPIRACY',
+  cyber_mysteries: 'CYBER MYSTERY',
 };
 
 // ── Story card image with priority: local hero_image > Wikipedia ──────────
@@ -131,26 +141,35 @@ function ReadPill({ progress, accentColor }) {
   return null;
 }
 
-// ── Engagement micro-bar (replaces clunky "X feedbacks" pill) ────────────
+// ── Engagement reacts display (classy Unicode indicators) ────────────────
 function EngagementBar({ reactions }) {
   const rx = reactions || {};
   const gripping = rx.gripping || rx.heart || 0;
   const scared   = rx.scared   || 0;
   const mindblown = rx.mindblown || 0;
-  const total = gripping + scared + mindblown;
-  if (total === 0) return null;
+
+  let maxCount = 0;
+  let dominant = null;
+
+  if (gripping > maxCount) {
+    maxCount = gripping;
+    dominant = { label: 'GRIPPING', emoji: '♥', color: '#9E7B4C' };
+  }
+  if (scared > maxCount) {
+    maxCount = scared;
+    dominant = { label: 'TERRIFYING', emoji: '☠', color: '#C4644A' };
+  }
+  if (mindblown > maxCount) {
+    maxCount = mindblown;
+    dominant = { label: 'MIND-BLOWN', emoji: '✦', color: '#9E7B4C' };
+  }
+
+  if (!dominant || maxCount === 0) return null;
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex gap-0.5">
-        {[...Array(Math.min(total, 8))].map((_, i) => (
-          <div key={i} className="w-1 h-2.5 rounded-full opacity-40"
-            style={{ backgroundColor: '#9E7B4C' }} />
-        ))}
-      </div>
-      <span className="text-[8px] font-mono opacity-35" style={{ color: '#EDE8DF' }}>
-        {total} react{total !== 1 ? 's' : ''}
-      </span>
+    <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
+      <span style={{ color: dominant.color }}>{dominant.emoji}</span>
+      <span className="uppercase">{dominant.label} ({maxCount})</span>
     </div>
   );
 }
@@ -212,13 +231,17 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
       <div className="vignette" aria-hidden="true" />
 
       {/* Header */}
-      <header style={{ padding: '0 40px' }}>
+      <header className="px-4 sm:px-8 md:px-10">
         <div className="mx-auto h-14 flex items-center justify-between" style={{ maxWidth: '780px' }}>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <div onClick={handleLogoTap} className="flex items-center gap-[10px] cursor-pointer select-none" title="Tap 5× for Admin">
               <LoreMark size={18} color={fg} />
               <span className="text-[10px] font-bold tracking-[0.32em] uppercase" style={{ color: fg, opacity: 0.85 }}>LORE</span>
             </div>
+            <span className="text-neutral-800">·</span>
+            <span className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] bg-[#9E7B4C]/5 select-none font-bold">
+              PREMIUM TESTING ACCESS
+            </span>
             <span className="text-neutral-800">·</span>
             <button onClick={onBack}
               className="text-[9px] font-bold tracking-[0.15em] uppercase opacity-50 hover:opacity-80 active:opacity-30 cursor-pointer"
@@ -233,7 +256,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
       </header>
 
       {/* Main */}
-      <main className="flex-1 flex flex-col" style={{ padding: '48px 40px 88px' }}>
+      <main className="flex-1 flex flex-col px-4 sm:px-8 md:px-10 py-12 md:py-16 pb-24">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
           {/* Title row */}
@@ -295,32 +318,43 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                       {/* Gradient overlay */}
                       <div className="absolute inset-0"
                         style={{ background: 'linear-gradient(to right, transparent 60%, rgba(15,13,10,0.9) 100%), linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)' }} />
-                      {/* Severity dot — top left of image */}
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: sev.dot }} />
-                        <span className="text-[8px] font-mono tracking-[0.16em] uppercase"
-                          style={{ color: sev.dot, textShadow: '0 0 8px rgba(0,0,0,0.8)' }}>
-                          {sev.label}
-                        </span>
-                      </div>
-                      {/* NEW dot — only if < 3 days old */}
-                      {isNew && (
-                        <div className="absolute bottom-3 left-3">
-                          <span className="text-[7px] font-mono tracking-[0.2em] uppercase px-1.5 py-0.5 rounded-sm"
-                            style={{ color: '#9E7B4C', backgroundColor: 'rgba(158,123,76,0.15)', border: '1px solid rgba(158,123,76,0.3)' }}>
-                            ◉ NEW
-                          </span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Content panel */}
                     <div className="flex-1 flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
                       <div>
-                        {/* Reading progress */}
-                        <div className="flex items-center justify-between mb-2.5">
-                          <ReadPill progress={prog} accentColor={ac} />
-                          <EngagementBar reactions={story.reactions} />
+                        {/* Top row: Badges & Reacts */}
+                        <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2 border-b border-neutral-900/60 pb-2.5">
+                          <div className="flex items-center gap-2 text-[8px] font-mono tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
+                            {/* Severity signal */}
+                            <span className="flex items-center gap-1.5 font-bold" style={{ color: sev.dot }}>
+                              <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
+                              {sev.label}
+                            </span>
+                            <span>·</span>
+                            {/* Category Signal */}
+                            <span style={{ color: fg, opacity: 0.65 }}>
+                              {SIGNAL_LABELS[story.category] || 'ARCHIVE'}
+                            </span>
+                            {/* NEW badge */}
+                            {isNew && (
+                              <>
+                                <span>·</span>
+                                <span style={{ color: ac }}>NEW</span>
+                              </>
+                            )}
+                            {/* TRENDING badge if total reactions > 3 */}
+                            {getTotalReactions(story) > 3 && (
+                              <>
+                                <span>·</span>
+                                <span style={{ color: '#C4644A' }} className="animate-pulse">✦ TRENDING</span>
+                              </>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <ReadPill progress={prog} accentColor={ac} />
+                            <EngagementBar reactions={story.reactions} />
+                          </div>
                         </div>
 
                         {/* Title */}
@@ -338,11 +372,12 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
 
                       {/* Bottom row: concepts + CTA arrow */}
                       <div className="flex items-end justify-between mt-4 gap-3">
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-x-4 gap-y-1.5">
                           {(story.concepts || []).slice(0, 3).map(c => (
                             <span key={c}
-                              className="text-[8px] font-mono tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm"
-                              style={{ color: mu, backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(237,232,223,0.06)' }}>
+                              className="text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1"
+                              style={{ color: mu }}>
+                              <span style={{ color: ac }} className="opacity-50 flex-shrink-0">//</span>
                               {c.replace(/_/g, ' ')}
                             </span>
                           ))}
@@ -373,7 +408,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
               </a>
             </p>
             <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-              MADE BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
+              DESIGNED BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
             </p>
           </footer>
         </div>

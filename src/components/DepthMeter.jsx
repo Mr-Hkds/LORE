@@ -13,10 +13,9 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
       style={{ backgroundColor: bg, borderBottom: `1px solid ${border}` }}
     >
       <div
-        className="mx-auto h-14 items-center gap-6"
+        className="mx-auto h-14 items-center gap-6 px-4 sm:px-8 md:px-10"
         style={{
           maxWidth: '780px',
-          padding: '0 40px',
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
         }}

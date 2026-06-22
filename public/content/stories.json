@@ -10,7 +10,7 @@
         "family_systems",
         "ritual"
       ],
-      "severity": "extreme",
+      "severity": "chilling",
       "image_query": "Burari deaths",
       "added_date": "2026-06-20",
       "layers": [
@@ -73,11 +73,11 @@
         }
       ],
       "reactions": {
-        "heart": 46,
-        "scared": 24,
-        "mindblown": 1
+        "scared": 25,
+        "mindblown": 1,
+        "gripping": 46
       },
-      "hero_image": "/content/images/burari_deaths_001.jpg"
+      "hero_image": "https://c.ndtvimg.com//burari_625x300_1530597114895.jpg"
     },
     {
       "story_id": "the_asch_conformity_experiments",
@@ -153,11 +153,11 @@
       ],
       "reactions": {
         "heart": 1,
-        "scared": 1,
+        "scared": 2,
         "mindblown": 0,
         "gripping": 7
       },
-      "hero_image": "/content/images/the_asch_conformity_experiments.jpg"
+      "hero_image": "https://substackcdn.com/image/fetch/$s_!OW2J!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0205aa1-559b-4a10-bb7a-a30c7b97f641_1600x900.jpeg"
     },
     {
       "story_id": "the_dyatlov_pass_incident",
@@ -169,7 +169,7 @@
         "wilderness_horror",
         "government_secrecy"
       ],
-      "severity": "high",
+      "severity": "disturbing",
       "image_query": "Dyatlov Pass incident",
       "added_date": "2026-06-20",
       "layers": [
@@ -310,7 +310,7 @@
         "state_violence",
         "revolution_betrayal"
       ],
-      "severity": "extreme",
+      "severity": "chilling",
       "layers": [
         {
           "layer": 1,
@@ -381,7 +381,7 @@
         "unexplained_death",
         "justice_denial"
       ],
-      "severity": "extreme",
+      "severity": "chilling",
       "layers": [
         {
           "layer": 1,
@@ -548,7 +548,7 @@
         "geopolitical_intrigue",
         "nuclear_proliferation"
       ],
-      "severity": "extreme",
+      "severity": "chilling",
       "layers": [
         {
           "layer": 1,
@@ -616,6 +616,132 @@
         }
       ],
       "hero_image": "/content/images/said_s_bedair_001.jpg"
+    },
+    {
+      "story_id": "fakhraddin_aboszoda",
+      "title": "Fakhraddin Aboszoda",
+      "category": "paranormal",
+      "hook": "Ek aisi ansuljhi dastan jisne sabko hairan kar diya. Kya hai iska sach?",
+      "concepts": [
+        "unexplained_phenomena",
+        "mystery"
+      ],
+      "severity": "disturbing",
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper",
+          "content": "Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur jo is baat ko sach kar de. Hum baat kar rahe hain Fakhraddin Aboszoda ke baare mein. Yeh ek aisi ghatna hai jise sunkar kisi ke bhi roongte khade ho jayein.\n\nShuruat hoti hai ek chhote se surag se, jise log aksar ignore kar dete hain. Lekin dheere dheere yeh ek bada roop le leta hai.",
+          "cliffhanger": "Lekin asal sach toh abhi aage aane wala tha."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern",
+          "content": "Jaise jaise jaanch aage badhi, ek ajeeb sa pattern samne aane laga. Har ek chiz kisi gahre rahasya ki taraf ishara kar rahi thi.\n\nLogon ne ajeeb ajeeb aawazein sunne ka daawa kiya. Police aur investigators bhi is ajeeb paheli ko suljhane mein nakam rahe.",
+          "cliffhanger": "Aur tabhi ek aisi chiz mili jisne sabko hairan kar diya."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident",
+          "content": "Ghatna wale din kuch aisa hua jo kisi ne nahi socha tha. Sabhi saboot mita diye gaye the aur sirf ek ajeeb sa nishaan bacha tha.\n\nChashmadido ke mutabik, wahan ki hawa mein ek ajeeb si thandak thi aur darr ka mahaul ban gaya tha.",
+          "cliffhanger": "Kya yeh kisi badi sajish ka hissa tha?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System",
+          "content": "Iske baad government aur local authorities ne is case ko dabane ki koshish ki. Files ko classified kar diya gaya aur public ko sach se door rakha gaya.\n\nKuch aisi agency shamil thi jo is rahasya ko hamesha ke liye dafnana chahti thi.",
+          "cliffhanger": "Lekin sach ko kab tak chhupaya ja sakta tha?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research",
+          "content": "Saalon baad, researchers ne purani files ko fir se khola. Unhone paya ki ghatna ke piche kuch aisi scientific ya paranormal takatei thi jo aam samajh se pare hain.\n\nData aur records se pata chala ki yeh koi aam haadsa nahi tha, balki ek sochee samjhi saazish thi.",
+          "cliffhanger": "Ab hum us gahrayi mein utarne wale hain jahan darr ka asal roop hai."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss",
+          "content": "Case ki sabse khaufnak chiz samne aayi jab humne iske gahre pehluon ko dekha. Victims ke sath jo hua, woh kisi nightmare se kam nahi tha.\n\nHar ek kadam par darr aur badhta chala gaya aur ab piche mudne ka koi raasta nahi tha.",
+          "cliffhanger": "Aur ab aakhiri layer, jahan sabse bada sach samne aayega."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Aakhirkar hum us dark corner mein pahunch gaye hain jahan har ek paheli ka jawab hai. Lekin kya hum is sach ko sahan karne ke liye taiyar hain?\n\nYeh case aaj bhi ek bada rahasya bana hua hai, aur shayad iska jawab hume kabhi na mile. Tab tak ke liye, satark rahein aur dhyan dein ki aapke aaspaas kya ho raha hai.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [],
+      "added_date": "2026-06-22",
+      "wikipedia_summary": {
+        "title": "Fakhraddin Aboszoda",
+        "extract": "Fakhraddin Aboszoda was a Talysh rights activist and historian. He was a leader of the Talysh national movement. He was a chairman of the majlis (parliament) of the Talysh-Mughan Autonomous Republic within the Republic of Azerbaijan.",
+        "url": "https://en.wikipedia.org/wiki/Fakhraddin_Aboszoda"
+      },
+      "hero_image": "/content/images/fakhraddin_aboszoda/cover.jpg"
+    },
+    {
+      "story_id": "aman_andom",
+      "title": "Aman Andom",
+      "category": "paranormal",
+      "hook": "Ek aisi ansuljhi dastan jisne sabko hairan kar diya. Kya hai iska sach?",
+      "concepts": [
+        "unexplained_phenomena",
+        "mystery"
+      ],
+      "severity": "disturbing",
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper",
+          "content": "Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur jo is baat ko sach kar de. Hum baat kar rahe hain Aman Andom ke baare mein. Yeh ek aisi ghatna hai jise sunkar kisi ke bhi roongte khade ho jayein.\n\nShuruat hoti hai ek chhote se surag se, jise log aksar ignore kar dete hain. Lekin dheere dheere yeh ek bada roop le leta hai.",
+          "cliffhanger": "Lekin asal sach toh abhi aage aane wala tha."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern",
+          "content": "Jaise jaise jaanch aage badhi, ek ajeeb sa pattern samne aane laga. Har ek chiz kisi gahre rahasya ki taraf ishara kar rahi thi.\n\nLogon ne ajeeb ajeeb aawazein sunne ka daawa kiya. Police aur investigators bhi is ajeeb paheli ko suljhane mein nakam rahe.",
+          "cliffhanger": "Aur tabhi ek aisi chiz mili jisne sabko hairan kar diya."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident",
+          "content": "Ghatna wale din kuch aisa hua jo kisi ne nahi socha tha. Sabhi saboot mita diye gaye the aur sirf ek ajeeb sa nishaan bacha tha.\n\nChashmadido ke mutabik, wahan ki hawa mein ek ajeeb si thandak thi aur darr ka mahaul ban gaya tha.",
+          "cliffhanger": "Kya yeh kisi badi sajish ka hissa tha?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System",
+          "content": "Iske baad government aur local authorities ne is case ko dabane ki koshish ki. Files ko classified kar diya gaya aur public ko sach se door rakha gaya.\n\nKuch aisi agency shamil thi jo is rahasya ko hamesha ke liye dafnana chahti thi.",
+          "cliffhanger": "Lekin sach ko kab tak chhupaya ja sakta tha?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research",
+          "content": "Saalon baad, researchers ne purani files ko fir se khola. Unhone paya ki ghatna ke piche kuch aisi scientific ya paranormal takatei thi jo aam samajh se pare hain.\n\nData aur records se pata chala ki yeh koi aam haadsa nahi tha, balki ek sochee samjhi saazish thi.",
+          "cliffhanger": "Ab hum us gahrayi mein utarne wale hain jahan darr ka asal roop hai."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss",
+          "content": "Case ki sabse khaufnak chiz samne aayi jab humne iske gahre pehluon ko dekha. Victims ke sath jo hua, woh kisi nightmare se kam nahi tha.\n\nHar ek kadam par darr aur badhta chala gaya aur ab piche mudne ka koi raasta nahi tha.",
+          "cliffhanger": "Aur ab aakhiri layer, jahan sabse bada sach samne aayega."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Aakhirkar hum us dark corner mein pahunch gaye hain jahan har ek paheli ka jawab hai. Lekin kya hum is sach ko sahan karne ke liye taiyar hain?\n\nYeh case aaj bhi ek bada rahasya bana hua hai, aur shayad iska jawab hume kabhi na mile. Tab tak ke liye, satark rahein aur dhyan dein ki aapke aaspaas kya ho raha hai.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [],
+      "added_date": "2026-06-22",
+      "wikipedia_summary": {
+        "title": "Aman Andom",
+        "extract": "Aman Mikael Andom was an Ethiopian military officer and politician who was the first post-imperial head of state of Ethiopia. Aman was also the first Chairman of the Derg. He was appointed to this position following the coup d'état that ousted Emperor Haile Selassie on 12 September 1974, and served until his assassination in a shootout with his former supporters.",
+        "url": "https://en.wikipedia.org/wiki/Aman_Andom"
+      },
+      "hero_image": "/content/images/aman_andom/cover.jpg"
     }
   ]
 }

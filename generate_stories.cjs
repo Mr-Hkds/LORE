@@ -8,7 +8,7 @@ const data = {
       category: "true_crime",
       hook: "Eleven members of a respected, ordinary family found hanging in their home. No foul play. No suicide note. Only diaries filled with instructions from the dead.",
       concepts: ["shared_delusion", "family_systems", "ritual"],
-      severity: "extreme",
+      severity: "chilling",
       image_query: "/content/images/burari_family.jpg",
       added_date: "2026-06-20",
       layers: [
@@ -95,7 +95,7 @@ const data = {
       category: "psychology",
       hook: "Would you deny what your own eyes see if everyone around you insisted you were wrong? In 1951, a simple test with lines proved how easily our reality is warped by peer pressure.",
       concepts: ["conformity", "groupthink", "social_pressure"],
-      severity: "moderate",
+      severity: "unsettling",
       image_query: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Asch_experiment.png",
       added_date: "2026-06-20",
       layers: [
@@ -176,7 +176,7 @@ const data = {
       category: "paranormal",
       hook: "Nine experienced hikers tore their way out of their tent from the inside and fled into the freezing Russian night without shoes. Their bodies were found weeks later with inexplicable injuries.",
       concepts: ["unexplained_deaths", "wilderness_horror", "government_secrecy"],
-      severity: "high",
+      severity: "disturbing",
       image_query: "https://upload.wikimedia.org/wikipedia/commons/d/df/Dyatlov_Pass_incident_02.jpg",
       added_date: "2026-06-20",
       layers: [

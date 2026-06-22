@@ -4,7 +4,7 @@
  * Lives in the bottom-right corner of every screen.
  * Submits to POST /api/feedback.
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TAGS = [
   'Love the concept',
@@ -24,6 +24,30 @@ export default function SiteFeedback() {
   const [tags, setTags]           = useState([]);
   const [note, setNote]           = useState('');
   const [status, setStatus]       = useState(null); // null | 'sending' | 'sent' | 'error'
+  const [promoVisible, setPromoVisible] = useState(false);
+
+  useEffect(() => {
+    // Only prompt on the homepage
+    const isMainPage = !window.location.hash || window.location.hash === '#';
+    if (!isMainPage) return;
+
+    // Check if we have already nudged in this session
+    const hasNudged = sessionStorage.getItem('lore:nudged');
+    if (hasNudged) return;
+
+    // Wait 30 seconds before showing the single classy nudge
+    const timer = setTimeout(() => {
+      if (!open) {
+        setPromoVisible(true);
+        sessionStorage.setItem('lore:nudged', 'true');
+        setTimeout(() => {
+          setPromoVisible(false);
+        }, 5000); // collapse after 5 seconds
+      }
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, [open]);
 
   const toggleTag = (t) => setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
 
@@ -64,18 +88,30 @@ export default function SiteFeedback() {
     <>
       {/* Floating trigger button */}
       <button
-        onClick={() => setOpen(o => !o)}
+        onClick={() => { setOpen(o => !o); setPromoVisible(false); }}
         aria-label="Give feedback"
         title="Give feedback about LORE"
-        className="fixed bottom-6 right-6 z-[200] w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+        className="fixed bottom-6 right-6 z-[200] h-10 rounded-full border flex items-center justify-center transition-all duration-350 active:scale-95 overflow-hidden whitespace-nowrap"
         style={{
           backgroundColor: 'rgba(13,11,8,0.92)',
           borderColor: 'rgba(158,123,76,0.35)',
           backdropFilter: 'blur(8px)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.5)',
+          width: open ? '40px' : promoVisible ? '190px' : '40px',
+          padding: promoVisible && !open ? '0 16px' : '0',
+          justifyContent: promoVisible && !open ? 'flex-start' : 'center',
+          gap: '8px',
         }}
       >
-        <span style={{ fontSize: '14px' }}>{open ? '✕' : '✦'}</span>
+        <span style={{ fontSize: '14px' }} className="flex-shrink-0">{open ? '✕' : '✦'}</span>
+        {promoVisible && !open && (
+          <span 
+            className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] transition-opacity duration-300"
+            style={{ opacity: promoVisible ? 1 : 0 }}
+          >
+            Share your thoughts?
+          </span>
+        )}
       </button>
 
       {/* Feedback panel */}

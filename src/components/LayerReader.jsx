@@ -132,14 +132,12 @@ export default function LayerReader({
     cyber_mysteries: 'Digital Shadows',
   };
 
-  const evidenceLinks = data?.evidenceLinks || [];
-
   return (
     <section
       ref={containerRef}
       className="snap-child w-full fade-in relative"
     >
-      <div className="w-full max-w-[1000px] mx-auto flex flex-col gap-8 px-4 md:px-8 my-auto pb-12">
+      <div className="w-full max-w-[1000px] mx-auto flex flex-col gap-6 px-0 sm:px-4 md:px-8 my-auto pb-12">
         {/* Premium Hero Header */}
         {layerName && (
           <div
@@ -164,7 +162,7 @@ export default function LayerReader({
         <div className="w-full">
           {/* Narrative Dossier Card (Main Container) */}
           <div
-            className="w-full p-6 md:p-10 rounded-2xl relative transition-all duration-300"
+            className="w-full p-4 sm:p-6 md:p-10 rounded-2xl relative transition-all duration-300"
             style={{
               backgroundColor: cardBg,
               border: `1px solid ${cardBorder}`,
@@ -249,29 +247,7 @@ export default function LayerReader({
                 </div>
               )}
 
-              {/* Evidence Links (OpenAlex PDFs) */}
-              {evidenceLinks && evidenceLinks.length > 0 && (
-                <div className="mt-8 pt-6 border-t" style={{ borderColor: layer.border }}>
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase block mb-4" style={{ color: accentColor }}>
-                    Attached Evidence / Research Papers
-                  </span>
-                  <div className="space-y-3">
-                    {evidenceLinks.map((link, idx) => (
-                      <a
-                        key={idx}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block p-3 rounded-lg border transition-all hover:bg-black/20"
-                        style={{ borderColor: layer.border, backgroundColor: isLight ? 'rgba(0,0,0,0.02)' : 'rgba(255,255,255,0.02)' }}
-                      >
-                        <span className="text-xs font-mono block mb-1" style={{ color: accentColor }}>[PDF Evidence {idx + 1}]</span>
-                        <span className="text-sm font-sans" style={{ color: cardTextPrimary }}>{link.label}</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
+
 
               {/* Feedback Widget at Layer 7 */}
               {isLastLayer && (

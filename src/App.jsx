@@ -34,7 +34,6 @@ export default function App() {
   const {
     allStories,
     getConnectedStories,
-    getCategoryCounts,
     refetchStories,
   } = useStaticContent();
 
@@ -69,6 +68,14 @@ export default function App() {
     });
     return combined;
   }, [allStories, localStories]);
+
+  const categoryCounts = useMemo(() => {
+    const counts = {};
+    stories.forEach(s => {
+      counts[s.category] = (counts[s.category] || 0) + 1;
+    });
+    return counts;
+  }, [stories]);
 
   const activeLayerConfig = getLayer(activeLayer);
 
@@ -269,7 +276,7 @@ export default function App() {
       <>
         <TopicSelector
           onSelect={handleSelectTopic}
-          categoryCounts={getCategoryCounts()}
+          categoryCounts={categoryCounts}
           allStories={stories}
         />
         <SiteFeedback />

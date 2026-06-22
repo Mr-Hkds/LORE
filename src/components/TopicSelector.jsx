@@ -1,7 +1,58 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
+import TodayInShadows from './TodayInShadows';
+
+// Mini image helper using local or Wikipedia cover art
+function StoryMiniImage({ story }) {
+  const [fetchedUrl, setFetchedUrl] = useState(null);
+
+  useEffect(() => {
+    if (story.hero_image) return;
+    let active = true;
+    const query = story.image_query || story.title;
+    
+    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
+      .then(res => res.json())
+      .then(data => {
+        const pages = data.query?.pages;
+        if (pages && active) {
+          const firstPageId = Object.keys(pages)[0];
+          const url = pages[firstPageId]?.thumbnail?.source;
+          if (url) setFetchedUrl(url);
+        }
+      })
+      .catch(() => {});
+      
+    return () => { active = false; };
+  }, [story.hero_image, story.image_query, story.title]);
+
+  const displayUrl = story.hero_image || fetchedUrl;
+
+  if (!displayUrl) {
+    return <div className="w-full h-full bg-neutral-950/60 animate-pulse" />;
+  }
+
+  return (
+    <img 
+      src={displayUrl} 
+      alt="" 
+      className="w-full h-full object-cover grayscale opacity-65 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
+      loading="lazy" 
+    />
+  );
+}
+
+const CATEGORY_LABELS = {
+  psychology: 'Psychology',
+  true_crime: 'True Crime',
+  paranormal: 'Paranormal',
+  mythology: 'Mythology',
+  gov_experiments: 'Hidden Gov Experiments',
+  conspiracy: 'Unresolved Conspiracies',
+  cyber_mysteries: 'Digital Shadows',
+};
 
 export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
 
@@ -22,6 +73,49 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
   const forYouStories = useMemo(() => {
     return allStories.length > 0 ? getForYouStories(allStories, 3) : [];
   }, [allStories, getForYouStories]);
+
+  const [activeTab, setActiveTab] = useState('top-rated');
+  const hasAutoSwitched = useRef(false);
+
+  // Auto-switch to 'recents' once when stories load, if user has reading progress
+  useEffect(() => {
+    if (allStories.length > 0 && !hasAutoSwitched.current) {
+      hasAutoSwitched.current = true;
+      if (forYouStories.length > 0) {
+        setActiveTab('recents');
+      }
+    }
+  }, [allStories, forYouStories]);
+
+  // Selected stories to display based on activeTab
+  const activeTabStories = useMemo(() => {
+    if (activeTab === 'recents') {
+      return forYouStories;
+    }
+    
+    if (activeTab === 'editors-picks') {
+      if (!allStories || allStories.length === 0) return [];
+      const flagged = allStories.filter(s => s.editors_pick === true);
+      if (flagged.length > 0) {
+        return flagged.slice(0, 3);
+      }
+      const fallbacks = ['burari_deaths_001', 'the_dyatlov_pass_incident', 'the_asch_conformity_experiments'];
+      return allStories.filter(s => fallbacks.includes(s.story_id)).slice(0, 3);
+    }
+
+    // Default to 'top-rated'
+    if (!allStories || allStories.length === 0) return [];
+    return [...allStories]
+      .sort((a, b) => {
+        const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0);
+        const bReactions = (b.reactions?.gripping || 0) + (b.reactions?.scared || 0) + (b.reactions?.mindblown || 0);
+        if (bReactions !== aReactions) {
+          return bReactions - aReactions;
+        }
+        return (b.added_date || '').localeCompare(a.added_date || '');
+      })
+      .slice(0, 3);
+  }, [activeTab, allStories, forYouStories]);
 
   const handleLogoTap = () => {
     const now = Date.now();
@@ -99,22 +193,28 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       <div className="vignette" aria-hidden="true" />
 
       {/* Header */}
-      <header style={{ padding: '0 40px' }}>
+      <header className="px-4 sm:px-8 md:px-10">
         <div
           className="mx-auto h-14 flex items-center justify-between"
           style={{ maxWidth: '780px' }}
         >
-          <div 
-            className="flex items-center gap-[10px] cursor-pointer" 
-            onClick={handleLogoTap}
-            title="Tap 5 times to open Admin Console"
-          >
-            <LoreMark size={18} color={fg} />
-            <span
-              className="text-[10px] font-bold tracking-[0.32em] uppercase select-none"
-              style={{ color: fg, opacity: 0.85 }}
+          <div className="flex items-center gap-3 flex-wrap">
+            <div 
+              className="flex items-center gap-[10px] cursor-pointer" 
+              onClick={handleLogoTap}
+              title="Tap 5 times to open Admin Console"
             >
-              LORE
+              <LoreMark size={18} color={fg} />
+              <span
+                className="text-[10px] font-bold tracking-[0.32em] uppercase select-none"
+                style={{ color: fg, opacity: 0.85 }}
+              >
+                LORE
+              </span>
+            </div>
+            <span className="text-neutral-800">·</span>
+            <span className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] bg-[#9E7B4C]/5 select-none font-bold">
+              PREMIUM TESTING ACCESS
             </span>
           </div>
           <span
@@ -127,7 +227,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col justify-end" style={{ padding: '80px 40px 88px' }}>
+      <main className="flex-1 flex flex-col justify-end px-4 sm:px-8 md:px-10 py-16 md:py-24">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
           {/* Eyebrow */}
@@ -135,7 +235,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             className="text-[10px] font-semibold tracking-[0.26em] uppercase"
             style={{ color: ac, opacity: 0.85, marginBottom: '32px' }}
           >
-            Select a rabbit hole
+            Select Category
           </p>
 
           {/* Title */}
@@ -150,7 +250,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '48px',
             }}
           >
-            What do you want<br />to know?
+            Archive Index
           </h1>
 
           {/* Subtitle */}
@@ -169,47 +269,153 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             Seven layers of real, documented knowledge.<br />
             Each one darker than the last.
           </p>
-
-          {/* ── For You section — only when reading history exists ── */}
-          {forYouStories.length > 0 && (
+          {/* ── Editorial and Recommendations Section ── */}
+          {activeTabStories.length > 0 && (
             <div className="mb-16 pt-2">
-              <p className="text-[9px] font-mono font-bold tracking-[0.24em] uppercase mb-5" style={{ color: ac, opacity: 0.7 }}>◉ For You</p>
+              <div className="flex items-center gap-6 mb-5 border-b border-neutral-900/60 pb-0">
+                <button 
+                  onClick={() => setActiveTab('top-rated')} 
+                  className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                  style={{ 
+                    color: activeTab === 'top-rated' ? ac : mu,
+                    borderBottom: activeTab === 'top-rated' ? `2px solid ${ac}` : '2px solid transparent',
+                    marginBottom: '-1px'
+                  }}
+                >
+                  ◉ TOP RATED
+                </button>
+                <button 
+                  onClick={() => setActiveTab('editors-picks')} 
+                  className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                  style={{ 
+                    color: activeTab === 'editors-picks' ? ac : mu,
+                    borderBottom: activeTab === 'editors-picks' ? `2px solid ${ac}` : '2px solid transparent',
+                    marginBottom: '-1px'
+                  }}
+                >
+                  ◉ EDITOR'S PICKS
+                </button>
+                {forYouStories.length > 0 && (
+                  <button 
+                    onClick={() => setActiveTab('recents')} 
+                    className="pb-2 text-[9px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
+                    style={{ 
+                      color: activeTab === 'recents' ? ac : mu,
+                      borderBottom: activeTab === 'recents' ? `2px solid ${ac}` : '2px solid transparent',
+                      marginBottom: '-1px'
+                    }}
+                  >
+                    ◉ RECENTS
+                  </button>
+                )}
+              </div>
               <div className="flex flex-col gap-3">
-                {forYouStories.map(story => {
+                {activeTabStories.map(story => {
                   const prog = getProgress(story.story_id);
+                  const isCompleted = prog?.completed;
+                  const currentL = prog?.lastLayer || 0;
+                  const catLabel = CATEGORY_LABELS[story.category] || story.category;
+                  
                   return (
                     <button
                       key={story.story_id}
                       onClick={() => {
-                        // Navigate directly to the story's category then story
-                        const catMap = { psychology:'psychology', mythology:'mythology', true_crime:'true-crime', gov_experiments:'gov-experiments', paranormal:'paranormal-reports', conspiracy:'conspiracy', cyber_mysteries:'cyber-mysteries' };
+                        const catMap = { 
+                          psychology: 'psychology', 
+                          mythology: 'mythology', 
+                          true_crime: 'true-crime', 
+                          gov_experiments: 'gov-experiments', 
+                          paranormal: 'paranormal-reports', 
+                          conspiracy: 'conspiracy', 
+                          cyber_mysteries: 'cyber-mysteries' 
+                        };
                         onSelect({ id: catMap[story.category] || story.category, label: story.category }, story.story_id);
                       }}
-                      className="w-full text-left flex items-center gap-4 px-4 py-3.5 rounded-xl border transition-all duration-200 hover:border-[rgba(158,123,76,0.25)] group"
-                      style={{ background: 'rgba(158,123,76,0.04)', borderColor: 'rgba(237,232,223,0.06)' }}
+                      className="group relative w-full flex flex-col sm:flex-row gap-4 rounded-xl border p-4 text-left cursor-pointer transition-all duration-300"
+                      style={{
+                        backgroundColor: 'rgba(15, 13, 10, 0.55)',
+                        borderColor: 'rgba(158, 123, 76, 0.12)',
+                        boxShadow: '0 4px 20px -8px rgba(0, 0, 0, 0.4)',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.borderColor = `rgba(158, 123, 76, 0.3)`;
+                        e.currentTarget.style.backgroundColor = `rgba(15, 13, 10, 0.75)`;
+                        e.currentTarget.style.boxShadow = `0 8px 24px -6px rgba(0, 0, 0, 0.6)`;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.12)';
+                        e.currentTarget.style.backgroundColor = 'rgba(15, 13, 10, 0.55)';
+                        e.currentTarget.style.boxShadow = '0 4px 20px -8px rgba(0, 0, 0, 0.4)';
+                      }}
                     >
-                      {/* progress indicator */}
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center" style={{ borderColor: ac + '33' }}>
-                        {prog?.completed
-                          ? <span style={{ color: ac, fontSize: '10px' }}>✓</span>
-                          : prog?.lastLayer
-                            ? <span style={{ color: ac, fontSize: '9px', fontWeight: 700 }}>{prog.lastLayer}</span>
-                            : <span style={{ color: mu, fontSize: '8px' }}>→</span>
-                        }
+                      {/* Left Side: Grayscale story thumbnail overlayed with subtle gold border */}
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900/80 bg-neutral-950 relative">
+                        <StoryMiniImage story={story} />
+                        <div className="absolute inset-0 bg-neutral-950/40 mix-blend-color group-hover:bg-transparent transition-all duration-300" />
+                        {currentL > 0 && !isCompleted && (
+                          <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-[#9E7B4C] rounded-br-xs animate-pulse" />
+                        )}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-serif italic text-sm leading-snug truncate group-hover:text-[#9E7B4C] transition-colors" style={{ color: fg }}>{story.title}</p>
-                        <p className="text-[9px] font-mono mt-0.5" style={{ color: mu }}>
-                          {prog?.completed ? 'Completed' : prog?.lastLayer ? `Resume — Layer ${prog.lastLayer}/7` : 'Not started'}
-                        </p>
+ 
+                      {/* Right Side: Typography and Segmented Depth Track */}
+                      <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                        <div>
+                          {/* Eyebrow: Category & Resume hint */}
+                          <div className="flex items-center gap-2 mb-1.5 text-[8px] font-mono tracking-[0.12em] uppercase">
+                            <span style={{ color: ac }} className="font-bold opacity-85">{catLabel}</span>
+                            <span className="text-neutral-800">·</span>
+                            <span style={{ color: mu }}>
+                              {isCompleted ? '✓ Completed' : currentL > 0 ? `Layer ${currentL}/7` : 'UNOPENED DOSSIER'}
+                            </span>
+                          </div>
+ 
+                          {/* Title */}
+                          <h4 className="font-serif italic text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-300 truncate" style={{ color: fg }}>
+                            {story.title}
+                          </h4>
+
+                          {/* Hook */}
+                          <p className="font-sans text-[11.5px] text-neutral-500 line-clamp-1 mt-1 opacity-80">
+                            {story.hook}
+                          </p>
+                        </div>
+ 
+                        {/* Segmented Depth indicator (mirroring DepthMeter progress segments) */}
+                        <div className="flex items-center gap-1 mt-3">
+                          {Array.from({ length: 7 }).map((_, idx) => {
+                            const active = idx + 1 <= (isCompleted ? 7 : currentL);
+                            return (
+                              <div 
+                                key={idx}
+                                className="h-[2px] rounded-full transition-all duration-500"
+                                style={{
+                                  width: idx + 1 === currentL && !isCompleted ? '18px' : '8px',
+                                  backgroundColor: active ? ac : '#262421',
+                                  opacity: active ? (idx + 1 === currentL && !isCompleted ? 1 : 0.6) : 0.2
+                                }}
+                              />
+                            );
+                          })}
+                        </div>
                       </div>
-                      <span className="text-sm flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" style={{ color: ac, opacity: 0.4 }}>→</span>
+ 
+                      {/* Action Arrow */}
+                      <div className="flex items-center justify-center self-center px-1 sm:px-2">
+                        <span className="text-sm flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" style={{ color: ac, opacity: 0.45 }}>
+                          →
+                        </span>
+                      </div>
                     </button>
                   );
                 })}
               </div>
             </div>
           )}
+
+          {/* Today in the Shadows */}
+          <div className="mb-16">
+            <TodayInShadows />
+          </div>
 
           {/* Topic list */}
           <div style={{ borderTop: `1px solid ${ru}` }}>
@@ -220,6 +426,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 'true-crime': 'true_crime',
                 'gov-experiments': 'gov_experiments',
                 'paranormal-reports': 'paranormal',
+                'conspiracy': 'conspiracy',
+                'cyber-mysteries': 'cyber_mysteries'
               };
               const count = categoryCounts[categoryMap[topic.id]] || 0;
               return (
@@ -344,7 +552,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </a>
           </p>
           <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-            MADE BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
+            DESIGNED BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
           </p>
         </footer>
       </main>

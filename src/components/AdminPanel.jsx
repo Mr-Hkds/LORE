@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
 
 function cleanAndParseJSON(text) {
@@ -46,8 +46,11 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 
-  // Tabs: 'catalog' | 'recommendations' | 'generator' | 'feedback' | 'ai-editor'
+  // Tabs: 'catalog' | 'recommendations' | 'generator' | 'automation' | 'feedback' | 'ai-editor'
   const [activeTab, setActiveTab] = useState('catalog');
+
+  // Image uploading state
+  const [uploadingState, setUploadingState] = useState('idle'); // 'idle' | 'uploading'
   
   // Feedback tab state
   const [feedbackItems, setFeedbackItems] = useState([]);
@@ -63,8 +66,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Custom stories state
   const [recommendations, setRecommendations] = useState([]);
-  const [expandedStoryId, setExpandedStoryId] = useState(null);
-  const [selectedRecIds, setSelectedRecIds] = useState([]);
 
   // Story editing state
   const [editingStoryId, setEditingStoryId] = useState(null);
@@ -80,12 +81,40 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [logs, setLogs] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
+  const [autoLogs, setAutoLogs] = useState([]);
 
   // Read apiKey from env on load
   useEffect(() => {
     const envKey = import.meta.env.VITE_GEMINI_API_KEY || '';
     setApiKey(envKey);
   }, []);
+
+  // Multi-select recommendations state
+  const [selectedRecs, setSelectedRecs] = useState([]);
+
+  // Auto-scroll refs
+  const autoLogsEndRef = useRef(null);
+  const manualLogsEndRef = useRef(null);
+
+  // Auto-scroll effect for background logs
+  useEffect(() => {
+    if (autoLogsEndRef.current) {
+      autoLogsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [autoLogs]);
+
+  // Auto-scroll effect for manual logs
+  useEffect(() => {
+    if (manualLogsEndRef.current) {
+      manualLogsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [logs]);
+
+  // Reset selected recommendations when the list changes
+  useEffect(() => {
+    setSelectedRecs([]);
+  }, [recommendations]);
 
   const [isCleaning, setIsCleaning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -143,9 +172,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     return null;
   };
 
-  const [autoStatus, setAutoStatus] = useState({ isRunning: false, logCount: 0 });
-  const [autoLogs, setAutoLogs] = useState([]);
-
   // Fetch status and logs from server
   const fetchAutomationData = useCallback(async () => {
     try {
@@ -195,20 +221,16 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   };
 
   const handleAiAutoClean = async () => {
-    if (!apiKey) {
-      alert('Gemini API Key is required to run the AI Auto-Clean.');
-      return;
-    }
     const pending = recommendations.filter(r => r.status === 'pending');
     if (pending.length === 0) {
-      alert('No pending recommendations to clean.');
+      alert('No pending suggestions to clean.');
       return;
     }
 
-    if (!window.confirm(`AI will analyze ${pending.length} pending recommendations to find and delete spam, test inputs, or gibberish. Proceed?`)) return;
+    if (!window.confirm(`AI will analyze ${pending.length} pending suggestions to find and delete spam, test inputs, or gibberish. Proceed?`)) return;
 
     setIsCleaning(true);
-    addLog('✨ Starting AI Auto-Clean of recommendations queue...');
+    addLog('✨ Starting AI Auto-Clean of suggestions queue...');
 
     try {
       const prompt = `Analyze the following list of user-recommended topics for a dark mystery, historical, or psychological archive website.
@@ -221,24 +243,24 @@ Return a JSON array containing ONLY the IDs (strings) of the recommendations tha
 If all recommendations are valid and relevant, return an empty array: [].
 Do not wrap in markdown. Output raw JSON only.`;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+      const res = await fetch('/api/ai-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: { responseMimeType: 'application/json' }
+          prompt,
+          systemPrompt: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.'
         })
       });
 
-      if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
+      if (!res.ok) throw new Error(`AI proxy error: ${res.status}`);
       const data = await res.json();
-      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      const text = data?.text;
       if (!text) throw new Error('Empty response from AI.');
 
       const spamIds = cleanAndParseJSON(text);
       if (!Array.isArray(spamIds)) throw new Error('Invalid response structure from AI.');
 
-      addLog(`✨ AI identified ${spamIds.length} spam/irrelevant recommendations.`);
+      addLog(`✨ AI identified ${spamIds.length} spam/irrelevant suggestions.`);
 
       let deletedCount = 0;
       for (const id of spamIds) {
@@ -248,11 +270,11 @@ Do not wrap in markdown. Output raw JSON only.`;
             deletedCount++;
           }
         } catch (e) {
-          console.error(`Failed to delete spam recommendation: ${id}`, e);
+          console.error(`Failed to delete spam suggestion: ${id}`, e);
         }
       }
 
-      addLog(`✨ AI Auto-Clean completed. Removed ${deletedCount} spam recommendations.`);
+      addLog(`✨ AI Auto-Clean completed. Removed ${deletedCount} spam suggestions.`);
       await loadRecommendations();
       alert(`AI Auto-Clean complete! Removed ${deletedCount} spam/irrelevant topics.`);
     } catch (err) {
@@ -262,6 +284,31 @@ Do not wrap in markdown. Output raw JSON only.`;
     } finally {
       setIsCleaning(false);
     }
+  };
+
+  const handleBulkDeleteRecommendations = async () => {
+    if (selectedRecs.length === 0) return;
+    if (!window.confirm(`Are you sure you want to delete the ${selectedRecs.length} selected suggestions?`)) return;
+
+    addLog(`🗑️ Starting bulk deletion of ${selectedRecs.length} suggestions...`);
+    let deletedCount = 0;
+    for (const id of selectedRecs) {
+      try {
+        const res = await fetch(`/api/recommendations?id=${id}`, {
+          method: 'DELETE'
+        });
+        if (res.ok) {
+          deletedCount++;
+        }
+      } catch (e) {
+        console.error(`Failed to delete recommendation: ${id}`, e);
+      }
+    }
+
+    addLog(`🗑️ Bulk deletion completed. Removed ${deletedCount} of ${selectedRecs.length} suggestions.`);
+    setSelectedRecs([]);
+    await loadRecommendations();
+    alert(`Successfully deleted ${deletedCount} suggestions.`);
   };
 
   const handleTriggerAutomation = async () => {
@@ -402,26 +449,61 @@ Do not wrap in markdown. Output raw JSON only.`;
     }
   };
 
-  // Handle bulk deleting selected recommendations
-  const handleDeleteMultipleRecommendations = async () => {
-    if (selectedRecIds.length === 0) return;
-    if (!window.confirm(`Are you sure you want to permanently delete the ${selectedRecIds.length} selected recommendations?`)) return;
+  // Toggle automation status on the server
+  const handleToggleAutomation = async () => {
+    try {
+      const res = await fetch('/api/automation/toggle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ enabled: !autoStatus.enabled }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setAutoStatus(prev => ({ ...prev, enabled: data.enabled }));
+        addLog(`Background writer automation ${data.enabled ? 'enabled' : 'disabled'}`);
+      }
+    } catch (err) {
+      console.warn('Failed to toggle automation:', err);
+    }
+  };
 
-    addLog(`Bulk deleting ${selectedRecIds.length} recommendations...`);
-    let count = 0;
-    for (const id of selectedRecIds) {
+  // Upload a custom cover image to the server
+  const handleUploadImage = async (e, storyId) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingState('uploading');
+    addLog(`Uploading custom cover image for ${storyId}...`);
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
       try {
-        const res = await fetch(`/api/recommendations?id=${id}`, { method: 'DELETE' });
+        const base64Data = reader.result;
+        const res = await fetch('/api/upload-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            storyId,
+            filename: 'cover.jpg',
+            base64Data,
+          }),
+        });
+
         if (res.ok) {
-          count++;
+          const data = await res.json();
+          addLog(`Successfully uploaded custom image: ${data.path}`);
+          setEditForm(prev => ({ ...prev, hero_image: data.path }));
+        } else {
+          alert('Failed to upload image to server');
         }
       } catch (err) {
-        console.error(`Failed to delete recommendation ${id}:`, err);
+        console.error(err);
+        alert('Error uploading image');
+      } finally {
+        setUploadingState('idle');
       }
-    }
-    addLog(`Bulk delete finished. Removed ${count} recommendations.`);
-    setSelectedRecIds([]);
-    await loadRecommendations();
+    };
+    reader.readAsDataURL(file);
   };
 
   // Run the Gemini story generation client-side
@@ -439,7 +521,6 @@ Do not wrap in markdown. Output raw JSON only.`;
     setIsGenerating(true);
     setLogs([]);
     setProgress(10);
-    setActiveTab('generator');
 
     addLog(`Initiating Content Engine for topic: "${topic}"...`);
     addLog(`Target Category: ${genCategory.toUpperCase()} | Severity: ${genSeverity.toUpperCase()}`);
@@ -821,7 +902,7 @@ Keep responses concise. Be direct and useful.`;
     mythology: 'Mythology',
     gov_experiments: 'Hidden Gov Experiments',
     conspiracy: 'Unresolved Conspiracies',
-    cyber_mysteries: 'Digital Shadows',
+    cyber_mysteries: 'Digital Shadows'
   };
 
   return (
@@ -835,7 +916,7 @@ Keep responses concise. Be direct and useful.`;
           <div className="flex items-center gap-[10px]">
             <LoreMark size={20} color={fg} />
             <span className="text-[11px] font-bold tracking-[0.32em] uppercase">
-              ARCHIVE ENGINE CONSOLE
+              Archive Manager
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -878,7 +959,7 @@ Keep responses concise. Be direct and useful.`;
           </div>
           <div>
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
-              User Recommendations
+              Topic Suggestions
             </span>
             <span className="font-serif italic text-2xl">{recommendations.length}</span>
           </div>
@@ -891,74 +972,76 @@ Keep responses concise. Be direct and useful.`;
         </div>
       </div>
 
+      {/* Main Tabbed Grid */}
       <div className="flex-1 flex flex-col md:flex-row mx-auto w-full" style={{ maxWidth: '1200px', padding: '32px 40px' }}>
-        
-        {/* Sidebar Nav */}
+        {/* Sidebar Navigation */}
         <aside className="w-full md:w-[240px] flex-shrink-0 flex flex-col gap-2 mb-8 md:mb-0 md:pr-8">
           <button
-            onClick={() => { setActiveTab('catalog'); setSelectedRecIds([]); }}
+            onClick={() => setActiveTab('catalog')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'catalog' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
           >
-            Archive Catalog
+            Case Archive ({stories.length})
           </button>
           <button
-            onClick={() => { setActiveTab('recommendations'); setSelectedRecIds([]); }}
+            onClick={() => setActiveTab('recommendations')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors relative cursor-pointer ${
               activeTab === 'recommendations' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
           >
-            Recommendations
-            {recommendations.filter(r => r.status === 'pending').length > 0 && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#8B2F2F] text-white rounded-full text-[8px] px-2 py-0.5">
-                {recommendations.filter(r => r.status === 'pending').length}
-              </span>
-            )}
+            Topic Suggestions ({recommendations.filter(r => r.status === 'pending').length})
           </button>
           <button
-            onClick={() => { setActiveTab('generator'); setSelectedRecIds([]); }}
+            onClick={() => setActiveTab('generator')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'generator' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
           >
-            Content Engine Console
+            Write a Dossier
+          </button>
+          <button
+            onClick={() => setActiveTab('automation')}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'automation' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
+            }`}
+          >
+            Automated Writer
           </button>
           <button
             onClick={async () => {
               setActiveTab('feedback');
-              setSelectedRecIds([]);
               setFeedbackLoading(true);
-              try {
-                const res = await fetch('/api/feedback');
-                if (res.ok) setFeedbackItems(await res.json());
-              } catch { /* server may be down */ }
+              try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
               setFeedbackLoading(false);
             }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'feedback' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
           >
-            User Feedback
+            User Feedback ({feedbackItems.filter(f => !f.addressed).length})
           </button>
           <button
-            onClick={() => { setActiveTab('ai-editor'); setSelectedRecIds([]); }}
+            onClick={() => setActiveTab('ai-editor')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'ai-editor' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#6A6560]'
             }`}
           >
-            🤖 AI Co-Editor
+            AI Editor
           </button>
         </aside>
 
-        {/* Console Content Area */}
-        <main className="flex-1 min-w-0">
+        {/* Content Area */}
+        <main className="flex-1 min-w-0 bg-[#110F0D] border rounded-2xl p-6 md:p-8" style={{ borderColor: ru }}>
           
           {/* Tab 1: Catalog */}
           {activeTab === 'catalog' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
-                <h2 className="font-serif italic text-2xl">Archived Case Files</h2>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3" style={{ borderColor: ru }}>
+                <div>
+                  <h2 className="font-serif italic text-2xl">Case Archive ({stories.length})</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Manage compiled dossiers in stories.json</p>
+                </div>
                 <div className="flex gap-2">
                   <button
                     onClick={async () => {
@@ -967,72 +1050,80 @@ Keep responses concise. Be direct and useful.`;
                         const res = await fetch('/api/stories/backfill-images', { method: 'POST' });
                         if (res.ok) {
                           const data = await res.json();
-                          addLog(`🖼️ ${data.message}`);
-                          if (data.queued === 0) {
-                            alert('All stories already have local cover images!');
-                          } else {
-                            alert(`Image backfill started for ${data.queued} stories. This runs in the background — check server logs.`);
-                          }
-                        } else {
-                          addLog('🖼️ Backfill request failed. Is the server running?');
+                          alert(data.message);
                         }
                       } catch (err) {
-                        addLog(`🖼️ Backfill error: ${err.message}`);
+                        alert(`Backfill failed: ${err.message}`);
                       }
                     }}
-                    className="px-4 py-2 border rounded text-xs font-mono hover:bg-white/5 cursor-pointer"
-                    style={{ borderColor: 'rgba(158, 123, 76, 0.4)', color: '#9E7B4C' }}
+                    className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer text-[#9E7B4C] border-[#9E7B4C]/30 transition-all uppercase font-bold"
                   >
                     🖼️ Backfill Images
                   </button>
                   <button
                     onClick={handleExportJSON}
-                    className="px-4 py-2 border rounded text-xs font-mono hover:bg-white/5 cursor-pointer"
+                    className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
                     style={{ borderColor: ru }}
                   >
-                    Export stories.json
+                    Export JSON
                   </button>
                 </div>
               </div>
 
-              {/* Table / List */}
-              <div className="space-y-4">
+              {/* Scrollable list of archives */}
+              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
                 {stories.map(story => (
                   <div
                     key={story.story_id}
-                    className="p-5 rounded-xl border transition-all duration-350"
-                    style={{ borderColor: ru, backgroundColor: '#110F0D' }}
+                    className="p-4 rounded-xl border transition-all hover:bg-black/10"
+                    style={{ borderColor: ru, backgroundColor: '#0D0B08' }}
                   >
                     {editingStoryId === story.story_id ? (
-                      <div className="space-y-4 my-3 p-4 rounded-lg bg-black/40 border border-neutral-800">
+                      <div className="space-y-3">
                         <div>
-                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Dossier Title</label>
+                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Title</label>
                           <input
                             type="text"
                             value={editForm.title}
                             onChange={(e) => setEditForm(prev => ({ ...prev, title: e.target.value }))}
-                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-sans"
+                            className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
                           />
                         </div>
                         <div>
-                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Thumbnail URL / Local Image Path</label>
-                          <input
-                            type="text"
-                            value={editForm.hero_image}
-                            onChange={(e) => setEditForm(prev => ({ ...prev, hero_image: e.target.value }))}
-                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
-                          />
+                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Cover Image Path</label>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={editForm.hero_image}
+                              onChange={(e) => setEditForm(prev => ({ ...prev, hero_image: e.target.value }))}
+                              className="flex-1 px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                            />
+                            <label
+                              htmlFor={`upload-${story.story_id}`}
+                              className="px-3 py-2 bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 text-[#EDE8DF] text-[10px] font-mono tracking-wider uppercase rounded cursor-pointer flex items-center justify-center min-w-[80px] active:scale-95 transition-all select-none font-bold"
+                            >
+                              {uploadingState === 'uploading' ? '...' : 'Upload'}
+                            </label>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              id={`upload-${story.story_id}`}
+                              className="hidden"
+                              onChange={(e) => handleUploadImage(e, story.story_id)}
+                              disabled={uploadingState === 'uploading'}
+                            />
+                          </div>
                         </div>
                         <div>
-                          <label className="block text-[10px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Dossier Hook (Narrative Intro)</label>
+                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Intro Hook</label>
                           <textarea
                             value={editForm.hook}
                             onChange={(e) => setEditForm(prev => ({ ...prev, hook: e.target.value }))}
-                            rows={3}
-                            className="w-full px-3 py-2 bg-[#13110E] text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none font-sans leading-relaxed"
+                            rows={2}
+                            className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none"
                           />
                         </div>
-                        <div className="flex gap-2 justify-end pt-2">
+                        <div className="flex gap-2 justify-end pt-1">
                           <button
                             onClick={() => setEditingStoryId(null)}
                             className="px-3 py-1.5 border border-neutral-800 text-[#6A6560] text-[10px] font-bold tracking-wider uppercase rounded hover:bg-white/5 cursor-pointer"
@@ -1041,81 +1132,47 @@ Keep responses concise. Be direct and useful.`;
                           </button>
                           <button
                             onClick={() => handleSaveStory(story.story_id)}
-                            className="px-3 py-1.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-wider uppercase rounded hover:bg-[#b08c5c] cursor-pointer"
+                            className="px-3.5 py-1.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-wider uppercase rounded hover:bg-[#b08c5c] cursor-pointer"
                           >
-                            Save & Push Live
+                            Save
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <>
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-serif italic text-lg text-[#EDE8DF]">{story.title}</span>
-                            <span className="text-[10px] font-mono tracking-widest px-3 py-1 rounded bg-[#1C1A17] text-[#EDE8DF]">
-                              {CATEGORY_LABELS[story.category] || story.category}
-                            </span>
-                            <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded bg-red-950/30 text-red-400">
-                              {story.severity}
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono text-[#6A6560]">Added: {story.added_date}</span>
-                        </div>
-                        
-                        <p className="text-xs text-[#6A6560] mb-4 leading-relaxed max-w-3xl">{story.hook}</p>
-                      </>
-                    )}
-
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {(story.concepts || []).map(c => (
-                        <span key={c} className="text-[10px] font-mono tracking-[0.05em] uppercase px-3 py-1 rounded bg-[#161412] text-amber-200">
-                          {c.replace(/_/g, ' ')}
-                        </span>
-                      ))}              </div>
-
-                    <div className="flex items-center gap-3 pt-3 border-t" style={{ borderColor: ru }}>
-                      <button
-                        onClick={() => setExpandedStoryId(expandedStoryId === story.story_id ? null : story.story_id)}
-                        className="text-[10px] font-bold tracking-wider uppercase text-[#9E7B4C] hover:underline cursor-pointer"
-                      >
-                        {expandedStoryId === story.story_id ? 'Hide Layers' : 'Inspect 7 Layers'}
-                      </button>
-
-                      {editingStoryId !== story.story_id && (
-                        <button
-                          onClick={() => startEditing(story)}
-                          className="text-[10px] font-bold tracking-wider uppercase text-[#9E7B4C] hover:underline cursor-pointer"
-                        >
-                          ✎ Edit Case Details
-                        </button>
-                      )}
-
-                      <button
-                        onClick={() => handleDeleteStory(story.story_id)}
-                        className="text-[10px] font-bold tracking-wider uppercase text-red-500 hover:underline cursor-pointer ml-auto"
-                      >
-                        Delete Story
-                      </button>
-                    </div>
-
-                    {/* Expanded Layer View */}
-                    {expandedStoryId === story.story_id && (
-                      <div className="mt-5 pt-5 border-t border-dashed space-y-4" style={{ borderColor: ru }}>
-                        {story.layers?.map(l => (
-                          <div key={l.layer} className="p-3 bg-neutral-950/40 rounded border" style={{ borderColor: ru }}>
-                            <div className="text-[9px] font-mono font-bold text-[#9E7B4C] mb-1">
-                              LAYER {l.layer} // {l.layer_name}
+                      <div>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="min-w-0">
+                            <span className="font-serif italic text-[#EDE8DF] text-lg block leading-snug">{story.title}</span>
+                            <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
+                              <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
+                                {CATEGORY_LABELS[story.category] || story.category}
+                              </span>
+                              <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-red-950/20 text-red-400 uppercase">
+                                {story.severity}
+                              </span>
+                              {story.added_date && (
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-amber-950/10 text-amber-500 uppercase">
+                                  Published: {story.added_date}
+                                </span>
+                              )}
                             </div>
-                            <p className="text-xs text-[#EDE8DF] leading-relaxed line-clamp-3">
-                              {l.content}
-                            </p>
-                            {l.cliffhanger && (
-                              <div className="text-[10px] font-sans italic text-[#6A6560] mt-2">
-                                Cliffhanger: "{l.cliffhanger}"
-                              </div>
-                            )}
+                            {story.hook && <p className="text-xs text-[#6A6560] mt-2 line-clamp-2 italic">"{story.hook}"</p>}
                           </div>
-                        ))}
+                          <div className="flex gap-2 flex-shrink-0 mt-0.5">
+                            <button
+                              onClick={() => startEditing(story)}
+                              className="text-[10px] font-mono px-2.5 py-1 border border-neutral-800 rounded hover:bg-white/5 text-neutral-400 cursor-pointer"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleDeleteStory(story.story_id)}
+                              className="text-[10px] font-mono px-2.5 py-1 border border-red-950/30 text-red-500 rounded hover:bg-red-950/10 cursor-pointer"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -1127,167 +1184,155 @@ Keep responses concise. Be direct and useful.`;
           {/* Tab 2: Recommendations */}
           {activeTab === 'recommendations' && (
             <div className="space-y-6">
-              <div className="border-b pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" style={{ borderColor: ru }}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3" style={{ borderColor: ru }}>
                 <div>
-                  <h2 className="font-serif italic text-2xl">User Recommended Topics</h2>
-                  <p className="text-xs text-[#6A6560] mt-1">
-                    Topics recommended by users browsing the website.
-                  </p>
+                  <h2 className="font-serif italic text-2xl">
+                    Topic Suggestions ({recommendations.filter(r => r.status === 'pending').length})
+                  </h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Review harvested topics for automated compilation</p>
                 </div>
-                <div className="flex gap-2 self-start sm:self-auto flex-wrap">
+                <div className="flex gap-2">
                   <button
                     onClick={handleHarvestWebTrends}
                     disabled={isHarvesting || isGenerating}
-                    className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-emerald-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
+                    className="px-3 py-1.5 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-emerald-950/20 uppercase transition-all cursor-pointer"
                     style={{ borderColor: 'rgba(52, 211, 153, 0.4)', color: '#34d399' }}
                   >
-                    {isHarvesting ? '📡 Scanning...' : '📡 Harvest Web Trends'}
+                    {isHarvesting ? '📡 Scanning...' : '📡 Harvest'}
                   </button>
                   <button
                     onClick={handleAiAutoClean}
                     disabled={isCleaning || isGenerating}
-                    className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-amber-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2"
+                    className="px-3 py-1.5 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-amber-950/20 uppercase transition-all cursor-pointer"
                     style={{ borderColor: 'rgba(158, 123, 76, 0.4)', color: '#9E7B4C' }}
                   >
-                    {isCleaning ? '✨ Cleaning...' : '✨ AI Auto-Clean'}
+                    {isCleaning ? '✨ Cleaning...' : '✨ AI Clean'}
                   </button>
                 </div>
               </div>
 
-              {recommendations.length === 0 ? (
-                <div className="text-center py-16 border rounded-xl" style={{ borderColor: ru, backgroundColor: '#110F0D' }}>
-                  <p className="font-serif italic text-lg text-[#6A6560] mb-2">No recommendations logged.</p>
-                  <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/50">Submit a recommendation from the home page.</p>
+              {recommendations.filter(r => r.status === 'pending').length === 0 ? (
+                <div className="py-12 text-center bg-black/20 rounded-2xl border border-dashed border-neutral-800">
+                  <p className="font-serif italic text-base text-[#6A6560] mb-2">Queue is clear.</p>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40 max-w-md mx-auto">
+                    The background engine is running. Discovered trends and visitor suggestions will appear here.
+                  </p>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {/* Bulk Actions Bar */}
-                  <div className="flex items-center gap-4 p-3 bg-neutral-950/40 rounded-lg border mb-4 justify-between flex-wrap" style={{ borderColor: ru }}>
+                <>
+                  {/* Select All Toggle bar */}
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-900/40 border border-neutral-800/80 text-xs">
                     <div className="flex items-center gap-3">
                       <input
                         type="checkbox"
-                        checked={selectedRecIds.length === recommendations.length && recommendations.length > 0}
+                        checked={
+                          recommendations.filter(r => r.status === 'pending').length > 0 &&
+                          recommendations.filter(r => r.status === 'pending').every(r => selectedRecs.includes(r.id))
+                        }
                         onChange={(e) => {
                           if (e.target.checked) {
-                            setSelectedRecIds(recommendations.map(r => r.id));
+                            setSelectedRecs(recommendations.filter(r => r.status === 'pending').map(r => r.id));
                           } else {
-                            setSelectedRecIds([]);
+                            setSelectedRecs([]);
                           }
                         }}
-                        className="w-4 h-4 rounded border border-neutral-700 bg-neutral-900 text-[#9E7B4C] focus:ring-0 cursor-pointer"
+                        className="rounded border-neutral-700 bg-neutral-950 text-[#9E7B4C] focus:ring-[#9E7B4C] focus:ring-opacity-25 w-4 h-4 cursor-pointer"
                       />
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">
-                        {selectedRecIds.length} of {recommendations.length} Selected
-                      </span>
+                      <span className="text-[#6A6560] font-mono text-[10px] uppercase tracking-wider">Select All Pending</span>
                     </div>
-                    {selectedRecIds.length > 0 && (
+                    {selectedRecs.length > 0 && (
                       <button
-                        onClick={handleDeleteMultipleRecommendations}
-                        className="px-3 py-1.5 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-red-950/20 uppercase transition-colors text-red-500 cursor-pointer"
-                        style={{ borderColor: 'rgba(139, 47, 47, 0.4)' }}
+                        onClick={handleBulkDeleteRecommendations}
+                        className="px-3 py-1 bg-red-950/40 border border-red-900/50 hover:bg-red-950/80 text-red-400 text-[10px] font-mono font-bold tracking-wider rounded uppercase transition-all cursor-pointer active:scale-95"
                       >
-                        Delete Selected ({selectedRecIds.length})
+                        Delete Selected ({selectedRecs.length})
                       </button>
                     )}
                   </div>
 
-                  {recommendations.map(rec => (
-                    <div
-                      key={rec.id}
-                      className="p-4 rounded-xl border flex items-center justify-between gap-4"
-                      style={{ borderColor: ru, backgroundColor: '#110F0D' }}
-                    >
-                      <div className="flex items-center gap-4">
-                        <input
-                          type="checkbox"
-                          checked={selectedRecIds.includes(rec.id)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedRecIds(prev => [...prev, rec.id]);
-                            } else {
-                              setSelectedRecIds(prev => prev.filter(id => id !== rec.id));
-                            }
-                          }}
-                          className="w-4 h-4 rounded border border-neutral-700 bg-neutral-900 text-[#9E7B4C] focus:ring-0 cursor-pointer"
-                        />
-                        <div>
-                          <span className="font-serif italic text-base block text-[#EDE8DF]">{rec.topic}</span>
-                          <div className="flex gap-2 items-center mt-1">
-                            <span className="text-[9px] font-mono text-[#6A6560]">Logged: {rec.date}</span>
-                            <span className={`text-[8px] font-mono tracking-widest px-2 py-0.5 rounded ${
-                              rec.status === 'generated' ? 'bg-emerald-950/20 text-emerald-400 border border-emerald-900/30' : 'bg-amber-950/20 text-amber-400 border border-amber-900/30'
-                            }`}>
-                              {rec.status?.toUpperCase()}
-                            </span>
+                  <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+                    {recommendations.filter(r => r.status === 'pending').map(rec => (
+                      <div
+                        key={rec.id}
+                        className="p-4 rounded-xl border flex items-center justify-between gap-4 transition-all hover:bg-black/10"
+                        style={{ borderColor: ru, backgroundColor: '#0D0B08' }}
+                      >
+                        <div className="flex items-center gap-4 min-w-0 flex-1">
+                          <input
+                            type="checkbox"
+                            checked={selectedRecs.includes(rec.id)}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setSelectedRecs(prev => [...prev, rec.id]);
+                              } else {
+                                setSelectedRecs(prev => prev.filter(id => id !== rec.id));
+                              }
+                            }}
+                            className="rounded border-neutral-700 bg-neutral-950 text-[#9E7B4C] focus:ring-[#9E7B4C] focus:ring-opacity-25 w-4 h-4 cursor-pointer flex-shrink-0"
+                          />
+                          <div className="min-w-0 flex-1">
+                            <span className="font-serif italic text-base text-[#EDE8DF] block leading-snug">{rec.topic}</span>
+                            <span className="text-[9px] font-mono text-[#6A6560] block mt-1">Logged: {rec.date}</span>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        {rec.status !== 'generated' && (
+                        <div className="flex gap-2 flex-shrink-0">
                           <button
                             onClick={() => {
-                              setActiveTab('generator');
                               setGenTopic(rec.topic);
+                              setActiveTab('generator');
                             }}
-                            className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-white/5 uppercase transition-colors whitespace-nowrap cursor-pointer"
-                            style={{ borderColor: ru, color: ac }}
+                            className="px-3 py-1.5 bg-[#9E7B4C] text-white text-[10px] font-mono font-bold tracking-wider hover:bg-[#b08c5c] rounded uppercase transition-all cursor-pointer active:scale-95"
                           >
-                            Send to Engine
+                            Review & Gen
                           </button>
-                        )}
-                        <button
-                          onClick={() => handleDeleteRecommendation(rec.id)}
-                          className="px-4 py-2 border rounded text-xs font-mono font-bold tracking-wider hover:bg-red-950/20 uppercase transition-colors whitespace-nowrap cursor-pointer"
-                          style={{ borderColor: 'rgba(139, 47, 47, 0.4)', color: '#8B2F2F' }}
-                        >
-                          Delete
-                        </button>
+                          <button
+                            onClick={() => handleDeleteRecommendation(rec.id)}
+                            className="px-3 py-1.5 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-red-950/20 uppercase transition-all cursor-pointer text-red-500"
+                            style={{ borderColor: 'rgba(139, 47, 47, 0.4)' }}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           )}
 
-          {/* Tab 3: Content Generator Console */}
+          {/* Tab 3: Manual Compiler */}
           {activeTab === 'generator' && (
             <div className="space-y-6">
               <div className="border-b pb-4" style={{ borderColor: ru }}>
-                <h2 className="font-serif italic text-2xl">AI Content Engine</h2>
-                <p className="text-xs text-[#6A6560] mt-1">
-                  Trigger immediate AI case generation or simulate the nightly cron run.
-                </p>
+                <h2 className="font-serif italic text-2xl">Manual Dossier Compiler</h2>
+                <p className="text-xs text-[#6A6560] mt-1">Directly generate a 7-layer story for any specific topic</p>
               </div>
 
-              {/* Form Config */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-xl border bg-[#110F0D]" style={{ borderColor: ru }}>
-                
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#0D0B08] p-6 rounded-2xl border" style={{ borderColor: ru }}>
                 <div className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#6A6560] block mb-2">
+                    <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
                       Dossier Topic / Keyword
                     </label>
                     <input
                       type="text"
                       value={genTopic}
                       onChange={(e) => setGenTopic(e.target.value)}
-                      placeholder="e.g. Project MKUltra, The Salem Witch Trials..."
-                      className="w-full px-4 py-2 bg-neutral-900 text-[#EDE8DF] text-sm rounded-lg border focus:border-[#9E7B4C] focus:outline-none transition-colors"
-                      style={{ borderColor: ru }}
+                      placeholder="e.g. Project MKUltra, Salem Witch Trials..."
+                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none transition-colors"
                       disabled={isGenerating}
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#6A6560] block mb-2">
+                    <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
                       Topic Category
                     </label>
                     <select
                       value={genCategory}
                       onChange={(e) => setGenCategory(e.target.value)}
-                      className="w-full px-4 py-2 bg-neutral-900 text-[#EDE8DF] text-sm rounded-lg border focus:border-[#9E7B4C] focus:outline-none cursor-pointer"
-                      style={{ borderColor: ru }}
+                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none cursor-pointer"
                       disabled={isGenerating}
                     >
                       <option value="auto">Auto-Detect</option>
@@ -1298,27 +1343,26 @@ Keep responses concise. Be direct and useful.`;
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#6A6560] block mb-2">
+                    <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
                       Severity Rating
                     </label>
                     <select
                       value={genSeverity}
                       onChange={(e) => setGenSeverity(e.target.value)}
-                      className="w-full px-4 py-2 bg-neutral-900 text-[#EDE8DF] text-sm rounded-lg border focus:border-[#9E7B4C] focus:outline-none cursor-pointer"
-                      style={{ borderColor: ru }}
+                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none cursor-pointer"
                       disabled={isGenerating}
                     >
                       <option value="auto">Auto-Detect</option>
                       <option value="unsettling">Unsettling</option>
                       <option value="disturbing">Disturbing</option>
-                      <option value="extreme">Extreme</option>
+                      <option value="chilling">Chilling</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#6A6560] block mb-2">
+                    <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
                       Gemini API Key
                     </label>
                     <input
@@ -1326,146 +1370,182 @@ Keep responses concise. Be direct and useful.`;
                       value={apiKey}
                       onChange={(e) => setApiKey(e.target.value)}
                       placeholder="Insert VITE_GEMINI_API_KEY..."
-                      className="w-full px-4 py-2 bg-neutral-900 text-[#EDE8DF] text-sm rounded-lg border focus:border-[#9E7B4C] focus:outline-none font-mono"
-                      style={{ borderColor: ru }}
+                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
                       disabled={isGenerating}
                     />
-                    <p className="text-[9px] text-[#6A6560] mt-1">
-                      Read from your .env file or input here to generate directly in browser.
-                    </p>
                   </div>
 
-                  <div className="pt-4 flex flex-col sm:flex-row gap-3">
+                  <div className="pt-2">
                     <button
                       onClick={() => handleGenerateStory()}
                       disabled={isGenerating || autoStatus.isRunning || !genTopic}
-                      className="flex-1 py-3 bg-[#9E7B4C] text-white text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-[#b08c5c] active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
+                      className="w-full py-2 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-widest uppercase rounded hover:bg-[#b08c5c] active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
                     >
-                      Generate Story
-                    </button>
-                    <button
-                      onClick={handleTriggerAutomation}
-                      disabled={isGenerating || autoStatus.isRunning}
-                      className="flex-1 py-3 border text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-white/5 active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
-                      style={{ borderColor: ru }}
-                    >
-                      {autoStatus.isRunning ? '⚡ Running...' : 'Trigger Full Automation'}
+                      Compile Story
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* Progress and Logger console */}
-              {(isGenerating || autoStatus.isRunning || autoLogs.length > 0 || logs.length > 0) && (
-                <div className="space-y-3">
-                  <div className="flex justify-between text-[10px] font-mono text-[#6A6560]">
-                    <span>
-                      {isGenerating ? `Manual Generation Logs (Elapsed: ${elapsedTime}s)` : 'Server Automated Engine Logs'}
-                    </span>
-                    <span>{isGenerating ? `${progress}%` : autoStatus.isRunning ? 'RUNNING' : 'STANDBY'}</span>
+              {/* Progress and Logger console for Manual Generation */}
+              {isGenerating && (
+                <div className="p-4 rounded-xl border bg-neutral-950/20" style={{ borderColor: ru }}>
+                  <div className="flex justify-between text-[9px] font-mono text-[#6A6560] mb-2">
+                    <span>Manual Compilation Logs (Elapsed: {elapsedTime}s)</span>
+                    <span>{progress}%</span>
                   </div>
                   
-                  {/* Progress bar */}
-                  {isGenerating && (
-                    <div className="w-full h-[3px] bg-neutral-900 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#9E7B4C] transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                  )}
+                  <div className="w-full h-[2px] bg-neutral-900 rounded-full overflow-hidden mb-3">
+                    <div className="h-full bg-[#9E7B4C] transition-all duration-300" style={{ width: `${progress}%` }} />
+                  </div>
 
-                  {/* Terminal console */}
-                  <div className="p-4 bg-black rounded-lg border font-mono text-[11px] leading-relaxed space-y-1 h-[240px] overflow-y-auto" style={{ borderColor: ru }}>
-                    {(isGenerating ? logs : autoLogs).map((log, idx) => (
+                  <div 
+                    className="p-3 bg-black rounded-lg border border-neutral-900 font-mono text-[10px] leading-relaxed space-y-1 h-[180px] overflow-y-auto crt-overlay pr-3"
+                    style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
+                  >
+                    {logs.map((log, idx) => (
                       <div
                         key={idx}
                         className={
                           log.includes('ERROR') || log.includes('warning') || log.includes('Warning') ? 'text-red-400' :
                           log.includes('SUCCESS') || log.includes('SUCCESS:') || log.includes('Success') || log.includes('AI Cleaned:') ? 'text-emerald-400' :
-                          log.includes('Starting generation') || log.includes('Phase') || log.includes('Generating Story') ? 'text-[#9E7B4C] font-bold mt-2' :
+                          log.includes('Starting generation') || log.includes('Phase') || log.includes('Generating Story') ? 'text-[#9E7B4C] font-bold mt-1' :
                           'text-neutral-300'
                         }
                       >
                         {log}
                       </div>
                     ))}
-                    {(isGenerating || autoStatus.isRunning) && (
-                      <div className="text-neutral-500 animate-pulse mt-1">▋ Executing engine thread...</div>
-                    )}
+                    <div className="text-neutral-500 animate-pulse mt-1">▋ Executing manual engine thread...</div>
+                    <div ref={manualLogsEndRef} />
                   </div>
                 </div>
               )}
-
             </div>
           )}
 
-          {/* ── Tab: User Feedback ── */}
+          {/* Tab 4: Automation Console */}
+          {activeTab === 'automation' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3" style={{ borderColor: ru }}>
+                <div>
+                  <h2 className="font-serif italic text-2xl">Automation Console</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Supervise background writer engine</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <label className="inline-flex items-center cursor-pointer select-none">
+                    <span className="text-[10px] font-mono tracking-wider uppercase text-neutral-400 mr-2">
+                      AUTO WRITER
+                    </span>
+                    <div className="relative">
+                      <input
+                        type="checkbox"
+                        checked={!!autoStatus.enabled}
+                        onChange={handleToggleAutomation}
+                        className="sr-only peer"
+                      />
+                      <div className="w-8 h-4.5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#EDE8DF] after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#9E7B4C]" />
+                    </div>
+                  </label>
+                  <button
+                    onClick={handleTriggerAutomation}
+                    disabled={isGenerating || autoStatus.isRunning}
+                    className="px-3 py-1.5 bg-neutral-900 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-white/5 disabled:opacity-40 transition-all uppercase cursor-pointer"
+                    style={{ borderColor: ru }}
+                  >
+                    {autoStatus.isRunning ? '⚡ Running...' : 'Force Run'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Logs output */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-[10px] font-mono">
+                  <span className="text-neutral-500">Live background thread logs</span>
+                  <span className="text-emerald-400 animate-pulse">● LOG MONITOR</span>
+                </div>
+                <div 
+                  className="p-4 bg-black rounded-lg border border-neutral-900 font-mono text-xs leading-relaxed space-y-1 h-[400px] overflow-y-auto crt-overlay pr-4"
+                  style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
+                >
+                  {autoLogs.slice(-50).map((log, idx) => (
+                    <div
+                      key={idx}
+                      className={
+                        log.includes('ERROR') || log.includes('warning') || log.includes('Warning') ? 'text-red-400' :
+                        log.includes('SUCCESS') || log.includes('SUCCESS:') || log.includes('Success') || log.includes('AI Cleaned:') ? 'text-emerald-400' :
+                        log.includes('Starting generation') || log.includes('Phase') || log.includes('Generating Story') ? 'text-[#9E7B4C] font-bold mt-1' :
+                        'text-neutral-300'
+                      }
+                    >
+                      {log}
+                    </div>
+                  ))}
+                  {autoStatus.isRunning && (
+                    <div className="text-neutral-500 animate-pulse mt-1">▋ Executing engine thread...</div>
+                  )}
+                  <div ref={autoLogsEndRef} />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 5: User Feedback */}
           {activeTab === 'feedback' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
                 <div>
-                  <h2 className="font-serif italic text-2xl">User Feedback</h2>
-                  <p className="text-xs font-mono mt-1" style={{ color: mu }}>Site-wide ratings and notes from visitors</p>
+                  <h2 className="font-serif italic text-2xl">
+                    User Feedback ({feedbackItems.filter(f => !f.addressed).length})
+                  </h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Review ratings and comments from readers</p>
                 </div>
-                <div className="flex items-center gap-4">
-                  {feedbackItems.length > 0 && (
-                    <span className="text-xs font-mono" style={{ color: ac }}>
-                      {feedbackItems.filter(f => !f.addressed).length} unaddressed
-                    </span>
-                  )}
-                  <button
-                    onClick={async () => {
-                      setFeedbackLoading(true);
-                      try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
-                      setFeedbackLoading(false);
-                    }}
-                    className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer" style={{ borderColor: ru }}
-                  >⟳ Refresh</button>
-                </div>
+                <button
+                  onClick={async () => {
+                    setFeedbackLoading(true);
+                    try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
+                    setFeedbackLoading(false);
+                  }}
+                  className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
+                  style={{ borderColor: ru }}
+                >
+                  ⟳ Refresh
+                </button>
               </div>
 
               {feedbackLoading ? (
-                <div className="text-center py-16 text-[#6A6560] font-mono text-xs animate-pulse">Loading feedback...</div>
+                <div className="text-center py-12 text-[#6A6560] font-mono text-xs animate-pulse">Loading feedback...</div>
               ) : feedbackItems.length === 0 ? (
-                <div className="text-center py-16">
-                  <p className="font-serif italic text-xl opacity-40">No feedback filed yet.</p>
-                  <p className="text-[10px] font-mono uppercase tracking-widest mt-2 opacity-20">The archive awaits your first visitor's voice.</p>
+                <div className="py-12 text-center bg-black/20 rounded-2xl border border-dashed border-neutral-800">
+                  <p className="font-serif italic text-base text-[#6A6560] mb-2">No feedback yet.</p>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40">Visitor comments will be loaded here.</p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
                   {feedbackItems.map(fb => (
-                    <div key={fb.id}
-                      className="p-4 rounded-xl border"
-                      style={{ borderColor: fb.addressed ? 'rgba(237,232,223,0.04)' : 'rgba(158,123,76,0.2)', backgroundColor: fb.addressed ? 'rgba(255,255,255,0.01)' : 'rgba(158,123,76,0.03)', opacity: fb.addressed ? 0.5 : 1 }}>
+                    <div
+                      key={fb.id}
+                      className="p-4 rounded-xl border flex flex-col gap-2 transition-all hover:bg-black/10"
+                      style={{
+                        borderColor: fb.addressed ? 'rgba(237,232,223,0.03)' : 'rgba(158,123,76,0.15)',
+                        backgroundColor: fb.addressed ? 'transparent' : 'rgba(158,123,76,0.02)',
+                        opacity: fb.addressed ? 0.6 : 1
+                      }}
+                    >
                       <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 min-w-0">
-                          {/* Rating dots */}
-                          <div className="flex items-center gap-1.5 mb-2">
-                            {[1,2,3,4,5].map(n => (
-                              <div key={n} className="w-2 h-2 rounded-full" style={{ backgroundColor: n <= fb.rating ? ac : 'rgba(237,232,223,0.1)' }} />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            {[1, 2, 3, 4, 5].map(n => (
+                              <div key={n} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: n <= fb.rating ? ac : 'rgba(237,232,223,0.1)' }} />
                             ))}
-                            <span className="text-[10px] font-mono ml-2" style={{ color: mu }}>{fb.rating}/5</span>
-                            {fb.addressed && <span className="text-[9px] font-mono ml-3 px-2 py-0.5 rounded" style={{ color: ac, backgroundColor: `${ac}15` }}>ADDRESSED</span>}
+                            <span className="text-[10px] font-mono text-[#6A6560]">{fb.rating}/5</span>
+                            {fb.addressed && <span className="text-[8px] font-mono px-2 py-0.5 rounded text-amber-500 bg-amber-500/10">ADDRESSED</span>}
                           </div>
-                          {/* Tags */}
-                          {fb.tags && fb.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mb-2">
-                              {fb.tags.map(t => (
-                                <span key={t} className="text-[8px] font-mono px-2 py-0.5 rounded border" style={{ borderColor: 'rgba(237,232,223,0.08)', color: mu }}>
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                          {/* Note */}
-                          {fb.note && <p className="text-xs font-sans italic leading-relaxed" style={{ color: fg, opacity: 0.8 }}>"{fb.note}"</p>}
-                          {/* Meta */}
-                          <p className="text-[9px] font-mono mt-2 opacity-35" style={{ color: mu }}>
-                            {new Date(fb.timestamp).toLocaleString()} · {fb.page}
-                          </p>
+                          {fb.note && <p className="text-sm font-sans italic mt-2 text-neutral-300">"{fb.note}"</p>}
+                          <span className="text-[9px] font-mono text-[#6A6560] block mt-2">
+                            {new Date(fb.timestamp).toLocaleDateString()} · {fb.page}
+                          </span>
                         </div>
-                        {/* Actions */}
                         <div className="flex flex-col gap-1.5 flex-shrink-0">
                           <button
                             onClick={async () => {
@@ -1474,9 +1554,11 @@ Keep responses concise. Be direct and useful.`;
                                 setFeedbackItems(prev => prev.map(f => f.id === fb.id ? { ...f, addressed: !f.addressed } : f));
                               } catch { /* ignore */ }
                             }}
-                            className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer whitespace-nowrap"
-                            style={{ borderColor: 'rgba(158,123,76,0.3)', color: ac }}
-                          >{fb.addressed ? 'Reopen' : '✓ Address'}</button>
+                            className="text-[10px] font-mono px-2.5 py-1 border rounded hover:bg-white/5 cursor-pointer text-[#9E7B4C] transition-all"
+                            style={{ borderColor: 'rgba(158,123,76,0.3)' }}
+                          >
+                            {fb.addressed ? 'Reopen' : '✓ Address'}
+                          </button>
                           <button
                             onClick={async () => {
                               if (!window.confirm('Delete this feedback?')) return;
@@ -1485,9 +1567,11 @@ Keep responses concise. Be direct and useful.`;
                                 setFeedbackItems(prev => prev.filter(f => f.id !== fb.id));
                               } catch { /* ignore */ }
                             }}
-                            className="text-[9px] font-mono px-2 py-1 border rounded hover:bg-white/5 cursor-pointer"
-                            style={{ borderColor: 'rgba(139,47,47,0.3)', color: '#8B2F2F' }}
-                          >Delete</button>
+                            className="text-[10px] font-mono px-2.5 py-1 border rounded hover:bg-white/5 cursor-pointer text-red-500 transition-all"
+                            style={{ borderColor: 'rgba(139,47,47,0.3)' }}
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1497,22 +1581,19 @@ Keep responses concise. Be direct and useful.`;
             </div>
           )}
 
-          {/* ── Tab: AI Co-Editor ── */}
+          {/* Tab 6: AI Co-Editor Chat */}
           {activeTab === 'ai-editor' && (
             <div className="flex flex-col h-full" style={{ minHeight: '600px' }}>
               <div className="border-b pb-4 mb-4" style={{ borderColor: ru }}>
                 <h2 className="font-serif italic text-2xl">AI Co-Editor</h2>
-                <p className="text-xs font-mono mt-1" style={{ color: mu }}>
-                  Reads all stories + feedback. Can edit, regenerate images, fetch evidence.
-                </p>
+                <p className="text-xs text-[#6A6560] mt-1">Direct the AI to research topics, edit details, or generate images</p>
               </div>
 
-              {/* Message thread */}
-              <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" style={{ maxHeight: '400px' }}>
+              <div className="flex-1 flex flex-col space-y-4 max-h-[400px] overflow-y-auto pr-1 mb-4">
                 {aiMessages.map((msg, i) => (
                   <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     <div
-                      className="max-w-[85%] px-4 py-3 rounded-xl text-sm font-sans leading-relaxed whitespace-pre-wrap"
+                      className="max-w-[85%] px-4 py-3 rounded-xl text-xs font-sans leading-relaxed whitespace-pre-wrap"
                       style={{
                         backgroundColor: msg.role === 'user' ? 'rgba(158,123,76,0.15)' : 'rgba(255,255,255,0.04)',
                         borderRadius: msg.role === 'user' ? '16px 16px 4px 16px' : '4px 16px 16px 16px',
@@ -1526,21 +1607,16 @@ Keep responses concise. Be direct and useful.`;
                 ))}
                 {aiLoading && (
                   <div className="flex justify-start">
-                    <div className="px-4 py-3 rounded-xl text-xs font-mono animate-pulse" style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: mu }}>
+                    <div className="px-4 py-2 rounded-xl text-[10px] font-mono animate-pulse" style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: mu }}>
                       Analyzing archive...
                     </div>
                   </div>
                 )}
-                {/* Proposal card */}
+                
                 {aiProposal && (
                   <div className="p-4 rounded-xl border" style={{ borderColor: 'rgba(158,123,76,0.4)', backgroundColor: 'rgba(158,123,76,0.06)' }}>
-                    <p className="text-[10px] font-mono tracking-wider uppercase mb-2" style={{ color: ac }}>Proposed Change</p>
-                    <p className="text-sm font-sans leading-relaxed mb-3" style={{ color: fg }}>{aiProposal.description}</p>
-                    {aiProposal.preview && (
-                      <pre className="text-[11px] font-mono p-3 rounded mb-3 overflow-x-auto" style={{ backgroundColor: 'rgba(0,0,0,0.3)', color: mu, maxHeight: '120px' }}>
-                        {typeof aiProposal.preview === 'string' ? aiProposal.preview : JSON.stringify(aiProposal.preview, null, 2)}
-                      </pre>
-                    )}
+                    <p className="text-[9px] font-mono tracking-wider uppercase mb-1" style={{ color: ac }}>Proposed Change</p>
+                    <p className="text-xs font-sans mb-3" style={{ color: fg }}>{aiProposal.description}</p>
                     <div className="flex gap-3">
                       <button
                         onClick={async () => {
@@ -1552,24 +1628,21 @@ Keep responses concise. Be direct and useful.`;
                             });
                             if (r.ok) {
                               if (refetchStories) refetchStories();
-                              setAiMessages(prev => [...prev, { role: 'assistant', text: `✓ Applied! The change to "${aiProposal.storyId}" is now live. Refresh the site to see it.` }]);
+                              setAiMessages(prev => [...prev, { role: 'assistant', text: `✓ Applied change to "${aiProposal.storyId}" successfully!` }]);
                               setAiProposal(null);
-                            } else {
-                              setAiMessages(prev => [...prev, { role: 'assistant', text: 'Failed to apply — is the server running?' }]);
                             }
                           } catch (err) {
                             setAiMessages(prev => [...prev, { role: 'assistant', text: `Error: ${err.message}` }]);
                           }
                         }}
-                        className="px-4 py-2 rounded-lg text-[10px] font-mono tracking-wider uppercase cursor-pointer"
-                        style={{ backgroundColor: 'rgba(158,123,76,0.2)', border: '1px solid rgba(158,123,76,0.4)', color: ac }}
+                        className="px-3 py-1.5 rounded bg-[#9E7B4C] text-white text-[9px] font-mono font-bold uppercase cursor-pointer"
                       >
-                        ✓ Apply Changes
+                        ✓ Apply
                       </button>
                       <button
                         onClick={() => setAiProposal(null)}
-                        className="px-4 py-2 rounded-lg text-[10px] font-mono tracking-wider uppercase cursor-pointer hover:bg-white/5"
-                        style={{ border: '1px solid rgba(237,232,223,0.08)', color: mu }}
+                        className="px-3 py-1.5 rounded border text-[9px] font-mono uppercase cursor-pointer hover:bg-white/5"
+                        style={{ borderColor: ru }}
                       >
                         Discard
                       </button>
@@ -1578,34 +1651,23 @@ Keep responses concise. Be direct and useful.`;
                 )}
               </div>
 
-              {/* Input */}
-              <div className="flex gap-3 mt-auto">
-                <textarea
+              <div className="flex gap-3">
+                <input
+                  type="text"
                   value={aiInput}
                   onChange={e => setAiInput(e.target.value)}
                   onKeyDown={e => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      if (aiInput.trim() && !aiLoading) handleAiCoEdit();
+                    if (e.key === 'Enter' && aiInput.trim() && !aiLoading) {
+                      handleAiCoEdit();
                     }
                   }}
-                  placeholder="Tell the AI what to change... (Enter to send, Shift+Enter for newline)"
-                  rows={2}
-                  className="flex-1 px-4 py-3 text-sm rounded-xl border resize-none focus:outline-none transition-colors"
-                  style={{
-                    backgroundColor: 'rgba(255,255,255,0.03)',
-                    borderColor: 'rgba(237,232,223,0.08)',
-                    color: fg,
-                    caretColor: ac,
-                  }}
-                  onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.3)'; }}
-                  onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.08)'; }}
+                  placeholder="Ask AI to make changes or look up papers..."
+                  className="flex-1 px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none"
                 />
                 <button
                   onClick={handleAiCoEdit}
                   disabled={!aiInput.trim() || aiLoading}
-                  className="px-4 py-3 rounded-xl text-xs font-mono tracking-wider uppercase transition-all active:scale-95 disabled:opacity-30 cursor-pointer"
-                  style={{ backgroundColor: 'rgba(158,123,76,0.15)', border: '1px solid rgba(158,123,76,0.3)', color: ac }}
+                  className="px-4 py-2 rounded bg-neutral-900 border border-neutral-800 text-[10px] font-mono font-bold uppercase transition-all active:scale-95 disabled:opacity-30 cursor-pointer text-[#9E7B4C]"
                 >
                   Send
                 </button>

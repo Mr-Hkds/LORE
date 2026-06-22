@@ -385,7 +385,7 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
       
       const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${item.topic}".
 Suggested Category: ${item.category} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
-Severity Level: unsettling, disturbing, or extreme
+Severity Level: unsettling, disturbing, or chilling
 
 CRITICAL LANGUAGE RULE: Write all story content (including title, hook, layer names, layer content, cliffhangers, and transition lines) in high-quality, engaging Hinglish (Hindi written in the English/Latin alphabet, naturally blended with English words as spoken by urban Indians). For example, write "Living room mein family ke 11 members hanging position mein mile" instead of "Eleven family members were found hanging in the living room." The tone should be extremely dark, conversational, and dramatic, like a local podcast host or YouTube narrator telling a mystery story in Hinglish. Keep it facts-based and true; do NOT fabricate.
 
@@ -401,7 +401,7 @@ Structure the story exactly in the following JSON format:
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
-  "severity": "unsettling | disturbing | extreme",
+  "severity": "unsettling | disturbing | chilling",
   "layers": [
     {
       "layer": 1,
