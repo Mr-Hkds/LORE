@@ -624,10 +624,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           const res = await fetch(url, {
             headers: {
               'Authorization': `Bearer ${token}`,
-              'Accept': 'application/vnd.github.v3+json',
-              'Cache-Control': 'no-cache, no-store, must-revalidate',
-              'Pragma': 'no-cache',
-              'Expires': '0'
+              'Accept': 'application/vnd.github.v3+json'
             }
           });
           if (res.ok) {
@@ -725,10 +722,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const resRemote = await fetch(remoteStoriesUrl, {
           headers: {
             'Authorization': `Bearer ${ghToken}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
+            'Accept': 'application/vnd.github.v3+json'
           }
         });
         if (resRemote.ok) {
