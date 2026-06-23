@@ -165,16 +165,6 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       status: 'pending'
     };
 
-    // Save to localStorage
-    try {
-      const existing = localStorage.getItem('lore:recommendations');
-      const recs = existing ? JSON.parse(existing) : [];
-      recs.push(newRec);
-      localStorage.setItem('lore:recommendations', JSON.stringify(recs));
-    } catch (err) {
-      console.error(err);
-    }
-
     // Try posting to local API
     try {
       const res = await fetch('/api/recommendations', {
@@ -185,7 +175,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       if (res.ok) {
         const data = await res.json();
         if (data.duplicate) {
-          setSubmitStatus(data.status === 'generated' ? 'duplicate_generated' : 'duplicate_pending');
+          setSubmitStatus('duplicate');
         } else {
           setSubmitStatus('success');
         }
@@ -193,7 +183,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         setSubmitStatus('success'); // Fallback to local success
       }
     } catch (err) {
-      console.warn('API submission failed, fell back to localStorage:', err);
+      console.warn('API submission failed:', err);
       setSubmitStatus('success');
     }
 
@@ -583,14 +573,9 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 ✓ Success: Topic logged. The archive is expanding.
               </div>
             )}
-            {submitStatus === 'duplicate_pending' && (
+            {submitStatus === 'duplicate' && (
               <div className="mt-3 text-[11px] text-[#C4644A] font-mono tracking-widest uppercase fade-in">
-                ⚠ Already in queue. The engine is investigating.
-              </div>
-            )}
-            {submitStatus === 'duplicate_generated' && (
-              <div className="mt-3 text-[11px] text-[#8F8A82] font-mono tracking-widest uppercase fade-in">
-                🛈 Archive already contains this topic.
+                ⚠ We already have it in database.
               </div>
             )}
           </div>

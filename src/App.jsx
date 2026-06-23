@@ -78,7 +78,7 @@ export default function App() {
         combined.push(ls);
       }
     });
-    return combined.filter(s => !deletedStories.includes(s.story_id));
+    return combined.filter(s => !deletedStories.includes(s.story_id) && !s.draft);
   }, [allStories, localStories, deletedStories]);
 
   const categoryCounts = useMemo(() => {

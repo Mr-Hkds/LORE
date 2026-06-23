@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const db = require('./db.cjs');
 
 const PORT = 3001;
 const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
@@ -52,18 +53,6 @@ function ensureFiles() {
   const contentDir = path.dirname(STORIES_FILE);
   if (!fs.existsSync(contentDir)) {
     fs.mkdirSync(contentDir, { recursive: true });
-  }
-  if (!fs.existsSync(STORIES_FILE)) {
-    fs.writeFileSync(STORIES_FILE, JSON.stringify({ stories: [] }, null, 2));
-  }
-  if (!fs.existsSync(CONCEPTS_FILE)) {
-    fs.writeFileSync(CONCEPTS_FILE, JSON.stringify({}, null, 2));
-  }
-  if (!fs.existsSync(FEEDBACK_FILE)) {
-    fs.writeFileSync(FEEDBACK_FILE, JSON.stringify([], null, 2));
-  }
-  if (!fs.existsSync(RECOMMENDATIONS_FILE)) {
-    fs.writeFileSync(RECOMMENDATIONS_FILE, JSON.stringify([], null, 2));
   }
   writeAutomationStatus('standby', '');
 }
@@ -202,25 +191,6 @@ function cleanAndParseJSON(text) {
   }
 }
 
-// Rebuild Concept Index
-function updateConceptIndex(stories) {
-  const conceptIndex = {};
-  stories.forEach(story => {
-    if (story.concepts) {
-      story.concepts.forEach(concept => {
-        const c = concept.trim().toLowerCase();
-        if (!conceptIndex[c]) {
-          conceptIndex[c] = [];
-        }
-        if (!conceptIndex[c].includes(story.story_id)) {
-          conceptIndex[c].push(story.story_id);
-        }
-      });
-    }
-  });
-  writeJson(CONCEPTS_FILE, conceptIndex);
-}
-
 // --- GEMINI BACKGROUND AUTO-GENERATION ENGINE ---
 async function runAutomation(isManual = false) {
   if (isAutomationRunning) return;
@@ -238,11 +208,9 @@ async function runAutomation(isManual = false) {
     writeAutomationStatus('failed', 'Gemini API key is missing');
     return;
   }
-
   try {
     // 1. Read existing database
-    const storiesData = readJson(STORIES_FILE) || { stories: [] };
-    const list = storiesData.stories || [];
+    const list = db.getStories(true); // Get all, including drafts
 
     // 2. Count categories to balance coverage
     const categories = ['psychology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
@@ -272,7 +240,7 @@ async function runAutomation(isManual = false) {
     let pendingTopicsText = '';
     let recs = [];
     try {
-      recs = readJson(RECOMMENDATIONS_FILE) || [];
+      recs = db.getRecommendations();
       const pendingRecs = recs.filter(r => r.status === 'pending');
       if (pendingRecs.length > 0) {
         pendingTopicsText = pendingRecs.slice(0, 5).map(r => `"- Topic: '${r.topic}', Recommendation ID: '${r.id}'"`).join('\n');
@@ -411,18 +379,14 @@ async function runAutomation(isManual = false) {
       storyObj.hero_image = 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
     }
 
-    // 6. Save story to file
-    storiesData.stories = storiesData.stories.filter(s => s.story_id !== storyObj.story_id);
-    storiesData.stories.push(storyObj);
-    writeJson(STORIES_FILE, storiesData);
-    updateConceptIndex(storiesData.stories);
+    // 6. Save story to SQLite as a DRAFT!
+    storyObj.draft = true;
+    db.insertStory(storyObj);
 
     // 7. Auto-delete the chosen recommendation from the queue
     if (storyObj.chosen_recommendation_id) {
       try {
-        const freshRecs = readJson(RECOMMENDATIONS_FILE) || [];
-        const filteredRecs = freshRecs.filter(r => r.id !== storyObj.chosen_recommendation_id);
-        writeJson(RECOMMENDATIONS_FILE, filteredRecs);
+        db.deleteRecommendation(storyObj.chosen_recommendation_id);
         addAutomationLog(`[RECOMMENDATION] Auto-deleted generated topic from queue (ID: ${storyObj.chosen_recommendation_id})`);
       } catch (err) {
         console.error('[Automation] Failed to clean recommendation from queue:', err.message);
@@ -430,25 +394,21 @@ async function runAutomation(isManual = false) {
     } else {
       // Fallback: search and clean matching topics by title/similarity just in case
       try {
-        const freshRecs = readJson(RECOMMENDATIONS_FILE) || [];
+        const freshRecs = db.getRecommendations();
         const storyTitle = storyObj.title.trim().toLowerCase();
-        const initialLen = freshRecs.length;
-        const filteredRecs = freshRecs.filter(r => {
+        for (const r of freshRecs) {
           const recTopic = r.topic.trim().toLowerCase();
-          return recTopic !== storyTitle && 
-                 !storyTitle.includes(recTopic) && 
-                 !recTopic.includes(storyTitle);
-        });
-        if (filteredRecs.length < initialLen) {
-          writeJson(RECOMMENDATIONS_FILE, filteredRecs);
-          addAutomationLog(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${storyObj.title}")`);
+          if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
+            db.deleteRecommendation(r.id);
+            addAutomationLog(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${storyObj.title}")`);
+          }
         }
       } catch (err) {
         // ignore
       }
     }
 
-    addAutomationLog(`SUCCESS: Story "${storyObj.title}" successfully added to archive.`);
+    addAutomationLog(`SUCCESS: Story "${storyObj.title}" successfully added to drafts queue.`);
     isAutomationRunning = false;
     writeAutomationStatus('standby', '');
 
@@ -666,7 +626,6 @@ const server = http.createServer(async (req, res) => {
     }
     return;
   }
-
   // Route: POST /api/stories/react
   if (req.method === 'POST' && pathname === '/api/stories/react') {
     try {
@@ -676,8 +635,7 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'Missing story_id or reaction_type' }));
         return;
       }
-      const storiesData = readJson(STORIES_FILE) || { stories: [] };
-      const story = storiesData.stories.find(s => s.story_id === story_id);
+      const story = db.getStory(story_id);
       if (story) {
         if (!story.reactions) {
           story.reactions = { gripping: 0, scared: 0, mindblown: 0, like: 0 };
@@ -687,7 +645,13 @@ const server = http.createServer(async (req, res) => {
         } else {
           story.reactions[reaction_type] = (story.reactions[reaction_type] || 0) + 1;
         }
-        writeJson(STORIES_FILE, storiesData);
+        db.updateStory(story_id, { reactions: story.reactions });
+        
+        // Export updated story to stories.json (only if it's not a draft)
+        if (!story.draft) {
+          db.exportStoriesToJSON();
+        }
+
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true, reactions: story.reactions }));
       } else {
@@ -703,7 +667,7 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/feedback
   if (req.method === 'GET' && pathname === '/api/feedback') {
-    const fb = readJson(FEEDBACK_FILE) || [];
+    const fb = db.getFeedback();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(fb));
     return;
@@ -720,10 +684,8 @@ const server = http.createServer(async (req, res) => {
       }
       entry.id = entry.id || ('fb_' + Date.now());
       entry.timestamp = entry.timestamp || new Date().toISOString();
-      entry.addressed = false;
-      const feedback = readJson(FEEDBACK_FILE) || [];
-      feedback.unshift(entry);
-      writeJson(FEEDBACK_FILE, feedback);
+      entry.addressed = entry.addressed || false;
+      db.insertFeedback(entry);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
     } catch (err) {
@@ -737,9 +699,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'DELETE' && pathname === '/api/feedback') {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
-    let feedback = readJson(FEEDBACK_FILE) || [];
-    feedback = feedback.filter(f => f.id !== id);
-    writeJson(FEEDBACK_FILE, feedback);
+    db.deleteFeedback(id);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true }));
     return;
@@ -750,13 +710,13 @@ const server = http.createServer(async (req, res) => {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
     const body = await getJsonBody(req);
-    const feedback = readJson(FEEDBACK_FILE) || [];
-    const item = feedback.find(f => f.id === id);
+    const feedbackItems = db.getFeedback();
+    const item = feedbackItems.find(f => f.id === id);
     if (item) {
-      item.addressed = body.addressed !== undefined ? body.addressed : !item.addressed;
-      writeJson(FEEDBACK_FILE, feedback);
+      const nextAddressed = body.addressed !== undefined ? body.addressed : !item.addressed;
+      db.updateFeedbackAddressed(id, nextAddressed);
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ success: true, addressed: item.addressed }));
+      res.end(JSON.stringify({ success: true, addressed: nextAddressed }));
     } else {
       res.writeHead(404); res.end('{"error":"Not found"}');
     }
@@ -765,7 +725,7 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/recommendations
   if (req.method === 'GET' && pathname === '/api/recommendations') {
-    const recs = readJson(RECOMMENDATIONS_FILE) || [];
+    const recs = db.getRecommendations();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(recs));
     return;
@@ -781,11 +741,11 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      const recs = readJson(RECOMMENDATIONS_FILE) || [];
-      const duplicate = recs.find(r => r.topic.toLowerCase() === entry.topic.trim().toLowerCase());
+      // Check for duplicate in database (both stories and recommendations)
+      const duplicate = db.checkDuplicate(entry.topic);
       if (duplicate) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, duplicate: true, status: duplicate.status || 'pending' }));
+        res.end(JSON.stringify({ success: true, duplicate: true, status: 'pending' }));
         return;
       }
 
@@ -793,8 +753,7 @@ const server = http.createServer(async (req, res) => {
       entry.date = entry.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
       entry.status = 'pending';
 
-      recs.push(entry);
-      writeJson(RECOMMENDATIONS_FILE, recs);
+      db.insertRecommendation(entry);
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
@@ -809,9 +768,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'DELETE' && pathname === '/api/recommendations') {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
-    let recs = readJson(RECOMMENDATIONS_FILE) || [];
-    recs = recs.filter(r => r.id !== id);
-    writeJson(RECOMMENDATIONS_FILE, recs);
+    db.deleteRecommendation(id);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true }));
     return;
@@ -827,16 +784,47 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'id and status required' }));
         return;
       }
-      const recs = readJson(RECOMMENDATIONS_FILE) || [];
+      const recs = db.getRecommendations();
       const item = recs.find(r => r.id === id);
       if (item) {
-        item.status = status;
-        writeJson(RECOMMENDATIONS_FILE, recs);
+        db.updateRecommendationStatus(id, status);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true }));
       } else {
         res.writeHead(404); res.end('{"error":"Not found"}');
       }
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: GET /api/stories (including drafts if specified)
+  if (req.method === 'GET' && pathname === '/api/stories') {
+    const includeDrafts = urlObj.searchParams.get('include_drafts') === 'true' || urlObj.searchParams.get('all') === 'true';
+    const list = db.getStories(includeDrafts);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(list));
+    return;
+  }
+
+  // Route: POST /api/stories/publish
+  if (req.method === 'POST' && pathname === '/api/stories/publish') {
+    try {
+      const { story_id, publish_all } = await getJsonBody(req);
+      if (publish_all) {
+        db.publishAllStories();
+      } else if (story_id) {
+        db.publishStory(story_id);
+      } else {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing story_id or publish_all' }));
+        return;
+      }
+      db.exportStoriesToJSON();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err.message }));
@@ -850,20 +838,22 @@ const server = http.createServer(async (req, res) => {
     try {
       const storyId = storyPutMatch[1];
       const updates = await getJsonBody(req);
-      const storiesData = readJson(STORIES_FILE) || { stories: [] };
-      const storyIdx = storiesData.stories.findIndex(s => s.story_id === storyId);
-      if (storyIdx === -1) {
+      const story = db.getStory(storyId);
+      if (!story) {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Story not found' }));
         return;
       }
-      storiesData.stories[storyIdx] = { ...storiesData.stories[storyIdx], ...updates };
-      writeJson(STORIES_FILE, storiesData);
       
-      updateConceptIndex(storiesData.stories);
+      db.updateStory(storyId, updates);
+      
+      // Export only if not a draft
+      if (!story.draft) {
+        db.exportStoriesToJSON();
+      }
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ success: true, story: storiesData.stories[storyIdx] }));
+      res.end(JSON.stringify({ success: true, story: db.getStory(storyId) }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err.message }));
@@ -881,27 +871,27 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      const storiesData = readJson(STORIES_FILE) || { stories: [] };
-      storiesData.stories = storiesData.stories.filter(s => s.story_id !== newStory.story_id);
-      storiesData.stories.push(newStory);
-      writeJson(STORIES_FILE, storiesData);
+      // If draft is not explicitly specified, save as draft by default
+      if (newStory.draft === undefined) {
+        newStory.draft = true;
+      }
 
-      updateConceptIndex(storiesData.stories);
+      db.insertStory(newStory);
+
+      if (!newStory.draft) {
+        db.exportStoriesToJSON();
+      }
 
       // Check if this matches a recommended topic and delete it from the queue
       try {
-        const recs = readJson(RECOMMENDATIONS_FILE) || [];
+        const recs = db.getRecommendations();
         const storyTitle = newStory.title.trim().toLowerCase();
-        const initialLen = recs.length;
-        const filteredRecs = recs.filter(r => {
+        for (const r of recs) {
           const recTopic = r.topic.trim().toLowerCase();
-          return recTopic !== storyTitle && 
-                 !storyTitle.includes(recTopic) && 
-                 !recTopic.includes(storyTitle);
-        });
-        if (filteredRecs.length < initialLen) {
-          console.log(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${newStory.title}")`);
-          writeJson(RECOMMENDATIONS_FILE, filteredRecs);
+          if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
+            db.deleteRecommendation(r.id);
+            console.log(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${newStory.title}")`);
+          }
         }
       } catch (err) {
         console.error('[RECOMMENDATION] Failed to check and delete from queue:', err.message);
@@ -919,15 +909,15 @@ const server = http.createServer(async (req, res) => {
   // Route: DELETE /api/stories/:id
   if (req.method === 'DELETE' && pathname.startsWith('/api/stories/')) {
     const id = pathname.split('/').pop();
-    
-    const storiesData = readJson(STORIES_FILE) || { stories: [] };
-    const initialLen = storiesData.stories.length;
-    storiesData.stories = storiesData.stories.filter(s => s.story_id !== id);
-    if (storiesData.stories.length < initialLen) {
-      writeJson(STORIES_FILE, storiesData);
+    const story = db.getStory(id);
+    if (story) {
+      db.deleteStory(id);
+      
+      // Export only if not a draft
+      if (!story.draft) {
+        db.exportStoriesToJSON();
+      }
     }
-    
-    updateConceptIndex(storiesData.stories);
     
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true }));

@@ -187,6 +187,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [uploadingState, setUploadingState] = useState('idle'); // 'idle' | 'uploading'
   const [feedbackItems, setFeedbackItems] = useState([]);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedbackFilter, setFeedbackFilter] = useState('pending');
   
   // Recommendations states
   const [recommendations, setRecommendations] = useState([]);
@@ -392,7 +393,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     addLog(`Target Category: ${genCategory.toUpperCase()} | Severity: ${genSeverity.toUpperCase()}`);
     addLog(`Connecting directly to Gemini API...`);
 
-    const storiesSummary = stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
+    const storiesSummary = adminStories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
     const targetCategory = genCategory === 'auto' ? 'Choose the single best category match for this topic from: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries' : genCategory;
     const targetSeverity = genSeverity === 'auto' ? 'unsettling | disturbing | extreme (auto-detect based on topic intensity)' : genSeverity;
 
@@ -689,6 +690,26 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   };
 
+  // Story catalog state loaded from server (includes drafts)
+  const [adminStories, setAdminStories] = useState([]);
+  const [adminStoriesLoading, setAdminStoriesLoading] = useState(false);
+
+  // Stories loader
+  const loadAdminStories = useCallback(async () => {
+    setAdminStoriesLoading(true);
+    try {
+      const res = await fetch('/api/stories?include_drafts=true');
+      if (res.ok) {
+        const data = await res.json();
+        setAdminStories(data);
+      }
+    } catch (err) {
+      console.warn('Failed to load admin stories from database:', err);
+    } finally {
+      setAdminStoriesLoading(false);
+    }
+  }, []);
+
   // Feedback loader
   const loadFeedback = useCallback(async () => {
     setFeedbackLoading(true);
@@ -697,34 +718,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       const res = await fetch('/api/feedback');
       if (res.ok) {
         items = await res.json();
-      } else {
-        const resStatic = await fetch(`/content/feedback.json?t=${Date.now()}`);
-        if (resStatic.ok) items = await resStatic.json();
       }
-    } catch {
-      try {
-        const resStatic = await fetch(`/content/feedback.json?t=${Date.now()}`);
-        if (resStatic.ok) items = await resStatic.json();
-      } catch {
-        void 0;
-      }
+    } catch (err) {
+      console.warn('Failed to load feedback:', err);
     }
-
-    try {
-      const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
-      if (localFb.length > 0) {
-        const combined = [...localFb];
-        items.forEach(item => {
-          if (!combined.some(c => c.id === item.id)) {
-            combined.push(item);
-          }
-        });
-        items = combined;
-      }
-    } catch {
-      void 0;
-    }
-
     setFeedbackItems(items);
     setFeedbackLoading(false);
   }, []);
@@ -737,32 +734,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       const res = await fetch('/api/recommendations');
       if (res.ok) {
         items = await res.json();
-      } else {
-        const resStatic = await fetch(`/content/recommendations.json?t=${Date.now()}`);
-        if (resStatic.ok) items = await resStatic.json();
       }
-    } catch {
-      try {
-        const resStatic = await fetch(`/content/recommendations.json?t=${Date.now()}`);
-        if (resStatic.ok) items = await resStatic.json();
-      } catch {
-        void 0;
-      }
-    }
-
-    try {
-      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
-      if (localRecs.length > 0) {
-        const combined = [...localRecs];
-        items.forEach(item => {
-          if (!combined.some(c => c.id === item.id)) {
-            combined.push(item);
-          }
-        });
-        items = combined;
-      }
-    } catch {
-      void 0;
+    } catch (err) {
+      console.warn('Failed to load recommendations:', err);
     }
 
     // Sort: pending first, then by date/id descending
@@ -794,14 +768,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     };
 
     try {
-      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
-      localRecs.push(newRec);
-      localStorage.setItem('lore:recommendations', JSON.stringify(localRecs));
-    } catch (err) {
-      console.warn(err);
-    }
-
-    try {
       const res = await fetch('/api/recommendations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -810,19 +776,18 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       if (res.ok) {
         const data = await res.json();
         if (data.duplicate) {
-          setToast({ text: `Topic is already in the queue! (Status: ${data.status})`, type: 'info' });
+          setToast({ text: 'We already have it in database.', type: 'info' });
         } else {
           setToast({ text: 'Recommendation successfully filed in queue!', type: 'success' });
         }
       } else {
-        setToast({ text: 'Added locally (server response was not OK)', type: 'info' });
+        setToast({ text: 'Error saving recommendation', type: 'error' });
       }
       setNewRecTopic('');
       loadRecommendations();
-    } catch {
-      setToast({ text: 'Added locally (offline mode)', type: 'info' });
-      setNewRecTopic('');
-      loadRecommendations();
+    } catch (err) {
+      console.warn(err);
+      setToast({ text: 'Error saving recommendation (offline)', type: 'error' });
     } finally {
       setAddingRec(false);
     }
@@ -831,16 +796,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const handleDeleteRecommendation = async (id) => {
     if (!window.confirm('Delete this recommendation from the queue?')) return;
     
-    setRecommendations(prev => prev.filter(r => r.id !== id));
-    
-    try {
-      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
-      const filtered = localRecs.filter(r => r.id !== id);
-      localStorage.setItem('lore:recommendations', JSON.stringify(filtered));
-    } catch {
-      void 0;
-    }
-
     try {
       const res = await fetch(`/api/recommendations?id=${id}`, {
         method: 'DELETE'
@@ -851,15 +806,108 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         throw new Error('Server deletion failed');
       }
     } catch (err) {
-      console.warn('Server delete failed, deleted only locally:', err.message);
+      console.warn('Server delete failed:', err.message);
     }
     loadRecommendations();
+  };
+
+  // Publish / Push to Live story logic
+  const handlePublishStory = async (storyId) => {
+    try {
+      setPublishStatus('Publishing draft story to archive...');
+      setIsPublishing(true);
+      
+      const res = await fetch('/api/stories/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ story_id: storyId })
+      });
+      
+      if (!res.ok) {
+        throw new Error('Server publication failed');
+      }
+
+      setToast({ text: 'Story published to local archive!', type: 'success' });
+
+      await loadAdminStories();
+      if (refetchStories) await refetchStories();
+
+      // Push straight to GitHub if sync credentials are active
+      if (ghToken) {
+        const resLocal = await fetch(`/content/stories.json?t=${Date.now()}`);
+        if (resLocal.ok) {
+          const localJson = await resLocal.ok ? await resLocal.json() : { stories: [] };
+          const localList = localJson.stories || [];
+          const newIndex = rebuildConceptIndex(localList);
+          
+          const filesToCommit = [
+            { path: 'public/content/stories.json', content: JSON.stringify({ stories: localList }, null, 2) },
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newIndex, null, 2) }
+          ];
+
+          await commitFilesToGitHub(filesToCommit, `admin: publish story ${storyId} live`);
+          setToast({ text: 'Story published and synced live to GitHub!', type: 'success' });
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      setToast({ text: `Failed to publish: ${err.message}`, type: 'error' });
+    } finally {
+      setIsPublishing(false);
+      setPublishStatus('');
+    }
+  };
+
+  const handlePublishAllDrafts = async () => {
+    try {
+      setPublishStatus('Publishing all draft stories to archive...');
+      setIsPublishing(true);
+      
+      const res = await fetch('/api/stories/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ publish_all: true })
+      });
+      
+      if (!res.ok) {
+        throw new Error('Server publication failed');
+      }
+
+      setToast({ text: 'All draft stories published to local archive!', type: 'success' });
+
+      await loadAdminStories();
+      if (refetchStories) await refetchStories();
+
+      if (ghToken) {
+        const resLocal = await fetch(`/content/stories.json?t=${Date.now()}`);
+        if (resLocal.ok) {
+          const localJson = await resLocal.json();
+          const localList = localJson.stories || [];
+          const newIndex = rebuildConceptIndex(localList);
+          
+          const filesToCommit = [
+            { path: 'public/content/stories.json', content: JSON.stringify({ stories: localList }, null, 2) },
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newIndex, null, 2) }
+          ];
+
+          await commitFilesToGitHub(filesToCommit, 'admin: publish all draft stories live');
+          setToast({ text: 'All stories published and synced live to GitHub!', type: 'success' });
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      setToast({ text: `Failed to publish all: ${err.message}`, type: 'error' });
+    } finally {
+      setIsPublishing(false);
+      setPublishStatus('');
+    }
   };
 
   useEffect(() => {
     loadFeedback();
     loadRecommendations();
-  }, [loadFeedback, loadRecommendations]);
+    loadAdminStories();
+  }, [loadFeedback, loadRecommendations, loadAdminStories]);
 
   // Story editor utilities
   const startEditing = (story) => {
@@ -1295,19 +1343,39 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Filtered stories in catalog
   const filteredStories = useMemo(() => {
-    return stories.filter(story => {
+    // Only show non-draft (published) stories in the main catalog list
+    const published = adminStories.filter(s => !s.draft);
+    return published.filter(story => {
       const matchesSearch = story.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             story.story_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             (story.hook && story.hook.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCategory = filterCategory === 'all' || story.category === filterCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [stories, searchQuery, filterCategory]);
+  }, [adminStories, searchQuery, filterCategory]);
 
   const storiesAddedToday = useMemo(() => {
     const today = new Date().toISOString().split('T')[0];
-    return stories.filter(s => s.added_date === today);
-  }, [stories]);
+    return adminStories.filter(s => s.added_date === today);
+  }, [adminStories]);
+
+  const draftStories = useMemo(() => {
+    return adminStories.filter(s => s.draft);
+  }, [adminStories]);
+
+  const avgRating = useMemo(() => {
+    if (feedbackItems.length === 0) return 0;
+    const sum = feedbackItems.reduce((acc, curr) => acc + curr.rating, 0);
+    return (sum / feedbackItems.length).toFixed(1);
+  }, [feedbackItems]);
+
+  const filteredFeedbackItems = useMemo(() => {
+    return feedbackItems.filter(item => {
+      if (feedbackFilter === 'pending') return !item.addressed;
+      if (feedbackFilter === 'resolved') return item.addressed;
+      return true;
+    });
+  }, [feedbackItems, feedbackFilter]);
 
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: bg, color: fg }}>
@@ -1385,7 +1453,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
               Total Dossiers
             </span>
-            <span className="font-serif italic text-2xl">{stories.length}</span>
+            <span className="font-serif italic text-2xl">
+              {adminStories.length}{' '}
+              <span className="text-[10px] font-mono font-normal text-[#6A6560]">
+                ({adminStories.filter(s => !s.draft).length} live · {adminStories.filter(s => s.draft).length} draft)
+              </span>
+            </span>
           </div>
           <div>
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
@@ -1420,7 +1493,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               activeTab === 'catalog' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
-            Dossier Catalog ({stories.length})
+            Dossier Catalog ({adminStories.length})
           </button>
           <button
             onClick={() => setActiveTab('generator')}
@@ -1668,6 +1741,82 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               ) : (
                 // Dossier Catalog Search & List View
                 <div className="space-y-4">
+                  {/* Draft Dossiers Staging Area */}
+                  {draftStories.length > 0 && (
+                    <div 
+                      className="p-5 rounded-xl border flex flex-col gap-4 text-left mb-6"
+                      style={{ 
+                        backgroundColor: 'rgba(158, 123, 76, 0.03)', 
+                        borderColor: 'rgba(158, 123, 76, 0.25)', 
+                      }}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3" style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}>
+                        <div>
+                          <h3 className="text-sm font-bold tracking-[0.12em] uppercase flex items-center gap-2" style={{ color: ac }}>
+                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                            Draft Dossiers (Newly Generated by AI)
+                          </h3>
+                          <p className="text-[10px] text-[#8F8A82] mt-0.5">
+                            These stories are staging drafts. They are not visible to public users until published.
+                          </p>
+                        </div>
+                        <button
+                          onClick={handlePublishAllDrafts}
+                          disabled={isPublishing}
+                          className="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white text-[9px] font-mono tracking-widest uppercase rounded-lg transition-all duration-200 active:scale-95 cursor-pointer font-bold"
+                        >
+                          Publish All Live
+                        </button>
+                      </div>
+
+                      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                        {draftStories.map(story => (
+                          <div 
+                            key={story.story_id} 
+                            className="p-3.5 rounded-lg border flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-black/40"
+                            style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}
+                          >
+                            <div className="text-left min-w-0">
+                              <span className="font-serif italic text-[#EDE8DF] text-base block leading-snug">{story.title}</span>
+                              <div className="flex items-center gap-1.5 flex-wrap mt-1">
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
+                                  {CATEGORY_LABELS[story.category] || story.category}
+                                </span>
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-red-950/20 text-red-400 uppercase">
+                                  {story.severity}
+                                </span>
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-amber-950/20 text-amber-400 uppercase font-bold">
+                                  Draft
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex gap-2 flex-shrink-0">
+                              <button
+                                onClick={() => handlePublishStory(story.story_id)}
+                                disabled={isPublishing}
+                                className="text-[9px] font-mono font-bold tracking-wider px-3 py-1.5 bg-emerald-800/20 border border-emerald-800/40 text-emerald-400 rounded-lg hover:bg-emerald-800/30 cursor-pointer transition-colors active:scale-95 disabled:opacity-40"
+                              >
+                                Push to Live
+                              </button>
+                              <button
+                                onClick={() => startEditing(story)}
+                                className="text-[9px] font-mono px-3 py-1.5 border border-neutral-800 rounded-lg hover:bg-white/5 text-neutral-400 cursor-pointer transition-colors active:scale-95"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => handleDeleteStory(story.story_id)}
+                                className="text-[9px] font-mono px-3 py-1.5 border border-red-950/30 text-red-500 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Search and Filters */}
                   <div className="flex flex-col sm:flex-row gap-3">
                     <input
@@ -1691,7 +1840,11 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
                   {/* Stories list */}
                   <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
-                    {filteredStories.map(story => (
+                    {adminStoriesLoading ? (
+                      <div className="py-12 text-center text-neutral-500 italic text-sm animate-pulse">
+                        Loading story archive...
+                      </div>
+                    ) : filteredStories.map(story => (
                       <div
                         key={story.story_id}
                         className="p-4 rounded-xl border transition-all hover:bg-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
@@ -2048,9 +2201,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
                 <div className="text-left">
                   <h2 className="font-serif italic text-2xl">
-                    Reader Feedback ({feedbackItems.filter(f => !f.addressed).length})
+                    Reader Feedback
                   </h2>
-                  <p className="text-xs text-[#6A6560] mt-1">Review ratings and reports from readers</p>
+                  <p className="text-xs text-[#6A6560] mt-1">Review ratings, tags, and comments from visitors</p>
                 </div>
                 <button
                   onClick={loadFeedback}
@@ -2061,16 +2214,60 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                 </button>
               </div>
 
+              {/* Feedback Summary Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="p-4 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Average Rating</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-serif italic text-2xl text-[#9E7B4C]">{avgRating}</span>
+                    <div className="flex gap-0.5">
+                      {[1, 2, 3, 4, 5].map(n => (
+                        <div key={n} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: n <= Math.round(avgRating) ? ac : 'rgba(237,232,223,0.1)' }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Total Received</span>
+                  <span className="font-serif italic text-2xl text-neutral-200">{feedbackItems.length}</span>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Pending Review</span>
+                  <span className="font-serif italic text-2xl text-amber-500">{feedbackItems.filter(f => !f.addressed).length}</span>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Resolved</span>
+                  <span className="font-serif italic text-2xl text-emerald-500">{feedbackItems.filter(f => f.addressed).length}</span>
+                </div>
+              </div>
+
+              {/* Feedback Filter Toggle */}
+              <div className="flex gap-2 border-b pb-4 mt-4 text-left" style={{ borderColor: ru }}>
+                {['pending', 'resolved', 'all'].map(mode => (
+                  <button
+                    key={mode}
+                    onClick={() => setFeedbackFilter(mode)}
+                    className={`px-3 py-1.5 text-[10px] font-mono rounded cursor-pointer transition-all uppercase font-bold border ${
+                      feedbackFilter === mode 
+                        ? 'bg-[#9E7B4C]/10 border-[#9E7B4C] text-[#9E7B4C]' 
+                        : 'border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                    }`}
+                  >
+                    {mode === 'pending' ? 'Pending' : mode === 'resolved' ? 'Resolved' : 'All'}
+                  </button>
+                ))}
+              </div>
+
               {feedbackLoading ? (
                 <div className="text-center py-12 text-[#6A6560] font-mono text-xs animate-pulse">Loading feedback archive...</div>
-              ) : feedbackItems.length === 0 ? (
+              ) : filteredFeedbackItems.length === 0 ? (
                 <div className="py-12 text-center bg-black/20 rounded-2xl border border-dashed border-neutral-800">
-                  <p className="font-serif italic text-base text-[#6A6560] mb-2">Inbox is clear.</p>
-                  <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40">Visitor comments will be loaded here.</p>
+                  <p className="font-serif italic text-base text-[#6A6560] mb-2">No feedback found.</p>
+                  <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40">Visitor comments matching this filter will appear here.</p>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
-                  {feedbackItems.map(fb => (
+                  {filteredFeedbackItems.map(fb => (
                     <div
                       key={fb.id}
                       className="p-4 rounded-xl border flex flex-col gap-2 transition-all hover:bg-black/10 text-left"
@@ -2090,8 +2287,35 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                             {fb.addressed && <span className="text-[8px] font-mono px-2 py-0.5 rounded text-emerald-500 bg-emerald-500/10">ADDRESSED</span>}
                           </div>
                           {fb.note && <p className="text-sm font-sans italic mt-2 text-neutral-300">"{fb.note}"</p>}
+                          
+                          {/* Visitor tags badge list */}
+                          {fb.tags && fb.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mt-2">
+                              {fb.tags.map((tag, tIdx) => (
+                                <span
+                                  key={tIdx}
+                                  className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 border border-neutral-850 uppercase tracking-wider"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
                           <span className="text-[9px] font-mono text-[#6A6560] block mt-2">
-                            {new Date(fb.timestamp).toLocaleDateString()} · page: {fb.page}
+                            {(() => {
+                              try {
+                                return new Date(fb.timestamp).toLocaleDateString('en-US', {
+                                  year: 'numeric',
+                                  month: 'short',
+                                  day: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                });
+                              } catch {
+                                return fb.timestamp;
+                              }
+                            })()} · page: {fb.page}
                           </span>
                         </div>
                         <div className="flex flex-col gap-1.5 flex-shrink-0">
