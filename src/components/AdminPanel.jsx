@@ -101,19 +101,22 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   }, [ghOwner, ghRepo, ghBranch, ghToken]);
 
-  // On mount: if no token in localStorage, try to fetch from GitHub config file
+  // On mount: try to fetch keys and sync configuration from GitHub config file
   useEffect(() => {
-    const existing = localStorage.getItem('lore:github:token');
-    if (!existing) {
-      // Try to load from GitHub config (pushed there on first successful sync)
-      const owner = localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
-      const repo = localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE';
-      const branch = localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main';
-      // Try raw GitHub CDN (no auth needed if repo is public)
-      fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/config/admin_config.json`)
-        .then(r => r.ok ? r.json() : null)
-        .then(cfg => {
-          if (cfg?.tok) {
+    const owner = localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
+    const repo = localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE';
+    const branch = localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main';
+
+    const existingToken = localStorage.getItem('lore:github:token');
+    const existingGemini = localStorage.getItem('lore:gemini:key');
+    const existingOpenRouter = localStorage.getItem('lore:openrouter:key');
+
+    // Try raw GitHub CDN (no auth needed if repo is public)
+    fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/config/admin_config.json`)
+      .then(r => r.ok ? r.json() : null)
+      .then(cfg => {
+        if (cfg) {
+          if (cfg.tok && !existingToken) {
             const decoded = storedToToken(cfg.tok);
             if (decoded) {
               setGhToken(decoded);
@@ -123,9 +126,23 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               localStorage.setItem('lore:github:success', 'true');
             }
           }
-        })
-        .catch(() => {});
-    }
+          if (cfg.geminiKey && !existingGemini) {
+            const decoded = storedToToken(cfg.geminiKey);
+            if (decoded) {
+              setApiKey(decoded);
+              localStorage.setItem('lore:gemini:key', decoded);
+            }
+          }
+          if (cfg.openRouterKey && !existingOpenRouter) {
+            const decoded = storedToToken(cfg.openRouterKey);
+            if (decoded) {
+              setOpenRouterKey(decoded);
+              localStorage.setItem('lore:openrouter:key', decoded);
+            }
+          }
+        }
+      })
+      .catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -156,6 +173,201 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [genCategory, setGenCategory] = useState('auto');
   const [genSeverity, setGenSeverity] = useState('auto');
   const [apiKey, setApiKey] = useState('');
+  const [openRouterKey, setOpenRouterKey] = useState('');
+  
+  // Generic helper to call Gemini API with retries and fallback from 2.5-flash to 1.5-flash
+  const callGeminiApi = async (contents, config = {}) => {
+    if (!apiKey) {
+      throw new Error('Gemini API key is not configured.');
+    }
+    const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+    let lastError = null;
+
+    for (const model of models) {
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents,
+              ...config
+            })
+          });
+
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`HTTP ${res.status}: ${res.statusText || errText || 'Service Unavailable'}`);
+          }
+
+          const data = await res.json();
+          const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) {
+            return text;
+          }
+          throw new Error('Empty response from model');
+        } catch (err) {
+          lastError = err;
+          console.warn(`[Gemini API] Attempt ${attempt} failed for model ${model}:`, err.message);
+          if (attempt < 3) {
+            await new Promise(r => setTimeout(r, attempt * 1000));
+          }
+        }
+      }
+    }
+    throw lastError || new Error('Failed to generate content from Gemini API');
+  };
+
+  // Call OpenRouter API with free model backup
+  const callOpenRouterApi = async (contents, config = {}) => {
+    if (!openRouterKey) {
+      throw new Error('OpenRouter API key is not configured.');
+    }
+
+    // Convert Gemini format to OpenAI standard format
+    const messages = contents.map(c => {
+      if (c.parts && c.parts[0] && c.parts[0].text) {
+        return {
+          role: c.role === 'user' ? 'user' : 'assistant',
+          content: c.parts[0].text
+        };
+      }
+      return {
+        role: c.role || 'user',
+        content: c.content || c.text || ''
+      };
+    });
+
+    const models = ['google/gemini-2.5-flash:free', 'meta-llama/llama-3-8b-instruct:free'];
+    let lastError = null;
+
+    for (const model of models) {
+      try {
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${openRouterKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://github.com/Mr-Hkds/LORE',
+            'X-Title': 'LORE Content Engine'
+          },
+          body: JSON.stringify({
+            model,
+            messages,
+            ...config
+          })
+        });
+
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`OpenRouter HTTP ${res.status}: ${res.statusText || errText}`);
+        }
+
+        const data = await res.json();
+        const text = data?.choices?.[0]?.message?.content;
+        if (text) {
+          return text.trim();
+        }
+        throw new Error('Empty response from OpenRouter');
+      } catch (err) {
+        lastError = err;
+        console.warn(`[OpenRouter API] Model ${model} call failed:`, err.message);
+      }
+    }
+    throw lastError || new Error('All OpenRouter models failed.');
+  };
+
+  // Call Pollinations AI Text completions with model fallback
+  const callPollinationsText = async (prompt, systemPrompt = '') => {
+    const models = ['openai', 'mistral', 'claude'];
+    let lastError = null;
+
+    for (const model of models) {
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const payload = {
+            messages: [
+              ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
+              { role: 'user', content: prompt }
+            ],
+            model
+          };
+
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+          const res = await fetch('https://text.pollinations.ai/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            signal: controller.signal
+          });
+          clearTimeout(timeout);
+
+          if (!res.ok) {
+            throw new Error(`Pollinations ${model} returned HTTP ${res.status}`);
+          }
+
+          const text = await res.text();
+          if (text && text.trim().length >= 5) {
+            return text.trim();
+          }
+          throw new Error('Empty response from Pollinations');
+        } catch (err) {
+          lastError = err;
+          console.warn(`[Pollinations AI] Model ${model} attempt ${attempt} failed:`, err.message);
+          if (attempt < 3) {
+            await new Promise(r => setTimeout(r, attempt * 1000));
+          }
+        }
+      }
+    }
+    throw lastError || new Error('All Pollinations AI models failed');
+  };
+
+  // Cascading Robust AI client router
+  const callRobustAI = async (contents, config = {}, expectJSON = false) => {
+    let lastError = null;
+
+    // 1. Try Direct Gemini
+    if (apiKey) {
+      try {
+        return await callGeminiApi(contents, config);
+      } catch (err) {
+        lastError = err;
+        console.warn('[Admin AI Client] Direct Gemini failed:', err.message);
+      }
+    }
+
+    // 2. Try OpenRouter
+    if (openRouterKey) {
+      try {
+        const routerConfig = expectJSON ? { response_format: { type: 'json_object' } } : {};
+        return await callOpenRouterApi(contents, { ...config, ...routerConfig });
+      } catch (err) {
+        lastError = err;
+        console.warn('[Admin AI Client] OpenRouter failed:', err.message);
+      }
+    }
+
+    // 3. Try Pollinations AI
+    try {
+      const promptText = contents[0]?.parts?.[0]?.text || contents[0]?.content || '';
+      const systemPrompt = contents.length > 1 ? contents[0]?.content || contents[0]?.parts?.[0]?.text : '';
+      const finalPrompt = contents.length > 1 ? contents[1]?.content || contents[1]?.parts?.[0]?.text : promptText;
+      
+      const suffix = expectJSON ? '\n\nReturn ONLY the raw JSON. Do not wrap in markdown or add explanations.' : '';
+      return await callPollinationsText(
+        finalPrompt + suffix,
+        systemPrompt || (expectJSON ? 'You are a dark historian database compiler. Output valid JSON only, no markdown wrapping.' : '')
+      );
+    } catch (err) {
+      lastError = err;
+      console.error('[Admin AI Client] Pollinations fallback failed:', err.message);
+    }
+
+    throw lastError || new Error('All AI providers in the fallback chain failed.');
+  };
   
   // Console logging state
   const [logs, setLogs] = useState([]);
@@ -175,10 +387,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   }, [toast]);
 
-  // Read apiKey from env on load
+  // Read keys from localstorage or env on load
   useEffect(() => {
-    const envKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-    setApiKey(envKey);
+    const storedGemini = localStorage.getItem('lore:gemini:key') || import.meta.env.VITE_GEMINI_API_KEY || '';
+    setApiKey(storedGemini);
+    
+    const storedOpenRouter = localStorage.getItem('lore:openrouter:key') || import.meta.env.VITE_OPENROUTER_API_KEY || '';
+    setOpenRouterKey(storedOpenRouter);
   }, []);
 
   // Multi-select recommendations state
@@ -263,35 +478,65 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     return null;
   };
 
-  // Fetch status and logs from server
+  // Fetch status and logs from server or fallback to static status JSON
   const fetchAutomationData = useCallback(async () => {
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     
-    // Only attempt fetch if we are local. If remote and not using GitHub Sync, or explicitly server-side
-    if (!isLocal) {
-      setServerOffline(true);
-      return;
+    if (isLocal) {
+      try {
+        const resStatus = await fetch('/api/automation/status');
+        if (resStatus.ok) {
+          const status = await resStatus.json();
+          setAutoStatus(status);
+          setServerOffline(false);
+          consecutiveFailuresRef.current = 0;
+
+          const resLogs = await fetch('/api/automation/logs');
+          if (resLogs.ok) {
+            const logsData = await resLogs.json();
+            setAutoLogs(logsData);
+          }
+          return; // Local success
+        }
+      } catch (err) {
+        // Fall back to static status file
+      }
     }
 
+    // Remote / stand-alone mode / local fallback
     try {
-      const resStatus = await fetch('/api/automation/status');
-      if (resStatus.ok) {
-        const status = await resStatus.json();
-        setAutoStatus(status);
+      const res = await fetch('/content/automation_status.json');
+      if (res.ok) {
+        const data = await res.json();
+        setAutoStatus({
+          isRunning: data.isRunning,
+          enabled: data.enabled,
+          lastRunAt: data.lastRunAt,
+          nextRunMs: Math.max(0, data.nextRunAt - Date.now()),
+          intervalMs: data.intervalMs,
+          status: data.status,
+          error: data.error,
+          mode: data.mode
+        });
         setServerOffline(false);
         consecutiveFailuresRef.current = 0;
+        
+        // Generate pseudo logs from static run status
+        const runTime = new Date(data.lastRunAt).toLocaleTimeString([], { hour12: false });
+        const runDate = new Date(data.lastRunAt).toLocaleDateString([], { month: 'short', day: 'numeric' });
+        setAutoLogs([
+          `[${runTime}] === ENGINE STATUS CHECK (${runDate}) ===`,
+          `[${runTime}] Runner Engine: ${data.mode === 'github-actions' ? 'GitHub Actions (Cloud)' : 'Local Server'}`,
+          `[${runTime}] Last Status: ${data.status ? data.status.toUpperCase() : 'UNKNOWN'}`,
+          ...(data.error ? [`[${runTime}] ERROR: ${data.error}`] : []),
+          `[${runTime}] Next execution scheduled in ${Math.round((data.nextRunAt - Date.now()) / 60000)} minutes.`
+        ]);
       } else {
-        throw new Error('Server returned non-ok status');
-      }
-      
-      const resLogs = await fetch('/api/automation/logs');
-      if (resLogs.ok) {
-        const logsData = await resLogs.json();
-        setAutoLogs(logsData);
+        throw new Error('Static status file not found');
       }
     } catch (err) {
       if (consecutiveFailuresRef.current < 3) {
-        console.warn('Failed to fetch automation data:', err);
+        console.warn('Failed to fetch automation static status:', err.message);
       }
       consecutiveFailuresRef.current += 1;
       if (consecutiveFailuresRef.current >= 3) {
@@ -302,14 +547,23 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Poll automation logs and status
   useEffect(() => {
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    if (serverOffline || ghSyncSuccess || !isLocal) {
-      return;
-    }
     fetchAutomationData();
-    const interval = setInterval(fetchAutomationData, 2500);
+    const interval = setInterval(fetchAutomationData, 10000); // Poll every 10s
     return () => clearInterval(interval);
-  }, [fetchAutomationData, serverOffline, ghSyncSuccess]);
+  }, [fetchAutomationData]);
+
+  // Countdown ticker for Next Run
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAutoStatus(prev => {
+        if (prev && prev.nextRunMs && prev.nextRunMs > 0) {
+          return { ...prev, nextRunMs: Math.max(0, prev.nextRunMs - 1000) };
+        }
+        return prev;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const [isHarvesting, setIsHarvesting] = useState(false);
 
@@ -821,8 +1075,8 @@ Do not wrap in markdown. Output raw JSON only.`;
       alert('Please enter a topic to generate.');
       return;
     }
-    if (!apiKey) {
-      alert('A Gemini API Key is required to run the content engine. Please input one or set it in your .env file.');
+    if (!apiKey && !openRouterKey) {
+      alert('An API Key (Gemini or OpenRouter) is required to run the content engine. Please configure one in Settings.');
       return;
     }
 
@@ -941,31 +1195,17 @@ ${storiesSummary}
 Ensure the output is strictly valid JSON only. Do not wrap it in markdown code blocks like \`\`\`json. Output raw JSON.`;
 
     try {
-      addLog(`Connecting to Gemini API endpoint...`);
+      addLog(`Connecting to AI content engine...`);
       setProgress(30);
       
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: { responseMimeType: 'application/json' }
-        })
-      });
-
-      if (!res.ok) {
-        throw new Error(`API returned HTTP ${res.status}: ${res.statusText}`);
-      }
+      const textResponse = await callRobustAI(
+        [{ role: 'user', parts: [{ text: prompt }] }],
+        { generationConfig: { responseMimeType: 'application/json' } },
+        true
+      );
 
       setProgress(60);
-      addLog(`Receiving stream from Gemini AI...`);
-      
-      const data = await res.json();
-      const textResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      
-      if (!textResponse) {
-        throw new Error('Received an empty response from the AI model.');
-      }
+      addLog(`Receiving stream from AI model...`);
 
       setProgress(80);
       addLog(`Parsing story structure...`);
@@ -1000,19 +1240,13 @@ Reply with YES only if such a specific, famous, iconic, and visually striking re
 Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
 Output YES or NO only. Do not include markdown or explanations.`;
 
-        const checkRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: checkPrompt }] }]
-          })
-        });
-        if (checkRes.ok) {
-          const checkData = await checkRes.json();
-          const decision = checkData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toUpperCase() || 'NO';
-          hasPerfectPhoto = decision.includes('YES');
-          addLog(`AI evaluation of real photo: ${decision}`);
-        }
+        const decisionText = await callPollinationsText(
+          checkPrompt,
+          "You are a decision bot. Output YES or NO only."
+        );
+        const decision = decisionText?.trim()?.toUpperCase() || 'NO';
+        hasPerfectPhoto = decision.includes('YES');
+        addLog(`AI evaluation of real photo: ${decision}`);
       } catch (err) {
         console.warn('Perfect photo evaluation failed:', err);
       }
@@ -1175,17 +1409,10 @@ For image changes, if user gives a direct URL, propose:
 Always respond with plain text explanation FIRST, then the JSON block on a new line if applicable.
 Keep responses concise. Be direct and useful.`;
 
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\nUser request: ' + userMsg }] }],
-          generationConfig: { temperature: 0.4 },
-        }),
-      });
-
-      const data = await res.json();
-      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
+      const rawText = await callPollinationsText(
+        userMsg,
+        systemPrompt
+      );
 
       // Try to extract JSON action from response
       const jsonMatch = rawText.match(/\{[\s\S]*?"action"\s*:[\s\S]*?\}/);
@@ -1808,8 +2035,28 @@ Keep responses concise. Be direct and useful.`;
                     <input
                       type="password"
                       value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
+                      onChange={(e) => {
+                        setApiKey(e.target.value);
+                        localStorage.setItem('lore:gemini:key', e.target.value);
+                      }}
                       placeholder="Insert VITE_GEMINI_API_KEY..."
+                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                      disabled={isGenerating}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
+                      OpenRouter API Key
+                    </label>
+                    <input
+                      type="password"
+                      value={openRouterKey}
+                      onChange={(e) => {
+                        setOpenRouterKey(e.target.value);
+                        localStorage.setItem('lore:openrouter:key', e.target.value);
+                      }}
+                      placeholder="Insert VITE_OPENROUTER_API_KEY..."
                       className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
                       disabled={isGenerating}
                     />
@@ -1921,26 +2168,29 @@ Keep responses concise. Be direct and useful.`;
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Interval</span>
                   <span className="text-xs font-mono font-bold text-[#EDE8DF]">
-                    {ghSyncSuccess ? 'Daily' : 'Every 30m'}
+                    Every 30m
                   </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Next Run</span>
                   <span className="text-xs font-mono font-bold" style={{ color: '#9E7B4C' }}>
-                    {ghSyncSuccess 
-                      ? 'Daily 00:00 UTC' 
-                      : autoStatus.nextRunMs > 0
+                    {autoStatus.nextRunMs > 0
                       ? (() => {
+                          const sec = Math.floor((autoStatus.nextRunMs % 60000) / 1000);
                           const m = Math.floor(autoStatus.nextRunMs / 60000);
                           const h = Math.floor(m / 60);
-                          return h > 0 ? `${h}h ${m % 60}m` : `${m}m`;
+                          return h > 0 
+                            ? `${h}h ${m % 60}m ${sec}s` 
+                            : m > 0 
+                            ? `${m}m ${sec}s` 
+                            : `${sec}s`;
                         })()
-                      : serverOffline ? 'SERVER OFFLINE' : 'Calculating...'}
+                      : serverOffline ? 'OFFLINE' : 'Calculating...'}
                   </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">GitHub Actions</span>
-                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">Daily 00:00 UTC</span>
+                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">Every 30m</span>
                 </div>
               </div>
 
@@ -2261,8 +2511,16 @@ Keep responses concise. Be direct and useful.`;
                           setGhSyncSuccess(true);
                           localStorage.setItem('lore:github:success', 'true');
                           setPublishStatus('Connection verified! Saving token config to GitHub...');
-                          // Push obfuscated token to GitHub config/admin_config.json so any admin device auto-loads it
-                          const configContent = JSON.stringify({ tok: tokenToStored(ghToken), owner: ghOwner, repo: ghRepo, branch: ghBranch, updated: new Date().toISOString() }, null, 2);
+                          // Push obfuscated token and keys to GitHub config/admin_config.json so any admin device auto-loads it
+                          const configContent = JSON.stringify({
+                            tok: tokenToStored(ghToken),
+                            geminiKey: apiKey ? tokenToStored(apiKey) : '',
+                            openRouterKey: openRouterKey ? tokenToStored(openRouterKey) : '',
+                            owner: ghOwner,
+                            repo: ghRepo,
+                            branch: ghBranch,
+                            updated: new Date().toISOString()
+                          }, null, 2);
                           try {
                             await commitFilesToGitHub(
                               [{ path: 'config/admin_config.json', content: configContent }],

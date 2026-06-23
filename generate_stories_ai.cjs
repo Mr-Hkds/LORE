@@ -17,6 +17,21 @@ function getApiKey() {
   return '';
 }
 
+// Helper to find OpenRouter API key
+function getOpenRouterApiKey() {
+  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY;
+  if (process.env.VITE_OPENROUTER_API_KEY) return process.env.VITE_OPENROUTER_API_KEY;
+
+  // Try reading .env file manually
+  const envPath = path.resolve(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf-8');
+    const match = envContent.match(/VITE_OPENROUTER_API_KEY\s*=\s*([^\s#]+)/);
+    if (match) return match[1];
+  }
+  return '';
+}
+
 // Native HTTPS helper to fetch JSON
 function fetchUrl(url, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -84,29 +99,18 @@ async function generateAndSaveImage(storyId, topic, apiKey) {
   const relativePath = `/content/images/${storyId}.jpg`;
 
   let hasPerfectPhoto = false;
-  if (apiKey) {
-    try {
-      const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
+  try {
+    const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
 Reply with YES only if such a specific, famous, iconic, and visually striking real photo exists.
 Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
 Output YES or NO only. Do not include markdown or explanations.`;
-      
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: checkPrompt }] }]
-        })
-      });
-      if (response.ok) {
-        const checkData = await response.json();
-        const decision = checkData?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toUpperCase() || 'NO';
-        hasPerfectPhoto = decision.includes('YES');
-        console.log(`[IMAGE ENGINE] Gemini decision on perfect real photo for "${topic}": ${decision}`);
-      }
-    } catch (err) {
-      console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
-    }
+    
+    const decisionText = await callPollinationsText(checkPrompt, "You are a decision bot. Output YES or NO only.");
+    const decision = decisionText?.trim()?.toUpperCase() || 'NO';
+    hasPerfectPhoto = decision.includes('YES');
+    console.log(`[IMAGE ENGINE] Pollinations decision on perfect real photo for "${topic}": ${decision}`);
+  } catch (err) {
+    console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
   }
 
   // Step 1: Try Wikipedia first if iconic real photo exists
@@ -137,21 +141,13 @@ Write a single descriptive sentence for a cinematic, atmospheric photo. Keep it 
 Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. Output the prompt text only.`;
     
     let aiPrompt = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
-    if (apiKey) {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: promptInstructions }] }]
-        })
-      });
-      if (response.ok) {
-        const geminiRes = await response.json();
-        const generated = geminiRes?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (generated) {
-          aiPrompt = generated;
-        }
+    try {
+      const generated = await callPollinationsText(promptInstructions, "You are an expert image prompt engineer.");
+      if (generated) {
+        aiPrompt = generated;
       }
+    } catch (err) {
+      console.warn(`[IMAGE ENGINE] Failed to generate AI prompt for "${topic}":`, err.message);
     }
     
     aiPrompt = aiPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
@@ -167,9 +163,10 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. O
 }
 
 const apiKey = getApiKey();
-if (!apiKey) {
-  console.error('ERROR: No Gemini API Key found in env or .env file.');
-  process.exit(1);
+const openRouterKey = getOpenRouterApiKey();
+
+if (!apiKey && !openRouterKey) {
+  console.warn('WARNING: Neither Gemini API Key nor OpenRouter API Key was found in the environment. Falling back entirely to Pollinations AI free-tier.');
 }
 
 const RECS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
@@ -188,24 +185,203 @@ ensureFiles();
 const storiesData = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf-8'));
 const conceptIndex = JSON.parse(fs.readFileSync(CONCEPTS_FILE, 'utf-8'));
 
-async function callGemini(prompt) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { responseMimeType: 'application/json' }
-    })
+// Generic helper to call Gemini API with retries and fallback from 2.5-flash to 1.5-flash
+async function callGeminiApi(contents, config = {}) {
+  if (!apiKey) {
+    throw new Error('Gemini API key is not configured.');
+  }
+  const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+  let lastError = null;
+
+  for (const model of models) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents,
+            ...config
+          })
+        });
+
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status}: ${res.statusText || errText}`);
+        }
+
+        const data = await res.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) {
+          return text.trim();
+        }
+        throw new Error('Empty response from model');
+      } catch (err) {
+        lastError = err;
+        console.warn(`[Gemini API] Attempt ${attempt} failed for model ${model}:`, err.message);
+        if (attempt < 3) {
+          await new Promise(r => setTimeout(r, attempt * 1000));
+        }
+      }
+    }
+  }
+  throw lastError || new Error('Failed to generate content from Gemini API');
+}
+
+// Call OpenRouter API with fallback models (Gemini-2.5-free and Llama-3-8b-free)
+async function callOpenRouterApi(contents, config = {}) {
+  if (!openRouterKey) {
+    throw new Error('OpenRouter API key is not configured.');
+  }
+
+  // Convert Gemini message format to OpenAI chat messages format
+  const messages = contents.map(c => {
+    if (c.parts && c.parts[0] && c.parts[0].text) {
+      return {
+        role: c.role === 'user' ? 'user' : 'assistant',
+        content: c.parts[0].text
+      };
+    }
+    return {
+      role: c.role || 'user',
+      content: c.content || c.text || ''
+    };
   });
 
-  if (!response.ok) {
-    throw new Error(`Gemini API returned ${response.status}: ${response.statusText}`);
+  const models = ['google/gemini-2.5-flash:free', 'meta-llama/llama-3-8b-instruct:free'];
+  let lastError = null;
+
+  for (const model of models) {
+    try {
+      console.log(`[OpenRouter API] Querying model ${model}...`);
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openRouterKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://github.com/Mr-Hkds/LORE',
+          'X-Title': 'LORE Content Engine'
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          ...config
+        })
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${res.statusText || errText}`);
+      }
+
+      const data = await response.json();
+      const text = data?.choices?.[0]?.message?.content;
+      if (text) {
+        return text.trim();
+      }
+      throw new Error(`OpenRouter ${model} returned empty response`);
+    } catch (err) {
+      lastError = err;
+      console.warn(`[OpenRouter API] Model ${model} call failed:`, err.message);
+    }
   }
-  const data = await response.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error('Empty response from Gemini.');
-  return text.trim();
+  throw lastError || new Error('All OpenRouter models failed.');
+}
+
+// Call Pollinations AI Text API with model rotation and retries
+async function callPollinationsText(prompt, systemPrompt = '') {
+  const models = ['openai', 'mistral', 'claude'];
+  let lastError = null;
+
+  for (const model of models) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const payload = {
+          messages: [
+            ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
+            { role: 'user', content: prompt }
+          ],
+          model
+        };
+
+        const res = await fetch('https://text.pollinations.ai/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          throw new Error(`Pollinations ${model} returned HTTP ${res.status}`);
+        }
+
+        const text = await res.text();
+        if (text && text.trim().length >= 5) {
+          return text.trim();
+        }
+        throw new Error(`Pollinations ${model} returned empty response`);
+      } catch (err) {
+        lastError = err;
+        console.warn(`[Pollinations AI] Model ${model} attempt ${attempt} failed:`, err.message);
+        if (attempt < 3) {
+          await new Promise(r => setTimeout(r, attempt * 1000));
+        }
+      }
+    }
+  }
+  throw lastError || new Error('All Pollinations AI models failed');
+}
+
+// Robust unified AI router that cascades through all available providers
+async function callRobustAI(prompt, expectJSON = false) {
+  let lastError = null;
+
+  // 1. Try Direct Gemini
+  if (apiKey) {
+    try {
+      console.log('[Content Engine] Running via Direct Gemini API...');
+      return await callGeminiApi(
+        [{ role: 'user', parts: [{ text: prompt }] }],
+        expectJSON ? { generationConfig: { responseMimeType: 'application/json' } } : {}
+      );
+    } catch (err) {
+      lastError = err;
+      console.warn('[Content Engine] Direct Gemini failed:', err.message);
+    }
+  }
+
+  // 2. Try OpenRouter
+  if (openRouterKey) {
+    try {
+      console.log('[Content Engine] Falling back to OpenRouter free-tier...');
+      return await callOpenRouterApi(
+        [{ role: 'user', parts: [{ text: prompt }] }],
+        expectJSON ? { response_format: { type: 'json_object' } } : {}
+      );
+    } catch (err) {
+      lastError = err;
+      console.warn('[Content Engine] OpenRouter failed:', err.message);
+    }
+  }
+
+  // 3. Try Pollinations AI (Zero Key Fallback)
+  try {
+    console.log('[Content Engine] Falling back to zero-config Pollinations AI...');
+    const suffix = expectJSON ? '\n\nReturn ONLY the raw JSON. Do not wrap in markdown or add explanations.' : '';
+    return await callPollinationsText(
+      prompt + suffix,
+      expectJSON ? 'You are a dark historian database compiler. Output valid JSON only, no markdown wrapping.' : 'You are a helpful assistant.'
+    );
+  } catch (err) {
+    lastError = err;
+    console.error('[Content Engine] Critical: Pollinations AI fallback failed:', err.message);
+  }
+
+  throw lastError || new Error('All AI providers in the fallback chain failed.');
+}
+
+async function callGemini(prompt) {
+  return callRobustAI(prompt, true);
 }
 
 async function fetchOpenAlexPapers(topic) {
@@ -525,7 +701,46 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
   fs.writeFileSync(STORIES_FILE, JSON.stringify(storiesData, null, 2));
   fs.writeFileSync(CONCEPTS_FILE, JSON.stringify(conceptIndex, null, 2));
   await saveRecommendations(recommendations);
+  
+  // Write automation status JSON
+  try {
+    const statusFilePath = path.join(__dirname, 'public', 'content', 'automation_status.json');
+    const statusData = {
+      lastRunAt: Date.now(),
+      nextRunAt: Date.now() + 30 * 60 * 1000,
+      intervalMs: 30 * 60 * 1000,
+      isRunning: false,
+      enabled: true,
+      status: 'success',
+      error: null,
+      mode: 'github-actions'
+    };
+    fs.writeFileSync(statusFilePath, JSON.stringify(statusData, null, 2));
+    console.log('Successfully wrote public/content/automation_status.json');
+  } catch (err) {
+    console.error('Failed to write automation status file:', err.message);
+  }
+
   console.log('\n--- ARCHIVE REPOSITORY FILES UPDATED SUCCESSFULLY ---');
 }
 
-run();
+run().catch(err => {
+  console.error('CRITICAL: Content Engine Run Failed:', err);
+  try {
+    const statusFilePath = path.join(__dirname, 'public', 'content', 'automation_status.json');
+    const statusData = {
+      lastRunAt: Date.now(),
+      nextRunAt: Date.now() + 30 * 60 * 1000,
+      intervalMs: 30 * 60 * 1000,
+      isRunning: false,
+      enabled: true,
+      status: 'failed',
+      error: err.message,
+      mode: 'github-actions'
+    };
+    fs.writeFileSync(statusFilePath, JSON.stringify(statusData, null, 2));
+  } catch (writeErr) {
+    console.error('Failed to write failure status file:', writeErr.message);
+  }
+  process.exit(1);
+});

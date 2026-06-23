@@ -253,6 +253,49 @@ async function callAI(prompt, systemPrompt = '', opts = {}) {
 // Backward-compatible alias
 const callPollinationsText = callAI;
 
+// Call OpenRouter API with fallback models (Gemini-2.5-free and Llama-3-8b-free)
+async function callOpenRouterAI(prompt, systemPrompt = '', opts = {}) {
+  const openRouterKey = process.env.OPENROUTER_API_KEY || process.env.VITE_OPENROUTER_API_KEY;
+  if (!openRouterKey) {
+    throw new Error('OpenRouter API key is not configured.');
+  }
+
+  const payload = {
+    model: opts.modelOverride || 'google/gemini-2.5-flash:free',
+    messages: [
+      ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
+      { role: 'user', content: prompt }
+    ]
+  };
+
+  if (opts.expectJSON) {
+    payload.response_format = { type: 'json_object' };
+  }
+
+  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${openRouterKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://github.com/Mr-Hkds/LORE',
+      'X-Title': 'LORE Content Engine'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`OpenRouter HTTP ${res.status}: ${res.statusText || errText}`);
+  }
+
+  const data = await res.json();
+  const text = data?.choices?.[0]?.message?.content;
+  if (text) {
+    return text.trim();
+  }
+  throw new Error('Empty response from OpenRouter');
+}
+
 // Fetch from Wikipedia or fall back to Pollinations AI to generate and save a story cover image
 async function generateAndSaveImage(storyId, topic, apiKey) {
   const storyImagesDir = path.join(__dirname, 'public', 'content', 'images', storyId);
@@ -569,6 +612,25 @@ let isAutomationRunning = false;
 const AUTOMATION_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
 let lastAutomationRunAt = 0; // epoch ms of last run
 
+function writeAutomationStatus(status, error = null) {
+  try {
+    const statusFilePath = path.join(__dirname, 'public', 'content', 'automation_status.json');
+    const statusData = {
+      lastRunAt: lastAutomationRunAt || Date.now(),
+      nextRunAt: (lastAutomationRunAt || Date.now()) + AUTOMATION_INTERVAL_MS,
+      intervalMs: AUTOMATION_INTERVAL_MS,
+      isRunning: isAutomationRunning,
+      enabled: isAutomationEnabled,
+      status,
+      error,
+      mode: 'local-server'
+    };
+    fs.writeFileSync(statusFilePath, JSON.stringify(statusData, null, 2));
+  } catch (err) {
+    console.error('[AUTOMATION] Failed to write status file:', err.message);
+  }
+}
+
 async function runAutomation(isManual = false) {
   if (isAutomationRunning) {
     addAutomationLog('Automation already in progress. Skipping.');
@@ -579,14 +641,18 @@ async function runAutomation(isManual = false) {
   }
   isAutomationRunning = true;
   lastAutomationRunAt = Date.now();
+  writeAutomationStatus('running');
   addAutomationLog('=== STARTING AUTOMATED CRON ENGINE ===');
   
   const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    addAutomationLog('ERROR: Gemini API Key not found in environment. Automation aborted.');
-    isAutomationRunning = false;
-    return;
+  const openRouterKey = process.env.OPENROUTER_API_KEY || process.env.VITE_OPENROUTER_API_KEY;
+  
+  if (!apiKey && !openRouterKey) {
+    addAutomationLog('WARNING: Neither Gemini nor OpenRouter API key found in environment. Relying on Pollinations AI for all generations.');
   }
+
+  let automationStatusResult = 'success';
+  let automationErrorMsg = null;
 
   try {
     // 1. Harvest Trends (using Wikipedia's Unsolved Deaths, Unexplained Phenomena, and Conspiracy Theories API)
@@ -853,13 +919,17 @@ ${storiesSummary}
 
 Ensure the output is strictly valid JSON only. Output raw JSON.`;
 
-      // Call Gemini API with retry-on-429 logic (free tier has rate limits)
+      // Call Gemini API with retry and fallback logic (tries 2.5-flash then 1.5-flash)
       let genRes = null;
-      try {
+      const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+      let lastError = null;
+
+      for (const model of models) {
+        if (genRes) break;
         for (let geminiAttempt = 1; geminiAttempt <= 3; geminiAttempt++) {
           try {
             genRes = await postUrl(
-              `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+              `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
               {
                 contents: [{ role: 'user', parts: [{ text: genPrompt }] }],
                 generationConfig: { responseMimeType: 'application/json' }
@@ -867,17 +937,20 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
             );
             break; // success
           } catch (geminiErr) {
-            if (geminiErr.message.includes('429') && geminiAttempt < 3) {
-              const waitSec = 10 * geminiAttempt; // 10s, 20s
-              addAutomationLog(`Gemini rate limited (429). Waiting ${waitSec}s before retry ${geminiAttempt + 1}/3...`);
+            lastError = geminiErr;
+            if ((geminiErr.message.includes('429') || geminiErr.message.includes('503')) && geminiAttempt < 3) {
+              const waitSec = 5 * geminiAttempt;
+              addAutomationLog(`Gemini ${model} error. Waiting ${waitSec}s before retry ${geminiAttempt + 1}/3...`);
               await new Promise(r => setTimeout(r, waitSec * 1000));
             } else {
-              throw geminiErr; // non-429 error or final attempt
+              break; // Try next model if it is another error or final attempt
             }
           }
         }
-      } catch (geminiErr) {
-        addAutomationLog(`WARNING: Gemini API call failed completely: ${geminiErr.message}`);
+      }
+      
+      if (!genRes) {
+        addAutomationLog(`WARNING: Gemini API calls failed completely: ${lastError?.message}`);
       }
       
       let storyObj = null;
@@ -900,9 +973,34 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         }
       }
 
-      // Fallback 1: Try Pollinations AI to generate the story
+      // Fallback 1: Try OpenRouter to generate the story
       if (!storyObj) {
-        addAutomationLog(`Gemini generation failed or returned invalid data. Falling back to robust Pollinations AI (openai) for story compilation...`);
+        const openRouterKey = process.env.OPENROUTER_API_KEY || process.env.VITE_OPENROUTER_API_KEY;
+        if (openRouterKey) {
+          addAutomationLog(`Direct Gemini failed. Falling back to OpenRouter API for story compilation...`);
+          try {
+            const rawText = await callOpenRouterAI(
+              genPrompt,
+              'You are a dark historian who writes premium Hinglish dossiers. Output valid JSON only, no markdown wrapping.',
+              { expectJSON: true }
+            );
+            const parsed = cleanAndParseJSON(rawText);
+            const validation = validateStoryStructure(parsed);
+            if (validation.valid) {
+              storyObj = parsed;
+              addAutomationLog(`SUCCESS: Story successfully compiled using OpenRouter.`);
+            } else {
+              addAutomationLog(`WARNING: OpenRouter response failed story structure validation: ${validation.errors.join('; ')}`);
+            }
+          } catch (err) {
+            addAutomationLog(`WARNING: OpenRouter story generation fallback failed: ${err.message}`);
+          }
+        }
+      }
+
+      // Fallback 2: Try Pollinations AI to generate the story
+      if (!storyObj) {
+        addAutomationLog(`Direct Gemini & OpenRouter failed. Falling back to robust Pollinations AI (openai) for story compilation...`);
         try {
           const pollinationsPrompt = genPrompt + `\n\nReturn ONLY the raw JSON. Do not wrap in markdown or add explanations.`;
           const text = await callAI(pollinationsPrompt, 'You are a dark historian who writes premium Hinglish dossiers. Output valid JSON only, no markdown wrapping.', { expectJSON: true, modelOverride: 'openai' });
@@ -993,10 +1091,13 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
     }
 
   } catch (err) {
+    automationStatusResult = 'failed';
+    automationErrorMsg = err.message;
     addAutomationLog(`CRITICAL ERROR during automation: ${err.message}`);
   } finally {
     isAutomationRunning = false;
     addAutomationLog('=== AUTOMATED CRON ENGINE STANDBY ===');
+    writeAutomationStatus(automationStatusResult, automationErrorMsg);
   }
 }
 
