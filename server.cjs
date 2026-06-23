@@ -567,6 +567,8 @@ function addAutomationLog(msg) {
 let isAutomationEnabled = true;
 let isAutomationRunning = false;
 let rateLimitSuspendedUntil = 0;
+const AUTOMATION_INTERVAL_MS = 3 * 60 * 60 * 1000; // 3 hours
+let lastAutomationRunAt = 0; // epoch ms of last run
 
 async function runAutomation(isManual = false) {
   if (isAutomationRunning) {
@@ -582,6 +584,7 @@ async function runAutomation(isManual = false) {
     return;
   }
   isAutomationRunning = true;
+  lastAutomationRunAt = Date.now();
   addAutomationLog('=== STARTING AUTOMATED CRON ENGINE ===');
   
   const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
@@ -1015,7 +1018,7 @@ setTimeout(() => {
 // Run automation every 3 hours
 setInterval(() => {
   runAutomation();
-}, 3 * 60 * 60 * 1000);
+}, AUTOMATION_INTERVAL_MS);
 
 // --- DAILY DOSSIER CONSTANTS & ENGINE ---
 const DOSSIER_FILE = path.join(__dirname, 'public', 'content', 'daily_dossier.json');
@@ -1315,8 +1318,18 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/automation/status
   if (req.method === 'GET' && pathname === '/api/automation/status') {
+    const nextRunMs = lastAutomationRunAt > 0
+      ? Math.max(0, lastAutomationRunAt + AUTOMATION_INTERVAL_MS - Date.now())
+      : 0;
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ isRunning: isAutomationRunning, enabled: isAutomationEnabled, logCount: automationLogs.length }));
+    res.end(JSON.stringify({
+      isRunning: isAutomationRunning,
+      enabled: isAutomationEnabled,
+      logCount: automationLogs.length,
+      lastRunAt: lastAutomationRunAt,
+      nextRunMs,
+      intervalMs: AUTOMATION_INTERVAL_MS,
+    }));
     return;
   }
 

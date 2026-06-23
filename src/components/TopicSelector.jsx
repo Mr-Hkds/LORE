@@ -294,45 +294,79 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           </p>
           {/* ── Editorial and Recommendations Section ── */}
           {activeTabStories.length > 0 && (
-            <div className="mb-16 pt-2">
-              <div className="flex items-center gap-6 mb-5 border-b border-neutral-900/60 pb-0">
-                <button 
-                  onClick={() => setActiveTab('top-rated')} 
-                  className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
-                  style={{ 
-                    color: activeTab === 'top-rated' ? ac : mu,
-                    borderBottom: activeTab === 'top-rated' ? `2px solid ${ac}` : '2px solid transparent',
-                    marginBottom: '-1px'
-                  }}
+            <div className="mb-16 pt-2 text-left">
+              {/* Outer premium card */}
+              <div
+                className="rounded-2xl border overflow-hidden"
+                style={{
+                  backgroundColor: 'rgba(13, 12, 10, 0.72)',
+                  borderColor: 'rgba(158, 123, 76, 0.18)',
+                  backdropFilter: 'blur(16px)',
+                  boxShadow: '0 2px 40px -8px rgba(0,0,0,0.55), inset 0 1px 0 rgba(158,123,76,0.07)',
+                }}
+              >
+                {/* Card Header Row */}
+                <div
+                  className="flex items-center justify-between px-5 pt-4 pb-3"
+                  style={{ borderBottom: '1px solid rgba(158,123,76,0.10)' }}
                 >
-                  ◉ TOP RATED
-                </button>
-                <button 
-                  onClick={() => setActiveTab('editors-picks')} 
-                  className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
-                  style={{ 
-                    color: activeTab === 'editors-picks' ? ac : mu,
-                    borderBottom: activeTab === 'editors-picks' ? `2px solid ${ac}` : '2px solid transparent',
-                    marginBottom: '-1px'
-                  }}
-                >
-                  ◉ EDITOR'S PICKS
-                </button>
-                {forYouStories.length > 0 && (
-                  <button 
-                    onClick={() => setActiveTab('recents')} 
-                    className="pb-2 text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] uppercase transition-all duration-300 relative cursor-pointer focus:outline-none"
-                    style={{ 
-                      color: activeTab === 'recents' ? ac : mu,
-                      borderBottom: activeTab === 'recents' ? `2px solid ${ac}` : '2px solid transparent',
-                      marginBottom: '-1px'
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="block w-1 h-4 rounded-full"
+                      style={{ background: 'linear-gradient(to bottom, #9E7B4C, rgba(158,123,76,0.15))' }}
+                    />
+                    <p
+                      className="text-[9px] font-mono font-bold tracking-[0.24em] uppercase"
+                      style={{ color: ac }}
+                    >
+                      Curated Dossiers
+                    </p>
+                  </div>
+                  {/* Tab pills – segmented control */}
+                  <div
+                    className="inline-flex items-center p-0.5 rounded-lg border"
+                    style={{
+                      backgroundColor: 'rgba(8, 7, 5, 0.6)',
+                      borderColor: 'rgba(158, 123, 76, 0.10)',
                     }}
                   >
-                    ◉ RECENTS
-                  </button>
-                )}
-              </div>
-              <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => setActiveTab('top-rated')}
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
+                      style={{
+                        color: activeTab === 'top-rated' ? fg : mu,
+                        backgroundColor: activeTab === 'top-rated' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                      }}
+                    >
+                      ◉ Top Rated
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('editors-picks')}
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
+                      style={{
+                        color: activeTab === 'editors-picks' ? fg : mu,
+                        backgroundColor: activeTab === 'editors-picks' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                      }}
+                    >
+                      ◉ Editor's Picks
+                    </button>
+                    {forYouStories.length > 0 && (
+                      <button
+                        onClick={() => setActiveTab('recents')}
+                        className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
+                        style={{
+                          color: activeTab === 'recents' ? fg : mu,
+                          backgroundColor: activeTab === 'recents' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                        }}
+                      >
+                        ◉ Recents
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Story list inside card */}
+                <div className="flex flex-col" style={{ borderColor: 'rgba(158,123,76,0.07)' }}>
                 {activeTabStories.map(story => {
                   const prog = getProgress(story.story_id);
                   const isCompleted = prog?.completed;
@@ -354,21 +388,16 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                         };
                         onSelect({ id: catMap[story.category] || story.category, label: story.category }, story.story_id);
                       }}
-                      className="group relative w-full flex flex-col sm:flex-row gap-4 rounded-xl border p-4 text-left cursor-pointer transition-all duration-300"
+                      className="group relative w-full flex flex-col sm:flex-row gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
                       style={{
-                        backgroundColor: 'rgba(15, 13, 10, 0.55)',
-                        borderColor: 'rgba(158, 123, 76, 0.12)',
-                        boxShadow: '0 4px 20px -8px rgba(0, 0, 0, 0.4)',
+                        backgroundColor: 'transparent',
+                        borderBottom: '1px solid rgba(158, 123, 76, 0.07)',
                       }}
                       onMouseEnter={e => {
-                        e.currentTarget.style.borderColor = `rgba(158, 123, 76, 0.3)`;
-                        e.currentTarget.style.backgroundColor = `rgba(15, 13, 10, 0.75)`;
-                        e.currentTarget.style.boxShadow = `0 8px 24px -6px rgba(0, 0, 0, 0.6)`;
+                        e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
                       }}
                       onMouseLeave={e => {
-                        e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.12)';
-                        e.currentTarget.style.backgroundColor = 'rgba(15, 13, 10, 0.55)';
-                        e.currentTarget.style.boxShadow = '0 4px 20px -8px rgba(0, 0, 0, 0.4)';
+                        e.currentTarget.style.backgroundColor = 'transparent';
                       }}
                     >
                       {/* Left Side: Grayscale story thumbnail overlayed with subtle gold border */}
@@ -431,6 +460,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     </button>
                   );
                 })}
+                </div>
               </div>
             </div>
           )}

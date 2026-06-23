@@ -54,6 +54,22 @@ function rebuildConceptIndex(storiesArray) {
   return index;
 }
 
+// XOR obfuscation for token storage (lightweight - NOT cryptographic security)
+const ADMIN_KEY = '0407';
+function xorObfuscate(str, key) {
+  return Array.from(str).map((c, i) =>
+    String.fromCharCode(c.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+  ).join('');
+}
+function tokenToStored(token) {
+  return btoa(xorObfuscate(token, ADMIN_KEY));
+}
+function storedToToken(stored) {
+  try {
+    return xorObfuscate(atob(stored), ADMIN_KEY);
+  } catch { return ''; }
+}
+
 export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
@@ -78,8 +94,40 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     localStorage.setItem('lore:github:owner', ghOwner);
     localStorage.setItem('lore:github:repo', ghRepo);
     localStorage.setItem('lore:github:branch', ghBranch);
-    localStorage.setItem('lore:github:token', ghToken);
+    if (ghToken) {
+      localStorage.setItem('lore:github:token', ghToken);
+      // Also save obfuscated version keyed to admin passcode
+      localStorage.setItem('lore:github:token:v2', tokenToStored(ghToken));
+    }
   }, [ghOwner, ghRepo, ghBranch, ghToken]);
+
+  // On mount: if no token in localStorage, try to fetch from GitHub config file
+  useEffect(() => {
+    const existing = localStorage.getItem('lore:github:token');
+    if (!existing) {
+      // Try to load from GitHub config (pushed there on first successful sync)
+      const owner = localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
+      const repo = localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE';
+      const branch = localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main';
+      // Try raw GitHub CDN (no auth needed if repo is public)
+      fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/config/admin_config.json`)
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+          if (cfg?.tok) {
+            const decoded = storedToToken(cfg.tok);
+            if (decoded) {
+              setGhToken(decoded);
+              localStorage.setItem('lore:github:token', decoded);
+              localStorage.setItem('lore:github:token:v2', cfg.tok);
+              setGhSyncSuccess(true);
+              localStorage.setItem('lore:github:success', 'true');
+            }
+          }
+        })
+        .catch(() => {});
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Image uploading state
   const [uploadingState, setUploadingState] = useState('idle'); // 'idle' | 'uploading'
@@ -786,7 +834,6 @@ Structure the story exactly in the following JSON format:
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
   "hook": "A highly-professional, specific, and compelling 1-2 sentence teaser (max 150 chars) in Hinglish for the catalog card. CRITICAL: The hook must be completely custom and specific to the case details (e.g., mention specific locations, names, or key anomalies). Never write generic hooks like 'Ek aisi ansuljhi dastan...' or 'Kya hai iska sach?'.",
   "concepts": ["concept1", "concept2", "concept3"],
-  "severity": "${severityVal}",ncept3"],
   "severity": "${severityVal}",
   "layers": [
     {
@@ -1286,9 +1333,9 @@ Keep responses concise. Be direct and useful.`;
           </div>
           <div>
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
-              Topic Suggestions
+              Pending Topics
             </span>
-            <span className="font-serif italic text-2xl">{recommendations.length}</span>
+            <span className="font-serif italic text-2xl">{recommendations.filter(r => r.status === 'pending').length}</span>
           </div>
           <div>
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
@@ -1795,6 +1842,36 @@ Keep responses concise. Be direct and useful.`;
                 </div>
               </div>
 
+              {/* Engine Status Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Engine Status</span>
+                  <span className="text-xs font-mono font-bold" style={{ color: autoStatus.isRunning ? '#F59E0B' : autoStatus.enabled ? '#10B981' : '#6A6560' }}>
+                    {autoStatus.isRunning ? '⚡ RUNNING' : autoStatus.enabled ? '● ACTIVE' : '◌ PAUSED'}
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Interval</span>
+                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">Every 3h</span>
+                </div>
+                <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Next Run</span>
+                  <span className="text-xs font-mono font-bold" style={{ color: '#9E7B4C' }}>
+                    {autoStatus.nextRunMs > 0
+                      ? (() => {
+                          const m = Math.floor(autoStatus.nextRunMs / 60000);
+                          const h = Math.floor(m / 60);
+                          return h > 0 ? `${h}h ${m % 60}m` : `${m}m`;
+                        })()
+                      : serverOffline ? 'SERVER OFFLINE' : 'Calculating...'}
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">GitHub Actions</span>
+                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">Daily 00:00 UTC</span>
+                </div>
+              </div>
+
               {/* Logs output */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-[10px] font-mono">
@@ -2084,11 +2161,12 @@ Keep responses concise. Be direct and useful.`;
                   </p>
                 </div>
 
-                <div className="pt-2 text-left">
+                <div className="pt-2 text-left flex flex-col gap-3">
                   <button
+                    id="btn-test-github-sync"
                     onClick={async () => {
                       if (!ghToken) {
-                        alert('Please provide a token first.');
+                        alert('Please provide a Personal Access Token first.');
                         return;
                       }
                       setIsPublishing(true);
@@ -2101,9 +2179,21 @@ Keep responses concise. Be direct and useful.`;
                           }
                         });
                         if (res.ok) {
-                          setToast({ text: `Success! Connected to repository ${ghOwner}/${ghRepo}.`, type: 'success' });
                           setGhSyncSuccess(true);
                           localStorage.setItem('lore:github:success', 'true');
+                          setPublishStatus('Connection verified! Saving token config to GitHub...');
+                          // Push obfuscated token to GitHub config/admin_config.json so any admin device auto-loads it
+                          const configContent = JSON.stringify({ tok: tokenToStored(ghToken), owner: ghOwner, repo: ghRepo, branch: ghBranch, updated: new Date().toISOString() }, null, 2);
+                          try {
+                            await commitFilesToGitHub(
+                              [{ path: 'config/admin_config.json', content: configContent }],
+                              'config: update admin sync config [skip ci]'
+                            );
+                            setToast({ text: `✓ Connected to ${ghOwner}/${ghRepo}. Token saved — any admin login will auto-connect.`, type: 'success' });
+                          } catch (commitErr) {
+                            // Connection worked but config commit failed — still mark success
+                            setToast({ text: `Connected to ${ghOwner}/${ghRepo}. Note: Could not save config to repo: ${commitErr.message}`, type: 'success' });
+                          }
                         } else {
                           const errData = await res.json();
                           setToast({ text: `Connection failed: ${errData.message || res.statusText}`, type: 'error' });
@@ -2122,8 +2212,18 @@ Keep responses concise. Be direct and useful.`;
                     disabled={isPublishing}
                     className="px-4 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-mono font-bold uppercase rounded active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer"
                   >
-                    {isPublishing ? 'Testing...' : 'Test Sync Connection'}
+                    {isPublishing ? publishStatus || 'Saving...' : 'Test Sync & Save Token'}
                   </button>
+
+                  {/* Connection status indicator */}
+                  <div className="p-3 rounded-lg border flex items-center gap-3" style={{ borderColor: ghSyncSuccess ? 'rgba(16,185,129,0.25)' : 'rgba(237,232,223,0.07)', backgroundColor: ghSyncSuccess ? 'rgba(16,185,129,0.04)' : 'transparent' }}>
+                    <span className="text-sm" style={{ color: ghSyncSuccess ? '#10B981' : '#6A6560' }}>
+                      {ghSyncSuccess ? '✓' : '○'}
+                    </span>
+                    <span className="text-[10px] font-mono tracking-wider" style={{ color: ghSyncSuccess ? '#10B981' : '#6A6560' }}>
+                      {ghSyncSuccess ? `Synced · ${ghOwner}/${ghRepo}:${ghBranch}` : 'Not connected — enter token and click Test Sync'}
+                    </span>
+                  </div>
                 </div>
               </div>
 

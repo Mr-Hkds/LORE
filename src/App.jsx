@@ -342,6 +342,7 @@ export default function App() {
         setLocalStories={setLocalStories}
         refetchStories={refetchStories}
         onBack={handleExitAdmin}
+        passcode="0407"
         onStoryDeleted={(deletedId) => {
           setDeletedStories(prev => {
             if (prev.includes(deletedId)) return prev;
