@@ -454,20 +454,20 @@ Do not wrap in markdown. Output raw JSON only.`;
       }
 
       if (!text) {
-        if (!apiKey) throw new Error('No Gemini API key configured. Go to the Generator tab to set it.');
-        addLog('Connecting directly to Google Gemini API for auto-clean...');
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        addLog('Connecting directly to Pollinations AI for auto-clean...');
+        const res = await fetch('https://text.pollinations.ai/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-            systemInstruction: { parts: [{ text: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.' }] },
-            generationConfig: { responseMimeType: 'application/json' }
+            messages: [
+              { role: 'system', content: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.' },
+              { role: 'user', content: prompt }
+            ],
+            model: 'openai'
           })
         });
-        if (!res.ok) throw new Error(`Gemini API returned HTTP ${res.status}: ${res.statusText}`);
-        const data = await res.json();
-        text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!res.ok) throw new Error(`Pollinations AI returned HTTP ${res.status}`);
+        text = await res.text();
       }
 
       if (!text) throw new Error('Empty response from AI.');
@@ -1921,7 +1921,7 @@ Keep responses concise. Be direct and useful.`;
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Interval</span>
                   <span className="text-xs font-mono font-bold text-[#EDE8DF]">
-                    {ghSyncSuccess ? 'Daily' : 'Every 3h'}
+                    {ghSyncSuccess ? 'Daily' : 'Every 30m'}
                   </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>

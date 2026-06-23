@@ -566,18 +566,12 @@ function addAutomationLog(msg) {
 
 let isAutomationEnabled = true;
 let isAutomationRunning = false;
-let rateLimitSuspendedUntil = 0;
-const AUTOMATION_INTERVAL_MS = 3 * 60 * 60 * 1000; // 3 hours
+const AUTOMATION_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
 let lastAutomationRunAt = 0; // epoch ms of last run
 
 async function runAutomation(isManual = false) {
   if (isAutomationRunning) {
     addAutomationLog('Automation already in progress. Skipping.');
-    return;
-  }
-  if (Date.now() < rateLimitSuspendedUntil && !isManual) {
-    const timeLeftHours = ((rateLimitSuspendedUntil - Date.now()) / (1000 * 60 * 60)).toFixed(2);
-    addAutomationLog(`Automation suspended due to Gemini 429 quota cooling period. Remaining: ${timeLeftHours} hours. Skipping.`);
     return;
   }
   if (!isAutomationEnabled && !isManual) {
@@ -884,10 +878,6 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         }
       } catch (geminiErr) {
         addAutomationLog(`WARNING: Gemini API call failed completely: ${geminiErr.message}`);
-        if (geminiErr.message.includes('429')) {
-          rateLimitSuspendedUntil = Date.now() + 4 * 60 * 60 * 1000;
-          addAutomationLog(`Gemini quota limit (429) hit. Background runner suspended for 4 hours (until ${new Date(rateLimitSuspendedUntil).toLocaleTimeString()}).`);
-        }
       }
       
       let storyObj = null;
