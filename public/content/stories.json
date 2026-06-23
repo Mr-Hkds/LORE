@@ -565,8 +565,11 @@
     {
       "story_id": "cicada_3301",
       "title": "Cicada 3301: Internet ka Sabse Bada Anjana Raaz",
-      "category": "cyber_mysteries",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
+      "image_query": "Cicada 3301",
       "hook": "Ek online puzzle jo duniya ke sabse tez dimaagon ko dhundh raha tha. Lekin kiske liye, aur kyon?",
+      "category": "cyber_mysteries",
+      "severity": "unsettling",
       "concepts": [
         "cryptography",
         "steganography",
@@ -574,8 +577,6 @@
         "recruitment",
         "secret_societies"
       ],
-      "severity": "unsettling",
-      "image_query": "Cicada 3301",
       "layers": [
         {
           "layer": 1,
@@ -617,23 +618,6 @@
           "layer": 7,
           "layer_name": "Layer 7: The Lingering Shadow of the Unknown",
           "content": "Cicada 3301 ka sabse gehra aur dark sach yeh hai ki uska asli maksad aur identity aaj tak ek raaz hai. Ye ek reminder hai ki internet ki duniya mein aisi anjaani shaktiyan ho sakti hain jo hamari soch se bhi pare hain. Ek entity jo duniya ke sabse tez dimaagon ko test aur recruit kar sakti hai, bina apni pehchaan ya maksad zahir kiye.\n\nYe hume ye bhi sikhata hai ki insaan ki intelligence aur curiosity ko kitni aasani se manipulate kiya ja sakta hai. Unhone proof kiya ki kaise kuch anjaane log, internet ke zariye, puri duniya ke sabse brightest minds ko ek saath la sakte hain, ek unkahi, anjaani wajah ke liye. Cicada 3301 ek unsettling question chhod gaya hai: kya hum sach mein apne digital duniya mein safe hain, aur aisi aur kitni hidden societies ya entities hain jo hume test kar rahi hain, bina hamari jaankari ke?"
-        }
-      ],
-      "connections": [],
-      "added_date": "2026-06-23",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
-      "evidence_links": [
-        {
-          "label": "Biophysical Model of Bacterial Cell Interactions with Nanopatterned Cicada Wing Surfaces (Sergey Pogodin, Jafar Hasan, 2013)",
-          "url": "http://www.cell.com/article/S0006349513000039/pdf"
-        },
-        {
-          "label": "Cicada Wing Surface Topography: An Investigation into the Bactericidal Properties of Nanostructural Features (Susan M. Kelleher, Olivier Habimana, 2015)",
-          "url": "http://hdl.handle.net/10197/7457"
-        },
-        {
-          "label": "Cicada-inspired cell-instructive nanopatterned arrays (Ting Diu, Nilofar Faruqui, 2014)",
-          "url": "https://www.nature.com/articles/srep07122.pdf"
         }
       ]
     }
