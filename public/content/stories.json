@@ -624,8 +624,11 @@
     {
       "story_id": "hidden_facts_shri_vishnu_ji",
       "title": "Bhagwan Vishnu Ke Ankahe Raaz: Ek Cosmic Dhokha Ya Ultimate Satya?",
-      "category": "mythology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vishnu_from_Gita_Govinda.jpg/330px-Vishnu_from_Gita_Govinda.jpg",
+      "image_query": "Vishnu",
       "hook": "Kya aap Shri Vishnu ji ko sirf ek benevolent Preserver maante hain? Aaj unki divine leela ke aise parde uthenge jo aapko sochne par majboor kar denge.",
+      "category": "mythology",
+      "severity": "unsettling",
       "concepts": [
         "cosmic_illusion",
         "divine_play",
@@ -633,8 +636,6 @@
         "cosmic_cycles",
         "preserver_destroyer_paradox"
       ],
-      "severity": "unsettling",
-      "image_query": "Vishnu",
       "layers": [
         {
           "layer": 1,
@@ -676,23 +677,6 @@
           "layer": 7,
           "layer_name": "The Darkest Truth: Tum Hi Vishnu Ho!",
           "content": "Sabse gehra aur shayad sabse 'unsettling' truth yeh hai: Vishnu ji sirf ek external deity nahi hain. Advaita Vedanta jaise philosophical schools mein kaha gaya hai ki 'Brahman Satyam, Jagat Mithya, Jeevo Brahmaiva Na Parah' – Brahma satya hai, jagat mithya hai, aur jeev Brahma se alag nahi hai. Iska matlab hai ki Vishnu, as the ultimate reality, humare andar hi hain.\n\nYeh 'darkest truth' isliye hai kyunki yeh humari saari external search ko khatam kar deta hai. Woh shakti, woh divine essence, woh cosmic intelligence jo Vishnu mein hai, woh humare andar bhi hai. Hum khud us Divine principle ka hissa hain, aur us 'Maya' se bahar nikalne ka rasta humare apne andar hi hai. Hamari individual identity aur 'main' ka ahankaar hi humein is ultimate truth se dur rakhta hai. Jab tak hum unhe bahar dhoondhte rahenge, tab tak woh 'hidden' hi rahenge. Unka sabse bada raaz yeh hai ki woh koi raaz nahi hain, balki wahi hain jo hum sab hain, ek aisi anant chetna jo har jeev mein samaahit hai. Is sachai ko samajhna hi 'moksha' ki disha mein pehla kadam hai, aur yeh realizing that we are part of something so vast and impersonal, can be truly unsettling and profound."
-        }
-      ],
-      "connections": [],
-      "added_date": "2026-06-23",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vishnu_from_Gita_Govinda.jpg/330px-Vishnu_from_Gita_Govinda.jpg",
-      "evidence_links": [
-        {
-          "label": "Pharmacodynamics of Sudarshan Churna (Rajiv Kumar, Munesh Sharma, 2024)",
-          "url": "https://pubs.thesciencein.org/journal/index.php/btl/article/download/a901/529"
-        },
-        {
-          "label": "Mountain, Water, Rock, God: Understanding Kedarnath in the Twenty-First Century (Luke Whitmore, 2018)",
-          "url": "https://www.luminosoa.org/site/books/10.1525/luminos.61/download/2456/"
-        },
-        {
-          "label": "IndIE: A Multilingual Open Information Extraction Tool For Indic Languages (Ritwik Mishra, Simranjeet Singh, 2023)",
-          "url": "https://aclanthology.org/2023.findings-ijcnlp.28.pdf"
         }
       ]
     }
