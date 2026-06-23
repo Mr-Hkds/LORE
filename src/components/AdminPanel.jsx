@@ -84,31 +84,52 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [activeTab, setActiveTab] = useState('catalog');
 
   // GitHub Sync Configuration States
-  const [ghOwner, setGhOwner] = useState(() => localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds');
-  const [ghRepo, setGhRepo] = useState(() => localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE');
-  const [ghBranch, setGhBranch] = useState(() => localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main');
-  const [ghToken, setGhToken] = useState(() => localStorage.getItem('lore:github:token') || import.meta.env.VITE_GITHUB_TOKEN || '');
+  const [ghOwner, setGhOwner] = useState(() => {
+    const v = localStorage.getItem('lore:github:owner');
+    return v && v !== 'undefined' && v !== 'null' ? v : (import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds');
+  });
+  const [ghRepo, setGhRepo] = useState(() => {
+    const v = localStorage.getItem('lore:github:repo');
+    return v && v !== 'undefined' && v !== 'null' ? v : (import.meta.env.VITE_GITHUB_REPO || 'LORE');
+  });
+  const [ghBranch, setGhBranch] = useState(() => {
+    const v = localStorage.getItem('lore:github:branch');
+    return v && v !== 'undefined' && v !== 'null' ? v : (import.meta.env.VITE_GITHUB_BRANCH || 'main');
+  });
+  const [ghToken, setGhToken] = useState(() => {
+    const v = localStorage.getItem('lore:github:token');
+    return v && v !== 'undefined' && v !== 'null' ? v : (import.meta.env.VITE_GITHUB_TOKEN || '');
+  });
   const [ghSyncSuccess, setGhSyncSuccess] = useState(() => localStorage.getItem('lore:github:success') === 'true');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
 
   // Save to localStorage when changed
   useEffect(() => {
-    localStorage.setItem('lore:github:owner', ghOwner);
-    localStorage.setItem('lore:github:repo', ghRepo);
-    localStorage.setItem('lore:github:branch', ghBranch);
-    if (ghToken) {
+    if (ghOwner && ghOwner !== 'undefined' && ghOwner !== 'null') {
+      localStorage.setItem('lore:github:owner', ghOwner);
+    }
+    if (ghRepo && ghRepo !== 'undefined' && ghRepo !== 'null') {
+      localStorage.setItem('lore:github:repo', ghRepo);
+    }
+    if (ghBranch && ghBranch !== 'undefined' && ghBranch !== 'null') {
+      localStorage.setItem('lore:github:branch', ghBranch);
+    }
+    if (ghToken && ghToken !== 'undefined' && ghToken !== 'null') {
       localStorage.setItem('lore:github:token', ghToken);
-      // Also save obfuscated version keyed to admin passcode
       localStorage.setItem('lore:github:token:v2', tokenToStored(ghToken));
     }
   }, [ghOwner, ghRepo, ghBranch, ghToken]);
 
   // On mount: try to fetch keys and sync configuration from GitHub config file
   useEffect(() => {
-    const owner = localStorage.getItem('lore:github:owner') || import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
-    const repo = localStorage.getItem('lore:github:repo') || import.meta.env.VITE_GITHUB_REPO || 'LORE';
-    const branch = localStorage.getItem('lore:github:branch') || import.meta.env.VITE_GITHUB_BRANCH || 'main';
+    const rawOwner = localStorage.getItem('lore:github:owner');
+    const rawRepo = localStorage.getItem('lore:github:repo');
+    const rawBranch = localStorage.getItem('lore:github:branch');
+
+    const owner = rawOwner && rawOwner !== 'undefined' && rawOwner !== 'null' ? rawOwner : (import.meta.env.VITE_GITHUB_OWNER || 'Mr-Hkds');
+    const repo = rawRepo && rawRepo !== 'undefined' && rawRepo !== 'null' ? rawRepo : (import.meta.env.VITE_GITHUB_REPO || 'LORE');
+    const branch = rawBranch && rawBranch !== 'undefined' && rawBranch !== 'null' ? rawBranch : (import.meta.env.VITE_GITHUB_BRANCH || 'main');
 
     const existingToken = localStorage.getItem('lore:github:token');
     const existingGemini = localStorage.getItem('lore:gemini:key');
@@ -119,7 +140,19 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       .then(r => r.ok ? r.json() : null)
       .then(cfg => {
         if (cfg) {
-          if (cfg.tok && !existingToken) {
+          if (cfg.owner && cfg.owner !== 'undefined' && cfg.owner !== 'null') {
+            setGhOwner(cfg.owner);
+            localStorage.setItem('lore:github:owner', cfg.owner);
+          }
+          if (cfg.repo && cfg.repo !== 'undefined' && cfg.repo !== 'null') {
+            setGhRepo(cfg.repo);
+            localStorage.setItem('lore:github:repo', cfg.repo);
+          }
+          if (cfg.branch && cfg.branch !== 'undefined' && cfg.branch !== 'null') {
+            setGhBranch(cfg.branch);
+            localStorage.setItem('lore:github:branch', cfg.branch);
+          }
+          if (cfg.tok && (!existingToken || existingToken === 'undefined' || existingToken === 'null')) {
             const decoded = storedToToken(cfg.tok);
             if (decoded) {
               setGhToken(decoded);
@@ -129,14 +162,14 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               localStorage.setItem('lore:github:success', 'true');
             }
           }
-          if (cfg.geminiKey && !existingGemini) {
+          if (cfg.geminiKey && (!existingGemini || existingGemini === 'undefined' || existingGemini === 'null')) {
             const decoded = storedToToken(cfg.geminiKey);
             if (decoded) {
               setApiKey(decoded);
               localStorage.setItem('lore:gemini:key', decoded);
             }
           }
-          if (cfg.openRouterKey && !existingOpenRouter) {
+          if (cfg.openRouterKey && (!existingOpenRouter || existingOpenRouter === 'undefined' || existingOpenRouter === 'null')) {
             const decoded = storedToToken(cfg.openRouterKey);
             if (decoded) {
               setOpenRouterKey(decoded);
@@ -146,7 +179,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         }
       })
       .catch(() => {});
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Image uploading state
@@ -547,7 +579,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         setServerOffline(true);
       }
     }
-  }, []);
+  }, [isLocal]);
 
   // Poll automation logs and status
   useEffect(() => {
@@ -591,7 +623,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         try {
           const res = await fetch(url, {
             headers: {
-              'Authorization': `token ${token}`,
+              'Authorization': `Bearer ${token}`,
               'Accept': 'application/vnd.github.v3+json',
               'Cache-Control': 'no-cache, no-store, must-revalidate',
               'Pragma': 'no-cache',
@@ -601,6 +633,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           if (res.ok) {
             const data = await res.json();
             sha = data.sha;
+            if (!sha) {
+              const etag = res.headers.get('etag');
+              if (etag) {
+                sha = etag.replace(/"/g, '');
+              }
+            }
           } else if (res.status !== 404) {
             const errData = await res.json().catch(() => ({}));
             throw new Error(`GitHub metadata fetch failed (HTTP ${res.status}): ${errData.message || res.statusText}`);
@@ -625,7 +663,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file.path}`, {
           method: 'PUT',
           headers: {
-            'Authorization': `token ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
           },
@@ -686,7 +724,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const remoteStoriesUrl = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/public/content/stories.json?ref=${ghBranch}&t=${Date.now()}`;
         const resRemote = await fetch(remoteStoriesUrl, {
           headers: {
-            'Authorization': `token ${ghToken}`,
+            'Authorization': `Bearer ${ghToken}`,
             'Accept': 'application/vnd.github.v3+json',
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
@@ -968,7 +1006,7 @@ Do not wrap in markdown. Output raw JSON only.`;
         const res = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}/actions/workflows/nightly-generation.yml/dispatches`, {
           method: 'POST',
           headers: {
-            'Authorization': `token ${ghToken}`,
+            'Authorization': `Bearer ${ghToken}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
           },
@@ -2953,7 +2991,7 @@ Keep responses concise. Be direct and useful.`;
                       try {
                         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
                           headers: {
-                            'Authorization': `token ${token}`,
+                            'Authorization': `Bearer ${token}`,
                             'Accept': 'application/vnd.github.v3+json'
                           }
                         });
