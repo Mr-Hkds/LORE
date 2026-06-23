@@ -1,0 +1,10 @@
+{
+  "lastRunAt": 0,
+  "nextRunAt": 0,
+  "intervalMs": 1800000,
+  "isRunning": false,
+  "enabled": true,
+  "status": "idle",
+  "error": null,
+  "mode": "github-actions"
+}

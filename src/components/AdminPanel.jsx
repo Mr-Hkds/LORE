@@ -77,6 +77,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const ac = '#9E7B4C';
   const ru = 'rgba(237,232,223,0.07)';
 
+  // Determine if running locally or live
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
   // Tabs: 'catalog' | 'recommendations' | 'generator' | 'automation' | 'feedback' | 'ai-editor' | 'github-sync'
   const [activeTab, setActiveTab] = useState('catalog');
 
@@ -172,8 +175,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [genTopic, setGenTopic] = useState('');
   const [genCategory, setGenCategory] = useState('auto');
   const [genSeverity, setGenSeverity] = useState('auto');
-  const [apiKey, setApiKey] = useState('');
-  const [openRouterKey, setOpenRouterKey] = useState('');
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem('lore:gemini:key') || '');
+  const [openRouterKey, setOpenRouterKey] = useState(() => localStorage.getItem('lore:openrouter:key') || '');
   
   // Generic helper to call Gemini API with retries and fallback from 2.5-flash to 1.5-flash
   const callGeminiApi = async (contents, config = {}) => {
@@ -480,8 +483,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Fetch status and logs from server or fallback to static status JSON
   const fetchAutomationData = useCallback(async () => {
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    
     if (isLocal) {
       try {
         const resStatus = await fetch('/api/automation/status');
@@ -640,6 +641,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   };
 
   const handleHarvestWebTrends = async () => {
+    if (!isLocal) {
+      alert('Trend Harvesting is a server-side feature. Please start your local server to harvest new trends.');
+      return;
+    }
     if (serverOffline) {
       alert('Trend Harvesting is a server-side feature. Please start your local API server to harvest new trends.');
       return;
@@ -688,7 +693,7 @@ If all recommendations are valid and relevant, return an empty array: [].
 Do not wrap in markdown. Output raw JSON only.`;
 
       let text = '';
-      if (!serverOffline) {
+      if (isLocal && !serverOffline) {
         try {
           const res = await fetch('/api/ai-chat', {
             method: 'POST',
@@ -781,6 +786,41 @@ Do not wrap in markdown. Output raw JSON only.`;
   };
 
   const handleTriggerAutomation = async () => {
+    if (!isLocal) {
+      if (!ghSyncSuccess || !ghToken) {
+        alert('Please configure and verify GitHub Sync first to trigger cloud runs.');
+        return;
+      }
+      setIsGenerating(true);
+      try {
+        addLog('🚀 Dispatching GitHub Action workflow (cloud run)...');
+        const res = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}/actions/workflows/nightly-generation.yml/dispatches`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `token ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ref: ghBranch })
+        });
+        if (res.ok || res.status === 204) {
+          addLog('🚀 GitHub Actions cloud workflow run successfully dispatched! It will take a few minutes to run and push updates.');
+          alert('Cloud workflow triggered successfully! It will take a few minutes to generate content and commit it to your repository.');
+        } else {
+          const err = await res.json().catch(() => ({}));
+          addLog(`❌ Failed to dispatch workflow: ${err.message || res.statusText}`);
+          alert(`Failed to trigger cloud workflow: ${err.message || res.statusText}`);
+        }
+      } catch (e) {
+        console.error(e);
+        addLog(`❌ Network error triggering cloud workflow: ${e.message}`);
+        alert('Network error while triggering cloud workflow.');
+      } finally {
+        setIsGenerating(false);
+      }
+      return;
+    }
+
     try {
       addLog('🚀 Triggering server-side automated cron run...');
       const res = await fetch('/api/automation/run', { method: 'POST' });
@@ -845,7 +885,7 @@ Do not wrap in markdown. Output raw JSON only.`;
 
   const handleSaveStory = async (storyId) => {
     let serverSaved = false;
-    if (!serverOffline) {
+    if (isLocal && !serverOffline) {
       try {
         const res = await fetch(`/api/stories/${storyId}`, {
           method: 'PUT',
@@ -922,7 +962,7 @@ Do not wrap in markdown. Output raw JSON only.`;
     
     let serverDeleted = false;
     // Try to delete from local server
-    if (!serverOffline) {
+    if (isLocal && !serverOffline) {
       try {
         const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
         if (res.ok) {
@@ -1031,7 +1071,10 @@ Do not wrap in markdown. Output raw JSON only.`;
 
   // Upload a custom cover image to the server
   const handleUploadImage = async (e, storyId) => {
-    if (serverOffline) return;
+    if (!isLocal || serverOffline) {
+      alert('Custom image uploading is a local feature. Please run the app on localhost to upload images.');
+      return;
+    }
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -1284,7 +1327,7 @@ Output YES or NO only. Do not include markdown or explanations.`;
 
       // Try writing to local server if running
       let serverSaved = false;
-      if (!serverOffline) {
+      if (isLocal && !serverOffline) {
         try {
           const res = await fetch('/api/stories/add', {
             method: 'POST',
@@ -1544,10 +1587,13 @@ Keep responses concise. Be direct and useful.`;
               <span className="text-lg mt-0.5 select-none" style={{ color: '#C4644A' }}>⚠</span>
               <div className="text-left">
                 <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#C4644A' }}>
-                  Local API Server Offline
+                  {isLocal ? 'Local API Server Offline' : 'GitHub Sync Unconfigured'}
                 </p>
                 <p className="text-[11px] font-sans mt-1 leading-relaxed" style={{ color: fg, opacity: 0.75 }}>
-                  Changes are being saved locally to your browser only. Configure **GitHub Sync** in Settings to push edits live directly to the website.
+                  {isLocal 
+                    ? 'Changes are being saved locally to your browser only. Configure **GitHub Sync** in Settings to push edits live directly to the website.'
+                    : 'GitHub Sync is unconfigured. All edits will save to local browser storage only. Configure **GitHub Sync** in Settings to push changes live to the website.'
+                  }
                 </p>
               </div>
             </div>
@@ -1580,7 +1626,10 @@ Keep responses concise. Be direct and useful.`;
                   GitHub Sync Active
                 </p>
                 <p className="text-[11px] font-sans mt-1 leading-relaxed" style={{ color: fg, opacity: 0.75 }}>
-                  Local API server is offline, but **GitHub Sync** is successfully connected. Edits will save locally and push live automatically.
+                  {isLocal
+                    ? 'Local API server is offline, but **GitHub Sync** is successfully connected. Edits will save locally and push live automatically.'
+                    : 'GitHub Sync is successfully connected. All edits will save and push live to the website automatically.'
+                  }
                 </p>
               </div>
             </div>
@@ -1708,6 +1757,10 @@ Keep responses concise. Be direct and useful.`;
                 <div className="flex gap-2">
                   <button
                     onClick={async () => {
+                      if (!isLocal) {
+                        alert('Image Backfilling is a server-side feature. Please start your local server to backfill images.');
+                        return;
+                      }
                       if (serverOffline) {
                         alert('Image Backfilling is a server-side feature. Please start your local API server to backfill images.');
                         return;
@@ -1767,7 +1820,7 @@ Keep responses concise. Be direct and useful.`;
                             />
                             <label
                               htmlFor={`upload-${story.story_id}`}
-                              className={`px-3 py-2 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[10px] font-mono tracking-wider uppercase rounded flex items-center justify-center min-w-[80px] transition-all select-none font-bold ${serverOffline ? 'opacity-40 cursor-not-allowed' : 'hover:bg-neutral-800 cursor-pointer active:scale-95'}`}
+                              className={`px-3 py-2 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[10px] font-mono tracking-wider uppercase rounded flex items-center justify-center min-w-[80px] transition-all select-none font-bold ${(isLocal ? serverOffline : true) ? 'opacity-40 cursor-not-allowed' : 'hover:bg-neutral-800 cursor-pointer active:scale-95'}`}
                             >
                               {uploadingState === 'uploading' ? '...' : 'Upload'}
                             </label>
@@ -1777,7 +1830,7 @@ Keep responses concise. Be direct and useful.`;
                               id={`upload-${story.story_id}`}
                               className="hidden"
                               onChange={(e) => handleUploadImage(e, story.story_id)}
-                              disabled={uploadingState === 'uploading' || serverOffline}
+                              disabled={uploadingState === 'uploading' || (isLocal ? serverOffline : true)}
                             />
                           </div>
                         </div>
@@ -2128,7 +2181,7 @@ Keep responses concise. Be direct and useful.`;
                       <input
                         type="checkbox"
                         checked={ghSyncSuccess ? true : !!autoStatus.enabled}
-                        disabled={serverOffline}
+                        disabled={isLocal ? serverOffline : !ghSyncSuccess}
                         onChange={handleToggleAutomation}
                         className="sr-only peer"
                       />
@@ -2137,7 +2190,7 @@ Keep responses concise. Be direct and useful.`;
                   </label>
                   <button
                     onClick={handleTriggerAutomation}
-                    disabled={isGenerating || autoStatus.isRunning || serverOffline}
+                    disabled={isGenerating || autoStatus.isRunning || (isLocal ? serverOffline : !ghSyncSuccess)}
                     className="px-3 py-1.5 bg-neutral-900 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-white/5 disabled:opacity-40 transition-all uppercase cursor-pointer"
                     style={{ borderColor: ru }}
                   >
@@ -2147,12 +2200,31 @@ Keep responses concise. Be direct and useful.`;
               </div>
 
               {serverOffline && (
-                <div className="p-4 rounded-xl border bg-[#C4644A]/10 border-[#C4644A]/25 text-xs text-[#C4644A] flex flex-col gap-1 leading-relaxed">
-                  <span className="font-semibold uppercase tracking-wider text-[10px]">Local API Server Offline</span>
+                <div 
+                  className="p-4 rounded-xl border text-xs flex flex-col gap-1 leading-relaxed transition-all duration-300"
+                  style={{
+                    backgroundColor: (!isLocal && ghSyncSuccess) ? 'rgba(16, 185, 129, 0.05)' : 'rgba(196, 100, 74, 0.05)',
+                    borderColor: (!isLocal && ghSyncSuccess) ? 'rgba(16, 185, 129, 0.25)' : 'rgba(196, 100, 74, 0.25)',
+                    color: (!isLocal && ghSyncSuccess) ? '#10B981' : '#C4644A'
+                  }}
+                >
+                  <span className="font-semibold uppercase tracking-wider text-[10px]">
+                    {isLocal 
+                      ? 'Local API Server Offline' 
+                      : ghSyncSuccess 
+                      ? 'Cloud Automation Active' 
+                      : 'Cloud Automation Unconfigured'
+                    }
+                  </span>
                   <span>
-                    {ghSyncSuccess 
-                      ? "The local automation engine controls are disabled because you are using GitHub Sync. Your story archive is synchronized, and the engine runs daily in the cloud via GitHub Actions." 
-                      : "The local automation engine controls are disabled because the local API server is not running. Please start the server locally using 'node server.cjs' to enable live background runs."}
+                    {isLocal 
+                      ? (ghSyncSuccess 
+                          ? "The local automation engine controls are disabled because you are using GitHub Sync. Your story archive is synchronized, and the engine runs daily in the cloud via GitHub Actions." 
+                          : "The local automation engine controls are disabled because the local API server is not running. Please start the server locally using 'node server.cjs' to enable live background runs.")
+                      : (ghSyncSuccess 
+                          ? "The automation engine is active in the cloud. It runs automatically every 30 minutes via GitHub Actions, publishing new stories directly to the live website." 
+                          : "The cloud automation engine is currently disabled because GitHub Sync is not configured. Please configure GitHub Sync in Settings to enable automatic cloud generation.")
+                    }
                   </span>
                 </div>
               )}
@@ -2185,7 +2257,10 @@ Keep responses concise. Be direct and useful.`;
                             ? `${m}m ${sec}s` 
                             : `${sec}s`;
                         })()
-                      : serverOffline ? 'OFFLINE' : 'Calculating...'}
+                      : isLocal
+                      ? (serverOffline ? 'OFFLINE' : 'Calculating...')
+                      : (ghSyncSuccess ? 'Scheduled (Every 30m)' : 'DISABLED')
+                      }
                   </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
@@ -2487,6 +2562,40 @@ Keep responses concise. Be direct and useful.`;
                   />
                   <p className="text-[9px] text-[#6A6560] leading-relaxed">
                     Token is stored purely inside your browser's local storage and is never sent anywhere except directly to GitHub's REST API. Required scope: <code>repo</code> or <code>contents:write</code>.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Gemini API Key</label>
+                  <input
+                    type="password"
+                    value={apiKey}
+                    onChange={e => {
+                      setApiKey(e.target.value);
+                      localStorage.setItem('lore:gemini:key', e.target.value);
+                    }}
+                    placeholder="Insert VITE_GEMINI_API_KEY..."
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors font-mono"
+                  />
+                  <p className="text-[9px] text-[#6A6560] leading-relaxed">
+                    Used as the primary engine for story content generation.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-1.5 text-left">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">OpenRouter API Key</label>
+                  <input
+                    type="password"
+                    value={openRouterKey}
+                    onChange={e => {
+                      setOpenRouterKey(e.target.value);
+                      localStorage.setItem('lore:openrouter:key', e.target.value);
+                    }}
+                    placeholder="Insert VITE_OPENROUTER_API_KEY..."
+                    className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors font-mono"
+                  />
+                  <p className="text-[9px] text-[#6A6560] leading-relaxed">
+                    Used as a robust fallback engine if the primary Gemini key limits out or fails.
                   </p>
                 </div>
 
