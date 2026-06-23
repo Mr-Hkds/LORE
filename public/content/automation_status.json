@@ -1,10 +1,10 @@
 {
-  "lastRunAt": 1782198588385,
-  "nextRunAt": 1782200388385,
+  "lastRunAt": 1782208504977,
+  "nextRunAt": 1782210304977,
   "intervalMs": 1800000,
-  "isRunning": false,
+  "isRunning": true,
   "enabled": true,
-  "status": "success",
+  "status": "running",
   "error": null,
-  "mode": "github-actions"
+  "mode": "local-server"
 }
