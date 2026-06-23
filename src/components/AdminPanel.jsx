@@ -187,6 +187,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [uploadingState, setUploadingState] = useState('idle'); // 'idle' | 'uploading'
   const [feedbackItems, setFeedbackItems] = useState([]);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  
+  // Recommendations states
+  const [recommendations, setRecommendations] = useState([]);
+  const [recsLoading, setRecsLoading] = useState(false);
+  const [newRecTopic, setNewRecTopic] = useState('');
+  const [addingRec, setAddingRec] = useState(false);
 
   // Story editor states
   const [editingStoryId, setEditingStoryId] = useState(null);
@@ -723,9 +729,137 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     setFeedbackLoading(false);
   }, []);
 
+  // Recommendations loader
+  const loadRecommendations = useCallback(async () => {
+    setRecsLoading(true);
+    let items = [];
+    try {
+      const res = await fetch('/api/recommendations');
+      if (res.ok) {
+        items = await res.json();
+      } else {
+        const resStatic = await fetch(`/content/recommendations.json?t=${Date.now()}`);
+        if (resStatic.ok) items = await resStatic.json();
+      }
+    } catch {
+      try {
+        const resStatic = await fetch(`/content/recommendations.json?t=${Date.now()}`);
+        if (resStatic.ok) items = await resStatic.json();
+      } catch {
+        void 0;
+      }
+    }
+
+    try {
+      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
+      if (localRecs.length > 0) {
+        const combined = [...localRecs];
+        items.forEach(item => {
+          if (!combined.some(c => c.id === item.id)) {
+            combined.push(item);
+          }
+        });
+        items = combined;
+      }
+    } catch {
+      void 0;
+    }
+
+    // Sort: pending first, then by date/id descending
+    const sorted = items.sort((a, b) => {
+      const aPending = (a.status || 'pending') === 'pending';
+      const bPending = (b.status || 'pending') === 'pending';
+      if (aPending && !bPending) return -1;
+      if (!aPending && bPending) return 1;
+      return b.id.localeCompare(a.id);
+    });
+
+    setRecommendations(sorted);
+    setRecsLoading(false);
+  }, []);
+
+  const handleAddRecommendation = async (e) => {
+    e.preventDefault();
+    if (!newRecTopic.trim()) return;
+    setAddingRec(true);
+    const newRec = {
+      id: 'rec_' + Date.now(),
+      topic: newRecTopic.trim(),
+      date: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }),
+      status: 'pending'
+    };
+
+    try {
+      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
+      localRecs.push(newRec);
+      localStorage.setItem('lore:recommendations', JSON.stringify(localRecs));
+    } catch (err) {
+      console.warn(err);
+    }
+
+    try {
+      const res = await fetch('/api/recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRec)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.duplicate) {
+          setToast({ text: `Topic is already in the queue! (Status: ${data.status})`, type: 'info' });
+        } else {
+          setToast({ text: 'Recommendation successfully filed in queue!', type: 'success' });
+        }
+      } else {
+        setToast({ text: 'Added locally (server response was not OK)', type: 'info' });
+      }
+      setNewRecTopic('');
+      loadRecommendations();
+    } catch {
+      setToast({ text: 'Added locally (offline mode)', type: 'info' });
+      setNewRecTopic('');
+      loadRecommendations();
+    } finally {
+      setAddingRec(false);
+    }
+  };
+
+  const handleDeleteRecommendation = async (id) => {
+    if (!window.confirm('Delete this recommendation from the queue?')) return;
+    
+    setRecommendations(prev => prev.filter(r => r.id !== id));
+    
+    try {
+      const localRecs = JSON.parse(localStorage.getItem('lore:recommendations') || '[]');
+      const filtered = localRecs.filter(r => r.id !== id);
+      localStorage.setItem('lore:recommendations', JSON.stringify(filtered));
+    } catch {
+      void 0;
+    }
+
+    try {
+      const res = await fetch(`/api/recommendations?id=${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setToast({ text: 'Recommendation deleted successfully!', type: 'success' });
+      } else {
+        throw new Error('Server deletion failed');
+      }
+    } catch (err) {
+      console.warn('Server delete failed, deleted only locally:', err.message);
+    }
+    loadRecommendations();
+  };
+
   useEffect(() => {
     loadFeedback();
-  }, [loadFeedback]);
+    loadRecommendations();
+  }, [loadFeedback, loadRecommendations]);
 
   // Story editor utilities
   const startEditing = (story) => {
@@ -1115,6 +1249,17 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         if (resFbLocal.ok) {
           const fbList = await resFbLocal.json();
           filesToCommit.push({ path: 'public/content/feedback.json', content: JSON.stringify(fbList, null, 2) });
+        }
+      } catch {
+        void 0;
+      }
+
+      // Read local recommendations file to push
+      try {
+        const resRecLocal = await fetch(`/content/recommendations.json?t=${Date.now()}`);
+        if (resRecLocal.ok) {
+          const recList = await resRecLocal.json();
+          filesToCommit.push({ path: 'public/content/recommendations.json', content: JSON.stringify(recList, null, 2) });
         }
       } catch {
         void 0;
@@ -1786,7 +1931,113 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                   </div>
 
                 </div>
+              </div>
 
+              {/* Row 2: Reader Recommendations Queue */}
+              <div className="border-t pt-8 text-left mt-8" style={{ borderColor: ru }}>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-6" style={{ borderColor: ru }}>
+                  <div>
+                    <h3 className="font-serif italic text-xl">Reader Recommendations Queue</h3>
+                    <p className="text-xs text-[#6A6560] mt-1">Pending and approved topics submitted by readers or added by admins</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={loadRecommendations}
+                      className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
+                      style={{ borderColor: ru, color: '#EDE8DF' }}
+                    >
+                      ⟳ Reload
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  {/* Form Column */}
+                  <div className="lg:col-span-1 space-y-4">
+                    <div className="p-5 bg-[#0D0B08] rounded-xl border space-y-4" style={{ borderColor: ru }}>
+                      <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#9E7B4C] font-bold">Add Custom Topic</h4>
+                      <form onSubmit={handleAddRecommendation} className="space-y-4">
+                        <div>
+                          <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
+                            Topic Name / Keyword
+                          </label>
+                          <input
+                            type="text"
+                            value={newRecTopic}
+                            onChange={(e) => setNewRecTopic(e.target.value)}
+                            placeholder="e.g. Project Sunshine, Sleep Paralysis..."
+                            className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none transition-colors"
+                            disabled={addingRec}
+                            required
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          disabled={addingRec || !newRecTopic.trim()}
+                          className="w-full py-2.5 bg-[#9E7B4C]/20 border border-[#9E7B4C]/40 text-[#9E7B4C] text-[10px] font-mono tracking-widest uppercase rounded hover:bg-[#9E7B4C]/30 active:scale-95 disabled:opacity-40 transition-all cursor-pointer font-bold"
+                        >
+                          {addingRec ? 'Adding...' : 'Add Topic to Queue'}
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+
+                  {/* List/Table Column */}
+                  <div className="lg:col-span-2">
+                    {recsLoading ? (
+                      <div className="text-center py-12 text-[#6A6560] font-mono text-xs animate-pulse">
+                        Loading recommendations queue...
+                      </div>
+                    ) : recommendations.length === 0 ? (
+                      <div className="py-12 text-center bg-black/20 rounded-2xl border border-dashed border-neutral-800">
+                        <p className="font-serif italic text-base text-[#6A6560] mb-2">Queue is empty.</p>
+                        <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40">Admin or visitor recommended topics will appear here.</p>
+                      </div>
+                    ) : (
+                      <div className="border rounded-xl overflow-hidden bg-black/10" style={{ borderColor: ru }}>
+                        <div className="max-h-[350px] overflow-y-auto pr-1">
+                          <table className="w-full text-left border-collapse text-xs">
+                            <thead>
+                              <tr className="border-b" style={{ borderColor: ru, backgroundColor: 'rgba(0,0,0,0.2)' }}>
+                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Topic Name</th>
+                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Date Added</th>
+                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Status</th>
+                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560] text-right">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {recommendations.map((rec) => (
+                                <tr key={rec.id} className="border-b transition-colors hover:bg-white/2" style={{ borderColor: ru }}>
+                                  <td className="p-3 font-serif text-sm text-neutral-200 font-medium">{rec.topic}</td>
+                                  <td className="p-3 text-[#8F8A82] font-mono text-[10px]">{rec.date}</td>
+                                  <td className="p-3">
+                                    <span 
+                                      className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
+                                        rec.status === 'pending' 
+                                          ? 'text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25' 
+                                          : 'text-[#6A6560] bg-neutral-800/20'
+                                      }`}
+                                    >
+                                      {rec.status || 'pending'}
+                                    </span>
+                                  </td>
+                                  <td className="p-3 text-right">
+                                    <button
+                                      onClick={() => handleDeleteRecommendation(rec.id)}
+                                      className="text-[10px] font-mono text-red-500 hover:text-red-400 cursor-pointer px-2 py-1 hover:bg-red-500/10 rounded transition-colors"
+                                    >
+                                      Delete
+                                    </button>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           )}

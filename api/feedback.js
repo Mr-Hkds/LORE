@@ -45,7 +45,7 @@ export default async function handler(req, res) {
           id: String(issue.number),
           rating: data.rating || (issue.title.match(/Rating:\s*(\d)/)?.[1] ? parseInt(issue.title.match(/Rating:\s*(\d)/)[1]) : 3),
           tags: data.tags || [],
-          note: data.note || body || '',
+          note: typeof data.note === 'string' ? data.note : (body || ''),
           timestamp: data.timestamp || issue.created_at,
           page: data.page || '/',
           addressed: issue.state === 'closed'
@@ -74,8 +74,19 @@ export default async function handler(req, res) {
         page: page || '/'
       };
 
-      const issueBody = `Submitted User Feedback:
+      const issueBody = `### ✦ LORE User Feedback
 
+| Parameter | Value |
+| --- | --- |
+| **Rating** | ${rating} / 5 |
+| **Tags** | ${(tags || []).join(', ') || '*None*'} |
+| **Comment** | ${note ? `"${note}"` : '*None*'} |
+| **Page** | \`${page || '/'}\` |
+| **Timestamp** | ${payload.timestamp} |
+
+---
+
+#### Developer Data (JSON)
 \`\`\`json
 ${JSON.stringify(payload, null, 2)}
 \`\`\`

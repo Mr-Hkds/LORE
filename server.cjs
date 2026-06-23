@@ -8,6 +8,7 @@ const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
 const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
 const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 const STATUS_FILE = path.join(__dirname, 'public', 'content', 'automation_status.json');
+const RECOMMENDATIONS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
 
 // Logs memory store
 let automationLogs = [];
@@ -60,6 +61,9 @@ function ensureFiles() {
   }
   if (!fs.existsSync(FEEDBACK_FILE)) {
     fs.writeFileSync(FEEDBACK_FILE, JSON.stringify([], null, 2));
+  }
+  if (!fs.existsSync(RECOMMENDATIONS_FILE)) {
+    fs.writeFileSync(RECOMMENDATIONS_FILE, JSON.stringify([], null, 2));
   }
   writeAutomationStatus('standby', '');
 }
@@ -261,16 +265,39 @@ async function runAutomation(isManual = false) {
     addAutomationLog(`Database contains ${list.length} stories. Balancing category focus...`);
     addAutomationLog(`Least represented category: "${targetCategory}" (${minCount} stories)`);
 
-    // 3. Formulate Prompt for Gemini
+    // 3. Formulate Prompt for Gemini, integrating recommendations queue
     const existingTitles = list.map(s => s.title).join(', ');
+    
+    // Read local recommendations queue (only take top 5 pending topics to avoid overwhelming AI/context)
+    let pendingTopicsText = '';
+    let recs = [];
+    try {
+      recs = readJson(RECOMMENDATIONS_FILE) || [];
+      const pendingRecs = recs.filter(r => r.status === 'pending');
+      if (pendingRecs.length > 0) {
+        pendingTopicsText = pendingRecs.slice(0, 5).map(r => `"- Topic: '${r.topic}', Recommendation ID: '${r.id}'"`).join('\n');
+        addAutomationLog(`Found ${pendingRecs.length} pending recommendations. Offering top 5 to Gemini.`);
+      } else {
+        addAutomationLog('No pending recommendations found. Gemini will choose a topic.');
+      }
+    } catch (err) {
+      console.error('[Automation] Failed to read recommendations:', err.message);
+    }
+
     addAutomationLog('Asking Gemini for an unexplored real-world topic...');
 
     const prompt = `Write a complete, highly-detailed 7-layer documentary story in Hinglish about a famous, documented, real-world case or event.
     
-    Category to write: "${targetCategory}"
+    Target Category: "${targetCategory}" (If writing about a user-recommended topic, you can classify it into whichever category fits best).
     
-    Exclude these existing story titles (do NOT write about them): [${existingTitles}]. Choose a completely different, famous unexplored topic that fits the category.
+    User-Recommended Topics:
+    ${pendingTopicsText || 'None. Please choose your own topic.'}
     
+    CRITICAL TOPIC SELECTION RULES:
+    1. If there are User-Recommended Topics provided above, review them. Select one of them if it is a compelling, historically documented case, OR if it fits the target category. If a user-recommended topic is chosen, you must return its 'Recommendation ID' in the "chosen_recommendation_id" field of the JSON.
+    2. If no user-recommended topics are provided, or if none of them are historically verifiable/compelling, choose a completely different, famous unexplored topic that fits the Target Category "${targetCategory}". In this case, set "chosen_recommendation_id" to null.
+    3. Exclude these existing story titles (do NOT write about them): [${existingTitles}].
+
     CRITICAL FACTUAL AND PACING RULES:
     1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
     2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in high-quality, engaging Hinglish (Hindi written in English alphabet, mixed with English words as spoken by mystery/true-crime podcasters).
@@ -282,11 +309,12 @@ async function runAutomation(isManual = false) {
     {
       "story_id": "lowercase_slug_with_underscores",
       "title": "Compelling Title",
-      "category": "${targetCategory}",
+      "category": "category_name",
       "hook": "Teaser description of this case (max 150 chars) in Hinglish.",
       "concepts": ["concept1", "concept2", "concept3"],
       "severity": "unsettling | disturbing | extreme (choose based on topic intensity)",
       "image_query": "The exact Wikipedia article title representing this topic for thumbnail fetching (e.g. Mary Celeste)",
+      "chosen_recommendation_id": "The Recommendation ID of the selected topic, or null if you chose your own topic",
       "layers": [
         {
           "layer": 1,
@@ -388,6 +416,37 @@ async function runAutomation(isManual = false) {
     storiesData.stories.push(storyObj);
     writeJson(STORIES_FILE, storiesData);
     updateConceptIndex(storiesData.stories);
+
+    // 7. Auto-delete the chosen recommendation from the queue
+    if (storyObj.chosen_recommendation_id) {
+      try {
+        const freshRecs = readJson(RECOMMENDATIONS_FILE) || [];
+        const filteredRecs = freshRecs.filter(r => r.id !== storyObj.chosen_recommendation_id);
+        writeJson(RECOMMENDATIONS_FILE, filteredRecs);
+        addAutomationLog(`[RECOMMENDATION] Auto-deleted generated topic from queue (ID: ${storyObj.chosen_recommendation_id})`);
+      } catch (err) {
+        console.error('[Automation] Failed to clean recommendation from queue:', err.message);
+      }
+    } else {
+      // Fallback: search and clean matching topics by title/similarity just in case
+      try {
+        const freshRecs = readJson(RECOMMENDATIONS_FILE) || [];
+        const storyTitle = storyObj.title.trim().toLowerCase();
+        const initialLen = freshRecs.length;
+        const filteredRecs = freshRecs.filter(r => {
+          const recTopic = r.topic.trim().toLowerCase();
+          return recTopic !== storyTitle && 
+                 !storyTitle.includes(recTopic) && 
+                 !recTopic.includes(storyTitle);
+        });
+        if (filteredRecs.length < initialLen) {
+          writeJson(RECOMMENDATIONS_FILE, filteredRecs);
+          addAutomationLog(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${storyObj.title}")`);
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
 
     addAutomationLog(`SUCCESS: Story "${storyObj.title}" successfully added to archive.`);
     isAutomationRunning = false;
@@ -704,6 +763,87 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Route: GET /api/recommendations
+  if (req.method === 'GET' && pathname === '/api/recommendations') {
+    const recs = readJson(RECOMMENDATIONS_FILE) || [];
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(recs));
+    return;
+  }
+
+  // Route: POST /api/recommendations
+  if (req.method === 'POST' && pathname === '/api/recommendations') {
+    try {
+      const entry = await getJsonBody(req);
+      if (!entry.topic) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Topic required' }));
+        return;
+      }
+
+      const recs = readJson(RECOMMENDATIONS_FILE) || [];
+      const duplicate = recs.find(r => r.topic.toLowerCase() === entry.topic.trim().toLowerCase());
+      if (duplicate) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, duplicate: true, status: duplicate.status || 'pending' }));
+        return;
+      }
+
+      entry.id = entry.id || ('rec_' + Date.now());
+      entry.date = entry.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      entry.status = 'pending';
+
+      recs.push(entry);
+      writeJson(RECOMMENDATIONS_FILE, recs);
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: DELETE /api/recommendations
+  if (req.method === 'DELETE' && pathname === '/api/recommendations') {
+    const id = urlObj.searchParams.get('id');
+    if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
+    let recs = readJson(RECOMMENDATIONS_FILE) || [];
+    recs = recs.filter(r => r.id !== id);
+    writeJson(RECOMMENDATIONS_FILE, recs);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+    return;
+  }
+
+  // Route: PUT /api/recommendations
+  if (req.method === 'PUT' && pathname === '/api/recommendations') {
+    try {
+      const body = await getJsonBody(req);
+      const { id, status } = body || {};
+      if (!id || !status) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'id and status required' }));
+        return;
+      }
+      const recs = readJson(RECOMMENDATIONS_FILE) || [];
+      const item = recs.find(r => r.id === id);
+      if (item) {
+        item.status = status;
+        writeJson(RECOMMENDATIONS_FILE, recs);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true }));
+      } else {
+        res.writeHead(404); res.end('{"error":"Not found"}');
+      }
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Route: PUT /api/stories/:id
   const storyPutMatch = pathname.match(/^\/api\/stories\/([^/]+)$/);
   if (req.method === 'PUT' && storyPutMatch) {
@@ -747,6 +887,25 @@ const server = http.createServer(async (req, res) => {
       writeJson(STORIES_FILE, storiesData);
 
       updateConceptIndex(storiesData.stories);
+
+      // Check if this matches a recommended topic and delete it from the queue
+      try {
+        const recs = readJson(RECOMMENDATIONS_FILE) || [];
+        const storyTitle = newStory.title.trim().toLowerCase();
+        const initialLen = recs.length;
+        const filteredRecs = recs.filter(r => {
+          const recTopic = r.topic.trim().toLowerCase();
+          return recTopic !== storyTitle && 
+                 !storyTitle.includes(recTopic) && 
+                 !recTopic.includes(storyTitle);
+        });
+        if (filteredRecs.length < initialLen) {
+          console.log(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${newStory.title}")`);
+          writeJson(RECOMMENDATIONS_FILE, filteredRecs);
+        }
+      } catch (err) {
+        console.error('[RECOMMENDATION] Failed to check and delete from queue:', err.message);
+      }
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));

@@ -506,7 +506,7 @@ async function run() {
     fs.writeFileSync(RECS_FILE, JSON.stringify(recsList, null, 2));
   }
 
-  const recommendations = await getRecommendations();
+  let recommendations = await getRecommendations();
   
   // 1. Identify topics to run
   const pendingRecs = recommendations.filter(r => r.status === 'pending');
@@ -684,13 +684,10 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         });
       }
 
-      // Mark recommendation as generated
+      // Delete recommendation from local list
       if (item.recId) {
-        const idx = recommendations.findIndex(r => r.id === item.recId);
-        if (idx !== -1) {
-          recommendations[idx].status = 'generated';
-          console.log(`Updated recommendation status to 'generated' for ID: ${item.recId}`);
-        }
+        recommendations = recommendations.filter(r => r.id !== item.recId);
+        console.log(`Auto-deleted recommendation ID: ${item.recId} from list.`);
       }
     } catch (e) {
       console.error(`FAILED to generate story for: "${item.topic}". Error:`, e.message);
