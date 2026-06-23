@@ -417,7 +417,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
               </a>
             </p>
             <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-              DESIGNED BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
+              DESIGNED & ENGINEERED BY <span className="mr-lotus-premium ml-1 transition-all duration-300">MR. LOTUS</span>
             </p>
           </footer>
         </div>

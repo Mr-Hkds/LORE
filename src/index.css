@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
 /* Global base */
@@ -166,62 +166,76 @@ body {
   animation: rollUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Animated Premium signature effect (Classy typewriter style with red shimmer) */
-.black-lotus-premium {
-  font-family: 'Courier New', Courier, monospace;
+/* Animated Premium signature effect for MR. LOTUS */
+.mr-lotus-premium {
+  font-family: 'Space Mono', monospace;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
   display: inline-block;
   position: relative;
+  text-transform: uppercase;
   
-  /* Red shimmer gradient background (no gold) */
+  /* Luxurious Gold/Amber Shimmer gradient background */
   background: linear-gradient(
     90deg,
-    #8F8A82 0%,
-    #EDE8DF 25%,
-    #ef4444 50%,
-    #EDE8DF 75%,
-    #8F8A82 100%
+    #9E7B4C 0%,
+    #EAD2AC 25%,
+    #FFFFFF 50%,
+    #EAD2AC 75%,
+    #9E7B4C 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: red-shimmer 4s linear infinite;
+  animation: gold-shimmer 5s linear infinite, gold-glow-pulse 4s ease-in-out infinite;
   
-  text-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  text-shadow: 0 0 8px rgba(158, 123, 76, 0.15);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.black-lotus-premium::after {
+.mr-lotus-premium::after {
   content: '_';
   display: inline-block;
-  margin-left: 3px;
-  color: #ef4444;
-  -webkit-text-fill-color: #ef4444;
+  margin-left: 4px;
+  color: #EAD2AC;
+  -webkit-text-fill-color: #EAD2AC;
   animation: typewriterBlink 1.2s step-end infinite;
 }
 
-.black-lotus-premium:hover {
-  transform: translateY(-2px);
-  /* red glow on hover */
-  text-shadow: 0 0 18px rgba(239, 68, 68, 0.8), 0 0 30px rgba(158, 123, 76, 0.4);
+.mr-lotus-premium:hover {
+  transform: translateY(-2px) scale(1.03);
+  text-shadow: 0 0 20px rgba(234, 210, 172, 0.8), 0 0 35px rgba(158, 123, 76, 0.5);
   letter-spacing: 0.24em;
 }
 
-@keyframes red-shimmer {
+.mr-lotus-premium:hover::after {
+  animation: typewriterBlink 0.6s step-end infinite;
+}
+
+@keyframes typewriterBlink {
+  from, to { color: transparent; -webkit-text-fill-color: transparent; }
+  50% { color: #EAD2AC; -webkit-text-fill-color: #EAD2AC; }
+}
+
+@keyframes gold-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(158, 123, 76, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(234, 210, 172, 0.75), 0 0 28px rgba(158, 123, 76, 0.4);
+  }
+}
+
+@keyframes gold-shimmer {
   0% {
     background-position: -200% center;
   }
   100% {
     background-position: 200% center;
   }
-}
-
-@keyframes typewriterBlink {
-  from, to { color: transparent; -webkit-text-fill-color: transparent; }
-  50% { color: #ef4444; -webkit-text-fill-color: #ef4444; }
 }
 
 /* CRT scanline effect for terminal console */

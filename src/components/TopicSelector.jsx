@@ -292,7 +292,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             Seven layers of real, documented knowledge.<br />
             Each one darker than the last.
           </p>
-          {/* ── Editorial and Recommendations Section ── */}
+          {/* Today in the Shadows */}
+          <div className="mb-16">
+            <TodayInShadows />
+          </div>
+
+          {/* ── Editorial and Recommendations Section ── */}
           {activeTabStories.length > 0 && (
             <div className="mb-16 pt-2 text-left">
               {/* Outer premium card */}
@@ -465,11 +470,6 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </div>
           )}
 
-          {/* Today in the Shadows */}
-          <div className="mb-16">
-            <TodayInShadows />
-          </div>
-
           {/* Topic list */}
           <div style={{ borderTop: `1px solid ${ru}` }}>
             {TOPICS.map((topic) => {
@@ -605,7 +605,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </a>
           </p>
           <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-            DESIGNED BY <span className="black-lotus-premium ml-1 transition-all duration-300">BLACK_LOTUS</span>
+            DESIGNED & ENGINEERED BY <span className="mr-lotus-premium ml-1 transition-all duration-300">MR. LOTUS</span>
           </p>
         </footer>
       </main>

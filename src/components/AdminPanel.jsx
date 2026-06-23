@@ -640,6 +640,58 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   };
 
+  const handleSyncLocalToGitHub = async () => {
+    if (!ghToken) {
+      alert('GitHub Personal Access Token is required. Please configure it first.');
+      return;
+    }
+    
+    setIsPublishing(true);
+    setPublishStatus('Sync: Fetching local database files...');
+    try {
+      const filesToSync = [
+        { path: 'public/content/stories.json', url: '/content/stories.json' },
+        { path: 'public/content/concept_index.json', url: '/content/concept_index.json' },
+        { path: 'public/content/recommendations.json', url: '/content/recommendations.json' },
+        { path: 'public/content/daily_dossier.json', url: '/content/daily_dossier.json' },
+        { path: 'public/content/feedback.json', url: '/content/feedback.json' },
+        { path: 'public/content/automation_status.json', url: '/content/automation_status.json' }
+      ];
+
+      const filesToCommit = [];
+
+      for (const f of filesToSync) {
+        try {
+          const res = await fetch(`${f.url}?t=${Date.now()}`);
+          if (res.ok) {
+            const content = await res.text();
+            if (content && content.trim().length > 0) {
+              filesToCommit.push({ path: f.path, content });
+            }
+          }
+        } catch (e) {
+          console.warn(`Skipping local file sync for ${f.path}:`, e.message);
+        }
+      }
+
+      if (filesToCommit.length === 0) {
+        throw new Error('No local files found to sync.');
+      }
+
+      setPublishStatus(`Sync: Found ${filesToCommit.length} files. Committing to GitHub...`);
+      await commitFilesToGitHub(filesToCommit, 'admin: sync local archive updates to live site');
+      setToast({ text: '✓ Successfully synchronized all local changes to the live site!', type: 'success' });
+      addLog(`🚀 Published ${filesToCommit.length} local files to GitHub repo.`);
+    } catch (err) {
+      console.error('Local sync to GitHub failed:', err);
+      setToast({ text: `Failed to push changes to GitHub: ${err.message}`, type: 'error' });
+      addLog(`❌ Local Sync Failed: ${err.message}`);
+    } finally {
+      setIsPublishing(false);
+      setPublishStatus('');
+    }
+  };
+
   const handleHarvestWebTrends = async () => {
     if (!isLocal) {
       alert('Trend Harvesting is a server-side feature. Please start your local server to harvest new trends.');
@@ -2670,6 +2722,29 @@ Keep responses concise. Be direct and useful.`;
                       {ghSyncSuccess ? `Synced · ${ghOwner}/${ghRepo}:${ghBranch}` : 'Not connected — enter token and click Test Sync'}
                     </span>
                   </div>
+
+                  {/* Localhost to GitHub Publishing Section */}
+                  {isLocal && ghSyncSuccess && (
+                    <div className="mt-8 pt-6 border-t border-neutral-800 flex flex-col gap-4 text-left">
+                      <h4 className="text-[11px] font-mono tracking-widest uppercase text-[#9E7B4C] font-bold">
+                        Publish Local Content to Live Website
+                      </h4>
+                      <p className="text-[10px] text-[#8F8A82] leading-relaxed">
+                        Since you are running LORE locally, all archive changes (story creations, edits, deletions) are stored on your local disk. 
+                        Click the button below to fetch all local JSON data files and automatically push/commit them directly to your live GitHub repository to update the main website.
+                      </p>
+                      <div>
+                        <button
+                          onClick={handleSyncLocalToGitHub}
+                          disabled={isPublishing}
+                          className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white text-[10px] font-mono font-bold uppercase rounded active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer flex items-center gap-2"
+                        >
+                          <span>🚀</span>
+                          {isPublishing ? 'Publishing changes...' : 'Publish Local Archive to GitHub'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
