@@ -572,7 +572,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [isHarvesting, setIsHarvesting] = useState(false);
 
   const commitFilesToGitHub = async (filesToCommit, commitMessage) => {
-    if (!ghToken) {
+    const token = ghToken ? ghToken.trim() : '';
+    const owner = ghOwner ? ghOwner.trim() : '';
+    const repo = ghRepo ? ghRepo.trim() : '';
+    const branch = ghBranch ? ghBranch.trim() : '';
+
+    if (!token) {
       throw new Error('GitHub Personal Access Token is required. Please set it in GitHub Sync Settings.');
     }
     setIsPublishing(true);
@@ -580,13 +585,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     try {
       for (const file of filesToCommit) {
         setPublishStatus(`Fetching metadata for ${file.path}...`);
-        const url = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}?ref=${ghBranch}&t=${Date.now()}`;
+        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${file.path}?ref=${branch}&t=${Date.now()}`;
         
         let sha = null;
         try {
           const res = await fetch(url, {
             headers: {
-              'Authorization': `token ${ghToken}`,
+              'Authorization': `token ${token}`,
               'Accept': 'application/vnd.github.v3+json',
               'Cache-Control': 'no-cache, no-store, must-revalidate',
               'Pragma': 'no-cache',
@@ -596,8 +601,14 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           if (res.ok) {
             const data = await res.json();
             sha = data.sha;
+          } else if (res.status !== 404) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(`GitHub metadata fetch failed (HTTP ${res.status}): ${errData.message || res.statusText}`);
           }
         } catch (err) {
+          if (err.message && err.message.includes('GitHub metadata fetch failed')) {
+            throw err;
+          }
           console.warn(`File ${file.path} might be new:`, err);
         }
 
@@ -605,16 +616,16 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const body = {
           message: commitMessage,
           content: btoa(unescape(encodeURIComponent(file.content))),
-          branch: ghBranch
+          branch: branch
         };
         if (sha) {
           body.sha = sha;
         }
 
-        const putRes = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}`, {
+        const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file.path}`, {
           method: 'PUT',
           headers: {
-            'Authorization': `token ${ghToken}`,
+            'Authorization': `token ${token}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
           },
@@ -622,12 +633,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         });
 
         if (!putRes.ok) {
-          const errorData = await putRes.json();
+          const errorData = await putRes.json().catch(() => ({}));
           throw new Error(`GitHub API Error for ${file.path}: ${errorData.message || putRes.statusText}`);
         }
       }
       setPublishStatus('Publish successful!');
-      addLog(`🚀 Successfully committed updates directly to GitHub repo ${ghOwner}/${ghRepo} on branch ${ghBranch}`);
+      addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
       setGhSyncSuccess(true);
       localStorage.setItem('lore:github:success', 'true');
       return true;
@@ -2928,16 +2939,21 @@ Keep responses concise. Be direct and useful.`;
                   <button
                     id="btn-test-github-sync"
                     onClick={async () => {
-                      if (!ghToken) {
+                      const token = ghToken ? ghToken.trim() : '';
+                      const owner = ghOwner ? ghOwner.trim() : '';
+                      const repo = ghRepo ? ghRepo.trim() : '';
+                      const branch = ghBranch ? ghBranch.trim() : '';
+
+                      if (!token) {
                         alert('Please provide a Personal Access Token first.');
                         return;
                       }
                       setIsPublishing(true);
                       setPublishStatus('Testing connection...');
                       try {
-                        const res = await fetch(`https://api.github.com/repos/${ghOwner}/${ghRepo}`, {
+                        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
                           headers: {
-                            'Authorization': `token ${ghToken}`,
+                            'Authorization': `token ${token}`,
                             'Accept': 'application/vnd.github.v3+json'
                           }
                         });
@@ -2947,12 +2963,12 @@ Keep responses concise. Be direct and useful.`;
                           setPublishStatus('Connection verified! Saving token config to GitHub...');
                           // Push obfuscated token and keys to GitHub config/admin_config.json so any admin device auto-loads it
                           const configContent = JSON.stringify({
-                            tok: tokenToStored(ghToken),
+                            tok: tokenToStored(token),
                             geminiKey: apiKey ? tokenToStored(apiKey) : '',
                             openRouterKey: openRouterKey ? tokenToStored(openRouterKey) : '',
-                            owner: ghOwner,
-                            repo: ghRepo,
-                            branch: ghBranch,
+                            owner: owner,
+                            repo: repo,
+                            branch: branch,
                             updated: new Date().toISOString()
                           }, null, 2);
                           try {
@@ -2960,7 +2976,7 @@ Keep responses concise. Be direct and useful.`;
                               [{ path: 'config/admin_config.json', content: configContent }],
                               'config: update admin sync config [skip ci]'
                             );
-                            setToast({ text: `✓ Connected to ${ghOwner}/${ghRepo}. Token saved — any admin login will auto-connect.`, type: 'success' });
+                            setToast({ text: `✓ Connected to ${owner}/${repo}. Token saved — any admin login will auto-connect.`, type: 'success' });
                           } catch (commitErr) {
                             // Connection worked but config commit failed — still mark success
                             setToast({ text: `Connected to ${ghOwner}/${ghRepo}. Note: Could not save config to repo: ${commitErr.message}`, type: 'success' });
