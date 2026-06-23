@@ -69,9 +69,21 @@ export default function SiteFeedback() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      setStatus(res.ok ? 'sent' : 'error');
-    } catch {
-      setStatus('error');
+      if (res.ok) {
+        setStatus('sent');
+      } else {
+        console.warn('Feedback API failed, saving locally to localStorage.');
+        const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
+        localFb.push(payload);
+        localStorage.setItem('lore:local_feedback', JSON.stringify(localFb));
+        setStatus('sent');
+      }
+    } catch (err) {
+      console.warn('Feedback API error, saving locally to localStorage:', err);
+      const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
+      localFb.push(payload);
+      localStorage.setItem('lore:local_feedback', JSON.stringify(localFb));
+      setStatus('sent');
     }
     setTimeout(() => {
       setOpen(false);
@@ -79,7 +91,7 @@ export default function SiteFeedback() {
       setRating(0);
       setTags([]);
       setNote('');
-    }, 2200);
+    }, 3500);
   };
 
   const displayRating = hoverRating || rating;

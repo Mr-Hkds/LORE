@@ -169,7 +169,16 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Story editing state
   const [editingStoryId, setEditingStoryId] = useState(null);
-  const [editForm, setEditForm] = useState({ title: '', hero_image: '', hook: '' });
+  const [editForm, setEditForm] = useState({
+    title: '',
+    hero_image: '',
+    image_query: '',
+    hook: '',
+    category: 'psychology',
+    severity: 'unsettling',
+    concepts: []
+  });
+  const [editFormActiveLayer, setEditFormActiveLayer] = useState(1);
 
   // Generator form state
   const [genTopic, setGenTopic] = useState('');
@@ -330,14 +339,11 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Cascading Robust AI client router
   const callRobustAI = async (contents, config = {}, expectJSON = false) => {
-    let lastError = null;
-
     // 1. Try Direct Gemini
     if (apiKey) {
       try {
         return await callGeminiApi(contents, config);
       } catch (err) {
-        lastError = err;
         console.warn('[Admin AI Client] Direct Gemini failed:', err.message);
       }
     }
@@ -348,7 +354,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const routerConfig = expectJSON ? { response_format: { type: 'json_object' } } : {};
         return await callOpenRouterApi(contents, { ...config, ...routerConfig });
       } catch (err) {
-        lastError = err;
         console.warn('[Admin AI Client] OpenRouter failed:', err.message);
       }
     }
@@ -365,11 +370,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         systemPrompt || (expectJSON ? 'You are a dark historian database compiler. Output valid JSON only, no markdown wrapping.' : '')
       );
     } catch (err) {
-      lastError = err;
       console.error('[Admin AI Client] Pollinations fallback failed:', err.message);
+      throw err;
     }
-
-    throw lastError || new Error('All AI providers in the fallback chain failed.');
   };
   
   // Console logging state
@@ -499,7 +502,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           }
           return; // Local success
         }
-      } catch (err) {
+      } catch {
         // Fall back to static status file
       }
     }
@@ -577,14 +580,17 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     try {
       for (const file of filesToCommit) {
         setPublishStatus(`Fetching metadata for ${file.path}...`);
-        const url = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}?ref=${ghBranch}`;
+        const url = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/${file.path}?ref=${ghBranch}&t=${Date.now()}`;
         
         let sha = null;
         try {
           const res = await fetch(url, {
             headers: {
               'Authorization': `token ${ghToken}`,
-              'Accept': 'application/vnd.github.v3+json'
+              'Accept': 'application/vnd.github.v3+json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
             }
           });
           if (res.ok) {
@@ -640,6 +646,19 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   };
 
+  const handleLayerChange = (layerNum, field, value) => {
+    setEditForm(prev => {
+      if (!prev.layers) return prev;
+      const updatedLayers = prev.layers.map(l => {
+        if (l.layer === layerNum) {
+          return { ...l, [field]: value };
+        }
+        return l;
+      });
+      return { ...prev, layers: updatedLayers };
+    });
+  };
+
   const handleSyncLocalToGitHub = async () => {
     if (!ghToken) {
       alert('GitHub Personal Access Token is required. Please configure it first.');
@@ -647,18 +666,106 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
     
     setIsPublishing(true);
-    setPublishStatus('Sync: Fetching local database files...');
+    setPublishStatus('Sync: Initializing database merge...');
     try {
+      // 1. Fetch remote stories.json to merge
+      let remoteStories = [];
+      try {
+        setPublishStatus('Sync: Fetching remote stories from GitHub...');
+        const remoteStoriesUrl = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/public/content/stories.json?ref=${ghBranch}&t=${Date.now()}`;
+        const resRemote = await fetch(remoteStoriesUrl, {
+          headers: {
+            'Authorization': `token ${ghToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        });
+        if (resRemote.ok) {
+          const dataRemote = await resRemote.json();
+          const decoded = decodeURIComponent(escape(atob(dataRemote.content.replace(/\s/g, ''))));
+          const parsed = JSON.parse(decoded);
+          remoteStories = parsed.stories || [];
+          addLog(`Fetched ${remoteStories.length} stories from remote GitHub repository.`);
+        }
+      } catch (err) {
+        console.warn('Could not fetch remote stories, falling back to local list:', err);
+        addLog(`Warning: Failed to fetch remote stories. Overwriting with local list.`);
+      }
+
+      // 2. Fetch local stories.json
+      setPublishStatus('Sync: Fetching local stories...');
+      const resLocalStories = await fetch(`/content/stories.json?t=${Date.now()}`);
+      if (!resLocalStories.ok) {
+        throw new Error(`Failed to read local stories.json: ${resLocalStories.statusText}`);
+      }
+      const localStoriesJson = await resLocalStories.json();
+      const localStoriesList = localStoriesJson.stories || [];
+
+      // 3. Read blacklist of deleted story IDs
+      const deletedIds = JSON.parse(localStorage.getItem('lore:deleted_stories') || '[]');
+
+      // 4. Perform smart merge
+      // Start with remote stories, filter out deleted ones
+      let mergedStories = remoteStories.filter(s => !deletedIds.includes(s.story_id));
+
+      // Upsert local stories into the list
+      localStoriesList.forEach(localStory => {
+        const idx = mergedStories.findIndex(s => s.story_id === localStory.story_id);
+        if (idx !== -1) {
+          mergedStories[idx] = localStory; // replace with local edited version
+        } else {
+          mergedStories.push(localStory); // append new local story
+        }
+      });
+
+      // 5. Rebuild concept index based on merged list
+      const mergedConceptIndex = rebuildConceptIndex(mergedStories);
+
+      // 6. Gather other local files to commit (recommendations, daily dossier, feedback, status)
+      setPublishStatus('Sync: Gathering other local assets...');
+      
+      let finalFeedbackJson = '';
+      try {
+        const resFbLocal = await fetch(`/content/feedback.json?t=${Date.now()}`);
+        let fbList = [];
+        if (resFbLocal.ok) {
+          fbList = await resFbLocal.json();
+        }
+        
+        // Merge with local storage queued items
+        const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
+        if (localFb.length > 0) {
+          const combined = [...localFb];
+          fbList.forEach(item => {
+            if (!combined.some(c => c.id === item.id)) {
+              combined.push(item);
+            }
+          });
+          fbList = combined;
+        }
+        finalFeedbackJson = JSON.stringify(fbList, null, 2);
+      } catch (err) {
+        console.warn('Failed to merge feedback for sync, leaving feedback untouched:', err.message);
+      }
+
       const filesToSync = [
-        { path: 'public/content/stories.json', url: '/content/stories.json' },
-        { path: 'public/content/concept_index.json', url: '/content/concept_index.json' },
         { path: 'public/content/recommendations.json', url: '/content/recommendations.json' },
         { path: 'public/content/daily_dossier.json', url: '/content/daily_dossier.json' },
-        { path: 'public/content/feedback.json', url: '/content/feedback.json' },
         { path: 'public/content/automation_status.json', url: '/content/automation_status.json' }
       ];
 
-      const filesToCommit = [];
+      const filesToCommit = [
+        { path: 'public/content/stories.json', content: JSON.stringify({ stories: mergedStories }, null, 2) },
+        { path: 'public/content/concept_index.json', content: JSON.stringify(mergedConceptIndex, null, 2) }
+      ];
+
+      if (finalFeedbackJson) {
+        filesToCommit.push({ path: 'public/content/feedback.json', content: finalFeedbackJson });
+      } else {
+        filesToSync.push({ path: 'public/content/feedback.json', url: '/content/feedback.json' });
+      }
 
       for (const f of filesToSync) {
         try {
@@ -674,14 +781,15 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         }
       }
 
-      if (filesToCommit.length === 0) {
-        throw new Error('No local files found to sync.');
-      }
-
-      setPublishStatus(`Sync: Found ${filesToCommit.length} files. Committing to GitHub...`);
-      await commitFilesToGitHub(filesToCommit, 'admin: sync local archive updates to live site');
-      setToast({ text: '✓ Successfully synchronized all local changes to the live site!', type: 'success' });
-      addLog(`🚀 Published ${filesToCommit.length} local files to GitHub repo.`);
+      setPublishStatus(`Sync: Committing ${filesToCommit.length} files to GitHub...`);
+      await commitFilesToGitHub(filesToCommit, 'admin: sync merged local archive updates to live site');
+      
+      // Clear deletion blacklist and local feedback queue on success
+      localStorage.removeItem('lore:deleted_stories');
+      localStorage.removeItem('lore:local_feedback');
+      
+      setToast({ text: '✓ Successfully merged and synchronized all local changes to the live site!', type: 'success' });
+      addLog(`🚀 Successfully published ${filesToCommit.length} merged files to GitHub repo.`);
     } catch (err) {
       console.error('Local sync to GitHub failed:', err);
       setToast({ text: `Failed to push changes to GitHub: ${err.message}`, type: 'error' });
@@ -921,18 +1029,69 @@ Do not wrap in markdown. Output raw JSON only.`;
     setRecommendations(localRecs);
   }, []);
 
+  const loadFeedback = useCallback(async () => {
+    setFeedbackLoading(true);
+    let items = [];
+    try {
+      const res = await fetch('/api/feedback');
+      if (res.ok) {
+        items = await res.json();
+      } else {
+        const resStatic = await fetch(`/content/feedback.json?t=${Date.now()}`);
+        if (resStatic.ok) items = await resStatic.json();
+      }
+    } catch (e) {
+      console.warn('Could not load feedback from API, trying static fallback:', e);
+      try {
+        const resStatic = await fetch(`/content/feedback.json?t=${Date.now()}`);
+        if (resStatic.ok) items = await resStatic.json();
+      } catch (err) {
+        console.error('Static feedback fallback failed:', err);
+      }
+    }
+
+    try {
+      const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
+      if (localFb.length > 0) {
+        const combined = [...localFb];
+        items.forEach(item => {
+          if (!combined.some(c => c.id === item.id)) {
+            combined.push(item);
+          }
+        });
+        items = combined;
+      }
+    } catch (e) {
+      console.warn('Failed to parse local feedback queue:', e);
+    }
+
+    setFeedbackItems(items);
+    setFeedbackLoading(false);
+  }, []);
+
   useEffect(() => {
     loadRecommendations();
-  }, [loadRecommendations]);
+    loadFeedback();
+  }, [loadRecommendations, loadFeedback]);
 
-  // Handle editing a story fields inline
   const startEditing = (story) => {
     setEditingStoryId(story.story_id);
     setEditForm({
       title: story.title || '',
       hero_image: story.hero_image || '',
+      image_query: story.image_query || '',
       hook: story.hook || '',
+      category: story.category || 'psychology',
+      severity: story.severity || 'unsettling',
+      concepts: story.concepts || [],
+      layers: story.layers ? JSON.parse(JSON.stringify(story.layers)) : Array.from({ length: 7 }).map((_, idx) => ({
+        layer: idx + 1,
+        layer_name: `Layer ${idx + 1}`,
+        content: '',
+        cliffhanger: idx < 6 ? 'Next layer hook...' : null
+      }))
     });
+    setEditFormActiveLayer(1);
   };
 
   const handleSaveStory = async (storyId) => {
@@ -1765,11 +1924,9 @@ Keep responses concise. Be direct and useful.`;
             Automated Writer
           </button>
           <button
-            onClick={async () => {
+            onClick={() => {
               setActiveTab('feedback');
-              setFeedbackLoading(true);
-              try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
-              setFeedbackLoading(false);
+              loadFeedback();
             }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'feedback' ? 'bg-[#9E7B4C] text-white' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
@@ -1862,7 +2019,7 @@ Keep responses concise. Be direct and useful.`;
                           />
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Cover Image Path</label>
+                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Cover Image Path / URL</label>
                           <div className="flex gap-2">
                             <input
                               type="text"
@@ -1887,6 +2044,16 @@ Keep responses concise. Be direct and useful.`;
                           </div>
                         </div>
                         <div>
+                          <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Wikipedia Image Query (Fallback)</label>
+                          <input
+                            type="text"
+                            value={editForm.image_query || ''}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, image_query: e.target.value }))}
+                            className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                            placeholder="Wikipedia article name to query cover image"
+                          />
+                        </div>
+                        <div>
                           <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Intro Hook</label>
                           <textarea
                             value={editForm.hook}
@@ -1895,6 +2062,116 @@ Keep responses concise. Be direct and useful.`;
                             className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none"
                           />
                         </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          <div>
+                            <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Category</label>
+                            <select
+                              value={editForm.category}
+                              onChange={(e) => setEditForm(prev => ({ ...prev, category: e.target.value }))}
+                              className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
+                            >
+                              <option value="psychology">Psychology</option>
+                              <option value="mythology">Mythology</option>
+                              <option value="true_crime">True Crime</option>
+                              <option value="gov_experiments">Gov Experiments</option>
+                              <option value="paranormal">Paranormal</option>
+                              <option value="conspiracy">Conspiracy</option>
+                              <option value="cyber_mysteries">Cyber Mysteries</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Severity</label>
+                            <select
+                              value={editForm.severity}
+                              onChange={(e) => setEditForm(prev => ({ ...prev, severity: e.target.value }))}
+                              className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
+                            >
+                              <option value="unsettling">Unsettling</option>
+                              <option value="disturbing">Disturbing</option>
+                              <option value="extreme">Extreme</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Concepts (comma-separated)</label>
+                            <input
+                              type="text"
+                              value={Array.isArray(editForm.concepts) ? editForm.concepts.join(', ') : editForm.concepts || ''}
+                              onChange={(e) => setEditForm(prev => ({ ...prev, concepts: e.target.value.split(',').map(c => c.trim()).filter(Boolean) }))}
+                              className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                              placeholder="e.g. shared_delusion, ritual"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Layer Editor Section */}
+                        {editForm.layers && editForm.layers.length > 0 && (
+                          <div className="mt-4 pt-4 border-t border-neutral-800 text-left">
+                            <label className="block text-[9px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-2 font-bold">
+                              Rework Story Layers
+                            </label>
+                            
+                            {/* Layer selection pills */}
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              {editForm.layers.map(l => (
+                                <button
+                                  key={l.layer}
+                                  type="button"
+                                  onClick={() => setEditFormActiveLayer(l.layer)}
+                                  className={`px-2.5 py-1 text-[8.5px] font-mono rounded transition-colors cursor-pointer ${editFormActiveLayer === l.layer ? 'bg-[#9E7B4C] text-white font-bold' : 'bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-neutral-200'}`}
+                                >
+                                  L{l.layer}
+                                </button>
+                              ))}
+                            </div>
+
+                            {/* Active layer fields */}
+                            {editForm.layers.map(l => {
+                              if (l.layer !== editFormActiveLayer) return null;
+                              return (
+                                <div key={l.layer} className="space-y-3 p-3 rounded-lg bg-black/40 border border-neutral-800">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[9px] font-mono text-[#9E7B4C] font-semibold uppercase">Layer {l.layer} of 7</span>
+                                  </div>
+
+                                  <div>
+                                    <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Layer Name</label>
+                                    <input
+                                      type="text"
+                                      value={l.layer_name || ''}
+                                      onChange={(e) => handleLayerChange(l.layer, 'layer_name', e.target.value)}
+                                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Content Text</label>
+                                    <textarea
+                                      value={l.content || ''}
+                                      onChange={(e) => handleLayerChange(l.layer, 'content', e.target.value)}
+                                      rows={5}
+                                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-y"
+                                      placeholder="Insert multi-paragraph layer story content..."
+                                    />
+                                  </div>
+
+                                  {l.layer < 7 && (
+                                    <div>
+                                      <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-0.5">Cliffhanger (Transition to Next Layer)</label>
+                                      <textarea
+                                        value={l.cliffhanger || ''}
+                                        onChange={(e) => handleLayerChange(l.layer, 'cliffhanger', e.target.value)}
+                                        rows={2}
+                                        className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none"
+                                        placeholder="Hook that pulls them to the next layer..."
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
                         <div className="flex gap-2 justify-end pt-1">
                           <button
                             onClick={() => setEditingStoryId(null)}
@@ -2371,11 +2648,7 @@ Keep responses concise. Be direct and useful.`;
                   <p className="text-xs text-[#6A6560] mt-1">Review ratings and comments from readers</p>
                 </div>
                 <button
-                  onClick={async () => {
-                    setFeedbackLoading(true);
-                    try { const r = await fetch('/api/feedback'); if (r.ok) setFeedbackItems(await r.json()); } catch { /* ignore */ }
-                    setFeedbackLoading(false);
-                  }}
+                  onClick={loadFeedback}
                   className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
                   style={{ borderColor: ru }}
                 >

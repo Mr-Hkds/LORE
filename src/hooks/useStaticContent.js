@@ -59,7 +59,7 @@ export function useStaticContent() {
 
   const loadStories = useCallback(async () => {
     try {
-      const res = await fetch('/content/stories.json');
+      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
       if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
       const data = await res.json();
       setAllStories(data.stories || []);

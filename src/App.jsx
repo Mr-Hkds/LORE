@@ -67,8 +67,12 @@ export default function App() {
 
   // Merge static and locally generated stories, filtering out deleted ones
   const stories = useMemo(() => {
-    // Avoid duplicates by checking story_id
-    const combined = [...allStories];
+    // Map static stories to their local edited versions if overridden, otherwise keep original
+    const combined = allStories.map(s => {
+      const edited = localStories.find(ls => ls.story_id === s.story_id);
+      return edited ? edited : s;
+    });
+    // Append completely new local stories that do not exist in the static list
     localStories.forEach(ls => {
       if (!combined.some(s => s.story_id === ls.story_id)) {
         combined.push(ls);
