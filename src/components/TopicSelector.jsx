@@ -605,7 +605,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </a>
           </p>
           <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-            BY <span className="mr-lotus-premium ml-1 transition-all duration-300">MR. LOTUS</span>
+            <span className="mr-lotus-premium transition-all duration-300">DESIGNED BY MR. LOTUS</span>
           </p>
         </footer>
       </main>
