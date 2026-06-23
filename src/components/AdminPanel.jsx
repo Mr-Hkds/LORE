@@ -265,6 +265,14 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Fetch status and logs from server
   const fetchAutomationData = useCallback(async () => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    // Only attempt fetch if we are local. If remote and not using GitHub Sync, or explicitly server-side
+    if (!isLocal) {
+      setServerOffline(true);
+      return;
+    }
+
     try {
       const resStatus = await fetch('/api/automation/status');
       if (resStatus.ok) {
@@ -282,7 +290,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         setAutoLogs(logsData);
       }
     } catch (err) {
-      console.warn('Failed to fetch automation data:', err);
+      if (consecutiveFailuresRef.current < 3) {
+        console.warn('Failed to fetch automation data:', err);
+      }
       consecutiveFailuresRef.current += 1;
       if (consecutiveFailuresRef.current >= 3) {
         setServerOffline(true);
@@ -292,11 +302,14 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Poll automation logs and status
   useEffect(() => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (serverOffline || ghSyncSuccess || !isLocal) {
+      return;
+    }
     fetchAutomationData();
-    const intervalTime = serverOffline ? 30000 : 2500; // Slow down polling when offline to stop spamming console
-    const interval = setInterval(fetchAutomationData, intervalTime);
+    const interval = setInterval(fetchAutomationData, 2500);
     return () => clearInterval(interval);
-  }, [fetchAutomationData, serverOffline]);
+  }, [fetchAutomationData, serverOffline, ghSyncSuccess]);
 
   const [isHarvesting, setIsHarvesting] = useState(false);
 
@@ -373,6 +386,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   };
 
   const handleHarvestWebTrends = async () => {
+    if (serverOffline) {
+      alert('Trend Harvesting is a server-side feature. Please start your local API server to harvest new trends.');
+      return;
+    }
     setIsHarvesting(true);
     addLog('📡 Triggering server-side trends harvest (Reddit)...');
     try {
@@ -416,18 +433,43 @@ Return a JSON array containing ONLY the IDs (strings) of the recommendations tha
 If all recommendations are valid and relevant, return an empty array: [].
 Do not wrap in markdown. Output raw JSON only.`;
 
-      const res = await fetch('/api/ai-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          prompt,
-          systemPrompt: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.'
-        })
-      });
+      let text = '';
+      if (!serverOffline) {
+        try {
+          const res = await fetch('/api/ai-chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              prompt,
+              systemPrompt: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.'
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            text = data?.text;
+          }
+        } catch (e) {
+          console.warn('Failed to call server-side AI chat, trying client-side...', e);
+        }
+      }
 
-      if (!res.ok) throw new Error(`AI proxy error: ${res.status}`);
-      const data = await res.json();
-      const text = data?.text;
+      if (!text) {
+        if (!apiKey) throw new Error('No Gemini API key configured. Go to the Generator tab to set it.');
+        addLog('Connecting directly to Google Gemini API for auto-clean...');
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: prompt }] }],
+            systemInstruction: { parts: [{ text: 'You are a data filtering bot. Output only valid JSON arrays, no markdown wrapping.' }] },
+            generationConfig: { responseMimeType: 'application/json' }
+          })
+        });
+        if (!res.ok) throw new Error(`Gemini API returned HTTP ${res.status}: ${res.statusText}`);
+        const data = await res.json();
+        text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      }
+
       if (!text) throw new Error('Empty response from AI.');
 
       const spamIds = cleanAndParseJSON(text);
@@ -549,30 +591,32 @@ Do not wrap in markdown. Output raw JSON only.`;
 
   const handleSaveStory = async (storyId) => {
     let serverSaved = false;
-    try {
-      const res = await fetch(`/api/stories/${storyId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editForm),
-      });
-      if (res.ok) {
-        addLog(`Successfully saved & pushed changes for story: ${storyId}`);
-        serverSaved = true;
-        // Also update local overrides list if it's already there
-        const exists = localStories.some(s => s.story_id === storyId);
-        let updatedLocal;
-        if (exists) {
-          updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
-        } else {
-          updatedLocal = localStories;
+    if (!serverOffline) {
+      try {
+        const res = await fetch(`/api/stories/${storyId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(editForm),
+        });
+        if (res.ok) {
+          addLog(`Successfully saved & pushed changes for story: ${storyId}`);
+          serverSaved = true;
+          // Also update local overrides list if it's already there
+          const exists = localStories.some(s => s.story_id === storyId);
+          let updatedLocal;
+          if (exists) {
+            updatedLocal = localStories.map(s => s.story_id === storyId ? { ...s, ...editForm } : s);
+          } else {
+            updatedLocal = localStories;
+          }
+          setLocalStories(updatedLocal);
+          localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
+          if (refetchStories) refetchStories();
+          setEditingStoryId(null);
         }
-        setLocalStories(updatedLocal);
-        localStorage.setItem('lore:custom_stories', JSON.stringify(updatedLocal));
-        if (refetchStories) refetchStories();
-        setEditingStoryId(null);
+      } catch (err) {
+        console.warn('Local server save failed:', err);
       }
-    } catch (err) {
-      console.warn('Local server save failed:', err);
     }
 
     if (!serverSaved) {
@@ -624,18 +668,20 @@ Do not wrap in markdown. Output raw JSON only.`;
     
     let serverDeleted = false;
     // Try to delete from local server
-    try {
-      const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
-      if (res.ok) {
-        addLog(`Successfully deleted story from server: ${storyId}`);
-        serverDeleted = true;
-        if (refetchStories) refetchStories();
-      } else {
-        addLog(`Server delete failed for story: ${storyId}. Removing locally.`);
+    if (!serverOffline) {
+      try {
+        const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
+        if (res.ok) {
+          addLog(`Successfully deleted story from server: ${storyId}`);
+          serverDeleted = true;
+          if (refetchStories) refetchStories();
+        } else {
+          addLog(`Server delete failed for story: ${storyId}. Removing locally.`);
+        }
+      } catch (e) {
+        console.warn('Local server delete failed:', e);
+        addLog(`Could not connect to local server to delete story: ${storyId}. Removing locally.`);
       }
-    } catch (e) {
-      console.warn('Local server delete failed:', e);
-      addLog(`Could not connect to local server to delete story: ${storyId}. Removing locally.`);
     }
     
     // Always remove from local localStorage if present
@@ -731,6 +777,7 @@ Do not wrap in markdown. Output raw JSON only.`;
 
   // Upload a custom cover image to the server
   const handleUploadImage = async (e, storyId) => {
+    if (serverOffline) return;
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -1003,18 +1050,20 @@ Output YES or NO only. Do not include markdown or explanations.`;
 
       // Try writing to local server if running
       let serverSaved = false;
-      try {
-        const res = await fetch('/api/stories/add', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(storyObj),
-        });
-        if (res.ok) {
-          addLog(`Synchronized story with public/content/stories.json file.`);
-          serverSaved = true;
+      if (!serverOffline) {
+        try {
+          const res = await fetch('/api/stories/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(storyObj),
+          });
+          if (res.ok) {
+            addLog(`Synchronized story with public/content/stories.json file.`);
+            serverSaved = true;
+          }
+        } catch (err) {
+          console.warn('Local server save failed:', err);
         }
-      } catch (err) {
-        console.warn('Local server save failed:', err);
       }
 
       if (!serverSaved) {
@@ -1232,6 +1281,9 @@ Keep responses concise. Be direct and useful.`;
               onClick={async () => {
                 if (refetchStories) refetchStories();
                 await loadRecommendations();
+                consecutiveFailuresRef.current = 0;
+                setServerOffline(false);
+                fetchAutomationData();
                 addLog('Archive logs and recommendations refreshed.');
               }}
               className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 border rounded-lg hover:bg-white/5 transition-colors cursor-pointer text-[#9E7B4C]"
@@ -1341,8 +1393,8 @@ Keep responses concise. Be direct and useful.`;
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
               Engine Status
             </span>
-            <span className="text-xs font-mono font-bold block mt-2" style={{ color: serverOffline ? '#C4644A' : '#10B981' }}>
-              {serverOffline ? '● OFFLINE' : '● ONLINE'}
+            <span className="text-xs font-mono font-bold block mt-2" style={{ color: (serverOffline && !ghSyncSuccess) ? '#C4644A' : '#10B981' }}>
+              {(serverOffline && !ghSyncSuccess) ? '● OFFLINE' : '● ONLINE'}
             </span>
           </div>
         </div>
@@ -1429,6 +1481,10 @@ Keep responses concise. Be direct and useful.`;
                 <div className="flex gap-2">
                   <button
                     onClick={async () => {
+                      if (serverOffline) {
+                        alert('Image Backfilling is a server-side feature. Please start your local API server to backfill images.');
+                        return;
+                      }
                       addLog('🖼️ Triggering image backfill for all stories missing covers...');
                       try {
                         const res = await fetch('/api/stories/backfill-images', { method: 'POST' });
@@ -1484,7 +1540,7 @@ Keep responses concise. Be direct and useful.`;
                             />
                             <label
                               htmlFor={`upload-${story.story_id}`}
-                              className="px-3 py-2 bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 text-[#EDE8DF] text-[10px] font-mono tracking-wider uppercase rounded cursor-pointer flex items-center justify-center min-w-[80px] active:scale-95 transition-all select-none font-bold"
+                              className={`px-3 py-2 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[10px] font-mono tracking-wider uppercase rounded flex items-center justify-center min-w-[80px] transition-all select-none font-bold ${serverOffline ? 'opacity-40 cursor-not-allowed' : 'hover:bg-neutral-800 cursor-pointer active:scale-95'}`}
                             >
                               {uploadingState === 'uploading' ? '...' : 'Upload'}
                             </label>
@@ -1494,7 +1550,7 @@ Keep responses concise. Be direct and useful.`;
                               id={`upload-${story.story_id}`}
                               className="hidden"
                               onChange={(e) => handleUploadImage(e, story.story_id)}
-                              disabled={uploadingState === 'uploading'}
+                              disabled={uploadingState === 'uploading' || serverOffline}
                             />
                           </div>
                         </div>
@@ -1824,16 +1880,17 @@ Keep responses concise. Be direct and useful.`;
                     <div className="relative">
                       <input
                         type="checkbox"
-                        checked={!!autoStatus.enabled}
+                        checked={ghSyncSuccess ? true : !!autoStatus.enabled}
+                        disabled={serverOffline}
                         onChange={handleToggleAutomation}
                         className="sr-only peer"
                       />
-                      <div className="w-8 h-4.5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#EDE8DF] after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#9E7B4C]" />
+                      <div className="w-8 h-4.5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#EDE8DF] after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#9E7B4C] peer-disabled:opacity-40" />
                     </div>
                   </label>
                   <button
                     onClick={handleTriggerAutomation}
-                    disabled={isGenerating || autoStatus.isRunning}
+                    disabled={isGenerating || autoStatus.isRunning || serverOffline}
                     className="px-3 py-1.5 bg-neutral-900 border rounded text-[10px] font-mono font-bold tracking-wider hover:bg-white/5 disabled:opacity-40 transition-all uppercase cursor-pointer"
                     style={{ borderColor: ru }}
                   >
@@ -1842,22 +1899,37 @@ Keep responses concise. Be direct and useful.`;
                 </div>
               </div>
 
+              {serverOffline && (
+                <div className="p-4 rounded-xl border bg-[#C4644A]/10 border-[#C4644A]/25 text-xs text-[#C4644A] flex flex-col gap-1 leading-relaxed">
+                  <span className="font-semibold uppercase tracking-wider text-[10px]">Local API Server Offline</span>
+                  <span>
+                    {ghSyncSuccess 
+                      ? "The local automation engine controls are disabled because you are using GitHub Sync. Your story archive is synchronized, and the engine runs daily in the cloud via GitHub Actions." 
+                      : "The local automation engine controls are disabled because the local API server is not running. Please start the server locally using 'node server.cjs' to enable live background runs."}
+                  </span>
+                </div>
+              )}
+
               {/* Engine Status Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Engine Status</span>
-                  <span className="text-xs font-mono font-bold" style={{ color: autoStatus.isRunning ? '#F59E0B' : autoStatus.enabled ? '#10B981' : '#6A6560' }}>
-                    {autoStatus.isRunning ? '⚡ RUNNING' : autoStatus.enabled ? '● ACTIVE' : '◌ PAUSED'}
+                  <span className="text-xs font-mono font-bold" style={{ color: autoStatus.isRunning ? '#F59E0B' : (autoStatus.enabled || ghSyncSuccess) ? '#10B981' : '#6A6560' }}>
+                    {autoStatus.isRunning ? '⚡ RUNNING' : (autoStatus.enabled || ghSyncSuccess) ? '● ACTIVE' : '◌ PAUSED'}
                   </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Interval</span>
-                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">Every 3h</span>
+                  <span className="text-xs font-mono font-bold text-[#EDE8DF]">
+                    {ghSyncSuccess ? 'Daily' : 'Every 3h'}
+                  </span>
                 </div>
                 <div className="p-3 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
                   <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Next Run</span>
                   <span className="text-xs font-mono font-bold" style={{ color: '#9E7B4C' }}>
-                    {autoStatus.nextRunMs > 0
+                    {ghSyncSuccess 
+                      ? 'Daily 00:00 UTC' 
+                      : autoStatus.nextRunMs > 0
                       ? (() => {
                           const m = Math.floor(autoStatus.nextRunMs / 60000);
                           const h = Math.floor(m / 60);
@@ -1882,6 +1954,13 @@ Keep responses concise. Be direct and useful.`;
                   className="p-4 bg-black rounded-lg border border-neutral-900 font-mono text-xs leading-relaxed space-y-1 h-[400px] overflow-y-auto crt-overlay pr-4"
                   style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
                 >
+                  {autoLogs.length === 0 && (
+                    <div className="text-neutral-500 italic text-[11px] p-2 leading-relaxed">
+                      {ghSyncSuccess 
+                        ? 'GitHub Sync is active. Local engine logs are offline, but you can track automated runs on your GitHub Repository Actions page.' 
+                        : 'Local API server is offline. Start the server locally to view live background thread logs.'}
+                    </div>
+                  )}
                   {autoLogs.slice(-50).map((log, idx) => (
                     <div
                       key={idx}
