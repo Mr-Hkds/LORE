@@ -405,8 +405,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     CRITICAL FACTUAL AND PACING RULES:
     1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
     2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in high-quality, engaging Hinglish (Hindi written in English alphabet, mixed with English words as spoken by mystery/true-crime podcasters).
-    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest truth. Layer 1 must start with: 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur...'
-    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \\n\\n between paragraphs.
+    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest truth. Layer 1 must start with a unique, gripping, and topic-specific hook to grab attention (avoid generic openings like 'kya aapne kabhi socha hai' or 'chalo aaj le chalte hain').
+    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
     5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
     
     Structure the story exactly in the following JSON format:
@@ -422,7 +422,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         {
           "layer": 1,
           "layer_name": "Layer 1 title",
-          "content": "Fully-written Layer 1 content starting with 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain...'",
+          "content": "Fully-written Layer 1 content starting with a unique, topic-specific gripping hook.",
           "cliffhanger": "Cliffhanger sentence."
         },
         {
@@ -946,7 +946,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       layers: Array.from({ length: 7 }).map((_, idx) => ({
         layer: idx + 1,
         layer_name: idx === 0 ? 'The Whisper' : idx === 3 ? 'The Incident' : idx === 6 ? 'The Dark Corner' : `Layer ${idx + 1}`,
-        content: idx === 0 ? 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur...' : 'Provide details...',
+        content: idx === 0 ? 'Introduce the initial whisper or mystery hook here...' : 'Provide details...',
         cliffhanger: idx < 6 ? 'Next layer hook...' : null
       }))
     });

@@ -269,8 +269,8 @@ async function runAutomation(isManual = false) {
     CRITICAL FACTUAL AND PACING RULES:
     1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
     2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in high-quality, engaging Hinglish (Hindi written in English alphabet, mixed with English words as spoken by mystery/true-crime podcasters).
-    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth. Layer 1 must start with: 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain ek aisi kahani ki aur...'
-    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \\n\\n between paragraphs.
+    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth. Layer 1 must start with a unique, gripping, and topic-specific hook to instantly capture the reader's attention (avoid generic openings like 'kya aapne kabhi socha hai' or 'chalo aaj le chalte hain').
+    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
     5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
     
     Structure the story exactly in the following JSON format:
@@ -287,7 +287,7 @@ async function runAutomation(isManual = false) {
         {
           "layer": 1,
           "layer_name": "Layer 1 title",
-          "content": "Fully-written Layer 1 content starting with 'Kya aapne kabhi aisa socha hai? Chalo aaj aapko le chalte hain...'",
+          "content": "Fully-written Layer 1 content starting with a unique, topic-specific gripping hook.",
           "cliffhanger": "Cliffhanger sentence."
         },
         {
