@@ -366,16 +366,14 @@ export default function TodayInShadows() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Deep-Dive Decryption Overlay Modal */}
+      </div>      {/* Deep-Dive Decryption Overlay Modal */}
       {modalOpen && (
         <div
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-md flex items-start justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[620px] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 space-y-6 shadow-2xl overflow-hidden my-8"
+            className="relative w-full max-w-[620px] max-h-[85vh] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             style={{
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
@@ -385,7 +383,7 @@ export default function TodayInShadows() {
             <div className="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(rgba(158,123,76,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(158,123,76,0.1)_1px,transparent_1px)] bg-[size:24px_24px]" />
 
             {/* Header */}
-            <div className="flex justify-between items-start border-b border-neutral-900 pb-4 relative z-10">
+            <div className="flex justify-between items-start border-b border-neutral-900 pb-4 relative z-10 flex-shrink-0">
               <div className="space-y-1">
                 <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm">
                   Today in History
@@ -408,7 +406,7 @@ export default function TodayInShadows() {
             </div>
 
             {/* Content Body */}
-            <div className="space-y-6 relative z-10 pr-2">
+            <div className="space-y-6 relative z-10 pr-2 overflow-y-auto flex-1 my-5 custom-scrollbar">
               
               {/* Intel Briefing */}
               <div className="space-y-2">
@@ -478,12 +476,10 @@ export default function TodayInShadows() {
                 </div>
               </div>
 
-
-
             </div>
 
             {/* Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-neutral-900 pt-4 relative z-10 gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-neutral-900 pt-4 relative z-10 gap-3 flex-shrink-0">
               {dossier.wikiUrl && (
                 <a
                   href={dossier.wikiUrl}
