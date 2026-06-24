@@ -238,6 +238,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [editFormActiveLayer, setEditFormActiveLayer] = useState(1);
   const [aiJsonInput, setAiJsonInput] = useState('');
   const [aiJsonError, setAiJsonError] = useState(null);
+  const [aiPromptTopic, setAiPromptTopic] = useState('');
+  const [copiedPromptStatus, setCopiedPromptStatus] = useState(false);
 
   // Database Console states
   const [dbSqlQuery, setDbSqlQuery] = useState('SELECT story_id, title, category, severity, draft FROM stories LIMIT 10;');
@@ -1068,6 +1070,94 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       console.error('Failed to parse AI JSON:', err);
       setAiJsonError('Parsing failed: ' + err.message);
     }
+  };
+
+  const handleCopyGeneratedPrompt = () => {
+    if (!aiPromptTopic.trim()) {
+      alert('Please enter a topic name first.');
+      return;
+    }
+    const slugBase = aiPromptTopic.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/(^_+|_+$)/g, '');
+    const promptText = `You are the lead narrative architect and lead forensic researcher for LORE, an atmospheric archive documenting the darkest corners of human history, psychology, and anomalous phenomena.
+
+Your task is to compile a complete LORE dossier on a specific topic. The tone must be clinical, investigative, objective, and deeply chilling—similar to a high-end forensic documentary. All details and facts must be completely real, verified, and historically accurate. Never distort sentiments or exaggerate sensitive religious/historical topics. Keep it authentic but haunting.
+
+Generate the dossier in STRICTLY valid JSON format matching the schema below.
+
+### Output Constraints:
+1. Output ONLY the raw JSON string. Do not wrap it in markdown code blocks (e.g., do not use \`\`\`json ... \`\`\`). Start with \`{\` and end with \`}\`.
+2. Ensure all quotes inside text values are escaped properly (use \\\" for inner quotes).
+3. Do not include any trailing commas.
+4. Provide exactly 7 descent layers.
+5. Within "content" values, use \\n\\n to separate paragraphs.
+
+### JSON Schema:
+{
+  "story_id": "${slugBase}_dossier",
+  "title": "Compelling Title of the Dossier",
+  "category": "psychology" | "true_crime" | "paranormal",
+  "hook": "A brief, gripping hook summarizing the core mystery to display in the catalog view (max 150 characters).",
+  "severity": "unsettling" | "disturbing" | "extreme",
+  "image_query": "The exact name of the Wikipedia article for this topic, used to automatically fetch a cover image.",
+  "concepts": ["concept_one", "concept_two", "concept_three"],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "Title of Layer 1 (The initial whisper)",
+      "content": "Paragraph 1 detailing the public facts.\\n\\nParagraph 2 adding more documented background details.",
+      "cliffhanger": "A chilling transition statement or question pulling the reader to the next layer."
+    },
+    {
+      "layer": 2,
+      "layer_name": "Title of Layer 2",
+      "content": "Detailed paragraphs...",
+      "cliffhanger": "Transition hook..."
+    },
+    {
+      "layer": 3,
+      "layer_name": "Title of Layer 3",
+      "content": "Detailed paragraphs...",
+      "cliffhanger": "Transition hook..."
+    },
+    {
+      "layer": 4,
+      "layer_name": "Title of Layer 4",
+      "content": "Detailed paragraphs...",
+      "cliffhanger": "Transition hook..."
+    },
+    {
+      "layer": 5,
+      "layer_name": "Title of Layer 5",
+      "content": "Detailed paragraphs...",
+      "cliffhanger": "Transition hook..."
+    },
+    {
+      "layer": 6,
+      "layer_name": "Title of Layer 6 (Entering the extreme depths)",
+      "content": "Detailed paragraphs...",
+      "cliffhanger": "Transition hook..."
+    },
+    {
+      "layer": 7,
+      "layer_name": "Title of Layer 7 (The absolute core truth/impact)",
+      "content": "The final chilling, factual conclusion or summary of the mystery.",
+      "cliffhanger": null
+    }
+  ]
+}
+
+### Topic for generation:
+${aiPromptTopic}`;
+
+    navigator.clipboard.writeText(promptText)
+      .then(() => {
+        setCopiedPromptStatus(true);
+        setTimeout(() => setCopiedPromptStatus(false), 3000);
+      })
+      .catch(err => {
+        console.error('Failed to copy prompt:', err);
+        alert('Could not copy automatically. Check console.');
+      });
   };
 
   const handleLayerChange = (layerNum, field, value) => {
@@ -2025,35 +2115,69 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                   </h3>
 
                   {/* AI Import Utility */}
-                  <div className="p-4 bg-[#110F0D] border border-neutral-800 rounded-lg mb-4 text-left">
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="block text-[9.5px] font-mono tracking-wider uppercase text-[#9E7B4C] font-bold">
-                        // Quick AI Dossier Import (Paste Raw JSON)
-                      </label>
-                      {aiJsonError && (
-                        <span className="text-[9.5px] font-mono text-red-500 uppercase tracking-wider animate-pulse">
-                          {aiJsonError}
-                        </span>
-                      )}
+                  <div className="p-4 bg-[#110F0D] border border-neutral-800 rounded-lg mb-4 text-left space-y-4">
+                    {/* Section 1: Prompt Generator */}
+                    <div className="border-b border-neutral-900 pb-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="block text-[9.5px] font-mono tracking-wider uppercase text-[#9E7B4C] font-bold">
+                          // Step 1: Generate AI Story Prompt
+                        </label>
+                        {copiedPromptStatus && (
+                          <span className="text-[9.5px] font-mono text-emerald-500 uppercase tracking-wider animate-pulse">
+                            ✓ Copied to Clipboard!
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={aiPromptTopic}
+                          onChange={(e) => setAiPromptTopic(e.target.value)}
+                          placeholder="Enter Dossier Topic (e.g. The Salem Witch Trials)..."
+                          className="flex-1 px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
+                        />
+                        <button
+                          onClick={handleCopyGeneratedPrompt}
+                          type="button"
+                          className="px-3.5 py-1.5 bg-indigo-950/40 hover:bg-indigo-900/40 border border-indigo-800/40 text-indigo-300 text-[9px] font-mono font-bold tracking-widest uppercase rounded transition-all cursor-pointer"
+                        >
+                          Copy Prompt
+                        </button>
+                      </div>
+                      <p className="text-[8px] text-[#6A6560] mt-1 font-mono">// Enter a topic name to generate and copy a structured prompt you can paste into ChatGPT/Claude.</p>
                     </div>
-                    <textarea
-                      value={aiJsonInput}
-                      onChange={(e) => {
-                        setAiJsonInput(e.target.value);
-                        if (aiJsonError) setAiJsonError(null);
-                      }}
-                      rows={3}
-                      className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
-                      placeholder="Paste the raw JSON generated by your AI story writer..."
-                    />
-                    <div className="flex justify-end mt-2">
-                      <button
-                        onClick={handleImportAiJson}
-                        type="button"
-                        className="px-3 py-1.5 bg-[#9E7B4C]/25 hover:bg-[#9E7B4C]/45 border border-[#9E7B4C]/40 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded transition-all cursor-pointer"
-                      >
-                        Parse & Populate Form
-                      </button>
+
+                    {/* Section 2: JSON Importer */}
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="block text-[9.5px] font-mono tracking-wider uppercase text-[#9E7B4C] font-bold">
+                          // Step 2: Paste Raw AI JSON Output
+                        </label>
+                        {aiJsonError && (
+                          <span className="text-[9.5px] font-mono text-red-500 uppercase tracking-wider animate-pulse">
+                            {aiJsonError}
+                          </span>
+                        )}
+                      </div>
+                      <textarea
+                        value={aiJsonInput}
+                        onChange={(e) => {
+                          setAiJsonInput(e.target.value);
+                          if (aiJsonError) setAiJsonError(null);
+                        }}
+                        rows={3}
+                        className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                        placeholder="Paste the raw JSON generated by your AI story writer..."
+                      />
+                      <div className="flex justify-end mt-2">
+                        <button
+                          onClick={handleImportAiJson}
+                          type="button"
+                          className="px-3 py-1.5 bg-[#9E7B4C]/25 hover:bg-[#9E7B4C]/45 border border-[#9E7B4C]/40 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded transition-all cursor-pointer"
+                        >
+                          Parse & Populate Form
+                        </button>
+                      </div>
                     </div>
                   </div>
 
