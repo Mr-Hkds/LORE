@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
@@ -82,34 +82,54 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
   const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
 
-  const { getForYouStories, getProgress } = useReadingProgress();
+  const { getProgress, removeProgress, markProgressAsCompleted, getAffinity } = useReadingProgress();
+  const [progressVersion, setProgressVersion] = useState(0);
 
-  // Compute For You list (reading history is synchronous from localStorage)
-  const forYouStories = useMemo(() => {
-    return allStories.length > 0 ? getForYouStories(allStories, 3) : [];
-  }, [allStories, getForYouStories]);
+  // Compute Continue Reading list
+  const continueReadingStories = useMemo(() => {
+    if (!allStories || allStories.length === 0) return [];
+    return allStories.filter(story => {
+      const prog = getProgress(story.story_id);
+      return prog && !prog.completed && prog.lastLayer > 0;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allStories, getProgress, progressVersion]);
 
-  const [activeTab, setActiveTab] = useState('top-rated');
-  const hasAutoSwitched = useRef(false);
-
-  // Auto-switch to 'recents' once when stories load, if user has reading progress
-  useEffect(() => {
-    if (allStories.length > 0 && !hasAutoSwitched.current) {
-      hasAutoSwitched.current = true;
-      if (forYouStories.length > 0) {
-        setActiveTab('recents');
-      }
-    }
-  }, [allStories, forYouStories]);
+  const [activeTab, setActiveTab] = useState('for-you');
 
   // Selected stories to display based on activeTab
   const activeTabStories = useMemo(() => {
-    if (activeTab === 'recents') {
-      return forYouStories;
+    if (!allStories || allStories.length === 0) return [];
+
+    if (activeTab === 'for-you') {
+      const affinity = getAffinity();
+      const hasAffinity = Object.keys(affinity).length > 0;
+      
+      // Filter out completed stories
+      let filtered = allStories.filter(s => {
+        const prog = getProgress(s.story_id);
+        return !prog || !prog.completed;
+      });
+
+      // If all stories are completed, fallback to showing all stories
+      if (filtered.length === 0) {
+        filtered = allStories;
+      }
+
+      return filtered
+        .map(s => {
+          const affinityScore = hasAffinity ? (affinity[s.category] || 0) * 10 : 0;
+          const rx = s.reactions || {};
+          const reactionScore = (rx.gripping || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
+          const prog = getProgress(s.story_id);
+          const startedBoost = (prog && prog.lastLayer > 0) ? 5 : 0;
+          return { ...s, _score: affinityScore + reactionScore + startedBoost };
+        })
+        .sort((a, b) => b._score - a._score)
+        .slice(0, 10);
     }
     
     if (activeTab === 'editors-picks') {
-      if (!allStories || allStories.length === 0) return [];
       const flagged = allStories.filter(s => s.editors_pick === true);
       if (flagged.length > 0) {
         return flagged.slice(0, 10);
@@ -118,8 +138,13 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       return allStories.filter(s => fallbacks.includes(s.story_id)).slice(0, 10);
     }
 
+    if (activeTab === 'recents') {
+      return [...allStories]
+        .sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''))
+        .slice(0, 10);
+    }
+
     // Default to 'top-rated'
-    if (!allStories || allStories.length === 0) return [];
     return [...allStories]
       .sort((a, b) => {
         const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0) + (a.reactions?.like || 0);
@@ -130,7 +155,9 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         return (b.added_date || '').localeCompare(a.added_date || '');
       })
       .slice(0, 10);
-  }, [activeTab, allStories, forYouStories]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, allStories, getProgress, getAffinity, progressVersion]);
+
 
   const handleLogoTap = () => {
     const now = Date.now();
@@ -287,6 +314,92 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             <TodayInShadows />
           </div>
 
+          {/* Continue Reading Section */}
+          {continueReadingStories.length > 0 && (
+            <div className="mb-16 pt-2 text-left">
+              {/* Outer premium card */}
+              <div
+                className="rounded-2xl border p-6 animate-fadeIn"
+                style={{
+                  backgroundColor: 'rgba(13, 12, 10, 0.72)',
+                  borderColor: 'rgba(158, 123, 76, 0.18)',
+                  backdropFilter: 'blur(16px)',
+                  boxShadow: '0 2px 40px -8px rgba(0,0,0,0.55), inset 0 1px 0 rgba(158,123,76,0.07)',
+                }}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between mb-5 pb-3 border-b border-neutral-900" style={{ borderColor: 'rgba(158,123,76,0.10)' }}>
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="block w-1 h-4 rounded-full"
+                      style={{ background: 'linear-gradient(to bottom, #9E7B4C, rgba(158,123,76,0.15))' }}
+                    />
+                    <p
+                      className="text-[10px] font-mono font-bold tracking-[0.24em] uppercase"
+                      style={{ color: ac }}
+                    >
+                      Continue Reading
+                    </p>
+                  </div>
+                </div>
+
+                {/* List */}
+                <div className="flex flex-col gap-4">
+                  {continueReadingStories.map(story => {
+                    const prog = getProgress(story.story_id);
+                    const currentL = prog?.lastLayer || 1;
+                    const catLabel = CATEGORY_LABELS[story.category] || story.category;
+                    return (
+                      <div 
+                        key={story.story_id} 
+                        className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:bg-neutral-900/20 hover:border-neutral-800/85 transition-all duration-200 group relative"
+                      >
+                        <div 
+                          onClick={() => window.location.hash = `#story-${story.story_id}-layer-${currentL}`}
+                          className="flex items-center gap-4 flex-1 cursor-pointer w-full min-w-0"
+                        >
+                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900 bg-neutral-950">
+                            <StoryMiniImage story={story} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-1">
+                              <span>{catLabel}</span>
+                              <span className="text-neutral-800">·</span>
+                              <span>Layer {currentL} of 7</span>
+                            </div>
+                            <h4 className="font-serif italic text-base text-[#EDE8DF] group-hover:text-[#9E7B4C] transition-colors duration-200 truncate">
+                              {story.title}
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+                          <button
+                            onClick={() => {
+                              markProgressAsCompleted(story.story_id);
+                              setProgressVersion(prev => prev + 1);
+                            }}
+                            className="px-3 py-1.5 rounded bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-500 text-[10px] font-mono tracking-wider uppercase border border-emerald-900/40 hover:border-emerald-800/60 active:scale-95 transition-all duration-200 cursor-pointer"
+                          >
+                            ✓ Complete
+                          </button>
+                          <button
+                            onClick={() => {
+                              removeProgress(story.story_id);
+                              setProgressVersion(prev => prev + 1);
+                            }}
+                            className="px-3 py-1.5 rounded bg-red-950/20 hover:bg-red-950/40 text-red-500/80 hover:text-red-400 text-[10px] font-mono tracking-wider uppercase border border-red-900/20 hover:border-red-900/50 active:scale-95 transition-all duration-200 cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* ── Editorial and Recommendations Section ── */}
           {activeTabStories.length > 0 && (
             <div className="mb-16 pt-2 text-left">
@@ -319,25 +432,25 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                   </div>
                   {/* Tab pills – segmented control */}
                   <div
-                    className="inline-flex items-center p-0.5 rounded-lg border"
+                    className="flex items-center gap-1 p-0.5 rounded-lg border overflow-x-auto scrollbar-none max-w-full"
                     style={{
                       backgroundColor: 'rgba(8, 7, 5, 0.6)',
                       borderColor: 'rgba(158, 123, 76, 0.10)',
                     }}
                   >
                     <button
-                      onClick={() => setActiveTab('top-rated')}
-                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
+                      onClick={() => setActiveTab('for-you')}
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"
                       style={{
-                        color: activeTab === 'top-rated' ? fg : mu,
-                        backgroundColor: activeTab === 'top-rated' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                        color: activeTab === 'for-you' ? fg : mu,
+                        backgroundColor: activeTab === 'for-you' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
                       }}
                     >
-                      ◉ Top Rated
+                      ✦ For You
                     </button>
                     <button
                       onClick={() => setActiveTab('editors-picks')}
-                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"
                       style={{
                         color: activeTab === 'editors-picks' ? fg : mu,
                         backgroundColor: activeTab === 'editors-picks' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
@@ -345,18 +458,26 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     >
                       ◉ Editor's Picks
                     </button>
-                    {forYouStories.length > 0 && (
-                      <button
-                        onClick={() => setActiveTab('recents')}
-                        className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none"
-                        style={{
-                          color: activeTab === 'recents' ? fg : mu,
-                          backgroundColor: activeTab === 'recents' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
-                        }}
-                      >
-                        ◉ Recents
-                      </button>
-                    )}
+                    <button
+                      onClick={() => setActiveTab('recents')}
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"
+                      style={{
+                        color: activeTab === 'recents' ? fg : mu,
+                        backgroundColor: activeTab === 'recents' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                      }}
+                    >
+                      ◉ Recents
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('top-rated')}
+                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"
+                      style={{
+                        color: activeTab === 'top-rated' ? fg : mu,
+                        backgroundColor: activeTab === 'top-rated' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
+                      }}
+                    >
+                      ◉ Top Rated
+                    </button>
                   </div>
                 </div>
 
@@ -372,16 +493,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     <button
                       key={story.story_id}
                       onClick={() => {
-                        const catMap = { 
-                          psychology: 'psychology', 
-                          mythology: 'mythology', 
-                          true_crime: 'true-crime', 
-                          gov_experiments: 'gov-experiments', 
-                          paranormal: 'paranormal-reports', 
-                          conspiracy: 'conspiracy', 
-                          cyber_mysteries: 'cyber-mysteries' 
-                        };
-                        onSelect({ id: catMap[story.category] || story.category, label: story.category }, story.story_id);
+                        window.location.hash = `#story-${story.story_id}-layer-${currentL > 0 ? currentL : 1}`;
                       }}
                       className="group relative w-full flex flex-col sm:flex-row gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
                       style={{

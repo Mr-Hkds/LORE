@@ -105,15 +105,13 @@ const STATIC_FALLBACKS = {
   }
 };
 
-// Deterministic hash to generate consistent mock initial reaction counts
-function getSeedCounts(dateStr, title) {
-  const combinedStr = `${dateStr || ''}-${title || ''}`;
-  const seed = combinedStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+// Return zero counts for initial reactions to avoid fake values
+function getSeedCounts() {
   return {
-    gripping: (seed % 47) + 12,
-    scared: (seed % 31) + 5,
-    mindblown: (seed % 71) + 24,
-    like: (seed % 89) + 42
+    gripping: 0,
+    scared: 0,
+    mindblown: 0,
+    like: 0
   };
 }
 
@@ -183,32 +181,6 @@ export default function TodayInShadows() {
         mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0),
         like: baseCounts.like + (storedReaction === 'like' ? 1 : 0)
       });
-
-      // Client-side fetch for default Wikipedia image
-      let active = true;
-      const query = dossier.wikiQuery || dossier.title;
-      if (query) {
-        fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=thumbnail&pithumbsize=800&titles=${encodeURIComponent(query)}&origin=*`)
-          .then(res => {
-            if (res.ok) return res.json();
-            throw new Error('Wiki fetch failed');
-          })
-          .then(data => {
-            const pages = data?.query?.pages;
-            if (pages && active) {
-               const firstPage = Object.values(pages)[0];
-               const imgUrl = firstPage?.thumbnail?.source;
-               if (imgUrl) {
-                 setWikiImgUrl(imgUrl);
-               }
-            }
-          })
-          .catch(err => {
-            console.warn('[WikiImage] Failed to fetch wiki image:', err.message);
-          });
-      }
-
-      return () => { active = false; };
     }
   }, [dossier]);
 

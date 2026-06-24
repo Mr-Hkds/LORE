@@ -70,6 +70,9 @@ function readJson(file) {
 
 // Helper to write JSON file
 function writeJson(file, obj) {
+  if (process.env.VERCEL) {
+    return true; // Skip writing on Vercel read-only filesystem
+  }
   try {
     fs.writeFileSync(file, JSON.stringify(obj, null, 2));
     return true;
@@ -548,6 +551,22 @@ function generateDailyDossier(dayOfWeek) {
   return dossier;
 }
 
+const wikiThumbnailCache = new Map();
+async function getWikipediaThumbnail(query) {
+  if (!query) return null;
+  if (wikiThumbnailCache.has(query)) return wikiThumbnailCache.get(query);
+  try {
+    const formattedQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
+    const matched = await fetchUrl(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`);
+    const imgUrl = matched?.thumbnail?.source || null;
+    wikiThumbnailCache.set(query, imgUrl);
+    return imgUrl;
+  } catch (err) {
+    console.warn(`[WikiCache] Failed to fetch Wikipedia thumbnail for "${query}":`, err.message);
+    return null;
+  }
+}
+
 // --- HTTP SERVER MAIN ROUTER ---
 const server = http.createServer(async (req, res) => {
   // Set CORS headers
@@ -571,6 +590,17 @@ const server = http.createServer(async (req, res) => {
     const todayObj = new Date();
     const dayOfWeek = todayObj.getDay();
     const dossier = generateDailyDossier(dayOfWeek);
+    
+    try {
+      const query = dossier.wikiQuery || dossier.title;
+      const thumbnail = await getWikipediaThumbnail(query);
+      if (thumbnail) {
+        dossier.thumbnail = thumbnail;
+      }
+    } catch (err) {
+      // Fallback to unsplash thumbnail is already set
+    }
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(dossier));
     return;
@@ -932,6 +962,13 @@ const server = http.createServer(async (req, res) => {
       if (!filename || !base64Data) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Missing filename or base64Data' }));
+        return;
+      }
+
+      if (process.env.VERCEL) {
+        // Vercel filesystem is read-only. Skip local write and instruct client to use remote URL directly.
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, path: null }));
         return;
       }
 

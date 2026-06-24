@@ -135,10 +135,12 @@ Output YES or NO only. Do not include markdown or explanations.`;
   // Step 2: Fallback to Pollinations AI
   console.log(`[IMAGE ENGINE] No perfect real photo available for ${topic}. Generating AI cover image...`);
   try {
-    const promptInstructions = `Create a highly descriptive, visually stunning image generation prompt for the dark historical/psychological topic: "${topic}".
-This image will be the main cover art of a thriller/mystery story. Design an attractive, clickable, eye-catching concept.
-Write a single descriptive sentence for a cinematic, atmospheric photo. Keep it highly realistic, dark, moody, with dramatic lighting, deep shadows, and rich textures, highlighting a mysterious and suspenseful focal point that makes the reader curious to click and read.
-Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. Output the prompt text only.`;
+    const promptInstructions = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${topic}".
+This image will be the main cover art of a dark mystery/history dossier. Focus on a concrete, atmospheric, and highly symbolic visual composition representing the topic.
+Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
+Highlight a single, mysterious focal point in a realistic documentary style.
+Absolutely FORBIDDEN styling: plastic smooth surfaces, oversaturated colors, neon glow, generic digital art, 3D illustrations, airbrushing, or digital smoothing.
+Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
     
     let aiPrompt = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
     try {
@@ -152,7 +154,8 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown styling. O
     
     aiPrompt = aiPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
     
-    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(aiPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+    const enhancedPrompt = `${aiPrompt.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
     console.log(`[IMAGE ENGINE] Downloading Pollinations AI image from: ${pollinationsUrl}`);
     await downloadImage(pollinationsUrl, localPath);
     return relativePath;

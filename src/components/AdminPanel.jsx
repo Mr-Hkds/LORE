@@ -513,7 +513,30 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         addLog(`Downloading Wikipedia cover photo...`);
         storyObj.hero_image = await saveRemoteImageLocally(storyObj.story_id, imageUrl);
       } else {
-        storyObj.hero_image = 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
+        addLog(`No Wikipedia photo found. Instructing Gemini to generate custom visual prompt...`);
+        const imagePrompt = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${topic}".
+This image will be the main cover art of a dark mystery/history dossier. Focus on a concrete, atmospheric, and highly symbolic visual composition representing the topic.
+Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
+Highlight a single, mysterious focal point in a realistic documentary style.
+Absolutely FORBIDDEN styling: plastic smooth surfaces, oversaturated colors, neon glow, generic digital art, 3D illustrations, airbrushing, or digital smoothing.
+Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+
+        let aiPromptText = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
+        try {
+          const generatedPrompt = await callGeminiApi([
+            { role: 'user', parts: [{ text: imagePrompt }] }
+          ]);
+          if (generatedPrompt && generatedPrompt.trim().length > 5) {
+            aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+          }
+        } catch (err) {
+          console.warn('Failed to generate cover prompt via Gemini:', err);
+        }
+
+        const enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+        const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+        addLog(`Generating premium AI cover image using Flux engine...`);
+        storyObj.hero_image = await saveRemoteImageLocally(storyObj.story_id, pollinationsUrl);
       }
 
       // Fetch related scholarly research PDFs from OpenAlex

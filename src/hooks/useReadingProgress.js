@@ -136,6 +136,33 @@ export function useReadingProgress() {
     } catch { /* ignore */ }
   }, []);
 
+  /**
+   * Removes progress record for a story.
+   */
+  const removeProgress = useCallback((storyId) => {
+    if (!storyId) return;
+    try {
+      localStorage.removeItem(KEY_PROGRESS(storyId));
+    } catch { /* ignore */ }
+  }, []);
+
+  /**
+   * Manually marks a story as completed in reading history.
+   */
+  const markProgressAsCompleted = useCallback((storyId) => {
+    if (!storyId) return;
+    try {
+      const prog = lsGet(KEY_PROGRESS(storyId), { layersRead: [1, 2, 3, 4, 5, 6, 7], lastLayer: 7, completed: true, startedAt: Date.now() });
+      prog.completed = true;
+      prog.lastLayer = 7;
+      prog.completedAt = Date.now();
+      if (!prog.layersRead.includes(7)) {
+        prog.layersRead.push(7);
+      }
+      lsSet(KEY_PROGRESS(storyId), prog);
+    } catch { /* ignore */ }
+  }, []);
+
   return {
     trackLayerRead,
     startTimeTracking,
@@ -145,5 +172,7 @@ export function useReadingProgress() {
     getAffinity,
     getForYouStories,
     clearHistory,
+    removeProgress,
+    markProgressAsCompleted,
   };
 }

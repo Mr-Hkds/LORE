@@ -2,7 +2,8 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-const dbPath = path.join(__dirname, 'lore.db');
+const isVercel = !!process.env.VERCEL;
+const dbPath = isVercel ? '/tmp/lore.db' : path.join(__dirname, 'lore.db');
 const db = new Database(dbPath);
 
 // Initialize tables
@@ -192,6 +193,10 @@ function updateFeedbackAddressed(id, addressed) {
 
 // Rebuild Concept Index and Export to stories.json / concept_index.json
 function exportStoriesToJSON() {
+  if (isVercel) {
+    console.log('[DB] Running on Vercel. Skipping static file export (GitHub Sync should be used for persistence).');
+    return;
+  }
   const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
   const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
   
@@ -230,11 +235,19 @@ function seed() {
 
   // Seed stories
   const storyCount = db.prepare('SELECT COUNT(*) as count FROM stories').get().count;
-  if (storyCount === 0 && fs.existsSync(STORIES_FILE)) {
+  if (storyCount === 0) {
     try {
-      const data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+      let data = null;
+      try {
+        data = require('./public/content/stories.json');
+      } catch (err) {
+        if (fs.existsSync(STORIES_FILE)) {
+          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+        }
+      }
+
       if (data && Array.isArray(data.stories)) {
-        console.log(`Seeding ${data.stories.length} stories from stories.json to SQLite database...`);
+        console.log(`Seeding ${data.stories.length} stories to SQLite database...`);
         const insertStmt = db.prepare(`
           INSERT INTO stories (
             story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
@@ -269,11 +282,19 @@ function seed() {
 
   // Seed recommendations
   const recCount = db.prepare('SELECT COUNT(*) as count FROM recommendations').get().count;
-  if (recCount === 0 && fs.existsSync(RECOMMENDATIONS_FILE)) {
+  if (recCount === 0) {
     try {
-      const recs = JSON.parse(fs.readFileSync(RECOMMENDATIONS_FILE, 'utf8'));
+      let recs = null;
+      try {
+        recs = require('./public/content/recommendations.json');
+      } catch (err) {
+        if (fs.existsSync(RECOMMENDATIONS_FILE)) {
+          recs = JSON.parse(fs.readFileSync(RECOMMENDATIONS_FILE, 'utf8'));
+        }
+      }
+
       if (Array.isArray(recs)) {
-        console.log(`Seeding ${recs.length} recommendations from recommendations.json to SQLite database...`);
+        console.log(`Seeding ${recs.length} recommendations to SQLite database...`);
         const insertStmt = db.prepare('INSERT INTO recommendations (id, topic, date, status) VALUES (?, ?, ?, ?)');
         const transaction = db.transaction((items) => {
           for (const r of items) {
@@ -289,11 +310,19 @@ function seed() {
 
   // Seed feedback
   const fbCount = db.prepare('SELECT COUNT(*) as count FROM feedback').get().count;
-  if (fbCount === 0 && fs.existsSync(FEEDBACK_FILE)) {
+  if (fbCount === 0) {
     try {
-      const feedback = JSON.parse(fs.readFileSync(FEEDBACK_FILE, 'utf8'));
+      let feedback = null;
+      try {
+        feedback = require('./public/content/feedback.json');
+      } catch (err) {
+        if (fs.existsSync(FEEDBACK_FILE)) {
+          feedback = JSON.parse(fs.readFileSync(FEEDBACK_FILE, 'utf8'));
+        }
+      }
+
       if (Array.isArray(feedback)) {
-        console.log(`Seeding ${feedback.length} feedback entries from feedback.json to SQLite database...`);
+        console.log(`Seeding ${feedback.length} feedback entries to SQLite database...`);
         const insertStmt = db.prepare('INSERT INTO feedback (id, rating, tags, note, timestamp, page, addressed) VALUES (?, ?, ?, ?, ?, ?, ?)');
         const transaction = db.transaction((items) => {
           for (const f of items) {
