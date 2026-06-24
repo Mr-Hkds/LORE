@@ -182,7 +182,7 @@ export default function LayerReader({
             <div className="max-w-2xl mx-auto w-full">
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
-                <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex items-center justify-center relative bg-black/30" style={{ borderColor: cardBorder }}>
+                <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex items-center justify-center relative bg-black/30 dossier-image-container" style={{ borderColor: cardBorder }}>
                   {imgFailed ? (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                       <LoreMark size={24} color="currentColor" />

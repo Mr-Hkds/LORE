@@ -398,7 +398,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                           onClick={() => window.location.hash = `#story-${story.story_id}-layer-${currentL}`}
                           className="flex flex-row items-center gap-4 flex-1 cursor-pointer w-full min-w-0"
                         >
-                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900 bg-neutral-950 relative">
+                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900 bg-neutral-950 relative dossier-image-container">
                             <StoryMiniImage story={story} />
                           </div>
                           <div className="min-w-0 flex-1">
@@ -539,7 +539,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       }}
                     >
                       {/* Left Side: Grayscale story thumbnail overlayed with subtle gold border */}
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900/80 bg-neutral-950 relative">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900/80 bg-neutral-950 relative dossier-image-container">
                         <StoryMiniImage story={story} />
                         <div className="absolute inset-0 bg-neutral-950/40 mix-blend-color group-hover:bg-transparent transition-all duration-300" />
                         {currentL > 0 && !isCompleted && (

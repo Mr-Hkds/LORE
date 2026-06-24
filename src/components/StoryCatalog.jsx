@@ -80,7 +80,7 @@ function StoryCardImage({ story, alt }) {
   }
   return (
     <div 
-      className="relative w-full h-full overflow-hidden flex items-center justify-center"
+      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container"
       style={{
         backgroundColor: '#090807',
         backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
@@ -96,9 +96,9 @@ function StoryCardImage({ story, alt }) {
       />
 
       {/* Brand Watermark / Stamp */}
-      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
-        <LoreMark size={10} color="#EDE8DF" />
-        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
+      <div className="absolute top-3 left-3 z-35 flex items-center gap-2 pointer-events-none select-none bg-[#0D0B08]/85 backdrop-blur-md border border-neutral-800/80 px-2 py-0.5 rounded shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse flex-shrink-0" />
+        <span className="text-[7.5px] font-mono tracking-[0.24em] text-[#EDE8DF]/95 uppercase font-bold">LORE ARCHIVE // SECURED</span>
       </div>
 
       {/* Crisp foreground contained image */}

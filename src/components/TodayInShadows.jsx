@@ -267,7 +267,7 @@ export default function TodayInShadows() {
               </div>
             ) : (
               <div 
-                className="relative w-full h-full overflow-hidden flex items-center justify-center"
+                className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container"
                 style={{
                   backgroundColor: '#090807',
                   backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
@@ -283,9 +283,9 @@ export default function TodayInShadows() {
                 />
 
                 {/* Brand Watermark / Stamp */}
-                <div className="absolute top-2 left-2 z-20 flex items-center gap-1 opacity-35 pointer-events-none select-none">
-                  <LoreMark size={8} color="#EDE8DF" />
-                  <span className="text-[6.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold">LORE</span>
+                <div className="absolute top-2 left-2 z-35 flex items-center gap-1.5 pointer-events-none select-none bg-[#0D0B08]/90 backdrop-blur-sm border border-neutral-900 px-1.5 py-0.5 rounded-xs shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
+                  <span className="w-1 h-1 rounded-full bg-red-600 animate-pulse flex-shrink-0" />
+                  <span className="text-[6px] font-mono tracking-[0.2em] text-[#EDE8DF]/90 uppercase font-bold">LORE // DECRYPTED</span>
                 </div>
 
                 {/* Crisp foreground contained image */}
