@@ -9,20 +9,15 @@
     "burari_deaths_001"
   ],
   "unexplained_deaths": [
-    "the_dyatlov_pass_incident"
+    "the_dyatlov_pass_incident",
+    "barney_barnato",
+    "uwe_barschel"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
   ],
   "government_secrecy": [
-    "the_dyatlov_pass_incident"
-  ],
-  "unexplained_phenomena": [
-    "barney_barnato",
-    "uwe_barschel"
-  ],
-  "mystery": [
-    "barney_barnato",
+    "the_dyatlov_pass_incident",
     "uwe_barschel"
   ],
   "conformity": [
@@ -33,5 +28,14 @@
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
+  ],
+  "financial_conspiracy": [
+    "barney_barnato"
+  ],
+  "lost_wealth": [
+    "barney_barnato"
+  ],
+  "espionage": [
+    "uwe_barschel"
   ]
 }

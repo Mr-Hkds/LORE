@@ -397,24 +397,25 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     const targetCategory = genCategory === 'auto' ? 'Choose the single best category match for this topic from: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries' : genCategory;
     const targetSeverity = genSeverity === 'auto' ? 'unsettling | disturbing | extreme (auto-detect based on topic intensity)' : genSeverity;
 
-    const prompt = `Write a complete, highly-detailed 7-layer documentary story in Hinglish about the famous, documented, real-world case or event: "${topic}".
+    const prompt = `Write a complete, highly-detailed 7-layer documentary story in clean, simple, and professional English about the famous, documented, real-world case or event: "${topic}".
     
     Suggested Category: ${targetCategory}
     Severity Level: ${targetSeverity}
     
-    CRITICAL FACTUAL AND PACING RULES:
-    1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
-    2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in high-quality, engaging Hinglish (Hindi written in English alphabet, mixed with English words as spoken by mystery/true-crime podcasters).
-    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest truth. Layer 1 must start with a unique, gripping, and topic-specific hook to grab attention (avoid generic openings like 'kya aapne kabhi socha hai' or 'chalo aaj le chalte hain').
-    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
-    5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
+     CRITICAL FACTUAL AND PACING RULES:
+     1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
+     2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in clean, professional, and clear English. The tone should be similar to an educational video essay or a premium documentary narrator. Keep the vocabulary accessible but serious. Do NOT use cheap sensationalism, clickbait phrasing, or slang. Avoid any Hinglish or Hindi words.
+     3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth.
+     4. Layer 1 MUST start with a unique, gripping, topic-specific factual hook to capture the reader's attention. Rhetorical questions or generic conversational openings are ABSOLUTELY FORBIDDEN. Specifically, do NOT use: "Did you know?", "Have you ever wondered?", "What if...", "Kya aapne kabhi socha hai?", "Chalo aaj le chalte hain", "Let us explore", "Imagine a world where", or similar cliches. Go straight into a concrete, chilling, or fascinating historical fact or observation (e.g. "On July 1, 2018, eleven bodies hung in perfect circular alignment...").
+     5. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
+     6. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
     
     Structure the story exactly in the following JSON format:
     {
       "story_id": "lowercase_slug_with_underscores",
       "title": "Compelling Title",
       "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
-      "hook": "Teaser description of this case (max 150 chars) in Hinglish.",
+      "hook": "Teaser description of this case (max 150 chars) in clean, professional English.",
       "concepts": ["concept1", "concept2", "concept3"],
       "severity": "unsettling | disturbing | extreme (choose based on topic intensity)",
       "image_query": "The exact Wikipedia article title representing this topic for thumbnail fetching (e.g. Mary Celeste)",
@@ -811,6 +812,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     loadRecommendations();
   };
 
+  const handleUseTopic = (topic) => {
+    setGenTopic(topic);
+    setActiveTab('generator');
+    setToast({ text: `Loaded topic "${topic}" into the AI Generator form.`, type: 'info' });
+  };
+
   // Publish / Push to Live story logic
   const handlePublishStory = async (storyId) => {
     try {
@@ -939,7 +946,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       title: 'New Dossier Title',
       hero_image: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800',
       image_query: '',
-      hook: 'Introduce the mystery here in 1-2 Hinglish sentences...',
+      hook: 'Introduce the mystery here in 1-2 professional English sentences...',
       category: 'psychology',
       severity: 'unsettling',
       concepts: [],
@@ -1341,11 +1348,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   };
 
-  // Filtered stories in catalog
+  // Filtered stories in catalog (includes drafts and live)
   const filteredStories = useMemo(() => {
-    // Only show non-draft (published) stories in the main catalog list
-    const published = adminStories.filter(s => !s.draft);
-    return published.filter(story => {
+    return adminStories.filter(story => {
       const matchesSearch = story.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             story.story_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             (story.hook && story.hook.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -1353,6 +1358,23 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       return matchesSearch && matchesCategory;
     });
   }, [adminStories, searchQuery, filterCategory]);
+
+  // Grouped filtered stories by category
+  const groupedStories = useMemo(() => {
+    const groups = {};
+    Object.keys(CATEGORY_LABELS).forEach(cat => {
+      groups[cat] = [];
+    });
+    filteredStories.forEach(story => {
+      const cat = story.category || 'other';
+      if (!groups[cat]) {
+        groups[cat] = [];
+      }
+      groups[cat].push(story);
+    });
+    // Return only groups that have stories
+    return Object.entries(groups).filter(([, list]) => list.length > 0);
+  }, [filteredStories]);
 
   const storiesAddedToday = useMemo(() => {
     const today = new Date().toISOString().split('T')[0];
@@ -1496,6 +1518,17 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
             Dossier Catalog ({adminStories.length})
           </button>
           <button
+            onClick={() => {
+              setActiveTab('recommendations');
+              loadRecommendations();
+            }}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'recommendations' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            Recommendations ({recommendations.filter(r => r.status === 'pending' || !r.status).length})
+          </button>
+          <button
             onClick={() => setActiveTab('generator')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'generator' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
@@ -1530,12 +1563,21 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           {/* Tab 1: Dossier Catalog */}
           {activeTab === 'catalog' && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3" style={{ borderColor: ru }}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3 text-left" style={{ borderColor: ru }}>
                 <div className="text-left">
                   <h2 className="font-serif italic text-2xl">Dossier Catalog</h2>
                   <p className="text-xs text-[#6A6560] mt-1">Manage and edit the story archive files</p>
                 </div>
-                <div>
+                <div className="flex gap-2 flex-wrap">
+                  {draftStories.length > 0 && (
+                    <button
+                      onClick={handlePublishAllDrafts}
+                      disabled={isPublishing}
+                      className="px-3.5 py-2 bg-emerald-800/80 hover:bg-emerald-700 disabled:opacity-50 text-white text-[10px] font-bold tracking-wider uppercase rounded-lg transition-all duration-200 active:scale-95 cursor-pointer font-bold"
+                    >
+                      Publish All Drafts ({draftStories.length})
+                    </button>
+                  )}
                   <button
                     onClick={handleCreateNewStory}
                     className="px-3.5 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer"
@@ -1703,7 +1745,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                               onChange={(e) => handleLayerChange(l.layer, 'content', e.target.value)}
                               rows={6}
                               className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-y"
-                              placeholder="Type story text details in Hinglish. Separate paragraphs with double newlines."
+                              placeholder="Type story text details in clean, professional English. Separate paragraphs with double newlines."
                             />
                           </div>
                           {l.layer < 7 && (
@@ -1741,82 +1783,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
               ) : (
                 // Dossier Catalog Search & List View
                 <div className="space-y-4">
-                  {/* Draft Dossiers Staging Area */}
-                  {draftStories.length > 0 && (
-                    <div 
-                      className="p-5 rounded-xl border flex flex-col gap-4 text-left mb-6"
-                      style={{ 
-                        backgroundColor: 'rgba(158, 123, 76, 0.03)', 
-                        borderColor: 'rgba(158, 123, 76, 0.25)', 
-                      }}
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3" style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}>
-                        <div>
-                          <h3 className="text-sm font-bold tracking-[0.12em] uppercase flex items-center gap-2" style={{ color: ac }}>
-                            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                            Draft Dossiers (Newly Generated by AI)
-                          </h3>
-                          <p className="text-[10px] text-[#8F8A82] mt-0.5">
-                            These stories are staging drafts. They are not visible to public users until published.
-                          </p>
-                        </div>
-                        <button
-                          onClick={handlePublishAllDrafts}
-                          disabled={isPublishing}
-                          className="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-600 disabled:opacity-50 text-white text-[9px] font-mono tracking-widest uppercase rounded-lg transition-all duration-200 active:scale-95 cursor-pointer font-bold"
-                        >
-                          Publish All Live
-                        </button>
-                      </div>
-
-                      <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
-                        {draftStories.map(story => (
-                          <div 
-                            key={story.story_id} 
-                            className="p-3.5 rounded-lg border flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-black/40"
-                            style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}
-                          >
-                            <div className="text-left min-w-0">
-                              <span className="font-serif italic text-[#EDE8DF] text-base block leading-snug">{story.title}</span>
-                              <div className="flex items-center gap-1.5 flex-wrap mt-1">
-                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
-                                  {CATEGORY_LABELS[story.category] || story.category}
-                                </span>
-                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-red-950/20 text-red-400 uppercase">
-                                  {story.severity}
-                                </span>
-                                <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-amber-950/20 text-amber-400 uppercase font-bold">
-                                  Draft
-                                </span>
-                              </div>
-                            </div>
-                            <div className="flex gap-2 flex-shrink-0">
-                              <button
-                                onClick={() => handlePublishStory(story.story_id)}
-                                disabled={isPublishing}
-                                className="text-[9px] font-mono font-bold tracking-wider px-3 py-1.5 bg-emerald-800/20 border border-emerald-800/40 text-emerald-400 rounded-lg hover:bg-emerald-800/30 cursor-pointer transition-colors active:scale-95 disabled:opacity-40"
-                              >
-                                Push to Live
-                              </button>
-                              <button
-                                onClick={() => startEditing(story)}
-                                className="text-[9px] font-mono px-3 py-1.5 border border-neutral-800 rounded-lg hover:bg-white/5 text-neutral-400 cursor-pointer transition-colors active:scale-95"
-                              >
-                                Edit
-                              </button>
-                              <button
-                                onClick={() => handleDeleteStory(story.story_id)}
-                                className="text-[9px] font-mono px-3 py-1.5 border border-red-950/30 text-red-500 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
                   {/* Search and Filters */}
                   <div className="flex flex-col sm:flex-row gap-3">
                     <input
@@ -1838,52 +1804,71 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                     </select>
                   </div>
 
-                  {/* Stories list */}
-                  <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
+                  {/* Grouped Catalog List */}
+                  <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1 text-left">
                     {adminStoriesLoading ? (
                       <div className="py-12 text-center text-neutral-500 italic text-sm animate-pulse">
                         Loading story archive...
                       </div>
-                    ) : filteredStories.map(story => (
-                      <div
-                        key={story.story_id}
-                        className="p-4 rounded-xl border transition-all hover:bg-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-                        style={{ borderColor: ru, backgroundColor: '#0D0B08' }}
-                      >
-                        <div className="text-left min-w-0">
-                          <span className="font-serif italic text-[#EDE8DF] text-lg block leading-snug">{story.title}</span>
-                          <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
-                            <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
-                              {CATEGORY_LABELS[story.category] || story.category}
-                            </span>
-                            <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-red-950/20 text-red-400 uppercase">
-                              {story.severity}
-                            </span>
-                            {story.added_date && (
-                              <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-amber-950/10 text-amber-500 uppercase">
-                                Published: {story.added_date}
-                              </span>
-                            )}
-                          </div>
-                          {story.hook && <p className="text-xs text-[#6A6560] mt-2 line-clamp-2 italic">"{story.hook}"</p>}
-                        </div>
-                        <div className="flex gap-2 flex-shrink-0">
-                          <button
-                            onClick={() => startEditing(story)}
-                            className="text-[10px] font-mono px-3 py-1.5 border border-neutral-800 rounded-lg hover:bg-white/5 text-neutral-400 cursor-pointer transition-colors active:scale-95"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDeleteStory(story.story_id)}
-                            className="text-[10px] font-mono px-3 py-1.5 border border-red-950/30 text-red-500 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
-                          >
-                            Delete
-                          </button>
+                    ) : groupedStories.map(([categoryKey, list]) => (
+                      <div key={categoryKey} className="space-y-3">
+                        <h3 className="font-serif italic text-base text-[#9E7B4C] border-b border-neutral-800/40 pb-1.5 mt-4 first:mt-0">
+                          {CATEGORY_LABELS[categoryKey] || categoryKey} ({list.length})
+                        </h3>
+                        <div className="grid grid-cols-1 gap-3">
+                          {list.map(story => (
+                            <div
+                              key={story.story_id}
+                              className="p-4 rounded-xl border transition-all hover:bg-white/2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#0D0B08]"
+                              style={{ borderColor: story.draft ? 'rgba(158, 123, 76, 0.25)' : ru }}
+                            >
+                              <div className="text-left min-w-0 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="font-serif italic text-[#EDE8DF] text-base leading-snug">{story.title}</span>
+                                  {story.draft ? (
+                                    <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
+                                      Draft
+                                    </span>
+                                  ) : (
+                                    <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">
+                                      Live
+                                    </span>
+                                  )}
+                                  <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
+                                    {story.severity}
+                                  </span>
+                                </div>
+                                {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
+                              </div>
+                              <div className="flex gap-2 flex-shrink-0">
+                                {story.draft && (
+                                  <button
+                                    onClick={() => handlePublishStory(story.story_id)}
+                                    disabled={isPublishing}
+                                    className="text-[9px] font-mono font-bold tracking-wider px-2.5 py-1.5 bg-emerald-800/20 border border-emerald-800/40 text-emerald-400 rounded-lg hover:bg-emerald-800/30 cursor-pointer transition-colors active:scale-95 disabled:opacity-40"
+                                  >
+                                    Push to Live
+                                  </button>
+                                )}
+                                <button
+                                  onClick={() => startEditing(story)}
+                                  className="text-[9px] font-mono px-2.5 py-1.5 border border-neutral-800 rounded-lg hover:bg-white/5 text-neutral-400 cursor-pointer transition-colors active:scale-95"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => handleDeleteStory(story.story_id)}
+                                  className="text-[9px] font-mono px-2.5 py-1.5 border border-red-950/30 text-red-500 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     ))}
-                    {filteredStories.length === 0 && (
+                    {groupedStories.length === 0 && (
                       <div className="py-12 text-center text-neutral-500 italic text-sm">
                         No stories match search criteria.
                       </div>
@@ -1894,16 +1879,193 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
             </div>
           )}
 
-          {/* Tab 2: AI Generator */}
+          {/* Tab 2: Recommendations Queue */}
+          {activeTab === 'recommendations' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b pb-4 text-left" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">Recommendations Queue</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Pending and approved topics submitted by readers or added by admins</p>
+                </div>
+                <button
+                  onClick={loadRecommendations}
+                  className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
+                  style={{ borderColor: ru }}
+                >
+                  ⟳ Reload
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Form Column */}
+                <div className="lg:col-span-1 space-y-4 text-left">
+                  <div className="p-5 bg-[#0D0B08] rounded-xl border space-y-4" style={{ borderColor: ru }}>
+                    <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#9E7B4C] font-bold">Add Custom Topic</h4>
+                    <form onSubmit={handleAddRecommendation} className="space-y-4">
+                      <div>
+                        <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
+                          Topic Name / Keyword
+                        </label>
+                        <input
+                          type="text"
+                          value={newRecTopic}
+                          onChange={(e) => setNewRecTopic(e.target.value)}
+                          placeholder="e.g. Project Sunshine, Sleep Paralysis..."
+                          className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none transition-colors"
+                          disabled={addingRec}
+                          required
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={addingRec || !newRecTopic.trim()}
+                        className="w-full py-2.5 bg-[#9E7B4C]/20 border border-[#9E7B4C]/40 text-[#9E7B4C] text-[10px] font-mono tracking-widest uppercase rounded hover:bg-[#9E7B4C]/30 active:scale-95 disabled:opacity-40 transition-all cursor-pointer font-bold"
+                      >
+                        {addingRec ? 'Adding...' : 'Add Topic to Queue'}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+
+                {/* List Column */}
+                <div className="lg:col-span-2 space-y-6 text-left">
+                  {recsLoading ? (
+                    <div className="text-center py-12 text-[#6A6560] font-mono text-xs animate-pulse">
+                      Loading recommendations queue...
+                    </div>
+                  ) : (
+                    <>
+                      {/* Pending Topics */}
+                      <div className="space-y-3">
+                        <h4 className="text-xs font-mono uppercase tracking-wider text-[#9E7B4C] font-bold">Pending Topics</h4>
+                        {recommendations.filter(r => r.status === 'pending' || !r.status).length === 0 ? (
+                          <div className="p-4 text-center bg-black/20 rounded-xl border border-neutral-800/40 text-neutral-500 text-xs italic">
+                            No pending topics.
+                          </div>
+                        ) : (
+                          <div className="border rounded-xl overflow-hidden bg-black/10" style={{ borderColor: ru }}>
+                            <table className="w-full text-left border-collapse text-xs">
+                              <thead>
+                                <tr className="border-b" style={{ borderColor: ru, backgroundColor: 'rgba(0,0,0,0.2)' }}>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Topic Name</th>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Date Added</th>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560] text-right">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {recommendations.filter(r => r.status === 'pending' || !r.status).map((rec) => (
+                                  <tr key={rec.id} className="border-b transition-colors hover:bg-white/2" style={{ borderColor: ru }}>
+                                    <td className="p-3 font-serif text-sm text-neutral-200 font-medium">{rec.topic}</td>
+                                    <td className="p-3 text-[#8F8A82] font-mono text-[10px]">{rec.date}</td>
+                                    <td className="p-3 text-right flex gap-2 justify-end">
+                                      <button
+                                        onClick={() => handleUseTopic(rec.topic)}
+                                        className="text-[10px] font-mono text-[#9E7B4C] hover:text-[#b08c5c] cursor-pointer px-2 py-1 hover:bg-[#9E7B4C]/10 rounded transition-colors"
+                                      >
+                                        Use Topic
+                                      </button>
+                                      <button
+                                        onClick={() => handleDeleteRecommendation(rec.id)}
+                                        className="text-[10px] font-mono text-red-500 hover:text-red-400 cursor-pointer px-2 py-1 hover:bg-red-500/10 rounded transition-colors"
+                                      >
+                                        Delete
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Generated Topics */}
+                      <div className="space-y-3 pt-4">
+                        <h4 className="text-xs font-mono uppercase tracking-wider text-[#6A6560] font-bold">Generated Topics</h4>
+                        {recommendations.filter(r => r.status === 'generated').length === 0 ? (
+                          <div className="p-4 text-center bg-black/20 rounded-xl border border-neutral-800/40 text-neutral-600 text-xs italic">
+                            No generated topics yet.
+                          </div>
+                        ) : (
+                          <div className="border rounded-xl overflow-hidden bg-black/10" style={{ borderColor: ru }}>
+                            <table className="w-full text-left border-collapse text-xs">
+                              <thead>
+                                <tr className="border-b" style={{ borderColor: ru, backgroundColor: 'rgba(0,0,0,0.2)' }}>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Topic Name</th>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Date Added</th>
+                                  <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560] text-right">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {recommendations.filter(r => r.status === 'generated').map((rec) => (
+                                  <tr key={rec.id} className="border-b transition-colors hover:bg-white/2" style={{ borderColor: ru }}>
+                                    <td className="p-3 font-serif text-sm text-neutral-400 line-through decoration-neutral-700">{rec.topic}</td>
+                                    <td className="p-3 text-[#6A6560] font-mono text-[10px]">{rec.date}</td>
+                                    <td className="p-3 text-right">
+                                      <button
+                                        onClick={() => handleDeleteRecommendation(rec.id)}
+                                        className="text-[10px] font-mono text-red-500 hover:text-red-400 cursor-pointer px-2 py-1 hover:bg-red-500/10 rounded transition-colors"
+                                      >
+                                        Remove
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: AI Generator */}
           {activeTab === 'generator' && (
-            <div className="space-y-8">
+            <div className="space-y-6">
+              
+              {/* Header & Stats bar */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b gap-4 text-left" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">AI Generator</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Compile new stories or manage background runner settings</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleTriggerAutomation}
+                    disabled={isGenerating || autoStatus.isRunning || (isLocal ? serverOffline : true)}
+                    className="px-3.5 py-2 bg-emerald-800/80 hover:bg-emerald-700 disabled:opacity-50 text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer font-bold"
+                  >
+                    Force Background Run
+                  </button>
+                </div>
+              </div>
+
+              {/* Stats & Last run */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Stories Created Today</span>
+                  <span className="font-serif italic text-2xl text-[#9E7B4C]">{storiesAddedToday.length}</span>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Last Run Done</span>
+                  <span className="text-xs font-mono font-bold block mt-1.5 text-neutral-200">
+                    {autoStatus.lastRunAt ? new Date(autoStatus.lastRunAt).toLocaleString('en-US', {
+                      year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }) : 'Never'}
+                  </span>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
                 {/* Column 1: Manual Generator */}
                 <div className="space-y-6 text-left">
-                  <div className="border-b pb-4" style={{ borderColor: ru }}>
-                    <h3 className="font-serif italic text-xl">Manual Generator</h3>
-                    <p className="text-xs text-[#6A6560] mt-1">Directly generate a new 7-layer story using Gemini</p>
+                  <div className="border-b pb-2" style={{ borderColor: ru }}>
+                    <h3 className="font-serif italic text-lg text-neutral-300">Manual Topic Compiler</h3>
                   </div>
 
                   <div className="space-y-4 p-5 bg-[#0D0B08] rounded-xl border" style={{ borderColor: ru }}>
@@ -1959,7 +2121,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                       <button
                         onClick={handleGenerateStory}
                         disabled={isGenerating || autoStatus.isRunning || !genTopic}
-                        className="w-full py-2.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-widest uppercase rounded hover:bg-[#b08c5c] active:scale-95 disabled:opacity-40 transition-all cursor-pointer"
+                        className="w-full py-2.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-widest uppercase rounded hover:bg-[#b08c5c] active:scale-95 disabled:opacity-40 transition-all cursor-pointer font-bold"
                       >
                         {isGenerating ? 'Compiling Story...' : 'Compile Story with Gemini'}
                       </button>
@@ -2003,14 +2165,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
                 {/* Column 2: Auto-Generator Control */}
                 <div className="space-y-6 text-left">
-                  <div className="border-b pb-4" style={{ borderColor: ru }}>
-                    <h3 className="font-serif italic text-xl">Auto-Generator Control</h3>
-                    <p className="text-xs text-[#6A6560] mt-1">Supervise background content balancing engine</p>
+                  <div className="border-b pb-2" style={{ borderColor: ru }}>
+                    <h3 className="font-serif italic text-lg text-neutral-300">Auto-Generator Settings</h3>
                   </div>
 
                   <div className="space-y-4 p-5 bg-[#0D0B08] rounded-xl border" style={{ borderColor: ru }}>
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-neutral-400">Background Runner</span>
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-neutral-400">Background Engine Status</span>
                       <div className="flex items-center gap-4">
                         <label className="inline-flex items-center cursor-pointer select-none">
                           <div className="relative">
@@ -2024,26 +2185,18 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                             <div className="w-8 h-4.5 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#EDE8DF] after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#9E7B4C] peer-disabled:opacity-40" />
                           </div>
                         </label>
-                        <button
-                          onClick={handleTriggerAutomation}
-                          disabled={isGenerating || autoStatus.isRunning || (isLocal ? serverOffline : true)}
-                          className="px-3 py-1.5 bg-neutral-900 border rounded text-[9px] font-mono font-bold tracking-wider hover:bg-white/5 disabled:opacity-40 transition-all uppercase cursor-pointer"
-                          style={{ borderColor: ru }}
-                        >
-                          Force Run
-                        </button>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 mt-4">
                       <div className="p-3 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
-                        <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Runner Status</span>
+                        <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Runner State</span>
                         <span className="text-xs font-mono font-bold" style={{ color: autoStatus.isRunning ? '#F59E0B' : autoStatus.enabled ? '#10B981' : '#6A6560' }}>
                           {autoStatus.isRunning ? '⚡ RUNNING' : autoStatus.enabled ? '● ACTIVE' : '◌ DISABLED'}
                         </span>
                       </div>
                       <div className="p-3 rounded-xl border bg-black/30 text-left" style={{ borderColor: ru }}>
-                        <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Periodicity</span>
+                        <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Auto Interval</span>
                         <span className="text-xs font-mono font-bold text-[#EDE8DF]">Every 3 Hours</span>
                       </div>
                     </div>
@@ -2085,120 +2238,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
                 </div>
               </div>
-
-              {/* Row 2: Reader Recommendations Queue */}
-              <div className="border-t pt-8 text-left mt-8" style={{ borderColor: ru }}>
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-6" style={{ borderColor: ru }}>
-                  <div>
-                    <h3 className="font-serif italic text-xl">Reader Recommendations Queue</h3>
-                    <p className="text-xs text-[#6A6560] mt-1">Pending and approved topics submitted by readers or added by admins</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={loadRecommendations}
-                      className="px-3 py-1.5 border rounded text-[10px] font-mono hover:bg-white/5 cursor-pointer transition-all uppercase font-bold"
-                      style={{ borderColor: ru, color: '#EDE8DF' }}
-                    >
-                      ⟳ Reload
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  {/* Form Column */}
-                  <div className="lg:col-span-1 space-y-4">
-                    <div className="p-5 bg-[#0D0B08] rounded-xl border space-y-4" style={{ borderColor: ru }}>
-                      <h4 className="text-[10px] font-mono uppercase tracking-wider text-[#9E7B4C] font-bold">Add Custom Topic</h4>
-                      <form onSubmit={handleAddRecommendation} className="space-y-4">
-                        <div>
-                          <label className="text-[9px] font-mono uppercase tracking-wider text-[#6A6560] block mb-1">
-                            Topic Name / Keyword
-                          </label>
-                          <input
-                            type="text"
-                            value={newRecTopic}
-                            onChange={(e) => setNewRecTopic(e.target.value)}
-                            placeholder="e.g. Project Sunshine, Sleep Paralysis..."
-                            className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none transition-colors"
-                            disabled={addingRec}
-                            required
-                          />
-                        </div>
-                        <button
-                          type="submit"
-                          disabled={addingRec || !newRecTopic.trim()}
-                          className="w-full py-2.5 bg-[#9E7B4C]/20 border border-[#9E7B4C]/40 text-[#9E7B4C] text-[10px] font-mono tracking-widest uppercase rounded hover:bg-[#9E7B4C]/30 active:scale-95 disabled:opacity-40 transition-all cursor-pointer font-bold"
-                        >
-                          {addingRec ? 'Adding...' : 'Add Topic to Queue'}
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-
-                  {/* List/Table Column */}
-                  <div className="lg:col-span-2">
-                    {recsLoading ? (
-                      <div className="text-center py-12 text-[#6A6560] font-mono text-xs animate-pulse">
-                        Loading recommendations queue...
-                      </div>
-                    ) : recommendations.length === 0 ? (
-                      <div className="py-12 text-center bg-black/20 rounded-2xl border border-dashed border-neutral-800">
-                        <p className="font-serif italic text-base text-[#6A6560] mb-2">Queue is empty.</p>
-                        <p className="text-[10px] uppercase tracking-wider text-[#6A6560]/40">Admin or visitor recommended topics will appear here.</p>
-                      </div>
-                    ) : (
-                      <div className="border rounded-xl overflow-hidden bg-black/10" style={{ borderColor: ru }}>
-                        <div className="max-h-[350px] overflow-y-auto pr-1">
-                          <table className="w-full text-left border-collapse text-xs">
-                            <thead>
-                              <tr className="border-b" style={{ borderColor: ru, backgroundColor: 'rgba(0,0,0,0.2)' }}>
-                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Topic Name</th>
-                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Date Added</th>
-                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560]">Status</th>
-                                <th className="p-3 font-mono text-[9px] uppercase tracking-wider text-[#6A6560] text-right">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {recommendations.map((rec) => (
-                                <tr key={rec.id} className="border-b transition-colors hover:bg-white/2" style={{ borderColor: ru }}>
-                                  <td className="p-3 font-serif text-sm text-neutral-200 font-medium">{rec.topic}</td>
-                                  <td className="p-3 text-[#8F8A82] font-mono text-[10px]">{rec.date}</td>
-                                  <td className="p-3">
-                                    <span 
-                                      className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
-                                        rec.status === 'pending' 
-                                          ? 'text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25' 
-                                          : 'text-[#6A6560] bg-neutral-800/20'
-                                      }`}
-                                    >
-                                      {rec.status || 'pending'}
-                                    </span>
-                                  </td>
-                                  <td className="p-3 text-right">
-                                    <button
-                                      onClick={() => handleDeleteRecommendation(rec.id)}
-                                      className="text-[10px] font-mono text-red-500 hover:text-red-400 cursor-pointer px-2 py-1 hover:bg-red-500/10 rounded transition-colors"
-                                    >
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
           )}
 
-          {/* Tab 3: User Feedback */}
+          {/* Tab 4: User Feedback */}
           {activeTab === 'feedback' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: ru }}>
+              <div className="flex items-center justify-between border-b pb-4 text-left" style={{ borderColor: ru }}>
                 <div className="text-left">
                   <h2 className="font-serif italic text-2xl">
                     Reader Feedback
@@ -2247,10 +2293,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                   <button
                     key={mode}
                     onClick={() => setFeedbackFilter(mode)}
-                    className={`px-3 py-1.5 text-[10px] font-mono rounded cursor-pointer transition-all uppercase font-bold border ${
+                    className={`px-3 py-1.5 text-[10px] font-mono rounded cursor-pointer transition-all uppercase font-bold border border-neutral-800 ${
                       feedbackFilter === mode 
                         ? 'bg-[#9E7B4C]/10 border-[#9E7B4C] text-[#9E7B4C]' 
-                        : 'border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                        : 'text-neutral-400 hover:text-neutral-200'
                     }`}
                   >
                     {mode === 'pending' ? 'Pending' : mode === 'resolved' ? 'Resolved' : 'All'}
@@ -2355,7 +2401,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
             </div>
           )}
 
-          {/* Tab 4: GitHub Sync Settings & Publishers */}
+          {/* Tab 5: Settings & Sync */}
           {activeTab === 'github-sync' && (
             <div className="space-y-6">
               <div className="border-b pb-4 text-left" style={{ borderColor: ru }}>
@@ -2441,7 +2487,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                   />
                 </div>
 
-                <div className="pt-2 flex flex-col gap-3">
+                <div className="pt-2 flex flex-col gap-3 text-left">
                   <button
                     onClick={async () => {
                       const token = ghToken ? ghToken.trim() : '';
@@ -2499,7 +2545,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
                       }
                     }}
                     disabled={isPublishing}
-                    className="px-4 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer"
+                    className="px-4 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer w-full text-center"
                   >
                     {isPublishing ? publishStatus || 'Validating...' : 'Verify & Save Credentials'}
                   </button>

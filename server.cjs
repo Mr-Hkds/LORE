@@ -254,7 +254,7 @@ async function runAutomation(isManual = false) {
 
     addAutomationLog('Asking Gemini for an unexplored real-world topic...');
 
-    const prompt = `Write a complete, highly-detailed 7-layer documentary story in Hinglish about a famous, documented, real-world case or event.
+    const prompt = `Write a complete, highly-detailed 7-layer documentary story in simple, professional English about a famous, documented, real-world case or event.
     
     Target Category: "${targetCategory}" (If writing about a user-recommended topic, you can classify it into whichever category fits best).
     
@@ -268,17 +268,18 @@ async function runAutomation(isManual = false) {
 
     CRITICAL FACTUAL AND PACING RULES:
     1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
-    2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in high-quality, engaging Hinglish (Hindi written in English alphabet, mixed with English words as spoken by mystery/true-crime podcasters).
-    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth. Layer 1 must start with a unique, gripping, and topic-specific hook to instantly capture the reader's attention (avoid generic openings like 'kya aapne kabhi socha hai' or 'chalo aaj le chalte hain').
-    4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
-    5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
+    2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in clean, professional, and clear English. The tone should be similar to an educational video essay or a premium documentary narrator. Keep the vocabulary accessible but serious. Do NOT use cheap sensationalism, clickbait phrasing, or slang. Avoid any Hinglish or Hindi words.
+    3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth.
+    4. Layer 1 MUST start with a unique, gripping, topic-specific factual hook to capture the reader's attention. Rhetorical questions or generic conversational openings are ABSOLUTELY FORBIDDEN. Specifically, do NOT use: "Did you know?", "Have you ever wondered?", "What if...", "Kya aapne kabhi socha hai?", "Chalo aaj le chalte hain", "Let us explore", "Imagine a world where", or similar cliches. Go straight into a concrete, chilling, or fascinating historical fact or observation (e.g. "On July 1, 2018, eleven bodies hung in perfect circular alignment...").
+    5. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
+    6. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
     
     Structure the story exactly in the following JSON format:
     {
       "story_id": "lowercase_slug_with_underscores",
       "title": "Compelling Title",
       "category": "category_name",
-      "hook": "Teaser description of this case (max 150 chars) in Hinglish.",
+      "hook": "Teaser description of this case (max 150 chars) in clean, professional English.",
       "concepts": ["concept1", "concept2", "concept3"],
       "severity": "unsettling | disturbing | extreme (choose based on topic intensity)",
       "image_query": "The exact Wikipedia article title representing this topic for thumbnail fetching (e.g. Mary Celeste)",
@@ -383,24 +384,24 @@ async function runAutomation(isManual = false) {
     storyObj.draft = true;
     db.insertStory(storyObj);
 
-    // 7. Auto-delete the chosen recommendation from the queue
+    // 7. Auto-mark the chosen recommendation as generated
     if (storyObj.chosen_recommendation_id) {
       try {
-        db.deleteRecommendation(storyObj.chosen_recommendation_id);
-        addAutomationLog(`[RECOMMENDATION] Auto-deleted generated topic from queue (ID: ${storyObj.chosen_recommendation_id})`);
+        db.updateRecommendationStatus(storyObj.chosen_recommendation_id, 'generated');
+        addAutomationLog(`[RECOMMENDATION] Marked topic as generated in queue (ID: ${storyObj.chosen_recommendation_id})`);
       } catch (err) {
-        console.error('[Automation] Failed to clean recommendation from queue:', err.message);
+        console.error('[Automation] Failed to update recommendation status:', err.message);
       }
     } else {
-      // Fallback: search and clean matching topics by title/similarity just in case
+      // Fallback: search and update matching topics by title/similarity just in case
       try {
         const freshRecs = db.getRecommendations();
         const storyTitle = storyObj.title.trim().toLowerCase();
         for (const r of freshRecs) {
           const recTopic = r.topic.trim().toLowerCase();
           if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
-            db.deleteRecommendation(r.id);
-            addAutomationLog(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${storyObj.title}")`);
+            db.updateRecommendationStatus(r.id, 'generated');
+            addAutomationLog(`[RECOMMENDATION] Marked matched topic as generated in queue (title: "${storyObj.title}")`);
           }
         }
       } catch (err) {
@@ -882,19 +883,19 @@ const server = http.createServer(async (req, res) => {
         db.exportStoriesToJSON();
       }
 
-      // Check if this matches a recommended topic and delete it from the queue
+      // Check if this matches a recommended topic and mark as generated in the queue
       try {
         const recs = db.getRecommendations();
         const storyTitle = newStory.title.trim().toLowerCase();
         for (const r of recs) {
           const recTopic = r.topic.trim().toLowerCase();
           if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
-            db.deleteRecommendation(r.id);
-            console.log(`[RECOMMENDATION] Auto-deleted matched topic from queue (title: "${newStory.title}")`);
+            db.updateRecommendationStatus(r.id, 'generated');
+            console.log(`[RECOMMENDATION] Marked matched topic as generated in queue (title: "${newStory.title}")`);
           }
         }
       } catch (err) {
-        console.error('[RECOMMENDATION] Failed to check and delete from queue:', err.message);
+        console.error('[RECOMMENDATION] Failed to check and update status in queue:', err.message);
       }
 
       res.writeHead(200, { 'Content-Type': 'application/json' });

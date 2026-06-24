@@ -559,11 +559,16 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
     try {
       const storiesSummary = storiesData.stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
       
-      const prompt = `Write a complete, highly-detailed 7-layer documentary story about the topic: "${item.topic}".
+      const prompt = `Write a complete, highly-detailed 7-layer documentary story in clean, simple, and professional English about the famous, documented, real-world case or event: "${item.topic}".
 Suggested Category: ${item.category} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
 Severity Level: unsettling, disturbing, or chilling
 
-CRITICAL LANGUAGE RULE: Write all story content (including title, hook, layer names, layer content, cliffhangers, and transition lines) in high-quality, engaging Hinglish (Hindi written in the English/Latin alphabet, naturally blended with English words as spoken by urban Indians). For example, write "Living room mein family ke 11 members hanging position mein mile" instead of "Eleven family members were found hanging in the living room." The tone should be extremely dark, conversational, and dramatic, like a local podcast host or YouTube narrator telling a mystery story in Hinglish. Keep it facts-based and true; do NOT fabricate.
+CRITICAL FACTUAL AND PACING RULES:
+1. Only real, historically documented cases. Absolutely no creepypastas or internet rumors.
+2. Write the title, hook, layer names, layer content, cliffhangers, and transition lines in clean, professional, and clear English. The tone should be similar to an educational video essay or a premium documentary narrator. Keep the vocabulary accessible but serious. Do NOT use cheap sensationalism, clickbait phrasing, or slang. Avoid any Hinglish or Hindi words.
+3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth. Layer 1 must start with a unique, gripping, and topic-specific hook to grab attention (avoid generic openings like 'Did you know' or 'Have you ever thought about' or any other generic question. Go straight into a chilling, specific fact).
+4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
+5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
 
 CRITICAL JSON FORMATTING RULES:
 1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
@@ -684,10 +689,10 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         });
       }
 
-      // Delete recommendation from local list
+      // Mark recommendation as generated in list
       if (item.recId) {
-        recommendations = recommendations.filter(r => r.id !== item.recId);
-        console.log(`Auto-deleted recommendation ID: ${item.recId} from list.`);
+        recommendations = recommendations.map(r => r.id === item.recId ? { ...r, status: 'generated' } : r);
+        console.log(`Marked recommendation ID: ${item.recId} as generated.`);
       }
     } catch (e) {
       console.error(`FAILED to generate story for: "${item.topic}". Error:`, e.message);
