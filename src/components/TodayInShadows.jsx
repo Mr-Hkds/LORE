@@ -183,6 +183,18 @@ export default function TodayInShadows() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [modalOpen]);
+
 
 
   const handleReact = async (type) => {
@@ -283,9 +295,9 @@ export default function TodayInShadows() {
                 />
 
                 {/* Brand Watermark / Stamp */}
-                <div className="absolute top-2 left-2 z-35 flex items-center gap-1.5 pointer-events-none select-none bg-[#0D0B08]/90 backdrop-blur-sm border border-neutral-900 px-1.5 py-0.5 rounded-xs shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
-                  <span className="w-1 h-1 rounded-full bg-red-600 animate-pulse flex-shrink-0" />
-                  <span className="text-[6px] font-mono tracking-[0.2em] text-[#EDE8DF]/90 uppercase font-bold">LORE // DECRYPTED</span>
+                <div className="absolute top-2 left-2 z-20 flex items-center gap-1 opacity-35 pointer-events-none select-none">
+                  <LoreMark size={8} color="#EDE8DF" />
+                  <span className="text-[6.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold">LORE</span>
                 </div>
 
                 {/* Crisp foreground contained image */}
@@ -338,16 +350,16 @@ export default function TodayInShadows() {
                   <button
                     key={r.id}
                     onClick={() => handleReact(r.id)}
-                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-[11px]"
+                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-[9px] font-mono uppercase tracking-wider"
                     style={{
                       backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
                       borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
                       color: isSelected ? '#EDE8DF' : '#8F8A82'
                     }}
-                    title={r.label}
                   >
                     <r.Icon className={`w-3.5 h-3.5 ${isSelected ? r.colorClass : 'opacity-70'}`} />
-                    <span className="text-[10px] font-mono opacity-70">({count})</span>
+                    <span className="opacity-95">{r.label}</span>
+                    <span className="opacity-70 text-[9.5px]">({count})</span>
                   </button>
                 );
               })}
@@ -359,7 +371,7 @@ export default function TodayInShadows() {
       {/* Deep-Dive Decryption Overlay Modal */}
       {modalOpen && (
         <div
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-md flex items-start justify-center p-4 overflow-y-auto"
           onClick={() => setModalOpen(false)}
         >
           <div
@@ -396,7 +408,7 @@ export default function TodayInShadows() {
             </div>
 
             {/* Content Body */}
-            <div className="space-y-6 relative z-10 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="space-y-6 relative z-10 pr-2">
               
               {/* Intel Briefing */}
               <div className="space-y-2">

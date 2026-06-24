@@ -96,9 +96,9 @@ function StoryCardImage({ story, alt }) {
       />
 
       {/* Brand Watermark / Stamp */}
-      <div className="absolute top-3 left-3 z-35 flex items-center gap-2 pointer-events-none select-none bg-[#0D0B08]/85 backdrop-blur-md border border-neutral-800/80 px-2 py-0.5 rounded shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse flex-shrink-0" />
-        <span className="text-[7.5px] font-mono tracking-[0.24em] text-[#EDE8DF]/95 uppercase font-bold">LORE ARCHIVE // SECURED</span>
+      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
+        <LoreMark size={10} color="#EDE8DF" />
+        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
       </div>
 
       {/* Crisp foreground contained image */}
@@ -352,7 +352,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                   <article
                     key={story.story_id}
                     onClick={() => onSelectStory(story)}
-                    className="group relative w-full flex flex-col md:flex-row gap-0 rounded-2xl overflow-hidden border cursor-pointer"
+                    className="group relative w-full grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
                     style={{
                       backgroundColor: 'rgba(15, 13, 10, 0.7)',
                       borderColor: 'rgba(237,232,223,0.055)',
@@ -371,14 +371,14 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                     }}
                   >
                     {/* Image panel */}
-                    <div className="w-full h-48 md:w-[200px] md:h-full flex-shrink-0 relative overflow-hidden">
+                    <div className="w-full h-48 md:h-full flex-shrink-0 relative overflow-hidden">
                       <StoryCardImage story={story} alt={story.title} />
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 story-card-overlay" />
                     </div>
 
                     {/* Content panel */}
-                    <div className="flex-1 flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
+                    <div className="w-full flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
                       <div>
                         {/* Top row: Badges & Reacts */}
                         <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2 border-b border-neutral-900/60 pb-2.5">
