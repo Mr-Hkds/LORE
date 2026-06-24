@@ -106,7 +106,7 @@ function StoryCardImage({ story, alt }) {
         src={displayUrl}
         alt={alt}
         onError={handleImageError}
-        className="relative z-10 max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-[1.02] shadow-[0_0_24px_rgba(0,0,0,0.6)]"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
         loading="lazy"
       />
     </div>
@@ -371,7 +371,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                     }}
                   >
                     {/* Image panel */}
-                    <div className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-auto md:w-[200px] md:h-auto flex-shrink-0 relative overflow-hidden">
+                    <div className="w-full h-48 md:w-[200px] md:h-full flex-shrink-0 relative overflow-hidden">
                       <StoryCardImage story={story} alt={story.title} />
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 story-card-overlay" />

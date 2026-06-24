@@ -293,7 +293,7 @@ export default function TodayInShadows() {
                   src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
                   alt={dossier.title}
                   onError={() => setImgFailed(true)}
-                  className="relative z-10 max-w-full max-h-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02] shadow-[0_0_16px_rgba(0,0,0,0.6)]"
+                  className="relative z-10 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02] shadow-[0_0_16px_rgba(0,0,0,0.6)]"
                   loading="lazy"
                 />
               </div>

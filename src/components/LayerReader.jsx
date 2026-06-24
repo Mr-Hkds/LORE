@@ -182,20 +182,23 @@ export default function LayerReader({
             <div className="max-w-2xl mx-auto w-full">
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
-                <div className="mb-8 w-full rounded-xl overflow-hidden border flex items-center justify-center min-h-[150px] md:min-h-[200px]" style={{ borderColor: cardBorder }}>
+                <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex items-center justify-center relative bg-black/30" style={{ borderColor: cardBorder }}>
                   {imgFailed ? (
-                    <div className="w-full py-12 md:py-16 flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                       <LoreMark size={24} color="currentColor" />
                       <span className="text-[9px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
                     </div>
                   ) : (
-                    <img
-                      src={data.imageUrl}
-                      alt={topic.label}
-                      onError={() => setImgFailed(true)}
-                      className="w-full h-auto object-contain max-h-[240px] md:max-h-[400px]"
-                      loading="lazy"
-                    />
+                    <>
+                      <img
+                        src={data.imageUrl}
+                        alt={topic.label}
+                        onError={() => setImgFailed(true)}
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.01]"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+                    </>
                   )}
                 </div>
               )}
