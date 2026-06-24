@@ -10,8 +10,8 @@
   ],
   "unexplained_deaths": [
     "the_dyatlov_pass_incident",
-    "barney_barnato",
-    "uwe_barschel"
+    "uwe_barschel",
+    "barney_barnato"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -19,12 +19,6 @@
   "government_secrecy": [
     "the_dyatlov_pass_incident",
     "uwe_barschel"
-  ],
-  "financial_conspiracy": [
-    "barney_barnato"
-  ],
-  "lost_wealth": [
-    "barney_barnato"
   ],
   "espionage": [
     "uwe_barschel"
@@ -38,9 +32,35 @@
   "social_pressure": [
     "the_asch_conformity_experiments"
   ],
-  "cryptography": [
-    "cicada_3301",
+  "serial_killer": [
     "the_zodiac_killer"
+  ],
+  "unsolved_mystery": [
+    "the_zodiac_killer",
+    "malaysia_airlines_mh370",
+    "hinterkaifeck_murders"
+  ],
+  "cryptography": [
+    "the_zodiac_killer",
+    "cicada_3301"
+  ],
+  "media_obsession": [
+    "the_zodiac_killer"
+  ],
+  "false_flag": [
+    "operation_northwoods_001"
+  ],
+  "government_conspiracy": [
+    "operation_northwoods_001"
+  ],
+  "national_security": [
+    "operation_northwoods_001"
+  ],
+  "unethical_warfare": [
+    "operation_northwoods_001"
+  ],
+  "covert_operations": [
+    "operation_northwoods_001"
   ],
   "steganography": [
     "cicada_3301"
@@ -68,38 +88,6 @@
   ],
   "preserver_destroyer_paradox": [
     "hidden_facts_shri_vishnu_ji"
-  ],
-  "cosmic_destruction": [
-    "mahadev_ki_kahani_001"
-  ],
-  "divine_paradox": [
-    "mahadev_ki_kahani_001"
-  ],
-  "existential_nihilism": [
-    "mahadev_ki_kahani_001"
-  ],
-  "unconventional_deity": [
-    "mahadev_ki_kahani_001"
-  ],
-  "unsolved_mystery": [
-    "hinterkaifeck_murders",
-    "malaysia_airlines_mh370",
-    "the_zodiac_killer"
-  ],
-  "brutal_murders": [
-    "hinterkaifeck_murders"
-  ],
-  "isolated_crime": [
-    "hinterkaifeck_murders"
-  ],
-  "strange_events": [
-    "hinterkaifeck_murders"
-  ],
-  "family_tragedy": [
-    "hinterkaifeck_murders"
-  ],
-  "cold_case": [
-    "hinterkaifeck_murders"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -131,25 +119,25 @@
   "dehumanization": [
     "stanford_prison_experiment_001"
   ],
-  "serial_killer": [
-    "the_zodiac_killer"
+  "financial_conspiracy": [
+    "barney_barnato"
   ],
-  "media_obsession": [
-    "the_zodiac_killer"
+  "lost_wealth": [
+    "barney_barnato"
   ],
-  "false_flag": [
-    "operation_northwoods_001"
+  "brutal_murders": [
+    "hinterkaifeck_murders"
   ],
-  "government_conspiracy": [
-    "operation_northwoods_001"
+  "isolated_crime": [
+    "hinterkaifeck_murders"
   ],
-  "national_security": [
-    "operation_northwoods_001"
+  "strange_events": [
+    "hinterkaifeck_murders"
   ],
-  "unethical_warfare": [
-    "operation_northwoods_001"
+  "family_tragedy": [
+    "hinterkaifeck_murders"
   ],
-  "covert_operations": [
-    "operation_northwoods_001"
+  "cold_case": [
+    "hinterkaifeck_murders"
   ]
 }
