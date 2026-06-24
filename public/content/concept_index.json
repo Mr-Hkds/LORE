@@ -19,7 +19,8 @@
   "government_secrecy": [
     "the_dyatlov_pass_incident",
     "uwe_barschel",
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "unit_731_experiments"
   ],
   "espionage": [
     "uwe_barschel"
@@ -179,5 +180,17 @@
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program"
+  ],
+  "biological_warfare": [
+    "unit_731_experiments"
+  ],
+  "human_experimentation": [
+    "unit_731_experiments"
+  ],
+  "war_crimes": [
+    "unit_731_experiments"
+  ],
+  "impunity": [
+    "unit_731_experiments"
   ]
 }
