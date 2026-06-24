@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-
+import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -115,6 +115,8 @@ export default function TodayInShadows() {
   const [imgFailed, setImgFailed] = useState(false);
   const [wikiImgUrl, setWikiImgUrl] = useState(null);
   const overlayRef = useRef(null);
+  const [reactions, setReactions] = useState({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+  const [userReaction, setUserReaction] = useState(null);
 
 
 
@@ -159,11 +161,14 @@ export default function TodayInShadows() {
     return () => { active = false; };
   }, [dayOfWeek, activeTheme.name]);
 
-  // Reset image errors when dossier is loaded
+  // Reset image errors and load reaction values when dossier is loaded
   useEffect(() => {
     if (dossier) {
       setImgFailed(false);
       setWikiImgUrl(null);
+      const storedReaction = localStorage.getItem(`lore:dossier:reaction:${dossier.date}`);
+      setUserReaction(storedReaction);
+      setReactions(dossier.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
     }
   }, [dossier]);
 
@@ -196,6 +201,58 @@ export default function TodayInShadows() {
       document.body.style.overflow = '';
     };
   }, [modalOpen]);
+
+  const handleReact = async (type) => {
+    if (!dossier) return;
+    
+    const wasSelected = userReaction === type;
+    const oldReaction = userReaction;
+    const newReaction = wasSelected ? null : type;
+    
+    setUserReaction(newReaction);
+    setReactions(prev => {
+      const next = { ...prev };
+      if (wasSelected) {
+        next[type] = Math.max(0, (next[type] || 1) - 1);
+      } else {
+        next[type] = (next[type] || 0) + 1;
+        if (oldReaction && oldReaction !== type) {
+          next[oldReaction] = Math.max(0, (next[oldReaction] || 1) - 1);
+        }
+      }
+      return next;
+    });
+
+    if (wasSelected) {
+      localStorage.removeItem(`lore:dossier:reaction:${dossier.date}`);
+    } else {
+      localStorage.setItem(`lore:dossier:reaction:${dossier.date}`, type);
+    }
+
+    try {
+      if (oldReaction && oldReaction !== type) {
+        await fetch('/api/daily-dossier', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reaction_type: oldReaction, undo: true })
+        });
+      }
+
+      const res = await fetch('/api/daily-dossier', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reaction_type: type, undo: wasSelected })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reactions) {
+          setReactions(data.reactions);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to save daily dossier reaction:', err.message);
+    }
+  };
 
   if (loading) {
     return (
@@ -277,23 +334,51 @@ export default function TodayInShadows() {
           <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.95 }}>
             {dossier.text}
           </p>
-          <div className="mt-4 pt-4 border-t border-neutral-900/40 text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4 pt-4 border-t border-neutral-900/40">
             <button
               onClick={() => setModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none"
+              className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none flex-shrink-0"
             >
               Read Entry <span className="text-xs">→</span>
             </button>
+
+            <div className="flex gap-2 items-center flex-wrap">
+              {[
+                { id: 'intriguing', Icon: Fingerprint, label: 'Intriguing', colorClass: 'text-amber-400' },
+                { id: 'gripping', Icon: Eye, label: 'Gripping', colorClass: 'text-violet-400' },
+                { id: 'chilling', Icon: Skull, label: 'Chilling', colorClass: 'text-red-400' },
+                { id: 'mind_blowing', Icon: HelpCircle, label: 'Mind Blowing', colorClass: 'text-cyan-400' }
+              ].map((r) => {
+                const isSelected = userReaction === r.id;
+                const count = reactions[r.id] || 0;
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => handleReact(r.id)}
+                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-[9px] font-mono uppercase tracking-wider"
+                    style={{
+                      backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
+                      borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
+                      color: isSelected ? '#EDE8DF' : '#8F8A82'
+                    }}
+                  >
+                    <r.Icon className={`w-3.5 h-3.5 ${isSelected ? r.colorClass : 'opacity-70'}`} />
+                    <span className="opacity-95">{r.label}</span>
+                    <span className="opacity-70 text-[9.5px]">({count})</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>      {modalOpen && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto p-4 md:p-6"
+          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[620px] mx-auto my-8 bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl"
+            className="relative w-full max-w-[620px] max-h-[85vh] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
             style={{
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
@@ -326,7 +411,7 @@ export default function TodayInShadows() {
             </div>
 
             {/* Content Body */}
-            <div className="space-y-6 relative z-10 my-5 pb-6">
+            <div className="space-y-6 relative z-10 pr-2 overflow-y-auto flex-1 my-5 custom-scrollbar pb-16">
               
               {/* Intel Briefing */}
               <div className="space-y-2">
@@ -361,7 +446,39 @@ export default function TodayInShadows() {
                   </div>
                 </div>
               )}
-
+              {/* Simple Reaction Toolbar */}
+              <div className="space-y-3 pt-2">
+                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
+                  Reader Sentiment
+                </h5>
+                <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
+                  {[
+                    { id: 'intriguing', label: 'Intriguing', Icon: Fingerprint, colorClass: 'text-amber-400' },
+                    { id: 'gripping', label: 'Gripping', Icon: Eye, colorClass: 'text-violet-400' },
+                    { id: 'chilling', label: 'Chilling', Icon: Skull, colorClass: 'text-red-400' },
+                    { id: 'mind_blowing', label: 'Mind Blowing', Icon: HelpCircle, colorClass: 'text-cyan-400' }
+                  ].map((r) => {
+                    const isSelected = userReaction === r.id;
+                    const count = reactions[r.id] || 0;
+                    return (
+                      <button
+                        key={r.id}
+                        onClick={() => handleReact(r.id)}
+                        className="flex-1 py-2.5 px-3 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-xs font-medium min-w-[70px]"
+                        style={{
+                          backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
+                          borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
+                          color: isSelected ? '#EDE8DF' : '#8F8A82'
+                        }}
+                      >
+                        <r.Icon className={`w-4 h-4 ${isSelected ? r.colorClass : 'opacity-70'}`} />
+                        <span className="hidden xs:inline">{r.label}</span>
+                        <span className="text-[10.5px] sm:text-xs font-mono opacity-60">({count})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
             </div>
 
