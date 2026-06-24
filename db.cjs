@@ -107,7 +107,11 @@ function updateStory(story_id, updates) {
 }
 
 function deleteStory(story_id) {
-  db.prepare('DELETE FROM stories WHERE story_id = ?').run(story_id);
+  if (!story_id || story_id === 'undefined' || story_id === 'null' || story_id === '') {
+    db.prepare("DELETE FROM stories WHERE story_id IS NULL OR story_id = '' OR story_id = 'undefined' OR story_id = 'null'").run();
+  } else {
+    db.prepare('DELETE FROM stories WHERE story_id = ?').run(story_id);
+  }
 }
 
 function publishStory(story_id) {

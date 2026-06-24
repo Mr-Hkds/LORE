@@ -30,12 +30,11 @@ export default async function handler(req, res) {
 
   if (req.method === 'DELETE') {
     try {
-      const story = db.getStory(id);
-      if (story) {
-        db.deleteStory(id);
-        if (!story.draft) {
-          db.exportStoriesToJSON();
-        }
+      const isInvalidId = !id || id === 'undefined' || id === 'null';
+      const story = isInvalidId ? null : db.getStory(id);
+      db.deleteStory(id);
+      if (isInvalidId || !story || !story.draft) {
+        db.exportStoriesToJSON();
       }
       return res.status(200).json({ success: true });
     } catch (err) {

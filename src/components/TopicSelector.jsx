@@ -131,55 +131,50 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
   const [activeTab, setActiveTab] = useState('for-you');
 
-  // Selected stories to display based on activeTab
-  const activeTabStories = useMemo(() => {
-    if (!allStories || allStories.length === 0) return [];
+  // Rebuild the 3 tabs with deduplicated distinct pools of 3-4 stories each
+  const curatedLists = useMemo(() => {
+    void progressVersion;
+    if (!allStories || allStories.length === 0) {
+      return { 'for-you': [], 'recents': [], 'top-rated': [] };
+    }
 
-    if (activeTab === 'for-you') {
-      const affinity = getAffinity();
-      const hasAffinity = Object.keys(affinity).length > 0;
-      
-      // Filter out completed stories
-      let filtered = allStories.filter(s => {
+    const affinity = getAffinity();
+    const hasAffinity = Object.keys(affinity).length > 0;
+
+    // 1. FOR YOU: Personalized to the user (prioritize uncompleted)
+    let uncompleted = allStories.filter(s => {
+      const prog = getProgress(s.story_id);
+      return !prog || !prog.completed;
+    });
+    if (uncompleted.length === 0) {
+      uncompleted = allStories;
+    }
+
+    const forYouPool = uncompleted
+      .map(s => {
+        const affinityScore = hasAffinity ? (affinity[s.category] || 0) * 10 : 0;
+        const rx = s.reactions || {};
+        const reactionScore = (rx.gripping || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
         const prog = getProgress(s.story_id);
-        return !prog || !prog.completed;
-      });
+        const startedBoost = (prog && prog.lastLayer > 0) ? 5 : 0;
+        return { ...s, _score: affinityScore + reactionScore + startedBoost };
+      })
+      .sort((a, b) => b._score - a._score);
 
-      // If all stories are completed, fallback to showing all stories
-      if (filtered.length === 0) {
-        filtered = allStories;
-      }
+    const forYouStories = forYouPool.slice(0, 4);
+    const forYouIds = new Set(forYouStories.map(s => s.story_id));
 
-      return filtered
-        .map(s => {
-          const affinityScore = hasAffinity ? (affinity[s.category] || 0) * 10 : 0;
-          const rx = s.reactions || {};
-          const reactionScore = (rx.gripping || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
-          const prog = getProgress(s.story_id);
-          const startedBoost = (prog && prog.lastLayer > 0) ? 5 : 0;
-          return { ...s, _score: affinityScore + reactionScore + startedBoost };
-        })
-        .sort((a, b) => b._score - a._score)
-        .slice(0, 10);
-    }
-    
-    if (activeTab === 'editors-picks') {
-      const flagged = allStories.filter(s => s.editors_pick === true);
-      if (flagged.length > 0) {
-        return flagged.slice(0, 10);
-      }
-      const fallbacks = ['burari_deaths_001', 'the_dyatlov_pass_incident', 'the_asch_conformity_experiments'];
-      return allStories.filter(s => fallbacks.includes(s.story_id)).slice(0, 10);
-    }
+    // 2. RECENTS: Newest stories, excluding For You
+    const recentsPool = [...allStories]
+      .filter(s => !forYouIds.has(s.story_id))
+      .sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''));
 
-    if (activeTab === 'recents') {
-      return [...allStories]
-        .sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''))
-        .slice(0, 10);
-    }
+    const recentsStories = recentsPool.slice(0, 4);
+    const recentsIds = new Set(recentsStories.map(s => s.story_id));
 
-    // Default to 'top-rated'
-    return [...allStories]
+    // 3. TOP RATED: Highest reactions, excluding For You and Recents
+    const topRatedPool = [...allStories]
+      .filter(s => !forYouIds.has(s.story_id) && !recentsIds.has(s.story_id))
       .sort((a, b) => {
         const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0) + (a.reactions?.like || 0);
         const bReactions = (b.reactions?.gripping || 0) + (b.reactions?.scared || 0) + (b.reactions?.mindblown || 0) + (b.reactions?.like || 0);
@@ -187,10 +182,21 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           return bReactions - aReactions;
         }
         return (b.added_date || '').localeCompare(a.added_date || '');
-      })
-      .slice(0, 10);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, allStories, getProgress, getAffinity, progressVersion]);
+      });
+
+    const topRatedStories = topRatedPool.slice(0, 4);
+
+    return {
+      'for-you': forYouStories,
+      'recents': recentsStories,
+      'top-rated': topRatedStories
+    };
+  }, [allStories, getProgress, getAffinity, progressVersion]);
+
+  // Selected stories to display based on activeTab
+  const activeTabStories = useMemo(() => {
+    return curatedLists[activeTab] || [];
+  }, [curatedLists, activeTab]);
 
 
   const handleLogoTap = () => {
@@ -482,16 +488,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     >
                       ✦ For You
                     </button>
-                    <button
-                      onClick={() => setActiveTab('editors-picks')}
-                      className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"
-                      style={{
-                        color: activeTab === 'editors-picks' ? fg : mu,
-                        backgroundColor: activeTab === 'editors-picks' ? 'rgba(158, 123, 76, 0.18)' : 'transparent',
-                      }}
-                    >
-                      ◉ Editor's Picks
-                    </button>
+
                     <button
                       onClick={() => setActiveTab('recents')}
                       className="px-3 py-1.5 text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-md transition-all duration-300 cursor-pointer focus:outline-none flex-shrink-0"

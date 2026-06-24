@@ -1074,13 +1074,14 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     setEditingStoryId(null);
   };
 
-  const handleDeleteStory = async (storyId) => {
+  const handleDeleteStory = async (storyId, storyObj) => {
     if (!window.confirm('Delete this story from the archive permanently?')) return;
     
     let serverDeleted = false;
     if (isLocal && !serverOffline) {
       try {
-        const res = await fetch(`/api/stories/${storyId}`, { method: 'DELETE' });
+        const idToSend = storyId || 'undefined';
+        const res = await fetch(`/api/stories/${idToSend}`, { method: 'DELETE' });
         if (res.ok) {
           serverDeleted = true;
         }
@@ -1089,20 +1090,27 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       }
     }
     
-    const updated = localStories.filter(s => s.story_id !== storyId);
+    const updated = localStories.filter(s => {
+      if (storyObj && s === storyObj) return false;
+      if (storyId && s.story_id === storyId) return false;
+      if (!storyId && !s.story_id) return false;
+      return true;
+    });
     setLocalStories(updated);
     localStorage.setItem('lore:custom_stories', JSON.stringify(updated));
 
     // Save to local blacklist
-    try {
-      const stored = localStorage.getItem('lore:deleted_stories');
-      const list = stored ? JSON.parse(stored) : [];
-      if (!list.includes(storyId)) {
-        list.push(storyId);
-        localStorage.setItem('lore:deleted_stories', JSON.stringify(list));
+    if (storyId) {
+      try {
+        const stored = localStorage.getItem('lore:deleted_stories');
+        const list = stored ? JSON.parse(stored) : [];
+        if (!list.includes(storyId)) {
+          list.push(storyId);
+          localStorage.setItem('lore:deleted_stories', JSON.stringify(list));
+        }
+      } catch {
+        void 0;
       }
-    } catch {
-      void 0;
     }
 
     if (onStoryDeleted) {
@@ -1111,14 +1119,19 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
 
     if (!serverDeleted) {
       if (ghToken) {
-        const updatedStories = stories.filter(s => s.story_id !== storyId);
+        const updatedStories = stories.filter(s => {
+          if (storyObj && s === storyObj) return false;
+          if (storyId && s.story_id === storyId) return false;
+          if (!storyId && !s.story_id) return false;
+          return true;
+        });
         const newConceptIndex = rebuildConceptIndex(updatedStories);
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
           { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
         ];
         try {
-          await commitFilesToGitHub(filesToCommit, `admin: delete story ${storyId} via GitHub Sync`);
+          await commitFilesToGitHub(filesToCommit, `admin: delete story ${storyId || 'empty'} via GitHub Sync`);
           setToast({ text: 'Story deleted and synced to GitHub live site!', type: 'success' });
         } catch (err) {
           setToast({ text: `Deleted locally. GitHub Sync failed: ${err.message}`, type: 'error' });
@@ -1130,6 +1143,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       setToast({ text: 'Story deleted from server database successfully.', type: 'success' });
     }
 
+    await loadAdminStories();
     if (refetchStories) refetchStories();
   };
 
@@ -1888,7 +1902,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                                   Edit
                                 </button>
                                 <button
-                                  onClick={() => handleDeleteStory(story.story_id)}
+                                  onClick={() => handleDeleteStory(story.story_id, story)}
                                   className="text-[9px] font-mono px-2.5 py-1.5 border border-red-950/30 text-red-500 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
                                 >
                                   Delete
