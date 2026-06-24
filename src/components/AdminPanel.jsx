@@ -44,12 +44,14 @@ function rebuildConceptIndex(storiesArray) {
   const index = {};
   storiesArray.forEach(story => {
     (story.concepts || []).forEach(concept => {
-      const c = concept.trim().toLowerCase();
-      if (!index[c]) {
-        index[c] = [];
-      }
-      if (!index[c].includes(story.story_id)) {
-        index[c].push(story.story_id);
+      if (concept && typeof concept === 'string') {
+        const c = concept.trim().toLowerCase();
+        if (!index[c]) {
+          index[c] = [];
+        }
+        if (!index[c].includes(story.story_id)) {
+          index[c].push(story.story_id);
+        }
       }
     });
   });
@@ -998,7 +1000,9 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
 
   const handleSaveStory = async (storyId) => {
     // Validate form
-    const finalId = editForm.story_id.trim() || editForm.title.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/(^_+|_+$)/g, '');
+    const storyIdVal = (editForm.story_id || '').trim();
+    const titleVal = (editForm.title || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/(^_+|_+$)/g, '');
+    const finalId = storyIdVal || titleVal;
     if (!finalId) {
       alert('Story ID / Slug is required.');
       return;
@@ -1374,9 +1378,13 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   // Filtered stories in catalog (includes drafts and live)
   const filteredStories = useMemo(() => {
     return adminStories.filter(story => {
-      const matchesSearch = story.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            story.story_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            (story.hook && story.hook.toLowerCase().includes(searchQuery.toLowerCase()));
+      const title = story.title || '';
+      const storyId = story.story_id || '';
+      const hook = story.hook || '';
+      const query = searchQuery ? searchQuery.toLowerCase() : '';
+      const matchesSearch = title.toLowerCase().includes(query) || 
+                            storyId.toLowerCase().includes(query) ||
+                            hook.toLowerCase().includes(query);
       const matchesCategory = filterCategory === 'all' || story.category === filterCategory;
       return matchesSearch && matchesCategory;
     });
