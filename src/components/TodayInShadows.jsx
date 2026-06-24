@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import LoreMark from './LoreMark';
 
@@ -114,6 +114,7 @@ export default function TodayInShadows() {
   const [modalOpen, setModalOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const [wikiImgUrl, setWikiImgUrl] = useState(null);
+  const overlayRef = useRef(null);
 
 
 
@@ -177,9 +178,38 @@ export default function TodayInShadows() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
+  // Scroll modal overlay back to top when opened
+  useEffect(() => {
+    if (modalOpen && overlayRef.current) {
+      overlayRef.current.scrollTop = 0;
+    }
+  }, [modalOpen]);
 
-
-
+  // Lock body scroll with fixed positioning to prevent touch freeze on mobile and infinite scroll bugs
+  useEffect(() => {
+    if (modalOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    };
+  }, [modalOpen]);
 
   if (loading) {
     return (
@@ -270,9 +300,9 @@ export default function TodayInShadows() {
             </button>
           </div>
         </div>
-      </div>      {/* Deep-Dive Decryption Overlay Modal */}
-      {modalOpen && (
+      </div>      {modalOpen && (
         <div
+          ref={overlayRef}
           className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto flex items-start justify-center p-4 md:p-6"
           onClick={() => setModalOpen(false)}
         >
