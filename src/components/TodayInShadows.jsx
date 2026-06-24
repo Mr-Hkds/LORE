@@ -265,20 +265,34 @@ export default function TodayInShadows() {
                 <span className="text-[7px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
               </div>
             ) : (
-              <div className="relative w-full h-full overflow-hidden bg-[#0C0B09]/80">
-                {/* Blurred background underlay */}
-                <img
-                  src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none"
+              <div 
+                className="relative w-full h-full overflow-hidden flex items-center justify-center"
+                style={{
+                  backgroundColor: '#090807',
+                  backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
+                  backgroundSize: '100% 4px',
+                }}
+              >
+                {/* Vignette shadow */}
+                <div 
+                  className="absolute inset-0 z-0 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)'
+                  }}
                 />
+
+                {/* Brand Watermark / Stamp */}
+                <div className="absolute top-2 left-2 z-20 flex items-center gap-1 opacity-35 pointer-events-none select-none">
+                  <LoreMark size={8} color="#EDE8DF" />
+                  <span className="text-[6.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold">LORE</span>
+                </div>
+
                 {/* Crisp foreground contained image */}
                 <img
                   src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
                   alt={dossier.title}
                   onError={() => setImgFailed(true)}
-                  className="relative z-10 w-full h-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02]"
+                  className="relative z-10 max-w-full max-h-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02] shadow-[0_0_16px_rgba(0,0,0,0.6)]"
                   loading="lazy"
                 />
               </div>

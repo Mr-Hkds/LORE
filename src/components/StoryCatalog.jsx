@@ -78,20 +78,34 @@ function StoryCardImage({ story, alt }) {
     );
   }
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#0C0B09]/80">
-      {/* Blurred background */}
-      <img
-        src={displayUrl}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none"
+    <div 
+      className="relative w-full h-full overflow-hidden flex items-center justify-center"
+      style={{
+        backgroundColor: '#090807',
+        backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
+        backgroundSize: '100% 4px',
+      }}
+    >
+      {/* Vignette shadow */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)'
+        }}
       />
+
+      {/* Brand Watermark / Stamp */}
+      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
+        <LoreMark size={10} color="#EDE8DF" />
+        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
+      </div>
+
       {/* Crisp foreground contained image */}
       <img
         src={displayUrl}
         alt={alt}
         onError={handleImageError}
-        className="relative z-10 w-full h-full object-contain transition-transform duration-700 group-hover:scale-102"
+        className="relative z-10 max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-[1.02] shadow-[0_0_24px_rgba(0,0,0,0.6)]"
         loading="lazy"
       />
     </div>
