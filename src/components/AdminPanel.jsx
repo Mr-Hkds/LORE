@@ -1180,6 +1180,102 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     }
   };
 
+  const handleGenerateMissingImages = async () => {
+    const missing = adminStories.filter(s => {
+      const img = s.hero_image;
+      return !img || img.trim() === '' || img.includes('undefined') || img.includes('null');
+    });
+
+    if (missing.length === 0) {
+      alert('All stories already have cover images!');
+      return;
+    }
+
+    if (!window.confirm(`Generate missing cover images for ${missing.length} stories?`)) return;
+
+    if (!apiKey) {
+      alert('Gemini API key is required to generate prompts for missing images. Set it in Settings & Sync.');
+      return;
+    }
+
+    setIsPublishing(true);
+    setPublishStatus('Generating cover images...');
+    addLog(`Found ${missing.length} stories missing cover images. Starting process...`);
+
+    let successCount = 0;
+
+    for (let i = 0; i < missing.length; i++) {
+      const story = missing[i];
+      addLog(`[${i + 1}/${missing.length}] Processing story: "${story.title}"...`);
+      try {
+        const imgSearchQuery = story.image_query || story.title;
+        let imageUrl = null;
+        try {
+          const matched = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(imgSearchQuery.replace(/ /g, '_'))}`);
+          if (matched.ok) {
+            const matchedData = await matched.json();
+            imageUrl = matchedData?.thumbnail?.source || null;
+          }
+        } catch (err) {
+          console.warn('Wikipedia image search failed:', err);
+        }
+
+        let newHeroImage = null;
+        if (imageUrl) {
+          addLog(`Found Wikipedia cover photo. Downloading...`);
+          newHeroImage = await saveRemoteImageLocally(story.story_id, imageUrl);
+        } else {
+          addLog(`No Wikipedia photo found. Generating Flux prompt with Gemini...`);
+          const imagePrompt = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${story.title}".
+Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
+Highlight a single, mysterious focal point in a realistic documentary style.
+Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+
+          let aiPromptText = `A cinematic, atmospheric dark photo of ${story.title}, highly realistic, dramatic lighting`;
+          try {
+            const generatedPrompt = await callGeminiApi([
+              { role: 'user', parts: [{ text: imagePrompt }] }
+            ]);
+            if (generatedPrompt && generatedPrompt.trim().length > 5) {
+              aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+            }
+          } catch (err) {
+            console.warn('Failed to generate prompt via Gemini:', err);
+          }
+
+          const enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+          const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+          addLog(`Generating premium AI cover image using Flux engine...`);
+          newHeroImage = await saveRemoteImageLocally(story.story_id, pollinationsUrl);
+        }
+
+        if (newHeroImage) {
+          addLog(`Updating story database record with new image...`);
+          const res = await fetch(`/api/stories/${story.story_id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...story, hero_image: newHeroImage })
+          });
+          if (res.ok) {
+            successCount++;
+            addLog(`✓ Successfully updated cover for "${story.title}"`);
+          } else {
+            addLog(`❌ Failed to update database record for "${story.title}"`);
+          }
+        }
+      } catch (err) {
+        addLog(`❌ Error generating image for "${story.title}": ${err.message}`);
+      }
+    }
+
+    addLog(`Process complete. Successfully updated ${successCount} out of ${missing.length} cover images.`);
+    setToast({ text: `Generated cover images for ${successCount} stories!`, type: 'success' });
+    setIsPublishing(false);
+    setPublishStatus('');
+    await loadAdminStories();
+    if (refetchStories) refetchStories();
+  };
+
   // Image Upload handler
   const handleUploadImage = async (e, storyId) => {
     if (!isLocal || serverOffline) {
@@ -1664,6 +1760,13 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                       Publish All Drafts ({draftStories.length})
                     </button>
                   )}
+                  <button
+                    onClick={handleGenerateMissingImages}
+                    disabled={isPublishing}
+                    className="px-3.5 py-2 bg-indigo-900/80 hover:bg-indigo-800 disabled:opacity-50 text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>⚡</span> Generate Missing Images
+                  </button>
                   <button
                     onClick={handleCreateNewStory}
                     className="px-3.5 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer"
