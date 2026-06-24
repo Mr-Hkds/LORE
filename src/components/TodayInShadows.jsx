@@ -369,11 +369,11 @@ export default function TodayInShadows() {
       </div>      {/* Deep-Dive Decryption Overlay Modal */}
       {modalOpen && (
         <div
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-[#0A0907]/95 backdrop-blur-md overflow-y-auto flex items-start justify-center p-4 md:p-6"
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[620px] max-h-[85vh] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl overflow-hidden"
+            className="relative w-full max-w-[620px] my-8 bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             style={{
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
@@ -406,7 +406,7 @@ export default function TodayInShadows() {
             </div>
 
             {/* Content Body */}
-            <div className="space-y-6 relative z-10 pr-2 overflow-y-auto flex-1 my-5 custom-scrollbar">
+            <div className="space-y-6 relative z-10 my-5">
               
               {/* Intel Briefing */}
               <div className="space-y-2">
