@@ -4,7 +4,7 @@
  * Cards show depth signal, not badges like "TRENDING".
  */
 import { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Activity, AlertTriangle, HelpCircle } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -207,19 +207,19 @@ function EngagementBar({ reactions }) {
 
   if (like > maxCount) {
     maxCount = like;
-    dominant = { label: 'CREDIBLE', Icon: ShieldCheck, color: '#F59E0B' };
+    dominant = { label: 'PLAUSIBLE', Icon: Fingerprint, color: '#F59E0B' };
   }
   if (gripping > maxCount) {
     maxCount = gripping;
-    dominant = { label: 'INTENSE', Icon: Activity, color: '#8B5CF6' };
+    dominant = { label: 'COMPELLING', Icon: Eye, color: '#8B5CF6' };
   }
   if (scared > maxCount) {
     maxCount = scared;
-    dominant = { label: 'UNSETTLING', Icon: AlertTriangle, color: '#EF4444' };
+    dominant = { label: 'CHILLING', Icon: Skull, color: '#EF4444' };
   }
   if (mindblown > maxCount) {
     maxCount = mindblown;
-    dominant = { label: 'ENIGMATIC', Icon: HelpCircle, color: '#06B6D4' };
+    dominant = { label: 'CRYPTIC', Icon: HelpCircle, color: '#06B6D4' };
   }
 
   if (!dominant || maxCount === 0) return null;

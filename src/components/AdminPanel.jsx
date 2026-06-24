@@ -442,6 +442,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
      4. Layer 1 MUST start with a unique, gripping, topic-specific factual hook to capture the reader's attention. Rhetorical questions or generic conversational openings are ABSOLUTELY FORBIDDEN. Specifically, do NOT use: "Did you know?", "Have you ever wondered?", "What if...", "Kya aapne kabhi socha hai?", "Chalo aaj le chalte hain", "Let us explore", "Imagine a world where", or similar cliches. Go straight into a concrete, chilling, or fascinating historical fact or observation (e.g. "On July 1, 2018, eleven bodies hung in perfect circular alignment...").
      5. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
      6. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
+     7. RESPECT AND SENSITIVITY FOR MYTHOLOGY/RELIGION: When writing about religious, sacred, or mythological topics (e.g., Shiva / Shiv Ji, ancient deities, sacred rituals, scriptures), you MUST remain strictly respectful and objective. Write the story as an informative, intellectually interesting, and historically/philosophically sound account. DO NOT exaggerate, dark-frame, or invent cheap, sinister, or morbid narrative elements that could hurt religious sentiments. Focus on the mystery, philosophy, and awe, keeping it premium and educational, not cheap or offensive.
     
     Structure the story exactly in the following JSON format:
     {

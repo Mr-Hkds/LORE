@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShieldCheck, Activity, AlertTriangle, HelpCircle } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -327,10 +327,10 @@ export default function TodayInShadows() {
             
             <div className="flex gap-2 items-center flex-wrap">
               {[
-                { id: 'like', Icon: ShieldCheck, label: 'Credible', colorClass: 'text-amber-400' },
-                { id: 'gripping', Icon: Activity, label: 'Intense', colorClass: 'text-violet-400' },
-                { id: 'scared', Icon: AlertTriangle, label: 'Unsettling', colorClass: 'text-red-400' },
-                { id: 'mindblown', Icon: HelpCircle, label: 'Enigmatic', colorClass: 'text-cyan-400' }
+                { id: 'like', Icon: Fingerprint, label: 'Plausible', colorClass: 'text-amber-400' },
+                { id: 'gripping', Icon: Eye, label: 'Compelling', colorClass: 'text-violet-400' },
+                { id: 'scared', Icon: Skull, label: 'Chilling', colorClass: 'text-red-400' },
+                { id: 'mindblown', Icon: HelpCircle, label: 'Cryptic', colorClass: 'text-cyan-400' }
               ].map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
@@ -439,10 +439,10 @@ export default function TodayInShadows() {
                 </h5>
                 <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
                   {[
-                    { id: 'like', label: 'Credible', Icon: ShieldCheck, colorClass: 'text-amber-400' },
-                    { id: 'gripping', label: 'Intense', Icon: Activity, colorClass: 'text-violet-400' },
-                    { id: 'scared', label: 'Unsettling', Icon: AlertTriangle, colorClass: 'text-red-400' },
-                    { id: 'mindblown', label: 'Enigmatic', Icon: HelpCircle, colorClass: 'text-cyan-400' }
+                    { id: 'like', label: 'Plausible', Icon: Fingerprint, colorClass: 'text-amber-400' },
+                    { id: 'gripping', label: 'Compelling', Icon: Eye, colorClass: 'text-violet-400' },
+                    { id: 'scared', label: 'Chilling', Icon: Skull, colorClass: 'text-red-400' },
+                    { id: 'mindblown', label: 'Cryptic', Icon: HelpCircle, colorClass: 'text-cyan-400' }
                   ].map((r) => {
                     const isSelected = userReaction === r.id;
                     const count = reactions[r.id] || 0;
