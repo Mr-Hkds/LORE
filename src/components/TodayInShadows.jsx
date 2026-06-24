@@ -371,12 +371,16 @@ export default function TodayInShadows() {
             </div>
           </div>
         </div>
-      </div>      {modalOpen && (
+      </div>
+
+      {/* Deep-Dive Decryption Overlay Modal */}
+      {modalOpen && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto"
           onClick={() => setModalOpen(false)}
         >
+          <div className="flex min-h-full items-center justify-center p-4 py-8">
           <div
             className="relative w-full max-w-[620px] max-h-[85vh] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
@@ -501,6 +505,8 @@ export default function TodayInShadows() {
                 Close File
               </button>
             </div>
+
+          </div>
 
           </div>
         </div>
