@@ -10,8 +10,8 @@
   ],
   "unexplained_deaths": [
     "the_dyatlov_pass_incident",
-    "barney_barnato",
-    "uwe_barschel"
+    "uwe_barschel",
+    "barney_barnato"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -19,12 +19,6 @@
   "government_secrecy": [
     "the_dyatlov_pass_incident",
     "uwe_barschel"
-  ],
-  "financial_conspiracy": [
-    "barney_barnato"
-  ],
-  "lost_wealth": [
-    "barney_barnato"
   ],
   "espionage": [
     "uwe_barschel"
@@ -151,5 +145,11 @@
   ],
   "dehumanization": [
     "stanford_prison_experiment_001"
+  ],
+  "financial_conspiracy": [
+    "barney_barnato"
+  ],
+  "lost_wealth": [
+    "barney_barnato"
   ]
 }
