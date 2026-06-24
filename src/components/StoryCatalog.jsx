@@ -4,6 +4,7 @@
  * Cards show depth signal, not badges like "TRENDING".
  */
 import { useState, useEffect, useRef } from 'react';
+import { ShieldCheck, Activity, AlertTriangle, HelpCircle } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -193,7 +194,7 @@ function ReadPill({ progress, accentColor }) {
   return null;
 }
 
-// ── Engagement reacts display (classy Unicode indicators) ────────────────
+// ── Engagement reacts display (classy Lucide indicators) ────────────────
 function EngagementBar({ reactions }) {
   const rx = reactions || {};
   const gripping = rx.gripping || rx.heart || 0;
@@ -206,26 +207,26 @@ function EngagementBar({ reactions }) {
 
   if (like > maxCount) {
     maxCount = like;
-    dominant = { label: 'RESPECT', emoji: '🕯️', color: '#9E7B4C' };
+    dominant = { label: 'CREDIBLE', Icon: ShieldCheck, color: '#F59E0B' };
   }
   if (gripping > maxCount) {
     maxCount = gripping;
-    dominant = { label: 'GRIPPING', emoji: '🔥', color: '#D97706' };
+    dominant = { label: 'INTENSE', Icon: Activity, color: '#8B5CF6' };
   }
   if (scared > maxCount) {
     maxCount = scared;
-    dominant = { label: 'SHOCKING', emoji: '💀', color: '#EF4444' };
+    dominant = { label: 'UNSETTLING', Icon: AlertTriangle, color: '#EF4444' };
   }
   if (mindblown > maxCount) {
     maxCount = mindblown;
-    dominant = { label: 'MIND-BLOWN', emoji: '🤯', color: '#8B5CF6' };
+    dominant = { label: 'ENIGMATIC', Icon: HelpCircle, color: '#06B6D4' };
   }
 
   if (!dominant || maxCount === 0) return null;
 
   return (
     <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
-      <span>{dominant.emoji}</span>
+      <dominant.Icon className="w-2.5 h-2.5" style={{ color: dominant.color }} />
       <span className="uppercase">{dominant.label} ({maxCount})</span>
     </div>
   );

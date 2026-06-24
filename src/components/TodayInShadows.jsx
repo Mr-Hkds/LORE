@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ShieldCheck, Activity, AlertTriangle, HelpCircle } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -326,10 +327,10 @@ export default function TodayInShadows() {
             
             <div className="flex gap-2 items-center flex-wrap">
               {[
-                { id: 'like', emoji: '🕯️', label: 'Respect' },
-                { id: 'gripping', emoji: '🔥', label: 'Gripping' },
-                { id: 'scared', emoji: '💀', label: 'Shocking' },
-                { id: 'mindblown', emoji: '🤯', label: 'Mindblown' }
+                { id: 'like', Icon: ShieldCheck, label: 'Credible', colorClass: 'text-amber-400' },
+                { id: 'gripping', Icon: Activity, label: 'Intense', colorClass: 'text-violet-400' },
+                { id: 'scared', Icon: AlertTriangle, label: 'Unsettling', colorClass: 'text-red-400' },
+                { id: 'mindblown', Icon: HelpCircle, label: 'Enigmatic', colorClass: 'text-cyan-400' }
               ].map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
@@ -337,7 +338,7 @@ export default function TodayInShadows() {
                   <button
                     key={r.id}
                     onClick={() => handleReact(r.id)}
-                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1 hover:border-[#9E7B4C]/40 active:scale-95 text-[11px]"
+                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-[11px]"
                     style={{
                       backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
                       borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
@@ -345,7 +346,7 @@ export default function TodayInShadows() {
                     }}
                     title={r.label}
                   >
-                    <span>{r.emoji}</span>
+                    <r.Icon className={`w-3.5 h-3.5 ${isSelected ? r.colorClass : 'opacity-70'}`} />
                     <span className="text-[10px] font-mono opacity-70">({count})</span>
                   </button>
                 );
@@ -438,10 +439,10 @@ export default function TodayInShadows() {
                 </h5>
                 <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
                   {[
-                    { id: 'like', label: 'Respect', emoji: '🕯️' },
-                    { id: 'gripping', label: 'Gripping', emoji: '🔥' },
-                    { id: 'scared', label: 'Shocking', emoji: '💀' },
-                    { id: 'mindblown', label: 'Mindblown', emoji: '🤯' }
+                    { id: 'like', label: 'Credible', Icon: ShieldCheck, colorClass: 'text-amber-400' },
+                    { id: 'gripping', label: 'Intense', Icon: Activity, colorClass: 'text-violet-400' },
+                    { id: 'scared', label: 'Unsettling', Icon: AlertTriangle, colorClass: 'text-red-400' },
+                    { id: 'mindblown', label: 'Enigmatic', Icon: HelpCircle, colorClass: 'text-cyan-400' }
                   ].map((r) => {
                     const isSelected = userReaction === r.id;
                     const count = reactions[r.id] || 0;
@@ -453,10 +454,10 @@ export default function TodayInShadows() {
                         style={{
                           backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
                           borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
-                          color: isSelected ? '#EDE8DF' : '#8F8A82' // Brighter unselected text for visibility
+                          color: isSelected ? '#EDE8DF' : '#8F8A82'
                         }}
                       >
-                        <span>{r.emoji}</span>
+                        <r.Icon className={`w-4 h-4 ${isSelected ? r.colorClass : 'opacity-70'}`} />
                         <span className="hidden xs:inline">{r.label}</span>
                         <span className="text-[10.5px] sm:text-xs font-mono opacity-60">({count})</span>
                       </button>
