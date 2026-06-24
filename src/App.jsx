@@ -107,7 +107,7 @@ export default function App() {
   // Scroll to top on navigation phase/category/story change
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [phase, activeCategory, activeStory]);
+  }, [phase, selectedCategory, currentStory]);
 
   // Global Pageview Analytics Tracker (with free Geolocation lookup)
   useEffect(() => {
