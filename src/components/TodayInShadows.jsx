@@ -185,28 +185,14 @@ export default function TodayInShadows() {
     }
   }, [modalOpen]);
 
-  // Lock body scroll with fixed positioning to prevent touch freeze on mobile and infinite scroll bugs
+  // Lock body scroll when modal is open
   useEffect(() => {
     if (modalOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
       document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-      }
     }
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
       document.body.style.overflow = '';
     };
   }, [modalOpen]);
@@ -303,11 +289,11 @@ export default function TodayInShadows() {
       </div>      {modalOpen && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto flex items-start justify-center p-4 md:p-6"
+          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto p-4 md:p-6"
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-[620px] my-8 bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl"
+            className="relative w-full max-w-[620px] mx-auto my-8 bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             style={{
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
