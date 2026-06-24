@@ -1181,26 +1181,58 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   };
 
   const handleGenerateMissingImages = async () => {
-    const missing = adminStories.filter(s => {
+    setIsPublishing(true);
+    setPublishStatus('Scanning for missing or broken cover images...');
+    addLog('Scanning database stories for missing or broken cover images...');
+
+    const missing = [];
+    for (let i = 0; i < adminStories.length; i++) {
+      const s = adminStories[i];
       const img = s.hero_image;
-      return !img || img.trim() === '' || img.includes('undefined') || img.includes('null');
-    });
+      let isMissing = false;
+
+      if (!img || img.trim() === '' || img.includes('undefined') || img.includes('null')) {
+        isMissing = true;
+      } else if (!img.startsWith('http://') && !img.startsWith('https://')) {
+        try {
+          const checkUrl = `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
+          const res = await fetch(checkUrl, { method: 'HEAD' });
+          if (!res.ok) {
+            isMissing = true;
+          }
+        } catch {
+          isMissing = true;
+        }
+      }
+
+      if (isMissing) {
+        missing.push(s);
+      }
+    }
 
     if (missing.length === 0) {
-      alert('All stories already have cover images!');
+      setIsPublishing(false);
+      setPublishStatus('');
+      alert('All stories already have valid cover images!');
       return;
     }
 
-    if (!window.confirm(`Generate missing cover images for ${missing.length} stories?`)) return;
+    if (!window.confirm(`Generate missing/broken cover images for ${missing.length} stories?`)) {
+      setIsPublishing(false);
+      setPublishStatus('');
+      return;
+    }
 
     if (!apiKey) {
       alert('Gemini API key is required to generate prompts for missing images. Set it in Settings & Sync.');
+      setIsPublishing(false);
+      setPublishStatus('');
       return;
     }
 
     setIsPublishing(true);
     setPublishStatus('Generating cover images...');
-    addLog(`Found ${missing.length} stories missing cover images. Starting process...`);
+    addLog(`Found ${missing.length} stories missing or broken cover images. Starting process...`);
 
     let successCount = 0;
 

@@ -526,7 +526,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       onClick={() => {
                         window.location.hash = `#story-${story.story_id}-layer-${currentL > 0 ? currentL : 1}`;
                       }}
-                      className="group relative w-full flex flex-col sm:flex-row gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
+                      className="group relative w-full flex flex-row gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
                       style={{
                         backgroundColor: 'transparent',
                         borderBottom: '1px solid rgba(158, 123, 76, 0.07)',

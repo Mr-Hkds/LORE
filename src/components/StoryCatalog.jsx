@@ -343,7 +343,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                     }}
                   >
                     {/* Image panel */}
-                    <div className="w-full md:w-[200px] h-[160px] md:h-auto flex-shrink-0 relative overflow-hidden">
+                    <div className="w-full aspect-[16/9] md:aspect-auto md:w-[200px] md:h-auto flex-shrink-0 relative overflow-hidden">
                       <StoryCardImage story={story} alt={story.title} />
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 story-card-overlay" />

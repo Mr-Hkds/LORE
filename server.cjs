@@ -439,13 +439,13 @@ setInterval(() => {
 
 // --- DAILY DOSSIER STATIC DATA ---
 const DAILY_THEMES = {
-  0: { name: 'Conspiracy Sunday', hint: 'conspiracies, government coverups, and espionage projects' },
+  0: { name: 'Secret Sunday', hint: 'secret archives, government coverups, and classified dossiers' },
   1: { name: 'Mystery Monday', hint: 'unexplained mysteries, disappearances, and unsolved riddles' },
   2: { name: 'Thriller Tuesday', hint: 'high-stakes thrillers, espionage, and political assassinations' },
-  3: { name: 'Shadowy Wednesday', hint: 'shadowy scientific experiments, classified research, and dangerous weapons' },
-  4: { name: 'Supernatural Thursday', hint: 'supernatural events, cults, occult practices, and paranormal encounters' },
-  5: { name: 'Chilling Friday', hint: 'chilling tragedies, historical disasters, and fatal accidents' },
-  6: { name: 'Criminal Saturday', hint: 'notorious crimes, heist masterminds, and high-profile trials' }
+  3: { name: 'Wicked Wednesday', hint: 'wicked scientific experiments, classified research, and dangerous weapons' },
+  4: { name: 'Terror Thursday', hint: 'terror-filled events, cults, occult practices, and paranormal encounters' },
+  5: { name: 'Fatal Friday', hint: 'fatal tragedies, historical disasters, and fatal accidents' },
+  6: { name: 'Sinister Saturday', hint: 'sinister crimes, heist masterminds, and high-profile trials' }
 };
 
 const DAILY_STATIC_FALLBACKS = {

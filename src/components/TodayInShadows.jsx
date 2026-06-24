@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
-  0: { name: 'Conspiracy Sunday' },
+  0: { name: 'Secret Sunday' },
   1: { name: 'Mystery Monday' },
   2: { name: 'Thriller Tuesday' },
-  3: { name: 'Shadowy Wednesday' },
-  4: { name: 'Supernatural Thursday' },
-  5: { name: 'Chilling Friday' },
-  6: { name: 'Criminal Saturday' }
+  3: { name: 'Wicked Wednesday' },
+  4: { name: 'Terror Thursday' },
+  5: { name: 'Fatal Friday' },
+  6: { name: 'Sinister Saturday' }
 };
 
 const STATIC_FALLBACKS = {
@@ -240,7 +240,7 @@ export default function TodayInShadows() {
         }}
       >
         {dossier.thumbnail && (
-          <div className="w-full md:w-[120px] h-[160px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
+          <div className="w-full aspect-[16/9] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                 <LoreMark size={20} color="currentColor" />
