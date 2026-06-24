@@ -47,22 +47,6 @@
   "covert_operations": [
     "operation_northwoods_001"
   ],
-  "cryptography": [
-    "cicada_3301",
-    "the_zodiac_killer"
-  ],
-  "steganography": [
-    "cicada_3301"
-  ],
-  "online_puzzles": [
-    "cicada_3301"
-  ],
-  "recruitment": [
-    "cicada_3301"
-  ],
-  "secret_societies": [
-    "cicada_3301"
-  ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
   ],
@@ -137,6 +121,10 @@
   "serial_killer": [
     "the_zodiac_killer"
   ],
+  "cryptography": [
+    "the_zodiac_killer",
+    "cicada_3301"
+  ],
   "media_obsession": [
     "the_zodiac_killer"
   ],
@@ -157,5 +145,17 @@
   ],
   "sacred_geography": [
     "mahadev_and_sati_dossier"
+  ],
+  "steganography": [
+    "cicada_3301"
+  ],
+  "online_puzzles": [
+    "cicada_3301"
+  ],
+  "recruitment": [
+    "cicada_3301"
+  ],
+  "secret_societies": [
+    "cicada_3301"
   ]
 }
