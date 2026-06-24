@@ -18,7 +18,8 @@
   ],
   "government_secrecy": [
     "the_dyatlov_pass_incident",
-    "uwe_barschel"
+    "uwe_barschel",
+    "cia_mk_ultra_program"
   ],
   "espionage": [
     "uwe_barschel"
@@ -45,7 +46,8 @@
     "operation_northwoods_001"
   ],
   "covert_operations": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "cia_mk_ultra_program"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -65,7 +67,8 @@
   "unsolved_mystery": [
     "malaysia_airlines_mh370",
     "hinterkaifeck_murders",
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "noida_double_murder_case_2008"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -113,7 +116,8 @@
     "hinterkaifeck_murders"
   ],
   "family_tragedy": [
-    "hinterkaifeck_murders"
+    "hinterkaifeck_murders",
+    "noida_double_murder_case_2008"
   ],
   "cold_case": [
     "hinterkaifeck_murders"
@@ -157,5 +161,23 @@
   ],
   "secret_societies": [
     "cicada_3301"
+  ],
+  "judicial_failure": [
+    "noida_double_murder_case_2008"
+  ],
+  "media_sensationalism": [
+    "noida_double_murder_case_2008"
+  ],
+  "forensic_controversy": [
+    "noida_double_murder_case_2008"
+  ],
+  "mind_control": [
+    "cia_mk_ultra_program"
+  ],
+  "unethical_experimentation": [
+    "cia_mk_ultra_program"
+  ],
+  "psychological_warfare": [
+    "cia_mk_ultra_program"
   ]
 }
