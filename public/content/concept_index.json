@@ -32,21 +32,6 @@
   "social_pressure": [
     "the_asch_conformity_experiments"
   ],
-  "serial_killer": [
-    "the_zodiac_killer"
-  ],
-  "unsolved_mystery": [
-    "the_zodiac_killer",
-    "malaysia_airlines_mh370",
-    "hinterkaifeck_murders"
-  ],
-  "cryptography": [
-    "the_zodiac_killer",
-    "cicada_3301"
-  ],
-  "media_obsession": [
-    "the_zodiac_killer"
-  ],
   "false_flag": [
     "operation_northwoods_001"
   ],
@@ -61,6 +46,10 @@
   ],
   "covert_operations": [
     "operation_northwoods_001"
+  ],
+  "cryptography": [
+    "cicada_3301",
+    "the_zodiac_killer"
   ],
   "steganography": [
     "cicada_3301"
@@ -88,6 +77,11 @@
   ],
   "preserver_destroyer_paradox": [
     "hidden_facts_shri_vishnu_ji"
+  ],
+  "unsolved_mystery": [
+    "malaysia_airlines_mh370",
+    "hinterkaifeck_murders",
+    "the_zodiac_killer"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -139,5 +133,11 @@
   ],
   "cold_case": [
     "hinterkaifeck_murders"
+  ],
+  "serial_killer": [
+    "the_zodiac_killer"
+  ],
+  "media_obsession": [
+    "the_zodiac_killer"
   ]
 }
