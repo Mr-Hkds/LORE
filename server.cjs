@@ -835,6 +835,14 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && pathname === '/api/stories') {
     const includeDrafts = urlObj.searchParams.get('include_drafts') === 'true' || urlObj.searchParams.get('all') === 'true';
     const list = db.getStories(includeDrafts);
+    
+    // Background seed reactions with AI if needed
+    list.forEach(story => {
+      if (story.reactions && !story.reactions.ai) {
+        ensureStoryReactionsWithAi(story).catch(() => {});
+      }
+    });
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(list));
     return;
@@ -885,6 +893,85 @@ const server = http.createServer(async (req, res) => {
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, story: db.getStory(storyId) }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: GET /api/analytics
+  if (req.method === 'GET' && pathname === '/api/analytics') {
+    const summary = db.getAnalyticsSummary();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(summary));
+    return;
+  }
+
+  // Route: POST /api/analytics
+  if (req.method === 'POST' && pathname === '/api/analytics') {
+    try {
+      const pv = await getJsonBody(req);
+      db.logPageView({
+        visitor_id: pv.visitor_id || 'unknown',
+        session_id: pv.session_id || 'unknown',
+        path: pv.path || '/',
+        referrer: pv.referrer || '',
+        user_agent: pv.user_agent || '',
+        timestamp: new Date().toISOString(),
+        ip: pv.ip || null,
+        city: pv.city || null,
+        region: pv.region || null,
+        country: pv.country || null,
+        country_code: pv.country_code || null,
+        org: pv.org || null
+      });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: GET /api/comments
+  if (req.method === 'GET' && pathname === '/api/comments') {
+    try {
+      const target_id = urlObj.searchParams.get('target_id');
+      const title = urlObj.searchParams.get('title') || '';
+      const category = urlObj.searchParams.get('category') || '';
+      
+      if (!target_id) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing target_id' }));
+        return;
+      }
+
+      const comments = await getCommentsWithAiFallback(target_id, title, category);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(comments));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: POST /api/comments
+  if (req.method === 'POST' && pathname === '/api/comments') {
+    try {
+      const { target_id, username, comment } = await getJsonBody(req);
+      if (!target_id || !username || !comment) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing target_id, username, or comment' }));
+        return;
+      }
+
+      db.insertComment(target_id, username, comment);
+      const comments = db.getComments(target_id);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(comments));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err.message }));

@@ -40,30 +40,100 @@ db.exec(`
     page TEXT,
     addressed INTEGER DEFAULT 0
   );
+
+  CREATE TABLE IF NOT EXISTS daily_reactions (
+    date TEXT PRIMARY KEY,
+    likes INTEGER DEFAULT 0,
+    gripping INTEGER DEFAULT 0,
+    scared INTEGER DEFAULT 0,
+    mindblown INTEGER DEFAULT 0
+  );
+
+  CREATE TABLE IF NOT EXISTS pageviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    visitor_id TEXT,
+    session_id TEXT,
+    path TEXT,
+    referrer TEXT,
+    user_agent TEXT,
+    timestamp TEXT,
+    ip TEXT,
+    city TEXT,
+    region TEXT,
+    country TEXT,
+    country_code TEXT,
+    org TEXT
+  );
+
+  CREATE TABLE IF NOT EXISTS comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    target_id TEXT,
+    username TEXT,
+    comment TEXT,
+    timestamp TEXT
+  );
 `);
 
-// Helper functions
+// Try to alter pageviews table if it was created without geolocation columns
+try { db.exec("ALTER TABLE pageviews ADD COLUMN ip TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE pageviews ADD COLUMN city TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE pageviews ADD COLUMN region TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE pageviews ADD COLUMN country TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE pageviews ADD COLUMN country_code TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE pageviews ADD COLUMN org TEXT"); } catch(e){}
+
+function ensureStoryReactions(story) {
+  const rx = story.reactions || {};
+  const total = (rx.like || 0) + (rx.gripping || 0) + (rx.scared || 0) + (rx.mindblown || 0);
+  if (total > 0) return rx;
+
+  const hash = (story.title || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + (story.story_id || '').length;
+  const category = story.category || '';
+  const severity = story.severity || '';
+
+  const seeded = {
+    like: 12 + (hash % 45),
+    gripping: 10 + (hash % 35),
+    scared: (category === 'paranormal' || category === 'true_crime' || severity === 'extreme') ? 22 + (hash % 50) : 1 + (hash % 6),
+    mindblown: (category === 'psychology' || category === 'conspiracy') ? 25 + (hash % 55) : 3 + (hash % 10)
+  };
+
+  try {
+    db.prepare('UPDATE stories SET reactions = ? WHERE story_id = ?').run(JSON.stringify(seeded), story.story_id);
+  } catch (err) {
+    console.warn(`[DB Reactions] Failed to save seeded reactions for story ${story.story_id}:`, err.message);
+  }
+
+  return seeded;
+}
+
 function getStories(includeDrafts = false) {
   const stmt = includeDrafts 
     ? db.prepare('SELECT * FROM stories') 
     : db.prepare('SELECT * FROM stories WHERE draft = 0');
   
   const rows = stmt.all();
-  return rows.map(row => ({
-    ...row,
-    draft: !!row.draft,
-    concepts: JSON.parse(row.concepts || '[]'),
-    reactions: JSON.parse(row.reactions || '{}'),
-    evidence_links: JSON.parse(row.evidence_links || '[]'),
-    connections: JSON.parse(row.connections || '[]'),
-    layers: JSON.parse(row.layers || '[]')
-  }));
+  return rows.map(row => {
+    const s = {
+      ...row,
+      draft: !!row.draft,
+      concepts: JSON.parse(row.concepts || '[]'),
+      reactions: JSON.parse(row.reactions || '{}'),
+      evidence_links: JSON.parse(row.evidence_links || '[]'),
+      connections: JSON.parse(row.connections || '[]'),
+      layers: JSON.parse(row.layers || '[]')
+    };
+    s.reactions = ensureStoryReactions(s);
+    // Safe fallback check for null added_date
+    s.added_date = s.added_date ? s.added_date.substring(0, 10) : '2026-06-20';
+    return s;
+  });
 }
 
 function getStory(story_id) {
   const row = db.prepare('SELECT * FROM stories WHERE story_id = ?').get(story_id);
   if (!row) return null;
-  return {
+  const s = {
     ...row,
     draft: !!row.draft,
     concepts: JSON.parse(row.concepts || '[]'),
@@ -72,6 +142,9 @@ function getStory(story_id) {
     connections: JSON.parse(row.connections || '[]'),
     layers: JSON.parse(row.layers || '[]')
   };
+  s.reactions = ensureStoryReactions(s);
+  s.added_date = s.added_date ? s.added_date.substring(0, 10) : '2026-06-20';
+  return s;
 }
 
 function insertStory(story) {
@@ -89,13 +162,14 @@ function insertStory(story) {
     JSON.stringify(story.concepts || []),
     story.severity,
     story.hero_image || null,
-    story.added_date || new Date().toISOString().split('T')[0],
+    story.added_date || new Date().toLocaleDateString('en-CA'),
     story.draft ? 1 : 0,
     JSON.stringify(story.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
     JSON.stringify(story.evidence_links || []),
     JSON.stringify(story.connections || []),
     JSON.stringify(story.layers || [])
   );
+  return getStory(story.story_id);
 }
 
 function updateStory(story_id, updates) {
@@ -115,16 +189,23 @@ function deleteStory(story_id) {
 }
 
 function publishStory(story_id) {
+  const story = getStory(story_id);
+  if (!story) return false;
   db.prepare('UPDATE stories SET draft = 0 WHERE story_id = ?').run(story_id);
+  
+  // Export updated stories database back to static content folder
+  exportStoriesToJSON();
+  return true;
 }
 
 function publishAllStories() {
-  db.prepare('UPDATE stories SET draft = 0 WHERE draft = 1').run();
+  db.prepare('UPDATE stories SET draft = 0').run();
+  exportStoriesToJSON();
 }
 
+// Recommendations Helpers
 function getRecommendations() {
-  const rows = db.prepare('SELECT * FROM recommendations').all();
-  return rows;
+  return db.prepare('SELECT * FROM recommendations ORDER BY date DESC').all();
 }
 
 function insertRecommendation(rec) {
@@ -349,6 +430,72 @@ function seed() {
   }
 }
 
+function getDailyReactions(date) {
+  const row = db.prepare('SELECT * FROM daily_reactions WHERE date = ?').get(date);
+  if (!row) return { likes: 0, gripping: 0, scared: 0, mindblown: 0 };
+  return {
+    likes: row.likes || 0,
+    gripping: row.gripping || 0,
+    scared: row.scared || 0,
+    mindblown: row.mindblown || 0
+  };
+}
+
+function updateDailyReaction(date, reaction_type, undo = false) {
+  const colName = reaction_type === 'like' ? 'likes' : reaction_type;
+  if (!['likes', 'gripping', 'scared', 'mindblown'].includes(colName)) return false;
+
+  db.prepare('INSERT OR IGNORE INTO daily_reactions (date) VALUES (?)').run(date);
+  const change = undo ? -1 : 1;
+  db.prepare(`UPDATE daily_reactions SET ${colName} = MAX(0, ${colName} + ?) WHERE date = ?`).run(change, date);
+  return true;
+}
+
+function setDailyReactions(date, reactions) {
+  const stmt = db.prepare(`
+    INSERT OR REPLACE INTO daily_reactions (date, likes, gripping, scared, mindblown)
+    VALUES (?, ?, ?, ?, ?)
+  `);
+  stmt.run(date, reactions.likes || 0, reactions.gripping || 0, reactions.scared || 0, reactions.mindblown || 0);
+}
+
+function logPageView(pv) {
+  const stmt = db.prepare(`
+    INSERT INTO pageviews (visitor_id, session_id, path, referrer, user_agent, timestamp)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `);
+  stmt.run(
+    pv.visitor_id,
+    pv.session_id,
+    pv.path,
+    pv.referrer,
+    pv.user_agent,
+    pv.timestamp || new Date().toISOString()
+  );
+}
+
+function getAnalyticsSummary() {
+  try {
+    const totalPageviews = db.prepare('SELECT COUNT(*) as count FROM pageviews').get().count;
+    const uniqueVisitors = db.prepare('SELECT COUNT(DISTINCT visitor_id) as count FROM pageviews').get().count;
+    
+    const thirtyMinsAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+    const activeSessions = db.prepare('SELECT COUNT(DISTINCT session_id) as count FROM pageviews WHERE timestamp >= ?').get(thirtyMinsAgo).count;
+    
+    const recentPageviews = db.prepare('SELECT * FROM pageviews ORDER BY timestamp DESC LIMIT 50').all();
+    
+    return {
+      totalPageviews,
+      uniqueVisitors,
+      activeSessions,
+      recentPageviews
+    };
+  } catch (err) {
+    console.error('Failed to query analytics:', err.message);
+    return { totalPageviews: 0, uniqueVisitors: 0, activeSessions: 0, recentPageviews: [] };
+  }
+}
+
 seed();
 
 module.exports = {
@@ -369,5 +516,10 @@ module.exports = {
   deleteFeedback,
   updateFeedbackAddressed,
   exportStoriesToJSON,
-  checkDuplicate
+  checkDuplicate,
+  getDailyReactions,
+  updateDailyReaction,
+  setDailyReactions,
+  logPageView,
+  getAnalyticsSummary
 };

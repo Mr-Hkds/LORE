@@ -104,6 +104,76 @@ export default function App() {
     }
   }, [phase, activeLayerConfig]);
 
+  // Scroll to top on navigation phase/category/story change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase, activeCategory, activeStory]);
+
+  // Global Pageview Analytics Tracker (with free Geolocation lookup)
+  useEffect(() => {
+    const logPageView = async () => {
+      try {
+        let visitorId = localStorage.getItem('lore:analytics:visitor_id');
+        if (!visitorId) {
+          visitorId = 'v_' + Math.random().toString(36).substring(2, 15);
+          localStorage.setItem('lore:analytics:visitor_id', visitorId);
+        }
+        let sessionId = sessionStorage.getItem('lore:analytics:session_id');
+        if (!sessionId) {
+          sessionId = 's_' + Math.random().toString(36).substring(2, 15);
+          sessionStorage.setItem('lore:analytics:session_id', sessionId);
+        }
+
+        // Check sessionStorage cache for IP geolocation details first
+        let geoData = {};
+        try {
+          const cachedGeo = sessionStorage.getItem('lore:analytics:geo_cache');
+          if (cachedGeo) {
+            geoData = JSON.parse(cachedGeo);
+          } else {
+            // Fetch fresh from free ipapi.co json endpoint
+            const res = await fetch('https://ipapi.co/json/');
+            if (res.ok) {
+              const parsed = await res.json();
+              if (parsed && parsed.ip) {
+                geoData = {
+                  ip: parsed.ip,
+                  city: parsed.city || 'unknown',
+                  region: parsed.region || 'unknown',
+                  country: parsed.country_name || 'unknown',
+                  country_code: parsed.country_code || 'unknown',
+                  org: parsed.org || 'unknown'
+                };
+                sessionStorage.setItem('lore:analytics:geo_cache', JSON.stringify(geoData));
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('[Analytics Geo] Failed to fetch IP geolocation:', e.message);
+        }
+
+        await fetch('/api/analytics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            visitor_id: visitorId,
+            session_id: sessionId,
+            path: window.location.hash || '/',
+            referrer: document.referrer || '',
+            user_agent: navigator.userAgent,
+            ...geoData
+          })
+        });
+      } catch {
+        // Silent catch
+      }
+    };
+    logPageView();
+
+    window.addEventListener('hashchange', logPageView);
+    return () => window.removeEventListener('hashchange', logPageView);
+  }, []);
+
   // Get all stories for a given category (merged list)
   const getStoriesByCategory = useCallback((categoryId) => {
     const categoryMap = {

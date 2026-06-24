@@ -105,15 +105,7 @@ const STATIC_FALLBACKS = {
   }
 };
 
-// Return zero counts for initial reactions to avoid fake values
-function getSeedCounts() {
-  return {
-    gripping: 0,
-    scared: 0,
-    mindblown: 0,
-    like: 0
-  };
-}
+
 
 export default function TodayInShadows() {
   const [dossier, setDossier] = useState(null);
@@ -124,6 +116,14 @@ export default function TodayInShadows() {
 
   const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0, like: 0 });
   const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | 'like' | null
+
+  // Comments state
+  const [comments, setComments] = useState([]);
+  const [commentsLoading, setCommentsLoading] = useState(false);
+  const [codename, setCodename] = useState(localStorage.getItem('lore:codename') || '');
+  const [newComment, setNewComment] = useState('');
+  const [submittingComment, setSubmittingComment] = useState(false);
+  const [commentError, setCommentError] = useState(null);
 
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
@@ -171,16 +171,9 @@ export default function TodayInShadows() {
     if (dossier) {
       setImgFailed(false);
       setWikiImgUrl(null);
-      const baseCounts = getSeedCounts(dossier.date, dossier.title);
       const storedReaction = localStorage.getItem(`lore:dossier:reaction:${dossier.date}`);
-      
       setUserReaction(storedReaction);
-      setReactions({
-        gripping: baseCounts.gripping + (storedReaction === 'gripping' ? 1 : 0),
-        scared: baseCounts.scared + (storedReaction === 'scared' ? 1 : 0),
-        mindblown: baseCounts.mindblown + (storedReaction === 'mindblown' ? 1 : 0),
-        like: baseCounts.like + (storedReaction === 'like' ? 1 : 0)
-      });
+      setReactions(dossier.reactions || { like: 0, gripping: 0, scared: 0, mindblown: 0 });
     }
   }, [dossier]);
 
@@ -195,27 +188,118 @@ export default function TodayInShadows() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  const handleReact = (type) => {
+  // Fetch comments when modal is opened for this dossier
+  useEffect(() => {
+    if (modalOpen && dossier) {
+      let active = true;
+      setCommentsLoading(true);
+      setCommentError(null);
+      
+      const fetchComments = async () => {
+        try {
+          const res = await fetch(`/api/comments?target_id=${dossier.date}&title=${encodeURIComponent(dossier.title)}&category=dossier`);
+          if (res.ok && active) {
+            const data = await res.json();
+            setComments(data);
+          }
+        } catch (err) {
+          console.warn('[Dossier Comments] Failed to fetch comments:', err.message);
+        } finally {
+          if (active) setCommentsLoading(false);
+        }
+      };
+
+      fetchComments();
+      return () => { active = false; };
+    }
+  }, [modalOpen, dossier]);
+
+  const handleSubmitComment = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim() || !dossier) return;
+    
+    setSubmittingComment(true);
+    setCommentError(null);
+    const activeCodename = codename.trim() || 'Anonymous Agent';
+    
+    try {
+      const res = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          target_id: dossier.date,
+          username: activeCodename,
+          comment: newComment.trim()
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setComments(data);
+        setNewComment('');
+        if (codename.trim()) {
+          localStorage.setItem('lore:codename', codename.trim());
+        }
+      } else {
+        const errData = await res.json();
+        setCommentError(errData.error || 'Failed to submit report');
+      }
+    } catch (err) {
+      setCommentError('Network error. Unable to dispatch intel.');
+    } finally {
+      setSubmittingComment(false);
+    }
+  };
+
+  const handleReact = async (type) => {
     if (!dossier) return;
     
-    let newReaction = type;
-    if (userReaction === type) {
-      // Toggle off
-      newReaction = null;
+    const wasSelected = userReaction === type;
+    const oldReaction = userReaction;
+    const newReaction = wasSelected ? null : type;
+    
+    setUserReaction(newReaction);
+    setReactions(prev => {
+      const next = { ...prev };
+      if (wasSelected) {
+        next[type] = Math.max(0, (next[type] || 1) - 1);
+      } else {
+        next[type] = (next[type] || 0) + 1;
+        if (oldReaction && oldReaction !== type) {
+          next[oldReaction] = Math.max(0, (next[oldReaction] || 1) - 1);
+        }
+      }
+      return next;
+    });
+
+    if (wasSelected) {
       localStorage.removeItem(`lore:dossier:reaction:${dossier.date}`);
     } else {
       localStorage.setItem(`lore:dossier:reaction:${dossier.date}`, type);
     }
-    
-    setUserReaction(newReaction);
-    
-    const baseCounts = getSeedCounts(dossier.date, dossier.title);
-    setReactions({
-      gripping: baseCounts.gripping + (newReaction === 'gripping' ? 1 : 0),
-      scared: baseCounts.scared + (newReaction === 'scared' ? 1 : 0),
-      mindblown: baseCounts.mindblown + (newReaction === 'mindblown' ? 1 : 0),
-      like: baseCounts.like + (newReaction === 'like' ? 1 : 0)
-    });
+
+    try {
+      if (oldReaction && oldReaction !== type) {
+        await fetch('/api/daily-dossier', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reaction_type: oldReaction, undo: true })
+        });
+      }
+
+      const res = await fetch('/api/daily-dossier', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reaction_type: type, undo: wasSelected })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reactions) {
+          setReactions(data.reactions);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to save daily dossier reaction:', err.message);
+    }
   };
 
   if (loading) {
@@ -240,19 +324,30 @@ export default function TodayInShadows() {
         }}
       >
         {dossier.thumbnail && (
-          <div className="w-full aspect-[16/9] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
+          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                 <LoreMark size={20} color="currentColor" />
                 <span className="text-[7px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
               </div>
             ) : (
-              <img
-                src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
-                alt={dossier.title}
-                onError={() => setImgFailed(true)}
-                className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-              />
+              <div className="relative w-full h-full overflow-hidden bg-[#0C0B09]/80">
+                {/* Blurred background underlay */}
+                <img
+                  src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none"
+                />
+                {/* Crisp foreground contained image */}
+                <img
+                  src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
+                  alt={dossier.title}
+                  onError={() => setImgFailed(true)}
+                  className="relative z-10 w-full h-full object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
+              </div>
             )}
           </div>
         )}
@@ -420,6 +515,82 @@ export default function TodayInShadows() {
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Classified Intel Feed / Decrypted Discussion */}
+              <div className="space-y-4 pt-4 border-t border-neutral-900">
+                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2 flex items-center justify-between">
+                  <span>Classified Intel Logs (Decrypted Feed)</span>
+                  {commentsLoading && <span className="text-[9px] text-[#9E7B4C] animate-pulse">DECRYPTING...</span>}
+                </h5>
+
+                {/* Comments List */}
+                <div className="space-y-3 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
+                  {comments.length === 0 && !commentsLoading ? (
+                    <div className="text-center py-6 border border-dashed border-neutral-900 rounded-lg text-neutral-500 text-xs font-mono">
+                      NO DECRYPTED INTEL LOGS FOUND.
+                    </div>
+                  ) : (
+                    comments.map((c) => (
+                      <div
+                        key={c.id || c.timestamp}
+                        className="p-3 rounded-lg border bg-neutral-950/60 border-neutral-900/60"
+                      >
+                        <div className="flex justify-between items-baseline mb-1">
+                          <span className="text-[10px] font-mono text-[#9E7B4C] uppercase tracking-wider font-bold">
+                            {c.username}
+                          </span>
+                          <span className="text-[8px] font-mono text-neutral-500">
+                            {new Date(c.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · {new Date(c.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                        </div>
+                        <p className="font-serif italic text-xs leading-relaxed text-[#EDE8DF]/90">
+                          {c.comment}
+                        </p>
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Submit Comment Form */}
+                <form onSubmit={handleSubmitComment} className="space-y-3 pt-2">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="w-full sm:w-[160px] flex-shrink-0">
+                      <label htmlFor="dossier-codename" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Codename</label>
+                      <input
+                        id="dossier-codename"
+                        type="text"
+                        placeholder="Agent_Anonymous"
+                        value={codename}
+                        onChange={(e) => setCodename(e.target.value)}
+                        className="w-full bg-[#0A0907] text-[#EDE8DF] text-[11px] font-mono px-3 py-2 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <label htmlFor="dossier-comment" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Intel Report</label>
+                      <textarea
+                        id="dossier-comment"
+                        placeholder="Log your findings or notes here..."
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        rows={2}
+                        className="w-full bg-[#0A0907] text-[#EDE8DF] text-[11px] font-serif px-3 py-2 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors resize-none"
+                      />
+                    </div>
+                  </div>
+                  {commentError && (
+                    <p className="text-[10px] font-mono text-red-500">{commentError}</p>
+                  )}
+                  <div className="flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={submittingComment || !newComment.trim()}
+                      className="px-4 py-2 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] hover:border-[#9E7B4C]/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-[10px] font-mono tracking-widest uppercase rounded active:scale-95 transition-all duration-200 cursor-pointer"
+                    >
+                      {submittingComment ? 'Sending...' : 'Dispatch Intel'}
+                    </button>
+                  </div>
+                </form>
               </div>
 
             </div>

@@ -78,10 +78,23 @@ function StoryCardImage({ story, alt }) {
     );
   }
   return (
-    <img src={displayUrl} alt={alt}
-      onError={handleImageError}
-      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-      loading="lazy" />
+    <div className="relative w-full h-full overflow-hidden bg-[#0C0B09]/80">
+      {/* Blurred background */}
+      <img
+        src={displayUrl}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-110 pointer-events-none"
+      />
+      {/* Crisp foreground contained image */}
+      <img
+        src={displayUrl}
+        alt={alt}
+        onError={handleImageError}
+        className="relative z-10 w-full h-full object-contain transition-transform duration-700 group-hover:scale-102"
+        loading="lazy"
+      />
+    </div>
   );
 }
 
@@ -343,7 +356,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                     }}
                   >
                     {/* Image panel */}
-                    <div className="w-full aspect-[16/9] md:aspect-auto md:w-[200px] md:h-auto flex-shrink-0 relative overflow-hidden">
+                    <div className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-auto md:w-[200px] md:h-auto flex-shrink-0 relative overflow-hidden">
                       <StoryCardImage story={story} alt={story.title} />
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 story-card-overlay" />

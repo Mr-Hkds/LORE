@@ -59,19 +59,28 @@ export function useStaticContent() {
 
   const loadStories = useCallback(async () => {
     try {
-      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
-      if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
+      const res = await fetch(`/api/stories?t=${Date.now()}`);
+      if (!res.ok) throw new Error(`API failed`);
       const data = await res.json();
-      setAllStories(data.stories || []);
+      setAllStories(Array.isArray(data) ? data : (data.stories || []));
       setLoading(false);
     } catch (err) {
-      console.error('Failed to load stories.json:', err);
-      setError('Failed to load the archive. Please refresh.');
-      setLoading(false);
+      // Fallback to static JSON file
+      try {
+        const res = await fetch(`/content/stories.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
+        const data = await res.json();
+        setAllStories(data.stories || []);
+        setLoading(false);
+      } catch (err2) {
+        console.error('Failed to load stories:', err2);
+        setError('Failed to load the archive. Please refresh.');
+        setLoading(false);
+      }
     }
   }, []);
 
-  // Load stories.json on mount
+  // Load stories on mount
   useEffect(() => {
     loadStories();
   }, [loadStories]);

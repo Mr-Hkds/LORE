@@ -1,3 +1,5 @@
+import db from '../db.cjs';
+
 const DAILY_THEMES = {
   0: { name: 'Secret Sunday', hint: 'secret archives, government coverups, and classified dossiers' },
   1: { name: 'Mystery Monday', hint: 'unexplained mysteries, disappearances, and unsolved riddles' },
@@ -135,19 +137,71 @@ async function getWikipediaThumbnail(query) {
   return null;
 }
 
+async function getReactionsWithAiFallback(dateStr, title, category, year) {
+  const existing = db.getDailyReactions(dateStr);
+  const total = (existing.likes || 0) + (existing.gripping || 0) + (existing.scared || 0) + (existing.mindblown || 0);
+  if (total > 0) {
+    return existing;
+  }
+
+  console.log(`[AI Reactions] Seeding reactions for daily dossier date: ${dateStr}...`);
+  const hash = dateStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + (title || '').length;
+  
+  const defaultReactions = {
+    likes: 25 + (hash % 45),
+    gripping: 18 + (hash % 35),
+    scared: (category === 'paranormal' || category === 'true_crime' || category.includes('horror') || category.includes('tragedy')) ? 30 + (hash % 50) : 2 + (hash % 8),
+    mindblown: (category === 'psychology' || category === 'conspiracy' || category.includes('experiment')) ? 35 + (hash % 60) : 5 + (hash % 12)
+  };
+
+  try {
+    const prompt = `Given a dark historical topic: "${title}", category: "${category}", year: "${year}". How relevant is this story for readers? Rate the sentiment and interest of the audience on four metrics: likes, gripping, scared, and mindblown. Return ONLY a JSON object of integers between 15 and 150 representing number of users who reacted. Format: {"likes": X, "gripping": Y, "scared": Z, "mindblown": W}`;
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, { signal: controller.signal });
+    clearTimeout(id);
+
+    if (res.ok) {
+      const text = await res.text();
+      const cleanJson = text.match(/\{[\s\S]*?\}/);
+      if (cleanJson) {
+        const parsed = JSON.parse(cleanJson[0]);
+        if (typeof parsed.likes === 'number' && typeof parsed.gripping === 'number') {
+          const aiReactions = {
+            likes: Math.max(10, parsed.likes),
+            gripping: Math.max(10, parsed.gripping),
+            scared: Math.max(0, parsed.scared || 0),
+            mindblown: Math.max(0, parsed.mindblown || 0)
+          };
+          db.setDailyReactions(dateStr, aiReactions);
+          return aiReactions;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[AI Reactions] Failed to fetch custom reactions from Pollinations:', err.message);
+  }
+
+  db.setDailyReactions(dateStr, defaultReactions);
+  return defaultReactions;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
+  const todayObj = new Date();
+  const dateStr = todayObj.toLocaleDateString('en-CA');
+  const dayOfWeek = todayObj.getDay();
+
   if (req.method === 'GET') {
-    const todayObj = new Date();
-    const dayOfWeek = todayObj.getDay();
     const dossier = generateDailyDossier(dayOfWeek);
+    dossier.date = dateStr;
 
     try {
       const query = dossier.wikiQuery || dossier.title;
@@ -159,7 +213,42 @@ export default async function handler(req, res) {
       // Fallback is already set
     }
 
+    try {
+      const rx = await getReactionsWithAiFallback(dateStr, dossier.title, dossier.theme, dossier.year);
+      // Map 'likes' database column back to UI key 'like'
+      dossier.reactions = {
+        like: rx.likes || 0,
+        gripping: rx.gripping || 0,
+        scared: rx.scared || 0,
+        mindblown: rx.mindblown || 0
+      };
+    } catch (err) {
+      dossier.reactions = { like: 0, gripping: 0, scared: 0, mindblown: 0 };
+    }
+
     return res.status(200).json(dossier);
+  }
+
+  if (req.method === 'POST') {
+    try {
+      const { reaction_type, undo } = req.body || {};
+      if (!reaction_type) {
+        return res.status(400).json({ error: 'Missing reaction_type' });
+      }
+      db.updateDailyReaction(dateStr, reaction_type, undo);
+      const rx = db.getDailyReactions(dateStr);
+      return res.status(200).json({
+        success: true,
+        reactions: {
+          like: rx.likes || 0,
+          gripping: rx.gripping || 0,
+          scared: rx.scared || 0,
+          mindblown: rx.mindblown || 0
+        }
+      });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
 
   return res.status(405).json({ error: 'Method Not Allowed' });

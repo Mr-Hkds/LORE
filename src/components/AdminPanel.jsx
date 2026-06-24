@@ -118,8 +118,33 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   });
 
   const [ghSyncSuccess, setGhSyncSuccess] = useState(() => localStorage.getItem('lore:github:success') === 'true');
+  const [genProgress, setGenProgress] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
+
+  // Analytics Dashboard state
+  const [analyticsData, setAnalyticsData] = useState({
+    totalPageviews: 0,
+    uniqueVisitors: 0,
+    activeSessions: 0,
+    recentPageviews: []
+  });
+  const [analyticsLoading, setAnalyticsLoading] = useState(false);
+
+  const loadAnalytics = async () => {
+    setAnalyticsLoading(true);
+    try {
+      const res = await fetch('/api/analytics');
+      if (res.ok) {
+        const data = await res.json();
+        setAnalyticsData(data);
+      }
+    } catch (err) {
+      console.error('Failed to load analytics:', err);
+    } finally {
+      setAnalyticsLoading(false);
+    }
+  };
 
   // Write safe localStorage setter
   const setLocalVal = (key, val) => {
@@ -365,7 +390,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
             });
             if (res.ok) {
               const data = await res.json();
-              resolve(data.path);
+              resolve(data.path || remoteUrl);
               return;
             }
           } catch {
@@ -500,7 +525,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         throw new Error('Failed to generate a valid 7-layer story from Gemini response');
       }
 
-      storyObj.added_date = new Date().toISOString().split('T')[0];
+      storyObj.added_date = new Date().toLocaleDateString('en-CA');
       setProgress(75);
 
       // Search Wikipedia for image
@@ -1223,14 +1248,8 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       return;
     }
 
-    if (!apiKey) {
-      alert('Gemini API key is required to generate prompts for missing images. Set it in Settings & Sync.');
-      setIsPublishing(false);
-      setPublishStatus('');
-      return;
-    }
-
     setIsPublishing(true);
+    setGenProgress({ current: 0, total: missing.length, percentage: 0 });
     setPublishStatus('Generating cover images...');
     addLog(`Found ${missing.length} stories missing or broken cover images. Starting process...`);
 
@@ -1257,22 +1276,26 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           addLog(`Found Wikipedia cover photo. Downloading...`);
           newHeroImage = await saveRemoteImageLocally(story.story_id, imageUrl);
         } else {
-          addLog(`No Wikipedia photo found. Generating Flux prompt with Gemini...`);
           const imagePrompt = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${story.title}".
 Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
 Highlight a single, mysterious focal point in a realistic documentary style.
 Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
 
-          let aiPromptText = `A cinematic, atmospheric dark photo of ${story.title}, highly realistic, dramatic lighting`;
-          try {
-            const generatedPrompt = await callGeminiApi([
-              { role: 'user', parts: [{ text: imagePrompt }] }
-            ]);
-            if (generatedPrompt && generatedPrompt.trim().length > 5) {
-              aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+          let aiPromptText = `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
+          if (apiKey) {
+            addLog(`No Wikipedia photo found. Generating Flux prompt with Gemini...`);
+            try {
+              const generatedPrompt = await callGeminiApi([
+                { role: 'user', parts: [{ text: imagePrompt }] }
+              ]);
+              if (generatedPrompt && generatedPrompt.trim().length > 5) {
+                aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
+              }
+            } catch (err) {
+              console.warn('Failed to generate prompt via Gemini:', err);
             }
-          } catch (err) {
-            console.warn('Failed to generate prompt via Gemini:', err);
+          } else {
+            addLog(`No Wikipedia photo found. Gemini API key missing. Using template fallback for Flux prompt.`);
           }
 
           const enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
@@ -1298,12 +1321,18 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       } catch (err) {
         addLog(`❌ Error generating image for "${story.title}": ${err.message}`);
       }
+      setGenProgress({
+        current: i + 1,
+        total: missing.length,
+        percentage: Math.round(((i + 1) / missing.length) * 100)
+      });
     }
 
     addLog(`Process complete. Successfully updated ${successCount} out of ${missing.length} cover images.`);
     setToast({ text: `Generated cover images for ${successCount} stories!`, type: 'success' });
     setIsPublishing(false);
     setPublishStatus('');
+    setGenProgress(null);
     await loadAdminStories();
     if (refetchStories) refetchStories();
   };
@@ -1583,8 +1612,21 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
   }, [filteredStories]);
 
   const storiesAddedToday = useMemo(() => {
-    const today = new Date().toISOString().split('T')[0];
-    return adminStories.filter(s => s.added_date === today);
+    const now = new Date();
+    const today = now.toLocaleDateString('en-CA');
+    return adminStories.filter(s => {
+      if (!s.added_date) return false;
+      const cleanDate = s.added_date.substring(0, 10);
+      if (cleanDate === today) return true;
+      try {
+        const addedTime = new Date(s.added_date).getTime();
+        const diffMs = now.getTime() - addedTime;
+        const diffHours = diffMs / (1000 * 60 * 60);
+        return diffHours >= 0 && diffHours <= 24;
+      } catch {
+        return false;
+      }
+    });
   }, [adminStories]);
 
   const draftStories = useMemo(() => {
@@ -1754,6 +1796,17 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
             Reader Feedback ({feedbackItems.filter(f => !f.addressed).length})
           </button>
           <button
+            onClick={() => {
+              setActiveTab('analytics');
+              loadAnalytics();
+            }}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'analytics' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            Visitor Analytics
+          </button>
+          <button
             onClick={() => setActiveTab('database')}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               activeTab === 'database' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
@@ -1807,6 +1860,24 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                   </button>
                 </div>
               </div>
+
+              {genProgress && (
+                <div className="p-4 bg-[#0D0B08] border border-indigo-900/30 rounded-xl space-y-2 text-left">
+                  <div className="flex justify-between items-center text-xs font-mono text-[#EDE8DF]">
+                    <span className="tracking-widest uppercase text-[#9E7B4C] flex items-center gap-1.5 animate-pulse font-bold">
+                      <span>⚡</span> Compiling Cover Images
+                    </span>
+                    <span>{genProgress.current} / {genProgress.total} ({genProgress.percentage}%)</span>
+                  </div>
+                  <div className="w-full bg-[#110F0D] h-2 rounded-full overflow-hidden border border-neutral-900">
+                    <div
+                      className="bg-indigo-600 h-full rounded-full transition-all duration-300"
+                      style={{ width: `${genProgress.percentage}%` }}
+                    />
+                  </div>
+                  <p className="text-[10px] text-[#6A6560] font-mono">{publishStatus}</p>
+                </div>
+              )}
 
               {editingStoryId ? (
                 // Story Editor Panel
@@ -2904,6 +2975,99 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                   {publishStatus}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Tab 8: Visitor Analytics */}
+          {activeTab === 'analytics' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3 text-left" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">Visitor Analytics</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Lightweight self-hosted SQLite pageview tracker metrics</p>
+                </div>
+                <button
+                  onClick={loadAnalytics}
+                  disabled={analyticsLoading}
+                  className="px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 transition-all cursor-pointer font-bold"
+                >
+                  {analyticsLoading ? 'Refreshing...' : 'Refresh Stats'}
+                </button>
+              </div>
+
+              {/* KPI Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Total Pageviews</span>
+                  <span className="font-serif italic text-2xl text-[#EDE8DF]">{analyticsData.totalPageviews}</span>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Unique Visitors</span>
+                  <span className="font-serif italic text-2xl text-[#9E7B4C]">{analyticsData.uniqueVisitors}</span>
+                </div>
+                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
+                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Active Sessions (30m)</span>
+                  <span className="font-serif italic text-2xl text-[#10B981]">{analyticsData.activeSessions}</span>
+                </div>
+              </div>
+
+              {/* Pageviews Table */}
+              <div className="space-y-3 text-left">
+                <div className="border-b pb-2 flex items-center justify-between" style={{ borderColor: ru }}>
+                  <h3 className="font-serif italic text-lg text-neutral-300">Recent Logs (Last 50 Views)</h3>
+                  <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">REALTIME STREAM</span>
+                </div>
+                {analyticsData.recentPageviews.length === 0 ? (
+                  <div className="text-center py-12 text-[#6A6560]">
+                    <p className="font-serif italic text-base">No visitor traffic logged yet.</p>
+                    <p className="text-[9px] font-mono uppercase mt-1">Navigate pages on the main site to trigger logs.</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto rounded-lg border border-neutral-900 bg-neutral-950/40">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="border-b border-neutral-900 bg-neutral-950 font-mono text-[9px] text-[#6A6560] uppercase tracking-wider">
+                          <th className="p-3">Timestamp</th>
+                          <th className="p-3">Path</th>
+                          <th className="p-3">Visitor ID</th>
+                          <th className="p-3">Session ID</th>
+                          <th className="p-3">Referrer</th>
+                          <th className="p-3">Device / User Agent</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-neutral-950 font-mono text-[10.5px]">
+                        {analyticsData.recentPageviews.map((pv) => {
+                          const dateObj = new Date(pv.timestamp);
+                          const formattedTime = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' ' + dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+                          
+                          let uaShort = 'Desktop / Browser';
+                          if (pv.user_agent) {
+                            const ua = pv.user_agent;
+                            if (ua.includes('Mobi') || ua.includes('Android') || ua.includes('iPhone')) {
+                              uaShort = 'Mobile Device';
+                            }
+                            if (ua.includes('Chrome') && !ua.includes('Edg')) uaShort += ' (Chrome)';
+                            else if (ua.includes('Safari') && !ua.includes('Chrome')) uaShort += ' (Safari)';
+                            else if (ua.includes('Edg')) uaShort += ' (Edge)';
+                            else if (ua.includes('Firefox')) uaShort += ' (Firefox)';
+                          }
+
+                          return (
+                            <tr key={pv.id} className="hover:bg-neutral-900/10 text-neutral-300">
+                              <td className="p-3 text-[#6A6560] whitespace-nowrap">{formattedTime}</td>
+                              <td className="p-3 text-[#9E7B4C] font-semibold">{pv.path}</td>
+                              <td className="p-3 select-all" title={pv.visitor_id}>{pv.visitor_id?.substring(2, 8)}...</td>
+                              <td className="p-3 select-all" title={pv.session_id}>{pv.session_id?.substring(2, 8)}...</td>
+                              <td className="p-3 truncate max-w-[120px]" title={pv.referrer}>{pv.referrer || 'direct'}</td>
+                              <td className="p-3 truncate max-w-[200px]" title={pv.user_agent}>{uaShort}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
