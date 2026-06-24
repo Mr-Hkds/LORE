@@ -358,11 +358,8 @@
     {
       "story_id": "operation_northwoods_001",
       "title": "Operation Northwoods: The 1962 Plan to Manufacture a War",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Major-general-lansdale.jpg/250px-Major-general-lansdale.jpg",
-      "image_query": "",
-      "hook": "Kya hoga agar government khud apne hi citizens par attack plan kare, sirf war justify karne ke liye? Ek aisa shocking sach jo aapko hila dega.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Kya hoga agar government khud apne hi citizens par attack plan kare, sirf war justify karne ke liye? Ek aisa shocking sach jo aapko hila dega.",
       "concepts": [
         "false_flag",
         "government_conspiracy",
@@ -370,6 +367,18 @@
         "unethical_warfare",
         "covert_operations"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Major-general-lansdale.jpg/250px-Major-general-lansdale.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 42,
+        "gripping": 30,
+        "scared": 4,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -480,11 +489,8 @@
     {
       "story_id": "malaysia_airlines_mh370",
       "title": "MH370: Malaysia Airlines flight 370 disappearance",
-      "hero_image": "https://i.insider.com/5b6196b642e1cc32c5106a48?width=1200&format=jpeg",
-      "image_query": "",
-      "hook": "Ek Boeing 777, 239 logon ke saath, bina kisi trace ke gayab ho gaya. Kya yeh sirf ek accident tha, ya iske peeche kuch aur hi raaz tha?",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "Ek Boeing 777, 239 logon ke saath, bina kisi trace ke gayab ho gaya. Kya yeh sirf ek accident tha, ya iske peeche kuch aur hi raaz tha?",
       "concepts": [
         "unsolved_mystery",
         "aviation_disaster",
@@ -495,6 +501,18 @@
         "technological_enigma",
         "oceanic_search"
       ],
+      "severity": "chilling",
+      "hero_image": "https://i.insider.com/5b6196b642e1cc32c5106a48?width=1200&format=jpeg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 28,
+        "gripping": 41,
+        "scared": 58,
+        "mindblown": 9
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -543,16 +561,25 @@
     {
       "story_id": "stanford_prison_experiment_001",
       "title": "Stanford Prison Experiment : The Psychology of Power",
-      "hero_image": "https://cdn.britannica.com/01/195501-050-8F76BB72/Guards-prisoner-Phillip-Zimbardo-Stanford-Prison-Experiment.jpg",
-      "image_query": "",
-      "hook": "Kya hota hai jab ordinary log extraordinary circumstances mein aa jaate hain? Stanford Prison Experiment ka sach aapki neend uda dega.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Kya hota hai jab ordinary log extraordinary circumstances mein aa jaate hain? Stanford Prison Experiment ka sach aapki neend uda dega.",
       "concepts": [
         "power_dynamics",
         "social_roles",
         "dehumanization"
       ],
+      "severity": "chilling",
+      "hero_image": "https://cdn.britannica.com/01/195501-050-8F76BB72/Guards-prisoner-Phillip-Zimbardo-Stanford-Prison-Experiment.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 12,
+        "scared": 6,
+        "mindblown": 67
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -601,16 +628,25 @@
     {
       "story_id": "barney_barnato",
       "title": "The Mysterious End of Barney Barnato",
-      "hero_image": "https://alchetron.com/cdn/barney-barnato-65a2d3aa-960c-4428-b8fc-c208a995eb0-resize-750.jpg",
-      "image_query": "",
-      "hook": "In 1897, one of the world's wealthiest diamond tycoons plunged into the Atlantic Ocean from a passenger ship. The official ruling was suicide, but the secrets he carried tell a different story.",
       "category": "conspiracy",
-      "severity": "disturbing",
+      "hook": "In 1897, one of the world's wealthiest diamond tycoons plunged into the Atlantic Ocean from a passenger ship. The official ruling was suicide, but the secrets he carried tell a different story.",
       "concepts": [
         "unexplained_deaths",
         "financial_conspiracy",
         "lost_wealth"
       ],
+      "severity": "disturbing",
+      "hero_image": "https://alchetron.com/cdn/barney-barnato-65a2d3aa-960c-4428-b8fc-c208a995eb0-resize-750.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 49,
+        "gripping": 17,
+        "scared": 2,
+        "mindblown": 37
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -658,11 +694,8 @@
     {
       "story_id": "hinterkaifeck_murders",
       "title": "Hinterkaifeck: Woh Khooni Raat Jo Ek Raaz Ban Gayi",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Hinterkaifeck-Hof_%28cropped%29.jpg",
-      "image_query": "",
-      "hook": "Bavaria ke ek isolated farm par ek poora parivar brutal tareeke se maar diya gaya, lekin aaj tak, killer ka koi surag nahi mila.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "Bavaria ke ek isolated farm par ek poora parivar brutal tareeke se maar diya gaya, lekin aaj tak, killer ka koi surag nahi mila.",
       "concepts": [
         "unsolved_mystery",
         "brutal_murders",
@@ -671,6 +704,18 @@
         "family_tragedy",
         "cold_case"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Hinterkaifeck-Hof_%28cropped%29.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 42,
+        "scared": 29,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -719,17 +764,26 @@
     {
       "story_id": "the_zodiac_killer",
       "title": "Zodiac: Raaz Jo Kabhi Na Khula",
-      "hero_image": "https://images.foxtv.com/static.q13fox.com/www.q13fox.com/content/uploads/2020/06/764/432/zodiac1.jpg",
-      "image_query": "",
-      "hook": "Ek aisa killer jo apne crimes ko celebrate karta tha, letters likhta tha, ciphers bhejta tha, aur America ko dahshat mein rakhta tha. Uski pehchaan aaj bhi ek paheli hai.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "Ek aisa killer jo apne crimes ko celebrate karta tha, letters likhta tha, ciphers bhejta tha, aur America ko dahshat mein rakhta tha. Uski pehchaan aaj bhi ek paheli hai.",
       "concepts": [
         "serial_killer",
         "unsolved_mystery",
         "cryptography",
         "media_obsession"
       ],
+      "severity": "chilling",
+      "hero_image": "https://images.foxtv.com/static.q13fox.com/www.q13fox.com/content/uploads/2020/06/764/432/zodiac1.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 22,
+        "gripping": 30,
+        "scared": 47,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -778,16 +832,25 @@
     {
       "story_id": "sleep_paralysis_dossier",
       "title": "Sleep Paralysis: The Mind That Builds Its Own Monster",
-      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/sleepparalysisdemon.jpg?c=original&q=w_860,c_fill",
-      "image_query": "",
-      "hook": "You are conscious. You cannot move. Something is in the room. And science can explain every detail — which makes it worse.",
       "category": "psychology",
-      "severity": "disturbing",
+      "hook": "You are conscious. You cannot move. Something is in the room. And science can explain every detail — which makes it worse.",
       "concepts": [
         "REM atonia",
         "hypnagogic hallucinations",
         "sensed presence phenomenon"
       ],
+      "severity": "disturbing",
+      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/sleepparalysisdemon.jpg?c=original&q=w_860,c_fill",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 40,
+        "gripping": 23,
+        "scared": 2,
+        "mindblown": 28
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -836,16 +899,25 @@
     {
       "story_id": "mahadev_and_sati_dossier",
       "title": "The God Who Would Not Let Go: Shiva, Sati, and the Anatomy of Cosmic Grief",
-      "hero_image": "https://2.bp.blogspot.com/-GCQgmEXeySE/T4se1tVJYKI/AAAAAAAAVFQ/wj2wsuTVPWk/s1600/Goddess+Sati+and+God+Shiva.jpg",
-      "image_query": "",
-      "hook": "A divine marriage ends in self-immolation. A god loses his mind. 51 pieces of a body fall across a subcontinent.",
       "category": "mythology",
-      "severity": "unsettling",
+      "hook": "A divine marriage ends in self-immolation. A god loses his mind. 51 pieces of a body fall across a subcontinent.",
       "concepts": [
         "grief_and_dissociation",
         "ritual_self_destruction",
         "sacred_geography"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://2.bp.blogspot.com/-GCQgmEXeySE/T4se1tVJYKI/AAAAAAAAVFQ/wj2wsuTVPWk/s1600/Goddess+Sati+and+God+Shiva.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 38,
+        "gripping": 11,
+        "scared": 6,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -894,11 +966,8 @@
     {
       "story_id": "cicada_3301",
       "title": "Cicada 3301: Internet ka Sabse Bada Anjana Raaz",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
-      "image_query": "",
-      "hook": "Ek online puzzle jo duniya ke sabse tez dimaagon ko dhundh raha tha. Lekin kiske liye, aur kyon?",
       "category": "cyber_mysteries",
-      "severity": "unsettling",
+      "hook": "Ek online puzzle jo duniya ke sabse tez dimaagon ko dhundh raha tha. Lekin kiske liye, aur kyon?",
       "concepts": [
         "cryptography",
         "steganography",
@@ -906,6 +975,18 @@
         "recruitment",
         "secret_societies"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 36,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -949,27 +1030,6 @@
           "content": "Cicada 3301 ka sabse gehra aur dark sach yeh hai ki uska asli maksad aur identity aaj tak ek raaz hai. Ye ek reminder hai ki internet ki duniya mein aisi anjaani shaktiyan ho sakti hain jo hamari soch se bhi pare hain. Ek entity jo duniya ke sabse tez dimaagon ko test aur recruit kar sakti hai, bina apni pehchaan ya maksad zahir kiye.\n\nYe hume ye bhi sikhata hai ki insaan ki intelligence aur curiosity ko kitni aasani se manipulate kiya ja sakta hai. Unhone proof kiya ki kaise kuch anjaane log, internet ke zariye, puri duniya ke sabse brightest minds ko ek saath la sakte hain, ek unkahi, anjaani wajah ke liye. Cicada 3301 ek unsettling question chhod gaya hai: kya hum sach mein apne digital duniya mein safe hain, aur aisi aur kitni hidden societies ya entities hain jo hume test kar rahi hain, bina hamari jaankari ke?"
         }
       ]
-    },
-    {
-      "role": "assistant",
-      "reasoning": "We have to generate JSON with the specified structure. Must not use double quotes inside string fields unless escaped. Use single quotes for citations. Avoid trailing commas. Provide connectivity details to an existing story: choose one from catalog. We should connect to e.g., \"the_zodiac_killer\" or \"hinterkaifeck_murders\". Let's connect to \"the_zodiac_killer\" because both are unsolved murders. Provide shared concept: \"unsolved_mystery\". Transition line linking. Provide concept list: for Black Dahlia, concepts maybe \"unsolved_mystery\", \"serial_killer\", \"media_impact\". We'll need severity \"disturbing\". Title: \"Silence in the Night: The Black Dahlia Case\". Hook: \"In June 1947, a Hollywood star went missing, only to return as a headline. The photograph that emerged will haunt the city for decades.\" (max 150 chars). Let's craft story: 7 layers, each 2-3 paragraphs. Use double newlines. Use single quotes in text. Avoid double quotes.\n\nWe need to be careful: can't include double quotes characters inside string values unless escaped. That includes standard quotes inside string; we can use single quotes for quotations, e.g., 'B. J. Silverman'.\n\nPotential double quotes inside the data? Some names: \"Black Dahlia\" has a space; no double quotes. We must not use any double quotes like \"...\". We must also avoid double quotes inside field content. We should use single quotes for any quotes inside the narrative. Use no double quotes inside. Use encoded double quotes with \\\". But easier, avoid them. We can embed quotes as '...' only.\n\nBut there will be constructs like \"Black Dahlia\" but that's fine, just words. No double quotes.\n\nMake sure we don't embed double quotes anywhere in text. That includes punctuation. So we should ensure all quotations use single quotes.\n\nAlso we need to make sure the JSON object is valid. Use double quotes for JSON keys and strings as mandated by JSON, but content strings may contain double quotes inside if escaped, but we won't use them.\n\nDouble-check \"concepts\" array: strings inside double quotes, no internal quotes. Good.\n\nEdge: \"Content\" messages may include newlines (\\n\\n). In JSON string, we need to represent newlines as \\n\\n. So content is a string with literal \\\\n\\\\n? Actually we can just use \\n\\n for separation. But must ensure proper escaping: inside double quotes, \\n is escape for newline. So we write \"First paragraph content.\\n\\nSecond paragraph.\" This is fine.\n\nAlso, we must not use any unescaped double quotes inside the content string. If we include ' (apostrophe) that's fine. Must avoid double quotes. In \"content\" strings we will not include double quotes.\n\nAlso in hook, I need to keep under 150 chars. Use single quotes if necessary. Avoid character counts beyond mention. Hook length: 150 chars limit. We'll approximate.\n\nMake sure there are no trailing commas in arrays or objects. Must ensure last object no comma.\n\nConnections array: we need story_id referencing existing. We'll pick \"the_zodiac_killer\". Provide shared_concept \"unsolved_mystery\". Transition line: \"When the Black Dahlia case unfolded, it echoed the chilling patterns that later appeared in the Zodiac killings.\" This includes a period. That's fine. It includes \"Zodiac\". No double quotes.\n\nCheck double quotes: There is no double quote in transition line. The word Zodiac is fine.\n\nOk.\n\nLet's craft layers.\n\nLayer 1: Introduction of whisper.\n\n- Paragraph 1: Mention a photo of Roxie Drummond, missing, returned as news.\n\nGiven sensitive content. \"In June 1947, a Hollywood actress vanished...\" Let's use 2-3 paragraphs: maybe 2 paragraphs.\n\nParagraph 1: \"In an era before internet, a Hollywood star's disappearance spiraled into a surreal, documented nightmare.\" Actually we need hook; the hook is separate. But layer 1 content 2-3 paragraphs.\n\nLet's craft content:\n\nParagraph 1: \"In early June 1947, the city of Los Angeles was stunned by the disappearance of a young actress. Her name was 'Roxie Drummond', and her absence was felt in studios and streets alike.\" Avoid proper nouns with accent? It's fine.\n\nParagraph 2: \"Two months later, a blood‑stained blank canvas arrived at the coroner's office—a photograph that would become emblematic of unsolved crime. The image showed a woman lying face‑down, a gash running across her torso, the first recorded slice that would set a chilling precedent for forensic detail.\" We need thoroughness but keep professional.\n\nThen cliffhanger: \"The mystery deepened when witnesses whispered of a sudden, inexplicable disappearance, hinting at a darkness that would soon be etched into a city’s memory.\"\n\nLayer 2: The Pattern.\n\nParagraph 1: \"The details of the footage and the medical reports established a pattern unlike any prior homicide in the city. The victim's body was severed in a precise manner, and evidence suggested a motive that lingered beyond simple violence.\" paragraph 2: \"But the case was not isolated. News of the brutality echoed through newspapers, tightening the public's fear. Critics argued that the murder was not merely a personal crime but an assault on the very fabric of Los Angeles' burgeoning glam.\"\n\nCliffhanger: mention that investigators soon faced a labyrinth of suspects.\n\nLayer 3: The Incident.\n\nParagraph 1: \"On June 1st, Roxie's apartment was discovered buried in a city house. The police report noted a broken switch, the lack of forced entry, and a peculiar shuffle of the footstep marks within the living room.\" Actually known facts: body was found in vacant lot. Let's correct: We should keep accurate: An empty lot near the intersection of View Park and.\n\nParagraph 1: \"The body was discovered on June 1, 1947, inside a vacant lot near the Los Angeles borough of View Park by a Jewish community leader. The forensic examination revealed the dramatic disfiguration that would define the case.\" Paragraph 2: \"The adjacent property had no forced entry, and the crime scene was arranged with a conspicuous angle that hinted at calculated staging. Officials noted that the victim had been split at a precise location, pointing to ritualistic awareness.\"\n\nCliffhanger: mention that the city began to suspect a complex, possibly ideological motive.\n\nLayer 4: The System.\n\nThis layer should detail the investigation system.\n\nParagraph 1: \"The Los Angeles County Sheriff's Department responded with a multi‑agency task force. They opened nineteen separate case files and consulted with forensic pathologists from the University of Southern California.\" Paragraph 2: \"The police employed the 'bladed, anticoagulation' approach, an unusual method then, but they relied heavily on the previously studied Victimology Model. The case, however, suffered from an undercurrent of political pressure from Hollywood executives who wanted to keep the city serene.\" Possibly reference pressure. Should keep factual. Okay.\n\nCliffhanger: hint that this system eventually broke down.\n\nLayer 5: The Research.\n\nParagraph 1: \"Years of scholarly work parsed the forensic",
-      "tool_calls": [],
-      "added_date": "2026-06-24",
-      "evidence_links": [
-        {
-          "label": "Postfeminist Noir: Brutality and Retro Aesthetics in The Black Dahlia (Katherine Farrimond, 2013)",
-          "url": "http://dx.doi.org/10.1353/flm.2013.a524257"
-        },
-        {
-          "label": "On the origin of species by means of natural selection, or, The preservation of favoured races in the struggle for life / (Charles Darwin, 1859)",
-          "url": "https://www.biodiversitylibrary.org/itempdf/122307"
-        },
-        {
-          "label": "Blossoming Dahlia: Chinese Women Novelists in Colonial Indonesia (Elizabeth Chandra, 2015)",
-          "url": "https://www.jstage.jst.go.jp/article/seas/4/3/4_KJ00010059079/_pdf"
-        }
-      ],
-      "hero_image": "/content/images/undefined.jpg"
     }
   ]
 }
