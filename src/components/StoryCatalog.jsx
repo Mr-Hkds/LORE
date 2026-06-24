@@ -80,7 +80,7 @@ function StoryCardImage({ story, alt }) {
   }
   return (
     <div 
-      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container"
+      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container pt-8"
       style={{
         backgroundColor: '#090807',
         backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
@@ -106,7 +106,7 @@ function StoryCardImage({ story, alt }) {
         src={displayUrl}
         alt={alt}
         onError={handleImageError}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+        className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.02]"
         loading="lazy"
       />
     </div>
