@@ -212,6 +212,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   });
   const [editFormActiveLayer, setEditFormActiveLayer] = useState(1);
 
+  // Database Console states
+  const [dbSqlQuery, setDbSqlQuery] = useState('SELECT story_id, title, category, severity, draft FROM stories LIMIT 10;');
+  const [dbQueryResults, setDbQueryResults] = useState(null);
+  const [dbQueryError, setDbQueryError] = useState(null);
+  const [dbQueryExecuting, setDbQueryExecuting] = useState(false);
+
   // Search & Filter in Catalog
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
@@ -1147,6 +1153,33 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     if (refetchStories) refetchStories();
   };
 
+  const handleExecuteSqlQuery = async () => {
+    if (!dbSqlQuery.trim()) return;
+    setDbQueryExecuting(true);
+    setDbQueryError(null);
+    setDbQueryResults(null);
+    try {
+      const res = await fetch('/api/database-query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sql: dbSqlQuery.trim() })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setDbQueryResults(data.result);
+        setToast({ text: 'SQL Query executed successfully!', type: 'success' });
+        if (refetchStories) refetchStories();
+        loadAdminStories();
+      } else {
+        setDbQueryError(data.error || 'Failed to execute query');
+      }
+    } catch (err) {
+      setDbQueryError(err.message || 'Network error executing SQL');
+    } finally {
+      setDbQueryExecuting(false);
+    }
+  };
+
   // Image Upload handler
   const handleUploadImage = async (e, storyId) => {
     if (!isLocal || serverOffline) {
@@ -1591,6 +1624,14 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
             }`}
           >
             Reader Feedback ({feedbackItems.filter(f => !f.addressed).length})
+          </button>
+          <button
+            onClick={() => setActiveTab('database')}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
+              activeTab === 'database' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            Database Console
           </button>
           <button
             onClick={() => setActiveTab('github-sync')}
@@ -2447,6 +2488,102 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           )}
 
           {/* Tab 5: Settings & Sync */}
+          {/* Tab 5: Database Console */}
+          {activeTab === 'database' && (
+            <div className="space-y-6">
+              <div className="border-b pb-4 text-left gap-3 flex flex-col sm:flex-row sm:items-center justify-between" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">Database Console</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Execute raw SQL queries directly on the SQLite database (lore.db)</p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setDbSqlQuery("SELECT name, tbl_name FROM sqlite_master WHERE type='table';")}
+                    className="px-2.5 py-1 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[9px] font-mono tracking-wider uppercase rounded hover:bg-neutral-800 cursor-pointer"
+                  >
+                    List Tables
+                  </button>
+                  <button
+                    onClick={() => setDbSqlQuery("SELECT story_id, title, category, severity, draft FROM stories LIMIT 10;")}
+                    className="px-2.5 py-1 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[9px] font-mono tracking-wider uppercase rounded hover:bg-neutral-800 cursor-pointer"
+                  >
+                    Select Stories
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-4 text-left">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">SQL Query</label>
+                  <textarea
+                    value={dbSqlQuery}
+                    onChange={e => setDbSqlQuery(e.target.value)}
+                    rows={4}
+                    className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors font-mono resize-y"
+                    placeholder="DELETE FROM stories WHERE story_id = 'your_story_id';"
+                  />
+                  <p className="text-[9px] text-[#6A6560] leading-relaxed">
+                    Write raw SQLite queries. Modifying queries on the <code>stories</code> table will automatically regenerate the static JSON files.
+                  </p>
+                </div>
+
+                <button
+                  onClick={handleExecuteSqlQuery}
+                  disabled={dbQueryExecuting || !dbSqlQuery.trim()}
+                  className="px-4 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 disabled:opacity-50 transition-all duration-200 cursor-pointer text-center"
+                >
+                  {dbQueryExecuting ? 'Executing Query...' : 'Execute SQL Query'}
+                </button>
+
+                {dbQueryError && (
+                  <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-red-400 text-xs font-mono text-left">
+                    <strong>Error:</strong> {dbQueryError}
+                  </div>
+                )}
+
+                {dbQueryResults && (
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-mono tracking-widest uppercase text-[#9E7B4C] font-bold">Query Results</h4>
+                    <div className="border border-neutral-850 rounded-xl overflow-hidden bg-black/25 max-h-[300px] overflow-y-auto">
+                      {Array.isArray(dbQueryResults) ? (
+                        dbQueryResults.length === 0 ? (
+                          <div className="p-4 text-center text-neutral-500 italic text-xs">
+                            Query returned 0 rows.
+                          </div>
+                        ) : (
+                          <table className="w-full text-left border-collapse text-xs font-mono">
+                            <thead>
+                              <tr className="border-b border-neutral-800 bg-neutral-900/60 font-bold">
+                                {Object.keys(dbQueryResults[0]).map(key => (
+                                  <th key={key} className="p-3 text-[9px] uppercase tracking-wider text-[#6A6560] border-r border-neutral-800 last:border-0">{key}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {dbQueryResults.map((row, idx) => (
+                                <tr key={idx} className="border-b border-neutral-850 last:border-0 hover:bg-white/2">
+                                  {Object.entries(row).map(([key, val]) => (
+                                    <td key={key} className="p-3 text-neutral-350 border-r border-neutral-850 last:border-0 truncate max-w-[200px]" title={String(val)}>
+                                      {val === null ? <em className="text-neutral-600">NULL</em> : typeof val === 'object' ? JSON.stringify(val) : String(val)}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        )
+                      ) : (
+                        <div className="p-4 text-left text-neutral-300 text-xs font-mono whitespace-pre-wrap">
+                          {JSON.stringify(dbQueryResults, null, 2)}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {activeTab === 'github-sync' && (
             <div className="space-y-6">
               <div className="border-b pb-4 text-left" style={{ borderColor: ru }}>
