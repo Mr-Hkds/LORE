@@ -12,8 +12,22 @@
       ],
       "severity": "chilling",
       "hero_image": "https://c.ndtvimg.com//burari_625x300_1530597114895.jpg",
-      "image_query": "/content/images/burari_family.jpg",
       "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "gripping": 1,
+        "scared": 0,
+        "mindblown": 0
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "the_asch_conformity_experiments",
+          "shared_concept": "shared_delusion",
+          "category": "psychology",
+          "transition_line": "The terrifying power of compliance isn't limited to families. Science proves that under the right pressure, anyone will reject reality."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -82,20 +96,7 @@
           "content": "For years after the incident, the Burari house remained vacant. Neighbors reported seeing shadows and hearing strange noises, and local property prices plummeted. Nobody was willing to buy or rent a place where eleven people had died in such a bizarre, ritualistic fashion. The local government considered demolishing the structure, but it remained standing, a grim reminder of the power of psychological manipulation.\n\nEventually, in an effort to dispel the superstitions and reclaim the space, a local doctor rented the house and opened a diagnostic clinic on the ground floor. He wanted to prove that there were no ghosts, only a tragic story of mental illness and isolation. The family's diaries are now locked in police archives, studied by forensic psychologists seeking to understand how an entire family could walk themselves to the gallows.\n\nThe Burari deaths serve as a terrifying case study of how easily the human mind can construct a reality out of grief and trauma. It reminds us that the most dangerous cults do not always live in remote compounds under charismatic leaders. Sometimes, they exist in plain sight, in the quiet, respectable house next door.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_asch_conformity_experiments",
-          "shared_concept": "shared_delusion",
-          "category": "psychology",
-          "transition_line": "The terrifying power of compliance isn't limited to families. Science proves that under the right pressure, anyone will reject reality."
-        }
-      ],
-      "reactions": {
-        "gripping": 1,
-        "scared": 0,
-        "mindblown": 0
-      }
+      ]
     },
     {
       "story_id": "the_dyatlov_pass_incident",
@@ -109,8 +110,23 @@
       ],
       "severity": "disturbing",
       "hero_image": "/content/images/the_dyatlov_pass_incident.jpg",
-      "image_query": "https://upload.wikimedia.org/wikipedia/commons/d/df/Dyatlov_Pass_incident_02.jpg",
       "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 42,
+        "gripping": 35,
+        "scared": 42,
+        "mindblown": 3
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "burari_deaths_001",
+          "shared_concept": "ritualistic_behavior",
+          "category": "true_crime",
+          "transition_line": "Sometimes, the deepest mysteries aren't found in frozen mountains, but inside the locked doors of an ordinary suburban home."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -173,14 +189,6 @@
           "content": "The modern investigation concluded that the hikers were victims of a slab avalanche. According to this theory, the hikers had cut into the snow slope to pitch their tent, which destabilized the snow above. During the night, a heavy slab of snow slid down, crushing the hikers inside their tent and causing the fractures. Panic-stricken, they cut their way out, fearing a second avalanche, and retreated to the forest to seek shelter.\n\nWhile the avalanche theory explains some aspects, critics argue it fails to address why the hikers walked in a calm, orderly line, why they abandoned their warm clothes if they had time to walk slowly, the presence of radiation on their clothes, and the strange orange hue of their skin. For many, the case remains open, a perfect riddle of nature and secrecy.\n\nThe pass was officially named Dyatlov Pass in memory of the young leader who led his friends into the mountains. They left behind a trail of footprints, photographs, and diaries, but the final moments of their lives remain frozen in the snows of Kholat Syakhl.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "burari_deaths_001",
-          "shared_concept": "ritualistic_behavior",
-          "category": "true_crime",
-          "transition_line": "Sometimes, the deepest mysteries aren't found in frozen mountains, but inside the locked doors of an ordinary suburban home."
-        }
       ]
     },
     {
@@ -198,10 +206,10 @@
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
-        "gripping": 0,
-        "scared": 0,
-        "mindblown": 0,
-        "like": 0
+        "like": 49,
+        "gripping": 17,
+        "scared": 2,
+        "mindblown": 37
       },
       "evidence_links": [
         {
@@ -276,10 +284,10 @@
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
-        "gripping": 0,
-        "scared": 0,
-        "mindblown": 0,
-        "like": 0
+        "like": 27,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 45
       },
       "evidence_links": [
         {
@@ -342,16 +350,25 @@
     {
       "story_id": "the_asch_conformity_experiments",
       "title": "The Asch Conformity Experiment",
-      "hero_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0205aa1-559b-4a10-bb7a-a30c7b97f641_1600x900.jpeg",
-      "image_query": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Asch_experiment.png",
-      "hook": "Would you deny what your own eyes see if everyone around you insisted you were wrong? In 1951, a simple test with lines proved how easily our reality is warped by peer pressure.",
       "category": "psychology",
-      "severity": "unsettling",
+      "hook": "Would you deny what your own eyes see if everyone around you insisted you were wrong? In 1951, a simple test with lines proved how easily our reality is warped by peer pressure.",
       "concepts": [
         "conformity",
         "groupthink",
         "social_pressure"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0205aa1-559b-4a10-bb7a-a30c7b97f641_1600x900.jpeg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 27,
+        "scared": 1,
+        "mindblown": 32
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -428,6 +445,36 @@
         "media_obsession"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/the_zodiac_killer.jpg",
+      "added_date": "2026-06-23",
+      "draft": false,
+      "reactions": {
+        "like": 22,
+        "gripping": 30,
+        "scared": 47,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "The Similarities of Thematic Progression in Zodiac Killer Letters (Mohammad Rakhmat Pramudita, Elvi Citraresmana, 2020)",
+          "url": "https://ijels.com/upload_document/issue_files/57IJELS-110202025-TheSimilarities.pdf"
+        },
+        {
+          "label": "Influenza Virus and Glycemic Variability in Diabetes: A Killer Combination? (Katina D. Hulme, Linda A. Gallo, 2017)",
+          "url": "https://www.frontiersin.org/articles/10.3389/fmicb.2017.00861/pdf"
+        },
+        {
+          "label": "Behavioural responses of male killer whales to a ‘leapfrogging’ vessel (Rob Williams, David E. Bain, 2023)",
+          "url": "https://journal.iwc.int/index.php/jcrm/article/download/844/564"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Zodiac Killer ke victims ki maut bhi ek gehri paheli ban gayi, jahan jawaab se zyada sawaal the, kuch vaise hi jaise Dyatlov Pass mein hue un unexplained deaths ka raaz aaj tak koi nahin suljha paya hai."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -471,30 +518,7 @@
           "content": "Zodiac Killer case aaj bhi ek cold case hai. Modern forensics ne bohot koshish ki hai. Kayi saalon baad, 2020 mein, FBI ne finally Z340 cipher ko decode karne ka announcement kiya, thanks to the efforts of independent codebreakers. Usmein likha tha ki killer ko umeed hai ki usko pakadte huye mazaa aayega, aur usko marne se darr nahin lagta kyuki uski afterlife mein slaves honge. Lekin, usmein bhi killer ki identity ka koi clue nahin tha.\n\nZodiac Killer ka impact pop culture par bhi bohot gehra raha. Films jaise 'Zodiac' (2007) aur kai TV shows aur novels ne is mystery ko zinda rakha hai. Victims ke families ke liye toh yeh ek anant dukh hai, ki unke loved ones ka killer kabhi pakda nahin gaya. Yeh case ek chilling reminder hai ki kaise kuch log system ko challenge kar sakte hain, aur bina koi nishaan chhode gayab ho sakte hain. Zodiac Killer, ek naam, ek symbol, aur ek anant raaz – jo shayad kabhi na khule.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_dyatlov_pass_incident",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Zodiac Killer ke victims ki maut bhi ek gehri paheli ban gayi, jahan jawaab se zyada sawaal the, kuch vaise hi jaise Dyatlov Pass mein hue un unexplained deaths ka raaz aaj tak koi nahin suljha paya hai."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "The Similarities of Thematic Progression in Zodiac Killer Letters (Mohammad Rakhmat Pramudita, Elvi Citraresmana, 2020)",
-          "url": "https://ijels.com/upload_document/issue_files/57IJELS-110202025-TheSimilarities.pdf"
-        },
-        {
-          "label": "Influenza Virus and Glycemic Variability in Diabetes: A Killer Combination? (Katina D. Hulme, Linda A. Gallo, 2017)",
-          "url": "https://www.frontiersin.org/articles/10.3389/fmicb.2017.00861/pdf"
-        },
-        {
-          "label": "Behavioural responses of male killer whales to a ‘leapfrogging’ vessel (Rob Williams, David E. Bain, 2023)",
-          "url": "https://journal.iwc.int/index.php/jcrm/article/download/844/564"
-        }
-      ],
-      "hero_image": "/content/images/the_zodiac_killer.jpg"
+      ]
     },
     {
       "story_id": "operation_northwoods_001",
@@ -509,6 +533,36 @@
         "covert_operations"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/operation_northwoods_001.jpg",
+      "added_date": "2026-06-23",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 12,
+        "scared": 6,
+        "mindblown": 10
+      },
+      "evidence_links": [
+        {
+          "label": "SPECIAL TOPICS — Mitigation of methane and nitrous oxide emissions from animal operations: I. A review of enteric methane mitigation options1 (A.N. Hristov, J. Oh, 2013)",
+          "url": "https://academic.oup.com/jas/article-pdf/91/11/5045/24036614/5045.pdf"
+        },
+        {
+          "label": "Minnesota forest ecosystem vulnerability assessment and synthesis: a report from the Northwoods Climate Change Response Framework project (Stephen D. Handler, Matthew J. Duveneck, 2014)",
+          "url": "https://www.fs.usda.gov/research/treesearch/download/45939.pdf"
+        },
+        {
+          "label": "A novel flexible model for piracy and robbery assessment of merchant ship operations (Sascha Pristrom, Zaili Yang, 2016)",
+          "url": "https://researchonline.ljmu.ac.uk/id/eprint/4261/1/Paper_June_2016.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "government_secrecy",
+          "transition_line": "Dyatlov Pass ki un sard raaton mein chhipe sarkari raaz ki tarah, Operation Northwoods bhi batata hai ki kitni gehri ho sakti hai government ki secrecy."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -546,30 +600,7 @@
           "layer_name": "Chhupe Hue Raaz Ki Subah (The Dark Corner)",
           "content": "Operation Northwoods ka ye kala sach lagbhag 35 saalon tak chupa raha. Ye document 1997 mein finally public domain mein aaya, Kennedy assassination se related records ki declassification ke dauran. Jab ye documents bahar aaye, toh poori duniya shocked reh gayi. Log hairan the ki unki apni government itni gehri aur disturbing saazish soch sakti hai.\n\nIs revelation ne government transparency aur ethics par bade sawaal khade kar diye. Kya Operation Northwoods jaisi aur bhi conspiracies hain jo aaj bhi chhupi hui hain? Ye incident ek chilling reminder hai ki kaise power aur desperation, military aur political leaders ko ethical boundaries cross karne par majboor kar sakti hai. Ye humein sochne par majboor karta hai ki 'national interest' ke naam par kya-kya kiya ja sakta hai.\n\nYe incident humein sikhata hai ki truth, kitna bhi dark kyun na ho, ek na ek din bahar zaroor aata hai, aur uski kimat humein hamesha chukani padti hai."
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_dyatlov_pass_incident",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Dyatlov Pass ki un sard raaton mein chhipe sarkari raaz ki tarah, Operation Northwoods bhi batata hai ki kitni gehri ho sakti hai government ki secrecy."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "SPECIAL TOPICS — Mitigation of methane and nitrous oxide emissions from animal operations: I. A review of enteric methane mitigation options1 (A.N. Hristov, J. Oh, 2013)",
-          "url": "https://academic.oup.com/jas/article-pdf/91/11/5045/24036614/5045.pdf"
-        },
-        {
-          "label": "Minnesota forest ecosystem vulnerability assessment and synthesis: a report from the Northwoods Climate Change Response Framework project (Stephen D. Handler, Matthew J. Duveneck, 2014)",
-          "url": "https://www.fs.usda.gov/research/treesearch/download/45939.pdf"
-        },
-        {
-          "label": "A novel flexible model for piracy and robbery assessment of merchant ship operations (Sascha Pristrom, Zaili Yang, 2016)",
-          "url": "https://researchonline.ljmu.ac.uk/id/eprint/4261/1/Paper_June_2016.pdf"
-        }
-      ],
-      "hero_image": "/content/images/operation_northwoods_001.jpg"
+      ]
     },
     {
       "story_id": "cicada_3301",
@@ -701,6 +732,36 @@
         "unconventional_deity"
       ],
       "severity": "disturbing",
+      "hero_image": "/content/images/mahadev_ki_kahani_001.jpg",
+      "added_date": "2026-06-23",
+      "draft": false,
+      "reactions": {
+        "like": 52,
+        "gripping": 25,
+        "scared": 2,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Rural tourism in Himachal Pradesh in transition: Challenges for regional sustainability (Vikas Verma, Rakesh Ahlawat, 2023)",
+          "url": "https://malque.pub/ojs/index.php/mr/article/download/984/841"
+        },
+        {
+          "label": "Prime Time Soap Operas on Indian Television (Shoma Munshi, 2020)",
+          "url": "https://api.taylorfrancis.com/content/books/mono/download?identifierName=doi&identifierValue=10.4324/9781003033509&type=googlepdf"
+        },
+        {
+          "label": "The Ideals of Islam in Maulana Abul Kalam Azad’s Thoughts and Political Practices: An Appraisal (Misbah Umar, Fozia Umar, 2021)",
+          "url": "https://albasirah.numl.edu.pk/index.php/alb/article/download/65/22"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "divine_paradox",
+          "transition_line": "Mahadev ki yeh kahani humein dikhati hai ki divine powers kitni complex aur paradoxical ho sakti hain. Isi tarah, Bhagwan Vishnu ke bhi kai aise raaz hain, jo unke 'preserver' roop ke peeche chhupi hui, ultimate reality ko challenge karte hain."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -744,114 +805,7 @@
           "content": "Mahadev ki kahani, jab hum iske gehrayiyon ko explore karte hain, toh woh sirf ek devta ki kahani nahi rehti. Woh existence ke sabse fundamental aur 'disturbing' truths ki kahani ban jaati hai. Woh humein batate hain ki life sirf creation aur preservation nahi hai, balki destruction bhi utni hi zaroori hai. Woh humein sikhaten hain ki har ant ek naye aarambh ka rasta kholta hai.\n\nIs 'dark corner' mein hum Mahadev ko ek aise devta ke roop mein dekhte hain jo duality se pare hain. Woh benevolent bhi hain aur terrifying bhi. Woh yogi bhi hain aur bhogi bhi. Woh shanti ka prateek bhi hain aur maha-vinashak bhi. Unka yeh complex character humein sikhata hai ki life aur universe mein sab kuch grey hai, kuch bhi absolute black ya white nahi. Unki kahani humein hamare apne dar, hamari apni mortality aur universe ki anant shakti ko face karne ki himmat deti hai.\n\nAnt mein, Mahadev ki kahani ek chilling realization hai ki life sirf ek temporary play hai, aur ultimate reality detachment aur shoonyata mein hai. Unki pooja karna ya unki kahani sunna, sirf bhakti nahi, balki existence ke sabse raw, unfiltered aur kabhi-kabhi terrifying aspects ko accept karna hai. Aur shayad, isi acceptence mein hi humein sachchi shanti milti hai. Jo Mahadev ko samajh gaya, woh life aur death ke raaz ko bhi samajh gaya.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "hidden_facts_shri_vishnu_ji",
-          "shared_concept": "divine_paradox",
-          "transition_line": "Mahadev ki yeh kahani humein dikhati hai ki divine powers kitni complex aur paradoxical ho sakti hain. Isi tarah, Bhagwan Vishnu ke bhi kai aise raaz hain, jo unke 'preserver' roop ke peeche chhupi hui, ultimate reality ko challenge karte hain."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "Rural tourism in Himachal Pradesh in transition: Challenges for regional sustainability (Vikas Verma, Rakesh Ahlawat, 2023)",
-          "url": "https://malque.pub/ojs/index.php/mr/article/download/984/841"
-        },
-        {
-          "label": "Prime Time Soap Operas on Indian Television (Shoma Munshi, 2020)",
-          "url": "https://api.taylorfrancis.com/content/books/mono/download?identifierName=doi&identifierValue=10.4324/9781003033509&type=googlepdf"
-        },
-        {
-          "label": "The Ideals of Islam in Maulana Abul Kalam Azad’s Thoughts and Political Practices: An Appraisal (Misbah Umar, Fozia Umar, 2021)",
-          "url": "https://albasirah.numl.edu.pk/index.php/alb/article/download/65/22"
-        }
-      ],
-      "hero_image": "/content/images/mahadev_ki_kahani_001.jpg"
-    },
-    {
-      "story_id": "malaysia_airlines_mh370",
-      "title": "MH370: Woh Flight Jo Hawa Mein Ghul Gayi",
-      "category": "true_crime",
-      "hook": "Ek Boeing 777, 239 logon ke saath, bina kisi trace ke gayab ho gaya. Kya yeh sirf ek accident tha, ya iske peeche kuch aur hi raaz tha?",
-      "concepts": [
-        "unsolved_mystery",
-        "aviation_disaster",
-        "disappearance",
-        "black_box",
-        "conspiracy_theories",
-        "pilot_suicide",
-        "technological_enigma",
-        "oceanic_search"
-      ],
-      "severity": "chilling",
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - Ek Hawaai Jahaz Ka Saaya",
-          "content": "March 8, 2014. Kuala Lumpur se Beijing jaane waali Malaysia Airlines ki Flight MH370, ek routine flight thi. 227 passengers aur 12 crew members ke saath, sab kuch normal lag raha tha. Raat ke 12:41 AM par flight ne take-off kiya. Sabki expectations thi ki woh subah 6:30 AM tak Beijing mein land kar jayegi.\n\nFlight ke first hour mein sab theek tha. Pilot Zaharie Ahmad Shah aur First Officer Fariq Abdul Hamid ne ATC se final goodbyes kahe. 'Good night, Malaysian three-seven-zero' – yeh uss flight ka aakhri recorded communication tha. Lekin uske baad, Malaysia aur Vietnam ke airspace ke border par, MH370 radaron se gayab ho gayi. Jaise ki hawa mein hi ghul gayi ho.",
-          "cliffhanger": "Kya hua tha uss flight ko? Kya yeh bas ek technical glitch tha, ya iske peeche koi gehri saazish chhupi thi, jiske baare mein humein abhi tak kuch pata nahi tha?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - Laapata hone ka Ajeeb Silsila",
-          "content": "Jab MH370 Beijing ATC se contact nahi kar paayi, toh shuruat mein laga ki yeh communications failure hai. Lekin jab ghanto tak koi trace nahi mila, toh duniya mein panic phail gaya. Ek massive search operation shuru hua, pehle South China Sea mein, jahan uska last contact tha. Navy ships, planes, satellites, sabko laga diya gaya.\n\nLekin din, hafton mein badal gaye, aur koi wreckage nahi mila. Koi life raft nahi, koi floating debris nahi. Itna bada jahaz, bina kisi nishaan ke kaise gayab ho sakta hai? Yeh pehli baar nahi tha ki koi jahaz gayab hua ho, lekin modern aviation mein itni bade scale par bina kisi clue ke gayab hona, ek alag hi darr paida kar raha tha. Duniya confuse thi, families royi jaa rahi thi, lekin koi jawab nahi tha.",
-          "cliffhanger": "Lekin jab military radar data saamne aaya, toh pata chala ki MH370 ne toh apna raasta hi badal liya tha. Yeh baat aur bhi zyada unsettling thi, aur mystery ko naye mod par le ja rahi thi."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - Raaste Badalte Jahaz Ka Raaz",
-          "content": "Investigation shuru hui, aur sabse shocking revelation thi ki MH370 ne apna raasta badal liya tha. Jaise hi usne Malaysian-Vietnamese airspace cross kiya, uske communication systems – jaise transponder aur ACARS – 'manually' switch off kar diye gaye the. MATLAB koi jahaz ke andar tha jisne yeh kiya. Uske baad, Malaysian military radar ne use trace kiya, jo uski intended flight path se hatt kar West ki taraf, Malaysia ke upar se aur phir Malacca Strait se, Andaman Sea ki taraf jaa raha tha.\n\nYeh ek dam clear tha ki flight ko deliberately uske destination se door, ek anjaan direction mein divert kiya gaya tha. Iska matlab yeh 'accident' nahi tha, balki kisi ki deliberate 'action' thi. Questions uthne lage, kya yeh hijacking tha? Kya pilot khud involved tha? Is sab ke beech, 239 logon ki life at stake thi, aur sab gahan chinta mein the ki jahaz kahan gaya hoga, aur kya unke apne zinda hain ya nahi.",
-          "cliffhanger": "Lekin asli horror toh abhi shuru hona tha, jab data scientists ne kuch ajeeb 'ghost pings' decode kiye, jinke basis par jahaz ki last destination ka ek chilling andaaza lagaya gaya."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - Ghost Pings Aur Gehri Sachai",
-          "content": "Jab sab physical search operations fail ho gaye, toh attention gaya British satellite company Inmarsat ke data par. Unke satellites ne MH370 se ajeeb, automated 'handshake pings' receive kiye the. Yeh pings aircraft ke satellite communication system se aate the, even after its main communication systems were turned off. Yeh pings sirf is baat ka signal the ki jahaz ka system 'on' hai, lekin koi voice ya data nahi. Scientists ne in pings ke timing aur angle ko analyze kiya.\n\nIs data analysis ne ek horrifying conclusion diya: Flight MH370 ne ghanto tak udna jaari rakha tha, aur uski final destination South Indian Ocean ke ek remote ilaake mein thi. Ek 'arc of possibilities' bana di gayi, ek aisi jagah jahan na koi land tha, na koi islands. Sirf athah samudra. Yeh batata tha ki jahaz ghanto tak 'ghost flight' ki tarah udta raha, jab tak uske engines ka fuel khatam nahi ho gaya.",
-          "cliffhanger": "Is naye data ne search area ko dramatically shift kar diya, lekin duniya ka sabse expensive aur extensive search operation bhi, is athah samudra mein sirf kuch chote-mote clues hi dhoondh paaya."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - Samudra Se Nikle Kuch Tukde",
-          "content": "Inmarsat data ke base par, South Indian Ocean ke 'Seventh Arc' mein ek massive underwater search operation launch kiya gaya. Yeh history ka sabse bada aur mehanga search operation tha, jisme advanced sonar technology aur submersible vehicles ka use kiya gaya. Lekin vastness of the ocean aur extreme depths ki wajah se, saalon tak koi significant breakthrough nahi mila.\n\nPhir, July 2015 mein, Reunion Island (Africa ke paas) par ek aircraft part washed ashore hua – ek 'flaperon'. Investigators ne confirm kiya ki yeh MH370 ka hi part tha. Iske baad Mauritius aur Tanzania ke coastlines par bhi kuch aur parts mile, jinhe MH370 ka confirm kiya gaya. Yeh pehla physical proof tha ki flight crash ho chuki thi, aur is baat par mohar laga di ki woh Indian Ocean mein hi gira tha. Lekin jahaz ka main fuselage, black boxes, aur baaki sabhi cheezein ab bhi gayab the.",
-          "cliffhanger": "Lekin in chhote tukdo ne ek naya, aur zyada unsettling question khada kar diya: agar jahaz crash hua tha, toh iske peeche kya karan tha? Aur kya yeh kisi ki deliberate koshish thi sab kuch chhupaane ki?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - Pilot Ki Gehri Sajish?",
-          "content": "Jaise-jaise search operations mein failures aate gaye, theories uthne lagi. Sabse chilling theory pilot, Captain Zaharie Ahmad Shah, par ghoomti thi. Woh ek experienced pilot the aur unka flying record spotless tha. Lekin investigation mein pata chala ki Zaharie ke ghar mein ek sophisticated flight simulator tha. Uss simulator mein aise flight paths paaye gaye, jo MH370 ke actual diverged path se 'eerie' similarities rakhte the, jisme South Indian Ocean mein crash karna bhi shamil tha.\n\nInvestigators ne yeh bhi point out kiya ki communication systems ko band karne ka tareeka, aur flight ko divert karne ka tareeka, kisi experienced aviator ka kaam tha. Kya Zaharie ne mass murder-suicide kiya tha? Kya koi political ya personal motive tha? Yeh theory zyada disturb karti hai, kyunki yeh batati hai ki 239 logon ki zindagi ek insaan ke haath mein thi jisne jaan-boojh kar sab ko maut ke muh mein dhakel diya. Lekin iska koi definitive proof nahi mila.",
-          "cliffhanger": "Toh kya woh ek lone wolf tha, ya uske peeche koi aur tha? Aur kya humein sachai kabhi pata chalegi? Yeh saare questions aaj bhi hawa mein latke hue hain, aur har guzarne waale din ke saath, yeh mystery aur bhi gehri hoti jaati hai."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - Sawaalon Ka Andhera",
-          "content": "Ajj bhi, Malaysia Airlines Flight MH370 aviation history ke sabse bade aur chilling mysteries mein se ek hai. Saalon ki search, arabon dollars ka kharcha, aur modern technology ke bawajood, jahaz ka main wreckage, black boxes, aur 239 logon ki body kabhi nahi mil paayi. Unki families aaj bhi intezaar kar rahi hain, closure ki aas mein. Har saal yeh tragedy naye conspiracy theories ko janm deti hai – aliens, government cover-up, terrorist attack, hidden military bases.\n\nLekin koi definitive answer nahi hai. Yeh incident ne aviation safety aur tracking protocols mein sudhar ki zaroorat par zor diya, lekin asli lesson toh yeh hai ki insaan kitna bhi aage badh jaye, nature ki vastness aur human psychology ki gehrayiaan ab bhi humari samajh se pare hain. MH370 sirf ek plane nahi tha, yeh ek saaya hai, jo humein yaad dilata hai ki kuch raaz shayad kabhi na khulein, aur kuch andhere shayad kabhi roshan na hon.",
-          "cliffhanger": null
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_zodiac_killer",
-          "shared_concept": "unsolved_mystery",
-          "transition_line": "Jaise Zodiac Killer ke case mein, jiske identity ka raaz aaj bhi ek paheli hai, waise hi MH370 bhi ek aisa unsolved mystery hai, jo sirf sawaal chhode jaata hai aur koi jawab nahi deta."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "A debris backwards flow simulation system for Malaysia airlines flight 370 (Mike Eichhorn, Alexander Haertel, 2016)",
-          "url": "https://arxiv.org/pdf/1702.08875"
-        },
-        {
-          "label": "Impact of service quality on customer satisfaction in Malaysia airlines: A PLS-SEM approach (Muhammad Shoaib Farooq, Maimoona Salam, 2018)",
-          "url": "https://www.sciencedirect.com/science/article/pii/S0969699717304076"
-        },
-        {
-          "label": "Sentiment, richness, authority, and relevance model of information sharing during social Crises—the case of #MH370 tweets (Weiai Wayne Xu, Congcong Zhang, 2018)",
-          "url": "https://doi.org/10.1016/j.chb.2018.07.041"
-        }
-      ],
-      "hero_image": "/content/images/malaysia_airlines_mh370.jpg"
+      ]
     },
     {
       "story_id": "stanford_prison_experiment_001",
@@ -864,6 +818,36 @@
         "dehumanization"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/stanford_prison_experiment_001.jpg",
+      "added_date": "2026-06-23",
+      "draft": false,
+      "reactions": {
+        "like": 12,
+        "gripping": 35,
+        "scared": 4,
+        "mindblown": 45
+      },
+      "evidence_links": [
+        {
+          "label": "Rethinking the nature of cruelty: The role of identity leadership in the Stanford Prison Experiment. (S. Alexander Haslam, Stephen Reicher, 2019)",
+          "url": "https://research-repository.st-andrews.ac.uk/bitstream/10023/18565/1/Haslam_American_Psychologist_Cruelty_2019_AAM.pdf"
+        },
+        {
+          "label": "The Stanford prison experiment in introductory psychology textbooks: A content analysis (Jared M. Bartels, 2015)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/1475725714568007"
+        },
+        {
+          "label": "Debunking the Stanford Prison Experiment (Thibault Le Texier, 2019)",
+          "url": "https://doi.org/10.31234/osf.io/mjhnp"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_asch_conformity_experiments",
+          "shared_concept": "social_pressure",
+          "transition_line": "Agar aapko lagta hai ki insaan apne convictions par khada rehta hai, toh 'The Asch Conformity Experiment' mein aap dekhenge kaise 'social pressure' ka khel aapki soch badal deta hai."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -907,30 +891,7 @@
           "content": "Stanford Prison Experiment, aaj bhi psychology ke sabse controversial aur talked-about studies mein se ek hai. Is par kai criticisms hue hain, jaise ki Zimbardo ka khud ka active participation, jo scientific objectivity ko compromise karta hai. Kuch critics ne toh yeh bhi kaha hai ki participants ne 'demand characteristics' ke hisaab se act kiya, yaani unhone wohi kiya jo unhein laga ki researchers unse expect kar rahe the. Ek guard ne toh baad mein admit kiya ki woh thoda 'acting' kar raha tha taaki experiment 'successful' lage.\n\nIn criticisms ke bawajood, is experiment ka impact undeniable hai. Isne Abu Ghraib prison mein American soldiers dwara Iraqi prisoners ke saath kiye gaye abuses ki explanations dene mein madad ki. Isne samjhaya ki kaise 'institutional cruelty' paida hoti hai aur kaise power ke galat istemal se insaniyat khatam ho sakti hai. Yeh ek warning hai ki authority ko bina check ke chhodna kitna dangerous ho sakta hai.\n\nAnt mein, Stanford Prison Experiment ek chilling reminder hai ki insaniyat ki gehriyon mein kitni darkness chhupi ho sakti hai. Jab power aur control galat haathon mein padte hain, aur social roles insaan ki asli pehchaan par haavi ho jaate hain, toh uske results sirf 'unsettling' nahi, balki 'chilling' ho sakte hain. Yeh humein hamesha yaad dilata hai ki system se zyada, insaan ki individuality aur uski morality kitni zaroori hai.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_asch_conformity_experiments",
-          "shared_concept": "social_pressure",
-          "transition_line": "Agar aapko lagta hai ki insaan apne convictions par khada rehta hai, toh 'The Asch Conformity Experiment' mein aap dekhenge kaise 'social pressure' ka khel aapki soch badal deta hai."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "Rethinking the nature of cruelty: The role of identity leadership in the Stanford Prison Experiment. (S. Alexander Haslam, Stephen Reicher, 2019)",
-          "url": "https://research-repository.st-andrews.ac.uk/bitstream/10023/18565/1/Haslam_American_Psychologist_Cruelty_2019_AAM.pdf"
-        },
-        {
-          "label": "The Stanford prison experiment in introductory psychology textbooks: A content analysis (Jared M. Bartels, 2015)",
-          "url": "https://journals.sagepub.com/doi/pdf/10.1177/1475725714568007"
-        },
-        {
-          "label": "Debunking the Stanford Prison Experiment (Thibault Le Texier, 2019)",
-          "url": "https://doi.org/10.31234/osf.io/mjhnp"
-        }
-      ],
-      "hero_image": "/content/images/stanford_prison_experiment_001.jpg"
+      ]
     },
     {
       "story_id": "hinterkaifeck_murders",
@@ -946,6 +907,32 @@
         "cold_case"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/hinterkaifeck_murders.jpg",
+      "added_date": "2026-06-23",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 42,
+        "scared": 29,
+        "mindblown": 10
+      },
+      "evidence_links": [
+        {
+          "label": "Warte, warte nur ein Weilchen. Faszination und Ethik von True Crime-Erzählungen (Simon Sahner, 2022)",
+          "url": "http://www.nomos-elibrary.de/10.5771/9783968218793-133.pdf"
+        },
+        {
+          "label": "Kriminalerzählungen der Gegenwart (Sandra Trevisan Beck, Johannes Franzen, 2022)",
+          "url": "http://www.nomos-elibrary.de/10.5771/9783968218793.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_zodiac_killer",
+          "shared_concept": "unsolved_mystery",
+          "transition_line": "Zodiac Killer ki tarah, Hinterkaifeck ke khooni ne bhi apni pehchan ko ek raaz ke piche chhupa rakha hai, humein uss gehri soch mein chhodte hue ki aisa darinda kaun ho sakta hai."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -989,26 +976,70 @@
           "content": "Hinterkaifeck farm ko murders ke ek saal baad hi demolish kar diya gaya tha, aur uski jagah ab ek small memorial hai. Lekin us khooni raat ki yaadein aur uske unsolved raaz aaj bhi Germany ki true crime history mein zinda hain. Detective Hannes Buchner ne 2007 mein is case ko phir se open karne ki koshish ki thi, modern forensic techniques ka use karke, par woh bhi kamyab nahi ho paye kyuki sabhi witnesses mar chuke the aur physical evidence bhi available nahi tha. \n\nAaj bhi, Hinterkaifeck murders ek haunting reminder hai ki kaise kuch apradh hamesha ke liye ek paheli bankar reh jaate hain. Yeh case bataata hai ki insaani zehan kitna dark aur unpredictable ho sakta hai, aur kaise kuch raaz maut ke baad bhi hamari samajh se pare reh jaate hain. Hinterkaifeck, ek chhota sa farm, jo ek khooni raaz ka symbol ban gaya, jahan 6 zindagiyaan toh chali gayi, lekin unki maut ka sach aaj bhi ek gehri, andheri khamoshi mein chhupa hai, humein hamesha ke liye ek sawal ke saath chhodte hue: Who was the Hinterkaifeck killer?",
           "cliffhanger": null
         }
+      ]
+    },
+    {
+      "story_id": "malaysia_airlines_mh370",
+      "title": "MH370: Woh Flight Jo Hawa Mein Ghul Gayi",
+      "hero_image": "/https://images.justwatch.com/poster/243044115/s718/lost-mh-370.jpg",
+      "image_query": "",
+      "hook": "Ek Boeing 777, 239 logon ke saath, bina kisi trace ke gayab ho gaya. Kya yeh sirf ek accident tha, ya iske peeche kuch aur hi raaz tha?",
+      "category": "true_crime",
+      "severity": "chilling",
+      "concepts": [
+        "unsolved_mystery",
+        "aviation_disaster",
+        "disappearance",
+        "black_box",
+        "conspiracy_theories",
+        "pilot_suicide",
+        "technological_enigma",
+        "oceanic_search"
       ],
-      "connections": [
+      "layers": [
         {
-          "story_id": "the_zodiac_killer",
-          "shared_concept": "unsolved_mystery",
-          "transition_line": "Zodiac Killer ki tarah, Hinterkaifeck ke khooni ne bhi apni pehchan ko ek raaz ke piche chhupa rakha hai, humein uss gehri soch mein chhodte hue ki aisa darinda kaun ho sakta hai."
-        }
-      ],
-      "added_date": "2026-06-23",
-      "evidence_links": [
-        {
-          "label": "Warte, warte nur ein Weilchen. Faszination und Ethik von True Crime-Erzählungen (Simon Sahner, 2022)",
-          "url": "http://www.nomos-elibrary.de/10.5771/9783968218793-133.pdf"
+          "layer": 1,
+          "layer_name": "The Whisper - Ek Hawaai Jahaz Ka Saaya",
+          "content": "March 8, 2014. Kuala Lumpur se Beijing jaane waali Malaysia Airlines ki Flight MH370, ek routine flight thi. 227 passengers aur 12 crew members ke saath, sab kuch normal lag raha tha. Raat ke 12:41 AM par flight ne take-off kiya. Sabki expectations thi ki woh subah 6:30 AM tak Beijing mein land kar jayegi.\n\nFlight ke first hour mein sab theek tha. Pilot Zaharie Ahmad Shah aur First Officer Fariq Abdul Hamid ne ATC se final goodbyes kahe. 'Good night, Malaysian three-seven-zero' – yeh uss flight ka aakhri recorded communication tha. Lekin uske baad, Malaysia aur Vietnam ke airspace ke border par, MH370 radaron se gayab ho gayi. Jaise ki hawa mein hi ghul gayi ho.",
+          "cliffhanger": "Kya hua tha uss flight ko? Kya yeh bas ek technical glitch tha, ya iske peeche koi gehri saazish chhupi thi, jiske baare mein humein abhi tak kuch pata nahi tha?"
         },
         {
-          "label": "Kriminalerzählungen der Gegenwart (Sandra Trevisan Beck, Johannes Franzen, 2022)",
-          "url": "http://www.nomos-elibrary.de/10.5771/9783968218793.pdf"
+          "layer": 2,
+          "layer_name": "The Pattern - Laapata hone ka Ajeeb Silsila",
+          "content": "Jab MH370 Beijing ATC se contact nahi kar paayi, toh shuruat mein laga ki yeh communications failure hai. Lekin jab ghanto tak koi trace nahi mila, toh duniya mein panic phail gaya. Ek massive search operation shuru hua, pehle South China Sea mein, jahan uska last contact tha. Navy ships, planes, satellites, sabko laga diya gaya.\n\nLekin din, hafton mein badal gaye, aur koi wreckage nahi mila. Koi life raft nahi, koi floating debris nahi. Itna bada jahaz, bina kisi nishaan ke kaise gayab ho sakta hai? Yeh pehli baar nahi tha ki koi jahaz gayab hua ho, lekin modern aviation mein itni bade scale par bina kisi clue ke gayab hona, ek alag hi darr paida kar raha tha. Duniya confuse thi, families royi jaa rahi thi, lekin koi jawab nahi tha.",
+          "cliffhanger": "Lekin jab military radar data saamne aaya, toh pata chala ki MH370 ne toh apna raasta hi badal liya tha. Yeh baat aur bhi zyada unsettling thi, aur mystery ko naye mod par le ja rahi thi."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - Raaste Badalte Jahaz Ka Raaz",
+          "content": "Investigation shuru hui, aur sabse shocking revelation thi ki MH370 ne apna raasta badal liya tha. Jaise hi usne Malaysian-Vietnamese airspace cross kiya, uske communication systems – jaise transponder aur ACARS – 'manually' switch off kar diye gaye the. MATLAB koi jahaz ke andar tha jisne yeh kiya. Uske baad, Malaysian military radar ne use trace kiya, jo uski intended flight path se hatt kar West ki taraf, Malaysia ke upar se aur phir Malacca Strait se, Andaman Sea ki taraf jaa raha tha.\n\nYeh ek dam clear tha ki flight ko deliberately uske destination se door, ek anjaan direction mein divert kiya gaya tha. Iska matlab yeh 'accident' nahi tha, balki kisi ki deliberate 'action' thi. Questions uthne lage, kya yeh hijacking tha? Kya pilot khud involved tha? Is sab ke beech, 239 logon ki life at stake thi, aur sab gahan chinta mein the ki jahaz kahan gaya hoga, aur kya unke apne zinda hain ya nahi.",
+          "cliffhanger": "Lekin asli horror toh abhi shuru hona tha, jab data scientists ne kuch ajeeb 'ghost pings' decode kiye, jinke basis par jahaz ki last destination ka ek chilling andaaza lagaya gaya."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - Ghost Pings Aur Gehri Sachai",
+          "content": "Jab sab physical search operations fail ho gaye, toh attention gaya British satellite company Inmarsat ke data par. Unke satellites ne MH370 se ajeeb, automated 'handshake pings' receive kiye the. Yeh pings aircraft ke satellite communication system se aate the, even after its main communication systems were turned off. Yeh pings sirf is baat ka signal the ki jahaz ka system 'on' hai, lekin koi voice ya data nahi. Scientists ne in pings ke timing aur angle ko analyze kiya.\n\nIs data analysis ne ek horrifying conclusion diya: Flight MH370 ne ghanto tak udna jaari rakha tha, aur uski final destination South Indian Ocean ke ek remote ilaake mein thi. Ek 'arc of possibilities' bana di gayi, ek aisi jagah jahan na koi land tha, na koi islands. Sirf athah samudra. Yeh batata tha ki jahaz ghanto tak 'ghost flight' ki tarah udta raha, jab tak uske engines ka fuel khatam nahi ho gaya.",
+          "cliffhanger": "Is naye data ne search area ko dramatically shift kar diya, lekin duniya ka sabse expensive aur extensive search operation bhi, is athah samudra mein sirf kuch chote-mote clues hi dhoondh paaya."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - Samudra Se Nikle Kuch Tukde",
+          "content": "Inmarsat data ke base par, South Indian Ocean ke 'Seventh Arc' mein ek massive underwater search operation launch kiya gaya. Yeh history ka sabse bada aur mehanga search operation tha, jisme advanced sonar technology aur submersible vehicles ka use kiya gaya. Lekin vastness of the ocean aur extreme depths ki wajah se, saalon tak koi significant breakthrough nahi mila.\n\nPhir, July 2015 mein, Reunion Island (Africa ke paas) par ek aircraft part washed ashore hua – ek 'flaperon'. Investigators ne confirm kiya ki yeh MH370 ka hi part tha. Iske baad Mauritius aur Tanzania ke coastlines par bhi kuch aur parts mile, jinhe MH370 ka confirm kiya gaya. Yeh pehla physical proof tha ki flight crash ho chuki thi, aur is baat par mohar laga di ki woh Indian Ocean mein hi gira tha. Lekin jahaz ka main fuselage, black boxes, aur baaki sabhi cheezein ab bhi gayab the.",
+          "cliffhanger": "Lekin in chhote tukdo ne ek naya, aur zyada unsettling question khada kar diya: agar jahaz crash hua tha, toh iske peeche kya karan tha? Aur kya yeh kisi ki deliberate koshish thi sab kuch chhupaane ki?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - Pilot Ki Gehri Sajish?",
+          "content": "Jaise-jaise search operations mein failures aate gaye, theories uthne lagi. Sabse chilling theory pilot, Captain Zaharie Ahmad Shah, par ghoomti thi. Woh ek experienced pilot the aur unka flying record spotless tha. Lekin investigation mein pata chala ki Zaharie ke ghar mein ek sophisticated flight simulator tha. Uss simulator mein aise flight paths paaye gaye, jo MH370 ke actual diverged path se 'eerie' similarities rakhte the, jisme South Indian Ocean mein crash karna bhi shamil tha.\n\nInvestigators ne yeh bhi point out kiya ki communication systems ko band karne ka tareeka, aur flight ko divert karne ka tareeka, kisi experienced aviator ka kaam tha. Kya Zaharie ne mass murder-suicide kiya tha? Kya koi political ya personal motive tha? Yeh theory zyada disturb karti hai, kyunki yeh batati hai ki 239 logon ki zindagi ek insaan ke haath mein thi jisne jaan-boojh kar sab ko maut ke muh mein dhakel diya. Lekin iska koi definitive proof nahi mila.",
+          "cliffhanger": "Toh kya woh ek lone wolf tha, ya uske peeche koi aur tha? Aur kya humein sachai kabhi pata chalegi? Yeh saare questions aaj bhi hawa mein latke hue hain, aur har guzarne waale din ke saath, yeh mystery aur bhi gehri hoti jaati hai."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - Sawaalon Ka Andhera",
+          "content": "Ajj bhi, Malaysia Airlines Flight MH370 aviation history ke sabse bade aur chilling mysteries mein se ek hai. Saalon ki search, arabon dollars ka kharcha, aur modern technology ke bawajood, jahaz ka main wreckage, black boxes, aur 239 logon ki body kabhi nahi mil paayi. Unki families aaj bhi intezaar kar rahi hain, closure ki aas mein. Har saal yeh tragedy naye conspiracy theories ko janm deti hai – aliens, government cover-up, terrorist attack, hidden military bases.\n\nLekin koi definitive answer nahi hai. Yeh incident ne aviation safety aur tracking protocols mein sudhar ki zaroorat par zor diya, lekin asli lesson toh yeh hai ki insaan kitna bhi aage badh jaye, nature ki vastness aur human psychology ki gehrayiaan ab bhi humari samajh se pare hain. MH370 sirf ek plane nahi tha, yeh ek saaya hai, jo humein yaad dilata hai ki kuch raaz shayad kabhi na khulein, aur kuch andhere shayad kabhi roshan na hon.",
+          "cliffhanger": null
         }
-      ],
-      "hero_image": "/content/images/hinterkaifeck_murders.jpg"
+      ]
     }
   ]
 }
