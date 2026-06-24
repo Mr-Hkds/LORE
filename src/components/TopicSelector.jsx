@@ -4,40 +4,74 @@ import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import TodayInShadows from './TodayInShadows';
 
-// Mini image helper using local or Wikipedia cover art
+// Mini image helper using local or Wikipedia cover art with self-healing fallback
 function StoryMiniImage({ story }) {
   const [fetchedUrl, setFetchedUrl] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
+  const [fallbackAttempted, setFallbackAttempted] = useState(false);
 
   useEffect(() => {
-    setImgFailed(false);
-    if (story.hero_image) return;
-    const query = story.image_query || story.title;
-    if (!query) return;
+    // If there is no hero_image, fetch Wikipedia immediately
+    if (!story.hero_image) {
+      let active = true;
+      const query = story.image_query || story.title;
+      if (!query) return;
 
-    // Bypassing Wikipedia API search if it is a direct image URL or path
-    if (query.startsWith('http') || query.startsWith('/')) {
-      return;
+      // Bypassing Wikipedia API search if it is a direct image URL or path
+      if (query.startsWith('http') || query.startsWith('/')) {
+        return;
+      }
+
+      fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
+        .then(res => res.json())
+        .then(data => {
+          const pages = data.query?.pages;
+          if (pages && active) {
+            const firstPageId = Object.keys(pages)[0];
+            const url = pages[firstPageId]?.thumbnail?.source;
+            if (url) setFetchedUrl(url);
+          }
+        })
+        .catch(() => {});
+        
+      return () => { active = false; };
     }
-
-    let active = true;
-    fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
-      .then(res => res.json())
-      .then(data => {
-        const pages = data.query?.pages;
-        if (pages && active) {
-          const firstPageId = Object.keys(pages)[0];
-          const url = pages[firstPageId]?.thumbnail?.source;
-          if (url) setFetchedUrl(url);
-        }
-      })
-      .catch(() => {});
-      
-    return () => { active = false; };
   }, [story.hero_image, story.image_query, story.title]);
 
+  const handleImageError = () => {
+    if (story.hero_image && !fallbackAttempted) {
+      setFallbackAttempted(true);
+      const query = story.image_query || story.title;
+      if (!query) {
+        setImgFailed(true);
+        return;
+      }
+      fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
+        .then(res => res.json())
+        .then(data => {
+          const pages = data.query?.pages;
+          if (pages) {
+            const firstPageId = Object.keys(pages)[0];
+            const url = pages[firstPageId]?.thumbnail?.source;
+            if (url) {
+              setFetchedUrl(url);
+            } else {
+              setImgFailed(true);
+            }
+          } else {
+            setImgFailed(true);
+          }
+        })
+        .catch(() => {
+          setImgFailed(true);
+        });
+    } else {
+      setImgFailed(true);
+    }
+  };
+
   const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
-  const displayUrl = story.hero_image || (isDirectUrl ? story.image_query : null) || fetchedUrl;
+  const displayUrl = (!fallbackAttempted && story.hero_image) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
 
   if (!displayUrl || imgFailed) {
     return (
@@ -52,7 +86,7 @@ function StoryMiniImage({ story }) {
     <img 
       src={displayUrl} 
       alt="" 
-      onError={() => setImgFailed(true)}
+      onError={handleImageError}
       className="w-full h-full object-cover grayscale opacity-65 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
       loading="lazy" 
     />

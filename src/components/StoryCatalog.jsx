@@ -31,22 +31,43 @@ const SIGNAL_LABELS = {
   cyber_mysteries: 'CYBER MYSTERY',
 };
 
-// ── Story card image with priority: local hero_image > Wikipedia ──────────
+// ── Story card image with priority: local hero_image > Wikipedia with self-healing fallback ──
 function StoryCardImage({ story, alt }) {
   const { getImageByQuery } = useStaticContent();
   const [fetchedUrl, setFetchedUrl] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
+  const [fallbackAttempted, setFallbackAttempted] = useState(false);
 
   useEffect(() => {
-    setImgFailed(false);
-    if (story.hero_image) return;
-    let active = true;
-    const query = story.image_query || story.title;
-    getImageByQuery(query).then(url => { if (active) setFetchedUrl(url); });
-    return () => { active = false; };
+    // If there is no hero_image, fetch Wikipedia immediately
+    if (!story.hero_image) {
+      let active = true;
+      const query = story.image_query || story.title;
+      getImageByQuery(query).then(url => { if (active) setFetchedUrl(url); });
+      return () => { active = false; };
+    }
   }, [story.hero_image, story.image_query, story.title, getImageByQuery]);
 
-  const displayUrl = story.hero_image || fetchedUrl;
+  const handleImageError = () => {
+    if (story.hero_image && !fallbackAttempted) {
+      setFallbackAttempted(true);
+      const query = story.image_query || story.title;
+      getImageByQuery(query).then(url => {
+        if (url) {
+          setFetchedUrl(url);
+        } else {
+          setImgFailed(true);
+        }
+      }).catch(() => {
+        setImgFailed(true);
+      });
+    } else {
+      setImgFailed(true);
+    }
+  };
+
+  const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
+  const displayUrl = (!fallbackAttempted && story.hero_image) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
 
   if (!displayUrl || imgFailed) {
     return (
@@ -58,7 +79,7 @@ function StoryCardImage({ story, alt }) {
   }
   return (
     <img src={displayUrl} alt={alt}
-      onError={() => setImgFailed(true)}
+      onError={handleImageError}
       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       loading="lazy" />
   );
