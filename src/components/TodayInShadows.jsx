@@ -117,13 +117,7 @@ export default function TodayInShadows() {
   const [reactions, setReactions] = useState({ gripping: 0, scared: 0, mindblown: 0, like: 0 });
   const [userReaction, setUserReaction] = useState(null); // 'gripping' | 'scared' | 'mindblown' | 'like' | null
 
-  // Comments state
-  const [comments, setComments] = useState([]);
-  const [commentsLoading, setCommentsLoading] = useState(false);
-  const [codename, setCodename] = useState(localStorage.getItem('lore:codename') || '');
-  const [newComment, setNewComment] = useState('');
-  const [submittingComment, setSubmittingComment] = useState(false);
-  const [commentError, setCommentError] = useState(null);
+
 
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
@@ -188,67 +182,7 @@ export default function TodayInShadows() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  // Fetch comments when modal is opened for this dossier
-  useEffect(() => {
-    if (modalOpen && dossier) {
-      let active = true;
-      setCommentsLoading(true);
-      setCommentError(null);
-      
-      const fetchComments = async () => {
-        try {
-          const res = await fetch(`/api/comments?target_id=${dossier.date}&title=${encodeURIComponent(dossier.title)}&category=dossier`);
-          if (res.ok && active) {
-            const data = await res.json();
-            setComments(data);
-          }
-        } catch (err) {
-          console.warn('[Dossier Comments] Failed to fetch comments:', err.message);
-        } finally {
-          if (active) setCommentsLoading(false);
-        }
-      };
 
-      fetchComments();
-      return () => { active = false; };
-    }
-  }, [modalOpen, dossier]);
-
-  const handleSubmitComment = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim() || !dossier) return;
-    
-    setSubmittingComment(true);
-    setCommentError(null);
-    const activeCodename = codename.trim() || 'Anonymous Agent';
-    
-    try {
-      const res = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          target_id: dossier.date,
-          username: activeCodename,
-          comment: newComment.trim()
-        })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setComments(data);
-        setNewComment('');
-        if (codename.trim()) {
-          localStorage.setItem('lore:codename', codename.trim());
-        }
-      } else {
-        const errData = await res.json();
-        setCommentError(errData.error || 'Failed to submit report');
-      }
-    } catch (err) {
-      setCommentError('Network error. Unable to dispatch intel.');
-    } finally {
-      setSubmittingComment(false);
-    }
-  };
 
   const handleReact = async (type) => {
     if (!dossier) return;
@@ -378,9 +312,9 @@ export default function TodayInShadows() {
             
             <div className="flex gap-2 items-center flex-wrap">
               {[
-                { id: 'like', emoji: '❤️', label: 'Like' },
-                { id: 'gripping', emoji: '👁️', label: 'Gripping' },
-                { id: 'scared', emoji: '😨', label: 'Scared' },
+                { id: 'like', emoji: '🕯️', label: 'Respect' },
+                { id: 'gripping', emoji: '🔥', label: 'Gripping' },
+                { id: 'scared', emoji: '💀', label: 'Shocking' },
                 { id: 'mindblown', emoji: '🤯', label: 'Mindblown' }
               ].map((r) => {
                 const isSelected = userReaction === r.id;
@@ -490,9 +424,9 @@ export default function TodayInShadows() {
                 </h5>
                 <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
                   {[
-                    { id: 'like', label: 'Like', emoji: '❤️' },
-                    { id: 'gripping', label: 'Gripping', emoji: '👁️' },
-                    { id: 'scared', label: 'Scared', emoji: '😨' },
+                    { id: 'like', label: 'Respect', emoji: '🕯️' },
+                    { id: 'gripping', label: 'Gripping', emoji: '🔥' },
+                    { id: 'scared', label: 'Shocking', emoji: '💀' },
                     { id: 'mindblown', label: 'Mindblown', emoji: '🤯' }
                   ].map((r) => {
                     const isSelected = userReaction === r.id;
@@ -517,81 +451,7 @@ export default function TodayInShadows() {
                 </div>
               </div>
 
-              {/* Classified Intel Feed / Decrypted Discussion */}
-              <div className="space-y-4 pt-4 border-t border-neutral-900">
-                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2 flex items-center justify-between">
-                  <span>Classified Intel Logs (Decrypted Feed)</span>
-                  {commentsLoading && <span className="text-[9px] text-[#9E7B4C] animate-pulse">DECRYPTING...</span>}
-                </h5>
 
-                {/* Comments List */}
-                <div className="space-y-3 max-h-[220px] overflow-y-auto pr-1 custom-scrollbar">
-                  {comments.length === 0 && !commentsLoading ? (
-                    <div className="text-center py-6 border border-dashed border-neutral-900 rounded-lg text-neutral-500 text-xs font-mono">
-                      NO DECRYPTED INTEL LOGS FOUND.
-                    </div>
-                  ) : (
-                    comments.map((c) => (
-                      <div
-                        key={c.id || c.timestamp}
-                        className="p-3 rounded-lg border bg-neutral-950/60 border-neutral-900/60"
-                      >
-                        <div className="flex justify-between items-baseline mb-1">
-                          <span className="text-[10px] font-mono text-[#9E7B4C] uppercase tracking-wider font-bold">
-                            {c.username}
-                          </span>
-                          <span className="text-[8px] font-mono text-neutral-500">
-                            {new Date(c.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · {new Date(c.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
-                          </span>
-                        </div>
-                        <p className="font-serif italic text-xs leading-relaxed text-[#EDE8DF]/90">
-                          {c.comment}
-                        </p>
-                      </div>
-                    ))
-                  )}
-                </div>
-
-                {/* Submit Comment Form */}
-                <form onSubmit={handleSubmitComment} className="space-y-3 pt-2">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <div className="w-full sm:w-[160px] flex-shrink-0">
-                      <label htmlFor="dossier-codename" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Codename</label>
-                      <input
-                        id="dossier-codename"
-                        type="text"
-                        placeholder="Agent_Anonymous"
-                        value={codename}
-                        onChange={(e) => setCodename(e.target.value)}
-                        className="w-full bg-[#0A0907] text-[#EDE8DF] text-[11px] font-mono px-3 py-2 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <label htmlFor="dossier-comment" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Intel Report</label>
-                      <textarea
-                        id="dossier-comment"
-                        placeholder="Log your findings or notes here..."
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
-                        rows={2}
-                        className="w-full bg-[#0A0907] text-[#EDE8DF] text-[11px] font-serif px-3 py-2 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors resize-none"
-                      />
-                    </div>
-                  </div>
-                  {commentError && (
-                    <p className="text-[10px] font-mono text-red-500">{commentError}</p>
-                  )}
-                  <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      disabled={submittingComment || !newComment.trim()}
-                      className="px-4 py-2 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] hover:border-[#9E7B4C]/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-[10px] font-mono tracking-widest uppercase rounded active:scale-95 transition-all duration-200 cursor-pointer"
-                    >
-                      {submittingComment ? 'Sending...' : 'Dispatch Intel'}
-                    </button>
-                  </div>
-                </form>
-              </div>
 
             </div>
 

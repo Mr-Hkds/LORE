@@ -567,6 +567,8 @@ async function getWikipediaThumbnail(query) {
   }
 }
 
+
+
 // --- HTTP SERVER MAIN ROUTER ---
 const server = http.createServer(async (req, res) => {
   // Set CORS headers
@@ -935,49 +937,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Route: GET /api/comments
-  if (req.method === 'GET' && pathname === '/api/comments') {
-    try {
-      const target_id = urlObj.searchParams.get('target_id');
-      const title = urlObj.searchParams.get('title') || '';
-      const category = urlObj.searchParams.get('category') || '';
-      
-      if (!target_id) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Missing target_id' }));
-        return;
-      }
 
-      const comments = await getCommentsWithAiFallback(target_id, title, category);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(comments));
-    } catch (err) {
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: err.message }));
-    }
-    return;
-  }
-
-  // Route: POST /api/comments
-  if (req.method === 'POST' && pathname === '/api/comments') {
-    try {
-      const { target_id, username, comment } = await getJsonBody(req);
-      if (!target_id || !username || !comment) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Missing target_id, username, or comment' }));
-        return;
-      }
-
-      db.insertComment(target_id, username, comment);
-      const comments = db.getComments(target_id);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(comments));
-    } catch (err) {
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: err.message }));
-    }
-    return;
-  }
 
   // Route: POST /api/stories/add
   if (req.method === 'POST' && pathname === '/api/stories/add') {

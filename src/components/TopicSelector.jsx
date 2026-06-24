@@ -392,13 +392,13 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     return (
                       <div 
                         key={story.story_id} 
-                        className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:bg-neutral-900/20 hover:border-neutral-800/85 transition-all duration-200 group relative"
+                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl border border-neutral-900 bg-neutral-950/40 hover:bg-neutral-900/20 hover:border-neutral-800/85 transition-all duration-200 group relative"
                       >
                         <div 
                           onClick={() => window.location.hash = `#story-${story.story_id}-layer-${currentL}`}
-                          className="flex items-center gap-4 flex-1 cursor-pointer w-full min-w-0"
+                          className="flex flex-row items-center gap-4 flex-1 cursor-pointer w-full min-w-0"
                         >
-                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900 bg-neutral-950">
+                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900 bg-neutral-950 relative">
                             <StoryMiniImage story={story} />
                           </div>
                           <div className="min-w-0 flex-1">
@@ -526,7 +526,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       onClick={() => {
                         window.location.hash = `#story-${story.story_id}-layer-${currentL > 0 ? currentL : 1}`;
                       }}
-                      className="group relative w-full flex flex-row gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
+                      className="group relative w-full flex flex-row items-center gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
                       style={{
                         backgroundColor: 'transparent',
                         borderBottom: '1px solid rgba(158, 123, 76, 0.07)',

@@ -32,13 +32,7 @@ export default function LayerReader({
   const [animatingReaction, setAnimatingReaction] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
 
-  // Comments state
-  const [comments, setComments] = useState([]);
-  const [commentsLoading, setCommentsLoading] = useState(false);
-  const [codename, setCodename] = useState(() => localStorage.getItem('lore:codename') || '');
-  const [newComment, setNewComment] = useState('');
-  const [submittingComment, setSubmittingComment] = useState(false);
-  const [commentError, setCommentError] = useState(null);
+
 
   // Sync reactions counts when data updates
   useEffect(() => {
@@ -93,67 +87,7 @@ export default function LayerReader({
     }
   };
 
-  // Fetch comments when Layer 7 is loaded
-  useEffect(() => {
-    if (isLastLayer && data?.storyId) {
-      let active = true;
-      setCommentsLoading(true);
-      setCommentError(null);
 
-      const fetchComments = async () => {
-        try {
-          const res = await fetch(`/api/comments?target_id=${data.storyId}&title=${encodeURIComponent(topic.label)}&category=${encodeURIComponent(topic.id)}`);
-          if (res.ok && active) {
-            const result = await res.json();
-            setComments(result);
-          }
-        } catch (err) {
-          console.warn('[Story Comments] Failed to fetch comments:', err.message);
-        } finally {
-          if (active) setCommentsLoading(false);
-        }
-      };
-
-      fetchComments();
-      return () => { active = false; };
-    }
-  }, [isLastLayer, data?.storyId, topic.label, topic.id]);
-
-  const handleSubmitComment = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim() || !data?.storyId) return;
-
-    setSubmittingComment(true);
-    setCommentError(null);
-    const activeCodename = codename.trim() || 'Anonymous Agent';
-
-    try {
-      const res = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          target_id: data.storyId,
-          username: activeCodename,
-          comment: newComment.trim()
-        })
-      });
-      if (res.ok) {
-        const result = await res.json();
-        setComments(result);
-        setNewComment('');
-        if (codename.trim()) {
-          localStorage.setItem('lore:codename', codename.trim());
-        }
-      } else {
-        const errData = await res.json();
-        setCommentError(errData.error || 'Failed to submit report');
-      }
-    } catch (err) {
-      setCommentError('Network error. Unable to dispatch intel.');
-    } finally {
-      setSubmittingComment(false);
-    }
-  };
 
   const cards = data?.cards || [];
   const layerName = data?.layerName || null;
@@ -346,23 +280,23 @@ export default function LayerReader({
                   </p>
                   <div className="flex justify-center gap-3 flex-wrap">
 
-                    {/* LIKE */}
+                    {/* RESPECT */}
                     <div className="relative">
                       {animatingReaction === 'like' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
-                          ❤️
+                          🕯️
                         </span>
                       )}
                       <button
                         onClick={() => handleReact('like')}
-                        title={reacted['like'] ? 'Click again to undo your vote' : 'Mark as Like'}
+                        title={reacted['like'] ? 'Click again to undo your vote' : 'Mark as Respect'}
                         className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
                           reacted['like']
-                            ? 'bg-rose-950/30 border-rose-700/70 text-rose-300 shadow-[0_0_12px_rgba(244,63,94,0.2)]'
-                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-rose-900/50 hover:text-rose-400'
+                            ? 'bg-amber-950/30 border-amber-700/70 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
+                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-amber-900/50 hover:text-amber-400'
                         } ${animatingReaction === 'like' ? 'scale-110' : ''}`}
                       >
-                        ❤️ LIKE <span className="opacity-60">({reactions.like || 0})</span>
+                        🕯️ RESPECT <span className="opacity-60">({reactions.like || 0})</span>
                       </button>
                     </div>
 
@@ -386,7 +320,7 @@ export default function LayerReader({
                       </button>
                     </div>
 
-                    {/* TERRIFYING */}
+                    {/* SHOCKING */}
                     <div className="relative">
                       {animatingReaction === 'scared' && (
                         <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xl animate-float-up-fade select-none">
@@ -395,14 +329,14 @@ export default function LayerReader({
                       )}
                       <button
                         onClick={() => handleReact('scared')}
-                        title={reacted['scared'] ? 'Click again to undo your vote' : 'Mark as Terrifying'}
+                        title={reacted['scared'] ? 'Click again to undo your vote' : 'Mark as Shocking'}
                         className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
                           reacted['scared']
                             ? 'bg-red-950/30 border-red-700/70 text-red-300 shadow-[0_0_12px_rgba(239,68,68,0.2)]'
                             : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-red-900/50 hover:text-red-400'
                         } ${animatingReaction === 'scared' ? 'scale-110' : ''}`}
                       >
-                        💀 TERRIFYING <span className="opacity-60">({reactions.scared || 0})</span>
+                        💀 SHOCKING <span className="opacity-60">({reactions.scared || 0})</span>
                       </button>
                     </div>
 
@@ -430,83 +364,7 @@ export default function LayerReader({
                 </div>
               )}
 
-              {/* Decrypted Forum Comments Widget at Layer 7 */}
-              {isLastLayer && (
-                <div className="mt-10 pt-8 border-t" style={{ borderColor: layer.border }}>
-                  <h5 className="text-[11px] font-mono tracking-widest uppercase text-[#9E7B4C] border-l border-[#9E7B4C] pl-2 flex items-center justify-between mb-4">
-                    <span>Classified Intel Logs (Decrypted Feed)</span>
-                    {commentsLoading && <span className="text-[9px] text-[#9E7B4C] animate-pulse">DECRYPTING...</span>}
-                  </h5>
 
-                  {/* Comments List */}
-                  <div className="space-y-3 max-h-[250px] overflow-y-auto pr-1 custom-scrollbar text-left mb-6">
-                    {comments.length === 0 && !commentsLoading ? (
-                      <div className="text-center py-6 border border-dashed border-neutral-800 rounded-lg text-neutral-500 text-xs font-mono">
-                        NO DECRYPTED INTEL LOGS FOUND.
-                      </div>
-                    ) : (
-                      comments.map((c) => (
-                        <div
-                          key={c.id || c.timestamp}
-                          className="p-3.5 rounded-lg border bg-black/40 border-neutral-900/60"
-                        >
-                          <div className="flex justify-between items-baseline mb-1">
-                            <span className="text-[10px] font-mono text-[#9E7B4C] uppercase tracking-wider font-bold">
-                              {c.username}
-                            </span>
-                            <span className="text-[8px] font-mono text-neutral-500">
-                              {new Date(c.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · {new Date(c.timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
-                            </span>
-                          </div>
-                          <p className="font-serif italic text-xs leading-relaxed text-[#EDE8DF]/90">
-                            {c.comment}
-                          </p>
-                        </div>
-                      ))
-                    )}
-                  </div>
-
-                  {/* Submit Comment Form */}
-                  <form onSubmit={handleSubmitComment} className="space-y-4 pt-2 text-left">
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <div className="w-full sm:w-[180px] flex-shrink-0">
-                        <label htmlFor="story-codename" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Codename</label>
-                        <input
-                          id="story-codename"
-                          type="text"
-                          placeholder="Agent_Anonymous"
-                          value={codename}
-                          onChange={(e) => setCodename(e.target.value)}
-                          className="w-full bg-black/50 text-[#EDE8DF] text-[11px] font-mono px-3 py-2.5 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label htmlFor="story-comment" className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest block mb-1">Intel Report</label>
-                        <textarea
-                          id="story-comment"
-                          placeholder="Log your findings or notes here..."
-                          value={newComment}
-                          onChange={(e) => setNewComment(e.target.value)}
-                          rows={2}
-                          className="w-full bg-black/50 text-[#EDE8DF] text-[11px] font-serif px-3 py-2.5 rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors resize-none"
-                        />
-                      </div>
-                    </div>
-                    {commentError && (
-                      <p className="text-[10px] font-mono text-red-500">{commentError}</p>
-                    )}
-                    <div className="flex justify-end">
-                      <button
-                        type="submit"
-                        disabled={submittingComment || !newComment.trim()}
-                        className="px-5 py-2.5 bg-neutral-900 border border-neutral-800 text-[#EDE8DF] hover:border-[#9E7B4C]/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-[10.5px] font-mono tracking-widest uppercase rounded active:scale-95 transition-all duration-200 cursor-pointer"
-                      >
-                        {submittingComment ? 'Sending...' : 'Dispatch Intel'}
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              )}
             </div>
 
             {/* Connected Stories at Layer 7 */}

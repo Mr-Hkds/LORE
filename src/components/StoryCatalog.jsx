@@ -192,7 +192,7 @@ function EngagementBar({ reactions }) {
 
   if (like > maxCount) {
     maxCount = like;
-    dominant = { label: 'LIKE', emoji: '❤️', color: '#E11D48' };
+    dominant = { label: 'RESPECT', emoji: '🕯️', color: '#9E7B4C' };
   }
   if (gripping > maxCount) {
     maxCount = gripping;
@@ -200,7 +200,7 @@ function EngagementBar({ reactions }) {
   }
   if (scared > maxCount) {
     maxCount = scared;
-    dominant = { label: 'TERRIFYING', emoji: '💀', color: '#EF4444' };
+    dominant = { label: 'SHOCKING', emoji: '💀', color: '#EF4444' };
   }
   if (mindblown > maxCount) {
     maxCount = mindblown;

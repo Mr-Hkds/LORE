@@ -614,13 +614,15 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           addLog('GitHub Sync configured. Preparing repository commit...');
           const updatedStories = [...stories.filter(s => s.story_id !== storyObj.story_id), storyObj];
           const newConceptIndex = rebuildConceptIndex(updatedStories);
+          const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyObj.story_id]);
           const filesToCommit = [
             { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+            ...imageFiles
           ];
           try {
             await commitFilesToGitHub(filesToCommit, `admin: generate story "${storyObj.title}" via manual generator`);
-            addLog('🚀 Successfully committed generated story to GitHub repo!');
+            addLog('🚀 Successfully committed generated story and images to GitHub repo!');
           } catch (err) {
             addLog(`❌ Failed to commit to GitHub: ${err.message}`);
           }
@@ -1084,9 +1086,11 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       if (ghToken) {
         const updatedStories = [...stories.filter(s => s.story_id !== storyId && s.story_id !== finalId), payload];
         const newConceptIndex = rebuildConceptIndex(updatedStories);
+        const imageFiles = await getLocalImageCommitFiles(updatedStories, [finalId]);
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+          ...imageFiles
         ];
         try {
           await commitFilesToGitHub(filesToCommit, `admin: update story ${finalId} via edit save`);
@@ -1329,6 +1333,30 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     }
 
     addLog(`Process complete. Successfully updated ${successCount} out of ${missing.length} cover images.`);
+
+    if (successCount > 0 && ghToken) {
+      addLog('Pushing updated stories to GitHub repository...');
+      setPublishStatus('Syncing updates to GitHub live site...');
+      try {
+        const storiesRes = await fetch('/api/stories');
+        if (storiesRes.ok) {
+          const freshStories = await storiesRes.json();
+          const newConceptIndex = rebuildConceptIndex(freshStories);
+          const generatedIds = missing.map(s => s.story_id);
+          const imageFiles = await getLocalImageCommitFiles(freshStories, generatedIds);
+          const filesToCommit = [
+            { path: 'public/content/stories.json', content: JSON.stringify({ stories: freshStories }, null, 2) },
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+            ...imageFiles
+          ];
+          await commitFilesToGitHub(filesToCommit, `admin: generate cover images for ${successCount} stories`);
+          addLog('🚀 Successfully committed and synced cover images to GitHub!');
+        }
+      } catch (err) {
+        addLog(`❌ GitHub Sync failed: ${err.message}`);
+      }
+    }
+
     setToast({ text: `Generated cover images for ${successCount} stories!`, type: 'success' });
     setIsPublishing(false);
     setPublishStatus('');
@@ -1339,8 +1367,8 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
 
   // Image Upload handler
   const handleUploadImage = async (e, storyId) => {
-    if (!isLocal || serverOffline) {
-      alert('Custom image uploading is a local feature. Please run on localhost to upload cover files.');
+    if ((!isLocal || serverOffline) && !ghToken) {
+      alert('Custom image uploading requires running locally or configuring GitHub Sync in settings.');
       return;
     }
     const file = e.target.files?.[0];
@@ -1353,32 +1381,88 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     reader.onloadend = async () => {
       try {
         const base64Data = reader.result;
-        const res = await fetch('/api/upload-image', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            storyId: storyId || 'general',
-            filename: 'cover.jpg',
-            base64Data,
-          }),
-        });
+        const base64Clean = base64Data.replace(/^data:image\/\w+;base64,/, '');
+        const filename = 'cover.jpg';
+        const folderName = storyId || 'general';
+        const relativePath = `/content/images/${folderName}/${filename}`;
 
-        if (res.ok) {
-          const data = await res.json();
-          addLog(`Successfully uploaded custom image: ${data.path}`);
-          setEditForm(prev => ({ ...prev, hero_image: data.path }));
-          setToast({ text: 'Image uploaded successfully!', type: 'success' });
-        } else {
-          alert('Failed to upload image to server');
+        let savedLocally = false;
+        if (isLocal && !serverOffline) {
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              storyId: folderName,
+              filename,
+              base64Data,
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            savedLocally = true;
+            addLog(`Successfully uploaded custom image to local server: ${data.path}`);
+          }
         }
+
+        // Commit directly to GitHub if token is present
+        if (ghToken) {
+          addLog(`Uploading cover image directly to GitHub repository...`);
+          const filesToCommit = [
+            {
+              path: `public${relativePath}`,
+              content: base64Clean,
+              isBinary: true
+            }
+          ];
+          await commitFilesToGitHub(filesToCommit, `admin: upload cover image for ${storyId || 'new_story'}`);
+          addLog(`🚀 Cover image successfully committed to GitHub: public${relativePath}`);
+        }
+
+        setEditForm(prev => ({ ...prev, hero_image: relativePath }));
+        setToast({ text: 'Image uploaded and synced successfully!', type: 'success' });
       } catch (err) {
         console.error(err);
-        alert('Error uploading image');
+        alert(`Error uploading image: ${err.message}`);
       } finally {
         setUploadingState('idle');
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  // Helper to fetch local cover images and format them as GitHub commit files
+  const getLocalImageCommitFiles = async (storiesList, limitStoryIds = null) => {
+    const files = [];
+    for (const story of storiesList) {
+      if (limitStoryIds && !limitStoryIds.includes(story.story_id)) {
+        continue;
+      }
+      if (story.hero_image && story.hero_image.startsWith('/content/images/')) {
+        try {
+          const checkUrl = `${window.location.origin}${story.hero_image.startsWith('/') ? '' : '/'}${story.hero_image}`;
+          const res = await fetch(checkUrl);
+          if (res.ok) {
+            const blob = await res.blob();
+            const base64 = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+            const base64Clean = base64.replace(/^data:image\/\w+;base64,/, '');
+            const cleanPath = story.hero_image.startsWith('/') ? story.hero_image.substring(1) : story.hero_image;
+            files.push({
+              path: `public/${cleanPath}`,
+              content: base64Clean,
+              isBinary: true
+            });
+          }
+        } catch (err) {
+          console.warn(`Failed to read local image for story ${story.story_id}:`, err);
+        }
+      }
+    }
+    return files;
   };
 
   // Commit files directly using REST API
@@ -1429,7 +1513,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
         setPublishStatus(`Committing ${file.path}...`);
         const body = {
           message: commitMessage,
-          content: btoa(unescape(encodeURIComponent(file.content))),
+          content: file.isBinary ? file.content : btoa(unescape(encodeURIComponent(file.content))),
           branch: branch
         };
         if (sha) {
@@ -1524,9 +1608,11 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       const mergedConceptIndex = rebuildConceptIndex(mergedStories);
       setPublishStatus('Sync: Gathering local files to publish...');
 
+      const imageFiles = await getLocalImageCommitFiles(mergedStories);
       const filesToCommit = [
         { path: 'public/content/stories.json', content: JSON.stringify({ stories: mergedStories }, null, 2) },
-        { path: 'public/content/concept_index.json', content: JSON.stringify(mergedConceptIndex, null, 2) }
+        { path: 'public/content/concept_index.json', content: JSON.stringify(mergedConceptIndex, null, 2) },
+        ...imageFiles
       ];
 
       // Read local feedback file to push
@@ -2129,6 +2215,11 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                   <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
                                     {story.severity}
                                   </span>
+                                  {story.added_date && (
+                                    <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-500 uppercase tracking-widest">
+                                      PUBLISHED: {story.added_date}
+                                    </span>
+                                  )}
                                 </div>
                                 {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                               </div>
