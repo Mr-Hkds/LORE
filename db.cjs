@@ -451,7 +451,7 @@ function updateDailyReaction(date, reaction_type, undo = false) {
 
   db.prepare('INSERT OR IGNORE INTO daily_reactions (date) VALUES (?)').run(date);
   const change = undo ? -1 : 1;
-  db.prepare(`UPDATE daily_reactions SET ${colName} = MAX(0, ${colName} + ?) WHERE date = ?`).run(change, date);
+  db.prepare(`UPDATE daily_reactions SET ${colName} = MAX(0, COALESCE(${colName}, 0) + ?) WHERE date = ?`).run(change, date);
   return true;
 }
 

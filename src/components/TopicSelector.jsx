@@ -307,7 +307,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col justify-end px-4 sm:px-8 md:px-10 py-16 md:py-24">
+      <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
           {/* Eyebrow */}

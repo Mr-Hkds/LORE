@@ -614,18 +614,33 @@ const server = http.createServer(async (req, res) => {
   // Route: POST /api/daily-dossier
   if (req.method === 'POST' && pathname === '/api/daily-dossier') {
     try {
-      const { reaction_type, undo, date } = await getJsonBody(req);
-      if (!reaction_type) {
+      const { reaction_type, undo, date, add_reaction, remove_reaction } = await getJsonBody(req);
+      const dateStr = date || new Date().toISOString().split('T')[0];
+      
+      let updated = false;
+      
+      // Support atomic add/remove format
+      if (add_reaction !== undefined || remove_reaction !== undefined) {
+        if (remove_reaction) {
+          db.updateDailyReaction(dateStr, remove_reaction, true);
+          updated = true;
+        }
+        if (add_reaction) {
+          db.updateDailyReaction(dateStr, add_reaction, false);
+          updated = true;
+        }
+      } else if (reaction_type) {
+        db.updateDailyReaction(dateStr, reaction_type, !!undo);
+        updated = true;
+      }
+      
+      if (!updated) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Missing reaction_type' }));
+        res.end(JSON.stringify({ error: 'Missing reaction parameters' }));
         return;
       }
       
-      const dateStr = date || new Date().toISOString().split('T')[0];
-      
-      db.updateDailyReaction(dateStr, reaction_type, !!undo);
       const updatedReactions = db.getDailyReactions(dateStr);
-      
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, reactions: updatedReactions }));
     } catch (err) {

@@ -292,11 +292,20 @@ export default function TodayInShadows() {
     const stored = localStorage.getItem(`lore:dossier:reaction:${dateKey}`);
     setUserReaction(stored || null);
 
-    // Load counts: prefer server's actual database counts
+    // Load counts: prefer server's actual database counts, fallback to local cache
     if (dossier.reactions) {
       setReactions(dossier.reactions);
     } else {
-      setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+      try {
+        const cached = localStorage.getItem(`lore:dossier:counts:${dateKey}`);
+        if (cached) {
+          setReactions(JSON.parse(cached));
+        } else {
+          setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+        }
+      } catch {
+        setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+      }
     }
   }, [dossier]);
 
@@ -349,19 +358,16 @@ export default function TodayInShadows() {
       localStorage.setItem(`lore:dossier:reaction:${dateKey}`, type);
     }
 
-    // Sync to server silently
+    // Sync to server using unified atomic API
     try {
-      if (oldReaction && oldReaction !== type) {
-        await fetch('/api/daily-dossier', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ reaction_type: oldReaction, undo: true, date: dateKey })
-        });
-      }
       const res = await fetch('/api/daily-dossier', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reaction_type: type, undo: wasSelected, date: dateKey })
+        body: JSON.stringify({
+          add_reaction: wasSelected ? null : type,
+          remove_reaction: oldReaction,
+          date: dateKey
+        })
       });
       if (res.ok) {
         const data = await res.json();
@@ -389,16 +395,16 @@ export default function TodayInShadows() {
     <>
       {/* ── Dossier Card on Homepage ──────────────────────────────────── */}
       <div
-        className="p-5 md:p-6 rounded-xl border flex flex-col md:flex-row gap-5 items-start transition-all duration-300 hover:border-[#9E7B4C]/35"
+        className="p-6 rounded-2xl border flex flex-col md:flex-row gap-6 items-stretch transition-all duration-300 hover:border-[#9E7B4C]/45 group relative"
         style={{
-          backgroundColor: 'rgba(15, 13, 10, 0.65)',
-          borderColor: 'rgba(158, 123, 76, 0.15)',
-          boxShadow: '0 8px 32px -10px rgba(0, 0, 0, 0.5)',
+          backgroundColor: '#151311',
+          borderColor: 'rgba(158, 123, 76, 0.18)',
+          boxShadow: '0 12px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.03)',
         }}
       >
         {/* Thumbnail */}
         {dossier.thumbnail && (
-          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
+          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[130px] md:h-auto rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                 <LoreMark size={20} color="currentColor" />
@@ -424,23 +430,29 @@ export default function TodayInShadows() {
         )}
 
         {/* Text block */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-2 flex-wrap">
-            <span className="text-[9.5px] sm:text-[10px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-sm">
-              WHAT HAPPENED TODAY · {dossier.theme?.toUpperCase()}
-            </span>
-            {dossier.year && <span className="text-[10px] font-mono text-neutral-400 tracking-wider">YEAR: {dossier.year}</span>}
+        <div className="flex-1 min-w-0 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2.5 py-0.5 rounded-sm">
+                WHAT HAPPENED TODAY · {dossier.theme?.toUpperCase()}
+              </span>
+              {dossier.year && (
+                <span className="text-[10px] font-mono text-neutral-550 tracking-widest uppercase">
+                  YEAR: {dossier.year}
+                </span>
+              )}
+            </div>
+            <h4 className="font-serif italic text-lg sm:text-xl text-[#EDE8DF] tracking-normal mb-2 font-semibold">{dossier.title}</h4>
+            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5">
+              {dossier.text}
+            </p>
           </div>
-          <h4 className="font-sans font-bold text-[13px] uppercase tracking-wider text-neutral-300 mb-1">{dossier.title}</h4>
-          <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.95 }}>
-            {dossier.text}
-          </p>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4 pt-4 border-t border-neutral-900/40">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-neutral-900/60">
             <button
               onClick={() => setModalOpen(true)}
               className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none flex-shrink-0"
             >
-              Read Entry <span className="text-xs">→</span>
+              Read Dossier Entry <span className="text-xs">→</span>
             </button>
             {/* Mini reaction pills on card */}
             <div className="flex gap-1.5 items-center flex-wrap">
@@ -452,16 +464,16 @@ export default function TodayInShadows() {
                     key={r.id}
                     onClick={() => handleReact(r.id)}
                     title={r.label}
-                    className="py-1 px-2 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group"
+                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group"
                     style={{
                       backgroundColor: isSelected ? r.activeBg : 'rgba(10,9,7,0.4)',
                       borderColor: isSelected ? r.activeBorder : 'rgba(237,232,223,0.06)',
                       boxShadow: isSelected ? `0 0 10px ${r.glowColor}` : 'none',
                     }}
                   >
-                    <r.Icon className="w-3 h-3 transition-all duration-200" style={{ color: isSelected ? r.activeColor : '#5A5650' }} />
+                    <r.Icon className="w-3 h-3 transition-all duration-200" style={{ color: isSelected ? r.activeColor : '#6B6560' }} />
                     <span style={{ color: isSelected ? r.activeColor : '#6B6560' }}>{r.label}</span>
-                    <span className="opacity-60" style={{ color: isSelected ? r.activeColor : '#4A4440' }}>({count})</span>
+                    <span className="opacity-60 font-bold" style={{ color: isSelected ? r.activeColor : '#4A4440' }}>({count})</span>
                   </button>
                 );
               })}
@@ -473,13 +485,13 @@ export default function TodayInShadows() {
       {/* ── MODAL — Full-screen overlay, centering flex wrapper, max height constraint ──── */}
       {modalOpen && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-8"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 md:p-6"
           style={{ backgroundColor: 'rgba(5,4,3,0.92)', backdropFilter: 'blur(10px)' }}
           onClick={() => setModalOpen(false)}
         >
           {/* Modal card — stops click propagation, flex layout with max-height and hidden overflow */}
           <div
-            className="relative w-full max-h-[90vh] rounded-2xl flex flex-col overflow-hidden animate-fadeIn"
+            className="relative w-full max-h-[92vh] sm:max-h-[88vh] rounded-2xl flex flex-col overflow-hidden animate-fadeIn"
             style={{
               maxWidth: '680px',
               backgroundColor: '#110F0D',
@@ -497,7 +509,7 @@ export default function TodayInShadows() {
                 <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm inline-block">
                   Today in History
                 </span>
-                <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-light pt-1 leading-tight">{dossier.title}</h3>
+                <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-semibold pt-1 leading-tight">{dossier.title}</h3>
                 <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 pt-0.5">
                   <span>THEME: {dossier.theme?.toUpperCase()}</span>
                   <span>·</span>
