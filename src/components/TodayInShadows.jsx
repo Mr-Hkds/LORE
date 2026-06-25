@@ -433,19 +433,19 @@ export default function TodayInShadows() {
               {dossier.text}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-neutral-900/60 w-full">
+          <div className="flex flex-col gap-4 pt-4 border-t border-neutral-900/60 w-full">
             {dossier.wikiUrl ? (
               <a
                 href={dossier.wikiUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none flex-shrink-0"
+                className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none w-fit"
               >
                 Read Wikipedia Article <span className="text-xs">→</span>
               </a>
             ) : <div />}
             {/* Mini reaction pills on card */}
-            <div className="grid grid-cols-2 sm:flex gap-1.5 items-center w-full sm:w-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center w-full">
               {REACTION_CONFIG.map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
@@ -454,7 +454,7 @@ export default function TodayInShadows() {
                     key={r.id}
                     onClick={() => handleReact(r.id)}
                     title={r.label}
-                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group w-full sm:w-auto"
+                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group w-full"
                     style={{
                       backgroundColor: isSelected ? r.activeBg : 'rgba(10,9,7,0.4)',
                       borderColor: isSelected ? r.activeBorder : 'rgba(237,232,223,0.06)',
