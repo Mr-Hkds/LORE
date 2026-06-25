@@ -1487,11 +1487,8 @@
     {
       "story_id": "cia_mk_ultra_program",
       "title": "MK-Ultra: The CIA's Mind Control Experiments",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/DeclassifiedMKULTRA.jpg/330px-DeclassifiedMKULTRA.jpg",
-      "image_query": "MK-Ultra",
-      "hook": "The human mind, a fortress of identity, can be systematically dismantled and rebuilt. This chilling truth was explored in a secret government program, blurring ethics and reality.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "The human mind, a fortress of identity, can be systematically dismantled and rebuilt. This chilling truth was explored in a secret government program, blurring ethics and reality.",
       "concepts": [
         "mind_control",
         "unethical_experimentation",
@@ -1499,6 +1496,18 @@
         "government_secrecy",
         "psychological_warfare"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/DeclassifiedMKULTRA.jpg/330px-DeclassifiedMKULTRA.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 29,
+        "scared": 5,
+        "mindblown": 7
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -1558,6 +1567,46 @@
         "obedience_to_authority"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/jonestown_massacre_001.jpg",
+      "added_date": "2026-06-25",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 13,
+        "scared": 60,
+        "mindblown": 11
+      },
+      "evidence_links": [
+        {
+          "label": "Leadership and discursive mobilizing of collective action in the Jonestown mass killing (Kevin Durrheim, Leda Blackwood, 2024)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bjso.12772"
+        },
+        {
+          "label": "A Normative Turn in the Study of Religions? (Michael Stausberg, Ingvild Sælid Gilhus, 2023)",
+          "url": "https://brill.com/downloadpdf/journals/mtsr/aop/article-10.1163-15700682-bja10117/article-10.1163-15700682-bja10117.pdf"
+        },
+        {
+          "label": "Understanding Jonestown: the criminal liabilities of the Port Kaituma airstrip shooting and Jonestown massacre (Charlie Tye, 2025)",
+          "url": "https://doi.org/10.15124/yao-jdpg-xx62"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "milgram_experiment_on_obedience_001",
+          "shared_concept": "obedience_to_authority",
+          "transition_line": "The chilling obedience observed in Jonestown offers a horrifying, real-world parallel to the shocking findings of Stanley Milgram's experiments on human compliance to authority figures."
+        },
+        {
+          "story_id": "the_asch_conformity_experiments",
+          "shared_concept": "groupthink",
+          "transition_line": "The collective delusion and tragic decisions made at Jonestown illustrate the extreme dangers of conformity and groupthink, echoing the powerful social pressures revealed in the Asch Conformity Experiments."
+        },
+        {
+          "story_id": "stanford_prison_experiment_001",
+          "shared_concept": "power_dynamics",
+          "transition_line": "Just as the Stanford Prison Experiment exposed the rapid psychological shifts under conditions of extreme power and social roles, Jonestown vividly demonstrates how a charismatic leader can utterly transform human behavior through absolute authority and control."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -1601,46 +1650,16 @@
           "content": "The Jonestown Massacre remains a chilling case study in the dynamics of cults, charismatic leadership, and social control. The meticulous psychological conditioning, the enforced isolation, and the complete erosion of individual critical thinking created an environment where obedience superseded self-preservation. Jones expertly exploited his followers' desires for community, equality, and meaning, twisting these aspirations into tools of his own power.\n\nPost-mortem analyses revealed a complex tapestry of motivations among the victims: some were true believers, convinced of Jones's divinity and the righteousness of their 'revolutionary suicide.' Others were coerced, trapped, and saw no viable escape, succumbing to the overwhelming social pressure and fear of retribution. The event serves as a stark reminder of the devastating potential when a leader's paranoia combines with unquestioning loyalty and an isolated, vulnerable populace.\n\nJonestown's legacy is a profound warning against unchecked authority and the dangers of groupthink. It highlights the importance of critical thinking, personal autonomy, and skepticism toward any ideology that demands absolute loyalty and isolates its followers from external scrutiny. The memory of Jonestown continues to echo, a permanent dark corner in human history, reminding us of the extreme fragility of the human will when subjected to sustained, totalitarian manipulation.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "milgram_experiment_on_obedience_001",
-          "shared_concept": "obedience_to_authority",
-          "transition_line": "The chilling obedience observed in Jonestown offers a horrifying, real-world parallel to the shocking findings of Stanley Milgram's experiments on human compliance to authority figures."
-        },
-        {
-          "story_id": "the_asch_conformity_experiments",
-          "shared_concept": "groupthink",
-          "transition_line": "The collective delusion and tragic decisions made at Jonestown illustrate the extreme dangers of conformity and groupthink, echoing the powerful social pressures revealed in the Asch Conformity Experiments."
-        },
-        {
-          "story_id": "stanford_prison_experiment_001",
-          "shared_concept": "power_dynamics",
-          "transition_line": "Just as the Stanford Prison Experiment exposed the rapid psychological shifts under conditions of extreme power and social roles, Jonestown vividly demonstrates how a charismatic leader can utterly transform human behavior through absolute authority and control."
-        }
-      ],
-      "added_date": "2026-06-25",
-      "evidence_links": [
-        {
-          "label": "Leadership and discursive mobilizing of collective action in the Jonestown mass killing (Kevin Durrheim, Leda Blackwood, 2024)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bjso.12772"
-        },
-        {
-          "label": "A Normative Turn in the Study of Religions? (Michael Stausberg, Ingvild Sælid Gilhus, 2023)",
-          "url": "https://brill.com/downloadpdf/journals/mtsr/aop/article-10.1163-15700682-bja10117/article-10.1163-15700682-bja10117.pdf"
-        },
-        {
-          "label": "Understanding Jonestown: the criminal liabilities of the Port Kaituma airstrip shooting and Jonestown massacre (Charlie Tye, 2025)",
-          "url": "https://doi.org/10.15124/yao-jdpg-xx62"
-        }
-      ],
-      "hero_image": "/content/images/jonestown_massacre_001.jpg"
+      ]
     },
     {
       "story_id": "the_numbers_stations",
       "title": "The Ghost Voices of the Airwaves: Unraveling the Numbers Stations",
-      "category": "cyber_mysteries",
+      "hero_image": "https://ychef.files.bbci.co.uk/1280x720/p05bbj96.jpg",
+      "image_query": "",
       "hook": "Every day, across the globe, strange, anonymous voices broadcast sequences of numbers and tones over shortwave radio, often without explanation, for decades.",
+      "category": "cyber_mysteries",
+      "severity": "chilling",
       "concepts": [
         "cryptography",
         "espionage",
@@ -1648,7 +1667,6 @@
         "shortwave_radio",
         "government_secrecy"
       ],
-      "severity": "chilling",
       "layers": [
         {
           "layer": 1,
@@ -1691,30 +1709,7 @@
           "layer_name": "The Dark Corner",
           "content": "The chilling reality of Numbers Stations is not merely their existence but what they represent: a tangible, undeniable manifestation of a global network of human intelligence, espionage, and covert operations that continues to thrive in the modern world. They are the silent heartbeat of spycraft, transmitting critical instructions to individuals who operate in the deepest shadows of society, often at immense personal risk.\n\nThese broadcasts confirm that an unseen battle of wits and secrets is constantly underway, with agents dispersed across continents, living double lives, and receiving their orders from robotic voices or strange melodies. The Numbers Stations are a stark reminder that even as technology advances, the human element of espionage remains vital, and the methods used to control and guide these hidden figures are as robust and secretive as ever. Their omnipresent, anonymous whispers are a chilling testament to the clandestine forces that shape our world, operating forever beyond the reach of public scrutiny."
         }
-      ],
-      "connections": [
-        {
-          "story_id": "cicada_3301",
-          "shared_concept": "cryptography",
-          "transition_line": "Much like the enigmatic online puzzles of Cicada 3301, the Numbers Stations use advanced cryptographic methods to conceal their true purpose, challenging all who attempt to decipher their hidden directives."
-        }
-      ],
-      "added_date": "2026-06-25",
-      "evidence_links": [
-        {
-          "label": "The climate hazards infrared precipitation with stations—a new environmental record for monitoring extremes (Chris Funk, Pete Peterson, 2015)",
-          "url": "https://www.nature.com/articles/sdata201566.pdf"
-        },
-        {
-          "label": "What Will 5G Be? (Jeffrey G. Andrews, Stefano Buzzi, 2014)",
-          "url": "https://repositori.upf.edu/bitstreams/fc28283a-2b87-4440-8960-ea80da00759d/download"
-        },
-        {
-          "label": "Scaling Up MIMO: Opportunities and Challenges with Very Large Arrays (F. Rusek, D. Persson, 2012)",
-          "url": "https://arxiv.org/pdf/1201.3210"
-        }
-      ],
-      "hero_image": "/content/images/the_numbers_stations.jpg"
+      ]
     }
   ]
 }
