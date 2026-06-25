@@ -395,7 +395,7 @@ export default function TodayInShadows() {
     <>
       {/* ── Dossier Card on Homepage ──────────────────────────────────── */}
       <div
-        className="p-6 rounded-2xl border flex flex-col md:flex-row gap-6 items-stretch transition-all duration-300 hover:border-[#9E7B4C]/45 group relative"
+        className="p-5 rounded-xl border flex flex-col md:flex-row gap-5 items-center transition-all duration-300 hover:border-[#9E7B4C]/45 group relative"
         style={{
           backgroundColor: '#151311',
           borderColor: 'rgba(158, 123, 76, 0.18)',
@@ -404,7 +404,7 @@ export default function TodayInShadows() {
       >
         {/* Thumbnail */}
         {dossier.thumbnail && (
-          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[130px] md:h-auto rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative">
+          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                 <LoreMark size={20} color="currentColor" />
@@ -489,9 +489,9 @@ export default function TodayInShadows() {
           style={{ backgroundColor: 'rgba(5,4,3,0.92)', backdropFilter: 'blur(10px)' }}
           onClick={() => setModalOpen(false)}
         >
-          {/* Modal card — stops click propagation, flex layout with max-height and hidden overflow */}
+          {/* Modal card — stops click propagation, flex layout with fixed height relative to viewport to prevent flex collapse */}
           <div
-            className="relative w-full max-h-[92vh] sm:max-h-[88vh] rounded-2xl flex flex-col overflow-hidden animate-fadeIn"
+            className="relative w-full h-[85vh] max-h-[750px] rounded-2xl flex flex-col overflow-hidden fade-in"
             style={{
               maxWidth: '680px',
               backgroundColor: '#110F0D',
