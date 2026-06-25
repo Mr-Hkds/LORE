@@ -445,7 +445,7 @@ export default function TodayInShadows() {
               </a>
             ) : <div />}
             {/* Mini reaction pills on card */}
-            <div className="flex gap-1.5 items-center flex-wrap">
+            <div className="grid grid-cols-2 sm:flex gap-1.5 items-center w-full sm:w-auto">
               {REACTION_CONFIG.map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
@@ -454,7 +454,7 @@ export default function TodayInShadows() {
                     key={r.id}
                     onClick={() => handleReact(r.id)}
                     title={r.label}
-                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group"
+                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group w-full sm:w-auto"
                     style={{
                       backgroundColor: isSelected ? r.activeBg : 'rgba(10,9,7,0.4)',
                       borderColor: isSelected ? r.activeBorder : 'rgba(237,232,223,0.06)',
