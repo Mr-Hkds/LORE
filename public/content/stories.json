@@ -1044,6 +1044,36 @@
         "forensic_controversy"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/noida_double_murder_case_2008.jpg",
+      "added_date": "2026-06-24",
+      "draft": false,
+      "reactions": {
+        "like": 53,
+        "gripping": 11,
+        "scared": 38,
+        "mindblown": 9
+      },
+      "evidence_links": [
+        {
+          "label": "United by a Common Language? Trade Union Responses in the UK and India to Call Centre Offshoring (Phil Taylor, Peter Bain, 2008)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1467-8330.2008.00567.x"
+        },
+        {
+          "label": "Changing social metabolism and environmental conflicts in India and South America (Joan Martínez Alier, Stanislav Shmelev, 2016)",
+          "url": "https://journals.uair.arizona.edu/index.php/JPE/article/download/20252/19868"
+        },
+        {
+          "label": "Employee voice and collective formation in the Indian ITES-BPO industry (Phil Taylor, Ernesto Noronha, 2008)",
+          "url": "https://strathprints.strath.ac.uk/15283/1/Taylor_et_al_Economic_and_Political_Weekly.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "hinterkaifeck_murders",
+          "shared_concept": "unsolved_mystery",
+          "transition_line": "Just as the isolated farm of Hinterkaifeck harbored a dark, impenetrable secret of brutal, unsolved murders, the Noida double murder case also left behind an equally perplexing and unresolved tragedy within the confines of a seemingly ordinary family home."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -1086,30 +1116,7 @@
           "layer_name": "The Dark Corner of Doubt",
           "content": "In October 2017, the Allahabad High Court delivered a landmark verdict, acquitting Rajesh and Nupur Talwar of all charges. The High Court meticulously reviewed the evidence, finding critical gaps in the prosecution's case. It concluded that the CBI had failed to establish a 'chain of evidence' beyond reasonable doubt, stating that the circumstantial evidence was insufficient to hold the parents guilty. The court famously remarked that the Talwars could not be convicted 'on the basis of suspicion or conjecture'.\n\nThis acquittal, while restoring the Talwars' freedom, thrust the case back into the realm of the officially unsolved. Two brutal murders, a teenage girl and a domestic helper, remain without a definitive perpetrator in the eyes of the law. The legal saga exposed profound systemic flaws, from police incompetence to the complexities of circumstantial evidence in Indian jurisprudence. The case became a chilling testament to how initial errors can permanently obscure truth.\n\nThe Noida double murder case stands as a permanent scar on India's judicial and investigative landscape. It is a haunting narrative of a family shattered, a justice system struggling, and a truth that, despite years of investigation and public obsession, continues to evade the light, leaving a chilling void where answers should be."
         }
-      ],
-      "connections": [
-        {
-          "story_id": "hinterkaifeck_murders",
-          "shared_concept": "unsolved_mystery",
-          "transition_line": "Just as the isolated farm of Hinterkaifeck harbored a dark, impenetrable secret of brutal, unsolved murders, the Noida double murder case also left behind an equally perplexing and unresolved tragedy within the confines of a seemingly ordinary family home."
-        }
-      ],
-      "added_date": "2026-06-24",
-      "evidence_links": [
-        {
-          "label": "United by a Common Language? Trade Union Responses in the UK and India to Call Centre Offshoring (Phil Taylor, Peter Bain, 2008)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1467-8330.2008.00567.x"
-        },
-        {
-          "label": "Changing social metabolism and environmental conflicts in India and South America (Joan Martínez Alier, Stanislav Shmelev, 2016)",
-          "url": "https://journals.uair.arizona.edu/index.php/JPE/article/download/20252/19868"
-        },
-        {
-          "label": "Employee voice and collective formation in the Indian ITES-BPO industry (Phil Taylor, Ernesto Noronha, 2008)",
-          "url": "https://strathprints.strath.ac.uk/15283/1/Taylor_et_al_Economic_and_Political_Weekly.pdf"
-        }
-      ],
-      "hero_image": "/content/images/noida_double_murder_case_2008.jpg"
+      ]
     },
     {
       "story_id": "cia_mk_ultra_program",
@@ -1124,6 +1131,36 @@
         "psychological_warfare"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/cia_mk_ultra_program.jpg",
+      "added_date": "2026-06-24",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 29,
+        "scared": 5,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "Cold War Anthropology: The CIA, the Pentagon, and the Growth of Dual Use Anthropology (David H. Price, 2016)",
+          "url": "https://openresearchlibrary.org/ext/api/media/6b45f9b9-3f99-465d-8a6a-7a2ce83cb89c/assets/external_content.pdf"
+        },
+        {
+          "label": "Buying a piece of anthropology (David H. Price, 2007)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1467-8322.2007.00537.x"
+        },
+        {
+          "label": "Istanbul Confidential: Heroin, Espionage, and Politics in Cold War Turkey, 1945-1960 (Ryan Gingeras, 2013)",
+          "url": "https://academic.oup.com/dh/article-pdf/37/4/779/1264795/dht057.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "operation_northwoods_001",
+          "shared_concept": "government_conspiracy",
+          "transition_line": "Just as the shadows of MK-Ultra hinted at a government willing to manipulate the mind, another chilling plan revealed a readiness to orchestrate events for national interest, a stark reminder of covert operations."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -1167,30 +1204,7 @@
           "content": "Even with the partial revelations, the true scope and impact of MK-Ultra remain shrouded in mystery due to the systematic destruction of records. The program left a trail of ruined lives, with countless victims suffering profound and irreversible mental and physical trauma, many of whom never understood what had happened to them. For decades, survivors and their families fought for recognition and compensation, with some receiving settlements, though the full measure of justice often proved elusive.\n\nMK-Ultra stands as a stark and chilling reminder of the dangers of unchecked power and scientific ambition devoid of ethical boundaries. It permanently stained the reputation of intelligence agencies and raised profound questions about government accountability, the sanctity of individual autonomy, and the ethical responsibilities of scientific research. Its legacy continues to fuel public distrust and serve as a cautionary tale about the darkest corners of human experimentation.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "operation_northwoods_001",
-          "shared_concept": "government_conspiracy",
-          "transition_line": "Just as the shadows of MK-Ultra hinted at a government willing to manipulate the mind, another chilling plan revealed a readiness to orchestrate events for national interest, a stark reminder of covert operations."
-        }
-      ],
-      "added_date": "2026-06-24",
-      "evidence_links": [
-        {
-          "label": "Cold War Anthropology: The CIA, the Pentagon, and the Growth of Dual Use Anthropology (David H. Price, 2016)",
-          "url": "https://openresearchlibrary.org/ext/api/media/6b45f9b9-3f99-465d-8a6a-7a2ce83cb89c/assets/external_content.pdf"
-        },
-        {
-          "label": "Buying a piece of anthropology (David H. Price, 2007)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1467-8322.2007.00537.x"
-        },
-        {
-          "label": "Istanbul Confidential: Heroin, Espionage, and Politics in Cold War Turkey, 1945-1960 (Ryan Gingeras, 2013)",
-          "url": "https://academic.oup.com/dh/article-pdf/37/4/779/1264795/dht057.pdf"
-        }
-      ],
-      "hero_image": "/content/images/cia_mk_ultra_program.jpg"
+      ]
     },
     {
       "story_id": "unit_731_experiments",
@@ -1205,6 +1219,36 @@
         "impunity"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/unit_731_experiments.jpg",
+      "added_date": "2026-06-24",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 32,
+        "scared": 1,
+        "mindblown": 5
+      },
+      "evidence_links": [
+        {
+          "label": "The promise and perils of Unit 731 data to advance COVID-19 research (Zhaohui Su, Dean McDonnell, 2021)",
+          "url": "https://gh.bmj.com/content/bmjgh/6/5/e004772.full.pdf"
+        },
+        {
+          "label": "Unit 731 and the Japanese Imperial Army's Biological Warfare Program (Tsuneishi Kei-ichi, 2005)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/815CBD55CEB1CFCBA06034704ECAFC1E/S155746600500361Xa.pdf/div-class-title-unit-731-and-the-japanese-imperial-army-s-biological-warfare-program-div.pdf"
+        },
+        {
+          "label": "The United States and the Japanese Mengele: Payoffs and Amnesty for Unit 731 (C. Reed, 2006)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/93530C7C428D29C761950CD5BA1A9B06/S1557466006005079a.pdf/div-class-title-the-united-states-and-the-japanese-mengele-payoffs-and-amnesty-for-unit-731-div.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "unethical_experimentation",
+          "transition_line": "Just as the shadows of psychological manipulation stretched through the Cold War with programs like MK-Ultra, the horrors of Unit 731 reveal an earlier, equally chilling pursuit of dark knowledge under the guise of national security."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -1248,30 +1292,7 @@
           "content": "In a shocking post-war development, the United States, prioritizing scientific advantage in the burgeoning Cold War, granted immunity to Shiro Ishii and other high-ranking Unit 731 doctors from prosecution as war criminals. In exchange for this clemency, the US acquired the vast and gruesome research data compiled from the human experiments, which included detailed findings on plague, anthrax, and other biological weapons. This controversial decision meant that the perpetrators of some of history's most heinous medical atrocities largely escaped justice.\n\nThe legacy of Unit 731 continues to haunt international relations and medical ethics. For decades, the Japanese government largely denied or minimized the unit's existence and activities, leading to an ongoing struggle for recognition and justice for the victims and their families, particularly in China. The impunity granted to the Unit 731 scientists remains a stark reminder of the moral compromises made in the pursuit of military intelligence and the chilling consequences of valuing strategic advantage over fundamental human rights and accountability for war crimes.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "Just as the shadows of psychological manipulation stretched through the Cold War with programs like MK-Ultra, the horrors of Unit 731 reveal an earlier, equally chilling pursuit of dark knowledge under the guise of national security."
-        }
-      ],
-      "added_date": "2026-06-24",
-      "evidence_links": [
-        {
-          "label": "The promise and perils of Unit 731 data to advance COVID-19 research (Zhaohui Su, Dean McDonnell, 2021)",
-          "url": "https://gh.bmj.com/content/bmjgh/6/5/e004772.full.pdf"
-        },
-        {
-          "label": "Unit 731 and the Japanese Imperial Army's Biological Warfare Program (Tsuneishi Kei-ichi, 2005)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/815CBD55CEB1CFCBA06034704ECAFC1E/S155746600500361Xa.pdf/div-class-title-unit-731-and-the-japanese-imperial-army-s-biological-warfare-program-div.pdf"
-        },
-        {
-          "label": "The United States and the Japanese Mengele: Payoffs and Amnesty for Unit 731 (C. Reed, 2006)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/93530C7C428D29C761950CD5BA1A9B06/S1557466006005079a.pdf/div-class-title-the-united-states-and-the-japanese-mengele-payoffs-and-amnesty-for-unit-731-div.pdf"
-        }
-      ],
-      "hero_image": "/content/images/unit_731_experiments.jpg"
+      ]
     },
     {
       "story_id": "the_philadelphia_experiment",
@@ -1287,6 +1308,36 @@
         "unified_field_theory"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/the_philadelphia_experiment.jpg",
+      "added_date": "2026-06-25",
+      "draft": false,
+      "reactions": {
+        "like": 42,
+        "gripping": 25,
+        "scared": 4,
+        "mindblown": 25
+      },
+      "evidence_links": [
+        {
+          "label": "DOES WHAT POLICE DO AT HOT SPOTS MATTER? THE PHILADELPHIA POLICING TACTICS EXPERIMENT* (Elizabeth R. Groff, Jerry H. Ratcliffe, 2014)",
+          "url": "https://doi.org/10.1111/1745-9125.12055"
+        },
+        {
+          "label": "The Confrontation between General Relativity and Experiment (Clifford M. Will, 2014)",
+          "url": "https://link.springer.com/content/pdf/10.12942/lrr-2014-4.pdf"
+        },
+        {
+          "label": "The Philadelphia predictive policing experiment (Jerry H. Ratcliffe, Ralph B. Taylor, 2020)",
+          "url": "https://doi.org/10.1007/s11292-019-09400-2"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "government_secrecy",
+          "transition_line": "Just as the Philadelphia Experiment hints at clandestine naval operations and their terrifying consequences, the infamous MK-Ultra program reveals another chilling facet of government secrecy, exploring the dark depths of unethical human experimentation."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -1330,51 +1381,7 @@
           "content": "The US Navy has consistently and unequivocally denied that any such experiment as the Philadelphia Experiment ever took place. They state that the USS Eldridge was indeed in commission in 1943, but its logbooks show it was never in Philadelphia at the dates specified by Allende. Official records place the ship in New York and then on convoy duty in the Atlantic during the critical October 1943 period, far from any alleged teleportation.\n\nSkeptics point to the lack of any credible, verifiable evidence—no official documents, no corroborating eyewitnesses (other than Allende's questionable claims), no scientific basis for such phenomena, and the clear inconsistencies in Allende's own narrative. They explain the rumors as a combination of misunderstandings about degaussing technology, wartime hysteria, and the vivid imagination of a mentally unstable individual, amplified by a receptive public eager for hidden truths.\n\nYet, the Philadelphia Experiment persists as one of the most famous and chilling conspiracy theories. Its enduring appeal lies in its potent blend of cutting-edge science, military secrecy, and horrific human tragedy. It remains a powerful cautionary tale about the perceived dangers of unchecked scientific ambition and the deep-seated public suspicion of hidden government agendas, cementing its place not as a documented historical event, but as a chilling exploration of what could be possible in the darkest corners of secret research.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Just as the Philadelphia Experiment hints at clandestine naval operations and their terrifying consequences, the infamous MK-Ultra program reveals another chilling facet of government secrecy, exploring the dark depths of unethical human experimentation."
-        }
-      ],
-      "added_date": "2026-06-25",
-      "evidence_links": [
-        {
-          "label": "DOES WHAT POLICE DO AT HOT SPOTS MATTER? THE PHILADELPHIA POLICING TACTICS EXPERIMENT* (Elizabeth R. Groff, Jerry H. Ratcliffe, 2014)",
-          "url": "https://doi.org/10.1111/1745-9125.12055"
-        },
-        {
-          "label": "The Confrontation between General Relativity and Experiment (Clifford M. Will, 2014)",
-          "url": "https://link.springer.com/content/pdf/10.12942/lrr-2014-4.pdf"
-        },
-        {
-          "label": "The Philadelphia predictive policing experiment (Jerry H. Ratcliffe, Ralph B. Taylor, 2020)",
-          "url": "https://doi.org/10.1007/s11292-019-09400-2"
-        }
-      ],
-      "hero_image": "/content/images/the_philadelphia_experiment.jpg"
-    },
-    {
-      "role": "assistant",
-      "reasoning": "We need to craft a JSON with story_id, title, category, hook, concepts, severity, layers 1-7, connections array to existing story. Must use valid json. Use single quotes inside strings only, but JSON requires double quotes around the keys and values. However the rule says prefer single quotes for quotes inside text. We can use double-quoted strings, but inside we should use single quotes appropriately. Avoid double quotes inside as that would need escaping. So for content strings, we cannot use double quotes unless escaped. So best to avoid double quotes entirely inside content (no \" but use ' for quoting names). Also any JSON strings inside must be in double quotes. That is fine.\n\nLength: each layer content two to three paragraphs, separated by double newlines \\n\\n.\n\nLet's craft.\n\nStory about Little Albert Experiment, category psychology. severity chilling? The experiment is unsettling and disturbing. They ask for category single best. We'll pick \"psychology\". severity maybe chilling or disturbing? \"disturbing\" is appropriate. Hook: 1-2 sentences teaser, max 150 chars.\n\nInclude concepts list: \"classical_conditioning\", \"child_safety\", \"ethical_violation\" maybe.\n\nStory id: \"little_albert_experiment_001\" maybe slug lowercased with underscores. We'll create \"little_albert_experiment_001\".\n\nConnections: choose one of existing stories. We can connect to \"the_asch_conformity_experiments\" or \"sleep_paralysis_dossier\" etc. Probably connect to Asch to highlight general experimental psychology. Shared concept: \"psychology\". Not exactly concept but maybe \"classical_conditioning\" not shared. But we can use concept \"psychology\" from our concepts list? Not in list. We need a concept present in both. Could use \"behavior_modification\" not in the Asch list. But Asch list has [\"conformity\",\"groupthink\",\"social_pressure\"]. None overlap. Could connect to \"sleep_paralysis_dossier\" with concept \"psychology\" maybe easier: it has [\"REM atonia\",\"hypnagogic hallucinations\",\"sensed presence phenomenon\"], but no overlap. We could connect to \"the_asch_conformity_experiments\" using \"psychology\" concept but not listed in that story. Perhaps we can include concept \"behavior\" but not there.\n\nWe might need to choose an existing story that shares a concept. Let's search list: \"burari_deaths_001\" concepts include \"shared_delusion\",\"family_systems\",\"ritual\". No. \"the_dyatlov_pass_incident\" \"unexplained_deaths\",\"wilderness_horror\",\"government_secrecy\". No. \"uwe_barschel\" \"government_secrecy\",\"espionage\",\"unexplained_deaths\". No. \"the_asch_conformity_experiments\" \"conformity\",\"groupthink\",\"social_pressure\". No. \"operation_northwoods_001\" \"false_flag\",\"government_conspiracy\",\"national_security\",\"unethical_warfare\",\"covert_operations\". No. \"hidden_facts_shri_vishnu_ji\" \"cosmic_illusion\",\"divine_play\",\"ultimate_reality\",\"cosmic_cycles\",\"preserver_destroyer_paradox\". No. \"malaysia_airlines_mh370\" \"unsolved_mystery\",\"aviation_disaster\",\"disappearance\",\"black_box\",\"conspiracy_theories\",\"pilot_suicide\",\"technological_enigma\",\"oceanic_search\". No. \"stanford_prison_experiment_001\" \"power_dynamics\",\"social_roles\",\"dehumanization\". None. \"barney_barnato\" \"unexplained_deaths\",\"financial_conspiracy\",\"lost_wealth\". No. \"hinterkaifeck_murders\" \"unsolved_mystery\",\"brutal_murders\",\"isolated_crime\",\"strange_events\",\"family_tragedy\",\"cold_case\". No. \"the_zodiac_killer\" \"serial_killer\",\"unsolved_mystery\",\"cryptography\",\"media_obsession\". No. \"sleep_paralysis_dossier\" \"REM atonia\",\"hypnagogic hallucinations\",\"sensed presence phenomenon\". No. \"mahadev_and_sati_dossier\" \"grief_and_dissociation\",\"ritual_self_destruction\",\"sacred_geography\". No. \"cicada_3301\" \"cryptography\",\"steganography\",\"online_puzzles\",\"recruitment\",\"secret_societies\". No. \"noida_double_murder_case_2008\" \"unsolved_mystery\",\"judicial_failure\",\"media_sensationalism\",\"family_tragedy\",\"forensic_controversy\". No. \"cia_mk_ultra_program\" \"mind_control\",\"unethical_experimentation\",\"covert_operations\",\"government_secrecy\",\"psychological_warfare\". Possibly we can use \"psychological_warfare\" with \"psychology\" but not same concept word. Maybe tie on \"mind_control\". Little Albert did conditioning, not mind control. We could connect to \"cia_mk_ultra_program\" using shared concept: \"mind_control\" but not in Little Albert story. Might need to add that concept. But our story concepts list can include \"mind_control\". But does it appear? We could add \"mind_control\" to concepts; that might overlap with CIA MK ultra. Ok.\n\nBetter to include concept \"mind_control\" or \"humane_experimentation\" but none in existing stories. Only CIA MK Ultra shares \"mind_control\". So we could include that concept, then connect.\n\nSo concepts: [\"classical_conditioning\", \"mind_control\", \"ethical_violation\"]. All good.\n\nConnection:\n\nstory_id: \"cia_mk_ultra_program\", shared_concept: \"mind_control\", transition_line: \"From the unsettling conditioning of a child, to covert programs that sought to reshape minds—how far will science dare to go?\"\n\nThat fits.\n\nNow craft content of layers. Keep 2-3 paragraphs per layer. Use double newlines. each has length but truth.\n\nWe must keep text within JSON double quotes. inside we must use \\n\\n for paragraph breaks; ensure escape sequences. Also avoid double quotes inside. Use single quotes inside content for quoting names etc.\n\nLet's draft each layer quickly.\n\nLayer1 \"The Whisper - introducing the mystery\":\n\nFirst paragraph: mention trained to raise fear in 100s of children? Actually need a hook theme: The experiment started with a little white rabbit? But the hook is in beginning of story; story hook separate from layer1. Layer1 start with a unique, gripping, topic-specific hook to grab attention: IN KEY \"The Little Albert Experiment\". It's about conditioning fear. So maybe first paragraph: \"In 1920, a single lecture hall witnessed a childhood horror unfold, as a research assistant raised the terror of a seven‑year‑old orphan into a living nightmare.\" Good.\n\nSecond paragraph describes being unexpected, early comment.\n\nAdd transitions.\n\nCliffhanger: \"Only weeks later, a white rabbit revealed the mechanism behind this twisted dread.\"\n\nLayer2 \"The Pattern\":\n\nExplain classical conditioning concept. talk about conditioning of fear to cue. Second paragraph about lab setup. ... Climatically.\n\nCliffhanger: \"When the researcher decided to test",
-      "tool_calls": [],
-      "added_date": "2026-06-25",
-      "evidence_links": [
-        {
-          "label": "Violent Conflict and Behavior: A Field Experiment in Burundi (Maarten Voors, Eleonora Nillesen, 2012)",
-          "url": "https://pure.rug.nl/ws/files/66563385/aer.102.2.941.pdf"
-        },
-        {
-          "label": "The validation of surrogate endpoints in meta-analyses of randomized experiments (Marc Buyse, Geert Molenberghs, 2000)",
-          "url": "https://academic.oup.com/biostatistics/article-pdf/1/1/49/17744017/100049.pdf"
-        },
-        {
-          "label": "Are Emily and Greg More Employable than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination (Marianne Bertrand, Sendhil Mullainathan, 2003)",
-          "url": "https://doi.org/10.3386/w9873"
-        }
-      ],
-      "hero_image": "/content/images/undefined.jpg"
+      ]
     }
   ]
 }
