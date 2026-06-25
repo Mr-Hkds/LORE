@@ -196,7 +196,7 @@ export default function LayerReader({
                         width="800"
                         height="450"
                         onError={() => setImgFailed(true)}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.01]"
+                        className="w-full h-full object-contain transition-transform duration-700 hover:scale-[1.01]"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
