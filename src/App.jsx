@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react';
 import { useStaticContent } from './hooks/useStaticContent';
 import { useReadingProgress } from './hooks/useReadingProgress';
 import { getLayer } from './constants/layers';
@@ -6,10 +6,12 @@ import TopicSelector from './components/TopicSelector';
 import StoryCatalog from './components/StoryCatalog';
 import LayerReader from './components/LayerReader';
 import DepthMeter from './components/DepthMeter';
-import AdminPanel from './components/AdminPanel';
 import LoreMark from './components/LoreMark';
-import SiteFeedback from './components/SiteFeedback';
+import LoadingState from './components/LoadingState';
 import { TOPICS } from './constants/topics';
+
+const AdminPanel = lazy(() => import('./components/AdminPanel'));
+const SiteFeedback = lazy(() => import('./components/SiteFeedback'));
 
 const TOTAL_LAYERS = 7;
 
@@ -362,7 +364,9 @@ export default function App() {
           categoryCounts={categoryCounts}
           allStories={stories}
         />
-        <SiteFeedback />
+        <Suspense fallback={null}>
+          <SiteFeedback />
+        </Suspense>
       </>
     );
   }
@@ -390,7 +394,9 @@ export default function App() {
           onSelectStory={handleSelectStory}
           onBack={handleBackToTopics}
         />
-        <SiteFeedback />
+        <Suspense fallback={null}>
+          <SiteFeedback />
+        </Suspense>
       </>
     );
   }
@@ -410,24 +416,26 @@ export default function App() {
     }
 
     return (
-      <AdminPanel
-        stories={stories}
-        localStories={localStories}
-        setLocalStories={setLocalStories}
-        refetchStories={refetchStories}
-        onBack={handleExitAdmin}
-        passcode="0407"
-        onStoryDeleted={(deletedId) => {
-          setDeletedStories(prev => {
-            if (prev.includes(deletedId)) return prev;
-            const next = [...prev, deletedId];
-            try {
-              localStorage.setItem('lore:deleted_stories', JSON.stringify(next));
-            } catch { /* ignore */ }
-            return next;
-          });
-        }}
-      />
+      <Suspense fallback={<LoadingState />}>
+        <AdminPanel
+          stories={stories}
+          localStories={localStories}
+          setLocalStories={setLocalStories}
+          refetchStories={refetchStories}
+          onBack={handleExitAdmin}
+          passcode="0407"
+          onStoryDeleted={(deletedId) => {
+            setDeletedStories(prev => {
+              if (prev.includes(deletedId)) return prev;
+              const next = [...prev, deletedId];
+              try {
+                localStorage.setItem('lore:deleted_stories', JSON.stringify(next));
+              } catch { /* ignore */ }
+              return next;
+            });
+          }}
+        />
+      </Suspense>
     );
   }
 

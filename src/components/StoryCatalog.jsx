@@ -92,6 +92,8 @@ function StoryCardImage({ story, alt, inView }) {
       <img
         src={displayUrl}
         alt={alt}
+        width="200"
+        height="150"
         onError={handleImageError}
         className={`w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
           inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]'

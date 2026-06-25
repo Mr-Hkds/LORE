@@ -30,13 +30,13 @@ async function fetchWikipediaImage(query) {
       }
     }
 
-    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=${encodeURIComponent(resolvedTitle)}&origin=*`;
+    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&titles=${encodeURIComponent(resolvedTitle)}&origin=*`;
     const res = await fetch(url);
     const data = await res.json();
     const pages = data?.query?.pages;
     if (pages) {
       const pageId = Object.keys(pages)[0];
-      const source = pages[pageId]?.original?.source || null;
+      const source = pages[pageId]?.thumbnail?.source || pages[pageId]?.original?.source || null;
       // Cache the result (even null, to avoid re-fetching)
       try { localStorage.setItem(cacheKey, source || 'null'); } catch { /* ignore */ }
       return source;

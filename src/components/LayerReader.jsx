@@ -193,6 +193,8 @@ export default function LayerReader({
                       <img
                         src={data.imageUrl}
                         alt={topic.label}
+                        width="800"
+                        height="450"
                         onError={() => setImgFailed(true)}
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.01]"
                         loading="lazy"
