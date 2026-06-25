@@ -87,7 +87,7 @@ function StoryMiniImage({ story }) {
       src={displayUrl} 
       alt="" 
       onError={handleImageError}
-      className="w-full h-full object-cover grayscale opacity-65 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
+      className="w-full h-full object-cover md:grayscale md:opacity-65 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700" 
       loading="lazy" 
     />
   );
@@ -141,16 +141,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
     const affinity = getAffinity();
     const hasAffinity = Object.keys(affinity).length > 0;
 
-    // 1. FOR YOU: Personalized to the user (prioritize uncompleted)
-    let uncompleted = allStories.filter(s => {
-      const prog = getProgress(s.story_id);
-      return !prog || !prog.completed;
-    });
-    if (uncompleted.length === 0) {
-      uncompleted = allStories;
-    }
-
-    const forYouPool = uncompleted
+    // 1. FOR YOU: Personalized to the user (ONLY show stories which are NOT completed/read)
+    const forYouPool = allStories
+      .filter(s => {
+        const prog = getProgress(s.story_id);
+        return !prog || !prog.completed;
+      })
       .map(s => {
         const affinityScore = hasAffinity ? (affinity[s.category] || 0) * 10 : 0;
         const rx = s.reactions || {};
@@ -165,7 +161,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
     const forYouIds = new Set(forYouStories.map(s => s.story_id));
 
     // 2. RECENTS: Newest stories, excluding For You
-    const recentsPool = [...allStories]
+    const recentsPool = allStories
       .filter(s => !forYouIds.has(s.story_id))
       .sort((a, b) => (b.added_date || '').localeCompare(a.added_date || ''));
 
@@ -173,7 +169,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
     const recentsIds = new Set(recentsStories.map(s => s.story_id));
 
     // 3. TOP RATED: Highest reactions, excluding For You and Recents
-    const topRatedPool = [...allStories]
+    const topRatedPool = allStories
       .filter(s => !forYouIds.has(s.story_id) && !recentsIds.has(s.story_id))
       .sort((a, b) => {
         const aReactions = (a.reactions?.gripping || 0) + (a.reactions?.scared || 0) + (a.reactions?.mindblown || 0) + (a.reactions?.like || 0);
@@ -514,90 +510,101 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
                 {/* Story list inside card */}
                 <div className="flex flex-col" style={{ borderColor: 'rgba(158,123,76,0.07)' }}>
-                {activeTabStories.map(story => {
-                  const prog = getProgress(story.story_id);
-                  const isCompleted = prog?.completed;
-                  const currentL = prog?.lastLayer || 0;
-                  const catLabel = CATEGORY_LABELS[story.category] || story.category;
-                  
-                  return (
-                    <button
-                      key={story.story_id}
-                      onClick={() => {
-                        window.location.hash = `#story-${story.story_id}-layer-${currentL > 0 ? currentL : 1}`;
-                      }}
-                      className="group relative w-full flex flex-row items-center gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
-                      style={{
-                        backgroundColor: 'transparent',
-                        borderBottom: '1px solid rgba(158, 123, 76, 0.07)',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                      }}
-                    >
-                      {/* Left Side: Grayscale story thumbnail overlayed with subtle gold border */}
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900/80 bg-neutral-950 relative dossier-image-container">
-                        <StoryMiniImage story={story} />
-                        <div className="absolute inset-0 bg-neutral-950/40 mix-blend-color group-hover:bg-transparent transition-all duration-300" />
-                        {currentL > 0 && !isCompleted && (
-                          <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-[#9E7B4C] rounded-br-xs animate-pulse" />
-                        )}
-                      </div>
- 
-                      {/* Right Side: Typography and Segmented Depth Track */}
-                      <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
-                        <div>
-                          {/* Eyebrow: Category & Resume hint */}
-                          <div className="flex items-center gap-2 mb-1.5 text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase">
-                            <span style={{ color: ac }} className="font-bold opacity-85">{catLabel}</span>
-                            <span className="text-neutral-800">·</span>
-                            <span style={{ color: mu }}>
-                              {isCompleted ? '✓ Completed' : currentL > 0 ? `Layer ${currentL}/7` : 'UNOPENED DOSSIER'}
-                            </span>
+                {activeTabStories.length > 0 ? (
+                  activeTabStories.map(story => {
+                    const prog = getProgress(story.story_id);
+                    const isCompleted = prog?.completed;
+                    const currentL = prog?.lastLayer || 0;
+                    const catLabel = CATEGORY_LABELS[story.category] || story.category;
+                    
+                    return (
+                      <button
+                        key={story.story_id}
+                        onClick={() => {
+                          window.location.hash = `#story-${story.story_id}-layer-${currentL > 0 ? currentL : 1}`;
+                        }}
+                        className="group relative w-full flex flex-row items-center gap-4 px-5 py-4 text-left cursor-pointer transition-all duration-200"
+                        style={{
+                          backgroundColor: 'transparent',
+                          borderBottom: '1px solid rgba(158, 123, 76, 0.07)',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        {/* Left Side: Grayscale story thumbnail overlayed with subtle gold border */}
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-900/80 bg-neutral-950 relative dossier-image-container">
+                          <StoryMiniImage story={story} />
+                          <div className="absolute inset-0 md:bg-neutral-950/40 md:mix-blend-color md:group-hover:bg-transparent transition-all duration-300 pointer-events-none" />
+                          {currentL > 0 && !isCompleted && (
+                            <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-[#9E7B4C] rounded-br-xs animate-pulse" />
+                          )}
+                        </div>
+   
+                        {/* Right Side: Typography and Segmented Depth Track */}
+                        <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                          <div>
+                            {/* Eyebrow: Category & Resume hint */}
+                            <div className="flex items-center gap-2 mb-1.5 text-[10px] sm:text-[11px] font-mono tracking-[0.12em] uppercase">
+                              <span style={{ color: ac }} className="font-bold opacity-85">{catLabel}</span>
+                              <span className="text-neutral-800">·</span>
+                              <span style={{ color: mu }}>
+                                {isCompleted ? '✓ Completed' : currentL > 0 ? `Layer ${currentL}/7` : 'UNOPENED DOSSIER'}
+                              </span>
+                            </div>
+   
+                            {/* Title */}
+                            <h4 className="font-serif italic text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-300 truncate" style={{ color: fg }}>
+                              {story.title}
+                            </h4>
+  
+                            {/* Hook */}
+                            <p className="font-sans text-xs sm:text-[13px] text-neutral-400 line-clamp-1 mt-1">
+                              {story.hook}
+                            </p>
                           </div>
- 
-                          {/* Title */}
-                          <h4 className="font-serif italic text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-300 truncate" style={{ color: fg }}>
-                            {story.title}
-                          </h4>
-
-                          {/* Hook */}
-                          <p className="font-sans text-xs sm:text-[13px] text-neutral-400 line-clamp-1 mt-1">
-                            {story.hook}
-                          </p>
+   
+                          {/* Segmented Depth indicator (mirroring DepthMeter progress segments) */}
+                          <div className="flex items-center gap-1 mt-3">
+                            {Array.from({ length: 7 }).map((_, idx) => {
+                              const active = idx + 1 <= (isCompleted ? 7 : currentL);
+                              return (
+                                <div 
+                                  key={idx}
+                                  className="h-[2px] rounded-full transition-all duration-500"
+                                  style={{
+                                    width: idx + 1 === currentL && !isCompleted ? '18px' : '8px',
+                                    backgroundColor: active ? ac : '#262421',
+                                    opacity: active ? (idx + 1 === currentL && !isCompleted ? 1 : 0.6) : 0.2
+                                  }}
+                                />
+                              );
+                            })}
+                          </div>
                         </div>
- 
-                        {/* Segmented Depth indicator (mirroring DepthMeter progress segments) */}
-                        <div className="flex items-center gap-1 mt-3">
-                          {Array.from({ length: 7 }).map((_, idx) => {
-                            const active = idx + 1 <= (isCompleted ? 7 : currentL);
-                            return (
-                              <div 
-                                key={idx}
-                                className="h-[2px] rounded-full transition-all duration-500"
-                                style={{
-                                  width: idx + 1 === currentL && !isCompleted ? '18px' : '8px',
-                                  backgroundColor: active ? ac : '#262421',
-                                  opacity: active ? (idx + 1 === currentL && !isCompleted ? 1 : 0.6) : 0.2
-                                }}
-                              />
-                            );
-                          })}
+   
+                        {/* Action Arrow */}
+                        <div className="flex items-center justify-center self-center px-1 sm:px-2">
+                          <span className="text-sm flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" style={{ color: ac, opacity: 0.45 }}>
+                            →
+                          </span>
                         </div>
-                      </div>
- 
-                      {/* Action Arrow */}
-                      <div className="flex items-center justify-center self-center px-1 sm:px-2">
-                        <span className="text-sm flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" style={{ color: ac, opacity: 0.45 }}>
-                          →
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
+                      </button>
+                    );
+                  })
+                ) : (
+                  <div className="py-12 text-center flex flex-col items-center justify-center gap-2">
+                    <LoreMark size={24} color={ac} className="opacity-30 animate-pulse" />
+                    <p className="text-[10px] font-mono tracking-[0.2em] uppercase" style={{ color: mu }}>
+                      {activeTab === 'for-you' 
+                        ? 'All curated files have been read' 
+                        : 'No records found'}
+                    </p>
+                  </div>
+                )}
                 </div>
               </div>
             </div>

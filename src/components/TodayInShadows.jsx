@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle, X } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -236,7 +236,6 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
 export default function TodayInShadows() {
   const [dossier, setDossier] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const [wikiImgUrl, setWikiImgUrl] = useState(null);
   const [reactions, setReactions] = useState({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
@@ -309,20 +308,7 @@ export default function TodayInShadows() {
     }
   }, [dossier]);
 
-  // Escape key
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && modalOpen) setModalOpen(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [modalOpen]);
 
-  // Body scroll lock
-  useEffect(() => {
-    document.body.style.overflow = modalOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [modalOpen]);
 
   const handleReact = async (type) => {
     if (!dossier) return;
@@ -421,7 +407,7 @@ export default function TodayInShadows() {
                   src={wikiImgUrl || dossier.thumbnail}
                   alt={dossier.title}
                   onError={() => setImgFailed(true)}
-                  className="relative z-10 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.02]"
+                  className="relative z-10 w-full h-full object-cover md:grayscale md:opacity-80 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
               </div>
@@ -443,17 +429,11 @@ export default function TodayInShadows() {
               )}
             </div>
             <h4 className="font-serif italic text-lg sm:text-xl text-[#EDE8DF] tracking-normal mb-2 font-semibold">{dossier.title}</h4>
-            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5">
+            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5 line-clamp-2">
               {dossier.text}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-neutral-900/60">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none flex-shrink-0"
-            >
-              Read Dossier Entry <span className="text-xs">→</span>
-            </button>
             {/* Mini reaction pills on card */}
             <div className="flex gap-1.5 items-center flex-wrap">
               {REACTION_CONFIG.map((r) => {
@@ -482,145 +462,6 @@ export default function TodayInShadows() {
         </div>
       </div>
 
-      {/* ── MODAL — Full-screen overlay, centering flex wrapper, max height constraint ──── */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 md:p-6"
-          style={{ backgroundColor: 'rgba(5,4,3,0.92)', backdropFilter: 'blur(10px)' }}
-          onClick={() => setModalOpen(false)}
-        >
-          {/* Modal card — stops click propagation, flex layout with fixed height relative to viewport to prevent flex collapse */}
-          <div
-            className="relative w-full h-[85vh] max-h-[750px] rounded-2xl flex flex-col overflow-hidden fade-in"
-            style={{
-              maxWidth: '680px',
-              backgroundColor: '#110F0D',
-              border: '1px solid rgba(158,123,76,0.22)',
-              boxShadow: '0 32px 64px -16px rgba(0,0,0,0.95), 0 0 0 1px rgba(158,123,76,0.06)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Grid lines overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03] rounded-2xl" style={{ backgroundImage: 'linear-gradient(rgba(158, 123, 76, 1) 1px, transparent 1px), linear-gradient(90deg,rgba(158, 123, 76, 1) 1px,transparent 1px)', backgroundSize: '24px 24px' }} />
-
-            {/* ── Modal Header (Sticky/Fixed inside Card) ── */}
-            <div className="flex justify-between items-start border-b border-neutral-900/60 p-6 md:p-8 pb-5 relative z-10 bg-[#110F0D]">
-              <div className="space-y-1.5 flex-1 pr-4">
-                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm inline-block">
-                  Today in History
-                </span>
-                <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-semibold pt-1 leading-tight">{dossier.title}</h3>
-                <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 pt-0.5">
-                  <span>THEME: {dossier.theme?.toUpperCase()}</span>
-                  <span>·</span>
-                  <span>YEAR: {dossier.year}</span>
-                </div>
-              </div>
-              <button
-                onClick={() => setModalOpen(false)}
-                className="flex-shrink-0 w-8 h-8 rounded-lg border border-neutral-800 hover:border-neutral-700 text-neutral-500 hover:text-white transition-all cursor-pointer focus:outline-none flex items-center justify-center hover:bg-neutral-900/60"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* ── Modal Content (Scrollable Area with flex min-h-0 constraint) ── */}
-            <div className="p-6 md:p-8 pt-6 space-y-6 relative z-10 overflow-y-auto flex-1 min-h-0 custom-scrollbar bg-[#110F0D]">
-              {/* Wikipedia Summary */}
-              <div className="space-y-2">
-                <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
-                  Wikipedia Summary
-                </h5>
-                <p className="font-serif text-sm md:text-[15px] leading-relaxed text-neutral-300">
-                  {dossier.wikiSummary || dossier.text}
-                </p>
-              </div>
-
-              {/* Alternative Theories */}
-              {dossier.theories && dossier.theories.length > 0 && (
-                <div className="space-y-3">
-                  <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
-                    Alternative Theories
-                  </h5>
-                  <div className="grid grid-cols-1 gap-3">
-                    {dossier.theories.map((theory, idx) => (
-                      <div key={idx} className="p-4 rounded-xl border bg-neutral-950/60 border-neutral-800/60">
-                        <span className="text-[10px] font-mono text-[#9E7B4C] uppercase tracking-wider block mb-1.5 font-bold">
-                          {idx + 1}. {theory.name}
-                        </span>
-                        <p className="font-serif italic text-sm leading-relaxed text-[#D4CFC7]">
-                          {theory.explanation}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ── Premium Reactions Section ── */}
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3">
-                  <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
-                    Reader Sentiment
-                  </h5>
-                  {userReaction && (
-                    <span className="text-[9px] font-mono text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                      Your vote: {userReaction.replace('_', ' ')}
-                    </span>
-                  )}
-                </div>
-                <style>{`
-                  @keyframes floatUp {
-                    0%   { transform: translate(-50%, 0); opacity: 0; }
-                    20%  { opacity: 1; }
-                    100% { transform: translate(-50%, -32px); opacity: 0; }
-                  }
-                  @keyframes floatEmoji {
-                    0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0; }
-                    20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
-                    100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
-                  }
-                `}</style>
-                <div className="flex gap-2 sm:gap-3">
-                  {REACTION_CONFIG.map((r) => (
-                    <ReactionPill
-                      key={r.id}
-                      reaction={r}
-                      isSelected={userReaction === r.id}
-                      count={reactions[r.id] || 0}
-                      onReact={handleReact}
-                      animating={animatingReaction === r.id}
-                    />
-                  ))}
-                </div>
-                <p className="text-[8.5px] font-mono text-neutral-600 tracking-wider">
-                  // ONE VOTE PER DAY — CLICK AGAIN TO UNDO
-                </p>
-              </div>
-            </div>
-
-            {/* ── Modal Footer (Sticky/Fixed at bottom) ── */}
-            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-neutral-900 p-6 md:p-8 pt-5 gap-3 relative z-10 bg-[#110F0D]">
-              {dossier.wikiUrl ? (
-                <a
-                  href={dossier.wikiUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors"
-                >
-                  Read Wikipedia Article <span className="text-xs">→</span>
-                </a>
-              ) : <span />}
-              <button
-                onClick={() => setModalOpen(false)}
-                className="w-full sm:w-auto px-6 py-2.5 bg-[#9E7B4C] text-white text-[11px] font-bold tracking-[0.25em] uppercase rounded-lg hover:bg-[#b08c5c] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
-              >
-                CLOSE FILE
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
