@@ -73,9 +73,9 @@
   "unsolved_mystery": [
     "malaysia_airlines_mh370",
     "hinterkaifeck_murders",
-    "the_zodiac_killer",
     "noida_double_murder_case_2008",
-    "jack_the_ripper_001"
+    "jack_the_ripper_001",
+    "the_zodiac_killer"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -130,18 +130,6 @@
   "cold_case": [
     "hinterkaifeck_murders"
   ],
-  "serial_killer": [
-    "the_zodiac_killer",
-    "jack_the_ripper_001"
-  ],
-  "cryptography": [
-    "the_zodiac_killer",
-    "cicada_3301",
-    "the_numbers_stations"
-  ],
-  "media_obsession": [
-    "the_zodiac_killer"
-  ],
   "rem atonia": [
     "sleep_paralysis_dossier"
   ],
@@ -159,6 +147,11 @@
   ],
   "sacred_geography": [
     "mahadev_and_sati_dossier"
+  ],
+  "cryptography": [
+    "cicada_3301",
+    "the_numbers_stations",
+    "the_zodiac_killer"
   ],
   "steganography": [
     "cicada_3301"
@@ -222,6 +215,16 @@
   "forensic_controversy": [
     "noida_double_murder_case_2008"
   ],
+  "serial_killer": [
+    "jack_the_ripper_001",
+    "the_zodiac_killer"
+  ],
+  "victorian_era": [
+    "jack_the_ripper_001"
+  ],
+  "social_inequality": [
+    "jack_the_ripper_001"
+  ],
   "obedience": [
     "milgram_experiment_on_obedience_001"
   ],
@@ -264,10 +267,7 @@
   "shortwave_radio": [
     "the_numbers_stations"
   ],
-  "victorian_era": [
-    "jack_the_ripper_001"
-  ],
-  "social_inequality": [
-    "jack_the_ripper_001"
+  "media_obsession": [
+    "the_zodiac_killer"
   ]
 }
