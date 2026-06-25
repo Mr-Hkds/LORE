@@ -292,18 +292,9 @@ export default function TodayInShadows() {
     const stored = localStorage.getItem(`lore:dossier:reaction:${dateKey}`);
     setUserReaction(stored || null);
 
-    // Load counts: prefer server, fall back to persisted local counts
-    const localCounts = (() => {
-      try {
-        const raw = localStorage.getItem(`lore:dossier:counts:${dateKey}`);
-        return raw ? JSON.parse(raw) : null;
-      } catch { return null; }
-    })();
-
-    if (dossier.reactions && Object.values(dossier.reactions).some(v => v > 0)) {
+    // Load counts: prefer server's actual database counts
+    if (dossier.reactions) {
       setReactions(dossier.reactions);
-    } else if (localCounts) {
-      setReactions(localCounts);
     } else {
       setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
     }
@@ -364,13 +355,13 @@ export default function TodayInShadows() {
         await fetch('/api/daily-dossier', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ reaction_type: oldReaction, undo: true })
+          body: JSON.stringify({ reaction_type: oldReaction, undo: true, date: dateKey })
         });
       }
       const res = await fetch('/api/daily-dossier', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reaction_type: type, undo: wasSelected })
+        body: JSON.stringify({ reaction_type: type, undo: wasSelected, date: dateKey })
       });
       if (res.ok) {
         const data = await res.json();
@@ -521,8 +512,8 @@ export default function TodayInShadows() {
               </button>
             </div>
 
-            {/* ── Modal Content (Scrollable Area) ── */}
-            <div className="p-6 md:p-8 pt-6 space-y-6 relative z-10 overflow-y-auto flex-1 custom-scrollbar bg-[#110F0D]">
+            {/* ── Modal Content (Scrollable Area with flex min-h-0 constraint) ── */}
+            <div className="p-6 md:p-8 pt-6 space-y-6 relative z-10 overflow-y-auto flex-1 min-h-0 custom-scrollbar bg-[#110F0D]">
               {/* Wikipedia Summary */}
               <div className="space-y-2">
                 <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">

@@ -614,15 +614,14 @@ const server = http.createServer(async (req, res) => {
   // Route: POST /api/daily-dossier
   if (req.method === 'POST' && pathname === '/api/daily-dossier') {
     try {
-      const { reaction_type, undo } = await getJsonBody(req);
+      const { reaction_type, undo, date } = await getJsonBody(req);
       if (!reaction_type) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Missing reaction_type' }));
         return;
       }
       
-      const todayObj = new Date();
-      const dateStr = todayObj.toISOString().split('T')[0];
+      const dateStr = date || new Date().toISOString().split('T')[0];
       
       db.updateDailyReaction(dateStr, reaction_type, !!undo);
       const updatedReactions = db.getDailyReactions(dateStr);
