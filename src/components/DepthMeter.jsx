@@ -32,7 +32,7 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
             className="text-[10px] font-bold tracking-[0.32em] uppercase"
             style={{ color: text, opacity: 0.85 }}
           >
-            LORE
+            SEVENDESCENTS
           </span>
         </button>
 
@@ -94,17 +94,17 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
             className="flex items-center gap-[8px] transition-opacity hover:opacity-60 active:opacity-35"
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
           >
-            <LoreMark size={16} color={text} />
+            <LoreMark size={14} color={text} />
             <span
-              className="text-[10px] font-bold tracking-[0.3em] uppercase"
+              className="text-[8px] font-bold tracking-[0.12em] uppercase"
               style={{ color: text, opacity: 0.85 }}
             >
-              LORE
+              SEVENDESCENTS
             </span>
           </button>
 
           {/* Layer label */}
-          <div className="overflow-hidden h-[16px] flex items-center max-w-[160px] select-none">
+          <div className="overflow-hidden h-[16px] flex items-center max-w-[120px] select-none">
             <span
               key={layerName}
               className="text-[9px] font-bold tracking-[0.12em] uppercase whitespace-nowrap block animate-roll-up truncate"

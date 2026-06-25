@@ -274,10 +274,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             >
               <LoreMark size={18} color={fg} />
               <span
-                className="text-[10px] font-bold tracking-[0.32em] uppercase select-none"
+                className="text-[9px] font-bold tracking-[0.12em] uppercase select-none"
                 style={{ color: fg, opacity: 0.85 }}
               >
-                LORE
+                SEVENDESCENTS
               </span>
             </div>
             <span className="text-neutral-800">·</span>
@@ -734,7 +734,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
         <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase transition-colors duration-500" style={{ borderColor: ru, color: mu }}>
           <p className="opacity-60">
-            © {new Date().getFullYear()} LORE ARCHIVE ·{' '}
+            © {new Date().getFullYear()} SEVENDESCENTS ·{' '}
             <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
               CONSOLE
             </a>

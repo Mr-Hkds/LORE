@@ -86,7 +86,7 @@ function StoryCardImage({ story, alt, inView }) {
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
       <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
         <LoreMark size={10} color="#EDE8DF" />
-        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
+        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">SEVENDESCENTS</span>
       </div>
       {/* Image — grayscale by default, full color when card is in viewport or hovered */}
       <img
@@ -384,7 +384,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
           <div className="flex items-center gap-3 flex-wrap">
             <div onClick={handleLogoTap} className="flex items-center gap-[10px] cursor-pointer select-none" title="Tap 5× for Admin">
               <LoreMark size={18} color={fg} />
-              <span className="text-[10px] font-bold tracking-[0.32em] uppercase" style={{ color: fg, opacity: 0.85 }}>LORE</span>
+              <span className="text-[9px] font-bold tracking-[0.12em] uppercase" style={{ color: fg, opacity: 0.85 }}>SEVENDESCENTS</span>
             </div>
             <span className="text-neutral-800">·</span>
             <span className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] bg-[#9E7B4C]/5 select-none font-bold">
@@ -452,7 +452,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
           <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase"
             style={{ borderColor: ru, color: mu }}>
             <p className="opacity-60">
-              © {new Date().getFullYear()} LORE ARCHIVE ·{' '}
+              © {new Date().getFullYear()} SEVENDESCENTS ·{' '}
               <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
                 CONSOLE
               </a>
