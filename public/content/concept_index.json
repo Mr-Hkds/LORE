@@ -21,17 +21,20 @@
     "uwe_barschel",
     "unit_731_experiments",
     "the_philadelphia_experiment",
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "the_numbers_stations"
   ],
   "espionage": [
-    "uwe_barschel"
+    "uwe_barschel",
+    "the_numbers_stations"
   ],
   "conformity": [
     "the_asch_conformity_experiments"
   ],
   "groupthink": [
     "the_asch_conformity_experiments",
-    "the_bystander_effect"
+    "the_bystander_effect",
+    "jonestown_massacre_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
@@ -133,7 +136,8 @@
   ],
   "cryptography": [
     "the_zodiac_killer",
-    "cicada_3301"
+    "cicada_3301",
+    "the_numbers_stations"
   ],
   "media_obsession": [
     "the_zodiac_killer"
@@ -244,5 +248,26 @@
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program"
+  ],
+  "cults": [
+    "jonestown_massacre_001"
+  ],
+  "mass_suicide": [
+    "jonestown_massacre_001"
+  ],
+  "social_control": [
+    "jonestown_massacre_001"
+  ],
+  "charismatic_leaders": [
+    "jonestown_massacre_001"
+  ],
+  "obedience_to_authority": [
+    "jonestown_massacre_001"
+  ],
+  "covert_communication": [
+    "the_numbers_stations"
+  ],
+  "shortwave_radio": [
+    "the_numbers_stations"
   ]
 }
