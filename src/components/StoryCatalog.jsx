@@ -84,17 +84,17 @@ function StoryCardImage({ story, alt, inView }) {
       }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
-      <div className="absolute bottom-2 right-2 z-20 flex flex-col items-center gap-0.5 opacity-25 pointer-events-none select-none">
-        <LoreMark size={11} color="#EDE8DF" />
+      <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-30 pointer-events-none select-none">
+        <LoreMark size={9} color="#EDE8DF" />
         <span
           style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: '6px',
+            fontSize: '7px',
             color: '#EDE8DF',
-            letterSpacing: '0.18em',
+            letterSpacing: '0.22em',
             fontWeight: 700,
           }}
-        >VII</span>
+        >CLASSIFIED</span>
       </div>
       {/* Image — grayscale by default, full color when card is in viewport or hovered */}
       <img
