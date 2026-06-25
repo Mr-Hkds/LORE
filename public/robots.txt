@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Replace the URL below with your actual deployed website domain
+Sitemap: https://lore-archive.vercel.app/sitemap.xml
