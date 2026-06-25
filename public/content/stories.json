@@ -1386,8 +1386,11 @@
     {
       "story_id": "the_bystander_effect",
       "title": "The Bystander Effect: When Humanity Fails to Act",
-      "category": "psychology",
+      "hero_image": "https://image.pollinations.ai/prompt/Dark%20atmospheric%20historical%20photograph%20of%20The%20Bystander%20Effect%3A%20When%20Humanity%20Fails%20to%20Act%2C%20black%20and%20white%2C%20archival%2C%20dramatic%2C%20cinematic%2C%20high%20detail?width=800&height=600&nologo=true&private=true&model=flux&seed=1782369811375",
+      "image_query": "",
       "hook": "In moments of crisis, the presence of others is often perceived as a source of safety. Yet, psychological research reveals a chilling paradox: the more people present, the less likely anyone is to help.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "bystander_effect",
         "diffusion_of_responsibility",
@@ -1396,7 +1399,6 @@
         "inaction",
         "emergency_response"
       ],
-      "severity": "chilling",
       "layers": [
         {
           "layer": 1,
@@ -1440,30 +1442,7 @@
           "content": "The Bystander Effect is not a testament to inherent human evil, but rather to the powerful, often unconscious, influence of social dynamics on individual decision-making. It highlights that even well-meaning people can fail to act when conditions allow for the diffusion of responsibility and pluralistic ignorance to take hold. This phenomenon continues to be observed in various contexts, from cyberbullying where 'online bystanders' outnumber active interveners, to public health crises where collective inaction can have devastating consequences.\n\nThe darkest truth is that simply being aware of the Bystander Effect does not automatically inoculate one against it. In the grip of an unfolding emergency, the default human response, when others are present, can still be hesitation. Overcoming this requires conscious effort: recognizing the situation, taking personal responsibility, and actively choosing to intervene or summon help, even when others remain passive.\n\nThe legacy of Kitty Genovese, and the subsequent psychological research, serves as a stark, enduring reminder of our collective capacity for both empathy and alarming inaction. It compels us to challenge our assumptions about crowds and safety, urging each individual to consciously decide to be the one who breaks the spell of the silent witness, and to act.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_asch_conformity_experiments",
-          "shared_concept": "social_pressure",
-          "transition_line": "Much like the subtle pressures that lead individuals to doubt their own perceptions in the Asch Conformity Experiment, the Bystander Effect reveals how group dynamics can warp our moral compass, leading us to inaction even when clear danger is present."
-        }
-      ],
-      "added_date": "2026-06-25",
-      "evidence_links": [
-        {
-          "label": "A senescent cell bystander effect: senescence‐induced senescence (Glyn Nelson, James Wordsworth, 2012)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1474-9726.2012.00795.x"
-        },
-        {
-          "label": "Novel Action of Paclitaxel against Cancer Cells: Bystander Effect Mediated by Reactive Oxygen Species (Jérôme Alexandre, Yumin Hu, 2007)",
-          "url": "https://aacrjournals.org/cancerres/article-pdf/67/8/3512/2582197/3512.pdf"
-        },
-        {
-          "label": "The bystander effect contributes to the accumulation of senescent cells in vivo (Paulo F. L. da Silva, Mikołaj Ogrodnik, 2018)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/acel.12848"
-        }
-      ],
-      "hero_image": "/content/images/the_bystander_effect.jpg"
+      ]
     }
   ]
 }
