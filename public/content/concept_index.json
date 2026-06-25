@@ -19,9 +19,9 @@
   "government_secrecy": [
     "the_dyatlov_pass_incident",
     "uwe_barschel",
-    "cia_mk_ultra_program",
     "unit_731_experiments",
-    "the_philadelphia_experiment"
+    "the_philadelphia_experiment",
+    "cia_mk_ultra_program"
   ],
   "espionage": [
     "uwe_barschel"
@@ -168,15 +168,6 @@
   "secret_societies": [
     "cicada_3301"
   ],
-  "mind_control": [
-    "cia_mk_ultra_program"
-  ],
-  "unethical_experimentation": [
-    "cia_mk_ultra_program"
-  ],
-  "psychological_warfare": [
-    "cia_mk_ultra_program"
-  ],
   "biological_warfare": [
     "unit_731_experiments"
   ],
@@ -244,5 +235,14 @@
   ],
   "ethics": [
     "milgram_experiment_on_obedience_001"
+  ],
+  "mind_control": [
+    "cia_mk_ultra_program"
+  ],
+  "unethical_experimentation": [
+    "cia_mk_ultra_program"
+  ],
+  "psychological_warfare": [
+    "cia_mk_ultra_program"
   ]
 }
