@@ -11,7 +11,8 @@
   "unexplained_deaths": [
     "the_dyatlov_pass_incident",
     "uwe_barschel",
-    "barney_barnato"
+    "barney_barnato",
+    "the_taman_shud_case"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -26,7 +27,8 @@
   ],
   "espionage": [
     "uwe_barschel",
-    "the_numbers_stations"
+    "the_numbers_stations",
+    "the_taman_shud_case"
   ],
   "conformity": [
     "the_asch_conformity_experiments"
@@ -76,7 +78,8 @@
     "hinterkaifeck_murders",
     "noida_double_murder_case_2008",
     "jack_the_ripper_001",
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "the_taman_shud_case"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -152,7 +155,8 @@
   "cryptography": [
     "cicada_3301",
     "the_numbers_stations",
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "the_taman_shud_case"
   ],
   "steganography": [
     "cicada_3301"
@@ -312,5 +316,29 @@
   ],
   "identity_perception": [
     "capgras_delusion_001"
+  ],
+  "identity_erasure": [
+    "the_taman_shud_case"
+  ],
+  "overpopulation": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "social_collapse": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "behavioral_sink": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "utopian_failure": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "population_density": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "ethology": [
+    "universe_25_calhouns_mouse_utopia"
+  ],
+  "social_pathology": [
+    "universe_25_calhouns_mouse_utopia"
   ]
 }
