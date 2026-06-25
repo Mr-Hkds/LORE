@@ -17,7 +17,7 @@ export default function LayerReader({
 
   // ── Reaction state: reactions counts come from server data ──────────────
   const [reactions, setReactions] = useState(() => {
-    return data?.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 };
+    return data?.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 };
   });
 
   // ── Per-user vote state: persisted to localStorage so one-vote-per-user ──
@@ -284,85 +284,31 @@ export default function LayerReader({
                   </p>
                   <div className="flex justify-center gap-3 flex-wrap">
 
-                    {/* PLAUSIBLE */}
-                    <div className="relative">
-                      {animatingReaction === 'like' && (
-                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-amber-400 animate-float-up-fade select-none">
-                          +1
-                        </span>
-                      )}
-                      <button
-                        onClick={() => handleReact('like')}
-                        title={reacted['like'] ? 'Click again to undo your vote' : 'Mark as Plausible'}
-                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
-                          reacted['like']
-                            ? 'bg-amber-950/30 border-amber-700/70 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-amber-900/50 hover:text-amber-400'
-                        } ${animatingReaction === 'like' ? 'scale-110' : ''}`}
-                      >
-                        <Fingerprint className="w-3.5 h-3.5" /> PLAUSIBLE <span className="opacity-60">({reactions.like || 0})</span>
-                      </button>
-                    </div>
-
-                    {/* COMPELLING */}
-                    <div className="relative">
-                      {animatingReaction === 'gripping' && (
-                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-violet-400 animate-float-up-fade select-none">
-                          +1
-                        </span>
-                      )}
-                      <button
-                        onClick={() => handleReact('gripping')}
-                        title={reacted['gripping'] ? 'Click again to undo your vote' : 'Mark as Compelling'}
-                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
-                          reacted['gripping']
-                            ? 'bg-violet-950/30 border-violet-700/70 text-violet-300 shadow-[0_0_12px_rgba(139,92,246,0.2)]'
-                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-violet-900/50 hover:text-violet-400'
-                        } ${animatingReaction === 'gripping' ? 'scale-110' : ''}`}
-                      >
-                        <Eye className="w-3.5 h-3.5" /> COMPELLING <span className="opacity-60">({reactions.gripping || 0})</span>
-                      </button>
-                    </div>
-
-                    {/* CHILLING */}
-                    <div className="relative">
-                      {animatingReaction === 'scared' && (
-                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-red-400 animate-float-up-fade select-none">
-                          +1
-                        </span>
-                      )}
-                      <button
-                        onClick={() => handleReact('scared')}
-                        title={reacted['scared'] ? 'Click again to undo your vote' : 'Mark as Chilling'}
-                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
-                          reacted['scared']
-                            ? 'bg-red-950/30 border-red-700/70 text-red-300 shadow-[0_0_12px_rgba(239,68,68,0.2)]'
-                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-red-900/50 hover:text-red-400'
-                        } ${animatingReaction === 'scared' ? 'scale-110' : ''}`}
-                      >
-                        <Skull className="w-3.5 h-3.5" /> CHILLING <span className="opacity-60">({reactions.scared || 0})</span>
-                      </button>
-                    </div>
-
-                    {/* CRYPTIC */}
-                    <div className="relative">
-                      {animatingReaction === 'mindblown' && (
-                        <span className="absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-cyan-400 animate-float-up-fade select-none">
-                          +1
-                        </span>
-                      )}
-                      <button
-                        onClick={() => handleReact('mindblown')}
-                        title={reacted['mindblown'] ? 'Click again to undo your vote' : 'Mark as Cryptic'}
-                        className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
-                          reacted['mindblown']
-                            ? 'bg-cyan-950/30 border-cyan-700/70 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.2)]'
-                            : 'hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-cyan-900/50 hover:text-cyan-400'
-                        } ${animatingReaction === 'mindblown' ? 'scale-110' : ''}`}
-                      >
-                        <HelpCircle className="w-3.5 h-3.5" /> CRYPTIC <span className="opacity-60">({reactions.mindblown || 0})</span>
-                      </button>
-                    </div>
+                    {[
+                      { key: 'intriguing', label: 'INTRIGUING', Icon: Fingerprint, color: 'amber' },
+                      { key: 'gripping',   label: 'GRIPPING',   Icon: Eye,         color: 'violet' },
+                      { key: 'chilling',   label: 'CHILLING',   Icon: Skull,       color: 'red' },
+                      { key: 'mind_blowing', label: 'MIND BLOWING', Icon: HelpCircle, color: 'cyan' },
+                    ].map(({ key, label, Icon, color }) => (
+                      <div key={key} className="relative">
+                        {animatingReaction === key && (
+                          <span className={`absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-${color}-400 animate-float-up-fade select-none`}>
+                            +1
+                          </span>
+                        )}
+                        <button
+                          onClick={() => handleReact(key)}
+                          title={reacted[key] ? 'Click again to undo your vote' : `Mark as ${label}`}
+                          className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
+                            reacted[key]
+                              ? `bg-${color}-950/30 border-${color}-700/70 text-${color}-300 shadow-[0_0_12px_rgba(0,0,0,0.2)]`
+                              : `hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-${color}-900/50 hover:text-${color}-400`
+                          } ${animatingReaction === key ? 'scale-110' : ''}`}
+                        >
+                          <Icon className="w-3.5 h-3.5" /> {label} <span className="opacity-60">({reactions[key] || 0})</span>
+                        </button>
+                      </div>
+                    ))}
 
                   </div>
                 </div>

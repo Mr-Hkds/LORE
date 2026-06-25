@@ -466,7 +466,7 @@ export default function App() {
 
     return {
       storyId: currentStory.story_id,
-      reactions: currentStory.reactions || { gripping: 0, scared: 0, mindblown: 0 },
+      reactions: currentStory.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 },
       layerName: layerData.layer_name || null,
       cards,
       imageUrl: layerNum === 1 ? currentStory.hero_image : null,

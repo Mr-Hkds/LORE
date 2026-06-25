@@ -239,7 +239,18 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [aiJsonInput, setAiJsonInput] = useState('');
   const [aiJsonError, setAiJsonError] = useState(null);
   const [aiPromptTopic, setAiPromptTopic] = useState('');
+  const [aiPromptCategory, setAiPromptCategory] = useState('auto');
   const [copiedPromptStatus, setCopiedPromptStatus] = useState(false);
+
+  // Wikipedia image search preview engine
+  const [wikiSearchTerm, setWikiSearchTerm] = useState('');
+  const [wikiPreviewState, setWikiPreviewState] = useState('idle'); // idle | loading | found | notfound
+  const [wikiPreviewImg, setWikiPreviewImg] = useState(null);
+  const [wikiPreviewTitle, setWikiPreviewTitle] = useState('');
+
+  // AI image preview engine
+  const [aiImagePreviewState, setAiImagePreviewState] = useState('idle'); // idle | loading | ready
+  const [aiImagePreviewUrl, setAiImagePreviewUrl] = useState(null);
 
   // Database Console states
   const [dbSqlQuery, setDbSqlQuery] = useState('SELECT story_id, title, category, severity, draft FROM stories LIMIT 10;');
@@ -1078,75 +1089,100 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       return;
     }
     const slugBase = aiPromptTopic.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/(^_+|_+$)/g, '');
-    const promptText = `You are the lead narrative architect and lead forensic researcher for LORE, an atmospheric archive documenting the darkest corners of human history, psychology, and anomalous phenomena.
 
-Your task is to compile a complete LORE dossier on a specific topic. The tone must be clinical, investigative, objective, and deeply chilling—similar to a high-end forensic documentary. All details and facts must be completely real, verified, and historically accurate. Never distort sentiments or exaggerate sensitive religious/historical topics. Keep it authentic but haunting.
+    const CATEGORY_TONE_GUIDE = {
+      auto:             'Choose the single best category from: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries. Match the tone accordingly.',
+      psychology:       'Clinical, forensic psychological tone. Focus on human behavior, cognitive distortions, case studies. Use terminology from forensic psychology.',
+      true_crime:       'Investigative journalism tone. Timeline-based, evidence-driven, factual. Like a true crime documentary with cold precision.',
+      paranormal:       'Eerie, atmospheric, measured skepticism. Present documented anomalies without dismissing them. X-Files meets academic research.',
+      mythology:        'Ancient scholar tone. Mythological narratives as cultural records. Reference real historical sources, archaeological findings, and oral traditions.',
+      gov_experiments:  'Declassified document tone. Cold, bureaucratic language revealing hidden truths. Reference real FOIA documents where possible.',
+      conspiracy:       'Research analyst tone. Examine the evidence on both sides. Clinical, not sensationalist. Focus on documented inconsistencies.',
+      cyber_mysteries:  'Tech journalist meets dark web investigator. Code, cryptography, digital forensics. Reference real vulnerabilities, breaches, and anomalies.',
+    };
 
-Generate the dossier in STRICTLY valid JSON format matching the schema below.
+    const tone = CATEGORY_TONE_GUIDE[aiPromptCategory] || CATEGORY_TONE_GUIDE.auto;
+    const categoryHint = aiPromptCategory === 'auto'
+      ? '"category": "Choose the best fit: psychology | true_crime | paranormal | mythology | gov_experiments | conspiracy | cyber_mysteries",'
+      : `"category": "${aiPromptCategory}",`;
 
-### Output Constraints:
-1. Output ONLY the raw JSON string. Do not wrap it in markdown code blocks (e.g., do not use \`\`\`json ... \`\`\`). Start with \`{\` and end with \`}\`.
-2. Ensure all quotes inside text values are escaped properly (use \\\" for inner quotes).
-3. Do not include any trailing commas.
-4. Provide exactly 7 descent layers.
-5. Within "content" values, use \\n\\n to separate paragraphs.
+    const promptText = `You are the lead narrative architect and forensic researcher for LORE — an atmospheric archive documenting the darkest corners of human history, psychology, mythology, and anomalous phenomena.
 
-### JSON Schema:
+## WRITING TONE
+${tone}
+
+## SEVERITY SCALE (choose the most accurate for this topic)
+- "curious"    → Mildly intriguing, strange or unexplained, but not dark
+- "unsettling" → Builds unease and psychological tension
+- "disturbing" → Dark themes, moral violations, disturbing truths
+- "harrowing"  → Deeply traumatic, intense historical horror
+- "forbidden"  → Extreme, occult, deeply classified, or transgressive content
+
+## CRITICAL RULES
+1. All details must be historically accurate and verifiable. Never fabricate facts.
+2. Output ONLY valid raw JSON — no markdown fences, no explanations.
+3. Start with \`{\` and end with \`}\`.
+4. Escape all inner quotes with \\\".
+5. No trailing commas.
+6. Exactly 7 descent layers — escalating depth and intensity.
+7. Use \\n\\n to separate paragraphs in "content" values.
+
+## JSON SCHEMA
 {
   "story_id": "${slugBase}_dossier",
-  "title": "Compelling Title of the Dossier",
-  "category": "psychology" | "true_crime" | "paranormal",
-  "hook": "A brief, gripping hook summarizing the core mystery to display in the catalog view (max 150 characters).",
-  "severity": "unsettling" | "disturbing" | "extreme",
-  "image_query": "The exact name of the Wikipedia article for this topic, used to automatically fetch a cover image.",
+  "title": "Compelling, evocative title",
+  ${categoryHint}
+  "hook": "A gripping one-sentence teaser for the catalog (max 150 chars).",
+  "severity": "curious | unsettling | disturbing | harrowing | forbidden",
+  "image_query": "The exact Wikipedia article title for this topic (used to auto-fetch a cover image). Example: Project MKUltra",
   "concepts": ["concept_one", "concept_two", "concept_three"],
   "layers": [
     {
       "layer": 1,
-      "layer_name": "Title of Layer 1 (The initial whisper)",
-      "content": "Paragraph 1 detailing the public facts.\\n\\nParagraph 2 adding more documented background details.",
-      "cliffhanger": "A chilling transition statement or question pulling the reader to the next layer."
+      "layer_name": "The Public Surface — what everyone knows",
+      "content": "Layer 1 content — documented public facts.\\n\\nAdditional background detail.",
+      "cliffhanger": "A chilling hook pulling the reader deeper."
     },
     {
       "layer": 2,
-      "layer_name": "Title of Layer 2",
-      "content": "Detailed paragraphs...",
-      "cliffhanger": "Transition hook..."
+      "layer_name": "The First Crack",
+      "content": "Layer 2 content — first inconsistencies appear.",
+      "cliffhanger": "Escalating tension hook."
     },
     {
       "layer": 3,
-      "layer_name": "Title of Layer 3",
-      "content": "Detailed paragraphs...",
-      "cliffhanger": "Transition hook..."
+      "layer_name": "Hidden Patterns",
+      "content": "Layer 3 content — patterns emerge, evidence mounts.",
+      "cliffhanger": "The reader starts questioning everything."
     },
     {
       "layer": 4,
-      "layer_name": "Title of Layer 4",
-      "content": "Detailed paragraphs...",
-      "cliffhanger": "Transition hook..."
+      "layer_name": "The Deeper Archive",
+      "content": "Layer 4 content — suppressed or overlooked records.",
+      "cliffhanger": "Something much darker is coming."
     },
     {
       "layer": 5,
-      "layer_name": "Title of Layer 5",
-      "content": "Detailed paragraphs...",
-      "cliffhanger": "Transition hook..."
+      "layer_name": "The Shadow Network",
+      "content": "Layer 5 content — key players, hidden connections.",
+      "cliffhanger": "The trail leads somewhere few have gone."
     },
     {
       "layer": 6,
-      "layer_name": "Title of Layer 6 (Entering the extreme depths)",
-      "content": "Detailed paragraphs...",
-      "cliffhanger": "Transition hook..."
+      "layer_name": "Entering the Abyss",
+      "content": "Layer 6 content — the darkest documented truths.",
+      "cliffhanger": "One final revelation remains."
     },
     {
       "layer": 7,
-      "layer_name": "Title of Layer 7 (The absolute core truth/impact)",
-      "content": "The final chilling, factual conclusion or summary of the mystery.",
+      "layer_name": "The Absolute Truth",
+      "content": "The final devastating, chilling conclusion. The full weight of the truth.",
       "cliffhanger": null
     }
   ]
 }
 
-### Topic for generation:
+## TOPIC
 ${aiPromptTopic}`;
 
     navigator.clipboard.writeText(promptText)
@@ -1159,6 +1195,71 @@ ${aiPromptTopic}`;
         alert('Could not copy automatically. Check console.');
       });
   };
+
+  // ── Wikipedia Image Search Engine ────────────────────────────────────────
+  const handleWikiImageSearch = async () => {
+    const term = wikiSearchTerm.trim() || editForm.image_query?.trim() || editForm.title?.trim();
+    if (!term) return;
+    setWikiPreviewState('loading');
+    setWikiPreviewImg(null);
+    try {
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term)}`);
+      if (res.ok) {
+        const data = await res.json();
+        const imgUrl = data?.thumbnail?.source || data?.originalimage?.source || null;
+        if (imgUrl) {
+          setWikiPreviewImg(imgUrl);
+          setWikiPreviewTitle(data.title || term);
+          setWikiPreviewState('found');
+        } else {
+          setWikiPreviewState('notfound');
+        }
+      } else {
+        setWikiPreviewState('notfound');
+      }
+    } catch {
+      setWikiPreviewState('notfound');
+    }
+  };
+
+  const handleApproveWikiImage = () => {
+    if (wikiPreviewImg) {
+      setEditForm(prev => ({ ...prev, hero_image: wikiPreviewImg, image_query: wikiSearchTerm || prev.image_query }));
+      setWikiPreviewState('idle');
+      setWikiPreviewImg(null);
+    }
+  };
+
+  // ── AI Image Preview Generator ───────────────────────────────────────────
+  const handleGenerateAiImagePreview = async () => {
+    const subject = editForm.title || editForm.story_id || 'mysterious historical event';
+    setAiImagePreviewState('loading');
+    setAiImagePreviewUrl(null);
+    try {
+      const prompt = `Dark atmospheric historical photograph of ${subject}, black and white, archival, dramatic, cinematic, high detail`;
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=800&height=600&nologo=true&private=true&model=flux&seed=${Date.now()}`;
+      // Preload to check it resolves
+      await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = url;
+      });
+      setAiImagePreviewUrl(url);
+      setAiImagePreviewState('ready');
+    } catch {
+      setAiImagePreviewState('idle');
+    }
+  };
+
+  const handleApproveAiImage = () => {
+    if (aiImagePreviewUrl) {
+      setEditForm(prev => ({ ...prev, hero_image: aiImagePreviewUrl }));
+      setAiImagePreviewState('idle');
+      setAiImagePreviewUrl(null);
+    }
+  };
+
 
   const handleLayerChange = (layerNum, field, value) => {
     setEditForm(prev => {
@@ -2120,7 +2221,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                     <div className="border-b border-neutral-900 pb-4">
                       <div className="flex justify-between items-center mb-2">
                         <label className="block text-[9.5px] font-mono tracking-wider uppercase text-[#9E7B4C] font-bold">
-                          // Step 1: Generate AI Story Prompt
+                          // Step 1: Generate Category-Aware AI Story Prompt
                         </label>
                         {copiedPromptStatus && (
                           <span className="text-[9.5px] font-mono text-emerald-500 uppercase tracking-wider animate-pulse">
@@ -2128,12 +2229,22 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                           </span>
                         )}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mb-2">
+                        <select
+                          value={aiPromptCategory}
+                          onChange={(e) => setAiPromptCategory(e.target.value)}
+                          className="px-2 py-1.5 bg-black text-[#9E7B4C] text-[9px] font-mono rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none cursor-pointer uppercase tracking-wider min-w-[130px]"
+                        >
+                          <option value="auto">Auto-Detect</option>
+                          {Object.entries(CATEGORY_LABELS).map(([k, label]) => (
+                            <option key={k} value={k}>{label}</option>
+                          ))}
+                        </select>
                         <input
                           type="text"
                           value={aiPromptTopic}
                           onChange={(e) => setAiPromptTopic(e.target.value)}
-                          placeholder="Enter Dossier Topic (e.g. The Salem Witch Trials)..."
+                          placeholder="Enter dossier topic (e.g. The Trojan War, Zodiac Killer)..."
                           className="flex-1 px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
                         />
                         <button
@@ -2144,7 +2255,9 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                           Copy Prompt
                         </button>
                       </div>
-                      <p className="text-[8px] text-[#6A6560] mt-1 font-mono">// Enter a topic name to generate and copy a structured prompt you can paste into ChatGPT/Claude.</p>
+                      <p className="text-[8px] text-[#6A6560] font-mono">
+                        // Select the category first for a tone-matched prompt, then copy and paste into ChatGPT/Claude.
+                      </p>
                     </div>
 
                     {/* Section 2: JSON Importer */}
@@ -2204,9 +2317,21 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                  <div className="text-left space-y-3">
+                    {/* Current image preview */}
+                    {editForm.hero_image && (
+                      <div className="flex gap-3 items-start p-2.5 bg-neutral-950/60 rounded-lg border border-neutral-800">
+                        <img src={editForm.hero_image} alt="Cover preview" className="w-20 h-16 object-cover rounded border border-neutral-800 bg-black flex-shrink-0" onError={e => { e.target.style.display = 'none'; }} />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[8px] font-mono text-[#9E7B4C] uppercase tracking-wider mb-1">Current Cover Image</p>
+                          <p className="text-[8px] text-[#6A6560] font-mono truncate">{editForm.hero_image}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Image URL direct input */}
                     <div>
-                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Cover Image Path / Remote URL</label>
+                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Cover Image URL / Path</label>
                       <div className="flex gap-2">
                         <input
                           type="text"
@@ -2221,26 +2346,104 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                         >
                           {uploadingState === 'uploading' ? '...' : 'Upload'}
                         </label>
+                        <input type="file" accept="image/*" id="editor-cover-upload" className="hidden" onChange={(e) => handleUploadImage(e, editForm.story_id)} disabled={uploadingState === 'uploading' || !isLocal || serverOffline} />
+                      </div>
+                    </div>
+
+                    {/* Smart Wikipedia Image Search Engine */}
+                    <div className="p-3 rounded-lg border border-neutral-800/60 bg-black/30 space-y-2">
+                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-1">🔍 Smart Wikipedia Image Search</label>
+                      <div className="flex gap-2">
                         <input
-                          type="file"
-                          accept="image/*"
-                          id="editor-cover-upload"
-                          className="hidden"
-                          onChange={(e) => handleUploadImage(e, editForm.story_id)}
-                          disabled={uploadingState === 'uploading' || !isLocal || serverOffline}
+                          type="text"
+                          value={wikiSearchTerm}
+                          onChange={(e) => setWikiSearchTerm(e.target.value)}
+                          onKeyDown={(e) => e.key === 'Enter' && handleWikiImageSearch()}
+                          placeholder={editForm.image_query || editForm.title || 'Type Wikipedia article title...'}
+                          className="flex-1 px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleWikiImageSearch}
+                          disabled={wikiPreviewState === 'loading'}
+                          className="px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-[#EDE8DF] text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer disabled:opacity-50"
+                        >
+                          {wikiPreviewState === 'loading' ? '...' : 'Search'}
+                        </button>
+                      </div>
+
+                      {/* Preview result */}
+                      {wikiPreviewState === 'found' && wikiPreviewImg && (
+                        <div className="flex gap-3 items-center p-2.5 bg-neutral-950/60 rounded-lg border border-emerald-900/40 mt-2">
+                          <img src={wikiPreviewImg} alt={wikiPreviewTitle} className="w-16 h-14 object-cover rounded border border-neutral-800 bg-black flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[8.5px] font-mono text-emerald-400 uppercase tracking-wider mb-0.5">✓ Found: {wikiPreviewTitle}</p>
+                            <p className="text-[7.5px] text-[#6A6560] font-mono truncate">{wikiPreviewImg}</p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleApproveWikiImage}
+                            className="px-3 py-1.5 bg-emerald-900/30 hover:bg-emerald-800/40 border border-emerald-700/50 text-emerald-300 text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer flex-shrink-0"
+                          >
+                            Use This
+                          </button>
+                        </div>
+                      )}
+                      {wikiPreviewState === 'notfound' && (
+                        <p className="text-[8px] text-red-400 font-mono mt-1">// No image found. Try a different keyword or use AI generation below.</p>
+                      )}
+
+                      {/* Store image_query separately */}
+                      <div>
+                        <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Wikipedia Fetch Keyword (saved in story)</label>
+                        <input
+                          type="text"
+                          value={editForm.image_query || ''}
+                          onChange={(e) => setEditForm(prev => ({ ...prev, image_query: e.target.value }))}
+                          className="w-full px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
+                          placeholder="Wikipedia article title (e.g. Project MKUltra)"
                         />
                       </div>
-                      <p className="text-[8px] text-[#6A6560] mt-0.5">Select a local image to convert to Base64 and upload to server automatically.</p>
                     </div>
-                    <div>
-                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Wikipedia Image Fetch Keyword</label>
-                      <input
-                        type="text"
-                        value={editForm.image_query || ''}
-                        onChange={(e) => setEditForm(prev => ({ ...prev, image_query: e.target.value }))}
-                        className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
-                        placeholder="Wikipedia article title (e.g. Project MKUltra)"
-                      />
+
+                    {/* AI Image Generator */}
+                    <div className="p-3 rounded-lg border border-neutral-800/60 bg-black/30 space-y-2">
+                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-1">✦ AI Image Generator (Flux)</label>
+                      <p className="text-[8px] text-[#6A6560] font-mono">// Generates a dark atmospheric image based on the story title using Flux AI.</p>
+                      <button
+                        type="button"
+                        onClick={handleGenerateAiImagePreview}
+                        disabled={aiImagePreviewState === 'loading'}
+                        className="px-3 py-1.5 bg-violet-950/30 hover:bg-violet-900/40 border border-violet-800/40 text-violet-300 text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer disabled:opacity-50"
+                      >
+                        {aiImagePreviewState === 'loading' ? 'Generating...' : '✦ Generate AI Image Preview'}
+                      </button>
+
+                      {aiImagePreviewState === 'ready' && aiImagePreviewUrl && (
+                        <div className="flex gap-3 items-center p-2.5 bg-neutral-950/60 rounded-lg border border-violet-900/40 mt-2">
+                          <img src={aiImagePreviewUrl} alt="AI generated" className="w-16 h-14 object-cover rounded border border-neutral-800 bg-black flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[8.5px] font-mono text-violet-400 uppercase tracking-wider mb-0.5">✦ AI Image Ready</p>
+                            <p className="text-[7.5px] text-[#6A6560] font-mono">Flux model — dark atmospheric style</p>
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <button
+                              type="button"
+                              onClick={handleApproveAiImage}
+                              className="px-3 py-1 bg-violet-900/30 hover:bg-violet-800/40 border border-violet-700/50 text-violet-300 text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer"
+                            >
+                              Use This
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleGenerateAiImagePreview}
+                              className="px-3 py-1 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-neutral-300 text-[9px] font-mono uppercase rounded transition-all cursor-pointer"
+                            >
+                              Regenerate
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -2275,9 +2478,11 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                         onChange={(e) => setEditForm(prev => ({ ...prev, severity: e.target.value }))}
                         className="w-full px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none cursor-pointer"
                       >
-                        <option value="unsettling">Unsettling</option>
-                        <option value="disturbing">Disturbing</option>
-                        <option value="extreme">Extreme</option>
+                        <option value="curious">🟢 Curious — Mildly Intriguing</option>
+                        <option value="unsettling">🟡 Unsettling — Builds Unease</option>
+                        <option value="disturbing">🟠 Disturbing — Dark Themes</option>
+                        <option value="harrowing">🔴 Harrowing — Deeply Intense</option>
+                        <option value="forbidden">🟣 Forbidden — Extreme / Occult</option>
                       </select>
                     </div>
                     <div>

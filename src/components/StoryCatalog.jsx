@@ -10,9 +10,11 @@ import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
 
 const SEVERITY_CONFIG = {
+  curious:    { label: 'CURIOUS',    dot: '#6B9E6E', glow: 'rgba(107,158,110,0.10)' },
   unsettling: { label: 'UNSETTLING', dot: '#9E7B4C', glow: 'rgba(158,123,76,0.12)' },
   disturbing: { label: 'DISTURBING', dot: '#C4644A', glow: 'rgba(196,100,74,0.12)' },
-  chilling:   { label: 'CHILLING',   dot: '#8B2F2F', glow: 'rgba(139,47,47,0.14)' },
+  harrowing:  { label: 'HARROWING', dot: '#8B2F2F', glow: 'rgba(139,47,47,0.14)' },
+  forbidden:  { label: 'FORBIDDEN',  dot: '#5B1A8A', glow: 'rgba(91,26,138,0.15)' },
 };
 
 const CATEGORY_LABELS = {
@@ -32,15 +34,28 @@ const SIGNAL_LABELS = {
   cyber_mysteries: 'CYBER MYSTERY',
 };
 
-// ── Story card image with priority: local hero_image > Wikipedia with self-healing fallback ──
+// ── Story card image with IntersectionObserver color reveal on scroll ──────
 function StoryCardImage({ story, alt }) {
   const { getImageByQuery } = useStaticContent();
   const [fetchedUrl, setFetchedUrl] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [fallbackAttempted, setFallbackAttempted] = useState(false);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef(null);
+
+  // IntersectionObserver: reveal color when card scrolls into focus
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    // If there is no hero_image, fetch Wikipedia immediately
     if (!story.hero_image) {
       let active = true;
       const query = story.image_query || story.title;
@@ -54,14 +69,9 @@ function StoryCardImage({ story, alt }) {
       setFallbackAttempted(true);
       const query = story.image_query || story.title;
       getImageByQuery(query).then(url => {
-        if (url) {
-          setFetchedUrl(url);
-        } else {
-          setImgFailed(true);
-        }
-      }).catch(() => {
-        setImgFailed(true);
-      });
+        if (url) setFetchedUrl(url);
+        else setImgFailed(true);
+      }).catch(() => setImgFailed(true));
     } else {
       setImgFailed(true);
     }
@@ -72,14 +82,15 @@ function StoryCardImage({ story, alt }) {
 
   if (!displayUrl || imgFailed) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+      <div ref={containerRef} className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
         <LoreMark size={20} color="currentColor" />
         <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
       </div>
     );
   }
   return (
-    <div 
+    <div
+      ref={containerRef}
       className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container pt-8"
       style={{
         backgroundColor: '#090807',
@@ -88,25 +99,28 @@ function StoryCardImage({ story, alt }) {
       }}
     >
       {/* Vignette shadow */}
-      <div 
+      <div
         className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)'
-        }}
+        style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }}
       />
 
-      {/* Brand Watermark / Stamp */}
+      {/* Brand Watermark */}
       <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
         <LoreMark size={10} color="#EDE8DF" />
         <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
       </div>
 
-      {/* Crisp foreground contained image */}
+      {/* Image — grayscale by default, full color when in viewport */}
       <img
         src={displayUrl}
         alt={alt}
         onError={handleImageError}
-        className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+        className="w-full h-full object-contain transition-all duration-700 group-hover:scale-[1.02]"
+        style={{
+          filter: inView ? 'grayscale(0%) brightness(1)' : 'grayscale(100%) brightness(0.6)',
+          opacity: inView ? 1 : 0.65,
+          transition: 'filter 0.65s ease, opacity 0.55s ease, transform 0.7s ease',
+        }}
         loading="lazy"
       />
     </div>
@@ -194,40 +208,29 @@ function ReadPill({ progress, accentColor }) {
   return null;
 }
 
-// ── Engagement reacts display (classy Lucide indicators) ────────────────
+// ── Engagement reacts display — unified reaction keys ────────────────────
 function EngagementBar({ reactions }) {
   const rx = reactions || {};
-  const gripping = rx.gripping || rx.heart || 0;
-  const scared   = rx.scared   || 0;
-  const mindblown = rx.mindblown || 0;
-  const like = rx.like || 0;
+  // Support both old keys (backward compat) and new unified keys
+  const intriguing  = rx.intriguing  || rx.like  || 0;
+  const gripping    = rx.gripping    || rx.heart || 0;
+  const chilling    = rx.chilling    || rx.scared || 0;
+  const mind_blowing = rx.mind_blowing || rx.mindblown || 0;
 
-  let maxCount = 0;
-  let dominant = null;
+  const REACTIONS = [
+    { count: intriguing,   label: 'INTRIGUING',   Icon: Fingerprint, color: '#F59E0B' },
+    { count: gripping,     label: 'GRIPPING',     Icon: Eye,         color: '#8B5CF6' },
+    { count: chilling,     label: 'CHILLING',     Icon: Skull,       color: '#EF4444' },
+    { count: mind_blowing, label: 'MIND BLOWING', Icon: HelpCircle,  color: '#06B6D4' },
+  ];
 
-  if (like > maxCount) {
-    maxCount = like;
-    dominant = { label: 'PLAUSIBLE', Icon: Fingerprint, color: '#F59E0B' };
-  }
-  if (gripping > maxCount) {
-    maxCount = gripping;
-    dominant = { label: 'COMPELLING', Icon: Eye, color: '#8B5CF6' };
-  }
-  if (scared > maxCount) {
-    maxCount = scared;
-    dominant = { label: 'CHILLING', Icon: Skull, color: '#EF4444' };
-  }
-  if (mindblown > maxCount) {
-    maxCount = mindblown;
-    dominant = { label: 'CRYPTIC', Icon: HelpCircle, color: '#06B6D4' };
-  }
-
-  if (!dominant || maxCount === 0) return null;
+  const dominant = REACTIONS.reduce((best, r) => (!best || r.count > best.count) ? r : best, null);
+  if (!dominant || dominant.count === 0) return null;
 
   return (
     <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
       <dominant.Icon className="w-2.5 h-2.5" style={{ color: dominant.color }} />
-      <span className="uppercase">{dominant.label} ({maxCount})</span>
+      <span className="uppercase">{dominant.label} ({dominant.count})</span>
     </div>
   );
 }
@@ -263,7 +266,8 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
 
   const getTotalReactions = (s) => {
     const rx = s.reactions || {};
-    return (rx.gripping || rx.heart || 0) + (rx.scared || 0) + (rx.mindblown || 0) + (rx.like || 0);
+    // Support both old and new unified reaction keys
+    return (rx.intriguing || rx.like || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
   };
 
   const isNewArrival = (addedDate) => {
