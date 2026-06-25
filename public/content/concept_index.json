@@ -71,7 +71,8 @@
     "malaysia_airlines_mh370",
     "hinterkaifeck_murders",
     "the_zodiac_killer",
-    "noida_double_murder_case_2008"
+    "noida_double_murder_case_2008",
+    "jack_the_ripper_001"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -127,7 +128,8 @@
     "hinterkaifeck_murders"
   ],
   "serial_killer": [
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "jack_the_ripper_001"
   ],
   "cryptography": [
     "the_zodiac_killer",
@@ -206,7 +208,8 @@
     "the_bystander_effect"
   ],
   "social_psychology": [
-    "the_bystander_effect"
+    "the_bystander_effect",
+    "milgram_experiment_on_obedience_001"
   ],
   "inaction": [
     "the_bystander_effect"
@@ -218,9 +221,28 @@
     "noida_double_murder_case_2008"
   ],
   "media_sensationalism": [
-    "noida_double_murder_case_2008"
+    "noida_double_murder_case_2008",
+    "jack_the_ripper_001"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
+  ],
+  "victorian_era": [
+    "jack_the_ripper_001"
+  ],
+  "social_inequality": [
+    "jack_the_ripper_001"
+  ],
+  "obedience": [
+    "milgram_experiment_on_obedience_001"
+  ],
+  "authority": [
+    "milgram_experiment_on_obedience_001"
+  ],
+  "human_nature": [
+    "milgram_experiment_on_obedience_001"
+  ],
+  "ethics": [
+    "milgram_experiment_on_obedience_001"
   ]
 }
