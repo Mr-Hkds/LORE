@@ -34,26 +34,12 @@ const SIGNAL_LABELS = {
   cyber_mysteries: 'CYBER MYSTERY',
 };
 
-// ── Story card image with IntersectionObserver color reveal on scroll ──────
-function StoryCardImage({ story, alt }) {
+// ── Story card image — accepts inView from parent card ────────────────────
+function StoryCardImage({ story, alt, inView }) {
   const { getImageByQuery } = useStaticContent();
   const [fetchedUrl, setFetchedUrl] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [fallbackAttempted, setFallbackAttempted] = useState(false);
-  const [inView, setInView] = useState(false);
-  const containerRef = useRef(null);
-
-  // IntersectionObserver: reveal color when card scrolls into focus
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.35 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     if (!story.hero_image) {
@@ -82,7 +68,7 @@ function StoryCardImage({ story, alt }) {
 
   if (!displayUrl || imgFailed) {
     return (
-      <div ref={containerRef} className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
         <LoreMark size={20} color="currentColor" />
         <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
       </div>
@@ -90,7 +76,6 @@ function StoryCardImage({ story, alt }) {
   }
   return (
     <div
-      ref={containerRef}
       className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container pt-8"
       style={{
         backgroundColor: '#090807',
@@ -98,32 +83,131 @@ function StoryCardImage({ story, alt }) {
         backgroundSize: '100% 4px',
       }}
     >
-      {/* Vignette shadow */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }}
-      />
-
-      {/* Brand Watermark */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
       <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
         <LoreMark size={10} color="#EDE8DF" />
         <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">LORE ARCHIVE</span>
       </div>
-
-      {/* Image — grayscale by default, full color when in viewport */}
+      {/* Image — grayscale by default, full color when card is in viewport or hovered */}
       <img
         src={displayUrl}
         alt={alt}
         onError={handleImageError}
-        className="w-full h-full object-contain transition-all duration-700 group-hover:scale-[1.02]"
-        style={{
-          filter: inView ? 'grayscale(0%) brightness(1)' : 'grayscale(100%) brightness(0.6)',
-          opacity: inView ? 1 : 0.65,
-          transition: 'filter 0.65s ease, opacity 0.55s ease, transform 0.7s ease',
-        }}
+        className={`w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
+          inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]'
+        }`}
         loading="lazy"
       />
     </div>
+  );
+}
+
+// ── Story card wrapper with IntersectionObserver for color reveal ────────
+function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
+  const [inView, setInView] = useState(false);
+  const cardRef = useRef(null);
+  const sev   = SEVERITY_CONFIG[story.severity] || SEVERITY_CONFIG.unsettling;
+  const { getProgress } = useReadingProgress();
+  const prog  = getProgress(story.story_id);
+  const isNew = story.added_date && (Date.now() - new Date(story.added_date).getTime() < 7 * 24 * 60 * 60 * 1000);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const getTotalReactions = (s) => {
+    const rx = s.reactions || {};
+    return (rx.intriguing || rx.like || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
+  };
+
+  return (
+    <article
+      ref={cardRef}
+      onClick={() => onSelectStory(story)}
+      className="group relative w-full grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
+      style={{
+        backgroundColor: 'rgba(15, 13, 10, 0.7)',
+        borderColor: 'rgba(237,232,223,0.055)',
+        boxShadow: '0 8px 32px -12px rgba(0,0,0,0.8)',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(14px)',
+        transition: `opacity 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1), transform 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1)`,
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = 'rgba(158,123,76,0.2)';
+        e.currentTarget.style.boxShadow = '0 16px 48px -12px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(158,123,76,0.08)';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'rgba(237,232,223,0.055)';
+        e.currentTarget.style.boxShadow = '0 8px 32px -12px rgba(0,0,0,0.8)';
+      }}
+    >
+      {/* Image panel */}
+      <div className="w-full h-48 md:h-full flex-shrink-0 relative overflow-hidden">
+        <StoryCardImage story={story} alt={story.title} inView={inView} />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 story-card-overlay" />
+      </div>
+
+      {/* Content panel */}
+      <div className="w-full flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
+        <div>
+          {/* Top row: Badges & Reacts */}
+          <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2 border-b border-neutral-900/60 pb-2.5">
+            <div className="flex items-center gap-2 text-[8px] font-mono tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
+              <span className="flex items-center gap-1.5 font-bold" style={{ color: sev.dot }}>
+                <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
+                {sev.label}
+              </span>
+              <span>·</span>
+              <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
+              {isNew && (<><span>·</span><span style={{ color: ac }}>NEW</span></>)}
+              {getTotalReactions(story) > 3 && (
+                <><span>·</span><span style={{ color: '#C4644A' }} className="animate-pulse">❖ TRENDING</span></>
+              )}
+            </div>
+            <div className="flex items-center gap-3">
+              <ReadPill progress={prog} accentColor={ac} />
+              <EngagementBar reactions={story.reactions} />
+            </div>
+          </div>
+
+          <h2
+            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
+            style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
+          >
+            {story.title}
+          </h2>
+          <p className="font-sans leading-relaxed line-clamp-2" style={{ fontSize: '13px', color: mu, opacity: 0.9 }}>
+            {story.hook}
+          </p>
+        </div>
+
+        {/* Concepts + arrow */}
+        <div className="flex items-end justify-between mt-4 gap-3">
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {(story.concepts || []).slice(0, 3).map(c => (
+              <span key={c} className="text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1" style={{ color: mu }}>
+                <span style={{ color: ac, opacity: 0.5 }}>▪</span>{c}
+              </span>
+            ))}
+          </div>
+          <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-sm flex-shrink-0">→</span>
+        </div>
+      </div>
+      {/* Resume bar — appears if partially read */}
+      {prog && !prog.completed && prog.lastLayer > 0 && (
+        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] z-20"
+          style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.12) ${(prog.lastLayer / 7) * 100}%)` }} />
+      )}
+    </article>
   );
 }
 
@@ -347,115 +431,18 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
             </div>
           ) : (
             <div className="space-y-4">
-              {sortedStories.map((story, idx) => {
-                const sev     = SEVERITY_CONFIG[story.severity] || SEVERITY_CONFIG.unsettling;
-                const prog    = getProgress(story.story_id);
-                const isNew   = isNewArrival(story.added_date);
-
-                return (
-                  <article
-                    key={story.story_id}
-                    onClick={() => onSelectStory(story)}
-                    className="group relative w-full grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
-                    style={{
-                      backgroundColor: 'rgba(15, 13, 10, 0.7)',
-                      borderColor: 'rgba(237,232,223,0.055)',
-                      boxShadow: '0 8px 32px -12px rgba(0,0,0,0.8)',
-                      opacity: visible ? 1 : 0,
-                      transform: visible ? 'translateY(0)' : 'translateY(14px)',
-                      transition: `opacity 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1), transform 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1)`,
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = `rgba(158,123,76,0.2)`;
-                      e.currentTarget.style.boxShadow = `0 16px 48px -12px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(158,123,76,0.08)`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = 'rgba(237,232,223,0.055)';
-                      e.currentTarget.style.boxShadow = '0 8px 32px -12px rgba(0,0,0,0.8)';
-                    }}
-                  >
-                    {/* Image panel */}
-                    <div className="w-full h-48 md:h-full flex-shrink-0 relative overflow-hidden">
-                      <StoryCardImage story={story} alt={story.title} />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 story-card-overlay" />
-                    </div>
-
-                    {/* Content panel */}
-                    <div className="w-full flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
-                      <div>
-                        {/* Top row: Badges & Reacts */}
-                        <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2 border-b border-neutral-900/60 pb-2.5">
-                          <div className="flex items-center gap-2 text-[8px] font-mono tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
-                            {/* Severity signal */}
-                            <span className="flex items-center gap-1.5 font-bold" style={{ color: sev.dot }}>
-                              <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
-                              {sev.label}
-                            </span>
-                            <span>·</span>
-                            {/* Category Signal */}
-                            <span style={{ color: fg, opacity: 0.65 }}>
-                              {SIGNAL_LABELS[story.category] || 'ARCHIVE'}
-                            </span>
-                            {/* NEW badge */}
-                            {isNew && (
-                              <>
-                                <span>·</span>
-                                <span style={{ color: ac }}>NEW</span>
-                              </>
-                            )}
-                            {/* TRENDING badge if total reactions > 3 */}
-                            {getTotalReactions(story) > 3 && (
-                              <>
-                                <span>·</span>
-                                <span style={{ color: '#C4644A' }} className="animate-pulse">✦ TRENDING</span>
-                              </>
-                            )}
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <ReadPill progress={prog} accentColor={ac} />
-                            <EngagementBar reactions={story.reactions} />
-                          </div>
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-                          style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}>
-                          {story.title}
-                        </h2>
-
-                        {/* Hook */}
-                        <p className="font-sans leading-relaxed line-clamp-2"
-                          style={{ fontSize: '13px', color: mu, opacity: 0.9 }}>
-                          {story.hook}
-                        </p>
-                      </div>
-
-                      {/* Bottom row: concepts + CTA arrow */}
-                      <div className="flex items-end justify-between mt-4 gap-3">
-                        <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-                          {(story.concepts || []).slice(0, 3).map(c => (
-                            <span key={c}
-                              className="text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1"
-                              style={{ color: mu }}>
-                              <span style={{ color: ac }} className="opacity-50 flex-shrink-0">//</span>
-                              {c.replace(/_/g, ' ')}
-                            </span>
-                          ))}
-                        </div>
-                        <span className="text-base flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-80"
-                          style={{ color: ac, opacity: 0.4 }}>→</span>
-                      </div>
-                    </div>
-
-                    {/* Resume bar — appears if partially read */}
-                    {prog && !prog.completed && prog.lastLayer > 0 && (
-                      <div className="absolute bottom-0 left-0 right-0 h-[2px]"
-                        style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.12) ${(prog.lastLayer / 7) * 100}%)` }} />
-                    )}
-                  </article>
-                );
-              })}
+              {sortedStories.map((story, idx) => (
+                <StoryCard
+                  key={story.story_id}
+                  story={story}
+                  onSelectStory={onSelectStory}
+                  idx={idx}
+                  visible={visible}
+                  ac={ac}
+                  fg={fg}
+                  mu={mu}
+                />
+              ))}
             </div>
           )}
 

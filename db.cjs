@@ -432,17 +432,21 @@ function seed() {
 
 function getDailyReactions(date) {
   const row = db.prepare('SELECT * FROM daily_reactions WHERE date = ?').get(date);
-  if (!row) return { likes: 0, gripping: 0, scared: 0, mindblown: 0 };
+  if (!row) return { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 };
   return {
-    likes: row.likes || 0,
+    intriguing: row.likes || 0,
     gripping: row.gripping || 0,
-    scared: row.scared || 0,
-    mindblown: row.mindblown || 0
+    chilling: row.scared || 0,
+    mind_blowing: row.mindblown || 0
   };
 }
 
 function updateDailyReaction(date, reaction_type, undo = false) {
-  const colName = reaction_type === 'like' ? 'likes' : reaction_type;
+  let colName = reaction_type;
+  if (reaction_type === 'intriguing' || reaction_type === 'like') colName = 'likes';
+  if (reaction_type === 'chilling' || reaction_type === 'scared') colName = 'scared';
+  if (reaction_type === 'mind_blowing' || reaction_type === 'mindblown') colName = 'mindblown';
+
   if (!['likes', 'gripping', 'scared', 'mindblown'].includes(colName)) return false;
 
   db.prepare('INSERT OR IGNORE INTO daily_reactions (date) VALUES (?)').run(date);
@@ -456,7 +460,13 @@ function setDailyReactions(date, reactions) {
     INSERT OR REPLACE INTO daily_reactions (date, likes, gripping, scared, mindblown)
     VALUES (?, ?, ?, ?, ?)
   `);
-  stmt.run(date, reactions.likes || 0, reactions.gripping || 0, reactions.scared || 0, reactions.mindblown || 0);
+  stmt.run(
+    date,
+    reactions.intriguing || reactions.likes || 0,
+    reactions.gripping || 0,
+    reactions.chilling || reactions.scared || 0,
+    reactions.mind_blowing || reactions.mindblown || 0
+  );
 }
 
 function logPageView(pv) {

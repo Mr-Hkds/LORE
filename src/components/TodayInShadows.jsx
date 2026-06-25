@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle, X } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -106,7 +106,132 @@ const STATIC_FALLBACKS = {
   }
 };
 
+// ── Reaction config ───────────────────────────────────────────────────────
+const REACTION_CONFIG = [
+  {
+    id: 'intriguing',
+    label: 'Intriguing',
+    Icon: Fingerprint,
+    activeColor: '#F59E0B',
+    activeBg: 'rgba(245,158,11,0.10)',
+    activeBorder: 'rgba(245,158,11,0.45)',
+    glowColor: 'rgba(245,158,11,0.25)',
+    emoji: '🔍',
+  },
+  {
+    id: 'gripping',
+    label: 'Gripping',
+    Icon: Eye,
+    activeColor: '#A78BFA',
+    activeBg: 'rgba(167,139,250,0.10)',
+    activeBorder: 'rgba(167,139,250,0.45)',
+    glowColor: 'rgba(167,139,250,0.25)',
+    emoji: '👁',
+  },
+  {
+    id: 'chilling',
+    label: 'Chilling',
+    Icon: Skull,
+    activeColor: '#F87171',
+    activeBg: 'rgba(248,113,113,0.10)',
+    activeBorder: 'rgba(248,113,113,0.45)',
+    glowColor: 'rgba(248,113,113,0.25)',
+    emoji: '💀',
+  },
+  {
+    id: 'mind_blowing',
+    label: 'Mind Blowing',
+    Icon: HelpCircle,
+    activeColor: '#22D3EE',
+    activeBg: 'rgba(34,211,238,0.10)',
+    activeBorder: 'rgba(34,211,238,0.45)',
+    glowColor: 'rgba(34,211,238,0.25)',
+    emoji: '🌀',
+  },
+];
 
+// ── Premium animated reaction pill ───────────────────────────────────────
+function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
+  const { id, label, Icon, activeColor, activeBg, activeBorder, glowColor, emoji } = reaction;
+  return (
+    <div className="relative flex-1 min-w-[75px]">
+      {/* Floating emoji + plus-one burst */}
+      {animating && (
+        <div className="absolute top-[-18px] left-1/2 -translate-x-1/2 pointer-events-none select-none z-30 flex flex-col items-center">
+          <span
+            className="text-base"
+            style={{ animation: 'floatEmoji 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards' }}
+          >
+            {emoji}
+          </span>
+          <span
+            className="text-[9px] font-bold font-mono"
+            style={{
+              color: activeColor,
+              textShadow: `0 0 4px ${glowColor}`,
+              animation: 'floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+              marginTop: '-4px'
+            }}
+          >
+            +1
+          </span>
+        </div>
+      )}
+      <button
+        onClick={() => onReact(id)}
+        className="relative w-full flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer group select-none focus:outline-none hover:-translate-y-0.5 active:scale-95"
+        style={{
+          backgroundColor: isSelected ? activeBg : 'rgba(15,13,11,0.5)',
+          borderColor: isSelected ? activeBorder : 'rgba(237,232,223,0.06)',
+          boxShadow: isSelected 
+            ? `0 8px 24px -6px rgba(0,0,0,0.6), 0 0 16px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)` 
+            : '0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02)',
+        }}
+      >
+        {/* Shimmer / light effect on select */}
+        {isSelected && (
+          <div
+            className="absolute inset-0 pointer-events-none opacity-40"
+            style={{
+              backgroundImage: `radial-gradient(circle at center, ${activeColor} 0%, transparent 80%)`,
+            }}
+          />
+        )}
+        
+        {/* Bottom light bar */}
+        <div 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-500 rounded-full"
+          style={{
+            width: isSelected ? '40%' : '0%',
+            backgroundColor: activeColor,
+            boxShadow: `0 0 8px ${activeColor}`,
+          }}
+        />
+
+        <Icon
+          className="w-4.5 h-4.5 relative z-10 transition-all duration-500 ease-out"
+          style={{
+            color: isSelected ? activeColor : '#6B6560',
+            filter: isSelected ? `drop-shadow(0 0 5px ${glowColor})` : 'none',
+            transform: isSelected ? 'scale(1.12) rotate(6deg)' : 'scale(1)',
+          }}
+        />
+        <span
+          className="text-[8.5px] font-mono tracking-wider uppercase leading-none relative z-10 transition-all duration-300"
+          style={{ color: isSelected ? activeColor : '#5A5650' }}
+        >
+          {label}
+        </span>
+        <span
+          className="text-[10.5px] font-bold font-mono relative z-10 transition-all duration-300"
+          style={{ color: isSelected ? activeColor : '#3A3630' }}
+        >
+          {count}
+        </span>
+      </button>
+    </div>
+  );
+}
 
 export default function TodayInShadows() {
   const [dossier, setDossier] = useState(null);
@@ -114,18 +239,16 @@ export default function TodayInShadows() {
   const [modalOpen, setModalOpen] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const [wikiImgUrl, setWikiImgUrl] = useState(null);
-  const overlayRef = useRef(null);
   const [reactions, setReactions] = useState({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
   const [userReaction, setUserReaction] = useState(null);
-
-
+  const [animatingReaction, setAnimatingReaction] = useState(null);
 
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
 
+  // Load dossier
   useEffect(() => {
     let active = true;
-
     const fetchDossier = async () => {
       try {
         const res = await fetch('/api/daily-dossier');
@@ -138,10 +261,8 @@ export default function TodayInShadows() {
           }
         }
       } catch (err) {
-        console.warn('[Dossier Widget] Failed to fetch daily dossier:', err.message);
+        console.warn('[Dossier Widget] Failed to fetch:', err.message);
       }
-
-      // Failsafe client fallback
       if (active) {
         const fallback = STATIC_FALLBACKS[dayOfWeek];
         const dateStr = new Date().toISOString().split('T')[0];
@@ -156,59 +277,65 @@ export default function TodayInShadows() {
         setLoading(false);
       }
     };
-
     fetchDossier();
     return () => { active = false; };
   }, [dayOfWeek, activeTheme.name]);
 
-  // Reset image errors and load reaction values when dossier is loaded
+  // Load reactions from localStorage + server when dossier is ready
   useEffect(() => {
-    if (dossier) {
-      setImgFailed(false);
-      setWikiImgUrl(null);
-      const storedReaction = localStorage.getItem(`lore:dossier:reaction:${dossier.date}`);
-      setUserReaction(storedReaction);
-      setReactions(dossier.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+    if (!dossier) return;
+    setImgFailed(false);
+    setWikiImgUrl(null);
+    const dateKey = dossier.date || new Date().toISOString().split('T')[0];
+
+    // Always restore the user's vote from localStorage first
+    const stored = localStorage.getItem(`lore:dossier:reaction:${dateKey}`);
+    setUserReaction(stored || null);
+
+    // Load counts: prefer server, fall back to persisted local counts
+    const localCounts = (() => {
+      try {
+        const raw = localStorage.getItem(`lore:dossier:counts:${dateKey}`);
+        return raw ? JSON.parse(raw) : null;
+      } catch { return null; }
+    })();
+
+    if (dossier.reactions && Object.values(dossier.reactions).some(v => v > 0)) {
+      setReactions(dossier.reactions);
+    } else if (localCounts) {
+      setReactions(localCounts);
+    } else {
+      setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
     }
   }, [dossier]);
 
-  // Escape key handler to close modal
+  // Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && modalOpen) {
-        setModalOpen(false);
-      }
+      if (e.key === 'Escape' && modalOpen) setModalOpen(false);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  // Scroll modal overlay back to top when opened
+  // Body scroll lock
   useEffect(() => {
-    if (modalOpen && overlayRef.current) {
-      overlayRef.current.scrollTop = 0;
-    }
-  }, [modalOpen]);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (modalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = modalOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [modalOpen]);
 
   const handleReact = async (type) => {
     if (!dossier) return;
-    
     const wasSelected = userReaction === type;
     const oldReaction = userReaction;
     const newReaction = wasSelected ? null : type;
-    
+    const dateKey = dossier.date || new Date().toISOString().split('T')[0];
+
+    if (!wasSelected) {
+      setAnimatingReaction(type);
+      setTimeout(() => setAnimatingReaction(null), 700);
+    }
+
     setUserReaction(newReaction);
     setReactions(prev => {
       const next = { ...prev };
@@ -220,15 +347,18 @@ export default function TodayInShadows() {
           next[oldReaction] = Math.max(0, (next[oldReaction] || 1) - 1);
         }
       }
+      // Persist counts locally so they never reset on page load
+      try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(next)); } catch {}
       return next;
     });
 
     if (wasSelected) {
-      localStorage.removeItem(`lore:dossier:reaction:${dossier.date}`);
+      localStorage.removeItem(`lore:dossier:reaction:${dateKey}`);
     } else {
-      localStorage.setItem(`lore:dossier:reaction:${dossier.date}`, type);
+      localStorage.setItem(`lore:dossier:reaction:${dateKey}`, type);
     }
 
+    // Sync to server silently
     try {
       if (oldReaction && oldReaction !== type) {
         await fetch('/api/daily-dossier', {
@@ -237,7 +367,6 @@ export default function TodayInShadows() {
           body: JSON.stringify({ reaction_type: oldReaction, undo: true })
         });
       }
-
       const res = await fetch('/api/daily-dossier', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -247,10 +376,11 @@ export default function TodayInShadows() {
         const data = await res.json();
         if (data.reactions) {
           setReactions(data.reactions);
+          try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(data.reactions)); } catch {}
         }
       }
     } catch (err) {
-      console.warn('Failed to save daily dossier reaction:', err.message);
+      console.warn('Failed to save dossier reaction:', err.message);
     }
   };
 
@@ -266,7 +396,7 @@ export default function TodayInShadows() {
 
   return (
     <>
-      {/* Dossier Card on Homepage */}
+      {/* ── Dossier Card on Homepage ──────────────────────────────────── */}
       <div
         className="p-5 md:p-6 rounded-xl border flex flex-col md:flex-row gap-5 items-start transition-all duration-300 hover:border-[#9E7B4C]/35"
         style={{
@@ -275,6 +405,7 @@ export default function TodayInShadows() {
           boxShadow: '0 8px 32px -10px rgba(0, 0, 0, 0.5)',
         }}
       >
+        {/* Thumbnail */}
         {dossier.thumbnail && (
           <div className="w-full aspect-[4/3] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative group">
             {imgFailed ? (
@@ -283,54 +414,33 @@ export default function TodayInShadows() {
                 <span className="text-[7px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
               </div>
             ) : (
-              <div 
-                className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container"
-                style={{
-                  backgroundColor: '#090807',
-                  backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
-                  backgroundSize: '100% 4px',
-                }}
-              >
-                {/* Vignette shadow */}
-                <div 
-                  className="absolute inset-0 z-0 pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)'
-                  }}
-                />
-
-                {/* Brand Watermark / Stamp */}
+              <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: '#090807' }}>
+                <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
                 <div className="absolute top-2 left-2 z-20 flex items-center gap-1 opacity-35 pointer-events-none select-none">
                   <LoreMark size={8} color="#EDE8DF" />
                   <span className="text-[6.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold">LORE</span>
                 </div>
-
-                {/* Crisp foreground contained image */}
                 <img
-                  src={wikiImgUrl || (dossier.thumbnail ? `${dossier.thumbnail}?v=${dossier.date || ''}` : '')}
+                  src={wikiImgUrl || dossier.thumbnail}
                   alt={dossier.title}
                   onError={() => setImgFailed(true)}
-                  className="relative z-10 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[700ms] group-hover:scale-[1.02] shadow-[0_0_16px_rgba(0,0,0,0.6)]"
+                  className="relative z-10 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
               </div>
             )}
           </div>
         )}
+
+        {/* Text block */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
             <span className="text-[9.5px] sm:text-[10px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-sm">
-              WHAT HAPPENED TODAY IN HISTORY · {dossier.theme?.toUpperCase()}
+              WHAT HAPPENED TODAY · {dossier.theme?.toUpperCase()}
             </span>
-            {dossier.year && (
-              <span className="text-[10px] font-mono text-neutral-400 tracking-wider">
-                YEAR: {dossier.year}
-              </span>
-            )}
+            {dossier.year && <span className="text-[10px] font-mono text-neutral-400 tracking-wider">YEAR: {dossier.year}</span>}
           </div>
-          <h4 className="font-sans font-bold text-[13px] uppercase tracking-wider text-neutral-300 mb-1">
-            {dossier.title}
-          </h4>
+          <h4 className="font-sans font-bold text-[13px] uppercase tracking-wider text-neutral-300 mb-1">{dossier.title}</h4>
           <p className="font-serif italic text-sm md:text-base leading-relaxed text-[#EDE8DF] mb-3" style={{ opacity: 0.95 }}>
             {dossier.text}
           </p>
@@ -341,30 +451,26 @@ export default function TodayInShadows() {
             >
               Read Entry <span className="text-xs">→</span>
             </button>
-
-            <div className="flex gap-2 items-center flex-wrap">
-              {[
-                { id: 'intriguing', Icon: Fingerprint, label: 'Intriguing', colorClass: 'text-amber-400' },
-                { id: 'gripping', Icon: Eye, label: 'Gripping', colorClass: 'text-violet-400' },
-                { id: 'chilling', Icon: Skull, label: 'Chilling', colorClass: 'text-red-400' },
-                { id: 'mind_blowing', Icon: HelpCircle, label: 'Mind Blowing', colorClass: 'text-cyan-400' }
-              ].map((r) => {
+            {/* Mini reaction pills on card */}
+            <div className="flex gap-1.5 items-center flex-wrap">
+              {REACTION_CONFIG.map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
                 return (
                   <button
                     key={r.id}
                     onClick={() => handleReact(r.id)}
-                    className="py-1 px-2.5 rounded border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-[9px] font-mono uppercase tracking-wider"
+                    title={r.label}
+                    className="py-1 px-2 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center gap-1 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group"
                     style={{
-                      backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
-                      borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
-                      color: isSelected ? '#EDE8DF' : '#8F8A82'
+                      backgroundColor: isSelected ? r.activeBg : 'rgba(10,9,7,0.4)',
+                      borderColor: isSelected ? r.activeBorder : 'rgba(237,232,223,0.06)',
+                      boxShadow: isSelected ? `0 0 10px ${r.glowColor}` : 'none',
                     }}
                   >
-                    <r.Icon className={`w-3.5 h-3.5 ${isSelected ? r.colorClass : 'opacity-70'}`} />
-                    <span className="opacity-95">{r.label}</span>
-                    <span className="opacity-70 text-[9.5px]">({count})</span>
+                    <r.Icon className="w-3 h-3 transition-all duration-200" style={{ color: isSelected ? r.activeColor : '#5A5650' }} />
+                    <span style={{ color: isSelected ? r.activeColor : '#6B6560' }}>{r.label}</span>
+                    <span className="opacity-60" style={{ color: isSelected ? r.activeColor : '#4A4440' }}>({count})</span>
                   </button>
                 );
               })}
@@ -373,34 +479,35 @@ export default function TodayInShadows() {
         </div>
       </div>
 
-      {/* Deep-Dive Decryption Overlay Modal */}
+      {/* ── MODAL — Full-screen overlay, centering flex wrapper, max height constraint ──── */}
       {modalOpen && (
         <div
-          ref={overlayRef}
-          className="fixed inset-0 z-50 bg-[#0A0907]/90 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-8"
+          style={{ backgroundColor: 'rgba(5,4,3,0.92)', backdropFilter: 'blur(10px)' }}
           onClick={() => setModalOpen(false)}
         >
-          <div className="flex min-h-full items-center justify-center p-4 py-8">
+          {/* Modal card — stops click propagation, flex layout with max-height and hidden overflow */}
           <div
-            className="relative w-full max-w-[620px] max-h-[85vh] bg-[#110F0D] border border-[#9E7B4C]/25 rounded-xl p-6 md:p-8 flex flex-col shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-h-[90vh] rounded-2xl flex flex-col overflow-hidden animate-fadeIn"
             style={{
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9)'
+              maxWidth: '680px',
+              backgroundColor: '#110F0D',
+              border: '1px solid rgba(158,123,76,0.22)',
+              boxShadow: '0 32px 64px -16px rgba(0,0,0,0.95), 0 0 0 1px rgba(158,123,76,0.06)',
             }}
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Decryption grid lines overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(rgba(158,123,76,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(158,123,76,0.1)_1px,transparent_1px)] bg-[size:24px_24px]" />
+            {/* Grid lines overlay */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03] rounded-2xl" style={{ backgroundImage: 'linear-gradient(rgba(158, 123, 76, 1) 1px, transparent 1px), linear-gradient(90deg,rgba(158, 123, 76, 1) 1px,transparent 1px)', backgroundSize: '24px 24px' }} />
 
-            {/* Header */}
-            <div className="flex justify-between items-start border-b border-neutral-900 pb-4 relative z-10 flex-shrink-0">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm">
+            {/* ── Modal Header (Sticky/Fixed inside Card) ── */}
+            <div className="flex justify-between items-start border-b border-neutral-900/60 p-6 md:p-8 pb-5 relative z-10 bg-[#110F0D]">
+              <div className="space-y-1.5 flex-1 pr-4">
+                <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2.5 py-0.5 rounded-sm inline-block">
                   Today in History
                 </span>
-                <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-light pt-1">
-                  {dossier.title}
-                </h3>
-                <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-400 pt-0.5">
+                <h3 className="font-serif italic text-2xl md:text-3xl text-[#EDE8DF] font-light pt-1 leading-tight">{dossier.title}</h3>
+                <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500 pt-0.5">
                   <span>THEME: {dossier.theme?.toUpperCase()}</span>
                   <span>·</span>
                   <span>YEAR: {dossier.year}</span>
@@ -408,41 +515,37 @@ export default function TodayInShadows() {
               </div>
               <button
                 onClick={() => setModalOpen(false)}
-                className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-[11px] font-mono tracking-widest uppercase focus:outline-none border border-neutral-800 hover:border-neutral-700 px-2.5 py-1 rounded"
+                className="flex-shrink-0 w-8 h-8 rounded-lg border border-neutral-800 hover:border-neutral-700 text-neutral-500 hover:text-white transition-all cursor-pointer focus:outline-none flex items-center justify-center hover:bg-neutral-900/60"
               >
-                Close [Esc]
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Content Body */}
-            <div className="space-y-6 relative z-10 pr-2 overflow-y-auto flex-1 my-5 custom-scrollbar pb-16">
-              
-              {/* Intel Briefing */}
+            {/* ── Modal Content (Scrollable Area) ── */}
+            <div className="p-6 md:p-8 pt-6 space-y-6 relative z-10 overflow-y-auto flex-1 custom-scrollbar bg-[#110F0D]">
+              {/* Wikipedia Summary */}
               <div className="space-y-2">
-                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
+                <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
                   Wikipedia Summary
                 </h5>
-                <p className="font-serif text-sm md:text-base leading-relaxed text-neutral-300">
+                <p className="font-serif text-sm md:text-[15px] leading-relaxed text-neutral-300">
                   {dossier.wikiSummary || dossier.text}
                 </p>
               </div>
 
-              {/* Classified Theories */}
+              {/* Alternative Theories */}
               {dossier.theories && dossier.theories.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
+                <div className="space-y-3">
+                  <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
                     Alternative Theories
                   </h5>
                   <div className="grid grid-cols-1 gap-3">
                     {dossier.theories.map((theory, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3.5 rounded-lg border bg-neutral-950/40 border-neutral-900/60"
-                      >
-                        <span className="text-[10.5px] font-mono text-[#9E7B4C] uppercase tracking-wider block mb-1 font-bold">
-                          Theory {idx + 1}: {theory.name}
+                      <div key={idx} className="p-4 rounded-xl border bg-neutral-950/60 border-neutral-800/60">
+                        <span className="text-[10px] font-mono text-[#9E7B4C] uppercase tracking-wider block mb-1.5 font-bold">
+                          {idx + 1}. {theory.name}
                         </span>
-                        <p className="font-serif italic text-xs sm:text-sm leading-relaxed text-[#EDE8DF]">
+                        <p className="font-serif italic text-sm leading-relaxed text-[#D4CFC7]">
                           {theory.explanation}
                         </p>
                       </div>
@@ -450,45 +553,52 @@ export default function TodayInShadows() {
                   </div>
                 </div>
               )}
-              {/* Simple Reaction Toolbar */}
-              <div className="space-y-3 pt-2">
-                <h5 className="text-[11px] font-mono tracking-widest uppercase text-neutral-300 border-l border-[#9E7B4C] pl-2">
-                  Reader Sentiment
-                </h5>
-                <div className="flex gap-2 sm:gap-3 flex-wrap xs:flex-nowrap">
-                  {[
-                    { id: 'intriguing', label: 'Intriguing', Icon: Fingerprint, colorClass: 'text-amber-400' },
-                    { id: 'gripping', label: 'Gripping', Icon: Eye, colorClass: 'text-violet-400' },
-                    { id: 'chilling', label: 'Chilling', Icon: Skull, colorClass: 'text-red-400' },
-                    { id: 'mind_blowing', label: 'Mind Blowing', Icon: HelpCircle, colorClass: 'text-cyan-400' }
-                  ].map((r) => {
-                    const isSelected = userReaction === r.id;
-                    const count = reactions[r.id] || 0;
-                    return (
-                      <button
-                        key={r.id}
-                        onClick={() => handleReact(r.id)}
-                        className="flex-1 py-2.5 px-3 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 hover:border-[#9E7B4C]/40 active:scale-95 text-xs font-medium min-w-[70px]"
-                        style={{
-                          backgroundColor: isSelected ? 'rgba(158, 123, 76, 0.08)' : 'rgba(10, 9, 7, 0.3)',
-                          borderColor: isSelected ? '#9E7B4C' : 'rgba(237, 232, 223, 0.06)',
-                          color: isSelected ? '#EDE8DF' : '#8F8A82'
-                        }}
-                      >
-                        <r.Icon className={`w-4 h-4 ${isSelected ? r.colorClass : 'opacity-70'}`} />
-                        <span className="hidden xs:inline">{r.label}</span>
-                        <span className="text-[10.5px] sm:text-xs font-mono opacity-60">({count})</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
 
+              {/* ── Premium Reactions Section ── */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3">
+                  <h5 className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 border-l-2 border-[#9E7B4C] pl-3">
+                    Reader Sentiment
+                  </h5>
+                  {userReaction && (
+                    <span className="text-[9px] font-mono text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      Your vote: {userReaction.replace('_', ' ')}
+                    </span>
+                  )}
+                </div>
+                <style>{`
+                  @keyframes floatUp {
+                    0%   { transform: translate(-50%, 0); opacity: 0; }
+                    20%  { opacity: 1; }
+                    100% { transform: translate(-50%, -32px); opacity: 0; }
+                  }
+                  @keyframes floatEmoji {
+                    0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0; }
+                    20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
+                    100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
+                  }
+                `}</style>
+                <div className="flex gap-2 sm:gap-3">
+                  {REACTION_CONFIG.map((r) => (
+                    <ReactionPill
+                      key={r.id}
+                      reaction={r}
+                      isSelected={userReaction === r.id}
+                      count={reactions[r.id] || 0}
+                      onReact={handleReact}
+                      animating={animatingReaction === r.id}
+                    />
+                  ))}
+                </div>
+                <p className="text-[8.5px] font-mono text-neutral-600 tracking-wider">
+                  // ONE VOTE PER DAY — CLICK AGAIN TO UNDO
+                </p>
+              </div>
             </div>
 
-            {/* Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-neutral-900 pt-4 relative z-10 gap-3 flex-shrink-0">
-              {dossier.wikiUrl && (
+            {/* ── Modal Footer (Sticky/Fixed at bottom) ── */}
+            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-neutral-900 p-6 md:p-8 pt-5 gap-3 relative z-10 bg-[#110F0D]">
+              {dossier.wikiUrl ? (
                 <a
                   href={dossier.wikiUrl}
                   target="_blank"
@@ -497,17 +607,14 @@ export default function TodayInShadows() {
                 >
                   Read Wikipedia Article <span className="text-xs">→</span>
                 </a>
-              )}
+              ) : <span />}
               <button
                 onClick={() => setModalOpen(false)}
-                className="w-full sm:w-auto px-5 py-2 bg-[#9E7B4C] text-white text-[11px] font-bold tracking-[0.25em] uppercase rounded hover:bg-[#b08c5c] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
+                className="w-full sm:w-auto px-6 py-2.5 bg-[#9E7B4C] text-white text-[11px] font-bold tracking-[0.25em] uppercase rounded-lg hover:bg-[#b08c5c] active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                Close File
+                CLOSE FILE
               </button>
             </div>
-
-          </div>
-
           </div>
         </div>
       )}

@@ -592,6 +592,9 @@ const server = http.createServer(async (req, res) => {
     const todayObj = new Date();
     const dayOfWeek = todayObj.getDay();
     const dossier = generateDailyDossier(dayOfWeek);
+    const dateStr = todayObj.toISOString().split('T')[0];
+    dossier.date = dateStr;
+    dossier.reactions = db.getDailyReactions(dateStr);
     
     try {
       const query = dossier.wikiQuery || dossier.title;
@@ -605,6 +608,31 @@ const server = http.createServer(async (req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(dossier));
+    return;
+  }
+
+  // Route: POST /api/daily-dossier
+  if (req.method === 'POST' && pathname === '/api/daily-dossier') {
+    try {
+      const { reaction_type, undo } = await getJsonBody(req);
+      if (!reaction_type) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing reaction_type' }));
+        return;
+      }
+      
+      const todayObj = new Date();
+      const dateStr = todayObj.toISOString().split('T')[0];
+      
+      db.updateDailyReaction(dateStr, reaction_type, !!undo);
+      const updatedReactions = db.getDailyReactions(dateStr);
+      
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, reactions: updatedReactions }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
     return;
   }
 

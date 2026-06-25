@@ -282,34 +282,86 @@ export default function LayerReader({
                   <p className="text-xs font-sans mb-6" style={{ color: cardTextSecondary }}>
                     Share your reaction to update the global archive's ratings.
                   </p>
+                  <style>{`
+                    @keyframes floatUp {
+                      0%   { transform: translate(-50%, 0); opacity: 0; }
+                      20%  { opacity: 1; }
+                      100% { transform: translate(-50%, -32px); opacity: 0; }
+                    }
+                    @keyframes floatEmoji {
+                      0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0; }
+                      20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
+                      100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
+                    }
+                  `}</style>
                   <div className="flex justify-center gap-3 flex-wrap">
-
                     {[
-                      { key: 'intriguing', label: 'INTRIGUING', Icon: Fingerprint, color: 'amber' },
-                      { key: 'gripping',   label: 'GRIPPING',   Icon: Eye,         color: 'violet' },
-                      { key: 'chilling',   label: 'CHILLING',   Icon: Skull,       color: 'red' },
-                      { key: 'mind_blowing', label: 'MIND BLOWING', Icon: HelpCircle, color: 'cyan' },
-                    ].map(({ key, label, Icon, color }) => (
-                      <div key={key} className="relative">
+                      { key: 'intriguing', label: 'INTRIGUING', Icon: Fingerprint, color: '#F59E0B', activeBg: 'rgba(245,158,11,0.10)', activeBorder: 'rgba(245,158,11,0.45)', glowColor: 'rgba(245,158,11,0.25)', emoji: '🔍' },
+                      { key: 'gripping',   label: 'GRIPPING',   Icon: Eye,         color: '#A78BFA', activeBg: 'rgba(167,139,250,0.10)', activeBorder: 'rgba(167,139,250,0.45)', glowColor: 'rgba(167,139,250,0.25)', emoji: '👁' },
+                      { key: 'chilling',   label: 'CHILLING',   Icon: Skull,       color: '#F87171', activeBg: 'rgba(248,113,113,0.10)', activeBorder: 'rgba(248,113,113,0.45)', glowColor: 'rgba(248,113,113,0.25)', emoji: '💀' },
+                      { key: 'mind_blowing', label: 'MIND BLOWING', Icon: HelpCircle, color: '#22D3EE', activeBg: 'rgba(34,211,238,0.10)', activeBorder: 'rgba(34,211,238,0.45)', glowColor: 'rgba(34,211,238,0.25)', emoji: '🌀' },
+                    ].map(({ key, label, Icon, color, activeBg, activeBorder, glowColor, emoji }) => (
+                      <div key={key} className="relative min-w-[125px]">
                         {animatingReaction === key && (
-                          <span className={`absolute -top-7 left-1/2 -translate-x-1/2 pointer-events-none text-xs font-mono font-bold text-${color}-400 animate-float-up-fade select-none`}>
-                            +1
-                          </span>
+                          <div className="absolute top-[-22px] left-1/2 -translate-x-1/2 pointer-events-none select-none z-30 flex flex-col items-center">
+                            <span
+                              className="text-base"
+                              style={{ animation: 'floatEmoji 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards' }}
+                            >
+                              {emoji}
+                            </span>
+                            <span
+                              className="text-[9px] font-bold font-mono"
+                              style={{
+                                color: color,
+                                textShadow: `0 0 4px ${glowColor}`,
+                                animation: 'floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+                                marginTop: '-4px'
+                              }}
+                            >
+                              +1
+                            </span>
+                          </div>
                         )}
                         <button
                           onClick={() => handleReact(key)}
                           title={reacted[key] ? 'Click again to undo your vote' : `Mark as ${label}`}
-                          className={`px-4 py-2.5 border rounded-lg text-[11px] font-mono tracking-wider transition-all duration-200 cursor-pointer active:scale-95 select-none flex items-center gap-2 ${
-                            reacted[key]
-                              ? `bg-${color}-950/30 border-${color}-700/70 text-${color}-300 shadow-[0_0_12px_rgba(0,0,0,0.2)]`
-                              : `hover:bg-white/5 border-neutral-800 text-neutral-400 hover:border-${color}-900/50 hover:text-${color}-400`
-                          } ${animatingReaction === key ? 'scale-110' : ''}`}
+                          className="relative w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer group select-none focus:outline-none hover:-translate-y-0.5 active:scale-95 text-[11px] font-mono tracking-wider"
+                          style={{
+                            backgroundColor: reacted[key] ? activeBg : 'rgba(15,13,11,0.4)',
+                            borderColor: reacted[key] ? activeBorder : 'rgba(237,232,223,0.06)',
+                            boxShadow: reacted[key] 
+                              ? `0 8px 24px -6px rgba(0,0,0,0.6), 0 0 16px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)` 
+                              : '0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02)',
+                            color: reacted[key] ? color : '#8F8A82',
+                          }}
                         >
-                          <Icon className="w-3.5 h-3.5" /> {label} <span className="opacity-60">({reactions[key] || 0})</span>
+                          {/* Shimmer effect on select */}
+                          {reacted[key] && (
+                            <div
+                              className="absolute inset-0 pointer-events-none opacity-20"
+                              style={{
+                                backgroundImage: `radial-gradient(circle at center, ${color} 0%, transparent 80%)`,
+                              }}
+                            />
+                          )}
+                          
+                          {/* Bottom light bar */}
+                          <div 
+                            className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-500 rounded-full"
+                            style={{
+                              width: reacted[key] ? '40%' : '0%',
+                              backgroundColor: color,
+                              boxShadow: `0 0 8px ${color}`,
+                            }}
+                          />
+
+                          <Icon className="w-3.5 h-3.5 transition-all duration-500 group-hover:scale-110" style={{ color: reacted[key] ? color : undefined }} />
+                          <span>{label}</span>
+                          <span className="opacity-60 font-bold" style={{ color: reacted[key] ? color : '#5A5650' }}>({reactions[key] || 0})</span>
                         </button>
                       </div>
                     ))}
-
                   </div>
                 </div>
               )}
