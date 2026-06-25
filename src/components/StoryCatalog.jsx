@@ -84,9 +84,17 @@ function StoryCardImage({ story, alt, inView }) {
       }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
-      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 opacity-35 pointer-events-none select-none">
-        <LoreMark size={10} color="#EDE8DF" />
-        <span className="text-[8px] font-mono tracking-[0.25em] text-[#EDE8DF] uppercase font-bold">SEVENDESCENTS</span>
+      <div className="absolute bottom-2 right-2 z-20 flex flex-col items-center gap-0.5 opacity-25 pointer-events-none select-none">
+        <LoreMark size={11} color="#EDE8DF" />
+        <span
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '6px',
+            color: '#EDE8DF',
+            letterSpacing: '0.18em',
+            fontWeight: 700,
+          }}
+        >VII</span>
       </div>
       {/* Image — grayscale by default, full color when card is in viewport or hovered */}
       <img
@@ -381,25 +389,35 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
       {/* Header */}
       <header className="px-4 sm:px-8 md:px-10">
         <div className="mx-auto h-14 flex items-center justify-between" style={{ maxWidth: '780px' }}>
-          <div className="flex items-center gap-3 flex-wrap">
-            <div onClick={handleLogoTap} className="flex items-center gap-[10px] cursor-pointer select-none" title="Tap 5× for Admin">
-              <LoreMark size={18} color={fg} />
-              <span className="text-[9px] font-bold tracking-[0.12em] uppercase" style={{ color: fg, opacity: 0.85 }}>SEVENDESCENTS</span>
-            </div>
-            <span className="text-neutral-800">·</span>
-            <span className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] bg-[#9E7B4C]/5 select-none font-bold">
-              PREMIUM TESTING ACCESS
+          {/* Logo + wordmark */}
+          <div onClick={handleLogoTap} className="flex items-center gap-2.5 cursor-pointer select-none" title="Tap 5× for Admin">
+            <LoreMark size={17} color={fg} />
+            <span
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                color: fg,
+                opacity: 0.82,
+                textTransform: 'uppercase',
+              }}
+            >
+              SevenDescents
             </span>
-            <span className="text-neutral-800">·</span>
+          </div>
+
+          {/* Right: dossier count + back */}
+          <div className="flex items-center gap-3">
+            <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>
+              {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
+            </span>
             <button onClick={onBack}
               className="text-[9px] font-bold tracking-[0.15em] uppercase opacity-50 hover:opacity-80 active:opacity-30 cursor-pointer"
-              style={{ background: 'none', border: 'none', color: ac }}>
+              style={{ background: 'none', border: 'none', color: ac, fontFamily: "'Space Mono', monospace" }}>
               ← Back
             </button>
           </div>
-          <span className="text-[10px] font-medium tracking-[0.12em] uppercase" style={{ color: mu }}>
-            {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
-          </span>
         </div>
       </header>
 

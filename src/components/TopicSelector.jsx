@@ -266,39 +266,35 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           className="mx-auto h-14 flex items-center justify-between"
           style={{ maxWidth: '780px' }}
         >
-          <div className="flex items-center gap-3 flex-wrap">
-            <div 
-              className="flex items-center gap-[10px] cursor-pointer" 
-              onClick={handleLogoTap}
-              title="Tap 5 times to open Admin Console"
+          {/* Logo + wordmark — tap 5× for admin */}
+          <div
+            className="flex items-center gap-2.5 cursor-pointer select-none"
+            onClick={handleLogoTap}
+            title="Tap 5 times to open Admin Console"
+          >
+            <LoreMark size={17} color={fg} />
+            <span
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                color: fg,
+                opacity: 0.82,
+                textTransform: 'uppercase',
+              }}
             >
-              <LoreMark size={18} color={fg} />
-              <span
-                className="text-[9px] font-bold tracking-[0.12em] uppercase select-none"
-                style={{ color: fg, opacity: 0.85 }}
-              >
-                SEVENDESCENTS
-              </span>
-            </div>
-            <span className="text-neutral-800">·</span>
-            <span className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] bg-[#9E7B4C]/5 select-none font-bold">
-              PREMIUM TESTING ACCESS
+              SevenDescents
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <span
-              className="text-[9px] font-mono tracking-[0.15em] uppercase text-neutral-500 hidden sm:inline"
-            >
-              {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase()}
-            </span>
-            <span className="text-neutral-800 hidden sm:inline">·</span>
-            <span
-              className="text-[10px] font-medium tracking-[0.12em] uppercase"
-              style={{ color: mu }}
-            >
-              A guided descent
-            </span>
-          </div>
+
+          {/* Right side — tagline hidden on mobile */}
+          <span
+            className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
+            style={{ color: mu, opacity: 0.7 }}
+          >
+            A guided descent
+          </span>
         </div>
       </header>
 
@@ -306,13 +302,21 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
-          {/* Eyebrow */}
-          <p
-            className="text-[11px] sm:text-xs font-semibold tracking-[0.26em] uppercase"
-            style={{ color: ac, opacity: 0.95, marginBottom: '24px' }}
-          >
-            Select your rabbit hole
-          </p>
+          {/* Eyebrow row — label + beta badge */}
+          <div className="flex items-center gap-3 flex-wrap" style={{ marginBottom: '24px' }}>
+            <p
+              className="text-[11px] sm:text-xs font-semibold tracking-[0.26em] uppercase"
+              style={{ color: ac, opacity: 0.95 }}
+            >
+              Select your rabbit hole
+            </p>
+            <span
+              className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border select-none"
+              style={{ borderColor: 'rgba(158,123,76,0.3)', color: '#9E7B4C', background: 'rgba(158,123,76,0.06)' }}
+            >
+              Beta Access
+            </span>
+          </div>
 
           {/* Title */}
           <h1

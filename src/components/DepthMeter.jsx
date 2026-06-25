@@ -27,12 +27,19 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           className="flex items-center gap-[10px] justify-self-start transition-opacity hover:opacity-60 active:opacity-35"
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
         >
-          <LoreMark size={18} color={text} />
+          <LoreMark size={17} color={text} />
           <span
-            className="text-[10px] font-bold tracking-[0.32em] uppercase"
-            style={{ color: text, opacity: 0.85 }}
+            style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '9px',
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              color: text,
+              opacity: 0.82,
+              textTransform: 'uppercase',
+            }}
           >
-            SEVENDESCENTS
+            SevenDescents
           </span>
         </button>
 
@@ -96,10 +103,17 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           >
             <LoreMark size={14} color={text} />
             <span
-              className="text-[8px] font-bold tracking-[0.12em] uppercase"
-              style={{ color: text, opacity: 0.85 }}
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '8px',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                color: text,
+                opacity: 0.82,
+                textTransform: 'uppercase',
+              }}
             >
-              SEVENDESCENTS
+              SevenDescents
             </span>
           </button>
 
