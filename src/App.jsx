@@ -33,7 +33,7 @@ export default function App() {
   
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(() => {
     try {
-      return sessionStorage.getItem('lore:admin_unlocked') === 'true';
+      return localStorage.getItem('lore:admin_unlocked') === 'true';
     } catch {
       return false;
     }
@@ -402,7 +402,7 @@ export default function App() {
         <PasscodeScreen
           onUnlock={() => {
             setIsAdminUnlocked(true);
-            try { sessionStorage.setItem('lore:admin_unlocked', 'true'); } catch { /* ignore */ }
+            try { localStorage.setItem('lore:admin_unlocked', 'true'); } catch { /* ignore */ }
           }}
           onCancel={handleExitAdmin}
         />
