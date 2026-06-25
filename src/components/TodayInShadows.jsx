@@ -429,11 +429,21 @@ export default function TodayInShadows() {
               )}
             </div>
             <h4 className="font-serif italic text-lg sm:text-xl text-[#EDE8DF] tracking-normal mb-2 font-semibold">{dossier.title}</h4>
-            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5 line-clamp-2">
+            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5">
               {dossier.text}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-neutral-900/60">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-neutral-900/60 w-full">
+            {dossier.wikiUrl ? (
+              <a
+                href={dossier.wikiUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none flex-shrink-0"
+              >
+                Read Wikipedia Article <span className="text-xs">→</span>
+              </a>
+            ) : <div />}
             {/* Mini reaction pills on card */}
             <div className="flex gap-1.5 items-center flex-wrap">
               {REACTION_CONFIG.map((r) => {

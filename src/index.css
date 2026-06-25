@@ -301,12 +301,16 @@ body::after {
 
 /* Consistent Forensic Image Treatment */
 img {
-  filter: grayscale(0.9) contrast(1.22) brightness(0.82) sepia(0.04) !important;
   transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.group:hover img, img:hover {
-  filter: grayscale(0.1) contrast(1.04) brightness(0.95) !important;
+@media (hover: hover) {
+  img {
+    filter: grayscale(0.9) contrast(1.22) brightness(0.82) sepia(0.04) !important;
+  }
+  .group:hover img, img:hover {
+    filter: grayscale(0.1) contrast(1.04) brightness(0.95) !important;
+  }
 }
 
 /* CCTV / Surveillance Scanlines overlay container ONLY for images */
