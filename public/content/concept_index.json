@@ -84,7 +84,8 @@
     "jack_the_ripper_001",
     "the_zodiac_killer",
     "the_taman_shud_case",
-    "the_sodder_children_disappearance"
+    "the_sodder_children_disappearance",
+    "the_cleveland_torso_murders"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -230,7 +231,8 @@
   ],
   "serial_killer": [
     "jack_the_ripper_001",
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "the_cleveland_torso_murders"
   ],
   "victorian_era": [
     "jack_the_ripper_001"
@@ -254,7 +256,8 @@
     "cia_mk_ultra_program"
   ],
   "unethical_experimentation": [
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "project_stargate_remote_viewing"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program"
@@ -388,7 +391,8 @@
   ],
   "intelligence_gathering": [
     "the_phoenix_program",
-    "project_shamrock"
+    "project_shamrock",
+    "project_stargate_remote_viewing"
   ],
   "government_surveillance": [
     "project_shamrock"
@@ -403,7 +407,8 @@
     "project_shamrock"
   ],
   "cold_war_era": [
-    "project_shamrock"
+    "project_shamrock",
+    "project_stargate_remote_viewing"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships"
@@ -452,5 +457,32 @@
   ],
   "flawed_investigation": [
     "the_sodder_children_disappearance"
+  ],
+  "depression_era": [
+    "the_cleveland_torso_murders"
+  ],
+  "dismemberment": [
+    "the_cleveland_torso_murders"
+  ],
+  "forensic_challenge": [
+    "the_cleveland_torso_murders"
+  ],
+  "political_pressure": [
+    "the_cleveland_torso_murders"
+  ],
+  "remote_viewing": [
+    "project_stargate_remote_viewing"
+  ],
+  "government_experiments": [
+    "project_stargate_remote_viewing"
+  ],
+  "psychic_espionage": [
+    "project_stargate_remote_viewing"
+  ],
+  "paranormal_research": [
+    "project_stargate_remote_viewing"
+  ],
+  "scientific_skepticism": [
+    "project_stargate_remote_viewing"
   ]
 }
