@@ -24,7 +24,8 @@
     "unit_731_experiments",
     "the_philadelphia_experiment",
     "cia_mk_ultra_program",
-    "the_numbers_stations"
+    "the_numbers_stations",
+    "the_phoenix_program"
   ],
   "espionage": [
     "uwe_barschel",
@@ -53,11 +54,13 @@
     "operation_northwoods_001"
   ],
   "unethical_warfare": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "the_phoenix_program"
   ],
   "covert_operations": [
     "operation_northwoods_001",
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "the_phoenix_program"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -179,7 +182,8 @@
     "tuskegee_syphilis_study"
   ],
   "war_crimes": [
-    "unit_731_experiments"
+    "unit_731_experiments",
+    "the_phoenix_program"
   ],
   "impunity": [
     "unit_731_experiments"
@@ -323,17 +327,20 @@
     "tuskegee_syphilis_study"
   ],
   "delusion": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "cotard_delusion_001"
   ],
   "altered_perception": [
     "capgras_delusion_001"
   ],
   "neurology": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "cotard_delusion_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
-    "folie_a_deux_shared_psychosis"
+    "folie_a_deux_shared_psychosis",
+    "cotard_delusion_001"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -364,5 +371,20 @@
   ],
   "identity_erasure": [
     "the_taman_shud_case"
+  ],
+  "nihilism": [
+    "cotard_delusion_001"
+  ],
+  "body_image_disorder": [
+    "cotard_delusion_001"
+  ],
+  "counter-insurgency": [
+    "the_phoenix_program"
+  ],
+  "extrajudicial_killings": [
+    "the_phoenix_program"
+  ],
+  "intelligence_gathering": [
+    "the_phoenix_program"
   ]
 }
