@@ -174,7 +174,8 @@
     "unit_731_experiments"
   ],
   "human_experimentation": [
-    "unit_731_experiments"
+    "unit_731_experiments",
+    "tuskegee_syphilis_study"
   ],
   "war_crimes": [
     "unit_731_experiments"
@@ -340,5 +341,17 @@
   ],
   "social_pathology": [
     "universe_25_calhouns_mouse_utopia"
+  ],
+  "medical_ethics": [
+    "tuskegee_syphilis_study"
+  ],
+  "racial_injustice": [
+    "tuskegee_syphilis_study"
+  ],
+  "government_misconduct": [
+    "tuskegee_syphilis_study"
+  ],
+  "public_health_failure": [
+    "tuskegee_syphilis_study"
   ]
 }
