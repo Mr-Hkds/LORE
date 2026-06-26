@@ -83,7 +83,8 @@
     "noida_double_murder_case_2008",
     "jack_the_ripper_001",
     "the_zodiac_killer",
-    "the_taman_shud_case"
+    "the_taman_shud_case",
+    "the_sodder_children_disappearance"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -133,7 +134,8 @@
   ],
   "family_tragedy": [
     "hinterkaifeck_murders",
-    "noida_double_murder_case_2008"
+    "noida_double_murder_case_2008",
+    "the_sodder_children_disappearance"
   ],
   "cold_case": [
     "hinterkaifeck_murders"
@@ -385,6 +387,34 @@
     "the_phoenix_program"
   ],
   "intelligence_gathering": [
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "project_shamrock"
+  ],
+  "missing_children": [
+    "the_sodder_children_disappearance"
+  ],
+  "arson": [
+    "the_sodder_children_disappearance"
+  ],
+  "abduction": [
+    "the_sodder_children_disappearance"
+  ],
+  "flawed_investigation": [
+    "the_sodder_children_disappearance"
+  ],
+  "government_surveillance": [
+    "project_shamrock"
+  ],
+  "privacy_invasion": [
+    "project_shamrock"
+  ],
+  "corporate_complicity": [
+    "project_shamrock"
+  ],
+  "unconstitutional_monitoring": [
+    "project_shamrock"
+  ],
+  "cold_war_era": [
+    "project_shamrock"
   ]
 }
