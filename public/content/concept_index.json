@@ -277,18 +277,6 @@
   "media_obsession": [
     "the_zodiac_killer"
   ],
-  "mass_psychogenic_illness": [
-    "dancing_mania_1518_strasbourg"
-  ],
-  "social_contagion": [
-    "dancing_mania_1518_strasbourg"
-  ],
-  "historical_epidemics": [
-    "dancing_mania_1518_strasbourg"
-  ],
-  "psychological_distress": [
-    "dancing_mania_1518_strasbourg"
-  ],
   "cyber warfare": [
     "stuxnet_cyberweapon_nuclear_facilities"
   ],
@@ -304,8 +292,57 @@
   "nuclear proliferation": [
     "stuxnet_cyberweapon_nuclear_facilities"
   ],
+  "delusion": [
+    "capgras_delusion_001"
+  ],
+  "altered_perception": [
+    "capgras_delusion_001"
+  ],
+  "neurology": [
+    "capgras_delusion_001"
+  ],
+  "psychosis": [
+    "capgras_delusion_001",
+    "folie_a_deux_shared_psychosis"
+  ],
+  "identity_perception": [
+    "capgras_delusion_001"
+  ],
   "identity_erasure": [
     "the_taman_shud_case"
+  ],
+  "medical_ethics": [
+    "tuskegee_syphilis_study"
+  ],
+  "racial_injustice": [
+    "tuskegee_syphilis_study"
+  ],
+  "government_misconduct": [
+    "tuskegee_syphilis_study"
+  ],
+  "public_health_failure": [
+    "tuskegee_syphilis_study"
+  ],
+  "interdependence": [
+    "folie_a_deux_shared_psychosis"
+  ],
+  "isolation": [
+    "folie_a_deux_shared_psychosis"
+  ],
+  "mental_health": [
+    "folie_a_deux_shared_psychosis"
+  ],
+  "mass_psychogenic_illness": [
+    "dancing_mania_1518_strasbourg"
+  ],
+  "social_contagion": [
+    "dancing_mania_1518_strasbourg"
+  ],
+  "historical_epidemics": [
+    "dancing_mania_1518_strasbourg"
+  ],
+  "psychological_distress": [
+    "dancing_mania_1518_strasbourg"
   ],
   "overpopulation": [
     "universe_25_calhouns_mouse_utopia"
@@ -327,42 +364,5 @@
   ],
   "social_pathology": [
     "universe_25_calhouns_mouse_utopia"
-  ],
-  "medical_ethics": [
-    "tuskegee_syphilis_study"
-  ],
-  "racial_injustice": [
-    "tuskegee_syphilis_study"
-  ],
-  "government_misconduct": [
-    "tuskegee_syphilis_study"
-  ],
-  "public_health_failure": [
-    "tuskegee_syphilis_study"
-  ],
-  "psychosis": [
-    "folie_a_deux_shared_psychosis",
-    "capgras_delusion_001"
-  ],
-  "interdependence": [
-    "folie_a_deux_shared_psychosis"
-  ],
-  "isolation": [
-    "folie_a_deux_shared_psychosis"
-  ],
-  "mental_health": [
-    "folie_a_deux_shared_psychosis"
-  ],
-  "delusion": [
-    "capgras_delusion_001"
-  ],
-  "altered_perception": [
-    "capgras_delusion_001"
-  ],
-  "neurology": [
-    "capgras_delusion_001"
-  ],
-  "identity_perception": [
-    "capgras_delusion_001"
   ]
 }
