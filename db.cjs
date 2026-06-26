@@ -124,8 +124,15 @@ function getStories(includeDrafts = false) {
       layers: JSON.parse(row.layers || '[]')
     };
     s.reactions = ensureStoryReactions(s);
-    // Safe fallback check for null added_date
-    s.added_date = s.added_date ? s.added_date.substring(0, 10) : '2026-06-20';
+    // Stable fallback: hash story_id to a deterministic date in the 2026 range
+    if (s.added_date) {
+      s.added_date = s.added_date.substring(0, 10);
+    } else {
+      const hash = (s.story_id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+      const base = new Date('2026-01-01').getTime();
+      const spread = 180 * 24 * 60 * 60 * 1000; // spread over 180 days
+      s.added_date = new Date(base + (hash % spread)).toISOString().split('T')[0];
+    }
     return s;
   });
 }
@@ -143,7 +150,13 @@ function getStory(story_id) {
     layers: JSON.parse(row.layers || '[]')
   };
   s.reactions = ensureStoryReactions(s);
-  s.added_date = s.added_date ? s.added_date.substring(0, 10) : '2026-06-20';
+  if (s.added_date) {
+    s.added_date = s.added_date.substring(0, 10);
+  } else {
+    const hash = (s.story_id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const base = new Date('2026-01-01').getTime();
+    s.added_date = new Date(base + (hash % (180 * 24 * 60 * 60 * 1000))).toISOString().split('T')[0];
+  }
   return s;
 }
 

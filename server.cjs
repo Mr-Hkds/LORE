@@ -710,15 +710,25 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'Missing story_id or reaction_type' }));
         return;
       }
+
+      // Normalize UI keys → canonical DB keys so counts never split across aliases
+      const normalizeReactionKey = (type) => {
+        if (type === 'intriguing')  return 'like';
+        if (type === 'chilling')    return 'scared';
+        if (type === 'mind_blowing') return 'mindblown';
+        return type; // 'gripping' and 'like'/'scared'/'mindblown' pass through unchanged
+      };
+      const canonicalType = normalizeReactionKey(reaction_type);
+
       const story = db.getStory(story_id);
       if (story) {
         if (!story.reactions) {
           story.reactions = { gripping: 0, scared: 0, mindblown: 0, like: 0 };
         }
         if (undo) {
-          story.reactions[reaction_type] = Math.max(0, (story.reactions[reaction_type] || 1) - 1);
+          story.reactions[canonicalType] = Math.max(0, (story.reactions[canonicalType] || 1) - 1);
         } else {
-          story.reactions[reaction_type] = (story.reactions[reaction_type] || 0) + 1;
+          story.reactions[canonicalType] = (story.reactions[canonicalType] || 0) + 1;
         }
         db.updateStory(story_id, { reactions: story.reactions });
         
@@ -728,7 +738,21 @@ const server = http.createServer(async (req, res) => {
         }
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, reactions: story.reactions }));
+        // Return both canonical and aliased keys for backward compat with the UI
+        const rx = story.reactions;
+        res.end(JSON.stringify({
+          success: true,
+          reactions: {
+            like: rx.like || 0,
+            gripping: rx.gripping || 0,
+            scared: rx.scared || 0,
+            mindblown: rx.mindblown || 0,
+            // Aliased for UI components that read new keys
+            intriguing: rx.like || 0,
+            chilling: rx.scared || 0,
+            mind_blowing: rx.mindblown || 0,
+          }
+        }));
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Story not found' }));

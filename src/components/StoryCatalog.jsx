@@ -223,9 +223,9 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
 
 // ── Sort dropdown ──────────────────────────────────────────────────────────
 const SORT_OPTIONS = [
-  { value: 'default',  label: 'Default order' },
-  { value: 'engaged',  label: 'Most engaged' },
+  { value: 'popular',  label: 'Popular + Recent' },
   { value: 'newest',   label: 'Newest first' },
+  { value: 'engaged',  label: 'Most engaged' },
 ];
 
 function SortDropdown({ value, onChange, color }) {
@@ -256,7 +256,7 @@ function SortDropdown({ value, onChange, color }) {
       </button>
       {open && (
         <div
-          className="absolute right-0 top-7 z-50 rounded-lg border overflow-hidden min-w-[152px]"
+          className="absolute right-0 top-7 z-50 rounded-lg border overflow-hidden min-w-[160px]"
           style={{ backgroundColor: '#110F0D', borderColor: 'rgba(237,232,223,0.08)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.8)' }}
         >
           {SORT_OPTIONS.map(opt => (
@@ -340,7 +340,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
   const ru = 'rgba(237,232,223,0.07)';
 
   const [visible, setVisible]   = useState(false);
-  const [sortBy, setSortBy]     = useState('default');
+  const [sortBy, setSortBy]     = useState('popular');
   const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
   const { getProgress }         = useReadingProgress();
@@ -370,6 +370,19 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
   };
 
   const sortedStories = [...stories].sort((a, b) => {
+    if (sortBy === 'popular') {
+      // Score = 70% popularity + 30% recency
+      const rxA = getTotalReactions(a);
+      const rxB = getTotalReactions(b);
+      const maxRx = Math.max(rxA, rxB, 1);
+      const now = Date.now();
+      const ageA = a.added_date ? (now - new Date(a.added_date).getTime()) : Number.MAX_SAFE_INTEGER;
+      const ageB = b.added_date ? (now - new Date(b.added_date).getTime()) : Number.MAX_SAFE_INTEGER;
+      const maxAge = Math.max(ageA, ageB, 1);
+      const scoreA = (rxA / maxRx) * 0.7 + (1 - ageA / maxAge) * 0.3;
+      const scoreB = (rxB / maxRx) * 0.7 + (1 - ageB / maxAge) * 0.3;
+      return scoreB - scoreA;
+    }
     if (sortBy === 'engaged') return getTotalReactions(b) - getTotalReactions(a);
     if (sortBy === 'newest') {
       if (!a.added_date && !b.added_date) return 0;
