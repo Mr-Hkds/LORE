@@ -25,7 +25,8 @@
     "the_philadelphia_experiment",
     "cia_mk_ultra_program",
     "the_numbers_stations",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "project_sunshine_cadaver_collection"
   ],
   "espionage": [
     "uwe_barschel",
@@ -182,7 +183,8 @@
   ],
   "human_experimentation": [
     "unit_731_experiments",
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "project_sunshine_cadaver_collection"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -320,7 +322,8 @@
     "universe_25_calhouns_mouse_utopia"
   ],
   "medical_ethics": [
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "project_sunshine_cadaver_collection"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study"
@@ -484,5 +487,20 @@
   ],
   "scientific_skepticism": [
     "project_stargate_remote_viewing"
+  ],
+  "hostage_psychology": [
+    "stockholm_syndrome_001"
+  ],
+  "trauma_bonding": [
+    "stockholm_syndrome_001"
+  ],
+  "survival_mechanism": [
+    "stockholm_syndrome_001"
+  ],
+  "cognitive_dissonance": [
+    "stockholm_syndrome_001"
+  ],
+  "captivity_syndrome": [
+    "stockholm_syndrome_001"
   ]
 }
