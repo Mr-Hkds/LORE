@@ -1,6 +1,7 @@
 {
   "shared_delusion": [
-    "burari_deaths_001"
+    "burari_deaths_001",
+    "folie_a_deux_shared_psychosis"
   ],
   "family_systems": [
     "burari_deaths_001"
@@ -313,7 +314,8 @@
     "capgras_delusion_001"
   ],
   "psychosis": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "folie_a_deux_shared_psychosis"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -353,5 +355,14 @@
   ],
   "public_health_failure": [
     "tuskegee_syphilis_study"
+  ],
+  "interdependence": [
+    "folie_a_deux_shared_psychosis"
+  ],
+  "isolation": [
+    "folie_a_deux_shared_psychosis"
+  ],
+  "mental_health": [
+    "folie_a_deux_shared_psychosis"
   ]
 }
