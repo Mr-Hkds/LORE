@@ -26,7 +26,8 @@
     "cia_mk_ultra_program",
     "the_numbers_stations",
     "the_phoenix_program",
-    "project_sunshine_cadaver_collection"
+    "project_sunshine_cadaver_collection",
+    "tunguska_event_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -444,7 +445,8 @@
     "winchester_mystery_house"
   ],
   "unexplained_phenomena": [
-    "winchester_mystery_house"
+    "winchester_mystery_house",
+    "tunguska_event_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -502,5 +504,8 @@
   ],
   "captivity_syndrome": [
     "stockholm_syndrome_001"
+  ],
+  "cosmic_impact": [
+    "tunguska_event_001"
   ]
 }
