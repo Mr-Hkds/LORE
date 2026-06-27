@@ -10,15 +10,25 @@ export default function LayerReader({
   onLayerActive,
   connections = [],
   onSelectConnectedStory,
+  onReactionUpdate,
 }) {
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
   const accentColor = '#9E7B4C';
 
+  // Normalize DB keys (like/scared/mindblown) → UI keys (intriguing/chilling/mind_blowing)
+  const normalizeReactions = (rx) => {
+    if (!rx) return { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 };
+    return {
+      intriguing:  rx.intriguing  ?? rx.like      ?? 0,
+      gripping:    rx.gripping    ?? 0,
+      chilling:    rx.chilling    ?? rx.scared    ?? 0,
+      mind_blowing: rx.mind_blowing ?? rx.mindblown ?? 0,
+    };
+  };
+
   // ── Reaction state: reactions counts come from server data ──────────────
-  const [reactions, setReactions] = useState(() => {
-    return data?.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 };
-  });
+  const [reactions, setReactions] = useState(() => normalizeReactions(data?.reactions));
 
   // ── Per-user vote state: persisted to localStorage so one-vote-per-user ──
   const getStoredReacted = () => {
@@ -35,11 +45,12 @@ export default function LayerReader({
 
 
 
-  // Sync reactions counts when data updates
+  // Sync reactions counts when data updates (normalize on the way in)
   useEffect(() => {
     if (data?.reactions) {
-      setReactions(data.reactions);
+      setReactions(normalizeReactions(data.reactions));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   // Re-load persisted votes when storyId changes (user navigates to different story)
@@ -63,10 +74,12 @@ export default function LayerReader({
       localStorage.setItem(`lore:voted:${data.storyId}`, JSON.stringify(newReacted));
     } catch { /* ignore quota errors */ }
 
-    setReactions(prev => ({
-      ...prev,
-      [type]: isUndo ? Math.max(0, (prev[type] || 1) - 1) : (prev[type] || 0) + 1,
-    }));
+    const updatedLocalReactions = {
+      ...reactions,
+      [type]: isUndo ? Math.max(0, (reactions[type] || 1) - 1) : (reactions[type] || 0) + 1,
+    };
+    setReactions(updatedLocalReactions);
+    onReactionUpdate?.(updatedLocalReactions);
 
     if (!isUndo) {
       setAnimatingReaction(type);
@@ -81,7 +94,11 @@ export default function LayerReader({
       });
       if (res.ok) {
         const result = await res.json();
-        if (result.reactions) setReactions(result.reactions);
+        if (result.reactions) {
+          const normRx = normalizeReactions(result.reactions);
+          setReactions(normRx);
+          onReactionUpdate?.(normRx);
+        }
       }
     } catch (e) {
       console.warn('Failed to record reaction:', e);

@@ -158,6 +158,11 @@ export function useStaticContent() {
     return getImageByQuery(story.image_query);
   }, [getImageByQuery]);
 
+  // Update a story's reactions count in state optimistically
+  const updateStoryReactions = useCallback((storyId, reactions) => {
+    setAllStories(prev => prev.map(s => s.story_id === storyId ? { ...s, reactions } : s));
+  }, []);
+
   return {
     allStories,
     loading,
@@ -169,5 +174,6 @@ export function useStaticContent() {
     getStoryImage,
     getImageByQuery,
     refetchStories: loadStories,
+    updateStoryReactions,
   };
 }

@@ -455,150 +455,216 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 <div style={{ height: '1px', background: 'rgba(158,123,76,0.10)' }} />
 
                 {/* ── Tab content ── */}
-                <div>
+                <div className="p-4 sm:p-5">
 
                   {/* Resume tab */}
-                  {activeTab === 'resume' && continueReadingStories.map(story => {
-                    const prog = getProgress(story.story_id);
-                    const currentL = prog?.lastLayer || 1;
-                    const catLabel = CATEGORY_LABELS[story.category] || story.category;
-                    return (
-                      <div
-                        key={story.story_id}
-                        className="group flex items-center gap-3 cursor-pointer transition-colors duration-150"
-                        style={{
-                          borderBottom: '1px solid rgba(158,123,76,0.06)',
-                          padding: '12px 16px',
-                          minHeight: '60px',
-                        }}
-                        onClick={() => window.location.hash = `#story-${story.story_id}-layer-${currentL}`}
-                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(158,123,76,0.035)'}
-                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                      >
-                        {/* Depth accent bar — fills proportional to progress */}
-                        <span
-                          className="flex-shrink-0 w-[2px] self-stretch rounded-full"
-                          style={{ background: `linear-gradient(to bottom, #9E7B4C ${(currentL / 7) * 100}%, rgba(158,123,76,0.12) ${(currentL / 7) * 100}%)` }}
-                        />
-
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 mb-0.5">
-                            <span className="text-[9px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: ac, opacity: 0.85 }}>
-                              {catLabel}
-                            </span>
-                            <span style={{ color: mu, opacity: 0.4, fontSize: '9px' }}>·</span>
-                            <span className="text-[9px] font-mono uppercase" style={{ color: mu }}>
-                              Layer {currentL}/7
-                            </span>
-                          </div>
-                          <h4 className="font-serif italic text-sm leading-snug truncate group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
-                            {story.title}
-                          </h4>
-                          {/* Progress depth track */}
-                          <div className="flex items-center gap-0.5 mt-1.5">
-                            {Array.from({ length: 7 }).map((_, idx) => (
-                              <div
-                                key={idx}
-                                className="h-[2px] rounded-full flex-1"
-                                style={{
-                                  backgroundColor: idx + 1 <= currentL ? '#9E7B4C' : 'rgba(158,123,76,0.12)',
-                                  opacity: idx + 1 === currentL ? 1 : idx + 1 < currentL ? 0.5 : 0.2,
-                                }}
-                              />
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Action buttons — icon-only, 28px tap targets */}
-                        <div className="flex items-center gap-1.5 flex-shrink-0">
-                          <button
-                            onClick={e => { e.stopPropagation(); markProgressAsCompleted(story.story_id); setProgressVersion(p => p + 1); }}
-                            className="w-7 h-7 flex items-center justify-center rounded-full text-[11px] active:scale-90 transition-all cursor-pointer"
-                            style={{ border: '1px solid rgba(16,185,129,0.3)', background: 'rgba(6,78,59,0.2)', color: '#10b981' }}
-                            title="Mark as complete"
-                          >✓</button>
-                          <button
-                            onClick={e => { e.stopPropagation(); removeProgress(story.story_id); setProgressVersion(p => p + 1); }}
-                            className="w-7 h-7 flex items-center justify-center rounded-full text-[11px] active:scale-90 transition-all cursor-pointer"
-                            style={{ border: '1px solid rgba(237,232,223,0.1)', background: 'rgba(15,13,10,0.3)', color: mu }}
-                            title="Remove from list"
-                          >✕</button>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Curated tabs: For You / Recents / Top Rated */}
-                  {activeTab !== 'resume' && (
-                    activeTabStories.length > 0 ? (
-                      activeTabStories.map(story => {
+                  {activeTab === 'resume' && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {continueReadingStories.map(story => {
                         const prog = getProgress(story.story_id);
-                        const isCompleted = prog?.completed;
-                        const currentL = prog?.lastLayer || 0;
+                        const currentL = prog?.lastLayer || 1;
                         const catLabel = CATEGORY_LABELS[story.category] || story.category;
-                        const startLayer = currentL > 0 ? currentL : 1;
                         return (
-                          <button
+                          <div
                             key={story.story_id}
-                            onClick={() => window.location.hash = `#story-${story.story_id}-layer-${startLayer}`}
-                            className="group w-full flex items-center gap-3 text-left cursor-pointer focus:outline-none transition-colors duration-150"
+                            onClick={() => window.location.hash = `#story-${story.story_id}-layer-${currentL}`}
+                            className="group text-left cursor-pointer focus:outline-none transition-all duration-300 rounded-xl border flex flex-col justify-between p-4 relative overflow-hidden active:scale-[0.98] hover:-translate-y-1"
                             style={{
-                              borderBottom: '1px solid rgba(158,123,76,0.06)',
-                              background: 'transparent',
-                              padding: '12px 16px',
-                              minHeight: '60px',
+                              backgroundColor: 'rgba(26, 24, 21, 0.4)',
+                              borderColor: 'rgba(158, 123, 76, 0.12)',
+                              boxShadow: '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.01)',
                             }}
-                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(158,123,76,0.035)'}
-                            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                            onMouseEnter={e => {
+                              e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.35)';
+                              e.currentTarget.style.backgroundColor = 'rgba(26, 24, 21, 0.7)';
+                              e.currentTarget.style.boxShadow = '0 12px 24px -8px rgba(0,0,0,0.5), 0 0 12px rgba(158,123,76,0.1), inset 0 1px 0 rgba(255,255,255,0.02)';
+                            }}
+                            onMouseLeave={e => {
+                              e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.12)';
+                              e.currentTarget.style.backgroundColor = 'rgba(26, 24, 21, 0.4)';
+                              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.01)';
+                            }}
                           >
-                            {/* Left accent bar */}
-                            <span
-                              className="flex-shrink-0 w-[2px] self-stretch rounded-full"
-                              style={{
-                                background: currentL > 0
-                                  ? `linear-gradient(to bottom, #9E7B4C, rgba(158,123,76,0.1))`
-                                  : 'rgba(158,123,76,0.2)',
+                            {/* Left gradient accent bar */}
+                            <div 
+                              className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r transition-all duration-300"
+                              style={{ 
+                                background: `linear-gradient(to bottom, #9E7B4C, rgba(158, 123, 76, 0.05))`,
+                                opacity: 0.8
                               }}
                             />
 
-                            {/* Content */}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1.5 mb-0.5">
-                                <span className="text-[9px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: ac, opacity: 0.85 }}>
+                            <div className="pl-2 space-y-2">
+                              {/* Eyebrow info */}
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: '#9E7B4C' }} />
+                                <span className="text-[8px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: ac, opacity: 0.85 }}>
                                   {catLabel}
                                 </span>
-                                <span style={{ color: mu, opacity: 0.4, fontSize: '9px' }}>·</span>
-                                <span className="text-[9px] font-mono uppercase" style={{ color: mu }}>
-                                  {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
+                                <span style={{ color: mu, opacity: 0.35, fontSize: '8px' }}>·</span>
+                                <span className="text-[8px] font-mono uppercase" style={{ color: mu }}>
+                                  Layer {currentL}/7
                                 </span>
                               </div>
-                              <h4 className="font-serif italic text-sm leading-snug truncate group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
+
+                              {/* Title */}
+                              <h4 className="font-serif italic text-sm sm:text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
                                 {story.title}
                               </h4>
+
+                              {/* Hook excerpt */}
+                              {story.hook && (
+                                <p className="text-[11px] font-sans leading-relaxed line-clamp-2" style={{ color: mu, opacity: 0.7 }}>
+                                  {story.hook}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Footer with Depth Track + Quick Actions */}
+                            <div className="pl-2 pt-3 flex items-center justify-between gap-4 mt-2">
                               {/* Depth track */}
-                              <div className="flex items-center gap-0.5 mt-1.5">
-                                {Array.from({ length: 7 }).map((_, idx) => (
+                              <div className="flex items-center gap-0.5 flex-1 max-w-[120px]">
+                                {Array.from({ length: 7 }).map((_, i) => (
                                   <div
-                                    key={idx}
+                                    key={i}
                                     className="h-[2px] rounded-full flex-1"
                                     style={{
-                                      backgroundColor: idx + 1 <= (isCompleted ? 7 : currentL) ? '#9E7B4C' : 'rgba(158,123,76,0.1)',
-                                      opacity: idx + 1 <= (isCompleted ? 7 : currentL) ? 0.65 : 0.18,
+                                      backgroundColor: i + 1 <= currentL ? '#9E7B4C' : 'rgba(158,123,76,0.1)',
+                                      opacity: i + 1 <= currentL ? (i + 1 === currentL ? 1 : 0.55) : 0.16,
                                     }}
                                   />
                                 ))}
                               </div>
+                              
+                              {/* Actions */}
+                              <div className="flex items-center gap-1.5 flex-shrink-0" onClick={e => e.stopPropagation()}>
+                                <button
+                                  onClick={e => { e.stopPropagation(); markProgressAsCompleted(story.story_id); setProgressVersion(p => p + 1); }}
+                                  className="w-6 h-6 flex items-center justify-center rounded-full text-[10px] active:scale-90 transition-all cursor-pointer border bg-emerald-950/20 text-emerald-400 hover:bg-emerald-900/40 border-emerald-500/30"
+                                  title="Mark as complete"
+                                >✓</button>
+                                <button
+                                  onClick={e => { e.stopPropagation(); removeProgress(story.story_id); setProgressVersion(p => p + 1); }}
+                                  className="w-6 h-6 flex items-center justify-center rounded-full text-[10px] active:scale-90 transition-all cursor-pointer border bg-neutral-900/40 text-neutral-400 hover:bg-neutral-800/60 border-neutral-700/30"
+                                  title="Remove from list"
+                                >✕</button>
+                              </div>
                             </div>
-
-                            {/* Arrow */}
-                            <span
-                              className="flex-shrink-0 text-sm transition-transform duration-200 group-hover:translate-x-0.5"
-                              style={{ color: ac, opacity: 0.35 }}
-                            >→</span>
-                          </button>
+                          </div>
                         );
-                      })
+                      })}
+                    </div>
+                  )}
+
+                  {/* Curated tabs: For You / Recents / Top Rated */}
+                  {activeTab !== 'resume' && (
+                    activeTabStories.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {activeTabStories.map((story, idx) => {
+                          const prog = getProgress(story.story_id);
+                          const isCompleted = prog?.completed;
+                          const currentL = prog?.lastLayer || 0;
+                          const catLabel = CATEGORY_LABELS[story.category] || story.category;
+                          const startLayer = currentL > 0 ? currentL : 1;
+                          const rx = story.reactions || {};
+                          const totalRx = (rx.like || rx.intriguing || 0) + (rx.gripping || 0) + (rx.scared || rx.chilling || 0) + (rx.mindblown || rx.mind_blowing || 0);
+                          const isNew = story.added_date && (Date.now() - new Date(story.added_date).getTime() < 7 * 24 * 60 * 60 * 1000);
+                          const SEVERITY_COLORS = { horrifying: '#C4644A', unsettling: '#9E7B4C', disturbing: '#A0522D', chilling: '#7B8FA1', intriguing: '#7A9E7E' };
+                          const sevColor = SEVERITY_COLORS[story.severity] || '#9E7B4C';
+                          return (
+                            <button
+                              key={story.story_id}
+                              onClick={() => window.location.hash = `#story-${story.story_id}-layer-${startLayer}`}
+                              className="group text-left cursor-pointer focus:outline-none transition-all duration-300 rounded-xl border flex flex-col justify-between p-4 relative overflow-hidden active:scale-[0.98] hover:-translate-y-1"
+                              style={{
+                                backgroundColor: 'rgba(26, 24, 21, 0.4)',
+                                borderColor: 'rgba(158, 123, 76, 0.12)',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.01)',
+                              }}
+                              onMouseEnter={e => {
+                                e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.35)';
+                                e.currentTarget.style.backgroundColor = 'rgba(26, 24, 21, 0.7)';
+                                e.currentTarget.style.boxShadow = '0 12px 24px -8px rgba(0,0,0,0.5), 0 0 12px rgba(158,123,76,0.1), inset 0 1px 0 rgba(255,255,255,0.02)';
+                              }}
+                              onMouseLeave={e => {
+                                e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.12)';
+                                e.currentTarget.style.backgroundColor = 'rgba(26, 24, 21, 0.4)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.01)';
+                              }}
+                            >
+                              {/* Left severity accent bar */}
+                              <div 
+                                className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r transition-all duration-300"
+                                style={{ 
+                                  background: `linear-gradient(to bottom, ${sevColor}, rgba(158, 123, 76, 0.05))`,
+                                  opacity: 0.7 
+                                }}
+                              />
+
+                              <div className="pl-2 space-y-2">
+                                {/* Eyebrow info */}
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <span className="w-1 h-1 rounded-full" style={{ backgroundColor: sevColor }} />
+                                  <span className="text-[8px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: ac, opacity: 0.85 }}>
+                                    {catLabel}
+                                  </span>
+                                  <span style={{ color: mu, opacity: 0.35, fontSize: '8px' }}>·</span>
+                                  <span className="text-[8px] font-mono uppercase" style={{ color: mu }}>
+                                    {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
+                                  </span>
+                                  {isNew && (
+                                    <>
+                                      <span style={{ color: mu, opacity: 0.35, fontSize: '8px' }}>·</span>
+                                      <span className="text-[8px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: '#10b981' }}>New</span>
+                                    </>
+                                  )}
+                                  {totalRx > 0 && (
+                                    <span className="ml-auto flex items-center gap-1 text-[8px] font-mono" style={{ color: mu, opacity: 0.55 }}>
+                                      <span>❖</span><span>{totalRx}</span>
+                                    </span>
+                                  )}
+                                </div>
+
+                                {/* Title */}
+                                <h4 className="font-serif italic text-sm sm:text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
+                                  {story.title}
+                                </h4>
+
+                                {/* Hook excerpt */}
+                                {story.hook && (
+                                  <p className="text-[11px] font-sans leading-relaxed line-clamp-2" style={{ color: mu, opacity: 0.7 }}>
+                                    {story.hook}
+                                  </p>
+                                )}
+                              </div>
+
+                              {/* Footer with Depth Track + Descend Link */}
+                              <div className="pl-2 pt-3 flex items-center justify-between gap-4 mt-2">
+                                {/* Depth track */}
+                                <div className="flex items-center gap-0.5 flex-1 max-w-[120px]">
+                                  {Array.from({ length: 7 }).map((_, i) => (
+                                    <div
+                                      key={i}
+                                      className="h-[2px] rounded-full flex-1"
+                                      style={{
+                                        backgroundColor: i + 1 <= (isCompleted ? 7 : currentL) ? '#9E7B4C' : 'rgba(158,123,76,0.1)',
+                                        opacity: i + 1 <= (isCompleted ? 7 : currentL) ? (i + 1 === currentL ? 1 : 0.55) : 0.16,
+                                      }}
+                                    />
+                                  ))}
+                                </div>
+                                
+                                <span
+                                  className="text-[10px] font-mono font-bold tracking-wider uppercase transition-transform duration-300 group-hover:translate-x-1"
+                                  style={{ color: ac, opacity: 0.6 }}
+                                >
+                                  Descend →
+                                </span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
                     ) : (
                       <div className="py-10 flex items-center justify-center">
                         <p className="text-[10px] font-mono tracking-[0.2em] uppercase" style={{ color: mu, opacity: 0.45 }}>

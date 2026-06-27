@@ -45,6 +45,7 @@ export default function App() {
     allStories,
     getConnectedStories,
     refetchStories,
+    updateStoryReactions,
   } = useStaticContent();
 
   const {
@@ -67,14 +68,19 @@ export default function App() {
     }
   }, []);
 
-  // Merge static and locally generated stories, filtering out deleted ones
+  // Merge static and locally generated stories, filtering out deleted ones.
+  // Merge server reactions into local storage overrides so reload doesn't wipe them.
   const stories = useMemo(() => {
-    // Map static stories to their local edited versions if overridden, otherwise keep original
     const combined = allStories.map(s => {
       const edited = localStories.find(ls => ls.story_id === s.story_id);
-      return edited ? edited : s;
+      if (edited) {
+        return {
+          ...edited,
+          reactions: { ...edited.reactions, ...s.reactions }
+        };
+      }
+      return s;
     });
-    // Append completely new local stories that do not exist in the static list
     localStories.forEach(ls => {
       if (!combined.some(s => s.story_id === ls.story_id)) {
         combined.push(ls);
@@ -208,6 +214,27 @@ export default function App() {
     const container = document.querySelector('.snap-container');
     if (container) container.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
+
+  const handleReactionUpdate = useCallback((storyId, updatedReactions) => {
+    setCurrentStory(prev => {
+      if (prev && prev.story_id === storyId) {
+        return { ...prev, reactions: updatedReactions };
+      }
+      return prev;
+    });
+    setLocalStories(prev => {
+      const exists = prev.some(s => s.story_id === storyId);
+      if (!exists) return prev;
+      const next = prev.map(s => s.story_id === storyId ? { ...s, reactions: updatedReactions } : s);
+      try {
+        localStorage.setItem('lore:custom_stories', JSON.stringify(next));
+      } catch (e) {
+        console.warn('Failed to save custom stories to localStorage', e);
+      }
+      return next;
+    });
+    updateStoryReactions(storyId, updatedReactions);
+  }, [updateStoryReactions]);
 
   // Go back to catalog
   const handleBackToCatalog = useCallback(() => {
@@ -518,6 +545,7 @@ export default function App() {
             onLayerActive={() => setActiveLayer(layerData.layer)}
             connections={layerData.layer === TOTAL_LAYERS ? connections : []}
             onSelectConnectedStory={handleSelectConnectedStory}
+            onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
           />
         ))}
       </div>

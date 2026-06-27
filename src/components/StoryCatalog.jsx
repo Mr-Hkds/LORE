@@ -305,26 +305,33 @@ function ReadPill({ progress, accentColor }) {
 // ── Engagement reacts display — unified reaction keys ────────────────────
 function EngagementBar({ reactions }) {
   const rx = reactions || {};
-  // Support both old keys (backward compat) and new unified keys
-  const intriguing  = rx.intriguing  || rx.like  || 0;
-  const gripping    = rx.gripping    || rx.heart || 0;
-  const chilling    = rx.chilling    || rx.scared || 0;
+  const intriguing   = rx.intriguing  || rx.like  || 0;
+  const gripping     = rx.gripping    || rx.heart || 0;
+  const chilling     = rx.chilling    || rx.scared || 0;
   const mind_blowing = rx.mind_blowing || rx.mindblown || 0;
 
-  const REACTIONS = [
-    { count: intriguing,   label: 'INTRIGUING',   Icon: Fingerprint, color: '#F59E0B' },
-    { count: gripping,     label: 'GRIPPING',     Icon: Eye,         color: '#8B5CF6' },
-    { count: chilling,     label: 'CHILLING',     Icon: Skull,       color: '#EF4444' },
-    { count: mind_blowing, label: 'MIND BLOWING', Icon: HelpCircle,  color: '#06B6D4' },
-  ];
+  const total = intriguing + gripping + chilling + mind_blowing;
+  if (total === 0) return null;
 
-  const dominant = REACTIONS.reduce((best, r) => (!best || r.count > best.count) ? r : best, null);
-  if (!dominant || dominant.count === 0) return null;
+  const ITEMS = [
+    { count: intriguing,   label: 'Intriguing',   color: '#F59E0B', emoji: '🔍' },
+    { count: gripping,     label: 'Gripping',     color: '#A78BFA', emoji: '👁' },
+    { count: chilling,     label: 'Chilling',     color: '#F87171', emoji: '💀' },
+    { count: mind_blowing, label: 'Mind Blowing', color: '#22D3EE', emoji: '🌀' },
+  ].filter(item => item.count > 0);
 
   return (
     <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
-      <dominant.Icon className="w-2.5 h-2.5" style={{ color: dominant.color }} />
-      <span className="uppercase">{dominant.label} ({dominant.count})</span>
+      <span className="font-bold text-[#9E7B4C]">❖ {total}</span>
+      {ITEMS.length > 0 && <span className="opacity-20 text-[6px]">|</span>}
+      <div className="flex items-center gap-1">
+        {ITEMS.map((item, idx) => (
+          <span key={idx} className="flex items-center gap-0.5" style={{ color: item.color }} title={item.label}>
+            <span>{item.emoji}</span>
+            <span className="text-[7px] font-bold text-neutral-500">{item.count}</span>
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -371,24 +378,29 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
 
   const sortedStories = [...stories].sort((a, b) => {
     if (sortBy === 'popular') {
-      // Score = 70% popularity + 30% recency
       const rxA = getTotalReactions(a);
       const rxB = getTotalReactions(b);
-      const maxRx = Math.max(rxA, rxB, 1);
-      const now = Date.now();
-      const ageA = a.added_date ? (now - new Date(a.added_date).getTime()) : Number.MAX_SAFE_INTEGER;
-      const ageB = b.added_date ? (now - new Date(b.added_date).getTime()) : Number.MAX_SAFE_INTEGER;
-      const maxAge = Math.max(ageA, ageB, 1);
-      const scoreA = (rxA / maxRx) * 0.7 + (1 - ageA / maxAge) * 0.3;
-      const scoreB = (rxB / maxRx) * 0.7 + (1 - ageB / maxAge) * 0.3;
-      return scoreB - scoreA;
+      if (rxA !== rxB) return rxB - rxA;
+      if (a.added_date && b.added_date) {
+        return new Date(b.added_date) - new Date(a.added_date);
+      }
+      return 0;
     }
-    if (sortBy === 'engaged') return getTotalReactions(b) - getTotalReactions(a);
+    if (sortBy === 'engaged') {
+      const rxA = getTotalReactions(a);
+      const rxB = getTotalReactions(b);
+      if (rxA !== rxB) return rxB - rxA;
+      if (a.added_date && b.added_date) {
+        return new Date(b.added_date) - new Date(a.added_date);
+      }
+      return 0;
+    }
     if (sortBy === 'newest') {
-      if (!a.added_date && !b.added_date) return 0;
-      if (!a.added_date) return 1;
-      if (!b.added_date) return -1;
-      return new Date(b.added_date) - new Date(a.added_date);
+      if (a.added_date && b.added_date) {
+        const dateDiff = new Date(b.added_date) - new Date(a.added_date);
+        if (dateDiff !== 0) return dateDiff;
+      }
+      return getTotalReactions(b) - getTotalReactions(a);
     }
     return 0;
   });
@@ -438,23 +450,36 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
       <main className="flex-1 flex flex-col px-4 sm:px-8 md:px-10 py-12 md:py-16 pb-24">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
-          {/* Title row */}
-          <div className="flex items-end justify-between mb-3 gap-4">
+          {/* Title */}
+          <div className="mb-3">
             <h1 className="font-serif italic leading-none tracking-tight"
               style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 600, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
               {categoryLabel}
             </h1>
-            {stories.length > 1 && (
-              <div className="flex-shrink-0 pb-1">
-                <SortDropdown value={sortBy} onChange={setSortBy} color={mu} />
-              </div>
-            )}
           </div>
 
-          <p className="font-serif leading-relaxed mb-12"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1rem)', fontWeight: 400, color: fg, opacity: 0.35, maxWidth: '48ch' }}>
-            Each file descends seven layers. The deeper you go, the harder it becomes to unsee.
-          </p>
+          {/* Sort tab pills: Trending · Recent · Top Rated */}
+          <div className="flex items-center gap-0.5 mb-8 overflow-x-auto scrollbar-none -mx-4 sm:-mx-8 md:-mx-10 px-4 sm:px-8 md:px-10 border-b"
+            style={{ borderBottomColor: 'rgba(158,123,76,0.12)' }}>
+            {[
+              { value: 'popular', label: '❖ Trending' },
+              { value: 'newest',  label: '◉ Recent'   },
+              { value: 'engaged', label: '◎ Top Rated' },
+            ].map(opt => (
+              <button
+                key={opt.value}
+                onClick={() => setSortBy(opt.value)}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase whitespace-nowrap flex-shrink-0 cursor-pointer border-b-2 focus:outline-none transition-all duration-150"
+                style={{
+                  color: sortBy === opt.value ? fg : mu,
+                  borderBottomColor: sortBy === opt.value ? ac : 'transparent',
+                  background: 'none',
+                }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
 
           {/* ── Story Cards ── */}
           {stories.length === 0 ? (
