@@ -27,9 +27,9 @@
     "cia_mk_ultra_program",
     "the_numbers_stations",
     "the_phoenix_program",
+    "project_sunshine_cadaver_collection",
     "tunguska_event_001",
     "echelon_global_surveillance",
-    "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city"
   ],
   "espionage": [
@@ -44,9 +44,9 @@
   "groupthink": [
     "the_asch_conformity_experiments",
     "the_bystander_effect",
-    "jonestown_massacre_001",
     "dancing_mania_1518_strasbourg",
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "jonestown_massacre_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
@@ -92,10 +92,10 @@
     "the_zodiac_killer",
     "the_taman_shud_case",
     "the_sodder_children_disappearance",
-    "black_dahlia_murder",
+    "the_cleveland_torso_murders",
     "roanoke_colony_disappearance",
     "eilean_mor_lighthouse_mystery",
-    "the_cleveland_torso_murders"
+    "black_dahlia_murder"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -196,8 +196,8 @@
   "human_experimentation": [
     "unit_731_experiments",
     "tuskegee_syphilis_study",
-    "monster_study_1939",
-    "project_sunshine_cadaver_collection"
+    "project_sunshine_cadaver_collection",
+    "monster_study_1939"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -277,21 +277,6 @@
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program"
-  ],
-  "cults": [
-    "jonestown_massacre_001"
-  ],
-  "mass_suicide": [
-    "jonestown_massacre_001"
-  ],
-  "social_control": [
-    "jonestown_massacre_001"
-  ],
-  "charismatic_leaders": [
-    "jonestown_massacre_001"
-  ],
-  "obedience_to_authority": [
-    "jonestown_massacre_001"
   ],
   "covert_communication": [
     "the_numbers_stations"
@@ -433,8 +418,8 @@
   ],
   "cold_war_era": [
     "project_shamrock",
-    "project_stargate_remote_viewing",
-    "project_iceworm_secret_city"
+    "project_iceworm_secret_city",
+    "project_stargate_remote_viewing"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships"
@@ -456,25 +441,6 @@
   "cannibalism": [
     "franklin_expedition_lost_ships"
   ],
-  "paranormal_activity": [
-    "winchester_mystery_house"
-  ],
-  "grief_and_madness": [
-    "winchester_mystery_house"
-  ],
-  "architectural_oddities": [
-    "winchester_mystery_house"
-  ],
-  "spiritualism": [
-    "winchester_mystery_house"
-  ],
-  "unexplained_phenomena": [
-    "winchester_mystery_house",
-    "tunguska_event_001"
-  ],
-  "haunted_house": [
-    "winchester_mystery_house"
-  ],
   "missing_children": [
     "the_sodder_children_disappearance"
   ],
@@ -487,20 +453,37 @@
   "flawed_investigation": [
     "the_sodder_children_disappearance"
   ],
-  "remote_viewing": [
-    "project_stargate_remote_viewing"
+  "depression_era": [
+    "the_cleveland_torso_murders"
   ],
-  "government_experiments": [
-    "project_stargate_remote_viewing"
+  "dismemberment": [
+    "the_cleveland_torso_murders"
   ],
-  "psychic_espionage": [
-    "project_stargate_remote_viewing"
+  "forensic_challenge": [
+    "the_cleveland_torso_murders",
+    "black_dahlia_murder"
   ],
-  "paranormal_research": [
-    "project_stargate_remote_viewing"
+  "political_pressure": [
+    "the_cleveland_torso_murders"
   ],
-  "scientific_skepticism": [
-    "project_stargate_remote_viewing"
+  "hostage_psychology": [
+    "stockholm_syndrome_001"
+  ],
+  "trauma_bonding": [
+    "stockholm_syndrome_001"
+  ],
+  "survival_mechanism": [
+    "stockholm_syndrome_001"
+  ],
+  "cognitive_dissonance": [
+    "stockholm_syndrome_001"
+  ],
+  "captivity_syndrome": [
+    "stockholm_syndrome_001"
+  ],
+  "unexplained_phenomena": [
+    "tunguska_event_001",
+    "winchester_mystery_house"
   ],
   "cosmic_impact": [
     "tunguska_event_001"
@@ -516,6 +499,85 @@
   ],
   "spectral_evidence": [
     "salem_witch_trials_001"
+  ],
+  "ghost_ship": [
+    "the_mary_celeste_mystery"
+  ],
+  "maritime_mystery": [
+    "the_mary_celeste_mystery",
+    "eilean_mor_lighthouse_mystery"
+  ],
+  "abandoned_vessel": [
+    "the_mary_celeste_mystery"
+  ],
+  "sea_legends": [
+    "the_mary_celeste_mystery"
+  ],
+  "brain_injury": [
+    "phineas_gage_brain_injury"
+  ],
+  "personality_change": [
+    "phineas_gage_brain_injury"
+  ],
+  "frontal_lobe": [
+    "phineas_gage_brain_injury"
+  ],
+  "self_identity": [
+    "phineas_gage_brain_injury"
+  ],
+  "global_surveillance": [
+    "echelon_global_surveillance"
+  ],
+  "signals_intelligence": [
+    "echelon_global_surveillance"
+  ],
+  "intelligence_sharing": [
+    "echelon_global_surveillance"
+  ],
+  "cold_war_legacy": [
+    "echelon_global_surveillance"
+  ],
+  "mass_interception": [
+    "echelon_global_surveillance"
+  ],
+  "altered_self_perception": [
+    "clinical_lycanthropy"
+  ],
+  "colonial_history": [
+    "roanoke_colony_disappearance"
+  ],
+  "intercultural_relations": [
+    "roanoke_colony_disappearance"
+  ],
+  "environmental_factors": [
+    "roanoke_colony_disappearance"
+  ],
+  "unethical_experiments": [
+    "project_iceworm_secret_city"
+  ],
+  "climate_change_impact": [
+    "project_iceworm_secret_city"
+  ],
+  "military_infrastructure": [
+    "project_iceworm_secret_city"
+  ],
+  "unethical_research": [
+    "monster_study_1939"
+  ],
+  "psychological_harm": [
+    "monster_study_1939"
+  ],
+  "stuttering": [
+    "monster_study_1939"
+  ],
+  "eugenics_influence": [
+    "monster_study_1939"
+  ],
+  "isolated_location": [
+    "eilean_mor_lighthouse_mystery"
+  ],
+  "unexplained_events": [
+    "eilean_mor_lighthouse_mystery"
   ],
   "addiction": [
     "the_rat_park_experiment_001"
@@ -535,34 +597,6 @@
   "drug_policy": [
     "the_rat_park_experiment_001"
   ],
-  "ghost_ship": [
-    "the_mary_celeste_mystery"
-  ],
-  "maritime_mystery": [
-    "the_mary_celeste_mystery",
-    "eilean_mor_lighthouse_mystery"
-  ],
-  "abandoned_vessel": [
-    "the_mary_celeste_mystery"
-  ],
-  "sea_legends": [
-    "the_mary_celeste_mystery"
-  ],
-  "global_surveillance": [
-    "echelon_global_surveillance"
-  ],
-  "signals_intelligence": [
-    "echelon_global_surveillance"
-  ],
-  "intelligence_sharing": [
-    "echelon_global_surveillance"
-  ],
-  "cold_war_legacy": [
-    "echelon_global_surveillance"
-  ],
-  "mass_interception": [
-    "echelon_global_surveillance"
-  ],
   "dissociation": [
     "dissociative_identity_disorder_fragmented_self"
   ],
@@ -578,95 +612,61 @@
   "coping_mechanisms": [
     "dissociative_identity_disorder_fragmented_self"
   ],
+  "cults": [
+    "jonestown_massacre_001"
+  ],
+  "mass_suicide": [
+    "jonestown_massacre_001"
+  ],
+  "social_control": [
+    "jonestown_massacre_001"
+  ],
+  "charismatic_leaders": [
+    "jonestown_massacre_001"
+  ],
+  "obedience_to_authority": [
+    "jonestown_massacre_001"
+  ],
   "brutal_murder": [
     "black_dahlia_murder"
   ],
   "hollywood_dark_side": [
     "black_dahlia_murder"
   ],
-  "forensic_challenge": [
-    "black_dahlia_murder",
-    "the_cleveland_torso_murders"
-  ],
   "police_misconduct": [
     "black_dahlia_murder"
   ],
-  "colonial_history": [
-    "roanoke_colony_disappearance"
+  "paranormal_activity": [
+    "winchester_mystery_house"
   ],
-  "intercultural_relations": [
-    "roanoke_colony_disappearance"
+  "grief_and_madness": [
+    "winchester_mystery_house"
   ],
-  "environmental_factors": [
-    "roanoke_colony_disappearance"
+  "architectural_oddities": [
+    "winchester_mystery_house"
+  ],
+  "spiritualism": [
+    "winchester_mystery_house"
+  ],
+  "haunted_house": [
+    "winchester_mystery_house"
   ],
   "unidentified_person": [
     "the_isdal_woman"
   ],
-  "unethical_research": [
-    "monster_study_1939"
+  "remote_viewing": [
+    "project_stargate_remote_viewing"
   ],
-  "psychological_harm": [
-    "monster_study_1939"
+  "government_experiments": [
+    "project_stargate_remote_viewing"
   ],
-  "stuttering": [
-    "monster_study_1939"
+  "psychic_espionage": [
+    "project_stargate_remote_viewing"
   ],
-  "eugenics_influence": [
-    "monster_study_1939"
+  "paranormal_research": [
+    "project_stargate_remote_viewing"
   ],
-  "hostage_psychology": [
-    "stockholm_syndrome_001"
-  ],
-  "trauma_bonding": [
-    "stockholm_syndrome_001"
-  ],
-  "survival_mechanism": [
-    "stockholm_syndrome_001"
-  ],
-  "cognitive_dissonance": [
-    "stockholm_syndrome_001"
-  ],
-  "captivity_syndrome": [
-    "stockholm_syndrome_001"
-  ],
-  "brain_injury": [
-    "phineas_gage_brain_injury"
-  ],
-  "personality_change": [
-    "phineas_gage_brain_injury"
-  ],
-  "frontal_lobe": [
-    "phineas_gage_brain_injury"
-  ],
-  "self_identity": [
-    "phineas_gage_brain_injury"
-  ],
-  "altered_self_perception": [
-    "clinical_lycanthropy"
-  ],
-  "isolated_location": [
-    "eilean_mor_lighthouse_mystery"
-  ],
-  "unexplained_events": [
-    "eilean_mor_lighthouse_mystery"
-  ],
-  "unethical_experiments": [
-    "project_iceworm_secret_city"
-  ],
-  "climate_change_impact": [
-    "project_iceworm_secret_city"
-  ],
-  "military_infrastructure": [
-    "project_iceworm_secret_city"
-  ],
-  "depression_era": [
-    "the_cleveland_torso_murders"
-  ],
-  "dismemberment": [
-    "the_cleveland_torso_murders"
-  ],
-  "political_pressure": [
-    "the_cleveland_torso_murders"
+  "scientific_skepticism": [
+    "project_stargate_remote_viewing"
   ]
 }
