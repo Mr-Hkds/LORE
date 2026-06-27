@@ -314,24 +314,32 @@ function EngagementBar({ reactions }) {
   if (total === 0) return null;
 
   const ITEMS = [
-    { count: intriguing,   label: 'Intriguing',   color: '#F59E0B', emoji: '🔍' },
-    { count: gripping,     label: 'Gripping',     color: '#A78BFA', emoji: '👁' },
-    { count: chilling,     label: 'Chilling',     color: '#F87171', emoji: '💀' },
-    { count: mind_blowing, label: 'Mind Blowing', color: '#22D3EE', emoji: '🌀' },
+    { count: intriguing,   label: 'Intriguing',   color: '#F59E0B', bg: 'rgba(245,158,11,0.06)', border: 'rgba(245,158,11,0.2)', emoji: '🔍' },
+    { count: gripping,     label: 'Gripping',     color: '#A78BFA', bg: 'rgba(167,139,250,0.06)', border: 'rgba(167,139,250,0.2)', emoji: '👁' },
+    { count: chilling,     label: 'Chilling',     color: '#F87171', bg: 'rgba(248,113,113,0.06)', border: 'rgba(248,113,113,0.2)', emoji: '💀' },
+    { count: mind_blowing, label: 'Mind Blowing', color: '#22D3EE', bg: 'rgba(34,211,238,0.06)', border: 'rgba(34,211,238,0.2)', emoji: '🌀' },
   ].filter(item => item.count > 0);
 
   return (
-    <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-wider text-neutral-400 bg-neutral-950/40 border border-neutral-800/35 px-2.5 py-0.5 rounded-full backdrop-blur-sm select-none">
-      <span className="font-bold text-[#9E7B4C]">❖ {total}</span>
-      {ITEMS.length > 0 && <span className="opacity-20 text-[6px]">|</span>}
-      <div className="flex items-center gap-1">
-        {ITEMS.map((item, idx) => (
-          <span key={idx} className="flex items-center gap-0.5" style={{ color: item.color }} title={item.label}>
-            <span>{item.emoji}</span>
-            <span className="text-[7px] font-bold text-neutral-500">{item.count}</span>
-          </span>
-        ))}
-      </div>
+    <div className="flex items-center gap-1 flex-wrap select-none">
+      <span className="flex items-center gap-1 text-[8px] font-mono font-bold tracking-wider text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-1.5 py-0.5 rounded-sm">
+        ❖ {total}
+      </span>
+      {ITEMS.map((item, idx) => (
+        <span
+          key={idx}
+          className="flex items-center gap-1 px-1.5 py-0.5 rounded-sm border text-[8px] font-mono transition-all duration-300"
+          style={{
+            color: item.color,
+            backgroundColor: item.bg,
+            borderColor: item.border,
+          }}
+          title={item.label}
+        >
+          <span>{item.emoji}</span>
+          <span className="font-bold">{item.count}</span>
+        </span>
+      ))}
     </div>
   );
 }

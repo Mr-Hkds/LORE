@@ -293,7 +293,13 @@ export default function TodayInShadows() {
 
     // Load counts: prefer server's actual database counts, fallback to local cache
     if (dossier.reactions) {
-      setReactions(dossier.reactions);
+      const rx = dossier.reactions;
+      setReactions({
+        intriguing: rx.intriguing || rx.likes || rx.like || 0,
+        gripping: rx.gripping || 0,
+        chilling: rx.chilling || rx.scared || 0,
+        mind_blowing: rx.mind_blowing || rx.mindblown || 0
+      });
     } else {
       try {
         const cached = localStorage.getItem(`lore:dossier:counts:${dateKey}`);
@@ -358,8 +364,15 @@ export default function TodayInShadows() {
       if (res.ok) {
         const data = await res.json();
         if (data.reactions) {
-          setReactions(data.reactions);
-          try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(data.reactions)); } catch {}
+          const rx = data.reactions;
+          const normalized = {
+            intriguing: rx.intriguing || rx.likes || rx.like || 0,
+            gripping: rx.gripping || 0,
+            chilling: rx.chilling || rx.scared || 0,
+            mind_blowing: rx.mind_blowing || rx.mindblown || 0
+          };
+          setReactions(normalized);
+          try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(normalized)); } catch {}
         }
       }
     } catch (err) {

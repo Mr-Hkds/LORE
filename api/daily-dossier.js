@@ -139,7 +139,7 @@ async function getWikipediaThumbnail(query) {
 
 async function getReactionsWithAiFallback(dateStr, title, category, year) {
   const existing = db.getDailyReactions(dateStr);
-  const total = (existing.likes || 0) + (existing.gripping || 0) + (existing.scared || 0) + (existing.mindblown || 0);
+  const total = (existing.intriguing || 0) + (existing.gripping || 0) + (existing.chilling || 0) + (existing.mind_blowing || 0);
   if (total > 0) {
     return existing;
   }
@@ -148,14 +148,14 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
   const hash = dateStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + (title || '').length;
   
   const defaultReactions = {
-    likes: 25 + (hash % 45),
+    intriguing: 25 + (hash % 45),
     gripping: 18 + (hash % 35),
-    scared: (category === 'paranormal' || category === 'true_crime' || category.includes('horror') || category.includes('tragedy')) ? 30 + (hash % 50) : 2 + (hash % 8),
-    mindblown: (category === 'psychology' || category === 'conspiracy' || category.includes('experiment')) ? 35 + (hash % 60) : 5 + (hash % 12)
+    chilling: (category === 'paranormal' || category === 'true_crime' || category.includes('horror') || category.includes('tragedy')) ? 30 + (hash % 50) : 2 + (hash % 8),
+    mind_blowing: (category === 'psychology' || category === 'conspiracy' || category.includes('experiment')) ? 35 + (hash % 60) : 5 + (hash % 12)
   };
 
   try {
-    const prompt = `Given a dark historical topic: "${title}", category: "${category}", year: "${year}". How relevant is this story for readers? Rate the sentiment and interest of the audience on four metrics: likes, gripping, scared, and mindblown. Return ONLY a JSON object of integers between 15 and 150 representing number of users who reacted. Format: {"likes": X, "gripping": Y, "scared": Z, "mindblown": W}`;
+    const prompt = `Given a dark historical topic: "${title}", category: "${category}", year: "${year}". How relevant is this story for readers? Rate the sentiment and interest of the audience on four metrics: intriguing, gripping, chilling, and mind_blowing. Return ONLY a JSON object of integers between 15 and 150 representing number of users who reacted. Format: {"intriguing": X, "gripping": Y, "chilling": Z, "mind_blowing": W}`;
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), 3000);
     const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, { signal: controller.signal });
@@ -166,12 +166,12 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
       const cleanJson = text.match(/\{[\s\S]*?\}/);
       if (cleanJson) {
         const parsed = JSON.parse(cleanJson[0]);
-        if (typeof parsed.likes === 'number' && typeof parsed.gripping === 'number') {
+        if (typeof parsed.intriguing === 'number' || typeof parsed.likes === 'number') {
           const aiReactions = {
-            likes: Math.max(10, parsed.likes),
-            gripping: Math.max(10, parsed.gripping),
-            scared: Math.max(0, parsed.scared || 0),
-            mindblown: Math.max(0, parsed.mindblown || 0)
+            intriguing: Math.max(10, parsed.intriguing || parsed.likes || 0),
+            gripping: Math.max(10, parsed.gripping || 0),
+            chilling: Math.max(0, parsed.chilling || parsed.scared || 0),
+            mind_blowing: Math.max(0, parsed.mind_blowing || parsed.mindblown || 0)
           };
           db.setDailyReactions(dateStr, aiReactions);
           return aiReactions;
@@ -215,15 +215,17 @@ export default async function handler(req, res) {
 
     try {
       const rx = await getReactionsWithAiFallback(dateStr, dossier.title, dossier.theme, dossier.year);
-      // Map 'likes' database column back to UI key 'like'
       dossier.reactions = {
-        like: rx.likes || 0,
+        intriguing: rx.intriguing || 0,
         gripping: rx.gripping || 0,
-        scared: rx.scared || 0,
-        mindblown: rx.mindblown || 0
+        chilling: rx.chilling || 0,
+        mind_blowing: rx.mind_blowing || 0,
+        like: rx.intriguing || 0,
+        scared: rx.chilling || 0,
+        mindblown: rx.mind_blowing || 0
       };
     } catch (err) {
-      dossier.reactions = { like: 0, gripping: 0, scared: 0, mindblown: 0 };
+      dossier.reactions = { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0, like: 0, scared: 0, mindblown: 0 };
     }
 
     return res.status(200).json(dossier);
@@ -231,19 +233,39 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { reaction_type, undo } = req.body || {};
-      if (!reaction_type) {
-        return res.status(400).json({ error: 'Missing reaction_type' });
+      const { reaction_type, undo, date, add_reaction, remove_reaction } = req.body || {};
+      const targetDate = date || dateStr;
+      let updated = false;
+
+      if (add_reaction !== undefined || remove_reaction !== undefined) {
+        if (remove_reaction) {
+          db.updateDailyReaction(targetDate, remove_reaction, true);
+          updated = true;
+        }
+        if (add_reaction) {
+          db.updateDailyReaction(targetDate, add_reaction, false);
+          updated = true;
+        }
+      } else if (reaction_type) {
+        db.updateDailyReaction(targetDate, reaction_type, !!undo);
+        updated = true;
       }
-      db.updateDailyReaction(dateStr, reaction_type, undo);
-      const rx = db.getDailyReactions(dateStr);
+
+      if (!updated) {
+        return res.status(400).json({ error: 'Missing reaction parameters' });
+      }
+
+      const rx = db.getDailyReactions(targetDate);
       return res.status(200).json({
         success: true,
         reactions: {
-          like: rx.likes || 0,
+          intriguing: rx.intriguing || 0,
           gripping: rx.gripping || 0,
-          scared: rx.scared || 0,
-          mindblown: rx.mindblown || 0
+          chilling: rx.chilling || 0,
+          mind_blowing: rx.mind_blowing || 0,
+          like: rx.intriguing || 0,
+          scared: rx.chilling || 0,
+          mindblown: rx.mind_blowing || 0
         }
       });
     } catch (err) {

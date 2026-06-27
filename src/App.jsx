@@ -347,7 +347,7 @@ export default function App() {
         window.history.replaceState(null, '', targetHash);
       }
     }
-  }, [phase, currentStory, activeLayer]);
+  }, [phase, currentStory?.story_id, activeLayer]);
 
   // Scroll to active layer when changed (e.g. from hash change or initial load)
   useEffect(() => {
@@ -366,7 +366,7 @@ export default function App() {
         }
       }
     }
-  }, [phase, currentStory, activeLayer]);
+  }, [phase, currentStory?.story_id, activeLayer]);
 
   // Keyboard shortcut Ctrl+Shift+A for Admin Console
   useEffect(() => {
