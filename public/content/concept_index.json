@@ -13,7 +13,8 @@
     "the_dyatlov_pass_incident",
     "uwe_barschel",
     "barney_barnato",
-    "the_taman_shud_case"
+    "the_taman_shud_case",
+    "the_isdal_woman"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -28,12 +29,14 @@
     "the_phoenix_program",
     "project_sunshine_cadaver_collection",
     "tunguska_event_001",
-    "echelon_global_surveillance"
+    "echelon_global_surveillance",
+    "project_iceworm_secret_city"
   ],
   "espionage": [
     "uwe_barschel",
     "the_numbers_stations",
-    "the_taman_shud_case"
+    "the_taman_shud_case",
+    "the_isdal_woman"
   ],
   "conformity": [
     "the_asch_conformity_experiments"
@@ -146,7 +149,8 @@
     "the_sodder_children_disappearance"
   ],
   "cold_case": [
-    "hinterkaifeck_murders"
+    "hinterkaifeck_murders",
+    "the_isdal_woman"
   ],
   "rem atonia": [
     "sleep_paralysis_dossier"
@@ -391,7 +395,8 @@
     "stuxnet_cyberweapon_nuclear_facilities"
   ],
   "identity_erasure": [
-    "the_taman_shud_case"
+    "the_taman_shud_case",
+    "the_isdal_woman"
   ],
   "nihilism": [
     "cotard_delusion_001"
@@ -425,7 +430,8 @@
   ],
   "cold_war_era": [
     "project_shamrock",
-    "project_stargate_remote_viewing"
+    "project_stargate_remote_viewing",
+    "project_iceworm_secret_city"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships"
@@ -628,5 +634,17 @@
   ],
   "environmental_factors": [
     "roanoke_colony_disappearance"
+  ],
+  "unidentified_person": [
+    "the_isdal_woman"
+  ],
+  "unethical_experiments": [
+    "project_iceworm_secret_city"
+  ],
+  "climate_change_impact": [
+    "project_iceworm_secret_city"
+  ],
+  "military_infrastructure": [
+    "project_iceworm_secret_city"
   ]
 }
