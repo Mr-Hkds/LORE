@@ -27,7 +27,8 @@
     "the_numbers_stations",
     "the_phoenix_program",
     "project_sunshine_cadaver_collection",
-    "tunguska_event_001"
+    "tunguska_event_001",
+    "echelon_global_surveillance"
   ],
   "espionage": [
     "uwe_barschel",
@@ -346,7 +347,8 @@
   ],
   "neurology": [
     "capgras_delusion_001",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "phineas_gage_brain_injury"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -404,7 +406,8 @@
     "project_shamrock"
   ],
   "privacy_invasion": [
-    "project_shamrock"
+    "project_shamrock",
+    "echelon_global_surveillance"
   ],
   "corporate_complicity": [
     "project_shamrock"
@@ -552,5 +555,32 @@
   ],
   "sea_legends": [
     "the_mary_celeste_mystery"
+  ],
+  "brain_injury": [
+    "phineas_gage_brain_injury"
+  ],
+  "personality_change": [
+    "phineas_gage_brain_injury"
+  ],
+  "frontal_lobe": [
+    "phineas_gage_brain_injury"
+  ],
+  "self_identity": [
+    "phineas_gage_brain_injury"
+  ],
+  "global_surveillance": [
+    "echelon_global_surveillance"
+  ],
+  "signals_intelligence": [
+    "echelon_global_surveillance"
+  ],
+  "intelligence_sharing": [
+    "echelon_global_surveillance"
+  ],
+  "cold_war_legacy": [
+    "echelon_global_surveillance"
+  ],
+  "mass_interception": [
+    "echelon_global_surveillance"
   ]
 }
