@@ -5,8 +5,8 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
   const [copied, setCopied] = useState(false);
   const modalRef = useRef(null);
 
-  // Generate deep-link url with active layer hash
-  const shareUrl = `${window.location.origin}/#story-${storyId}-layer-${layerNum}`;
+  // Generate deep-link url with api redirect for rich dynamic meta previews
+  const shareUrl = `${window.location.origin}/api/share?story_id=${storyId}&layer=${layerNum}`;
 
   useEffect(() => {
     if (isOpen) {
@@ -47,8 +47,8 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `LORE Archive: ${storyTitle}`,
-          text: `Explore this classified archive file on SevenDescents: "${storyTitle}"`,
+          title: `[CLASSIFIED] ${storyTitle}`,
+          text: `Decrypted record details: "${storyTitle}". Descend through 7 progressive layers of evidence.`,
           url: shareUrl,
         });
       } catch (err) {
@@ -60,9 +60,9 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
   if (!isOpen) return null;
 
   // Social sharing links
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Explore this classified archive on LORE: "${storyTitle}"`)}&url=${encodeURIComponent(shareUrl)}`;
-  const redditShareUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(`LORE Archive: "${storyTitle}"`)}&url=${encodeURIComponent(shareUrl)}`;
-  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`Explore this classified archive: "${storyTitle}" ${shareUrl}`)}`;
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`[CLASSIFIED ENTRY] Decrypted: "${storyTitle}" on SevenDescents.`)}&url=${encodeURIComponent(shareUrl)}`;
+  const redditShareUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(`[CLASSIFIED] LORE Archive: "${storyTitle}"`)}&url=${encodeURIComponent(shareUrl)}`;
+  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`Explore this classified dossier: "${storyTitle}" ${shareUrl}`)}`;
 
   const supportsNativeShare = typeof navigator.share === 'function';
 

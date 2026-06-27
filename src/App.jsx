@@ -424,6 +424,13 @@ export default function App() {
           onBack={handleBackToTopics}
           onShareStory={(story) => setShareTarget({ story, layerNum: 1 })}
         />
+        <ShareModal
+          isOpen={!!shareTarget}
+          onClose={() => setShareTarget(null)}
+          storyTitle={shareTarget?.story?.title}
+          storyId={shareTarget?.story?.story_id}
+          layerNum={shareTarget?.layerNum || 1}
+        />
         <Suspense fallback={null}>
           <SiteFeedback />
         </Suspense>

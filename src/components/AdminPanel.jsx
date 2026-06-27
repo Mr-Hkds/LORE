@@ -894,6 +894,16 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
 
   // Publish / Push to Live story logic
   const handlePublishStory = async (storyId) => {
+    // Comprehensive check: ensure story has a proper hero image before going live
+    const targetStory = adminStories.find(s => s.story_id === storyId);
+    if (targetStory) {
+      const hasProperImage = targetStory.hero_image && typeof targetStory.hero_image === 'string' && targetStory.hero_image.startsWith('http');
+      if (!hasProperImage) {
+        setToast({ text: `Cannot publish: "${targetStory.title}" is missing a valid Hero Image. Please edit and set an image first.`, type: 'error' });
+        return;
+      }
+    }
+
     try {
       setPublishStatus('Publishing draft story to archive...');
       setIsPublishing(true);
@@ -940,6 +950,20 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   };
 
   const handlePublishAllDrafts = async () => {
+    // Comprehensive check: ensure all drafts have proper hero images
+    const invalidDrafts = draftStories.filter(s => {
+      const hasProperImage = s.hero_image && typeof s.hero_image === 'string' && s.hero_image.startsWith('http');
+      return !hasProperImage;
+    });
+
+    if (invalidDrafts.length > 0) {
+      setToast({ 
+        text: `Cannot publish all: ${invalidDrafts.length} draft story(s) lack a valid Hero Image. Please configure images for: ${invalidDrafts.map(s => `"${s.title}"`).join(', ')}`, 
+        type: 'error' 
+      });
+      return;
+    }
+
     try {
       setPublishStatus('Publishing all draft stories to archive...');
       setIsPublishing(true);
@@ -2618,9 +2642,16 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                 <div className="flex items-center gap-2 flex-wrap">
                                   <span className="font-serif italic text-[#EDE8DF] text-base leading-snug">{story.title}</span>
                                   {story.draft ? (
-                                    <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
-                                      Draft
-                                    </span>
+                                    <div className="flex gap-1.5 items-center">
+                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
+                                        Draft
+                                      </span>
+                                      {(!story.hero_image || !story.hero_image.startsWith('http')) && (
+                                        <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
+                                          ⚠️ Missing Image
+                                        </span>
+                                      )}
+                                    </div>
                                   ) : (
                                     <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">
                                       Live

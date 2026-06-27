@@ -77,15 +77,8 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           ))}
         </div>
 
-        {/* Layer label & Share button */}
-        <div className="justify-self-end flex items-center gap-3">
-          <button
-            onClick={onShare}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/45 text-[#9E7B4C] hover:text-[#b08c5c] transition-all duration-200 cursor-pointer text-[8px] font-mono tracking-widest focus:outline-none active:scale-95 uppercase select-none"
-          >
-            <Share2 className="w-3 h-3" />
-            Share
-          </button>
+        {/* Layer label */}
+        <div className="justify-self-end flex items-center">
           <div className="overflow-hidden h-[18px] flex items-center max-w-[100px] md:max-w-[155px] select-none">
             <span
               key={layerName}
@@ -127,15 +120,8 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
             </span>
           </button>
 
-          {/* Layer label & Share button */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onShare}
-              className="flex items-center gap-1 px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] text-[8px] font-mono tracking-wider focus:outline-none active:scale-95 uppercase select-none cursor-pointer"
-            >
-              <Share2 className="w-2.5 h-2.5" />
-              Share
-            </button>
+          {/* Layer label */}
+          <div className="flex items-center">
             <div className="overflow-hidden h-[16px] flex items-center max-w-[85px] select-none">
               <span
                 key={layerName}
