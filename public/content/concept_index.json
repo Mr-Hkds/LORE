@@ -44,9 +44,9 @@
   "groupthink": [
     "the_asch_conformity_experiments",
     "the_bystander_effect",
-    "jonestown_massacre_001",
     "dancing_mania_1518_strasbourg",
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "jonestown_massacre_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
@@ -278,21 +278,6 @@
   "psychological_warfare": [
     "cia_mk_ultra_program"
   ],
-  "cults": [
-    "jonestown_massacre_001"
-  ],
-  "mass_suicide": [
-    "jonestown_massacre_001"
-  ],
-  "social_control": [
-    "jonestown_massacre_001"
-  ],
-  "charismatic_leaders": [
-    "jonestown_massacre_001"
-  ],
-  "obedience_to_authority": [
-    "jonestown_massacre_001"
-  ],
   "covert_communication": [
     "the_numbers_stations"
   ],
@@ -515,6 +500,21 @@
   "scientific_skepticism": [
     "project_stargate_remote_viewing"
   ],
+  "hostage_psychology": [
+    "stockholm_syndrome_001"
+  ],
+  "trauma_bonding": [
+    "stockholm_syndrome_001"
+  ],
+  "survival_mechanism": [
+    "stockholm_syndrome_001"
+  ],
+  "cognitive_dissonance": [
+    "stockholm_syndrome_001"
+  ],
+  "captivity_syndrome": [
+    "stockholm_syndrome_001"
+  ],
   "cosmic_impact": [
     "tunguska_event_001"
   ],
@@ -530,24 +530,6 @@
   "spectral_evidence": [
     "salem_witch_trials_001"
   ],
-  "addiction": [
-    "the_rat_park_experiment_001"
-  ],
-  "environment_vs_biology": [
-    "the_rat_park_experiment_001"
-  ],
-  "social_determinants_of_health": [
-    "the_rat_park_experiment_001"
-  ],
-  "rehabilitation": [
-    "the_rat_park_experiment_001"
-  ],
-  "behavioral_science": [
-    "the_rat_park_experiment_001"
-  ],
-  "drug_policy": [
-    "the_rat_park_experiment_001"
-  ],
   "ghost_ship": [
     "the_mary_celeste_mystery"
   ],
@@ -560,6 +542,18 @@
   ],
   "sea_legends": [
     "the_mary_celeste_mystery"
+  ],
+  "brain_injury": [
+    "phineas_gage_brain_injury"
+  ],
+  "personality_change": [
+    "phineas_gage_brain_injury"
+  ],
+  "frontal_lobe": [
+    "phineas_gage_brain_injury"
+  ],
+  "self_identity": [
+    "phineas_gage_brain_injury"
   ],
   "global_surveillance": [
     "echelon_global_surveillance"
@@ -576,21 +570,6 @@
   "mass_interception": [
     "echelon_global_surveillance"
   ],
-  "dissociation": [
-    "dissociative_identity_disorder_fragmented_self"
-  ],
-  "trauma_response": [
-    "dissociative_identity_disorder_fragmented_self"
-  ],
-  "identity_fragmentation": [
-    "dissociative_identity_disorder_fragmented_self"
-  ],
-  "alter_personalities": [
-    "dissociative_identity_disorder_fragmented_self"
-  ],
-  "coping_mechanisms": [
-    "dissociative_identity_disorder_fragmented_self"
-  ],
   "brutal_murder": [
     "black_dahlia_murder"
   ],
@@ -599,6 +578,9 @@
   ],
   "police_misconduct": [
     "black_dahlia_murder"
+  ],
+  "altered_self_perception": [
+    "clinical_lycanthropy"
   ],
   "colonial_history": [
     "roanoke_colony_disappearance"
@@ -639,34 +621,52 @@
   "unexplained_events": [
     "eilean_mor_lighthouse_mystery"
   ],
-  "hostage_psychology": [
-    "stockholm_syndrome_001"
+  "addiction": [
+    "the_rat_park_experiment_001"
   ],
-  "trauma_bonding": [
-    "stockholm_syndrome_001"
+  "environment_vs_biology": [
+    "the_rat_park_experiment_001"
   ],
-  "survival_mechanism": [
-    "stockholm_syndrome_001"
+  "social_determinants_of_health": [
+    "the_rat_park_experiment_001"
   ],
-  "cognitive_dissonance": [
-    "stockholm_syndrome_001"
+  "rehabilitation": [
+    "the_rat_park_experiment_001"
   ],
-  "captivity_syndrome": [
-    "stockholm_syndrome_001"
+  "behavioral_science": [
+    "the_rat_park_experiment_001"
   ],
-  "brain_injury": [
-    "phineas_gage_brain_injury"
+  "drug_policy": [
+    "the_rat_park_experiment_001"
   ],
-  "personality_change": [
-    "phineas_gage_brain_injury"
+  "dissociation": [
+    "dissociative_identity_disorder_fragmented_self"
   ],
-  "frontal_lobe": [
-    "phineas_gage_brain_injury"
+  "trauma_response": [
+    "dissociative_identity_disorder_fragmented_self"
   ],
-  "self_identity": [
-    "phineas_gage_brain_injury"
+  "identity_fragmentation": [
+    "dissociative_identity_disorder_fragmented_self"
   ],
-  "altered_self_perception": [
-    "clinical_lycanthropy"
+  "alter_personalities": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "coping_mechanisms": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "cults": [
+    "jonestown_massacre_001"
+  ],
+  "mass_suicide": [
+    "jonestown_massacre_001"
+  ],
+  "social_control": [
+    "jonestown_massacre_001"
+  ],
+  "charismatic_leaders": [
+    "jonestown_massacre_001"
+  ],
+  "obedience_to_authority": [
+    "jonestown_massacre_001"
   ]
 }
