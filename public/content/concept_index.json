@@ -360,8 +360,8 @@
   "neurology": [
     "capgras_delusion_001",
     "cotard_delusion_001",
-    "phineas_gage_brain_injury",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "phineas_gage_brain_injury"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -515,21 +515,6 @@
   "scientific_skepticism": [
     "project_stargate_remote_viewing"
   ],
-  "hostage_psychology": [
-    "stockholm_syndrome_001"
-  ],
-  "trauma_bonding": [
-    "stockholm_syndrome_001"
-  ],
-  "survival_mechanism": [
-    "stockholm_syndrome_001"
-  ],
-  "cognitive_dissonance": [
-    "stockholm_syndrome_001"
-  ],
-  "captivity_syndrome": [
-    "stockholm_syndrome_001"
-  ],
   "cosmic_impact": [
     "tunguska_event_001"
   ],
@@ -545,6 +530,24 @@
   "spectral_evidence": [
     "salem_witch_trials_001"
   ],
+  "addiction": [
+    "the_rat_park_experiment_001"
+  ],
+  "environment_vs_biology": [
+    "the_rat_park_experiment_001"
+  ],
+  "social_determinants_of_health": [
+    "the_rat_park_experiment_001"
+  ],
+  "rehabilitation": [
+    "the_rat_park_experiment_001"
+  ],
+  "behavioral_science": [
+    "the_rat_park_experiment_001"
+  ],
+  "drug_policy": [
+    "the_rat_park_experiment_001"
+  ],
   "ghost_ship": [
     "the_mary_celeste_mystery"
   ],
@@ -557,18 +560,6 @@
   ],
   "sea_legends": [
     "the_mary_celeste_mystery"
-  ],
-  "brain_injury": [
-    "phineas_gage_brain_injury"
-  ],
-  "personality_change": [
-    "phineas_gage_brain_injury"
-  ],
-  "frontal_lobe": [
-    "phineas_gage_brain_injury"
-  ],
-  "self_identity": [
-    "phineas_gage_brain_injury"
   ],
   "global_surveillance": [
     "echelon_global_surveillance"
@@ -651,22 +642,31 @@
   "unexplained_events": [
     "eilean_mor_lighthouse_mystery"
   ],
-  "addiction": [
-    "the_rat_park_experiment_001"
+  "hostage_psychology": [
+    "stockholm_syndrome_001"
   ],
-  "environment_vs_biology": [
-    "the_rat_park_experiment_001"
+  "trauma_bonding": [
+    "stockholm_syndrome_001"
   ],
-  "social_determinants_of_health": [
-    "the_rat_park_experiment_001"
+  "survival_mechanism": [
+    "stockholm_syndrome_001"
   ],
-  "rehabilitation": [
-    "the_rat_park_experiment_001"
+  "cognitive_dissonance": [
+    "stockholm_syndrome_001"
   ],
-  "behavioral_science": [
-    "the_rat_park_experiment_001"
+  "captivity_syndrome": [
+    "stockholm_syndrome_001"
   ],
-  "drug_policy": [
-    "the_rat_park_experiment_001"
+  "brain_injury": [
+    "phineas_gage_brain_injury"
+  ],
+  "personality_change": [
+    "phineas_gage_brain_injury"
+  ],
+  "frontal_lobe": [
+    "phineas_gage_brain_injury"
+  ],
+  "self_identity": [
+    "phineas_gage_brain_injury"
   ]
 }
