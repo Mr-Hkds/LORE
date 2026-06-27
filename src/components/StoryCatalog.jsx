@@ -249,6 +249,7 @@ const SORT_OPTIONS = [
   { value: 'popular',  label: 'Popular + Recent' },
   { value: 'newest',   label: 'Newest first' },
   { value: 'engaged',  label: 'Most engaged' },
+  { value: 'progress', label: 'Reading Progress' },
 ];
 
 function SortDropdown({ value, onChange, color }) {
@@ -406,11 +407,19 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
     return (MODULE_LOAD_TIME - new Date(addedDate)) < 1000 * 60 * 60 * 24 * 3; // 3 days
   };
 
+  const getTrendingScore = (s) => {
+    const rxCount = getTotalReactions(s);
+    if (!s.added_date) return rxCount;
+    const ageDays = (Date.now() - new Date(s.added_date).getTime()) / (1000 * 60 * 60 * 24);
+    // Exponentially decay the value of reactions over time (halflife around 7 days)
+    return rxCount / Math.sqrt(Math.max(1, ageDays) + 1);
+  };
+
   const sortedStories = [...stories].sort((a, b) => {
     if (sortBy === 'popular') {
-      const rxA = getTotalReactions(a);
-      const rxB = getTotalReactions(b);
-      if (rxA !== rxB) return rxB - rxA;
+      const scoreA = getTrendingScore(a);
+      const scoreB = getTrendingScore(b);
+      if (scoreA !== scoreB) return scoreB - scoreA;
       if (a.added_date && b.added_date) {
         return new Date(b.added_date) - new Date(a.added_date);
       }
@@ -431,6 +440,22 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
         if (dateDiff !== 0) return dateDiff;
       }
       return getTotalReactions(b) - getTotalReactions(a);
+    }
+    if (sortBy === 'progress') {
+      const progA = getProgress(a.story_id);
+      const progB = getProgress(b.story_id);
+      
+      const statusA = progA?.completed ? 2 : (progA?.lastLayer > 0 ? 0 : 1); // 0 = in progress, 1 = unread, 2 = completed
+      const statusB = progB?.completed ? 2 : (progB?.lastLayer > 0 ? 0 : 1);
+      
+      if (statusA !== statusB) return statusA - statusB;
+      if (statusA === 0) {
+        return (progB.lastLayer || 0) - (progA.lastLayer || 0);
+      }
+      if (a.added_date && b.added_date) {
+        return new Date(b.added_date) - new Date(a.added_date);
+      }
+      return 0;
     }
     return 0;
   });
@@ -488,13 +513,14 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
             </h1>
           </div>
 
-          {/* Sort tab pills: Trending · Recent · Top Rated */}
+          {/* Sort tab pills: Trending · Recent · Top Rated · Reading */}
           <div className="flex items-center gap-0.5 mb-8 overflow-x-auto scrollbar-none -mx-4 sm:-mx-8 md:-mx-10 px-4 sm:px-8 md:px-10 border-b"
             style={{ borderBottomColor: 'rgba(158,123,76,0.12)' }}>
             {[
               { value: 'popular', label: '❖ Trending' },
               { value: 'newest',  label: '◉ Recent'   },
               { value: 'engaged', label: '◎ Top Rated' },
+              { value: 'progress', label: '⊙ Reading' },
             ].map(opt => (
               <button
                 key={opt.value}

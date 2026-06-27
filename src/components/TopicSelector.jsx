@@ -612,12 +612,21 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                                   <span className="text-[8px] font-mono uppercase" style={{ color: mu }}>
                                     {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
                                   </span>
-                                  {isNew && (
-                                    <>
-                                      <span style={{ color: mu, opacity: 0.35, fontSize: '8px' }}>·</span>
-                                      <span className="text-[8px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: '#10b981' }}>New</span>
-                                    </>
-                                  )}
+
+                                  {/* Curated Tags */}
+                                  <span className="flex items-center gap-1.5 flex-wrap ml-1">
+                                    {isNew && (
+                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30 px-1 py-0.5 rounded-sm select-none">New</span>
+                                    )}
+                                    {totalRx >= 8 ? (
+                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30 px-1 py-0.5 rounded-sm select-none">Most Rated</span>
+                                    ) : totalRx >= 3 ? (
+                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#c4644a]/15 text-[#c4644a] border border-[#c4644a]/30 px-1 py-0.5 rounded-sm select-none">Trending</span>
+                                    ) : totalRx > 0 ? (
+                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#9e7b4c]/15 text-[#9e7b4c] border border-[#9e7b4c]/30 px-1 py-0.5 rounded-sm select-none">Good</span>
+                                    ) : null}
+                                  </span>
+
                                   {totalRx > 0 && (
                                     <span className="ml-auto flex items-center gap-1 text-[8px] font-mono" style={{ color: mu, opacity: 0.55 }}>
                                       <span>❖</span><span>{totalRx}</span>

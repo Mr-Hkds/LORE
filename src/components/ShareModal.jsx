@@ -11,6 +11,13 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
   useEffect(() => {
     if (isOpen) {
       setCopied(false);
+      // Auto-scroll to center the modal in the viewport, avoiding offscreen render bugs
+      setTimeout(() => {
+        if (modalRef.current) {
+          modalRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+      }, 80);
+
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
       

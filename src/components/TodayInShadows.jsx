@@ -179,13 +179,13 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
       )}
       <button
         onClick={() => onReact(id)}
-        className="relative w-full flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer group select-none focus:outline-none hover:-translate-y-0.5 active:scale-95"
+        className="relative w-full flex flex-row items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg border overflow-hidden transition-all duration-300 cursor-pointer group select-none focus:outline-none hover:-translate-y-0.5 active:scale-95"
         style={{
           backgroundColor: isSelected ? activeBg : 'rgba(15,13,11,0.5)',
           borderColor: isSelected ? activeBorder : 'rgba(237,232,223,0.06)',
           boxShadow: isSelected 
-            ? `0 8px 24px -6px rgba(0,0,0,0.6), 0 0 16px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)` 
-            : '0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02)',
+            ? `0 6px 20px -6px rgba(0,0,0,0.6), 0 0 12px ${glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)` 
+            : '0 3px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
         {/* Shimmer / light effect on select */}
@@ -200,33 +200,33 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
         
         {/* Bottom light bar */}
         <div 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-500 rounded-full"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] transition-all duration-500 rounded-full"
           style={{
             width: isSelected ? '40%' : '0%',
             backgroundColor: activeColor,
-            boxShadow: `0 0 8px ${activeColor}`,
+            boxShadow: `0 0 6px ${activeColor}`,
           }}
         />
 
         <Icon
-          className="w-4.5 h-4.5 relative z-10 transition-all duration-500 ease-out"
+          className="w-3.5 h-3.5 relative z-10 transition-all duration-500 ease-out"
           style={{
             color: isSelected ? activeColor : '#6B6560',
-            filter: isSelected ? `drop-shadow(0 0 5px ${glowColor})` : 'none',
-            transform: isSelected ? 'scale(1.12) rotate(6deg)' : 'scale(1)',
+            filter: isSelected ? `drop-shadow(0 0 3px ${glowColor})` : 'none',
+            transform: isSelected ? 'scale(1.1) rotate(4deg)' : 'scale(1)',
           }}
         />
         <span
-          className="text-[8.5px] font-mono tracking-wider uppercase leading-none relative z-10 transition-all duration-300"
+          className="text-[8px] sm:text-[8.5px] font-mono tracking-wider uppercase leading-none relative z-10 transition-all duration-300"
           style={{ color: isSelected ? activeColor : '#5A5650' }}
         >
           {label}
         </span>
         <span
-          className="text-[10.5px] font-bold font-mono relative z-10 transition-all duration-300"
+          className="text-[9px] sm:text-[9.5px] font-bold font-mono relative z-10 transition-all duration-300"
           style={{ color: isSelected ? activeColor : '#3A3630' }}
         >
-          {count}
+          ({count})
         </span>
       </button>
     </div>
@@ -430,7 +430,7 @@ export default function TodayInShadows() {
                 
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 opacity-40 pointer-events-none select-none">
                   <LoreMark size={10} color="#EDE8DF" />
-                  <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold font-semibold">LORE ARCHIVE</span>
+                  <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold font-semibold">CLASSIFIED</span>
                 </div>
 
                 <img
