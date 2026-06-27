@@ -8,6 +8,7 @@ import LayerReader from './components/LayerReader';
 import DepthMeter from './components/DepthMeter';
 import LoreMark from './components/LoreMark';
 import LoadingState from './components/LoadingState';
+import ShareModal from './components/ShareModal';
 import { TOPICS } from './constants/topics';
 
 const AdminPanel = lazy(() => import('./components/AdminPanel'));
@@ -24,6 +25,7 @@ export default function App() {
   const [currentStory, setCurrentStory] = useState(null);
   const [activeLayer, setActiveLayer] = useState(1);
   const [localStories, setLocalStories] = useState([]);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -531,6 +533,7 @@ export default function App() {
         muted={activeLayerConfig.muted}
         border={activeLayerConfig.border}
         onBack={handleBackToCatalog}
+        onShare={() => setIsShareOpen(true)}
       />
 
       {/* Content Scroll Container */}
@@ -549,6 +552,14 @@ export default function App() {
           />
         ))}
       </div>
+
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        storyTitle={currentStory.title}
+        storyId={currentStory.story_id}
+        layerNum={activeLayer}
+      />
     </div>
   );
 }

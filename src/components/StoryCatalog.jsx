@@ -76,7 +76,7 @@ function StoryCardImage({ story, alt, inView }) {
   }
   return (
     <div
-      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container pt-8"
+      className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center dossier-image-container"
       style={{
         backgroundColor: '#090807',
         backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.03) 1px, transparent 1px)',
@@ -141,7 +141,7 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
     <article
       ref={cardRef}
       onClick={() => onSelectStory(story)}
-      className="group relative w-full grid grid-cols-1 md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
+      className="group relative w-full grid grid-cols-[100px_1fr] sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
       style={{
         backgroundColor: 'rgba(15, 13, 10, 0.7)',
         borderColor: 'rgba(237,232,223,0.055)',
@@ -160,19 +160,19 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
       }}
     >
       {/* Image panel */}
-      <div className="w-full h-48 md:h-full flex-shrink-0 relative overflow-hidden">
+      <div className="w-full h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
         {/* Gradient overlay */}
         <div className="absolute inset-0 story-card-overlay" />
       </div>
 
       {/* Content panel */}
-      <div className="w-full flex flex-col justify-between p-5 md:p-6 min-h-[140px]">
+      <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 md:p-6 min-h-[140px]">
         <div>
           {/* Top row: Badges & Reacts */}
-          <div className="flex items-center justify-between mb-3.5 flex-wrap gap-2 border-b border-neutral-900/60 pb-2.5">
-            <div className="flex items-center gap-2 text-[8px] font-mono tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
-              <span className="flex items-center gap-1.5 font-bold" style={{ color: sev.dot }}>
+          <div className="flex items-center justify-between mb-2.5 flex-wrap gap-x-2 gap-y-1 border-b border-neutral-900/60 pb-2">
+            <div className="flex items-center gap-1.5 text-[7px] sm:text-[8px] font-mono tracking-[0.12em] sm:tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
+              <span className="flex items-center gap-1 font-bold" style={{ color: sev.dot }}>
                 <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
                 {sev.label}
               </span>
@@ -180,36 +180,36 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
               <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
               {isNew && (<><span>·</span><span style={{ color: ac }}>NEW</span></>)}
               {getTotalReactions(story) > 3 && (
-                <><span>·</span><span style={{ color: '#C4644A' }} className="animate-pulse">❖ TRENDING</span></>
+                <><span>·</span><span style={{ color: '#C4644A' }} className="animate-pulse hidden xs:inline">❖ TRENDING</span></>
               )}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <ReadPill progress={prog} accentColor={ac} />
               <EngagementBar reactions={story.reactions} />
             </div>
           </div>
 
           <h2
-            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
+            className="font-serif italic leading-snug mb-1.5 transition-colors duration-200 group-hover:text-[#9E7B4C]"
+            style={{ fontSize: 'clamp(0.92rem, 2.2vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
           >
             {story.title}
           </h2>
-          <p className="font-sans leading-relaxed line-clamp-2" style={{ fontSize: '13px', color: mu, opacity: 0.9 }}>
+          <p className="font-sans leading-relaxed text-[11px] sm:text-[13px] line-clamp-2 sm:line-clamp-3" style={{ color: mu, opacity: 0.9 }}>
             {story.hook}
           </p>
         </div>
 
         {/* Concepts + arrow */}
-        <div className="flex items-end justify-between mt-4 gap-3">
-          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-            {(story.concepts || []).slice(0, 3).map(c => (
-              <span key={c} className="text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1" style={{ color: mu }}>
+        <div className="flex items-end justify-between mt-3 gap-2">
+          <div className="flex flex-wrap gap-x-3 gap-y-1">
+            {(story.concepts || []).slice(0, 2).map(c => (
+              <span key={c} className="text-[8px] sm:text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1" style={{ color: mu }}>
                 <span style={{ color: ac, opacity: 0.5 }}>▪</span>{c}
               </span>
             ))}
           </div>
-          <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-sm flex-shrink-0">→</span>
+          <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-xs sm:text-sm flex-shrink-0">→</span>
         </div>
       </div>
       {/* Resume bar — appears if partially read */}
@@ -313,20 +313,43 @@ function EngagementBar({ reactions }) {
   const total = intriguing + gripping + chilling + mind_blowing;
   if (total === 0) return null;
 
-  const maxVal = Math.max(intriguing, gripping, chilling, mind_blowing);
-  let label = 'ENGAGED';
-  if (maxVal > 0) {
-    if (maxVal === intriguing) label = 'INTRIGUED';
-    else if (maxVal === gripping) label = 'GRIPPED';
-    else if (maxVal === chilling) label = 'CHILLED';
-    else if (maxVal === mind_blowing) label = 'MINDBLOWN';
+  const ITEMS = [
+    { key: 'intriguing', label: 'INTRIGUING', count: intriguing, Icon: Fingerprint, color: '#F59E0B', bg: 'rgba(245,158,11,0.04)', border: 'rgba(245,158,11,0.3)', glow: 'rgba(245,158,11,0.12)' },
+    { key: 'gripping', label: 'GRIPPING', count: gripping, Icon: Eye, color: '#A78BFA', bg: 'rgba(167,139,250,0.04)', border: 'rgba(167,139,250,0.3)', glow: 'rgba(167,139,250,0.12)' },
+    { key: 'chilling', label: 'CHILLING', count: chilling, Icon: Skull, color: '#F87171', bg: 'rgba(248,113,113,0.04)', border: 'rgba(248,113,113,0.3)', glow: 'rgba(248,113,113,0.12)' },
+    { key: 'mind_blowing', label: 'MIND BLOWING', count: mind_blowing, Icon: HelpCircle, color: '#22D3EE', bg: 'rgba(34,211,238,0.04)', border: 'rgba(34,211,238,0.3)', glow: 'rgba(34,211,238,0.12)' },
+  ];
+
+  // Find dominant reaction
+  let dominant = ITEMS[0];
+  for (let i = 1; i < ITEMS.length; i++) {
+    if (ITEMS[i].count > dominant.count) {
+      dominant = ITEMS[i];
+    }
   }
 
+  if (dominant.count === 0) return null;
+
   return (
-    <div className="flex items-center gap-1 select-none">
-      <span className="text-[8.5px] font-mono font-bold tracking-wider text-[#9E7B4C] bg-[#9E7B4C]/8 border border-[#9E7B4C]/25 px-2 py-0.5 rounded-sm uppercase">
-        ❖ {total} {label}
-      </span>
+    <div 
+      className="relative flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[8px] font-mono tracking-widest uppercase transition-all duration-300 overflow-hidden select-none"
+      style={{
+        color: dominant.color,
+        backgroundColor: dominant.bg,
+        borderColor: dominant.border,
+        boxShadow: `0 0 10px ${dominant.glow}, inset 0 0 8px ${dominant.glow}`,
+      }}
+      title={`${dominant.label}: ${dominant.count} reactions`}
+    >
+      <dominant.Icon className="w-2.5 h-2.5 opacity-85" />
+      <span>{dominant.label}</span>
+      <span className="font-bold">({dominant.count})</span>
+      
+      {/* Sleek bottom accent bar */}
+      <span 
+        className="absolute bottom-0 left-1/4 right-1/4 h-[1.5px] rounded-t-full"
+        style={{ backgroundColor: dominant.color }}
+      />
     </div>
   );
 }

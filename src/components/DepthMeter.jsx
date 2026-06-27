@@ -4,8 +4,9 @@
  * to prevent overlap and truncation on small screens.
  */
 import LoreMark from './LoreMark';
+import { Share2 } from 'lucide-react';
 
-export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack }) {
+export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack, onShare }) {
   const accentColor = '#9E7B4C';
 
   return (
@@ -76,16 +77,25 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           ))}
         </div>
 
-        {/* Layer label with premium slide-up roller effect */}
-        <div className="justify-self-end overflow-hidden h-[18px] flex items-center max-w-[120px] sm:max-w-[200px] select-none">
-          <span
-            key={layerName}
-            className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap block animate-roll-up truncate"
-            style={{ color: text }}
-            title={layerName}
+        {/* Layer label & Share button */}
+        <div className="justify-self-end flex items-center gap-3">
+          <button
+            onClick={onShare}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/45 text-[#9E7B4C] hover:text-[#b08c5c] transition-all duration-200 cursor-pointer text-[8px] font-mono tracking-widest focus:outline-none active:scale-95 uppercase select-none"
           >
-            {layerName}
-          </span>
+            <Share2 className="w-3 h-3" />
+            Share
+          </button>
+          <div className="overflow-hidden h-[18px] flex items-center max-w-[100px] md:max-w-[155px] select-none">
+            <span
+              key={layerName}
+              className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap block animate-roll-up truncate"
+              style={{ color: text }}
+              title={layerName}
+            >
+              {layerName}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -117,16 +127,25 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
             </span>
           </button>
 
-          {/* Layer label */}
-          <div className="overflow-hidden h-[16px] flex items-center max-w-[120px] select-none">
-            <span
-              key={layerName}
-              className="text-[9px] font-bold tracking-[0.12em] uppercase whitespace-nowrap block animate-roll-up truncate"
-              style={{ color: text }}
-              title={layerName}
+          {/* Layer label & Share button */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onShare}
+              className="flex items-center gap-1 px-2 py-0.5 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] text-[8px] font-mono tracking-wider focus:outline-none active:scale-95 uppercase select-none cursor-pointer"
             >
-              {layerName}
-            </span>
+              <Share2 className="w-2.5 h-2.5" />
+              Share
+            </button>
+            <div className="overflow-hidden h-[16px] flex items-center max-w-[85px] select-none">
+              <span
+                key={layerName}
+                className="text-[9px] font-bold tracking-[0.12em] uppercase whitespace-nowrap block animate-roll-up truncate"
+                style={{ color: text }}
+                title={layerName}
+              >
+                {layerName}
+              </span>
+            </div>
           </div>
         </div>
 
