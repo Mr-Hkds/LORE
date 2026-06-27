@@ -122,7 +122,8 @@
     "malaysia_airlines_mh370"
   ],
   "power_dynamics": [
-    "stanford_prison_experiment_001"
+    "stanford_prison_experiment_001",
+    "harold_shipman_serial_killer"
   ],
   "social_roles": [
     "stanford_prison_experiment_001"
@@ -248,7 +249,8 @@
   "serial_killer": [
     "jack_the_ripper_001",
     "the_zodiac_killer",
-    "the_cleveland_torso_murders"
+    "the_cleveland_torso_murders",
+    "harold_shipman_serial_killer"
   ],
   "victorian_era": [
     "jack_the_ripper_001"
@@ -668,5 +670,17 @@
   ],
   "scientific_skepticism": [
     "project_stargate_remote_viewing"
+  ],
+  "medical_malpractice": [
+    "harold_shipman_serial_killer"
+  ],
+  "betrayal_of_trust": [
+    "harold_shipman_serial_killer"
+  ],
+  "elder_abuse": [
+    "harold_shipman_serial_killer"
+  ],
+  "systemic_failure": [
+    "harold_shipman_serial_killer"
   ]
 }
