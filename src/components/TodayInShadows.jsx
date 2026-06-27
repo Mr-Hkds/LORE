@@ -392,35 +392,52 @@ export default function TodayInShadows() {
 
   return (
     <>
+      <style>{`
+        @keyframes floatUp {
+          0%   { transform: translate(-50%, 0); opacity: 0; }
+          20%  { opacity: 1; }
+          100% { transform: translate(-50%, -32px); opacity: 0; }
+        }
+        @keyframes floatEmoji {
+          0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0; }
+          20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
+          100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
+        }
+      `}</style>
+      
       {/* ── Dossier Card on Homepage ──────────────────────────────────── */}
       <div
-        className="p-5 rounded-xl border flex flex-col md:flex-row gap-5 items-center transition-all duration-300 hover:border-[#9E7B4C]/45 group relative"
+        className="rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/45 group relative overflow-hidden"
         style={{
           backgroundColor: '#151311',
           borderColor: 'rgba(158, 123, 76, 0.18)',
           boxShadow: '0 12px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.03)',
         }}
       >
-        {/* Thumbnail */}
+        {/* Cinematic Banner Image */}
         {dossier.thumbnail && (
-          <div className="w-full aspect-[4/3] md:aspect-auto md:w-[120px] md:h-[90px] rounded-lg overflow-hidden flex-shrink-0 border border-neutral-800/60 bg-black/40 relative">
+          <div className="w-full h-48 sm:h-64 md:h-72 overflow-hidden bg-[#090807] relative border-b border-neutral-900/60">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
-                <LoreMark size={20} color="currentColor" />
-                <span className="text-[7px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
+                <LoreMark size={24} color="currentColor" />
+                <span className="text-[8px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
               </div>
             ) : (
-              <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: '#090807' }}>
-                <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
-                <div className="absolute top-2 left-2 z-20 flex items-center gap-1 opacity-35 pointer-events-none select-none">
-                  <LoreMark size={8} color="#EDE8DF" />
-                  <span className="text-[6.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold">LORE</span>
+              <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+                {/* Cinematic gradients */}
+                <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, #151311 0%, rgba(21, 19, 17, 0.4) 40%, transparent 100%)' }} />
+                <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.6) 100%)' }} />
+                
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 opacity-40 pointer-events-none select-none">
+                  <LoreMark size={10} color="#EDE8DF" />
+                  <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold font-semibold">LORE ARCHIVE</span>
                 </div>
+
                 <img
                   src={wikiImgUrl || dossier.thumbnail}
                   alt={dossier.title}
                   onError={() => setImgFailed(true)}
-                  className="relative z-10 w-full h-full object-cover md:grayscale md:opacity-80 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
                   loading="lazy"
                 />
               </div>
@@ -428,25 +445,25 @@ export default function TodayInShadows() {
           </div>
         )}
 
-        {/* Text block */}
-        <div className="flex-1 min-w-0 flex flex-col justify-between">
+        {/* Content Block */}
+        <div className="p-5 sm:p-6 md:p-7 flex flex-col justify-between flex-1">
           <div>
-            <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <div className="flex items-center gap-2 mb-3.5 flex-wrap">
               <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2.5 py-0.5 rounded-sm">
                 WHAT HAPPENED TODAY · {dossier.theme?.toUpperCase()}
               </span>
               {dossier.year && (
-                <span className="text-[10px] font-mono text-neutral-550 tracking-widest uppercase">
+                <span className="text-[10px] font-mono text-[#8F8A82] tracking-widest uppercase">
                   YEAR: {dossier.year}
                 </span>
               )}
             </div>
-            <h4 className="font-serif italic text-lg sm:text-xl text-[#EDE8DF] tracking-normal mb-2 font-semibold">{dossier.title}</h4>
-            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-5">
+            <h4 className="font-serif italic text-xl sm:text-2xl text-[#EDE8DF] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
+            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-6">
               {dossier.text}
             </p>
           </div>
-          <div className="flex flex-col gap-4 pt-4 border-t border-neutral-900/60 w-full">
+          <div className="flex flex-col gap-5 pt-4 border-t border-neutral-900/60 w-full">
             {dossier.wikiUrl ? (
               <a
                 href={dossier.wikiUrl}
@@ -457,34 +474,26 @@ export default function TodayInShadows() {
                 Read Wikipedia Article <span className="text-xs">→</span>
               </a>
             ) : <div />}
-            {/* Mini reaction pills on card */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center w-full">
+            {/* Animated premium reaction pills */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center w-full">
               {REACTION_CONFIG.map((r) => {
                 const isSelected = userReaction === r.id;
                 const count = reactions[r.id] || 0;
                 return (
-                  <button
+                  <ReactionPill
                     key={r.id}
-                    onClick={() => handleReact(r.id)}
-                    title={r.label}
-                    className="py-1 px-2.5 rounded-lg border text-center transition-all duration-200 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5 active:scale-95 text-[8.5px] font-mono uppercase tracking-wider group w-full"
-                    style={{
-                      backgroundColor: isSelected ? r.activeBg : 'rgba(10,9,7,0.4)',
-                      borderColor: isSelected ? r.activeBorder : 'rgba(237,232,223,0.06)',
-                      boxShadow: isSelected ? `0 0 10px ${r.glowColor}` : 'none',
-                    }}
-                  >
-                    <r.Icon className="w-3 h-3 transition-all duration-200" style={{ color: isSelected ? r.activeColor : '#6B6560' }} />
-                    <span style={{ color: isSelected ? r.activeColor : '#6B6560' }}>{r.label}</span>
-                    <span className="opacity-60 font-bold" style={{ color: isSelected ? r.activeColor : '#4A4440' }}>({count})</span>
-                  </button>
+                    reaction={r}
+                    isSelected={isSelected}
+                    count={count}
+                    onReact={handleReact}
+                    animating={animatingReaction === r.id}
+                  />
                 );
               })}
             </div>
           </div>
         </div>
       </div>
-
     </>
   );
 }

@@ -159,6 +159,18 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         e.currentTarget.style.boxShadow = '0 8px 32px -12px rgba(0,0,0,0.8)';
       }}
     >
+      {/* Floating Premium Share Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onShareStory?.(story);
+        }}
+        className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-30 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-neutral-800/80 bg-[#0F0D0A]/85 backdrop-blur-md text-[#EDE8DF]/75 hover:text-[#9E7B4C] hover:border-[#9E7B4C]/45 hover:bg-[#151311] transition-all duration-300 active:scale-90 focus:outline-none cursor-pointer group/share"
+        title="Share Dossier"
+      >
+        <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover/share:scale-110" />
+      </button>
+
       {/* Image panel */}
       <div className="w-full h-44 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
@@ -170,7 +182,7 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
       <div className="w-full flex flex-col justify-between p-4 sm:p-5 md:p-6 min-h-[140px]">
         <div>
           {/* Top row: Badges & Reacts */}
-          <div className="flex items-center justify-between mb-2.5 flex-wrap gap-x-2 gap-y-1 border-b border-neutral-900/60 pb-2">
+          <div className="flex items-center justify-between mb-2.5 flex-wrap gap-x-2 gap-y-1 border-b border-neutral-900/60 pb-2 pr-8 sm:pr-10">
             <div className="flex items-center gap-1.5 text-[7.5px] sm:text-[8px] font-mono tracking-[0.12em] sm:tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
               <span className="flex items-center gap-1 font-bold" style={{ color: sev.dot }}>
                 <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
@@ -208,7 +220,7 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           </p>
         </div>
 
-        {/* Concepts + arrow/share */}
+        {/* Concepts + arrow */}
         <div className="flex items-end justify-between mt-3 gap-2">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {(story.concepts || []).slice(0, 2).map(c => (
@@ -218,19 +230,8 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
             ))}
           </div>
           
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onShareStory?.(story);
-              }}
-              className="flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] hover:text-[#b08c5c] hover:border-[#9E7B4C]/45 transition-colors cursor-pointer text-[8px] font-mono tracking-wider focus:outline-none active:scale-95 uppercase select-none"
-              title="Share Dossier Link"
-            >
-              <Share2 className="w-2.5 h-2.5" />
-              Share
-            </button>
-            <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-xs sm:text-sm">→</span>
+          <div className="flex items-center flex-shrink-0">
+            <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-xs sm:text-sm">→</span>
           </div>
         </div>
       </div>
