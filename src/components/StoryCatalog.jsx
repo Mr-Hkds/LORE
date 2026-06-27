@@ -4,7 +4,7 @@
  * Cards show depth signal, not badges like "TRENDING".
  */
 import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle, Share2 } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -113,7 +113,7 @@ function StoryCardImage({ story, alt, inView }) {
 }
 
 // ── Story card wrapper with IntersectionObserver for color reveal ────────
-function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
+function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, mu }) {
   const [inView, setInView] = useState(false);
   const cardRef = useRef(null);
   const sev   = SEVERITY_CONFIG[story.severity] || SEVERITY_CONFIG.unsettling;
@@ -141,7 +141,7 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
     <article
       ref={cardRef}
       onClick={() => onSelectStory(story)}
-      className="group relative w-full grid grid-cols-[100px_1fr] sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
+      className="group relative w-full grid grid-cols-1 sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
       style={{
         backgroundColor: 'rgba(15, 13, 10, 0.7)',
         borderColor: 'rgba(237,232,223,0.055)',
@@ -160,24 +160,33 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
       }}
     >
       {/* Image panel */}
-      <div className="w-full h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
+      <div className="w-full h-44 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
         {/* Gradient overlay */}
         <div className="absolute inset-0 story-card-overlay" />
       </div>
 
       {/* Content panel */}
-      <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 md:p-6 min-h-[140px]">
+      <div className="w-full flex flex-col justify-between p-4 sm:p-5 md:p-6 min-h-[140px]">
         <div>
           {/* Top row: Badges & Reacts */}
           <div className="flex items-center justify-between mb-2.5 flex-wrap gap-x-2 gap-y-1 border-b border-neutral-900/60 pb-2">
-            <div className="flex items-center gap-1.5 text-[7px] sm:text-[8px] font-mono tracking-[0.12em] sm:tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
+            <div className="flex items-center gap-1.5 text-[7.5px] sm:text-[8px] font-mono tracking-[0.12em] sm:tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
               <span className="flex items-center gap-1 font-bold" style={{ color: sev.dot }}>
                 <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
                 {sev.label}
               </span>
               <span>·</span>
               <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
+              
+              {/* Dominant reaction - inline metadata style */}
+              {getTotalReactions(story) > 0 && (
+                <>
+                  <span>·</span>
+                  <EngagementBar reactions={story.reactions} />
+                </>
+              )}
+
               {isNew && (<><span>·</span><span style={{ color: ac }}>NEW</span></>)}
               {getTotalReactions(story) > 3 && (
                 <><span>·</span><span style={{ color: '#C4644A' }} className="animate-pulse hidden xs:inline">❖ TRENDING</span></>
@@ -185,13 +194,12 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
             </div>
             <div className="flex items-center gap-2">
               <ReadPill progress={prog} accentColor={ac} />
-              <EngagementBar reactions={story.reactions} />
             </div>
           </div>
 
           <h2
             className="font-serif italic leading-snug mb-1.5 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(0.92rem, 2.2vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
+            style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
           >
             {story.title}
           </h2>
@@ -200,7 +208,7 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
           </p>
         </div>
 
-        {/* Concepts + arrow */}
+        {/* Concepts + arrow/share */}
         <div className="flex items-end justify-between mt-3 gap-2">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {(story.concepts || []).slice(0, 2).map(c => (
@@ -209,7 +217,21 @@ function StoryCard({ story, onSelectStory, idx, visible, ac, fg, mu }) {
               </span>
             ))}
           </div>
-          <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-xs sm:text-sm flex-shrink-0">→</span>
+          
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onShareStory?.(story);
+              }}
+              className="flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded border border-[#9E7B4C]/25 text-[#9E7B4C] hover:text-[#b08c5c] hover:border-[#9E7B4C]/45 transition-colors cursor-pointer text-[8px] font-mono tracking-wider focus:outline-none active:scale-95 uppercase select-none"
+              title="Share Dossier Link"
+            >
+              <Share2 className="w-2.5 h-2.5" />
+              Share
+            </button>
+            <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] transition-colors duration-200 text-xs sm:text-sm">→</span>
+          </div>
         </div>
       </div>
       {/* Resume bar — appears if partially read */}
@@ -314,10 +336,10 @@ function EngagementBar({ reactions }) {
   if (total === 0) return null;
 
   const ITEMS = [
-    { key: 'intriguing', label: 'INTRIGUING', count: intriguing, Icon: Fingerprint, color: '#F59E0B', bg: 'rgba(245,158,11,0.04)', border: 'rgba(245,158,11,0.3)', glow: 'rgba(245,158,11,0.12)' },
-    { key: 'gripping', label: 'GRIPPING', count: gripping, Icon: Eye, color: '#A78BFA', bg: 'rgba(167,139,250,0.04)', border: 'rgba(167,139,250,0.3)', glow: 'rgba(167,139,250,0.12)' },
-    { key: 'chilling', label: 'CHILLING', count: chilling, Icon: Skull, color: '#F87171', bg: 'rgba(248,113,113,0.04)', border: 'rgba(248,113,113,0.3)', glow: 'rgba(248,113,113,0.12)' },
-    { key: 'mind_blowing', label: 'MIND BLOWING', count: mind_blowing, Icon: HelpCircle, color: '#22D3EE', bg: 'rgba(34,211,238,0.04)', border: 'rgba(34,211,238,0.3)', glow: 'rgba(34,211,238,0.12)' },
+    { key: 'intriguing', label: 'INTRIGUING', count: intriguing, Icon: Fingerprint, color: '#F59E0B' },
+    { key: 'gripping', label: 'GRIPPING', count: gripping, Icon: Eye, color: '#A78BFA' },
+    { key: 'chilling', label: 'CHILLING', count: chilling, Icon: Skull, color: '#F87171' },
+    { key: 'mind_blowing', label: 'MIND BLOWING', count: mind_blowing, Icon: HelpCircle, color: '#22D3EE' },
   ];
 
   // Find dominant reaction
@@ -331,33 +353,22 @@ function EngagementBar({ reactions }) {
   if (dominant.count === 0) return null;
 
   return (
-    <div 
-      className="relative flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[8px] font-mono tracking-widest uppercase transition-all duration-300 overflow-hidden select-none"
-      style={{
-        color: dominant.color,
-        backgroundColor: dominant.bg,
-        borderColor: dominant.border,
-        boxShadow: `0 0 10px ${dominant.glow}, inset 0 0 8px ${dominant.glow}`,
-      }}
+    <span 
+      className="inline-flex items-center gap-1 font-mono uppercase"
+      style={{ color: dominant.color }}
       title={`${dominant.label}: ${dominant.count} reactions`}
     >
-      <dominant.Icon className="w-2.5 h-2.5 opacity-85" />
+      <dominant.Icon className="w-2.5 h-2.5 opacity-80" />
       <span>{dominant.label}</span>
       <span className="font-bold">({dominant.count})</span>
-      
-      {/* Sleek bottom accent bar */}
-      <span 
-        className="absolute bottom-0 left-1/4 right-1/4 h-[1.5px] rounded-t-full"
-        style={{ backgroundColor: dominant.color }}
-      />
-    </div>
+    </span>
   );
 }
 
 const MODULE_LOAD_TIME = Date.now();
 
 // ── Main catalog component ────────────────────────────────────────────────
-export default function StoryCatalog({ category, stories, onSelectStory, onBack }) {
+export default function StoryCatalog({ category, stories, onSelectStory, onBack, onShareStory }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#8F8A82';
@@ -512,6 +523,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack 
                   key={story.story_id}
                   story={story}
                   onSelectStory={onSelectStory}
+                  onShareStory={onShareStory}
                   idx={idx}
                   visible={visible}
                   ac={ac}

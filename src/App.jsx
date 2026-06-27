@@ -25,7 +25,7 @@ export default function App() {
   const [currentStory, setCurrentStory] = useState(null);
   const [activeLayer, setActiveLayer] = useState(1);
   const [localStories, setLocalStories] = useState([]);
-  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [shareTarget, setShareTarget] = useState(null);
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -422,6 +422,7 @@ export default function App() {
           stories={categoryStories}
           onSelectStory={handleSelectStory}
           onBack={handleBackToTopics}
+          onShareStory={(story) => setShareTarget({ story, layerNum: 1 })}
         />
         <Suspense fallback={null}>
           <SiteFeedback />
@@ -533,7 +534,7 @@ export default function App() {
         muted={activeLayerConfig.muted}
         border={activeLayerConfig.border}
         onBack={handleBackToCatalog}
-        onShare={() => setIsShareOpen(true)}
+        onShare={() => setShareTarget({ story: currentStory, layerNum: activeLayer })}
       />
 
       {/* Content Scroll Container */}
@@ -549,16 +550,17 @@ export default function App() {
             connections={layerData.layer === TOTAL_LAYERS ? connections : []}
             onSelectConnectedStory={handleSelectConnectedStory}
             onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
+            onShare={() => setShareTarget({ story: currentStory, layerNum: layerData.layer })}
           />
         ))}
       </div>
 
       <ShareModal
-        isOpen={isShareOpen}
-        onClose={() => setIsShareOpen(false)}
-        storyTitle={currentStory.title}
-        storyId={currentStory.story_id}
-        layerNum={activeLayer}
+        isOpen={!!shareTarget}
+        onClose={() => setShareTarget(null)}
+        storyTitle={shareTarget?.story?.title}
+        storyId={shareTarget?.story?.story_id}
+        layerNum={shareTarget?.layerNum || 1}
       />
     </div>
   );

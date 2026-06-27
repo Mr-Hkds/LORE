@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle, Share2 } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 export default function LayerReader({
@@ -11,6 +11,7 @@ export default function LayerReader({
   connections = [],
   onSelectConnectedStory,
   onReactionUpdate,
+  onShare,
 }) {
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
@@ -381,6 +382,22 @@ export default function LayerReader({
                         </button>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Transmit/Share Dossier Link */}
+                  <div className="mt-8 flex justify-center">
+                    <button
+                      onClick={onShare}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-lg border text-[9px] font-mono tracking-widest uppercase transition-all duration-300 active:scale-95 hover:border-neutral-500/60 cursor-pointer select-none"
+                      style={{
+                        color: '#9E7B4C',
+                        borderColor: 'rgba(158, 123, 76, 0.25)',
+                        backgroundColor: 'rgba(158, 123, 76, 0.04)',
+                      }}
+                    >
+                      <Share2 className="w-3 h-3" />
+                      Transmit Dossier Link
+                    </button>
                   </div>
                 </div>
               )}
