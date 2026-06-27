@@ -89,7 +89,8 @@
     "the_zodiac_killer",
     "the_taman_shud_case",
     "the_sodder_children_disappearance",
-    "the_cleveland_torso_murders"
+    "the_cleveland_torso_murders",
+    "black_dahlia_murder"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -229,7 +230,8 @@
   ],
   "media_sensationalism": [
     "noida_double_murder_case_2008",
-    "jack_the_ripper_001"
+    "jack_the_ripper_001",
+    "black_dahlia_murder"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
@@ -476,7 +478,8 @@
     "the_cleveland_torso_murders"
   ],
   "forensic_challenge": [
-    "the_cleveland_torso_murders"
+    "the_cleveland_torso_murders",
+    "black_dahlia_murder"
   ],
   "political_pressure": [
     "the_cleveland_torso_murders"
@@ -582,5 +585,29 @@
   ],
   "mass_interception": [
     "echelon_global_surveillance"
+  ],
+  "dissociation": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "trauma_response": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "identity_fragmentation": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "alter_personalities": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "coping_mechanisms": [
+    "dissociative_identity_disorder_fragmented_self"
+  ],
+  "brutal_murder": [
+    "black_dahlia_murder"
+  ],
+  "hollywood_dark_side": [
+    "black_dahlia_murder"
+  ],
+  "police_misconduct": [
+    "black_dahlia_murder"
   ]
 }
