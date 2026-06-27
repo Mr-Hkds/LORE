@@ -194,7 +194,8 @@
   "human_experimentation": [
     "unit_731_experiments",
     "tuskegee_syphilis_study",
-    "project_sunshine_cadaver_collection"
+    "project_sunshine_cadaver_collection",
+    "monster_study_1939"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -646,5 +647,17 @@
   ],
   "military_infrastructure": [
     "project_iceworm_secret_city"
+  ],
+  "unethical_research": [
+    "monster_study_1939"
+  ],
+  "psychological_harm": [
+    "monster_study_1939"
+  ],
+  "stuttering": [
+    "monster_study_1939"
+  ],
+  "eugenics_influence": [
+    "monster_study_1939"
   ]
 }
