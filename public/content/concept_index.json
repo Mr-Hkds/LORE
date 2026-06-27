@@ -24,7 +24,10 @@
     "unit_731_experiments",
     "the_philadelphia_experiment",
     "cia_mk_ultra_program",
-    "the_numbers_stations"
+    "the_numbers_stations",
+    "the_phoenix_program",
+    "project_sunshine_cadaver_collection",
+    "tunguska_event_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -38,7 +41,8 @@
     "the_asch_conformity_experiments",
     "the_bystander_effect",
     "jonestown_massacre_001",
-    "dancing_mania_1518_strasbourg"
+    "dancing_mania_1518_strasbourg",
+    "salem_witch_trials_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
@@ -53,11 +57,13 @@
     "operation_northwoods_001"
   ],
   "unethical_warfare": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "the_phoenix_program"
   ],
   "covert_operations": [
     "operation_northwoods_001",
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "the_phoenix_program"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -80,7 +86,9 @@
     "noida_double_murder_case_2008",
     "jack_the_ripper_001",
     "the_zodiac_killer",
-    "the_taman_shud_case"
+    "the_taman_shud_case",
+    "the_sodder_children_disappearance",
+    "the_cleveland_torso_murders"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -130,7 +138,8 @@
   ],
   "family_tragedy": [
     "hinterkaifeck_murders",
-    "noida_double_murder_case_2008"
+    "noida_double_murder_case_2008",
+    "the_sodder_children_disappearance"
   ],
   "cold_case": [
     "hinterkaifeck_murders"
@@ -176,10 +185,12 @@
   ],
   "human_experimentation": [
     "unit_731_experiments",
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "project_sunshine_cadaver_collection"
   ],
   "war_crimes": [
-    "unit_731_experiments"
+    "unit_731_experiments",
+    "the_phoenix_program"
   ],
   "impunity": [
     "unit_731_experiments"
@@ -224,7 +235,8 @@
   ],
   "serial_killer": [
     "jack_the_ripper_001",
-    "the_zodiac_killer"
+    "the_zodiac_killer",
+    "the_cleveland_torso_murders"
   ],
   "victorian_era": [
     "jack_the_ripper_001"
@@ -248,7 +260,8 @@
     "cia_mk_ultra_program"
   ],
   "unethical_experimentation": [
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "project_stargate_remote_viewing"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program"
@@ -308,10 +321,12 @@
     "universe_25_calhouns_mouse_utopia"
   ],
   "social_pathology": [
-    "universe_25_calhouns_mouse_utopia"
+    "universe_25_calhouns_mouse_utopia",
+    "the_rat_park_experiment_001"
   ],
   "medical_ethics": [
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "project_sunshine_cadaver_collection"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study"
@@ -323,17 +338,20 @@
     "tuskegee_syphilis_study"
   ],
   "delusion": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "cotard_delusion_001"
   ],
   "altered_perception": [
     "capgras_delusion_001"
   ],
   "neurology": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "cotard_delusion_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
-    "folie_a_deux_shared_psychosis"
+    "folie_a_deux_shared_psychosis",
+    "cotard_delusion_001"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -364,5 +382,175 @@
   ],
   "identity_erasure": [
     "the_taman_shud_case"
+  ],
+  "nihilism": [
+    "cotard_delusion_001"
+  ],
+  "body_image_disorder": [
+    "cotard_delusion_001"
+  ],
+  "counter-insurgency": [
+    "the_phoenix_program"
+  ],
+  "extrajudicial_killings": [
+    "the_phoenix_program"
+  ],
+  "intelligence_gathering": [
+    "the_phoenix_program",
+    "project_shamrock",
+    "project_stargate_remote_viewing"
+  ],
+  "government_surveillance": [
+    "project_shamrock"
+  ],
+  "privacy_invasion": [
+    "project_shamrock"
+  ],
+  "corporate_complicity": [
+    "project_shamrock"
+  ],
+  "unconstitutional_monitoring": [
+    "project_shamrock"
+  ],
+  "cold_war_era": [
+    "project_shamrock",
+    "project_stargate_remote_viewing"
+  ],
+  "maritime_disaster": [
+    "franklin_expedition_lost_ships"
+  ],
+  "arctic_exploration": [
+    "franklin_expedition_lost_ships"
+  ],
+  "survival_horror": [
+    "franklin_expedition_lost_ships"
+  ],
+  "unexplained_disappearance": [
+    "franklin_expedition_lost_ships",
+    "the_mary_celeste_mystery"
+  ],
+  "lead_poisoning": [
+    "franklin_expedition_lost_ships"
+  ],
+  "cannibalism": [
+    "franklin_expedition_lost_ships"
+  ],
+  "paranormal_activity": [
+    "winchester_mystery_house"
+  ],
+  "grief_and_madness": [
+    "winchester_mystery_house"
+  ],
+  "architectural_oddities": [
+    "winchester_mystery_house"
+  ],
+  "spiritualism": [
+    "winchester_mystery_house"
+  ],
+  "unexplained_phenomena": [
+    "winchester_mystery_house",
+    "tunguska_event_001"
+  ],
+  "haunted_house": [
+    "winchester_mystery_house"
+  ],
+  "missing_children": [
+    "the_sodder_children_disappearance"
+  ],
+  "arson": [
+    "the_sodder_children_disappearance"
+  ],
+  "abduction": [
+    "the_sodder_children_disappearance"
+  ],
+  "flawed_investigation": [
+    "the_sodder_children_disappearance"
+  ],
+  "depression_era": [
+    "the_cleveland_torso_murders"
+  ],
+  "dismemberment": [
+    "the_cleveland_torso_murders"
+  ],
+  "forensic_challenge": [
+    "the_cleveland_torso_murders"
+  ],
+  "political_pressure": [
+    "the_cleveland_torso_murders"
+  ],
+  "remote_viewing": [
+    "project_stargate_remote_viewing"
+  ],
+  "government_experiments": [
+    "project_stargate_remote_viewing"
+  ],
+  "psychic_espionage": [
+    "project_stargate_remote_viewing"
+  ],
+  "paranormal_research": [
+    "project_stargate_remote_viewing"
+  ],
+  "scientific_skepticism": [
+    "project_stargate_remote_viewing"
+  ],
+  "hostage_psychology": [
+    "stockholm_syndrome_001"
+  ],
+  "trauma_bonding": [
+    "stockholm_syndrome_001"
+  ],
+  "survival_mechanism": [
+    "stockholm_syndrome_001"
+  ],
+  "cognitive_dissonance": [
+    "stockholm_syndrome_001"
+  ],
+  "captivity_syndrome": [
+    "stockholm_syndrome_001"
+  ],
+  "cosmic_impact": [
+    "tunguska_event_001"
+  ],
+  "mass_hysteria": [
+    "salem_witch_trials_001"
+  ],
+  "judicial_injustice": [
+    "salem_witch_trials_001"
+  ],
+  "religious_extremism": [
+    "salem_witch_trials_001"
+  ],
+  "spectral_evidence": [
+    "salem_witch_trials_001"
+  ],
+  "addiction": [
+    "the_rat_park_experiment_001"
+  ],
+  "environment_vs_biology": [
+    "the_rat_park_experiment_001"
+  ],
+  "social_determinants_of_health": [
+    "the_rat_park_experiment_001"
+  ],
+  "rehabilitation": [
+    "the_rat_park_experiment_001"
+  ],
+  "behavioral_science": [
+    "the_rat_park_experiment_001"
+  ],
+  "drug_policy": [
+    "the_rat_park_experiment_001"
+  ],
+  "ghost_ship": [
+    "the_mary_celeste_mystery"
+  ],
+  "maritime_mystery": [
+    "the_mary_celeste_mystery"
+  ],
+  "abandoned_vessel": [
+    "the_mary_celeste_mystery"
+  ],
+  "sea_legends": [
+    "the_mary_celeste_mystery"
   ]
 }
