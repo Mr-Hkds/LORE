@@ -3210,39 +3210,6 @@
       ]
     },
     {
-      "story_id": null,
-      "title": null,
-      "category": null,
-      "hook": null,
-      "concepts": [],
-      "severity": null,
-      "hero_image": "/content/images/undefined.jpg",
-      "added_date": "2026-06-27",
-      "draft": false,
-      "reactions": {
-        "like": 12,
-        "gripping": 10,
-        "scared": 1,
-        "mindblown": 3
-      },
-      "evidence_links": [
-        {
-          "label": "Probing the Statistical Properties of Unknown Texts: Application to the Voynich Manuscript (Diego R. Amancio, Eduardo G. Altmann, 2013)",
-          "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0067310&type=printable"
-        },
-        {
-          "label": "Keywords and Co-Occurrence Patterns in the Voynich Manuscript: An Information-Theoretic Analysis (Marcelo A. Montemurro, Damián H. Zanette, 2013)",
-          "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0066344&type=printable"
-        },
-        {
-          "label": "How the Voynich Manuscript was created (Torsten Timm, 2014)",
-          "url": "https://arxiv.org/pdf/1407.6639"
-        }
-      ],
-      "connections": [],
-      "layers": []
-    },
-    {
       "story_id": "the_rat_park_experiment_001",
       "title": "The Rat Park Experiment: Rewriting the Narrative of Addiction",
       "category": "psychology",
@@ -4133,6 +4100,41 @@
         "eugenics_influence"
       ],
       "severity": "disturbing",
+      "hero_image": "/content/images/monster_study_1939.jpg",
+      "added_date": "2026-06-27",
+      "draft": false,
+      "reactions": {
+        "like": 56,
+        "gripping": 24,
+        "scared": 6,
+        "mindblown": 74
+      },
+      "evidence_links": [
+        {
+          "label": "From sectoral systems of innovation to socio-technical systems (Frank W. Geels, 2004)",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0048733304000496"
+        },
+        {
+          "label": "The Medium Is the Monster: Canadian Adaptations of Frankenstein and the Discourse of Technology (Mark A. McCutcheon, 2018)",
+          "url": "https://www.aupress.ca/app/uploads/120275_99Z_McCutcheon_2018-The_Medium_Is_the_Monster.pdf"
+        },
+        {
+          "label": "The \"Monster\" in All of Us: When Victims Become Perpetrators (Abbe Smith, 2005)",
+          "url": "https://scholarship.law.georgetown.edu/cgi/viewcontent.cgi?article=1218&context=facpub"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "milgram_experiment_on_obedience_001",
+          "shared_concept": "unethical_experimentation",
+          "transition_line": "Like 'The Monster Study', the Milgram Experiment also ignited fierce ethical debate, demonstrating how scientific inquiry, when unchecked, can lead to profound psychological distress and raise uncomfortable questions about human nature."
+        },
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Much like the horrific Tuskegee Syphilis Study, 'The Monster Study' stands as a grave testament to the dangers of unethical human experimentation, where the pursuit of knowledge superseded the fundamental rights and well-being of its unsuspecting subjects."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -4176,35 +4178,7 @@
           "content": "In 2001, sixty-two years after the experiment, the University of Iowa publicly apologized for 'The Monster Study,' acknowledging the egregious ethical violations. The apology was a precursor to financial settlements paid to six surviving orphans in 2007, totaling $1.2 million. This belated acknowledgment, while necessary, could never fully compensate for the lifelong psychological burdens these individuals had endured.\n\nThe darkest truth of 'The Monster Study' lies not just in the deliberate infliction of psychological harm upon vulnerable children, but in its stark illustration of a scientific culture where the pursuit of knowledge could, for a time, eclipse fundamental human decency. It serves as a chilling example of the influence of eugenics-era thinking, where certain individuals were deemed suitable for experimentation without true consideration for their inherent rights or welfare.\n\nUltimately, the study became a critical, albeit horrifying, catalyst for the establishment of modern ethical guidelines in human research, particularly the absolute necessity of informed consent and the creation of Institutional Review Boards (IRBs). Its legacy is a permanent scar on the history of psychology, a stark reminder that the quest for understanding must always be tempered by an unwavering commitment to the dignity and safety of every human subject.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "milgram_experiment_on_obedience_001",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "Like 'The Monster Study', the Milgram Experiment also ignited fierce ethical debate, demonstrating how scientific inquiry, when unchecked, can lead to profound psychological distress and raise uncomfortable questions about human nature."
-        },
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Much like the horrific Tuskegee Syphilis Study, 'The Monster Study' stands as a grave testament to the dangers of unethical human experimentation, where the pursuit of knowledge superseded the fundamental rights and well-being of its unsuspecting subjects."
-        }
-      ],
-      "added_date": "2026-06-27",
-      "evidence_links": [
-        {
-          "label": "From sectoral systems of innovation to socio-technical systems (Frank W. Geels, 2004)",
-          "url": "https://www.sciencedirect.com/science/article/pii/S0048733304000496"
-        },
-        {
-          "label": "The Medium Is the Monster: Canadian Adaptations of Frankenstein and the Discourse of Technology (Mark A. McCutcheon, 2018)",
-          "url": "https://www.aupress.ca/app/uploads/120275_99Z_McCutcheon_2018-The_Medium_Is_the_Monster.pdf"
-        },
-        {
-          "label": "The \"Monster\" in All of Us: When Victims Become Perpetrators (Abbe Smith, 2005)",
-          "url": "https://scholarship.law.georgetown.edu/cgi/viewcontent.cgi?article=1218&context=facpub"
-        }
-      ],
-      "hero_image": "/content/images/monster_study_1939.jpg"
+      ]
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
@@ -4219,6 +4193,23 @@
         "unexplained_events"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/eilean_mor_lighthouse_mystery.jpg",
+      "added_date": "2026-06-27",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 22,
+        "scared": 49,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "the_mary_celeste_mystery",
+          "shared_concept": "unexplained_disappearance",
+          "transition_line": "Just as the crew of the Mary Celeste vanished without a trace from their ship, leaving only a chilling emptiness, the Eilean Mòr Lighthouse stands as another silent monument to inexplicable maritime disappearances."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -4262,16 +4253,7 @@
           "content": "Over a century later, the Eilean Mòr Lighthouse Mystery remains officially unsolved, a chilling testament to the sea's indifferent power and the vulnerabilities of those who stand watch against it. Despite extensive searches, inquiries, and countless theories, no definitive evidence has ever emerged to explain the disappearance of James Ducat, Thomas Marshall, and William McArthur. Their bodies were never recovered, leaving no physical trace of their fate.\n\nThe 'darkest truth' is the profound absence of truth itself. The lighthouse keepers simply vanished, absorbed by an environment they spent their lives mastering. The Eilean Mòr case continues to haunt, not because of a definitive horror, but because of its terrifying lack of resolution. It stands as a stark reminder of the isolation of such posts, the unforgiving nature of the elements, and the fragility of human existence when confronted by forces beyond comprehension or control. The lighthouse, now automated, still stands sentinel, but its silent chambers forever guard the secret of its vanished keepers.",
           "cliffhanger": null
         }
-      ],
-      "connections": [
-        {
-          "story_id": "the_mary_celeste_mystery",
-          "shared_concept": "unexplained_disappearance",
-          "transition_line": "Just as the crew of the Mary Celeste vanished without a trace from their ship, leaving only a chilling emptiness, the Eilean Mòr Lighthouse stands as another silent monument to inexplicable maritime disappearances."
-        }
-      ],
-      "added_date": "2026-06-27",
-      "hero_image": "/content/images/eilean_mor_lighthouse_mystery.jpg"
+      ]
     }
   ]
 }
