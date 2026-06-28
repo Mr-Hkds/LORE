@@ -2995,45 +2995,17 @@
     {
       "story_id": "salem_witch_trials_001",
       "title": "The Salem Witch Trials: A Village Consumed by Fear",
-      "category": "true_crime",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "image_query": "Salem witch trials",
       "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "mass_hysteria",
         "groupthink",
         "judicial_injustice",
         "religious_extremism",
         "spectral_evidence"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/salem_witch_trials_001.jpg",
-      "added_date": "2026-06-27",
-      "draft": false,
-      "reactions": {
-        "like": 18,
-        "gripping": 26,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [
-        {
-          "label": "The Nature of Knowledge: Evidence and Evidentiality in the Witness Depositions from the Salem Witch Trials (Peter J. Grund, 2012)",
-          "url": "https://doi.org/10.1215/00031283-1599941"
-        },
-        {
-          "label": "Supplicatory Voices: Genre Properties of the 1692 Petitions in the Salem Witch-Trials<sup>1</sup> (Matti Peikola, 2012)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/00393274.2012.668078?download=true"
-        },
-        {
-          "label": "Textual History as Language History? Text Categories, Corpora, Editions, and the Witness Depositions from the Salem Witch Trials<sup>1</sup> (Peter J. Grund, 2012)",
-          "url": "https://doi.org/10.1080/00393274.2012.668071"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "jonestown_massacre_001",
-          "shared_concept": "groupthink",
-          "transition_line": "The collective madness that consumed Salem echoes the chilling power of groupthink, a psychological phenomenon that can drive individuals to unthinkable acts, much like the tragic events that unfolded in Jonestown."
-        }
       ],
       "layers": [
         {
@@ -3078,7 +3050,13 @@
           "content": "By the time the Salem Witch Trials concluded, a horrific toll had been exacted: nineteen people were hanged on Gallows Hill, one man, Giles Corey, was pressed to death for refusing to enter a plea, and several others died in prison awaiting trial. Over 200 individuals were accused, their reputations shattered and their lives irrevocably altered. The darkest truth of Salem is not merely the unjust deaths, but the swift ease with which an entire community succumbed to mass hysteria, turning on its own members in a paroxysm of fear and religious fervor.\n\nIn the aftermath, surviving victims and their families sought justice and compensation. By 1711, the Massachusetts General Court passed a bill clearing the names of many of the accused and providing financial restitution to their heirs. However, it took centuries for full exoneration for all those implicated. The events revealed deep-seated social anxieties, economic resentments, rigid religious dogma, and the dangerous power of suggestion and groupthink in a confined, isolated community.\n\nThe Salem Witch Trials stand as a chilling historical testament to the fragility of justice when confronted by unfounded accusations, collective panic, and the unchecked authority of those who claim to speak for truth. It serves as a stark reminder of the devastating consequences when reason is abandoned and fear is allowed to dictate judgment, a dark corner of history where the human capacity for cruelty and irrationality was laid bare.",
           "cliffhanger": null
         }
-      ]
+      ],
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 33,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "the_rat_park_experiment_001",
@@ -4165,7 +4143,13 @@
           "content": "Paul Freshour was eventually released from prison in 1994, having consistently maintained his innocence regarding the anonymous letters. To his dying day in 2012, he continued to claim he was framed, asserting that a network of individuals in Circleville was involved in the harassment campaign. The letters themselves tapered off in the late 1980s, but the true identity of the original 'Circleville Writer' was never definitively proven or brought to justice.\n\nThe case of the Circleville Letters remains one of America's most disturbing unsolved mysteries. It stands as a chilling testament to the power of anonymous harassment, its capacity to dismantle lives, corrupt the judicial system, and leave an indelible mark of paranoia on a community. The possibility that the real writer, or writers, walked free, silently observing the chaos they created, is a profoundly unsettling thought, ensuring that Circleville's secrets may forever remain unmasked.",
           "cliffhanger": null
         }
-      ]
+      ],
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 54,
+        "mindblown": 5
+      }
     },
     {
       "story_id": "mystery_of_dwarka",
@@ -4180,6 +4164,36 @@
         "catastrophic_events"
       ],
       "severity": "unsettling",
+      "hero_image": "/content/images/mystery_of_dwarka.jpg",
+      "added_date": "2026-06-28",
+      "draft": false,
+      "reactions": {
+        "like": 41,
+        "gripping": 24,
+        "scared": 3,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "SSII: Secured and High-Quality Steganography Using Intelligent Hybrid Optimization Algorithms for IoT (Sachin Dhawan, Chinmay Chakraborty, 2021)",
+          "url": "https://ieeexplore.ieee.org/ielx7/6287639/9312710/09454474.pdf"
+        },
+        {
+          "label": "S Doradus variables in the Galaxy and the Magellanic Clouds (A. M. van Genderen, 2001)",
+          "url": "https://www.aanda.org/articles/aa/pdf/2001/05/aads1896.pdf"
+        },
+        {
+          "label": "Halotolerant PGPR Stenotrophomonas maltophilia BJ01 Induces Salt Tolerance by Modulating Physiology and Biochemical Activities of Arachis hypogaea (Ankita Alexander, Vijay Kumar Singh, 2020)",
+          "url": "https://www.frontiersin.org/articles/10.3389/fmicb.2020.568289/pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "mythology",
+          "transition_line": "Just as the 'Mystery of Dwarka' grapples with the historical validation of divine narratives, the 'Bhagwan Vishnu Ke Ankahe Raaz' delves into the very cosmic fabric of such mythological entities, exploring their profound implications beyond simple tales."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -4217,112 +4231,7 @@
           "content": "Despite the impressive findings, the interpretation of the 'Mystery of Dwarka' remains fraught with scientific skepticism. Critics point to the inherent difficulties of underwater archaeology, where natural rock formations can sometimes be mistaken for man-made structures. They emphasize the need for more extensive excavation, controlled sample collection, and independent verification of dating results to firmly establish the site's urban character and chronology.\n\nFurthermore, the exact mechanism of the city's submergence is debated. While some theories suggest a sudden tsunami or rapid sea-level rise, others propose a gradual inundation over centuries, consistent with known geological shifts in the region. The lack of clear evidence for a single, catastrophic event that matches the mythological description adds another layer of complexity, preventing a definitive scientific endorsement of the legend.",
           "cliffhanger": "The evidence of a lost city was strong, but the story of its fall, and its true identity, remained submerged in the waters of uncertainty."
         }
-      ],
-      "connections": [
-        {
-          "story_id": "hidden_facts_shri_vishnu_ji",
-          "shared_concept": "mythology",
-          "transition_line": "Just as the 'Mystery of Dwarka' grapples with the historical validation of divine narratives, the 'Bhagwan Vishnu Ke Ankahe Raaz' delves into the very cosmic fabric of such mythological entities, exploring their profound implications beyond simple tales."
-        }
-      ],
-      "added_date": "2026-06-28",
-      "evidence_links": [
-        {
-          "label": "SSII: Secured and High-Quality Steganography Using Intelligent Hybrid Optimization Algorithms for IoT (Sachin Dhawan, Chinmay Chakraborty, 2021)",
-          "url": "https://ieeexplore.ieee.org/ielx7/6287639/9312710/09454474.pdf"
-        },
-        {
-          "label": "S Doradus variables in the Galaxy and the Magellanic Clouds (A. M. van Genderen, 2001)",
-          "url": "https://www.aanda.org/articles/aa/pdf/2001/05/aads1896.pdf"
-        },
-        {
-          "label": "Halotolerant PGPR Stenotrophomonas maltophilia BJ01 Induces Salt Tolerance by Modulating Physiology and Biochemical Activities of Arachis hypogaea (Ankita Alexander, Vijay Kumar Singh, 2020)",
-          "url": "https://www.frontiersin.org/articles/10.3389/fmicb.2020.568289/pdf"
-        }
-      ],
-      "hero_image": "/content/images/mystery_of_dwarka.jpg"
-    },
-    {
-      "story_id": "kalki_bhagavan_movement",
-      "title": "Kalki Bhagavan: The Self-Proclaimed Deity and His Golden Age",
-      "category": "psychology",
-      "hook": "A spiritual leader in rural India declared himself the Kalki Avatar, the prophesied tenth incarnation of Vishnu, promising a 'Golden Age' and ultimate liberation, but this divine promise masked a disturbing reality of wealth and control.",
-      "concepts": [
-        "cults",
-        "charismatic_leaders",
-        "groupthink",
-        "spiritual_exploitation",
-        "mass_delusion",
-        "psychological_manipulation"
-      ],
-      "severity": "chilling",
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: The Prophecy and the Persona",
-          "content": "Centuries of spiritual tradition in India speak of Kalki, the tenth and final avatar of Vishnu, destined to appear at the end of the current age, the Kali Yuga, to cleanse the world of corruption and usher in a new era of righteousness. This ancient prophecy holds profound significance for millions, a powerful narrative embedded deep within the collective consciousness.\n\nInto this landscape of ancient expectation, in the late 1980s, emerged Vijayakumar Naidu, a former clerk from Tamil Nadu. He began to attract a following by presenting himself not merely as a spiritual teacher, but as a harbinger of extraordinary spiritual awakening. His initial claims were modest, focusing on enlightenment and personal transformation, yet his narrative was subtly intertwined with the grander, mystical threads of India's spiritual heritage.",
-          "cliffhanger": "What began as a humble spiritual commune would soon expand into a vast, enigmatic empire built on devotion and an unsettling promise of a new era."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: Early Teachings and the Deeksha Phenomenon",
-          "content": "Vijayakumar Naidu's movement, initially known as the 'Golden Age Foundation' and later 'Oneness University', quickly gained traction. His core teachings revolved around the concept of 'Oneness' – a state of unity with all existence, leading to profound inner peace and freedom from suffering. This resonated deeply with those seeking a modern path to spiritual fulfillment, attracting a diverse array of followers from across India and eventually, the globe.\n\nThe central practice of the movement was 'Deeksha', also known as the 'Oneness Blessing'. This was described as a transfer of divine energy, often administered by touch, which purportedly facilitated spiritual awakening, healed emotional wounds, and even manifested miracles. Thousands reported transformative experiences, attributing profound shifts in their consciousness and lives to Deeksha, cementing their belief in the unique power emanating from the movement's founders.",
-          "cliffhanger": "As the movement gained momentum, the claims of its leader grew bolder, hinting at a power far beyond mere spiritual guidance."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: The Declaration of Divinity",
-          "content": "The subtle hints of divine connection gradually escalated into an overt declaration. Vijayakumar Naidu, alongside his wife Padmavati, began to be referred to as 'Kalki Bhagavan' and 'Amma Bhagavan' – literally 'God' and 'Mother God'. The implication was clear: he was not merely a spiritual teacher but the living, breathing incarnation of Kalki, the avatar prophesied to bring about a new 'Golden Age' for humanity.\n\nThis audacious claim marked a critical turning point. For his devoted followers, it was a confirmation of what they felt in their hearts, a validation of the profound experiences they had undergone. For the outside world, it transitioned the movement from a curious spiritual group to a potentially controversial cult centered on a living deity. The declaration demanded absolute faith, transforming the dynamic between leader and follower from mentorship to worship.",
-          "cliffhanger": "This audacious claim would transform his movement from a spiritual path into a devotion centered entirely on his divine person, demanding absolute faith and a new form of allegiance."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: The Empire of Oneness",
-          "content": "What began as a spiritual commune rapidly evolved into a vast, intricate network of institutions. 'Oneness University' became a sprawling campus offering expensive courses and retreats, attracting thousands of international participants. Beyond spiritual education, the movement established a range of businesses, including schools, real estate ventures, and media production houses, creating a self-sustaining ecosystem.\n\nThe financial structure of the 'Oneness' empire was built on a foundation of donations, course fees, and the encouragement of followers to contribute their wealth and even properties for the 'divine cause'. This system fostered an environment where material resources flowed inwards, consolidating immense wealth and influence within the hands of Kalki Bhagavan and his close family, particularly his son, Krishna. The promise of spiritual enlightenment became inextricably linked to financial participation.",
-          "cliffhanger": "The sprawling network, built on spiritual promises, started to reveal a less divine, more material ambition, raising questions about the true cost of 'oneness'."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: Whispers of Allegations and Investigations",
-          "content": "As the movement grew in prominence and wealth, so did the scrutiny and whispers of discontent. Former followers began to speak out, detailing allegations of financial exploitation, land grabbing, and psychological manipulation. Investigative journalists and media outlets started to delve into the operations of the 'Oneness' empire, uncovering a labyrinth of complex financial transactions and property holdings.\n\nReports emerged suggesting that vast tracts of land were acquired through questionable means, and that followers were pressured to donate significant portions of their earnings, often under the guise of contributing to humanitarian projects that showed little tangible evidence. These accusations painted a stark contrast to the benevolent, enlightened image projected by Kalki Bhagavan, challenging the narrative of a selfless spiritual mission.",
-          "cliffhanger": "Despite the mounting evidence and public accusations, the unwavering faith of his devotees held firm, entangled in a psychological web woven with promises of enlightenment."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: Control, Isolation, and Psychological Manipulation",
-          "content": "Beneath the veneer of spiritual liberation, a more insidious form of control was reportedly at play. Testimonies from ex-devotees described a highly controlled environment where personal autonomy was subtly eroded. Followers were allegedly encouraged to isolate themselves from external influences, including family members who questioned the movement, fostering a dependence on the community and its leaders.\n\nPsychological tactics, including the constant reinforcement of Kalki Bhagavan's divinity and the potential negative 'karma' or 'divine displeasure' for dissent, created an atmosphere of fear and obedience. Marriages were reportedly arranged, and personal finances dictated, all under the guidance of the leadership. This sustained psychological pressure ensured unwavering loyalty, making it incredibly difficult for individuals to critically assess their situation or break free from the powerful grip of the movement.",
-          "cliffhanger": "As the depths of psychological control became apparent, a sudden, dramatic crisis would expose the fragile foundations of his carefully constructed divinity."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: The Raids, The Retreat, and The Enduring Mystery",
-          "content": "The true extent of the alleged financial irregularities was dramatically exposed in October 2019 when Indian income tax authorities conducted extensive raids across multiple premises associated with Kalki Bhagavan and his son. The raids unearthed massive undeclared assets, including foreign currency, diamonds, and properties, totaling hundreds of millions of dollars. These findings directly contradicted the movement's public image of spiritual asceticism and humanitarian service, revealing instead a staggering accumulation of personal wealth.\n\nFollowing the raids and intense public scrutiny, Kalki Bhagavan and his son largely retreated from public view, their 'Golden Age' promises now heavily overshadowed by investigations into tax evasion and illicit financial dealings. While his movement continues to exist in a diminished capacity, the case stands as a chilling testament to the potent combination of spiritual yearning, charismatic leadership, and sophisticated psychological manipulation that can lead individuals to surrender their critical faculties, their wealth, and their autonomy to a self-proclaimed deity. The enduring mystery is not just how such empires are built, but why so many are drawn into their often-destructive embrace.",
-          "cliffhanger": null
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "jonestown_massacre_001",
-          "shared_concept": "cults",
-          "transition_line": "While Jonestown ended in a horrifying mass suicide, the story of Kalki Bhagavan offers a chilling insight into how similar mechanisms of spiritual promise and charismatic control can weave a potent, destructive spell, albeit without the same violent conclusion."
-        }
-      ],
-      "added_date": "2026-06-28",
-      "evidence_links": [
-        {
-          "label": "EMOTIONAL STRUCTURES OF PERCEPTION OF RELIGIOUS TEXTS (The Image of Kalki in Medieval Puranas) (А С Иванова, 2017)",
-          "url": "http://journals.rudn.ru/philosophy/article/download/17672/15378"
-        },
-        {
-          "label": "Kalki językowe w ukraińskich gwarach nadsańskich (Tatiana Kołodyńska, 2010)",
-          "url": "http://apcz.umk.pl/czasopisma/index.php/LinCop/article/download/LinCop.2010.034/6751"
-        },
-        {
-          "label": "Frazeologiczne kalki, półkalki i hybrydy w mowie dwujęzycznej społeczności staroobrzędowców mieszkających w Polsce (Magdalena Grupa-Dolińska, 2019)",
-          "url": "https://journals.akademicka.pl/lv/article/download/732/717"
-        }
-      ],
-      "hero_image": "/content/images/kalki_bhagavan_movement.jpg"
+      ]
     }
   ]
 }
