@@ -401,7 +401,8 @@
   ],
   "mental_health": [
     "folie_a_deux_shared_psychosis",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "the_silent_twins_gibbons"
   ],
   "cyber warfare": [
     "stuxnet_cyberweapon_nuclear_facilities"
@@ -480,7 +481,8 @@
     "franklin_expedition_lost_ships"
   ],
   "paranormal_activity": [
-    "winchester_mystery_house"
+    "winchester_mystery_house",
+    "edinburgh_vaults_001"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -497,7 +499,8 @@
     "project_blue_book_ufo",
     "the_wow_signal",
     "tanganyika_laughter_epidemic",
-    "the_bloop_unexplained_sound"
+    "the_bloop_unexplained_sound",
+    "edinburgh_vaults_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -837,5 +840,26 @@
   ],
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
+  ],
+  "shared_psychosis": [
+    "the_silent_twins_gibbons"
+  ],
+  "selective_mutism": [
+    "the_silent_twins_gibbons"
+  ],
+  "sibling_interdependence": [
+    "the_silent_twins_gibbons"
+  ],
+  "institutionalization": [
+    "the_silent_twins_gibbons"
+  ],
+  "urban_legends": [
+    "edinburgh_vaults_001"
+  ],
+  "historical_trauma": [
+    "edinburgh_vaults_001"
+  ],
+  "haunted_location": [
+    "edinburgh_vaults_001"
   ]
 }
