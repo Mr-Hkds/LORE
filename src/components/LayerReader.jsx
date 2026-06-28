@@ -200,7 +200,7 @@ export default function LayerReader({
             <div className="max-w-2xl mx-auto w-full">
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
-                <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex flex-col relative bg-black/30 dossier-image-container" style={{ borderColor: cardBorder }}>
+                <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex flex-col relative bg-[#090807] dossier-image-container" style={{ borderColor: cardBorder }}>
                   {imgFailed ? (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                       <LoreMark size={24} color="currentColor" />
@@ -228,24 +228,16 @@ export default function LayerReader({
                       </div>
 
                       {/* Foreground image viewport area — renders below the header bar */}
-                      <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center">
-                        {/* Blurred background version to blend nicely inside container */}
-                        <img
-                          src={data.imageUrl}
-                          alt=""
-                          className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-105 pointer-events-none select-none z-0"
-                        />
-
+                      <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
                         <img
                           src={data.imageUrl}
                           alt={topic.label}
                           width="800"
                           height="450"
                           onError={() => setImgFailed(true)}
-                          className="relative z-10 w-full h-full object-contain transition-transform duration-700 hover:scale-[1.01]"
+                          className="relative z-10 max-h-full max-w-full object-contain transition-transform duration-700 hover:scale-[1.01]"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
                       </div>
                     </>
                   )}

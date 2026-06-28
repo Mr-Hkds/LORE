@@ -444,23 +444,12 @@ export default function TodayInShadows() {
                 </div>
 
                 {/* Foreground image viewport area — renders below the header bar */}
-                <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center">
-                  {/* Cinematic gradients */}
-                  <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, #151311 0%, rgba(21, 19, 17, 0.4) 40%, transparent 100%)' }} />
-                  <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.6) 100%)' }} />
-
-                  {/* Blurred background */}
-                  <img
-                    src={wikiImgUrl || dossier.thumbnail}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-105 pointer-events-none select-none z-0"
-                  />
-
+                <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
                   <img
                     src={wikiImgUrl || dossier.thumbnail}
                     alt={dossier.title}
                     onError={() => setImgFailed(true)}
-                    className="relative z-10 w-full h-full object-contain md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
+                    className="relative z-10 max-h-full max-w-full object-contain md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
                     loading="lazy"
                   />
                 </div>
