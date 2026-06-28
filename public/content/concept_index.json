@@ -15,7 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "the_lead_mask_case"
+    "the_lead_mask_case",
+    "operation_gladio"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -33,7 +34,8 @@
     "echelon_global_surveillance",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "operation_gladio"
   ],
   "espionage": [
     "uwe_barschel",
@@ -49,13 +51,15 @@
     "the_bystander_effect",
     "jonestown_massacre_001",
     "dancing_mania_1518_strasbourg",
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "tanganyika_laughter_epidemic"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments"
   ],
   "false_flag": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "operation_gladio"
   ],
   "government_conspiracy": [
     "operation_northwoods_001"
@@ -71,7 +75,8 @@
     "operation_northwoods_001",
     "cia_mk_ultra_program",
     "the_phoenix_program",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "operation_gladio"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -316,16 +321,19 @@
     "the_zodiac_killer"
   ],
   "mass_psychogenic_illness": [
-    "dancing_mania_1518_strasbourg"
+    "dancing_mania_1518_strasbourg",
+    "tanganyika_laughter_epidemic"
   ],
   "social_contagion": [
-    "dancing_mania_1518_strasbourg"
+    "dancing_mania_1518_strasbourg",
+    "tanganyika_laughter_epidemic"
   ],
   "historical_epidemics": [
     "dancing_mania_1518_strasbourg"
   ],
   "psychological_distress": [
-    "dancing_mania_1518_strasbourg"
+    "dancing_mania_1518_strasbourg",
+    "tanganyika_laughter_epidemic"
   ],
   "overpopulation": [
     "universe_25_calhouns_mouse_utopia"
@@ -487,7 +495,8 @@
     "winchester_mystery_house",
     "tunguska_event_001",
     "project_blue_book_ufo",
-    "the_wow_signal"
+    "the_wow_signal",
+    "tanganyika_laughter_epidemic"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -803,5 +812,17 @@
   ],
   "existential_mystery": [
     "the_wow_signal"
+  ],
+  "cold_war": [
+    "operation_gladio"
+  ],
+  "anti_communism": [
+    "operation_gladio"
+  ],
+  "state_terrorism": [
+    "operation_gladio"
+  ],
+  "deep_state": [
+    "operation_gladio"
   ]
 }
