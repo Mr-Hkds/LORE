@@ -420,6 +420,7 @@ export default function App() {
         <StoryCatalog
           category={mappedCategory}
           stories={categoryStories}
+          allStories={stories}
           onSelectStory={handleSelectStory}
           onBack={handleBackToTopics}
           onShareStory={(story) => setShareTarget({ story, layerNum: 1 })}

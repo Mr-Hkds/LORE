@@ -416,31 +416,55 @@ export default function TodayInShadows() {
       >
         {/* Cinematic Banner Image */}
         {dossier.thumbnail && (
-          <div className="w-full h-48 sm:h-64 md:h-72 overflow-hidden bg-[#090807] relative border-b border-neutral-900/60">
+          <div className="w-full h-60 sm:h-64 md:h-72 overflow-hidden bg-[#090807] flex flex-col border-b border-neutral-900/60">
             {imgFailed ? (
               <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                 <LoreMark size={24} color="currentColor" />
                 <span className="text-[8px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
               </div>
             ) : (
-              <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                {/* Cinematic gradients */}
-                <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, #151311 0%, rgba(21, 19, 17, 0.4) 40%, transparent 100%)' }} />
-                <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.6) 100%)' }} />
-                
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 opacity-40 pointer-events-none select-none">
-                  <LoreMark size={10} color="#EDE8DF" />
-                  <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#EDE8DF] uppercase font-bold font-semibold">CLASSIFIED</span>
+              <>
+                {/* Top Dossier Bar with backdrop-blur */}
+                <div className="w-full h-9 z-20 flex-shrink-0 flex items-center justify-between px-3.5 bg-black/45 backdrop-blur-md border-b border-white/5 select-none">
+                  <div className="flex items-center gap-1.5">
+                    <LoreMark size={8} color="#9E7B4C" />
+                    <span
+                      style={{
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: '7.5px',
+                        color: '#EDE8DF',
+                        letterSpacing: '0.22em',
+                        fontWeight: 700,
+                      }}
+                    >CLASSIFIED</span>
+                  </div>
+                  <span className="font-mono text-[6.5px] text-neutral-500 tracking-wider">
+                    SEC-DOSS.00{dossier.story_id ? dossier.story_id.slice(-2) : 'XX'}
+                  </span>
                 </div>
 
-                <img
-                  src={wikiImgUrl || dossier.thumbnail}
-                  alt={dossier.title}
-                  onError={() => setImgFailed(true)}
-                  className="w-full h-full object-cover md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
-                  loading="lazy"
-                />
-              </div>
+                {/* Foreground image viewport area — renders below the header bar */}
+                <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center">
+                  {/* Cinematic gradients */}
+                  <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, #151311 0%, rgba(21, 19, 17, 0.4) 40%, transparent 100%)' }} />
+                  <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.6) 100%)' }} />
+
+                  {/* Blurred background */}
+                  <img
+                    src={wikiImgUrl || dossier.thumbnail}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 scale-105 pointer-events-none select-none z-0"
+                  />
+
+                  <img
+                    src={wikiImgUrl || dossier.thumbnail}
+                    alt={dossier.title}
+                    onError={() => setImgFailed(true)}
+                    className="relative z-10 w-full h-full object-contain md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
+                    loading="lazy"
+                  />
+                </div>
+              </>
             )}
           </div>
         )}

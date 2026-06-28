@@ -894,16 +894,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
 
   // Publish / Push to Live story logic
   const handlePublishStory = async (storyId) => {
-    // Comprehensive check: ensure story has a proper hero image before going live
-    const targetStory = adminStories.find(s => s.story_id === storyId);
-    if (targetStory) {
-      const hasProperImage = targetStory.hero_image && typeof targetStory.hero_image === 'string' && targetStory.hero_image.startsWith('http');
-      if (!hasProperImage) {
-        setToast({ text: `Cannot publish: "${targetStory.title}" is missing a valid Hero Image. Please edit and set an image first.`, type: 'error' });
-        return;
-      }
-    }
-
     try {
       setPublishStatus('Publishing draft story to archive...');
       setIsPublishing(true);
@@ -927,7 +917,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       if (ghToken) {
         const resLocal = await fetch(`/content/stories.json?t=${Date.now()}`);
         if (resLocal.ok) {
-          const localJson = await resLocal.ok ? await resLocal.json() : { stories: [] };
+          const localJson = await resLocal.json();
           const localList = localJson.stories || [];
           const newIndex = rebuildConceptIndex(localList);
           
@@ -950,19 +940,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   };
 
   const handlePublishAllDrafts = async () => {
-    // Comprehensive check: ensure all drafts have proper hero images
-    const invalidDrafts = draftStories.filter(s => {
-      const hasProperImage = s.hero_image && typeof s.hero_image === 'string' && s.hero_image.startsWith('http');
-      return !hasProperImage;
-    });
-
-    if (invalidDrafts.length > 0) {
-      setToast({ 
-        text: `Cannot publish all: ${invalidDrafts.length} draft story(s) lack a valid Hero Image. Please configure images for: ${invalidDrafts.map(s => `"${s.title}"`).join(', ')}`, 
-        type: 'error' 
-      });
-      return;
-    }
 
     try {
       setPublishStatus('Publishing all draft stories to archive...');

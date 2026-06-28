@@ -208,13 +208,39 @@ export default function LayerReader({
                     </div>
                   ) : (
                     <>
+                      {/* Top Dossier Bar with backdrop-blur */}
+                      <div className="absolute top-0 left-0 right-0 h-9 z-20 flex items-center justify-between px-3.5 bg-black/45 backdrop-blur-md border-b border-white/5 select-none pointer-events-none">
+                        <div className="flex items-center gap-1.5">
+                          <LoreMark size={8} color="#9E7B4C" />
+                          <span
+                            style={{
+                              fontFamily: "'Space Mono', monospace",
+                              fontSize: '7px',
+                              color: '#EDE8DF',
+                              letterSpacing: '0.22em',
+                              fontWeight: 700,
+                            }}
+                          >CLASSIFIED</span>
+                        </div>
+                        <span className="font-mono text-[6.5px] text-neutral-500 tracking-wider">
+                          SEC-DOSS.00{topic.id ? topic.id.slice(-2) : 'XX'}
+                        </span>
+                      </div>
+
+                      {/* Blurred background version to blend nicely inside container */}
+                      <img
+                        src={data.imageUrl}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-105 pointer-events-none select-none z-0"
+                      />
+
                       <img
                         src={data.imageUrl}
                         alt={topic.label}
                         width="800"
                         height="450"
                         onError={() => setImgFailed(true)}
-                        className="w-full h-full object-contain transition-transform duration-700 hover:scale-[1.01]"
+                        className="relative z-10 w-full h-full object-contain transition-transform duration-700 hover:scale-[1.01]"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
