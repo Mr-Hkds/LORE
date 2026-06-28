@@ -106,6 +106,7 @@ function StoryCardImage({ story, alt, inView }) {
         className={`w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
           inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]'
         }`}
+        style={{ objectPosition: 'center 18%' }}
         loading="lazy"
       />
     </div>
@@ -174,8 +175,13 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
       {/* Image panel */}
       <div className="w-full h-44 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 story-card-overlay" />
+        {/* Gradient overlay to soften top and bottom boundaries */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-10"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(9, 8, 7, 0.95) 0%, rgba(9, 8, 7, 0.4) 18%, transparent 40%, transparent 70%, #090807 98%)'
+          }}
+        />
       </div>
 
       {/* Content panel */}
