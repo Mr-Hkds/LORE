@@ -30,7 +30,8 @@
     "project_sunshine_cadaver_collection",
     "tunguska_event_001",
     "echelon_global_surveillance",
-    "project_iceworm_secret_city"
+    "project_iceworm_secret_city",
+    "project_artichoke_mind_control"
   ],
   "espionage": [
     "uwe_barschel",
@@ -67,7 +68,8 @@
   "covert_operations": [
     "operation_northwoods_001",
     "cia_mk_ultra_program",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "project_artichoke_mind_control"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -251,7 +253,8 @@
     "jack_the_ripper_001",
     "the_zodiac_killer",
     "the_cleveland_torso_murders",
-    "harold_shipman_serial_killer"
+    "harold_shipman_serial_killer",
+    "albert_fish_the_gray_man"
   ],
   "victorian_era": [
     "jack_the_ripper_001"
@@ -272,15 +275,18 @@
     "milgram_experiment_on_obedience_001"
   ],
   "mind_control": [
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "project_artichoke_mind_control"
   ],
   "unethical_experimentation": [
     "cia_mk_ultra_program",
-    "project_stargate_remote_viewing"
+    "project_stargate_remote_viewing",
+    "project_artichoke_mind_control"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
-    "circleville_letters"
+    "circleville_letters",
+    "project_artichoke_mind_control"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -438,7 +444,8 @@
   "cold_war_era": [
     "project_shamrock",
     "project_stargate_remote_viewing",
-    "project_iceworm_secret_city"
+    "project_iceworm_secret_city",
+    "project_artichoke_mind_control"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships"
@@ -730,5 +737,20 @@
   ],
   "catastrophic_events": [
     "mystery_of_dwarka"
+  ],
+  "child_predator": [
+    "albert_fish_the_gray_man"
+  ],
+  "sadism": [
+    "albert_fish_the_gray_man"
+  ],
+  "psychopathy": [
+    "albert_fish_the_gray_man"
+  ],
+  "unsolved_cases": [
+    "albert_fish_the_gray_man"
+  ],
+  "interrogation_techniques": [
+    "project_artichoke_mind_control"
   ]
 }
