@@ -31,7 +31,8 @@
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_iceworm_secret_city",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "project_blue_book_ufo"
   ],
   "espionage": [
     "uwe_barschel",
@@ -445,7 +446,8 @@
     "project_shamrock",
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "project_blue_book_ufo"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships"
@@ -481,7 +483,8 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "tunguska_event_001"
+    "tunguska_event_001",
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -752,5 +755,26 @@
   ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
+  ],
+  "false_memory": [
+    "the_mandela_effect"
+  ],
+  "cognitive_bias": [
+    "the_mandela_effect"
+  ],
+  "collective_memory": [
+    "the_mandela_effect"
+  ],
+  "reality_perception": [
+    "the_mandela_effect"
+  ],
+  "ufo": [
+    "project_blue_book_ufo"
+  ],
+  "military_investigations": [
+    "project_blue_book_ufo"
+  ],
+  "public_perception": [
+    "project_blue_book_ufo"
   ]
 }
