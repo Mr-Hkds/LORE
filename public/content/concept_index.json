@@ -14,7 +14,8 @@
     "uwe_barschel",
     "barney_barnato",
     "the_taman_shud_case",
-    "the_isdal_woman"
+    "the_isdal_woman",
+    "the_lead_mask_case"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident"
@@ -99,7 +100,8 @@
     "black_dahlia_murder",
     "roanoke_colony_disappearance",
     "eilean_mor_lighthouse_mystery",
-    "circleville_letters"
+    "circleville_letters",
+    "the_lead_mask_case"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -484,7 +486,8 @@
   "unexplained_phenomena": [
     "winchester_mystery_house",
     "tunguska_event_001",
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "the_wow_signal"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -776,5 +779,29 @@
   ],
   "public_perception": [
     "project_blue_book_ufo"
+  ],
+  "occult_rituals": [
+    "the_lead_mask_case"
+  ],
+  "bizarre_circumstances": [
+    "the_lead_mask_case"
+  ],
+  "cryptic_messages": [
+    "the_lead_mask_case"
+  ],
+  "extraterrestrial_life": [
+    "the_wow_signal"
+  ],
+  "radio_astronomy": [
+    "the_wow_signal"
+  ],
+  "seti": [
+    "the_wow_signal"
+  ],
+  "cosmic_communication": [
+    "the_wow_signal"
+  ],
+  "existential_mystery": [
+    "the_wow_signal"
   ]
 }
