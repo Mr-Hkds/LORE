@@ -95,7 +95,8 @@
     "the_cleveland_torso_murders",
     "roanoke_colony_disappearance",
     "eilean_mor_lighthouse_mystery",
-    "black_dahlia_murder"
+    "black_dahlia_murder",
+    "circleville_letters"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -278,7 +279,8 @@
     "project_stargate_remote_viewing"
   ],
   "psychological_warfare": [
-    "cia_mk_ultra_program"
+    "cia_mk_ultra_program",
+    "circleville_letters"
   ],
   "covert_communication": [
     "the_numbers_stations"
@@ -682,5 +684,14 @@
   ],
   "systemic_failure": [
     "harold_shipman_serial_killer"
+  ],
+  "anonymous_harassment": [
+    "circleville_letters"
+  ],
+  "false_imprisonment": [
+    "circleville_letters"
+  ],
+  "small_town_secrets": [
+    "circleville_letters"
   ]
 }
