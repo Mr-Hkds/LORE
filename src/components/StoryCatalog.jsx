@@ -3,8 +3,8 @@
  * No cheap tab bars. Sort is a single ambient dropdown.
  * Cards show depth signal, not badges like "TRENDING".
  */
-import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle, Share2 } from 'lucide-react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { Share2 } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -113,13 +113,13 @@ function StoryCardImage({ story, alt, inView }) {
 }
 
 // ── Story card wrapper with IntersectionObserver for color reveal ────────
-function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, mu }) {
+function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, mu, relativeThresholds }) {
   const [inView, setInView] = useState(false);
   const cardRef = useRef(null);
   const sev   = SEVERITY_CONFIG[story.severity] || SEVERITY_CONFIG.unsettling;
   const { getProgress } = useReadingProgress();
   const prog  = getProgress(story.story_id);
-  const isNew = story.added_date && (Date.now() - new Date(story.added_date).getTime() < 7 * 24 * 60 * 60 * 1000);
+  const isNew = relativeThresholds?.newStoryIds?.has(story.story_id) || false;
 
   useEffect(() => {
     const el = cardRef.current;
@@ -190,18 +190,30 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
               </span>
               <span>·</span>
               <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
-              
-              {/* Dominant reaction - inline metadata style */}
-              {getTotalReactions(story) > 0 && (
+
+              {isNew && (
                 <>
                   <span>·</span>
-                  <EngagementBar reactions={story.reactions} />
+                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#7A9E7E]/10 text-[#8CB893] border border-[#7A9E7E]/25 px-1.5 py-0.5 rounded select-none">
+                    New
+                  </span>
                 </>
               )}
-
-              {isNew && (<><span>·</span><span style={{ color: ac }}>NEW</span></>)}
-              {getTotalReactions(story) > 3 && (
-                <><span>·</span><span style={{ color: '#C4644A' }} className="animate-pulse hidden xs:inline">❖ TRENDING</span></>
+              {getTotalReactions(story) >= (relativeThresholds?.highThreshold || 8) && (
+                <>
+                  <span>·</span>
+                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#9E7B4C]/8 text-[#B89568] border border-[#9E7B4C]/25 px-1.5 py-0.5 rounded select-none">
+                    Top Rated
+                  </span>
+                </>
+              )}
+              {getTotalReactions(story) >= (relativeThresholds?.midThreshold || 3) && getTotalReactions(story) < (relativeThresholds?.highThreshold || 8) && (
+                <>
+                  <span>·</span>
+                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#C4644A]/8 text-[#D97F68] border border-[#C4644A]/25 px-1.5 py-0.5 rounded select-none">
+                    Trending
+                  </span>
+                </>
               )}
             </div>
             <div className="flex items-center gap-2">
@@ -222,12 +234,18 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
 
         {/* Concepts + arrow */}
         <div className="flex items-end justify-between mt-3 gap-2">
-          <div className="flex flex-wrap gap-x-3 gap-y-1">
+          <div className="flex flex-wrap gap-x-3 gap-y-1 items-center">
             {(story.concepts || []).slice(0, 2).map(c => (
               <span key={c} className="text-[8px] sm:text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1" style={{ color: mu }}>
                 <span style={{ color: ac, opacity: 0.5 }}>▪</span>{c}
               </span>
             ))}
+            {getTotalReactions(story) > 0 && (
+              <span className="text-[8px] sm:text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1">
+                <span style={{ color: ac, opacity: 0.5 }}>▪</span>
+                <EngagementBar reactions={story.reactions} />
+              </span>
+            )}
           </div>
           
           <div className="flex items-center flex-shrink-0">
@@ -241,65 +259,6 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.12) ${(prog.lastLayer / 7) * 100}%)` }} />
       )}
     </article>
-  );
-}
-
-// ── Sort dropdown ──────────────────────────────────────────────────────────
-const SORT_OPTIONS = [
-  { value: 'popular',  label: 'Popular + Recent' },
-  { value: 'newest',   label: 'Newest first' },
-  { value: 'engaged',  label: 'Most engaged' },
-  { value: 'progress', label: 'Reading Progress' },
-];
-
-function SortDropdown({ value, onChange, color }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
-  const current = SORT_OPTIONS.find(o => o.value === value);
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="flex items-center gap-2 text-[9px] font-mono tracking-[0.18em] uppercase cursor-pointer transition-opacity hover:opacity-70 active:opacity-40"
-        style={{ color }}
-      >
-        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-          <line x1="0" y1="1" x2="10" y2="1" stroke="currentColor" strokeWidth="1"/>
-          <line x1="0" y1="4" x2="7"  y2="4" stroke="currentColor" strokeWidth="1"/>
-          <line x1="0" y1="7" x2="4"  y2="7" stroke="currentColor" strokeWidth="1"/>
-        </svg>
-        {current?.label}
-        <span style={{ opacity: 0.4 }}>↕</span>
-      </button>
-      {open && (
-        <div
-          className="absolute right-0 top-7 z-50 rounded-lg border overflow-hidden min-w-[160px]"
-          style={{ backgroundColor: '#110F0D', borderColor: 'rgba(237,232,223,0.08)', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.8)' }}
-        >
-          {SORT_OPTIONS.map(opt => (
-            <button
-              key={opt.value}
-              onClick={() => { onChange(opt.value); setOpen(false); }}
-              className="w-full text-left px-4 py-2.5 text-[10px] font-mono tracking-[0.14em] uppercase transition-colors cursor-pointer hover:bg-white/5"
-              style={{
-                color: opt.value === value ? '#9E7B4C' : '#8F8A82',
-                borderBottom: '1px solid rgba(237,232,223,0.04)',
-              }}
-            >
-              {opt.value === value && <span className="mr-2 text-[8px]">◉</span>}
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -338,10 +297,10 @@ function EngagementBar({ reactions }) {
   if (total === 0) return null;
 
   const ITEMS = [
-    { key: 'intriguing', label: 'INTRIGUING', count: intriguing, Icon: Fingerprint, color: '#F59E0B' },
-    { key: 'gripping', label: 'GRIPPING', count: gripping, Icon: Eye, color: '#A78BFA' },
-    { key: 'chilling', label: 'CHILLING', count: chilling, Icon: Skull, color: '#F87171' },
-    { key: 'mind_blowing', label: 'MIND BLOWING', count: mind_blowing, Icon: HelpCircle, color: '#22D3EE' },
+    { key: 'intriguing', label: 'INTRIGUING', count: intriguing, color: '#F59E0B' },
+    { key: 'gripping', label: 'GRIPPING', count: gripping, color: '#A78BFA' },
+    { key: 'chilling', label: 'CHILLING', count: chilling, color: '#F87171' },
+    { key: 'mind_blowing', label: 'MIND BLOWING', count: mind_blowing, color: '#22D3EE' },
   ];
 
   // Find dominant reaction
@@ -356,21 +315,18 @@ function EngagementBar({ reactions }) {
 
   return (
     <span 
-      className="inline-flex items-center gap-1 font-mono uppercase"
+      className="font-mono uppercase text-[8px] sm:text-[9px] tracking-wider font-semibold"
       style={{ color: dominant.color }}
       title={`${dominant.label}: ${dominant.count} reactions`}
     >
-      <dominant.Icon className="w-2.5 h-2.5 opacity-80" />
-      <span>{dominant.label}</span>
-      <span className="font-bold">({dominant.count})</span>
+      {dominant.label} ({dominant.count})
     </span>
   );
 }
 
-const MODULE_LOAD_TIME = Date.now();
 
 // ── Main catalog component ────────────────────────────────────────────────
-export default function StoryCatalog({ category, stories, onSelectStory, onBack, onShareStory }) {
+export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#8F8A82';
@@ -382,6 +338,36 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
   const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
   const { getProgress }         = useReadingProgress();
+
+  // Calculate relative thresholds for engagement and new status from all stories
+  const relativeThresholds = useMemo(() => {
+    const pool = allStories || stories || [];
+    if (pool.length === 0) {
+      return { highThreshold: 8, midThreshold: 3, newStoryIds: new Set() };
+    }
+
+    const counts = pool.map(s => {
+      const rx = s.reactions || {};
+      return (rx.like || rx.intriguing || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
+    });
+    counts.sort((a, b) => a - b);
+    
+    const highIdx = Math.floor(counts.length * 0.80);
+    const midIdx = Math.floor(counts.length * 0.50);
+    
+    const highThreshold = Math.max(1, counts[highIdx] || 8);
+    const midThreshold = Math.max(1, counts[midIdx] || 3);
+
+    const sortedByDate = [...pool]
+      .filter(s => s.added_date)
+      .sort((a, b) => new Date(b.added_date).getTime() - new Date(a.added_date).getTime());
+    
+    const recentCutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    const recentStories = sortedByDate.filter(s => new Date(s.added_date).getTime() > recentCutoff);
+    const newStoryIds = new Set(recentStories.slice(0, 6).map(s => s.story_id));
+
+    return { highThreshold, midThreshold, newStoryIds };
+  }, [allStories, stories]);
 
   useEffect(() => { requestAnimationFrame(() => setVisible(true)); }, []);
 
@@ -402,10 +388,6 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
     return (rx.intriguing || rx.like || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
   };
 
-  const isNewArrival = (addedDate) => {
-    if (!addedDate) return false;
-    return (MODULE_LOAD_TIME - new Date(addedDate)) < 1000 * 60 * 60 * 24 * 3; // 3 days
-  };
 
   const getTrendingScore = (s) => {
     const rxCount = getTotalReactions(s);
@@ -556,6 +538,7 @@ export default function StoryCatalog({ category, stories, onSelectStory, onBack,
                   ac={ac}
                   fg={fg}
                   mu={mu}
+                  relativeThresholds={relativeThresholds}
                 />
               ))}
             </div>

@@ -4,95 +4,6 @@ import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import TodayInShadows from './TodayInShadows';
 
-// Mini image helper using local or Wikipedia cover art with self-healing fallback
-function StoryMiniImage({ story }) {
-  const [fetchedUrl, setFetchedUrl] = useState(null);
-  const [imgFailed, setImgFailed] = useState(false);
-  const [fallbackAttempted, setFallbackAttempted] = useState(false);
-
-  useEffect(() => {
-    // If there is no hero_image, fetch Wikipedia immediately
-    if (!story.hero_image) {
-      let active = true;
-      const query = story.image_query || story.title;
-      if (!query) return;
-
-      // Bypassing Wikipedia API search if it is a direct image URL or path
-      if (query.startsWith('http') || query.startsWith('/')) {
-        return;
-      }
-
-      fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
-        .then(res => res.json())
-        .then(data => {
-          const pages = data.query?.pages;
-          if (pages && active) {
-            const firstPageId = Object.keys(pages)[0];
-            const url = pages[firstPageId]?.thumbnail?.source;
-            if (url) setFetchedUrl(url);
-          }
-        })
-        .catch(() => {});
-        
-      return () => { active = false; };
-    }
-  }, [story.hero_image, story.image_query, story.title]);
-
-  const handleImageError = () => {
-    if (story.hero_image && !fallbackAttempted) {
-      setFallbackAttempted(true);
-      const query = story.image_query || story.title;
-      if (!query) {
-        setImgFailed(true);
-        return;
-      }
-      fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=120&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrlimit=1&origin=*`)
-        .then(res => res.json())
-        .then(data => {
-          const pages = data.query?.pages;
-          if (pages) {
-            const firstPageId = Object.keys(pages)[0];
-            const url = pages[firstPageId]?.thumbnail?.source;
-            if (url) {
-              setFetchedUrl(url);
-            } else {
-              setImgFailed(true);
-            }
-          } else {
-            setImgFailed(true);
-          }
-        })
-        .catch(() => {
-          setImgFailed(true);
-        });
-    } else {
-      setImgFailed(true);
-    }
-  };
-
-  const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
-  const displayUrl = (!fallbackAttempted && story.hero_image) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
-
-  if (!displayUrl || imgFailed) {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
-        <LoreMark size={16} color="currentColor" />
-        <span className="text-[7px] font-mono tracking-[0.1em] uppercase mt-1">CLASSIFIED</span>
-      </div>
-    );
-  }
-
-  return (
-    <img 
-      src={displayUrl} 
-      alt="" 
-      onError={handleImageError}
-      className="w-full h-full object-cover md:grayscale md:opacity-65 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700" 
-      loading="lazy" 
-    />
-  );
-}
-
 const CATEGORY_LABELS = {
   psychology: 'Psychology',
   true_crime: 'True Crime',
@@ -144,6 +55,35 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [continueReadingStories.length]);
+
+  // Calculate relative thresholds for engagement and new status
+  const relativeThresholds = useMemo(() => {
+    if (!allStories || allStories.length === 0) {
+      return { highThreshold: 8, midThreshold: 3, newStoryIds: new Set() };
+    }
+
+    const counts = allStories.map(s => {
+      const rx = s.reactions || {};
+      return (rx.like || rx.intriguing || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
+    });
+    counts.sort((a, b) => a - b);
+    
+    const highIdx = Math.floor(counts.length * 0.80);
+    const midIdx = Math.floor(counts.length * 0.50);
+    
+    const highThreshold = Math.max(1, counts[highIdx] || 8);
+    const midThreshold = Math.max(1, counts[midIdx] || 3);
+
+    const sortedByDate = [...allStories]
+      .filter(s => s.added_date)
+      .sort((a, b) => new Date(b.added_date).getTime() - new Date(a.added_date).getTime());
+    
+    const recentCutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    const recentStories = sortedByDate.filter(s => new Date(s.added_date).getTime() > recentCutoff);
+    const newStoryIds = new Set(recentStories.slice(0, 6).map(s => s.story_id));
+
+    return { highThreshold, midThreshold, newStoryIds };
+  }, [allStories]);
 
   // Rebuild the 3 tabs with deduplicated distinct pools of 3-4 stories each
   const curatedLists = useMemo(() => {
@@ -560,7 +500,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                   {activeTab !== 'resume' && (
                     activeTabStories.length > 0 ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {activeTabStories.map((story, idx) => {
+                        {activeTabStories.map((story) => {
                           const prog = getProgress(story.story_id);
                           const isCompleted = prog?.completed;
                           const currentL = prog?.lastLayer || 0;
@@ -568,7 +508,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                           const startLayer = currentL > 0 ? currentL : 1;
                           const rx = story.reactions || {};
                           const totalRx = (rx.like || rx.intriguing || 0) + (rx.gripping || 0) + (rx.scared || rx.chilling || 0) + (rx.mindblown || rx.mind_blowing || 0);
-                          const isNew = story.added_date && (Date.now() - new Date(story.added_date).getTime() < 7 * 24 * 60 * 60 * 1000);
+                          const isNew = relativeThresholds.newStoryIds.has(story.story_id);
                           const SEVERITY_COLORS = { horrifying: '#C4644A', unsettling: '#9E7B4C', disturbing: '#A0522D', chilling: '#7B8FA1', intriguing: '#7A9E7E' };
                           const sevColor = SEVERITY_COLORS[story.severity] || '#9E7B4C';
                           return (
@@ -612,24 +552,27 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                                   <span className="text-[8px] font-mono uppercase" style={{ color: mu }}>
                                     {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
                                   </span>
-
                                   {/* Curated Tags */}
                                   <span className="flex items-center gap-1.5 flex-wrap ml-1">
                                     {isNew && (
-                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30 px-1 py-0.5 rounded-sm select-none">New</span>
+                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#7A9E7E]/10 text-[#8CB893] border border-[#7A9E7E]/25 px-1.5 py-0.5 rounded-md select-none">
+                                        New
+                                      </span>
                                     )}
-                                    {totalRx >= 8 ? (
-                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#f59e0b]/15 text-[#f59e0b] border border-[#f59e0b]/30 px-1 py-0.5 rounded-sm select-none">Most Rated</span>
-                                    ) : totalRx >= 3 ? (
-                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#c4644a]/15 text-[#c4644a] border border-[#c4644a]/30 px-1 py-0.5 rounded-sm select-none">Trending</span>
-                                    ) : totalRx > 0 ? (
-                                      <span className="text-[7px] font-mono font-bold tracking-[0.12em] uppercase bg-[#9e7b4c]/15 text-[#9e7b4c] border border-[#9e7b4c]/30 px-1 py-0.5 rounded-sm select-none">Good</span>
+                                    {totalRx >= relativeThresholds.highThreshold ? (
+                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#9E7B4C]/8 text-[#B89568] border border-[#9E7B4C]/25 px-1.5 py-0.5 rounded-md select-none">
+                                        Top Rated
+                                      </span>
+                                    ) : totalRx >= relativeThresholds.midThreshold ? (
+                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#C4644A]/8 text-[#D97F68] border border-[#C4644A]/25 px-1.5 py-0.5 rounded-md select-none">
+                                        Trending
+                                      </span>
                                     ) : null}
                                   </span>
 
                                   {totalRx > 0 && (
-                                    <span className="ml-auto flex items-center gap-1 text-[8px] font-mono" style={{ color: mu, opacity: 0.55 }}>
-                                      <span>❖</span><span>{totalRx}</span>
+                                    <span className="ml-auto text-[8px] font-mono" style={{ color: mu, opacity: 0.55 }}>
+                                      {totalRx}
                                     </span>
                                   )}
                                 </div>
