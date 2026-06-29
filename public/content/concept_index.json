@@ -46,7 +46,8 @@
     "the_isdal_woman"
   ],
   "conformity": [
-    "the_asch_conformity_experiments"
+    "the_asch_conformity_experiments",
+    "the_third_wave_experiment"
   ],
   "groupthink": [
     "the_asch_conformity_experiments",
@@ -54,7 +55,9 @@
     "jonestown_massacre_001",
     "dancing_mania_1518_strasbourg",
     "salem_witch_trials_001",
-    "tanganyika_laughter_epidemic"
+    "tanganyika_laughter_epidemic",
+    "the_third_wave_experiment",
+    "the_batavia_shipwreck_mutiny"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -138,7 +141,8 @@
   ],
   "power_dynamics": [
     "stanford_prison_experiment_001",
-    "harold_shipman_serial_killer"
+    "harold_shipman_serial_killer",
+    "the_third_wave_experiment"
   ],
   "social_roles": [
     "stanford_prison_experiment_001"
@@ -243,7 +247,8 @@
   ],
   "social_psychology": [
     "the_bystander_effect",
-    "milgram_experiment_on_obedience_001"
+    "milgram_experiment_on_obedience_001",
+    "the_third_wave_experiment"
   ],
   "inaction": [
     "the_bystander_effect"
@@ -276,7 +281,8 @@
     "jack_the_ripper_001"
   ],
   "obedience": [
-    "milgram_experiment_on_obedience_001"
+    "milgram_experiment_on_obedience_001",
+    "the_third_wave_experiment"
   ],
   "authority": [
     "milgram_experiment_on_obedience_001"
@@ -472,14 +478,16 @@
     "project_blue_book_ufo"
   ],
   "maritime_disaster": [
-    "franklin_expedition_lost_ships"
+    "franklin_expedition_lost_ships",
+    "the_batavia_shipwreck_mutiny"
   ],
   "arctic_exploration": [
     "franklin_expedition_lost_ships"
   ],
   "survival_horror": [
     "franklin_expedition_lost_ships",
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "the_batavia_shipwreck_mutiny"
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
@@ -996,5 +1004,21 @@
   ],
   "ideomotor_effect": [
     "the_philip_experiment"
+  ],
+  "authoritarianism": [
+    "the_third_wave_experiment",
+    "the_batavia_shipwreck_mutiny"
+  ],
+  "mutiny": [
+    "the_batavia_shipwreck_mutiny"
+  ],
+  "psychological_collapse": [
+    "the_batavia_shipwreck_mutiny"
+  ],
+  "human_depravity": [
+    "the_batavia_shipwreck_mutiny"
+  ],
+  "social_hierarchy": [
+    "the_batavia_shipwreck_mutiny"
   ]
 }
