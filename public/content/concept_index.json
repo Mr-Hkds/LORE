@@ -57,7 +57,8 @@
     "tanganyika_laughter_epidemic"
   ],
   "social_pressure": [
-    "the_asch_conformity_experiments"
+    "the_asch_conformity_experiments",
+    "blue_whale_game_001"
   ],
   "false_flag": [
     "operation_northwoods_001",
@@ -381,7 +382,8 @@
   "delusion": [
     "capgras_delusion_001",
     "cotard_delusion_001",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "ravaan_character_study"
   ],
   "altered_perception": [
     "capgras_delusion_001"
@@ -930,5 +932,38 @@
   ],
   "folklore": [
     "the_children_of_woolpit"
+  ],
+  "vulnerability": [
+    "blue_whale_game_001"
+  ],
+  "online_manipulation": [
+    "blue_whale_game_001"
+  ],
+  "suicide_ideation": [
+    "blue_whale_game_001"
+  ],
+  "digital_threats": [
+    "blue_whale_game_001"
+  ],
+  "psychological_exploitation": [
+    "blue_whale_game_001"
+  ],
+  "narcissism": [
+    "ravaan_character_study"
+  ],
+  "hubris": [
+    "ravaan_character_study"
+  ],
+  "power_corruption": [
+    "ravaan_character_study"
+  ],
+  "ego_inflation": [
+    "ravaan_character_study"
+  ],
+  "self_destruction": [
+    "ravaan_character_study"
+  ],
+  "obsession": [
+    "ravaan_character_study"
   ]
 }
