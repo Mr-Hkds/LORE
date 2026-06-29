@@ -19,7 +19,8 @@
     "operation_gladio"
   ],
   "wilderness_horror": [
-    "the_dyatlov_pass_incident"
+    "the_dyatlov_pass_incident",
+    "aokigahara_suicide_forest"
   ],
   "government_secrecy": [
     "the_dyatlov_pass_incident",
@@ -106,7 +107,8 @@
     "roanoke_colony_disappearance",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
-    "the_lead_mask_case"
+    "the_lead_mask_case",
+    "uss_cyclops_vanishing"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -402,7 +404,8 @@
   "mental_health": [
     "folie_a_deux_shared_psychosis",
     "clinical_lycanthropy",
-    "the_silent_twins_gibbons"
+    "the_silent_twins_gibbons",
+    "aokigahara_suicide_forest"
   ],
   "cyber warfare": [
     "stuxnet_cyberweapon_nuclear_facilities"
@@ -472,7 +475,8 @@
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
-    "the_mary_celeste_mystery"
+    "the_mary_celeste_mystery",
+    "uss_cyclops_vanishing"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -599,7 +603,8 @@
   ],
   "maritime_mystery": [
     "the_mary_celeste_mystery",
-    "eilean_mor_lighthouse_mystery"
+    "eilean_mor_lighthouse_mystery",
+    "uss_cyclops_vanishing"
   ],
   "abandoned_vessel": [
     "the_mary_celeste_mystery"
@@ -861,5 +866,26 @@
   ],
   "haunted_location": [
     "edinburgh_vaults_001"
+  ],
+  "world_war_i": [
+    "uss_cyclops_vanishing"
+  ],
+  "military_disaster": [
+    "uss_cyclops_vanishing"
+  ],
+  "suicide": [
+    "aokigahara_suicide_forest"
+  ],
+  "cultural_factors": [
+    "aokigahara_suicide_forest"
+  ],
+  "despair": [
+    "aokigahara_suicide_forest"
+  ],
+  "social_stigma": [
+    "aokigahara_suicide_forest"
+  ],
+  "prevention_efforts": [
+    "aokigahara_suicide_forest"
   ]
 }
