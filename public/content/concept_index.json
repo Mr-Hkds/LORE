@@ -15,8 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "operation_gladio",
-    "the_lead_mask_case"
+    "the_lead_mask_case",
+    "operation_gladio"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -33,12 +33,12 @@
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "operation_gladio",
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "operation_gladio"
   ],
   "espionage": [
     "uwe_barschel",
@@ -515,11 +515,11 @@
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
+    "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
-    "project_blue_book_ufo",
-    "the_children_of_woolpit"
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -744,19 +744,6 @@
   "existential_mystery": [
     "the_wow_signal"
   ],
-  "cold_war": [
-    "operation_gladio",
-    "the_russian_woodpecker_duga_3"
-  ],
-  "anti_communism": [
-    "operation_gladio"
-  ],
-  "state_terrorism": [
-    "operation_gladio"
-  ],
-  "deep_state": [
-    "operation_gladio"
-  ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
   ],
@@ -777,6 +764,10 @@
   ],
   "haunted_location": [
     "edinburgh_vaults_001"
+  ],
+  "cold_war": [
+    "the_russian_woodpecker_duga_3",
+    "operation_gladio"
   ],
   "signals_intelligence": [
     "the_russian_woodpecker_duga_3",
@@ -812,6 +803,15 @@
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment"
+  ],
+  "historical_mystery": [
+    "the_children_of_woolpit"
+  ],
+  "isolated_cultures": [
+    "the_children_of_woolpit"
+  ],
+  "folklore": [
+    "the_children_of_woolpit"
   ],
   "narcissism": [
     "ravaan_character_study"
@@ -1076,13 +1076,13 @@
   "cryptic_messages": [
     "the_lead_mask_case"
   ],
-  "historical_mystery": [
-    "the_children_of_woolpit"
+  "anti_communism": [
+    "operation_gladio"
   ],
-  "isolated_cultures": [
-    "the_children_of_woolpit"
+  "state_terrorism": [
+    "operation_gladio"
   ],
-  "folklore": [
-    "the_children_of_woolpit"
+  "deep_state": [
+    "operation_gladio"
   ]
 }
