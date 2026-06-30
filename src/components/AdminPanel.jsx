@@ -1142,9 +1142,11 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         if (ghToken) {
           const updatedStories = [...stories.filter(s => s.story_id !== storyId), updatedStoryObj];
           const newConceptIndex = rebuildConceptIndex(updatedStories);
+          const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyId]);
           const filesToCommit = [
             { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+            ...imageFiles
           ];
           await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
         }
