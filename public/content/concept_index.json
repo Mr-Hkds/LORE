@@ -31,14 +31,14 @@
     "the_numbers_stations",
     "the_phoenix_program",
     "project_sunshine_cadaver_collection",
-    "tunguska_event_001",
     "echelon_global_surveillance",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
+    "project_blue_book_ufo",
     "operation_gladio",
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
-    "project_blue_book_ufo"
+    "tunguska_event_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -471,8 +471,8 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "operation_paperclip_001",
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "operation_paperclip_001"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships",
@@ -512,14 +512,14 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "tunguska_event_001",
+    "project_blue_book_ufo",
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
     "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
-    "project_blue_book_ufo"
+    "tunguska_event_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -580,9 +580,6 @@
   ],
   "captivity_syndrome": [
     "stockholm_syndrome_001"
-  ],
-  "cosmic_impact": [
-    "tunguska_event_001"
   ],
   "mass_hysteria": [
     "salem_witch_trials_001"
@@ -755,6 +752,15 @@
   ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
+  ],
+  "ufo": [
+    "project_blue_book_ufo"
+  ],
+  "military_investigations": [
+    "project_blue_book_ufo"
+  ],
+  "public_perception": [
+    "project_blue_book_ufo"
   ],
   "occult_rituals": [
     "the_lead_mask_case"
@@ -1064,6 +1070,9 @@
   "sensory_perception": [
     "the_taos_hum"
   ],
+  "cosmic_impact": [
+    "tunguska_event_001"
+  ],
   "child_predator": [
     "albert_fish_the_gray_man"
   ],
@@ -1075,14 +1084,5 @@
   ],
   "unsolved_cases": [
     "albert_fish_the_gray_man"
-  ],
-  "ufo": [
-    "project_blue_book_ufo"
-  ],
-  "military_investigations": [
-    "project_blue_book_ufo"
-  ],
-  "public_perception": [
-    "project_blue_book_ufo"
   ]
 }
