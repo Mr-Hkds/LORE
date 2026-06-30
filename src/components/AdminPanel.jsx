@@ -1168,10 +1168,9 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
 
       // Push straight to GitHub if sync credentials are active
       if (ghToken) {
-        const resLocal = await fetch(`/content/stories.json?t=${Date.now()}`);
+        const resLocal = await fetch(`/api/stories?t=${Date.now()}`);
         if (resLocal.ok) {
-          const localJson = await resLocal.json();
-          const localList = localJson.stories || [];
+          const localList = await resLocal.json();
           const newIndex = rebuildConceptIndex(localList);
           
           const filesToCommit = [
@@ -1214,10 +1213,9 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       if (refetchStories) await refetchStories();
 
       if (ghToken) {
-        const resLocal = await fetch(`/content/stories.json?t=${Date.now()}`);
+        const resLocal = await fetch(`/api/stories?t=${Date.now()}`);
         if (resLocal.ok) {
-          const localJson = await resLocal.json();
-          const localList = localJson.stories || [];
+          const localList = await resLocal.json();
           const newIndex = rebuildConceptIndex(localList);
           
           const filesToCommit = [
