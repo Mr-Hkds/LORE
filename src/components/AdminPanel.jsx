@@ -1116,18 +1116,39 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   const handleSaveImageSource = async (storyId, imageSource) => {
     try {
       const targetStory = adminStories.find(s => s.story_id === storyId);
-      if (!targetStory) return;
+      if (!targetStory) return null;
 
       const newHeroImage = await saveRemoteImageLocally(storyId, imageSource);
+      
+      const updatedStoryObj = { 
+        ...targetStory, 
+        hero_image: newHeroImage,
+        image_missing: 0,
+        draft: 0
+      };
+      
+      if (!updatedStoryObj.added_date || updatedStoryObj.added_date === '2026-01-01') {
+        updatedStoryObj.added_date = new Date().toLocaleDateString('en-CA');
+      }
       
       const res = await fetch(`/api/stories/${storyId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...targetStory, hero_image: newHeroImage })
+        body: JSON.stringify(updatedStoryObj)
       });
       
       if (res.ok) {
-        setToast({ text: 'Cover image updated successfully!', type: 'success' });
+        if (ghToken) {
+          const updatedStories = [...stories.filter(s => s.story_id !== storyId), updatedStoryObj];
+          const newConceptIndex = rebuildConceptIndex(updatedStories);
+          const filesToCommit = [
+            { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
+            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+          ];
+          await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
+        }
+        
+        setToast({ text: 'Cover image updated and story published live!', type: 'success' });
         await loadAdminStories();
         if (refetchStories) await refetchStories();
         return newHeroImage;
@@ -1270,10 +1291,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         savedImageUrl = savedImg;
       }
       
-      if (story.draft) {
-        setPasteStatusText('Publishing dossier to local archive...');
-        await handlePublishStory(story_id, true);
-      }
+      // Publishing drafts is now handled directly inside handleSaveImageSource
       
       if (!ghToken) {
         setPasteSuccess(true);
