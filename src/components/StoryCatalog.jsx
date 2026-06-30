@@ -12,53 +12,7 @@ import LoreMark from './LoreMark';
 // Helper to automatically redact sensitive terms and custom bracketed text
 export function redactText(text) {
   if (!text) return '';
-  
-  // 1. Check double bracket syntax [[custom redacted]]
-  const customRegex = /\[\[(.*?)\]\]/g;
-  const hasBrackets = /\[\[.*?\]\]/.test(text);
-  
-  if (hasBrackets) {
-    customRegex.lastIndex = 0;
-    const parts = [];
-    let lastIndex = 0;
-    let match;
-    while ((match = customRegex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.substring(lastIndex, match.index));
-      }
-      parts.push(
-        <span key={match.index} className="redacted-text" title="CLASSIFIED // HOVER TO DECRYPT">
-          {match[1]}
-        </span>
-      );
-      lastIndex = customRegex.lastIndex;
-    }
-    if (lastIndex < text.length) {
-      parts.push(text.substring(lastIndex));
-    }
-    return parts;
-  }
-
-  // 2. Default fallback: Autoredact years, operations, intelligence agencies
-  const sensitiveTerms = /\b(CIA|FBI|KGB|NSA|Pentagon|MI6|Project|MKULTRA|experiment|experiments|military|covert|operations|confidential|secret|secrets|underground|bunker|19\d{2}|20\d{2})\b/gi;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-  while ((match = sensitiveTerms.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push(text.substring(lastIndex, match.index));
-    }
-    parts.push(
-      <span key={match.index} className="redacted-text" title="CLASSIFIED // HOVER TO DECRYPT">
-        {match[0]}
-      </span>
-    );
-    lastIndex = sensitiveTerms.lastIndex;
-  }
-  if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
-  }
-  return parts.length > 0 ? parts : text;
+  return text.replace(/\[\[(.*?)\]\]/g, '$1');
 }
 
 const SEVERITY_CONFIG = {
