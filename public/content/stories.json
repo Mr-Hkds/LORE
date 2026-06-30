@@ -1508,11 +1508,8 @@
     {
       "story_id": "jonestown_massacre_001",
       "title": "Jonestown: The Cult of Revolutionary Suicide",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
-      "image_query": "jonestown_massacre",
-      "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
       "concepts": [
         "cults",
         "mass_suicide",
@@ -1521,6 +1518,18 @@
         "groupthink",
         "obedience_to_authority"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 13,
+        "scared": 60,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -1565,12 +1574,7 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 20,
-        "gripping": 13,
-        "scared": 60,
-        "mindblown": 11
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_numbers_stations",
@@ -2275,11 +2279,8 @@
     {
       "story_id": "winchester_mystery_house",
       "title": "The Winchester Mystery House: A Widow's Endless Construction",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
-      "image_query": "",
-      "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
       "concepts": [
         "paranormal_activity",
         "grief_and_madness",
@@ -2288,6 +2289,18 @@
         "unexplained_phenomena",
         "haunted_house"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 18,
+        "scared": 50,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2326,12 +2339,7 @@
           "content": "The darkest documented truth of the Winchester Mystery House lies not solely in its spectral claims, which remain subjective, but in the profound human tragedy that underlies its very existence. Sarah Winchester was undeniably a woman consumed by overwhelming grief and a deep-seated sense of guilt, exacerbated by her vast fortune and the deadly legacy of the Winchester rifle.\n\nWhile the concept of vengeful spirits driving her to build is a captivating narrative, the historical record confirms her debilitating losses and her earnest embrace of spiritualism as a coping mechanism. Her immense wealth allowed her to manifest this internal anguish into an unprecedented, tangible reality, transforming a farmhouse into a bewildering monument of her psyche.\n\nThe house, therefore, stands as a haunting testament to one woman's lifelong attempt to outrun or appease the shadows of her past. The 'curse' was perhaps less about literal spirits and more about the crushing weight of loss, the immense guilt associated with her family's fortune built on death, and a profound psychological haunting made terrifyingly manifest in brick, wood, and a never-ending labyrinth."
         }
       ],
-      "reactions": {
-        "like": 20,
-        "gripping": 18,
-        "scared": 50,
-        "mindblown": 11
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2407,11 +2415,8 @@
     {
       "story_id": "the_cleveland_torso_murders",
       "title": "The Cleveland Torso Murders: The Unseen Butcher of Kingsbury Run",
-      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
-      "image_query": "",
-      "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
       "concepts": [
         "serial_killer",
         "unsolved_mystery",
@@ -2420,6 +2425,18 @@
         "forensic_challenge",
         "political_pressure"
       ],
+      "severity": "chilling",
+      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 25,
+        "gripping": 13,
+        "scared": 25,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2464,21 +2481,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 25,
-        "gripping": 13,
-        "scared": 25,
-        "mindblown": 6
-      }
+      "image_missing": false
     },
     {
       "story_id": "project_stargate_remote_viewing",
       "title": "Project Stargate: The Secret Quest for Psychic Espionage",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
-      "image_query": "",
-      "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
       "concepts": [
         "remote_viewing",
         "government_experiments",
@@ -2489,6 +2498,18 @@
         "unethical_experimentation",
         "scientific_skepticism"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 33,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2533,21 +2554,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 20,
-        "gripping": 33,
-        "scared": 6,
-        "mindblown": 6
-      }
+      "image_missing": false
     },
     {
       "story_id": "stockholm_syndrome_001",
       "title": "Stockholm Syndrome: The Unsettling Bond of Captivity",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
-      "image_query": "Stockholm Syndrome",
-      "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
       "concepts": [
         "hostage_psychology",
         "trauma_bonding",
@@ -2555,6 +2568,18 @@
         "cognitive_dissonance",
         "captivity_syndrome"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 24,
+        "scared": 5,
+        "mindblown": 59
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2599,26 +2624,30 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 46,
-        "gripping": 24,
-        "scared": 5,
-        "mindblown": 59
-      }
+      "image_missing": false
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
       "title": "Project Sunshine: The Covert Harvest of the Dead",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
-      "image_query": "",
-      "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
       "concepts": [
         "human_experimentation",
         "government_secrecy",
         "medical_ethics"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 40,
+        "gripping": 38,
+        "scared": 5,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2663,21 +2692,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 40,
-        "gripping": 38,
-        "scared": 5,
-        "mindblown": 11
-      }
+      "image_missing": false
     },
     {
       "story_id": "salem_witch_trials_001",
       "title": "The Salem Witch Trials: A Village Consumed by Fear",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
-      "image_query": "Salem witch trials",
-      "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
       "concepts": [
         "mass_hysteria",
         "groupthink",
@@ -2685,6 +2706,18 @@
         "religious_extremism",
         "spectral_evidence"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2729,21 +2762,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 18,
-        "gripping": 26,
-        "scared": 33,
-        "mindblown": 4
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_rat_park_experiment_001",
       "title": "The Rat Park Experiment: Rewriting the Narrative of Addiction",
-      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
-      "image_query": "",
-      "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
       "category": "psychology",
-      "severity": "disturbing",
+      "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
       "concepts": [
         "addiction",
         "environment_vs_biology",
@@ -2753,6 +2778,18 @@
         "drug_policy",
         "social_pathology"
       ],
+      "severity": "disturbing",
+      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 17,
+        "gripping": 25,
+        "scared": 3,
+        "mindblown": 25
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2797,12 +2834,7 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 17,
-        "gripping": 25,
-        "scared": 3,
-        "mindblown": 25
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_mary_celeste_mystery",
@@ -2896,11 +2928,8 @@
     {
       "story_id": "phineas_gage_brain_injury",
       "title": "The Case of Phineas Gage: The Man Whose Mind Was Shattered",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
-      "image_query": "Phineas Gage",
-      "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
       "concepts": [
         "brain_injury",
         "personality_change",
@@ -2908,6 +2937,18 @@
         "frontal_lobe",
         "self_identity"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 55,
+        "gripping": 18,
+        "scared": 2,
+        "mindblown": 48
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2952,21 +2993,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 55,
-        "gripping": 18,
-        "scared": 2,
-        "mindblown": 48
-      }
+      "image_missing": false
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
       "title": "Dissociative Identity Disorder: The Shattered Self",
-      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
-      "image_query": "",
-      "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
       "concepts": [
         "dissociation",
         "trauma_response",
@@ -2974,6 +3007,18 @@
         "alter_personalities",
         "coping_mechanisms"
       ],
+      "severity": "chilling",
+      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 19,
+        "scared": 5,
+        "mindblown": 44
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3018,21 +3063,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 46,
-        "gripping": 19,
-        "scared": 5,
-        "mindblown": 44
-      }
+      "image_missing": false
     },
     {
       "story_id": "black_dahlia_murder",
       "title": "The Black Dahlia Murder: Hollywood's Unsolved Nightmare",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
-      "image_query": "",
-      "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
       "concepts": [
         "unsolved_mystery",
         "brutal_murder",
@@ -3041,6 +3078,18 @@
         "forensic_challenge",
         "police_misconduct"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 27,
+        "scared": 49,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3085,21 +3134,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 54,
-        "gripping": 27,
-        "scared": 49,
-        "mindblown": 10
-      }
+      "image_missing": false
     },
     {
       "story_id": "clinical_lycanthropy",
       "title": "Clinical Lycanthropy: When the Human Mind Becomes a Beast",
-      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
-      "image_query": "",
-      "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
       "concepts": [
         "delusion",
         "psychosis",
@@ -3107,6 +3148,18 @@
         "neurology",
         "mental_health"
       ],
+      "severity": "chilling",
+      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 23,
+        "scared": 3,
+        "mindblown": 28
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3151,21 +3204,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 20,
-        "gripping": 23,
-        "scared": 3,
-        "mindblown": 28
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_isdal_woman",
       "title": "The Isdal Woman: Europe's Unidentified Shadow",
-      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
-      "image_query": "",
-      "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
       "concepts": [
         "unidentified_person",
         "espionage",
@@ -3173,6 +3218,18 @@
         "unexplained_deaths",
         "cold_case"
       ],
+      "severity": "chilling",
+      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3217,21 +3274,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 33,
-        "mindblown": 4
-      }
+      "image_missing": false
     },
     {
       "story_id": "project_iceworm_secret_city",
       "title": "Project ICEWORM: The US Army's Secret City Under the Ice",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
-      "image_query": "",
-      "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
       "concepts": [
         "cold_war_era",
         "government_secrecy",
@@ -3239,6 +3288,18 @@
         "climate_change_impact",
         "military_infrastructure"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 23,
+        "gripping": 31,
+        "scared": 6,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3283,21 +3344,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 23,
-        "gripping": 31,
-        "scared": 6,
-        "mindblown": 4
-      }
+      "image_missing": false
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
       "title": "The Vanished Keepers of Eilean Mòr: A Lighthouse's Silent Riddle",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
-      "image_query": "",
-      "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
       "concepts": [
         "unsolved_mystery",
         "disappearance",
@@ -3305,6 +3358,18 @@
         "isolated_location",
         "unexplained_events"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 22,
+        "scared": 49,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3349,21 +3414,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 44,
-        "gripping": 22,
-        "scared": 49,
-        "mindblown": 10
-      }
+      "image_missing": false
     },
     {
       "story_id": "harold_shipman_serial_killer",
       "title": "The Angel of Death: Harold Shipman's Betrayal",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
-      "image_query": "",
-      "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
       "concepts": [
         "serial_killer",
         "medical_malpractice",
@@ -3372,6 +3429,18 @@
         "systemic_failure",
         "power_dynamics"
       ],
+      "severity": "chilling",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 56,
+        "gripping": 34,
+        "scared": 71,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3416,21 +3485,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 56,
-        "gripping": 34,
-        "scared": 71,
-        "mindblown": 12
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_ganzfeld_experiment",
       "title": "The Ganzfeld Experiment: The Science of Unseen Minds",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
-      "image_query": "Ganzfeld experiment",
-      "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
       "category": "psychology",
-      "severity": "unsettling",
+      "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
       "concepts": [
         "parapsychology",
         "ESP",
@@ -3441,6 +3502,18 @@
         "replication_crisis",
         "perception_biases"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 4,
+        "mindblown": 31
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3485,21 +3558,13 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 4,
-        "mindblown": 31
-      }
+      "image_missing": false
     },
     {
       "story_id": "circleville_letters",
       "title": "The Circleville Letters: A Town Held Hostage by Anonymous Fear",
-      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
-      "image_query": "",
-      "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
       "concepts": [
         "anonymous_harassment",
         "unsolved_mystery",
@@ -3507,6 +3572,18 @@
         "psychological_warfare",
         "small_town_secrets"
       ],
+      "severity": "chilling",
+      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 54,
+        "mindblown": 5
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3551,12 +3628,7 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 24,
-        "gripping": 22,
-        "scared": 54,
-        "mindblown": 5
-      }
+      "image_missing": false
     },
     {
       "story_id": "project_artichoke_mind_control",
@@ -3750,9 +3822,9 @@
         "oceanographic_research"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_bloop_unexplained_sound.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f2sztpw2_FXT3ssVNrTXAd26Ygw_3dtfP0VKQTdDk2SgtGgAmho9CXvU&s=10",
       "added_date": "2026-06-28",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 26,
         "gripping": 14,
@@ -3811,88 +3883,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": true
-    },
-    {
-      "story_id": "edinburgh_vaults_001",
-      "title": "The Edinburgh Vaults: Echoes from a Buried City",
-      "category": "paranormal",
-      "hook": "Beneath Edinburgh's bustling streets lies a sprawling, forgotten underworld—a labyrinth of stone vaults where desperation once bred disease, crime, and an enduring chill that whispers of the past.",
-      "concepts": [
-        "paranormal_activity",
-        "urban_legends",
-        "historical_trauma",
-        "unexplained_phenomena",
-        "haunted_location"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/edinburgh_vaults_001.jpg",
-      "added_date": "2026-06-28",
-      "draft": false,
-      "reactions": {
-        "like": 31,
-        "gripping": 34,
-        "scared": 66,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "Paranormal tourism in Edinburgh : storytelling, appropriating ghost culture and presenting an uncanny heritage (Elizabeth Holzhauser, 2015)",
-          "url": "http://hdl.handle.net/10023/6922"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "winchester_mystery_house",
-          "shared_concept": "paranormal_activity",
-          "transition_line": "Just as the Winchester Mystery House stands as a testament to a widow's haunted conscience, the Edinburgh Vaults reveal how a city's collective suffering can permeate its very foundations, creating a chilling echo of the past."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Buried City's Breath",
-          "content": "In the late 18th century, as Edinburgh flourished, a monumental engineering project unfolded: the construction of the South Bridge. Beneath its twenty arches, a series of vast, cavernous spaces were designed to house workshops, taverns, and storage facilities. These chambers, known as the Edinburgh Vaults or South Bridge Vaults, were initially a hub of commercial activity, bustling with tradesmen and merchants. The intention was to create a vibrant subterranean extension of the city's burgeoning economy, a testament to its ambition and growth.\n\nHowever, the grand vision for the vaults quickly soured. Poor construction, rampant dampness, and inadequate ventilation made them unsuitable for their intended purpose. Within a few decades, most legitimate businesses abandoned the subterranean spaces, unable to contend with the perpetually dark, waterlogged, and often disease-ridden conditions. The initial promise of prosperity gave way to a creeping neglect that would soon define their character.\n\nAs the legitimate commerce receded, a different kind of activity began to seep into the abandoned chambers, a shadow economy that thrived on the very isolation and darkness the vaults provided. This shift marked the true beginning of the vaults' dark legend.",
-          "cliffhanger": "What began as a commercial failure would rapidly transform into a haven for the city's most desperate and dangerous elements, sealing their fate as a true underbelly."
-        },
-        {
-          "layer": 2,
-          "layer_name": "A Descent into Despair",
-          "content": "By the early 19th century, the Edinburgh Vaults had become a notorious slum, a refuge for the city's poorest, most marginalized, and criminal populations. Families, often entire generations, crammed into the damp, windowless cells, living in squalor unimaginable even by the standards of the time. Without sanitation, fresh air, or natural light, disease spread unchecked, and life expectancy plummeted. The vaults became a literal pit of misery, a forgotten world just meters beneath the polite society above.\n\nConditions deteriorated to such an extent that the vaults were often waist-deep in raw sewage and refuse. The air was thick with the stench of decay, illness, and despair. Many residents, having nowhere else to go, were born, lived, and died within these suffocating confines, rarely if ever seeing the sky. This prolonged human suffering infused the very stones of the vaults with an indelible imprint of hardship and hopelessness.\n\nThe descent into despair was not merely physical; it was also moral. Surrounded by poverty, crime became not just prevalent but essential for survival. This harsh reality painted a bleak picture of human resilience and desperation within the forgotten tunnels.",
-          "cliffhanger": "Yet, beyond mere survival, these depths concealed activities far more sinister than petty theft, further staining the vaults with human depravity."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Unseen Inhabitants",
-          "content": "The anonymity and isolation of the vaults made them perfect breeding grounds for organized crime and illicit enterprises. Infamous figures like the serial killers Burke and Hare were known to frequent the vaults, allegedly using them to store bodies before selling them to anatomists. Illegal distilleries operated in secret, producing potent, unregulated spirits that fueled both escape and further violence among the destitute inhabitants. The darkness offered not just shelter, but a cloak for heinous deeds.\n\nBare-knuckle boxing matches, gambling dens, and prostitution rings flourished, shielded from the watchful eyes of the city authorities above. Robberies were common, and violence was an everyday occurrence. The lack of law enforcement presence allowed a brutal, self-governing hierarchy to emerge, where the strongest or most ruthless held sway. The vaults became a place where lives were cheap, and morality was a forgotten luxury.\n\nHistorians and chroniclers of the era documented the horrifying reality, describing the vaults as a 'veritable cesspool of human vice and degradation.' The air was thick not just with physical pollutants, but with the palpable weight of desperation and fear. These dark chapters etched themselves deeply into the fabric of the vaults, leaving behind a legacy that transcended mere memory.",
-          "cliffhanger": "With such a dark history of suffering and malevolence, it became inevitable that the vaults would not remain merely an historical curiosity, but a place where the past refused to die."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Abandonment and Rediscovery",
-          "content": "By the mid-19th century, the vaults had become so dangerous and unsanitary that city officials decided to seal them off. Entrances were bricked up, and the entire subterranean network was effectively buried and forgotten by mainstream Edinburgh. For nearly 170 years, the vaults lay entombed beneath the city, their dark secrets preserved in the damp, undisturbed air. They became a ghostly legend, a whispered tale of a city's dark past that few believed to be real.\n\nThe rediscovery began piecemeal, with fragments found during construction work, but it was not until the 1980s that a thorough exploration and partial excavation commenced. A local rugby player, Norrie Rowan, spearheaded efforts to uncover and clear sections of the vaults, revealing the extent of the hidden city beneath. What they found was a trove of artifacts: pottery shards, tools, buttons, and even human remains, all testifying to the lives and deaths of those who once inhabited these forgotten spaces.\n\nThe re-opening of the vaults brought their tragic history back into the light, transforming them from a forgotten grave into a chilling historical exhibit. But as people began to explore these newly accessible tunnels, they found that the echoes of the past were not merely historical; they seemed to be unnervingly present.",
-          "cliffhanger": "As the physical barriers came down, invisible ones seemed to emerge, as explorers and visitors began reporting strange, inexplicable encounters within the unearthed darkness."
-        },
-        {
-          "layer": 5,
-          "layer_name": "Modern Encounters and Allegations",
-          "content": "Since their rediscovery and the commencement of public tours, the Edinburgh Vaults have garnered a reputation as one of the most haunted locations in the world. Visitors and tour guides consistently report a wide range of inexplicable phenomena. These include sudden drops in temperature, often localized to specific areas, far beyond what the ambient dampness would suggest. Whispers and disembodied voices are frequently heard, sometimes responding to questions, other times speaking in an unknown tongue or uttering distressed sounds.\n\nPhysical sensations are also common. Many visitors describe feeling an unseen presence brush past them, or a cold hand touching their arm or neck. Some have reported being pushed, scratched, or having their clothes tugged by invisible forces. The feeling of being watched is almost universal, and electronic devices, particularly cameras and phones, are known to malfunction inexplicably within certain sections of the vaults, their batteries draining rapidly or their screens freezing.\n\nThese consistent accounts, spanning decades and involving countless independent witnesses, have cemented the vaults' status as a genuine site of alleged paranormal activity. The sheer volume and similarity of the experiences suggest something more than mere suggestion or overactive imaginations.",
-          "cliffhanger": "Among the myriad of reported phenomena, specific entities have emerged, developing their own distinct reputations for disturbing interactions with the living."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Darker Residents: Mr. Boots and The Watcher",
-          "content": "Among the myriad of spectral presences said to inhabit the Edinburgh Vaults, two figures stand out for their consistent and often terrifying interactions: 'Mr. Boots' and 'The Watcher'. Mr. Boots is believed to be the spirit of a cobbler or tradesman who once worked in the vaults. His presence is frequently associated with the distinct sound of heavy, old-fashioned boots stomping through the dark corridors, often preceding other phenomena or appearing when no living person is near.\n\nThe other, far more menacing entity is often referred to as 'The Watcher,' or simply 'The Dark Figure.' This is described as a distinctly malevolent presence, responsible for the more aggressive and physically intrusive encounters. Visitors and guides have reported feeling immense pressure on their chests, being pushed forcibly, or experiencing intense feelings of dread and anger emanating from specific areas. Some claim to have seen a shadowy figure at the periphery of their vision, particularly in the deep, unlit sections.\n\nThese entities, along with the alleged spirit of a young girl named 'Little Annie' and a group of poltergeist-like children, form a chilling tableau of the vault's resident ghosts. Tour guides, who spend countless hours within these chambers, often have their own personal harrowing tales of encounters, lending credence to the idea that these are not merely fleeting shadows, but persistent, interactive intelligences.",
-          "cliffhanger": "The question remains: are these merely residual echoes of a tragic past, or are they conscious entities, forever bound to the darkness and despair of their former existence?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Lingering Trauma",
-          "content": "The absolute darkest documented truth of the Edinburgh Vaults lies not just in the alleged hauntings, but in the undeniable, historical suffering that created the fertile ground for such phenomena. The vaults represent a concrete manifestation of Edinburgh's hidden history of poverty, disease, and crime, a tangible record of human despair. The thousands of lives lived and lost in such horrific conditions, the violence perpetrated, and the pure desperation endured by its inhabitants, are historical facts.\n\nParanormal theories often suggest that intense human emotion and traumatic events can leave an energetic imprint on a location, creating 'residual hauntings' that replay moments of the past. Others propose that these are 'intelligent hauntings,' where the spirits of the deceased remain tethered to the place of their greatest suffering, perhaps unaware of their passing or unwilling to move on. In the vaults, the sheer concentration of documented historical trauma, from starvation and illness to murder and exploitation, provides a compelling, if chilling, context for the alleged paranormal activity.\n\nThe enduring cold, the phantom whispers, and the unseen touches are, for many, the tangible echoes of this profound historical trauma. The Edinburgh Vaults serve as a stark reminder that some dark histories are not merely written in books, but are deeply imprinted into the very stones of our cities, whispering their tales for centuries, forever chilling those who dare to listen.",
-          "cliffhanger": null
-        }
-      ],
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -3987,11 +3978,8 @@
     {
       "story_id": "mystery_of_dwarka",
       "title": "The Sunken Kingdom: Dwarka's Enduring Mystery",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
-      "image_query": "",
-      "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
       "category": "mythology",
-      "severity": "unsettling",
+      "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
       "concepts": [
         "lost_civilizations",
         "mythology",
@@ -3999,6 +3987,18 @@
         "historical_validation",
         "catastrophic_events"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 41,
+        "gripping": 24,
+        "scared": 3,
+        "mindblown": 7
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4037,12 +4037,7 @@
           "cliffhanger": "The evidence of a lost city was strong, but the story of its fall, and its true identity, remained submerged in the waters of uncertainty."
         }
       ],
-      "reactions": {
-        "like": 41,
-        "gripping": 24,
-        "scared": 3,
-        "mindblown": 7
-      }
+      "image_missing": false
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -4145,17 +4140,45 @@
     {
       "story_id": "the_children_of_woolpit",
       "title": "The Green Children of Woolpit: An Unearthly Mystery",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU8cGedkJCzo2f_Dt96V_31-nylw14nLd6ZLw1HxKw0BDSwL9qCkZsi2J0&s=10",
-      "image_query": "",
-      "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
       "concepts": [
         "unexplained_phenomena",
         "historical_mystery",
         "extraterrestrial_life",
         "isolated_cultures",
         "folklore"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/the_children_of_woolpit.jpg",
+      "added_date": "2026-06-29",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 44,
+        "scared": 31,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "John Clark. The Green Children of Woolpit: Chronicles, Fairies and Facts in Medieval England. University of Exeter Press, 2024. ISBN: 978-1-80413-136-7 . 260 pp. (Veronika Nikiforova, 2025)",
+          "url": "https://revistas.ucm.es/index.php/AMAL/article/download/97557/4564456573040"
+        },
+        {
+          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
+          "url": "https://revistaselectronicas.ujaen.es/index.php/blo/article/download/9628/9770"
+        },
+        {
+          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
+          "url": "https://doi.org/10.17561/blo.v15.9628"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_wow_signal",
+          "shared_concept": "unexplained_phenomena",
+          "transition_line": "Just as the 'Wow! Signal' captured a fleeting whisper from the cosmos, the tale of the Green Children of Woolpit echoes an unexplained phenomenon, challenging our perceptions of what exists just beyond our known world."
+        }
       ],
       "layers": [
         {
@@ -4201,12 +4224,97 @@
           "cliffhanger": null
         }
       ],
+      "image_missing": true
+    },
+    {
+      "story_id": "ravaan_character_study",
+      "title": "The Ten-Headed Echo: A Psychological Deconstruction of Ravana",
+      "category": "mythology",
+      "hook": "The legend speaks of a king with ten heads, not merely a physical marvel, but a profound symbol of a fragmented psyche consumed by power and destructive ego.",
+      "concepts": [
+        "narcissism",
+        "hubris",
+        "power_corruption",
+        "ego_inflation",
+        "self_destruction",
+        "delusion",
+        "obsession"
+      ],
+      "severity": "disturbing",
+      "hero_image": "/content/images/ravaan_character_study.jpg",
+      "added_date": "2026-06-29",
+      "draft": false,
       "reactions": {
-        "like": 46,
-        "gripping": 44,
-        "scared": 31,
+        "like": 51,
+        "gripping": 29,
+        "scared": 4,
         "mindblown": 12
-      }
+      },
+      "evidence_links": [
+        {
+          "label": "Sufi Political Thought (Milad Milani, 2017)",
+          "url": "https://api.taylorfrancis.com/content/books/mono/download?identifierName=doi&identifierValue=10.4324/9781315766294&type=googlepdf"
+        },
+        {
+          "label": "Expression of p190 BCR-ABL fusion gene in a patient with chronic myeloid leukemia (Paulo Villas-Boas Carvalho, Gustavo Jacob Lourenço, 2003)",
+          "url": "http://www.scielo.br/pdf/rbhh/v25n3/v25n3a09.pdf"
+        },
+        {
+          "label": "THE INFLUENCE OF ISLAMIC CORPORATE GOVERNANCE AND INTERNAL CONTROL ON INDICATIONS OF FRAUD IN ISLAMIC COMMERCIAL BANKS IN INDONESIA (Uus Ahmad Husaeni, 2021)",
+          "url": "http://jurnal.unissula.ac.id/index.php/ijibe/article/download/15252/5900"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stanford_prison_experiment_001",
+          "shared_concept": "power_dynamics",
+          "transition_line": "Just as the Stanford Prison Experiment laid bare the corrupting influence of unchecked power on individuals, the legend of Ravana vividly illustrates how absolute authority can warp a leader's psyche and dismantle an entire societal structure."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Genesis of Grandeur",
+          "content": "Deep within the ancient Sanskrit epic, 'The Ramayana,' a figure emerges whose very name, Ravana, resonates with immense power and unsettling complexity. He is described not merely as a formidable demon king, but as a scholar, a devotee, a warrior of unparalleled might, and a ruler of the golden city of Lanka. Yet, woven into this tapestry of extraordinary achievement is the nascent thread of a fatal flaw: an ego that expanded unchecked, destined to overshadow his virtues.\n\nHis multiple heads, often depicted, are not just a fantastical element but can be seen as a potent metaphor for a mind fractured by ambition, each aspect pulling towards a different desire, yet all serving a singular, overwhelming sense of self-importance. From his birth, prophesied to be extraordinary, Ravana cultivated a self-image that bordered on the divine, a belief in his own invincibility forged through intense penance and boons from the gods. This foundation of immense personal power, however, lacked the internal checks that would prevent its eventual catastrophic distortion.",
+          "cliffhanger": "But how did such a figure, blessed with incredible boons and intellect, become a harbinger of his own undoing?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Seeds of Arrogance",
+          "content": "Ravana's early life is marked by astonishing ascetism and fierce dedication, earning him immense boons from powerful deities. These blessings, which made him invulnerable to gods and celestial beings, ironically sowed the seeds of his greatest psychological vulnerability: an inflated sense of self-worth and an almost pathological inability to perceive limits. His focus on invincibility against divine powers led him to overlook mortals and animals, a blind spot that would prove catastrophic.\n\nThis early pattern of gaining power through intense effort, followed by an immediate descent into its misuse, became a hallmark of his reign. Each victory, each concession from the gods, fueled his narcissism, solidifying a worldview where his desires were paramount and resistance was an affront to his inherent superiority. The whispers of his own greatness became the only truth he was willing to hear, isolating him in a gilded cage of self-adulation.",
+          "cliffhanger": "As his power grew, so too did his appetite for dominance, setting a dangerous trajectory for his interactions with the world."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Breaking Point of Hubris",
+          "content": "The central incident that irrevocably sealed Ravana's fate was the abduction of Sita, the wife of Lord Rama. This act was not merely one of passion or conquest; it was a deeply ingrained expression of his unchecked ego and a deliberate challenge to the moral order. Having been humiliated by Rama's brother Lakshmana, and driven by a perceived slight, Ravana sought to assert his supreme authority by seizing that which was most precious to his perceived rival.\n\nHis advisors, including his sagacious brother Vibhishana, repeatedly warned him of the folly of this act, highlighting the moral and strategic repercussions. Yet, Ravana's pride was so immense that he dismissed all counsel as weakness or disloyalty. He was incapable of introspection or admitting error, viewing any suggestion to return Sita as a direct assault on his dignity and absolute power. This incident illuminates a critical psychological blind spot: the inability to distinguish between personal strength and moral righteousness.",
+          "cliffhanger": "With Sita captive in Lanka, Ravana initiated a chain of events that would test the very foundations of his formidable kingdom and his own sanity."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Kingdom's Reflection",
+          "content": "Ravana's psychological state was not confined to his personal chambers; it permeated the very fabric of his golden kingdom, Lanka. His court became a microcosm of his own unchecked narcissism and authoritarian rule. While outwardly splendid and technologically advanced, Lanka suffered from an internal rot born of fear and unquestioning obedience. Dissent was suppressed, and loyalty often stemmed from terror rather than genuine respect.\n\nThe people and even his family members were compelled to conform to his will, demonstrating the far-reaching impact of a leader's distorted psychology on an entire society. Decisions, no matter how catastrophic, were pushed through by sheer force of will, creating a culture where truth was secondary to the king's narrative. This dynamic transformed Lanka into a reflection of Ravana's mind: powerful and impressive on the surface, yet deeply fragile underneath, unable to adapt or admit fault.",
+          "cliffhanger": "As the war with Rama escalated, the true cost of Ravana's psychological tyranny began to reveal itself, not just to him, but to his entire lineage."
+        },
+        {
+          "layer": 5,
+          "layer_name": "Prophecies and Blindness",
+          "content": "Throughout the epic, Ravana is presented with numerous warnings and omens foretelling his downfall. His own wife, Mandodari, and his loyal brother, Vibhishana, provided clear, rational arguments against his actions and urged him to return Sita. Even celestial beings attempted to intervene. However, Ravana's advanced delusion of invincibility rendered him completely deaf to these portents and pleas. His hubris had constructed an impenetrable wall around his perception of reality.\n\nPsychologically, this demonstrates an extreme case of cognitive dissonance, where any information conflicting with his self-aggrandizing narrative was either ignored, reinterpreted, or actively demonized. He chose to believe in his own absolute power and the infallibility of his judgment, creating a self-reinforcing loop of delusion. This mental state prevented any possibility of course correction, driving him relentlessly towards the prophesied catastrophic end.",
+          "cliffhanger": "As his kingdom faced imminent invasion, Ravana's mental state began its final, terrifying descent into a complete break from reality."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Descent into Madness",
+          "content": "As the war raged, Ravana witnessed the systematic destruction of his army, the fall of his most formidable warriors, and the deaths of his beloved sons and brothers. Each loss chipped away at the veneer of his supposed invincibility, yet instead of fostering humility or regret, these defeats pushed him further into a state of irrational rage and unshakeable denial. He began to attribute his losses to fate, treachery, or sorcery, never to his own misjudgment.\n\nHis ten heads, once a symbol of his diverse knowledge and power, now seemed to represent a mind in chaotic disarray, incapable of coherent strategy or emotional processing. He fought not with calculated tactical brilliance, but with a desperate, self-destructive fury. This phase of the conflict reveals Ravana in his most psychologically fractured state, clinging to a dying empire as a desperate affirmation of his shattered ego.",
+          "cliffhanger": "In the ultimate confrontation, stripped of his allies and his illusions, Ravana faced the absolute truth of his unraveling, a truth far more chilling than any physical defeat."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Ultimate Self-Destruction",
+          "content": "The final battle between Rama and Ravana is not just a clash of titans, but a profound psychological examination of self-destruction. Even in the face of insurmountable odds, Ravana refused to surrender, to seek peace, or to admit his profound errors. His hubris dictated that death in battle was preferable to any perceived dishonor or concession. His psychological construction of himself as invincible meant that true defeat was an existential impossibility.\n\nHis multiple heads and lives, granted by boons, became a metaphor for his inability to truly 'die' to his ego. Each time a head was severed, it would regrow, symbolizing the persistence of his destructive pride. Ultimately, it was not merely Rama's arrow, but the full weight of his own psychological failings—his unchecked narcissism, his delusional grandiosity, and his profound inability to accept limitations—that led to his final, irreversible demise. Ravana's story stands as a timeless cautionary tale, depicting how the unchecked human ego, even when combined with immense power and intellect, inevitably leads to an ultimate, self-inflicted ruin, a chilling testament to the darkest corners of the human psyche."
+        }
+      ],
+      "image_missing": true
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -4681,16 +4789,44 @@
     {
       "story_id": "the_mandela_effect",
       "title": "The Mandela Effect: When Reality Itself Seemed to Shift",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
-      "image_query": "",
-      "hook": "A significant number of people vividly recall Nelson Mandela dying in prison in the 1980s, despite historical records confirming his release in 1990 and his death in 2013. This collective misremembrance forms the unsettling core of a global phenomenon.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "A significant number of people vividly recall Nelson Mandela dying in prison in the 1980s, despite historical records confirming his release in 1990 and his death in 2013. This collective misremembrance forms the unsettling core of a global phenomenon.",
       "concepts": [
         "false_memory",
         "cognitive_bias",
         "collective_memory",
         "reality_perception"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
+      "added_date": "2026-06-28",
+      "draft": false,
+      "reactions": {
+        "like": 41,
+        "gripping": 19,
+        "scared": 6,
+        "mindblown": 54
+      },
+      "evidence_links": [
+        {
+          "label": "Health and Health Care in South Africa — 20 Years after Mandela (Bongani M. Mayosi, Solomon R. Benatar, 2014)",
+          "url": "https://www.nejm.org/doi/pdf/10.1056/NEJMsr1405012?articleTools=true"
+        },
+        {
+          "label": "The Mandela Effect and New Memory (Aaron M. French, 2018)",
+          "url": "https://doaj.org/article/383666474adc44e0884472bbe5dfd32b"
+        },
+        {
+          "label": "The Visual Mandela Effect as evidence for shared and specific false memories across people (Deepasri Prasad, Wilma Bainbridge, 2021)",
+          "url": "https://psyarxiv.com/nzh3s/download"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "folie_a_deux_shared_psychosis",
+          "shared_concept": "shared_delusion",
+          "transition_line": "Just as the Mandela Effect exposes the collective vulnerability of memory to shared misremembering, the chilling phenomenon of 'Folie à Deux' reveals how delusions, though not identical to false memories, can similarly become a shared reality, binding individuals in a mutually reinforced, distorted perception of the world."
+        }
       ],
       "layers": [
         {
@@ -4736,12 +4872,7 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 41,
-        "gripping": 19,
-        "scared": 6,
-        "mindblown": 54
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_third_wave_experiment",
@@ -5127,11 +5258,8 @@
     {
       "story_id": "blue_whale_game_001",
       "title": "The Blue Whale Challenge: A Digital Descent into Despair",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhagoRxtesPzPsBVwesnSNVBp79GEfrB-q5Z4YQfuslAUU9u21hnvVebDw&s=10",
-      "image_query": "",
-      "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
       "category": "cyber_mysteries",
-      "severity": "chilling",
+      "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
       "concepts": [
         "social_pressure",
         "vulnerability",
@@ -5140,6 +5268,18 @@
         "digital_threats",
         "psychological_exploitation"
       ],
+      "severity": "chilling",
+      "hero_image": "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/08/26/Pictures/print_229ba15a-8a8c-11e7-b7bc-fa1568cb40f1.jpg",
+      "added_date": "2026-06-30",
+      "draft": false,
+      "reactions": {
+        "like": 13,
+        "gripping": 11,
+        "scared": 2,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -5184,12 +5324,7 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 13,
-        "gripping": 11,
-        "scared": 2,
-        "mindblown": 4
-      }
+      "image_missing": false
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -6384,65 +6519,85 @@
       "image_missing": false
     },
     {
-      "story_id": "ravaan_character_study",
-      "title": "The Ten-Headed Echo: A Psychological Deconstruction of Ravana",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuCQQPPbh6nD_5kqhNYHyTJwMYXSrT2wS_Kz7R8-YvWiCkzLYzREHP0z2I&s=10",
-      "image_query": "",
-      "hook": "The legend speaks of a king with ten heads, not merely a physical marvel, but a profound symbol of a fragmented psyche consumed by power and destructive ego.",
-      "category": "mythology",
-      "severity": "disturbing",
+      "story_id": "edinburgh_vaults_001",
+      "title": "The Edinburgh Vaults: Echoes from a Buried City",
+      "category": "paranormal",
+      "hook": "Beneath Edinburgh's bustling streets lies a sprawling, forgotten underworld—a labyrinth of stone vaults where desperation once bred disease, crime, and an enduring chill that whispers of the past.",
       "concepts": [
-        "narcissism",
-        "hubris",
-        "power_corruption",
-        "ego_inflation",
-        "self_destruction",
-        "delusion",
-        "obsession"
+        "paranormal_activity",
+        "urban_legends",
+        "historical_trauma",
+        "unexplained_phenomena",
+        "haunted_location"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFTf-c0XPFGsv1Phdz5pqJWGnz5vAPidw2Ms-ocUG72g&s=10",
+      "added_date": "2026-06-28",
+      "draft": 0,
+      "reactions": {
+        "like": 31,
+        "gripping": 34,
+        "scared": 66,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "Paranormal tourism in Edinburgh : storytelling, appropriating ghost culture and presenting an uncanny heritage (Elizabeth Holzhauser, 2015)",
+          "url": "http://hdl.handle.net/10023/6922"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "winchester_mystery_house",
+          "shared_concept": "paranormal_activity",
+          "transition_line": "Just as the Winchester Mystery House stands as a testament to a widow's haunted conscience, the Edinburgh Vaults reveal how a city's collective suffering can permeate its very foundations, creating a chilling echo of the past."
+        }
       ],
       "layers": [
         {
           "layer": 1,
-          "layer_name": "The Genesis of Grandeur",
-          "content": "Deep within the ancient Sanskrit epic, 'The Ramayana,' a figure emerges whose very name, Ravana, resonates with immense power and unsettling complexity. He is described not merely as a formidable demon king, but as a scholar, a devotee, a warrior of unparalleled might, and a ruler of the golden city of Lanka. Yet, woven into this tapestry of extraordinary achievement is the nascent thread of a fatal flaw: an ego that expanded unchecked, destined to overshadow his virtues.\n\nHis multiple heads, often depicted, are not just a fantastical element but can be seen as a potent metaphor for a mind fractured by ambition, each aspect pulling towards a different desire, yet all serving a singular, overwhelming sense of self-importance. From his birth, prophesied to be extraordinary, Ravana cultivated a self-image that bordered on the divine, a belief in his own invincibility forged through intense penance and boons from the gods. This foundation of immense personal power, however, lacked the internal checks that would prevent its eventual catastrophic distortion.",
-          "cliffhanger": "But how did such a figure, blessed with incredible boons and intellect, become a harbinger of his own undoing?"
+          "layer_name": "The Buried City's Breath",
+          "content": "In the late 18th century, as Edinburgh flourished, a monumental engineering project unfolded: the construction of the South Bridge. Beneath its twenty arches, a series of vast, cavernous spaces were designed to house workshops, taverns, and storage facilities. These chambers, known as the Edinburgh Vaults or South Bridge Vaults, were initially a hub of commercial activity, bustling with tradesmen and merchants. The intention was to create a vibrant subterranean extension of the city's burgeoning economy, a testament to its ambition and growth.\n\nHowever, the grand vision for the vaults quickly soured. Poor construction, rampant dampness, and inadequate ventilation made them unsuitable for their intended purpose. Within a few decades, most legitimate businesses abandoned the subterranean spaces, unable to contend with the perpetually dark, waterlogged, and often disease-ridden conditions. The initial promise of prosperity gave way to a creeping neglect that would soon define their character.\n\nAs the legitimate commerce receded, a different kind of activity began to seep into the abandoned chambers, a shadow economy that thrived on the very isolation and darkness the vaults provided. This shift marked the true beginning of the vaults' dark legend.",
+          "cliffhanger": "What began as a commercial failure would rapidly transform into a haven for the city's most desperate and dangerous elements, sealing their fate as a true underbelly."
         },
         {
           "layer": 2,
-          "layer_name": "The Seeds of Arrogance",
-          "content": "Ravana's early life is marked by astonishing ascetism and fierce dedication, earning him immense boons from powerful deities. These blessings, which made him invulnerable to gods and celestial beings, ironically sowed the seeds of his greatest psychological vulnerability: an inflated sense of self-worth and an almost pathological inability to perceive limits. His focus on invincibility against divine powers led him to overlook mortals and animals, a blind spot that would prove catastrophic.\n\nThis early pattern of gaining power through intense effort, followed by an immediate descent into its misuse, became a hallmark of his reign. Each victory, each concession from the gods, fueled his narcissism, solidifying a worldview where his desires were paramount and resistance was an affront to his inherent superiority. The whispers of his own greatness became the only truth he was willing to hear, isolating him in a gilded cage of self-adulation.",
-          "cliffhanger": "As his power grew, so too did his appetite for dominance, setting a dangerous trajectory for his interactions with the world."
+          "layer_name": "A Descent into Despair",
+          "content": "By the early 19th century, the Edinburgh Vaults had become a notorious slum, a refuge for the city's poorest, most marginalized, and criminal populations. Families, often entire generations, crammed into the damp, windowless cells, living in squalor unimaginable even by the standards of the time. Without sanitation, fresh air, or natural light, disease spread unchecked, and life expectancy plummeted. The vaults became a literal pit of misery, a forgotten world just meters beneath the polite society above.\n\nConditions deteriorated to such an extent that the vaults were often waist-deep in raw sewage and refuse. The air was thick with the stench of decay, illness, and despair. Many residents, having nowhere else to go, were born, lived, and died within these suffocating confines, rarely if ever seeing the sky. This prolonged human suffering infused the very stones of the vaults with an indelible imprint of hardship and hopelessness.\n\nThe descent into despair was not merely physical; it was also moral. Surrounded by poverty, crime became not just prevalent but essential for survival. This harsh reality painted a bleak picture of human resilience and desperation within the forgotten tunnels.",
+          "cliffhanger": "Yet, beyond mere survival, these depths concealed activities far more sinister than petty theft, further staining the vaults with human depravity."
         },
         {
           "layer": 3,
-          "layer_name": "The Breaking Point of Hubris",
-          "content": "The central incident that irrevocably sealed Ravana's fate was the abduction of Sita, the wife of Lord Rama. This act was not merely one of passion or conquest; it was a deeply ingrained expression of his unchecked ego and a deliberate challenge to the moral order. Having been humiliated by Rama's brother Lakshmana, and driven by a perceived slight, Ravana sought to assert his supreme authority by seizing that which was most precious to his perceived rival.\n\nHis advisors, including his sagacious brother Vibhishana, repeatedly warned him of the folly of this act, highlighting the moral and strategic repercussions. Yet, Ravana's pride was so immense that he dismissed all counsel as weakness or disloyalty. He was incapable of introspection or admitting error, viewing any suggestion to return Sita as a direct assault on his dignity and absolute power. This incident illuminates a critical psychological blind spot: the inability to distinguish between personal strength and moral righteousness.",
-          "cliffhanger": "With Sita captive in Lanka, Ravana initiated a chain of events that would test the very foundations of his formidable kingdom and his own sanity."
+          "layer_name": "The Unseen Inhabitants",
+          "content": "The anonymity and isolation of the vaults made them perfect breeding grounds for organized crime and illicit enterprises. Infamous figures like the serial killers Burke and Hare were known to frequent the vaults, allegedly using them to store bodies before selling them to anatomists. Illegal distilleries operated in secret, producing potent, unregulated spirits that fueled both escape and further violence among the destitute inhabitants. The darkness offered not just shelter, but a cloak for heinous deeds.\n\nBare-knuckle boxing matches, gambling dens, and prostitution rings flourished, shielded from the watchful eyes of the city authorities above. Robberies were common, and violence was an everyday occurrence. The lack of law enforcement presence allowed a brutal, self-governing hierarchy to emerge, where the strongest or most ruthless held sway. The vaults became a place where lives were cheap, and morality was a forgotten luxury.\n\nHistorians and chroniclers of the era documented the horrifying reality, describing the vaults as a 'veritable cesspool of human vice and degradation.' The air was thick not just with physical pollutants, but with the palpable weight of desperation and fear. These dark chapters etched themselves deeply into the fabric of the vaults, leaving behind a legacy that transcended mere memory.",
+          "cliffhanger": "With such a dark history of suffering and malevolence, it became inevitable that the vaults would not remain merely an historical curiosity, but a place where the past refused to die."
         },
         {
           "layer": 4,
-          "layer_name": "The Kingdom's Reflection",
-          "content": "Ravana's psychological state was not confined to his personal chambers; it permeated the very fabric of his golden kingdom, Lanka. His court became a microcosm of his own unchecked narcissism and authoritarian rule. While outwardly splendid and technologically advanced, Lanka suffered from an internal rot born of fear and unquestioning obedience. Dissent was suppressed, and loyalty often stemmed from terror rather than genuine respect.\n\nThe people and even his family members were compelled to conform to his will, demonstrating the far-reaching impact of a leader's distorted psychology on an entire society. Decisions, no matter how catastrophic, were pushed through by sheer force of will, creating a culture where truth was secondary to the king's narrative. This dynamic transformed Lanka into a reflection of Ravana's mind: powerful and impressive on the surface, yet deeply fragile underneath, unable to adapt or admit fault.",
-          "cliffhanger": "As the war with Rama escalated, the true cost of Ravana's psychological tyranny began to reveal itself, not just to him, but to his entire lineage."
+          "layer_name": "The Abandonment and Rediscovery",
+          "content": "By the mid-19th century, the vaults had become so dangerous and unsanitary that city officials decided to seal them off. Entrances were bricked up, and the entire subterranean network was effectively buried and forgotten by mainstream Edinburgh. For nearly 170 years, the vaults lay entombed beneath the city, their dark secrets preserved in the damp, undisturbed air. They became a ghostly legend, a whispered tale of a city's dark past that few believed to be real.\n\nThe rediscovery began piecemeal, with fragments found during construction work, but it was not until the 1980s that a thorough exploration and partial excavation commenced. A local rugby player, Norrie Rowan, spearheaded efforts to uncover and clear sections of the vaults, revealing the extent of the hidden city beneath. What they found was a trove of artifacts: pottery shards, tools, buttons, and even human remains, all testifying to the lives and deaths of those who once inhabited these forgotten spaces.\n\nThe re-opening of the vaults brought their tragic history back into the light, transforming them from a forgotten grave into a chilling historical exhibit. But as people began to explore these newly accessible tunnels, they found that the echoes of the past were not merely historical; they seemed to be unnervingly present.",
+          "cliffhanger": "As the physical barriers came down, invisible ones seemed to emerge, as explorers and visitors began reporting strange, inexplicable encounters within the unearthed darkness."
         },
         {
           "layer": 5,
-          "layer_name": "Prophecies and Blindness",
-          "content": "Throughout the epic, Ravana is presented with numerous warnings and omens foretelling his downfall. His own wife, Mandodari, and his loyal brother, Vibhishana, provided clear, rational arguments against his actions and urged him to return Sita. Even celestial beings attempted to intervene. However, Ravana's advanced delusion of invincibility rendered him completely deaf to these portents and pleas. His hubris had constructed an impenetrable wall around his perception of reality.\n\nPsychologically, this demonstrates an extreme case of cognitive dissonance, where any information conflicting with his self-aggrandizing narrative was either ignored, reinterpreted, or actively demonized. He chose to believe in his own absolute power and the infallibility of his judgment, creating a self-reinforcing loop of delusion. This mental state prevented any possibility of course correction, driving him relentlessly towards the prophesied catastrophic end.",
-          "cliffhanger": "As his kingdom faced imminent invasion, Ravana's mental state began its final, terrifying descent into a complete break from reality."
+          "layer_name": "Modern Encounters and Allegations",
+          "content": "Since their rediscovery and the commencement of public tours, the Edinburgh Vaults have garnered a reputation as one of the most haunted locations in the world. Visitors and tour guides consistently report a wide range of inexplicable phenomena. These include sudden drops in temperature, often localized to specific areas, far beyond what the ambient dampness would suggest. Whispers and disembodied voices are frequently heard, sometimes responding to questions, other times speaking in an unknown tongue or uttering distressed sounds.\n\nPhysical sensations are also common. Many visitors describe feeling an unseen presence brush past them, or a cold hand touching their arm or neck. Some have reported being pushed, scratched, or having their clothes tugged by invisible forces. The feeling of being watched is almost universal, and electronic devices, particularly cameras and phones, are known to malfunction inexplicably within certain sections of the vaults, their batteries draining rapidly or their screens freezing.\n\nThese consistent accounts, spanning decades and involving countless independent witnesses, have cemented the vaults' status as a genuine site of alleged paranormal activity. The sheer volume and similarity of the experiences suggest something more than mere suggestion or overactive imaginations.",
+          "cliffhanger": "Among the myriad of reported phenomena, specific entities have emerged, developing their own distinct reputations for disturbing interactions with the living."
         },
         {
           "layer": 6,
-          "layer_name": "The Descent into Madness",
-          "content": "As the war raged, Ravana witnessed the systematic destruction of his army, the fall of his most formidable warriors, and the deaths of his beloved sons and brothers. Each loss chipped away at the veneer of his supposed invincibility, yet instead of fostering humility or regret, these defeats pushed him further into a state of irrational rage and unshakeable denial. He began to attribute his losses to fate, treachery, or sorcery, never to his own misjudgment.\n\nHis ten heads, once a symbol of his diverse knowledge and power, now seemed to represent a mind in chaotic disarray, incapable of coherent strategy or emotional processing. He fought not with calculated tactical brilliance, but with a desperate, self-destructive fury. This phase of the conflict reveals Ravana in his most psychologically fractured state, clinging to a dying empire as a desperate affirmation of his shattered ego.",
-          "cliffhanger": "In the ultimate confrontation, stripped of his allies and his illusions, Ravana faced the absolute truth of his unraveling, a truth far more chilling than any physical defeat."
+          "layer_name": "The Darker Residents: Mr. Boots and The Watcher",
+          "content": "Among the myriad of spectral presences said to inhabit the Edinburgh Vaults, two figures stand out for their consistent and often terrifying interactions: 'Mr. Boots' and 'The Watcher'. Mr. Boots is believed to be the spirit of a cobbler or tradesman who once worked in the vaults. His presence is frequently associated with the distinct sound of heavy, old-fashioned boots stomping through the dark corridors, often preceding other phenomena or appearing when no living person is near.\n\nThe other, far more menacing entity is often referred to as 'The Watcher,' or simply 'The Dark Figure.' This is described as a distinctly malevolent presence, responsible for the more aggressive and physically intrusive encounters. Visitors and guides have reported feeling immense pressure on their chests, being pushed forcibly, or experiencing intense feelings of dread and anger emanating from specific areas. Some claim to have seen a shadowy figure at the periphery of their vision, particularly in the deep, unlit sections.\n\nThese entities, along with the alleged spirit of a young girl named 'Little Annie' and a group of poltergeist-like children, form a chilling tableau of the vault's resident ghosts. Tour guides, who spend countless hours within these chambers, often have their own personal harrowing tales of encounters, lending credence to the idea that these are not merely fleeting shadows, but persistent, interactive intelligences.",
+          "cliffhanger": "The question remains: are these merely residual echoes of a tragic past, or are they conscious entities, forever bound to the darkness and despair of their former existence?"
         },
         {
           "layer": 7,
-          "layer_name": "The Ultimate Self-Destruction",
-          "content": "The final battle between Rama and Ravana is not just a clash of titans, but a profound psychological examination of self-destruction. Even in the face of insurmountable odds, Ravana refused to surrender, to seek peace, or to admit his profound errors. His hubris dictated that death in battle was preferable to any perceived dishonor or concession. His psychological construction of himself as invincible meant that true defeat was an existential impossibility.\n\nHis multiple heads and lives, granted by boons, became a metaphor for his inability to truly 'die' to his ego. Each time a head was severed, it would regrow, symbolizing the persistence of his destructive pride. Ultimately, it was not merely Rama's arrow, but the full weight of his own psychological failings—his unchecked narcissism, his delusional grandiosity, and his profound inability to accept limitations—that led to his final, irreversible demise. Ravana's story stands as a timeless cautionary tale, depicting how the unchecked human ego, even when combined with immense power and intellect, inevitably leads to an ultimate, self-inflicted ruin, a chilling testament to the darkest corners of the human psyche."
+          "layer_name": "The Lingering Trauma",
+          "content": "The absolute darkest documented truth of the Edinburgh Vaults lies not just in the alleged hauntings, but in the undeniable, historical suffering that created the fertile ground for such phenomena. The vaults represent a concrete manifestation of Edinburgh's hidden history of poverty, disease, and crime, a tangible record of human despair. The thousands of lives lived and lost in such horrific conditions, the violence perpetrated, and the pure desperation endured by its inhabitants, are historical facts.\n\nParanormal theories often suggest that intense human emotion and traumatic events can leave an energetic imprint on a location, creating 'residual hauntings' that replay moments of the past. Others propose that these are 'intelligent hauntings,' where the spirits of the deceased remain tethered to the place of their greatest suffering, perhaps unaware of their passing or unwilling to move on. In the vaults, the sheer concentration of documented historical trauma, from starvation and illness to murder and exploitation, provides a compelling, if chilling, context for the alleged paranormal activity.\n\nThe enduring cold, the phantom whispers, and the unseen touches are, for many, the tangible echoes of this profound historical trauma. The Edinburgh Vaults serve as a stark reminder that some dark histories are not merely written in books, but are deeply imprinted into the very stones of our cities, whispering their tales for centuries, forever chilling those who dare to listen.",
+          "cliffhanger": null
         }
-      ]
+      ],
+      "image_missing": 0
     }
   ]
 }
