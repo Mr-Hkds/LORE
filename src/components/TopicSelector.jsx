@@ -678,7 +678,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               tabIndex={0}
               aria-label="Search the archive"
               onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onOpenSearch(); }}
-              className="group w-full flex items-center gap-4 cursor-pointer select-none active:scale-[0.995]"
+              className="group w-full flex items-center gap-4 cursor-pointer select-none active:scale-[0.995] relative overflow-hidden"
               style={{
                 background: 'rgba(12,10,8,0.6)',
                 border: '1px solid rgba(158,123,76,0.18)',
@@ -699,17 +699,32 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)';
               }}
             >
+              {/* Shimmer sweep overlay */}
+              <div
+                className="absolute inset-0 pointer-events-none overflow-hidden"
+                style={{ borderRadius: '13px' }}
+              >
+                <div
+                  className="search-shimmer absolute top-0 bottom-0"
+                  style={{
+                    left: '-60%',
+                    width: '55%',
+                    background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.07) 40%, rgba(158,123,76,0.13) 50%, rgba(158,123,76,0.07) 60%, transparent)',
+                  }}
+                />
+              </div>
+
               <Search
-                className="flex-shrink-0 transition-colors duration-200"
+                className="flex-shrink-0 transition-colors duration-200 relative z-10"
                 style={{ width: '15px', height: '15px', color: '#9E7B4C', opacity: 0.8 }}
               />
               <span
-                className="flex-1 font-sans transition-colors duration-200"
+                className="flex-1 font-sans transition-colors duration-200 relative z-10"
                 style={{ fontSize: '13px', color: 'rgba(143,138,130,0.55)', letterSpacing: '0.01em' }}
               >
                 Search all archives by title, event, or concept...
               </span>
-              <div className="flex items-center gap-1.5 flex-shrink-0">
+              <div className="flex items-center gap-1.5 flex-shrink-0 relative z-10">
                 <kbd
                   style={{
                     display: 'inline-flex',

@@ -372,3 +372,14 @@ img {
 .animate-slide-in-right {
   animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Search bar shimmer sweep */
+@keyframes searchShimmer {
+  0%   { transform: translateX(-120%); }
+  55%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
+
+.search-shimmer {
+  animation: searchShimmer 4s ease-in-out infinite;
+}

@@ -1,231 +1,393 @@
-// 1. Imports
+// ApprovalCard — premium approval UX with local preview state,
+// step indicator, instant publish gate, and loading shimmer.
 import { useState, useRef } from 'react';
-import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit } from 'lucide-react';
+import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight } from 'lucide-react';
 import LoreMark from './LoreMark';
 
+const PLACEHOLDER_URL = 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
+
+function isValidImage(url) {
+  return url && url.trim() !== '' && url !== PLACEHOLDER_URL;
+}
+
 export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) {
-  // 5. State declarations
-  const [remoteUrl, setRemoteUrl] = useState('');
-  const [aiPrompt, setAiPrompt] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  // Local preview tracks the image immediately after any save action
+  const initialPreview = isValidImage(story.hero_image) ? story.hero_image : null;
+  const [previewUrl, setPreviewUrl]   = useState(initialPreview);
+  const [remoteUrl, setRemoteUrl]     = useState('');
+  const [aiPrompt, setAiPrompt]       = useState('');
+  const [loading, setLoading]         = useState(false);
+  const [loadingMethod, setLoadingMethod] = useState(null); // 'upload' | 'ai' | 'url'
+  const [error, setError]             = useState('');
+  const [publishing, setPublishing]   = useState(false);
   const fileInputRef = useRef(null);
 
-  // 7. Callbacks
+  // ── Helpers ──────────────────────────────────────────────────────────
+  const saveAndPreview = async (fn) => {
+    setError('');
+    setLoading(true);
+    try {
+      await fn();
+    } catch (e) {
+      setError(e.message || 'Something went wrong. Try again.');
+    } finally {
+      setLoading(false);
+      setLoadingMethod(null);
+    }
+  };
+
+  // ── Handlers ─────────────────────────────────────────────────────────
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setLoading(true);
-    setError('');
-
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      try {
-        const base64Data = reader.result;
-        await onSaveImage(story.story_id, base64Data);
-      } catch {
-        setError('Failed to upload image file.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    reader.onerror = () => {
-      setError('Failed to read image file.');
-      setLoading(false);
-    };
-    reader.readAsDataURL(file);
+    setLoadingMethod('upload');
+    saveAndPreview(() => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        try {
+          await onSaveImage(story.story_id, reader.result);
+          setPreviewUrl(reader.result);
+          resolve();
+        } catch { reject(new Error('Failed to upload image file.')); }
+      };
+      reader.onerror = () => reject(new Error('Failed to read image file.'));
+      reader.readAsDataURL(file);
+    }));
   };
 
-  const handleSaveRemoteUrl = async () => {
+  const handleSaveRemoteUrl = () => {
     if (!remoteUrl.trim()) return;
-    setLoading(true);
-    setError('');
-    try {
+    setLoadingMethod('url');
+    saveAndPreview(async () => {
       await onSaveImage(story.story_id, remoteUrl.trim());
+      setPreviewUrl(remoteUrl.trim());
       setRemoteUrl('');
-    } catch {
-      setError('Failed to download image from the provided URL.');
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
-  const handleGenerateAiImage = async () => {
-    const promptText = aiPrompt.trim() || `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
-    setLoading(true);
-    setError('');
-    try {
-      const enhancedPrompt = `${promptText.replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
-      const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
+  const handleGenerateAiImage = () => {
+    setLoadingMethod('ai');
+    const base = aiPrompt.trim() || `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
+    const enhanced = `${base.replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=800&height=600&nologo=true&private=true&model=flux`;
+    saveAndPreview(async () => {
       await onSaveImage(story.story_id, pollinationsUrl);
-    } catch {
-      setError('Failed to generate image with Flux AI.');
+      setPreviewUrl(pollinationsUrl);
+    });
+  };
+
+  const handlePublish = async () => {
+    if (!previewUrl) return;
+    setPublishing(true);
+    try {
+      await onPublish(story.story_id);
     } finally {
-      setLoading(false);
+      setPublishing(false);
     }
   };
 
-  // 8. Derived state
-  const hasThumbnail = story.hero_image && 
-                       story.hero_image !== 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800' && 
-                       story.hero_image.trim() !== '';
+  // ── Derived ──────────────────────────────────────────────────────────
+  const isReady      = isValidImage(previewUrl);
+  const step         = isReady ? 2 : 1;
+  const categoryLabel = story.category?.replace(/_/g, ' ') ?? '';
 
-  // 10. Main render
+  // ── Render ────────────────────────────────────────────────────────────
   return (
-    <div className="bg-[#0D0B09] border border-neutral-900 rounded-2xl p-6 flex flex-col lg:flex-row gap-6 text-left transition-all hover:border-[#9E7B4C]/20 shadow-md">
-      {/* Left side: Thumbnail preview and basic story info */}
-      <div className="w-full lg:w-[260px] flex flex-col gap-4 flex-shrink-0">
-        <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-900 bg-black/60 flex items-center justify-center dossier-image-container">
-          {hasThumbnail ? (
-            <img
-              src={story.hero_image}
-              alt={story.title}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center p-4 text-center text-neutral-600">
-              <AlertCircle className="w-8 h-8 text-[#9E7B4C]/40 mb-2" />
-              <span className="text-[9px] font-mono tracking-widest uppercase font-bold text-[#8F8A82]/50">No Thumbnail</span>
-              <span className="text-[8px] font-mono text-neutral-700 mt-1">Classification: {story.category}</span>
-            </div>
-          )}
-
-          {/* Quick status badge */}
-          <div className="absolute top-2 left-2 z-10">
-            <span className={`text-[7px] font-mono font-bold tracking-widest uppercase px-2 py-0.5 rounded-md ${
-              hasThumbnail ? 'bg-emerald-950/80 border border-emerald-500/30 text-emerald-400' : 'bg-red-950/80 border border-red-500/30 text-red-400'
-            }`}>
-              {hasThumbnail ? 'Ready' : 'Pending Image'}
-            </span>
-          </div>
+    <div
+      className="rounded-2xl overflow-hidden text-left transition-all duration-200"
+      style={{
+        background: '#0D0B09',
+        border: `1px solid ${isReady ? 'rgba(16,185,129,0.2)' : 'rgba(237,232,223,0.07)'}`,
+        boxShadow: isReady
+          ? '0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(16,185,129,0.04)'
+          : '0 4px 20px rgba(0,0,0,0.4)',
+      }}
+    >
+      {/* ── Top status bar ── */}
+      <div
+        className="flex items-center justify-between px-5 py-2.5"
+        style={{
+          background: isReady ? 'rgba(16,185,129,0.06)' : 'rgba(239,68,68,0.05)',
+          borderBottom: `1px solid ${isReady ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.1)'}`,
+        }}
+      >
+        {/* Step indicator */}
+        <div className="flex items-center gap-2">
+          <StepDot active={step >= 1} done={step > 1} label="Add Image" />
+          <ChevronRight className="w-3 h-3" style={{ color: 'rgba(143,138,130,0.3)' }} />
+          <StepDot active={step >= 2} done={false} label="Publish" />
         </div>
 
-        <div className="space-y-1">
-          <div className="flex items-center gap-1.5 text-[8px] font-mono tracking-widest uppercase text-[#9E7B4C]/70">
-            <LoreMark size={8} color="currentColor" />
-            <span>{story.category}</span>
-          </div>
-          <h4 className="font-serif italic text-base text-[#EDE8DF] leading-snug">{story.title}</h4>
-          <p className="text-[10px] font-mono text-neutral-600">{story.story_id}</p>
-        </div>
-
-        <button
-          onClick={onEdit}
-          className="w-full py-2 bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+        <span
+          className="text-[7.5px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+          style={{
+            color: isReady ? '#10B981' : '#EF4444',
+            background: isReady ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
+            border: `1px solid ${isReady ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.25)'}`,
+          }}
         >
-          <Edit className="w-3 h-3" /> Edit Full Story
-        </button>
+          {isReady ? '✓ Ready' : 'Needs Image'}
+        </span>
       </div>
 
-      {/* Right side: Interactive Image Tools */}
-      <div className="flex-1 flex flex-col justify-between gap-6 border-t lg:border-t-0 lg:border-l border-neutral-900/60 pt-6 lg:pt-0 lg:pl-6">
-        <div className="space-y-4">
-          <h5 className="text-[10px] font-mono tracking-widest uppercase text-[#9E7B4C] font-bold">Cover Image Tools</h5>
+      {/* ── Main body ── */}
+      <div className="flex flex-col lg:flex-row gap-0">
 
+        {/* Left: preview + story info */}
+        <div className="w-full lg:w-[280px] flex-shrink-0 p-5 flex flex-col gap-4" style={{ borderRight: '1px solid rgba(237,232,223,0.05)' }}>
+
+          {/* Image area */}
+          <div
+            className="relative rounded-xl overflow-hidden"
+            style={{ aspectRatio: '16/9', background: 'rgba(0,0,0,0.5)' }}
+          >
+            {previewUrl ? (
+              <>
+                <img
+                  src={previewUrl}
+                  alt={story.title}
+                  className="w-full h-full object-cover"
+                  onError={() => setPreviewUrl(null)}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <span
+                  className="absolute bottom-2 left-2 text-[7px] font-mono uppercase tracking-widest px-2 py-0.5 rounded"
+                  style={{ background: 'rgba(0,0,0,0.7)', color: '#10B981' }}
+                >
+                  ✓ Cover set
+                </span>
+              </>
+            ) : (
+              /* Loading shimmer or empty placeholder */
+              loading ? (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                  <div className="w-full h-full absolute inset-0 animate-pulse" style={{ background: 'linear-gradient(90deg, #0D0B09, rgba(158,123,76,0.08), #0D0B09)' }} />
+                  <span className="relative text-[9px] font-mono uppercase tracking-widest" style={{ color: 'rgba(158,123,76,0.6)' }}>
+                    {loadingMethod === 'ai' ? 'Generating with Flux AI...' : 'Processing...'}
+                  </span>
+                </div>
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4">
+                  <AlertCircle className="w-6 h-6" style={{ color: 'rgba(158,123,76,0.3)' }} />
+                  <span className="text-[9px] font-mono uppercase tracking-widest text-center" style={{ color: 'rgba(143,138,130,0.4)' }}>
+                    No cover image
+                  </span>
+                </div>
+              )
+            )}
+          </div>
+
+          {/* Story info */}
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-1.5">
+              <LoreMark size={7} color="#9E7B4C" />
+              <span className="text-[8px] font-mono uppercase tracking-widest" style={{ color: '#9E7B4C', opacity: 0.75 }}>
+                {categoryLabel}
+              </span>
+            </div>
+            <h4 className="font-serif italic text-sm leading-snug" style={{ color: '#EDE8DF' }}>
+              {story.title}
+            </h4>
+            <p className="text-[10px] leading-relaxed line-clamp-3" style={{ color: '#4A4540', fontFamily: 'sans-serif' }}>
+              {story.hook}
+            </p>
+          </div>
+
+          <button
+            onClick={onEdit}
+            className="flex items-center justify-center gap-1.5 w-full py-2 rounded-lg text-[9px] font-mono uppercase tracking-widest transition-colors cursor-pointer"
+            style={{
+              background: 'rgba(255,255,255,0.02)',
+              border: '1px solid rgba(237,232,223,0.08)',
+              color: '#6A6560',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#EDE8DF'; e.currentTarget.style.borderColor = 'rgba(237,232,223,0.18)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#6A6560'; e.currentTarget.style.borderColor = 'rgba(237,232,223,0.08)'; }}
+          >
+            <Edit className="w-3 h-3" /> Edit Story
+          </button>
+        </div>
+
+        {/* Right: image tools */}
+        <div className="flex-1 p-5 flex flex-col gap-5">
+          <h5
+            className="text-[9px] font-mono uppercase tracking-widest font-bold"
+            style={{ color: '#9E7B4C' }}
+          >
+            {isReady ? 'Change Cover Image' : 'Add Cover Image — Choose a method'}
+          </h5>
+
+          {/* Error */}
           {error && (
-            <div className="p-3 bg-red-950/30 border border-red-500/20 text-red-400 rounded-lg text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <div
+              className="flex items-start gap-2 px-3 py-2.5 rounded-lg text-xs"
+              style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#F87171' }}
+            >
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* Action Tabs for Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* 1. Upload Local File */}
-            <div className="p-4 bg-black/20 border border-neutral-900/60 rounded-xl space-y-3 flex flex-col justify-between">
-              <div className="space-y-1">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest block font-bold">Option 1</span>
-                <span className="text-[11px] font-semibold text-[#EDE8DF] block">Local File Upload</span>
-                <p className="text-[10px] text-[#8F8A82]/70 leading-relaxed">Select a custom jpg or png from your computer</p>
-              </div>
-              <div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-                <button
-                  disabled={loading}
-                  onClick={() => fileInputRef.current?.click()}
-                  className="w-full py-2 bg-[#9E7B4C]/10 border border-[#9E7B4C]/30 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded-lg hover:bg-[#9E7B4C]/25 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5"
-                >
-                  <Upload className="w-3.5 h-3.5" /> {loading ? 'Processing...' : 'Choose File'}
-                </button>
-              </div>
+          {/* ─── Option 1: Flux AI ─── */}
+          <div
+            className="rounded-xl p-4 space-y-3"
+            style={{ background: 'rgba(99,102,241,0.05)', border: '1px solid rgba(99,102,241,0.15)' }}
+          >
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5" style={{ color: '#818CF8' }} />
+              <span className="text-[10px] font-semibold" style={{ color: '#EDE8DF' }}>Flux AI Generation</span>
+              <span className="text-[8px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(99,102,241,0.15)', color: '#818CF8' }}>Recommended</span>
             </div>
-
-            {/* 2. Generate AI Thumbnail */}
-            <div className="p-4 bg-black/20 border border-neutral-900/60 rounded-xl space-y-3 flex flex-col justify-between md:col-span-2">
-              <div className="space-y-1 text-left">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest block font-bold">Option 2</span>
-                <span className="text-[11px] font-semibold text-[#EDE8DF] block">Flux AI Generation</span>
-                <p className="text-[10px] text-[#8F8A82]/70 leading-relaxed">Create a premium atmospheric cover image directly with AI</p>
-              </div>
-              <div className="space-y-2">
-                <textarea
-                  value={aiPrompt}
-                  onChange={(e) => setAiPrompt(e.target.value)}
-                  placeholder={`Prompt (defaults to: A cinematic, atmospheric dark photo of ${story.title}...)`}
-                  rows={2}
-                  className="w-full bg-neutral-950 border border-neutral-850 rounded-lg p-2 text-xs text-[#EDE8DF] focus:outline-none focus:border-[#9E7B4C]/50 placeholder-neutral-600 resize-none font-sans"
-                />
-                <button
-                  disabled={loading}
-                  onClick={handleGenerateAiImage}
-                  className="w-full py-2 bg-indigo-900/40 border border-indigo-500/25 hover:border-indigo-500/50 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded-lg hover:bg-indigo-900/70 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" /> {loading ? 'Generating image...' : 'Generate with Flux'}
-                </button>
-              </div>
-            </div>
+            <textarea
+              value={aiPrompt}
+              onChange={e => setAiPrompt(e.target.value)}
+              placeholder={`Defaults to: "Cinematic dark photo of ${story.title?.slice(0, 40)}..."`}
+              rows={2}
+              className="w-full rounded-lg px-3 py-2 text-xs resize-none focus:outline-none font-sans"
+              style={{
+                background: 'rgba(0,0,0,0.3)',
+                border: '1px solid rgba(99,102,241,0.2)',
+                color: '#EDE8DF',
+                caretColor: '#818CF8',
+              }}
+              onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.5)'; }}
+              onBlur={e  => { e.target.style.borderColor = 'rgba(99,102,241,0.2)'; }}
+            />
+            <button
+              disabled={loading}
+              onClick={handleGenerateAiImage}
+              className="w-full py-2 rounded-lg text-[9px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 cursor-pointer disabled:opacity-40 flex items-center justify-center gap-1.5"
+              style={{
+                background: 'rgba(99,102,241,0.15)',
+                border: '1px solid rgba(99,102,241,0.3)',
+                color: '#818CF8',
+              }}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              {loading && loadingMethod === 'ai' ? 'Generating…' : 'Generate Cover'}
+            </button>
           </div>
 
-          {/* 3. Link Remote URL */}
-          <div className="p-4 bg-black/20 border border-neutral-900/60 rounded-xl space-y-3">
-            <div className="space-y-1">
-              <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest block font-bold">Option 3</span>
-              <span className="text-[11px] font-semibold text-[#EDE8DF] block">Web Image URL</span>
+          {/* ─── Option 2: File upload ─── */}
+          <div
+            className="rounded-xl p-4 space-y-3"
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(237,232,223,0.07)' }}
+          >
+            <div className="flex items-center gap-2">
+              <Upload className="w-3.5 h-3.5" style={{ color: '#9E7B4C' }} />
+              <span className="text-[10px] font-semibold" style={{ color: '#EDE8DF' }}>Upload Local File</span>
+            </div>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+            <button
+              disabled={loading}
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full py-2 rounded-lg text-[9px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 cursor-pointer disabled:opacity-40 flex items-center justify-center gap-1.5"
+              style={{
+                background: 'rgba(158,123,76,0.08)',
+                border: '1px solid rgba(158,123,76,0.25)',
+                color: '#9E7B4C',
+              }}
+            >
+              <Upload className="w-3.5 h-3.5" />
+              {loading && loadingMethod === 'upload' ? 'Uploading…' : 'Choose File'}
+            </button>
+          </div>
+
+          {/* ─── Option 3: Remote URL ─── */}
+          <div
+            className="rounded-xl p-4 space-y-3"
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(237,232,223,0.07)' }}
+          >
+            <div className="flex items-center gap-2">
+              <LinkIcon className="w-3.5 h-3.5" style={{ color: '#9E7B4C' }} />
+              <span className="text-[10px] font-semibold" style={{ color: '#EDE8DF' }}>Paste Image URL</span>
             </div>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={remoteUrl}
-                onChange={(e) => setRemoteUrl(e.target.value)}
-                placeholder="Paste remote image URL (https://...)"
-                className="flex-1 bg-neutral-950 border border-neutral-850 rounded-lg px-3 py-1.5 text-xs text-[#EDE8DF] focus:outline-none focus:border-[#9E7B4C]/50 placeholder-neutral-600 font-mono"
+                onChange={e => setRemoteUrl(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleSaveRemoteUrl(); }}
+                placeholder="https://..."
+                className="flex-1 px-3 py-1.5 rounded-lg text-xs focus:outline-none font-mono"
+                style={{
+                  background: 'rgba(0,0,0,0.3)',
+                  border: '1px solid rgba(237,232,223,0.08)',
+                  color: '#EDE8DF',
+                  caretColor: '#9E7B4C',
+                }}
+                onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.35)'; }}
+                onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.08)'; }}
               />
               <button
                 disabled={loading || !remoteUrl.trim()}
                 onClick={handleSaveRemoteUrl}
-                className="px-4 py-1.5 bg-[#9E7B4C]/10 border border-[#9E7B4C]/30 text-[#EDE8DF] text-[9px] font-mono font-bold tracking-widest uppercase rounded-lg hover:bg-[#9E7B4C]/25 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5"
+                className="px-4 py-1.5 rounded-lg text-[9px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 cursor-pointer disabled:opacity-40"
+                style={{
+                  background: 'rgba(158,123,76,0.08)',
+                  border: '1px solid rgba(158,123,76,0.25)',
+                  color: '#9E7B4C',
+                }}
               >
-                <LinkIcon className="w-3 h-3" /> Save URL
+                {loading && loadingMethod === 'url' ? '…' : 'Save'}
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Action Button: Publish to Live */}
-        <div className="pt-4 border-t border-neutral-900/60 flex items-center justify-end gap-3">
-          <span className="text-[9px] font-mono text-neutral-600">
-            {hasThumbnail ? '✓ Ready for publication' : '⚠️ Requires cover thumbnail before going live'}
-          </span>
-          <button
-            disabled={loading || !hasThumbnail}
-            onClick={() => onPublish(story.story_id)}
-            className={`px-6 py-2.5 rounded-lg text-[10px] font-bold tracking-wider uppercase transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
-              hasThumbnail 
-                ? 'bg-emerald-800 hover:bg-emerald-700 text-white active:scale-95' 
-                : 'bg-neutral-900 border border-neutral-800 text-neutral-600 cursor-not-allowed'
-            }`}
+          {/* ─── Publish ─── */}
+          <div
+            className="flex items-center justify-between gap-3 pt-1"
+            style={{ borderTop: '1px solid rgba(237,232,223,0.06)', paddingTop: '16px' }}
           >
-            <Check className="w-3.5 h-3.5" /> Go Live
-          </button>
+            <span
+              className="text-[9px] font-mono"
+              style={{ color: isReady ? '#10B981' : '#6A6560' }}
+            >
+              {isReady ? '✓ Cover image set — ready to go live' : '⚠ Add a cover image to publish'}
+            </span>
+            <button
+              disabled={!isReady || publishing}
+              onClick={handlePublish}
+              className="flex items-center gap-1.5 px-6 py-2.5 rounded-lg text-[10px] font-bold tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer disabled:cursor-not-allowed"
+              style={{
+                background: isReady ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${isReady ? 'rgba(16,185,129,0.4)' : 'rgba(237,232,223,0.08)'}`,
+                color: isReady ? '#10B981' : '#4A4540',
+                opacity: !isReady ? 0.5 : 1,
+              }}
+            >
+              <Check className="w-3.5 h-3.5" />
+              {publishing ? 'Publishing…' : 'Go Live'}
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Step indicator dot component
+function StepDot({ active, done, label }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <div
+        className="w-4 h-4 rounded-full flex items-center justify-center transition-all duration-200"
+        style={{
+          background: done ? 'rgba(16,185,129,0.2)' : active ? 'rgba(158,123,76,0.2)' : 'rgba(255,255,255,0.04)',
+          border: `1px solid ${done ? 'rgba(16,185,129,0.5)' : active ? 'rgba(158,123,76,0.5)' : 'rgba(237,232,223,0.1)'}`,
+        }}
+      >
+        <div
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ background: done ? '#10B981' : active ? '#9E7B4C' : 'transparent' }}
+        />
+      </div>
+      <span
+        className="text-[8px] font-mono uppercase tracking-widest"
+        style={{ color: active || done ? '#EDE8DF' : 'rgba(143,138,130,0.35)' }}
+      >
+        {label}
+      </span>
     </div>
   );
 }
