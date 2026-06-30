@@ -2175,17 +2175,29 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
         );
         const commitData = await commitRes.json();
 
-        // 5. Update the branch ref
+        // 5. Update the branch ref (with retry for replica propagation lag)
         setPublishStatus('Finalizing branch sync...');
-        await ghFetch(
-          `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`,
-          {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sha: commitData.sha, force: true })
-          },
-          'Ref update'
-        );
+        const maxRefUpdateAttempts = 3;
+        for (let refAttempt = 1; refAttempt <= maxRefUpdateAttempts; refAttempt++) {
+          try {
+            await ghFetch(
+              `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`,
+              {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sha: commitData.sha, force: true })
+              },
+              'Ref update'
+            );
+            break; // Success, proceed
+          } catch (refErr) {
+            if (refAttempt >= maxRefUpdateAttempts) {
+              throw refErr; // Rethrow to trigger outer global retry loop
+            }
+            console.warn(`[GitHub Sync] Ref update attempt ${refAttempt} failed, retrying in 1.5s:`, refErr.message);
+            await new Promise(r => setTimeout(r, 1500));
+          }
+        }
 
         setPublishStatus('Publish successful!');
         addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
