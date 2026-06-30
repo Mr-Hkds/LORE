@@ -4,7 +4,7 @@
  * Opens a panel anchored to the right edge.
  */
 import { useState, useRef } from 'react';
-import { X, Star } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const TAGS = [
   'Love the concept',

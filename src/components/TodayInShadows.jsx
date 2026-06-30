@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
 import LoreMark from './LoreMark';
 
@@ -340,7 +340,7 @@ export default function TodayInShadows() {
         }
       }
       // Persist counts locally so they never reset on page load
-      try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(next)); } catch {}
+      try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(next)); } catch { /* ignore */ }
       return next;
     });
 
@@ -372,7 +372,7 @@ export default function TodayInShadows() {
             mind_blowing: rx.mind_blowing || rx.mindblown || 0
           };
           setReactions(normalized);
-          try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(normalized)); } catch {}
+          try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(normalized)); } catch { /* ignore */ }
         }
       }
     } catch (err) {

@@ -68,7 +68,7 @@ export function useStaticContent() {
       // Fallback to static JSON file
       try {
         const res = await fetch(`/content/stories.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`);
+        if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`, { cause: err });
         const data = await res.json();
         setAllStories(data.stories || []);
         setLoading(false);

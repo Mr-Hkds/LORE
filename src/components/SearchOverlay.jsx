@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, X, ChevronRight, ArrowRight } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 
 const CATEGORY_LABELS = {
   psychology:      'Psychology',
@@ -164,7 +164,7 @@ export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory 
         <div className="overflow-y-auto" style={{ maxHeight: '380px', scrollbarWidth: 'thin' }}>
           {filteredStories.length > 0 ? (
             <div className="p-2">
-              {filteredStories.map((story, i) => {
+              {filteredStories.map(story => {
                 const accent = CATEGORY_ACCENT[story.category] || { color: '#9E7B4C', bg: 'rgba(158,123,76,0.06)', border: 'rgba(158,123,76,0.25)' };
                 return (
                   <div

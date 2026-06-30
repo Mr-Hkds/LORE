@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     try {
       const { visitor_id, session_id, path, referrer, user_agent } = req.body || {};
       
-      db.logPageView({
+      await db.logPageView({
         visitor_id: visitor_id || 'unknown',
         session_id: session_id || 'unknown',
         path: path || '/',
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const summary = db.getAnalyticsSummary();
+      const summary = await db.getAnalyticsSummary();
       return res.status(200).json(summary);
     } catch (err) {
       return res.status(500).json({ error: err.message });

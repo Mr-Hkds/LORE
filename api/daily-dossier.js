@@ -104,10 +104,10 @@ const DAILY_STATIC_FALLBACKS = {
   }
 };
 
-function generateDailyDossier(dateStr, dayOfWeek) {
+async function generateDailyDossier(dateStr, dayOfWeek) {
   let selectedStory = null;
   try {
-    const list = db.getStories(false);
+    const list = await db.getStories(false);
     if (list && list.length > 0) {
       const categoryMap = {
         0: ['gov_experiments', 'conspiracy'],
@@ -250,7 +250,7 @@ async function getWikipediaThumbnail(query) {
 }
 
 async function getReactionsWithAiFallback(dateStr, title, category, year) {
-  const existing = db.getDailyReactions(dateStr);
+  const existing = await db.getDailyReactions(dateStr);
   const total = (existing.intriguing || 0) + (existing.gripping || 0) + (existing.chilling || 0) + (existing.mind_blowing || 0);
   if (total > 0) {
     return existing;
@@ -285,7 +285,7 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
             chilling: Math.max(0, parsed.chilling || parsed.scared || 0),
             mind_blowing: Math.max(0, parsed.mind_blowing || parsed.mindblown || 0)
           };
-          db.setDailyReactions(dateStr, aiReactions);
+          await db.setDailyReactions(dateStr, aiReactions);
           return aiReactions;
         }
       }
@@ -294,7 +294,7 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
     console.warn('[AI Reactions] Failed to fetch custom reactions from Pollinations:', err.message);
   }
 
-  db.setDailyReactions(dateStr, defaultReactions);
+  await db.setDailyReactions(dateStr, defaultReactions);
   return defaultReactions;
 }
 
@@ -312,7 +312,7 @@ export default async function handler(req, res) {
   const dayOfWeek = todayObj.getDay();
 
   if (req.method === 'GET') {
-    const dossier = generateDailyDossier(dateStr, dayOfWeek);
+    const dossier = await generateDailyDossier(dateStr, dayOfWeek);
     dossier.date = dateStr;
 
     try {
@@ -351,15 +351,15 @@ export default async function handler(req, res) {
 
       if (add_reaction !== undefined || remove_reaction !== undefined) {
         if (remove_reaction) {
-          db.updateDailyReaction(targetDate, remove_reaction, true);
+          await db.updateDailyReaction(targetDate, remove_reaction, true);
           updated = true;
         }
         if (add_reaction) {
-          db.updateDailyReaction(targetDate, add_reaction, false);
+          await db.updateDailyReaction(targetDate, add_reaction, false);
           updated = true;
         }
       } else if (reaction_type) {
-        db.updateDailyReaction(targetDate, reaction_type, !!undo);
+        await db.updateDailyReaction(targetDate, reaction_type, !!undo);
         updated = true;
       }
 
@@ -367,7 +367,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing reaction parameters' });
       }
 
-      const rx = db.getDailyReactions(targetDate);
+      const rx = await db.getDailyReactions(targetDate);
       return res.status(200).json({
         success: true,
         reactions: {

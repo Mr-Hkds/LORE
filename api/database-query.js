@@ -17,20 +17,19 @@ export default async function handler(req, res) {
       }
 
       const sqlTrimmed = sql.trim().toUpperCase();
-      const stmt = db.db.prepare(sql);
+      const resQuery = await db.client.execute({ sql, args: params || [] });
       
       let result;
       if (sqlTrimmed.startsWith('SELECT') || sqlTrimmed.startsWith('PRAGMA') || sqlTrimmed.startsWith('EXPLAIN')) {
-        result = stmt.all(params || []);
+        result = resQuery.rows;
       } else {
-        const info = stmt.run(params || []);
         result = {
-          changes: info.changes,
-          lastInsertRowid: info.lastInsertRowid
+          changes: resQuery.rowsAffected,
+          lastInsertRowid: resQuery.lastInsertRowid !== undefined ? String(resQuery.lastInsertRowid) : null
         };
         // Regenerate static content if stories table was altered
         if (sqlTrimmed.includes('STORIES')) {
-          db.exportStoriesToJSON();
+          await db.exportStoriesToJSON();
         }
       }
 

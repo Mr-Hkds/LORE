@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
 import ApprovalCard from './ApprovalCard';

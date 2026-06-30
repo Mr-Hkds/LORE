@@ -218,7 +218,7 @@ Return only the raw JSON. Do not include markdown code block formatting.`;
           mindblown: parsed.mindblown || 0,
           ai: 1
         };
-        db.updateStory(story.story_id, { reactions });
+        await db.updateStory(story.story_id, { reactions });
         console.log(`[AI Reactions] Seeding reactions using Pollinations AI succeeded for: "${story.title}"`);
       }
     }
@@ -246,7 +246,7 @@ async function runAutomation(isManual = false) {
   }
   try {
     // 1. Read existing database
-    const list = db.getStories(true); // Get all, including drafts
+    const list = await db.getStories(true); // Get all, including drafts
 
     // 2. Count categories to balance coverage
     const categories = ['psychology', 'mythology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
@@ -276,7 +276,7 @@ async function runAutomation(isManual = false) {
     let pendingTopicsText = '';
     let recs = [];
     try {
-      recs = db.getRecommendations();
+      recs = await db.getRecommendations();
       const pendingRecs = recs.filter(r => r.status === 'pending');
       if (pendingRecs.length > 0) {
         pendingTopicsText = pendingRecs.slice(0, 5).map(r => `"- Topic: '${r.topic}', Recommendation ID: '${r.id}'"`).join('\n');
@@ -419,12 +419,12 @@ async function runAutomation(isManual = false) {
 
     // 6. Save story to SQLite as a DRAFT!
     storyObj.draft = true;
-    db.insertStory(storyObj);
+    await db.insertStory(storyObj);
 
     // 7. Auto-mark the chosen recommendation as generated
     if (storyObj.chosen_recommendation_id) {
       try {
-        db.updateRecommendationStatus(storyObj.chosen_recommendation_id, 'generated');
+        await db.updateRecommendationStatus(storyObj.chosen_recommendation_id, 'generated');
         addAutomationLog(`[RECOMMENDATION] Marked topic as generated in queue (ID: ${storyObj.chosen_recommendation_id})`);
       } catch (err) {
         console.error('[Automation] Failed to update recommendation status:', err.message);
@@ -432,12 +432,12 @@ async function runAutomation(isManual = false) {
     } else {
       // Fallback: search and update matching topics by title/similarity just in case
       try {
-        const freshRecs = db.getRecommendations();
+        const freshRecs = await db.getRecommendations();
         const storyTitle = storyObj.title.trim().toLowerCase();
         for (const r of freshRecs) {
           const recTopic = r.topic.trim().toLowerCase();
           if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
-            db.updateRecommendationStatus(r.id, 'generated');
+            await db.updateRecommendationStatus(r.id, 'generated');
             addAutomationLog(`[RECOMMENDATION] Marked matched topic as generated in queue (title: "${storyObj.title}")`);
           }
         }
@@ -652,16 +652,16 @@ const server = http.createServer(async (req, res) => {
     const dateStr = todayObj.toISOString().split('T')[0];
     
     // 1. Check if a selection is already saved in the database
-    let selectedStoryId = db.getDailyDossierStoryId(dateStr);
+    let selectedStoryId = await db.getDailyDossierStoryId(dateStr);
     let selectedStory = null;
     
     if (selectedStoryId) {
-      selectedStory = db.getStory(selectedStoryId);
+      selectedStory = await db.getStory(selectedStoryId);
     }
     
     // 2. If no selection or the story was deleted, select one dynamically
     if (!selectedStory) {
-      const list = db.getStories(false); // Get published stories only
+      const list = await db.getStories(false); // Get published stories only
       if (list && list.length > 0) {
         const categoryMap = {
           0: ['gov_experiments', 'conspiracy'],
@@ -687,7 +687,7 @@ const server = http.createServer(async (req, res) => {
 
         selectedStory = candidates[hash % candidates.length];
         if (selectedStory) {
-          db.setDailyDossierStoryId(dateStr, selectedStory.story_id);
+          await db.setDailyDossierStoryId(dateStr, selectedStory.story_id);
         }
       }
     }
@@ -734,11 +734,11 @@ const server = http.createServer(async (req, res) => {
       };
     } else {
       // Fallback to static theme fallback if no stories exist in DB
-      dossier = generateDailyDossier(dayOfWeek);
+      dossier = await generateDailyDossier(dayOfWeek);
       dossier.date = dateStr;
     }
     
-    dossier.reactions = db.getDailyReactions(dateStr);
+    dossier.reactions = await db.getDailyReactions(dateStr);
     
     // Dynamic wiki thumbnail check if no thumbnail matches
     if (!dossier.thumbnail || dossier.thumbnail.includes('unsplash.com')) {
@@ -769,15 +769,15 @@ const server = http.createServer(async (req, res) => {
       // Support atomic add/remove format
       if (add_reaction !== undefined || remove_reaction !== undefined) {
         if (remove_reaction) {
-          db.updateDailyReaction(dateStr, remove_reaction, true);
+          await db.updateDailyReaction(dateStr, remove_reaction, true);
           updated = true;
         }
         if (add_reaction) {
-          db.updateDailyReaction(dateStr, add_reaction, false);
+          await db.updateDailyReaction(dateStr, add_reaction, false);
           updated = true;
         }
       } else if (reaction_type) {
-        db.updateDailyReaction(dateStr, reaction_type, !!undo);
+        await db.updateDailyReaction(dateStr, reaction_type, !!undo);
         updated = true;
       }
       
@@ -787,7 +787,7 @@ const server = http.createServer(async (req, res) => {
         return;
       }
       
-      const updatedReactions = db.getDailyReactions(dateStr);
+      const updatedReactions = await db.getDailyReactions(dateStr);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, reactions: updatedReactions }));
     } catch (err) {
@@ -867,7 +867,7 @@ const server = http.createServer(async (req, res) => {
       };
       const canonicalType = normalizeReactionKey(reaction_type);
 
-      const story = db.getStory(story_id);
+      const story = await db.getStory(story_id);
       if (story) {
         if (!story.reactions) {
           story.reactions = { gripping: 0, scared: 0, mindblown: 0, like: 0 };
@@ -877,11 +877,11 @@ const server = http.createServer(async (req, res) => {
         } else {
           story.reactions[canonicalType] = (story.reactions[canonicalType] || 0) + 1;
         }
-        db.updateStory(story_id, { reactions: story.reactions });
+        await db.updateStory(story_id, { reactions: story.reactions });
         
         // Export updated story to stories.json (only if it's not a draft)
         if (!story.draft) {
-          db.exportStoriesToJSON();
+          await db.exportStoriesToJSON();
         }
 
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -913,7 +913,7 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/feedback
   if (req.method === 'GET' && pathname === '/api/feedback') {
-    const fb = db.getFeedback();
+    const fb = await db.getFeedback();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(fb));
     return;
@@ -931,7 +931,7 @@ const server = http.createServer(async (req, res) => {
       entry.id = entry.id || ('fb_' + Date.now());
       entry.timestamp = entry.timestamp || new Date().toISOString();
       entry.addressed = entry.addressed || false;
-      db.insertFeedback(entry);
+      await db.insertFeedback(entry);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
     } catch (err) {
@@ -945,7 +945,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'DELETE' && pathname === '/api/feedback') {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
-    db.deleteFeedback(id);
+    await db.deleteFeedback(id);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true }));
     return;
@@ -956,11 +956,11 @@ const server = http.createServer(async (req, res) => {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
     const body = await getJsonBody(req);
-    const feedbackItems = db.getFeedback();
+    const feedbackItems = await db.getFeedback();
     const item = feedbackItems.find(f => f.id === id);
     if (item) {
       const nextAddressed = body.addressed !== undefined ? body.addressed : !item.addressed;
-      db.updateFeedbackAddressed(id, nextAddressed);
+      await db.updateFeedbackAddressed(id, nextAddressed);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, addressed: nextAddressed }));
     } else {
@@ -971,7 +971,7 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/recommendations
   if (req.method === 'GET' && pathname === '/api/recommendations') {
-    const recs = db.getRecommendations();
+    const recs = await db.getRecommendations();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(recs));
     return;
@@ -988,7 +988,7 @@ const server = http.createServer(async (req, res) => {
       }
 
       // Check for duplicate in database (both stories and recommendations)
-      const duplicate = db.checkDuplicate(entry.topic);
+      const duplicate = await db.checkDuplicate(entry.topic);
       if (duplicate) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true, duplicate: true, status: 'pending' }));
@@ -999,7 +999,7 @@ const server = http.createServer(async (req, res) => {
       entry.date = entry.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
       entry.status = 'pending';
 
-      db.insertRecommendation(entry);
+      await db.insertRecommendation(entry);
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
@@ -1014,7 +1014,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'DELETE' && pathname === '/api/recommendations') {
     const id = urlObj.searchParams.get('id');
     if (!id) { res.writeHead(400); res.end('{"error":"id required"}'); return; }
-    db.deleteRecommendation(id);
+    await db.deleteRecommendation(id);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: true }));
     return;
@@ -1030,10 +1030,10 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'id and status required' }));
         return;
       }
-      const recs = db.getRecommendations();
+      const recs = await db.getRecommendations();
       const item = recs.find(r => r.id === id);
       if (item) {
-        db.updateRecommendationStatus(id, status);
+        await db.updateRecommendationStatus(id, status);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true }));
       } else {
@@ -1049,7 +1049,7 @@ const server = http.createServer(async (req, res) => {
   // Route: GET /api/stories (including drafts if specified)
   if (req.method === 'GET' && pathname === '/api/stories') {
     const includeDrafts = urlObj.searchParams.get('include_drafts') === 'true' || urlObj.searchParams.get('all') === 'true';
-    const list = db.getStories(includeDrafts);
+    const list = await db.getStories(includeDrafts);
     
     // Background seed reactions with AI if needed
     list.forEach(story => {
@@ -1068,15 +1068,15 @@ const server = http.createServer(async (req, res) => {
     try {
       const { story_id, publish_all } = await getJsonBody(req);
       if (publish_all) {
-        db.publishAllStories();
+        await db.publishAllStories();
       } else if (story_id) {
-        db.publishStory(story_id);
+        await db.publishStory(story_id);
       } else {
         res.writeHead(400, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Missing story_id or publish_all' }));
         return;
       }
-      db.exportStoriesToJSON();
+      await db.exportStoriesToJSON();
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true }));
     } catch (err) {
@@ -1092,22 +1092,22 @@ const server = http.createServer(async (req, res) => {
     try {
       const storyId = storyPutMatch[1];
       const updates = await getJsonBody(req);
-      const story = db.getStory(storyId);
+      const story = await db.getStory(storyId);
       if (!story) {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'Story not found' }));
         return;
       }
       
-      db.updateStory(storyId, updates);
+      await db.updateStory(storyId, updates);
       
       // Export only if not a draft
       if (!story.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ success: true, story: db.getStory(storyId) }));
+      res.end(JSON.stringify({ success: true, story: await db.getStory(storyId) }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err.message }));
@@ -1117,7 +1117,7 @@ const server = http.createServer(async (req, res) => {
 
   // Route: GET /api/analytics
   if (req.method === 'GET' && pathname === '/api/analytics') {
-    const summary = db.getAnalyticsSummary();
+    const summary = await db.getAnalyticsSummary();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(summary));
     return;
@@ -1127,7 +1127,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && pathname === '/api/analytics') {
     try {
       const pv = await getJsonBody(req);
-      db.logPageView({
+      await db.logPageView({
         visitor_id: pv.visitor_id || 'unknown',
         session_id: pv.session_id || 'unknown',
         path: pv.path || '/',
@@ -1167,20 +1167,20 @@ const server = http.createServer(async (req, res) => {
         newStory.draft = true;
       }
 
-      db.insertStory(newStory);
+      await db.insertStory(newStory);
 
       if (!newStory.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
 
       // Check if this matches a recommended topic and mark as generated in the queue
       try {
-        const recs = db.getRecommendations();
+        const recs = await db.getRecommendations();
         const storyTitle = newStory.title.trim().toLowerCase();
         for (const r of recs) {
           const recTopic = r.topic.trim().toLowerCase();
           if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
-            db.updateRecommendationStatus(r.id, 'generated');
+            await db.updateRecommendationStatus(r.id, 'generated');
             console.log(`[RECOMMENDATION] Marked matched topic as generated in queue (title: "${newStory.title}")`);
           }
         }
@@ -1200,13 +1200,13 @@ const server = http.createServer(async (req, res) => {
   // Route: DELETE /api/stories/:id
   if (req.method === 'DELETE' && pathname.startsWith('/api/stories/')) {
     const id = pathname.split('/').pop();
-    const story = db.getStory(id);
+    const story = await db.getStory(id);
     if (story) {
-      db.deleteStory(id);
+      await db.deleteStory(id);
       
       // Export only if not a draft
       if (!story.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
     }
     

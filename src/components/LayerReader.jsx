@@ -113,7 +113,7 @@ export default function LayerReader({
       } else {
         throw new Error("No definition");
       }
-    } catch (err) {
+    } catch {
       setLookup(prev => ({
         ...prev,
         definition: `Could not find a simple definition for "${cleanOriginal}". Double-click to search or verify spelling.`,
@@ -137,7 +137,7 @@ export default function LayerReader({
     
     // Sort keys descending by length
     const keys = Object.keys(LOCAL_DICTIONARY).sort((a, b) => b.length - a.length);
-    const escapedKeys = keys.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const escapedKeys = keys.map(k => k.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
     const pattern = new RegExp(`\\b(${escapedKeys.join('|')})\\b`, 'gi');
     
     const parts = [];
@@ -228,7 +228,6 @@ export default function LayerReader({
     if (data?.reactions) {
       setReactions(normalizeReactions(data.reactions));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   // Re-load persisted votes when storyId changes (user navigates to different story)

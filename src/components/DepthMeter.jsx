@@ -4,9 +4,8 @@
  * to prevent overlap and truncation on small screens.
  */
 import LoreMark from './LoreMark';
-import { Share2 } from 'lucide-react';
 
-export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack, onShare }) {
+export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack }) {
   const accentColor = '#9E7B4C';
 
   return (

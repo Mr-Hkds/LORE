@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const includeDrafts = req.query.include_drafts === 'true' || req.query.all === 'true';
-      const list = db.getStories(includeDrafts);
+      const list = await db.getStories(includeDrafts);
       return res.status(200).json(list);
     } catch (err) {
       return res.status(500).json({ error: err.message });
@@ -35,18 +35,18 @@ export default async function handler(req, res) {
       if (newStory.draft === undefined) {
         newStory.draft = true;
       }
-      db.insertStory(newStory);
+      await db.insertStory(newStory);
       if (!newStory.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
       // Update recommendation status
       try {
-        const recs = db.getRecommendations();
+        const recs = await db.getRecommendations();
         const storyTitle = newStory.title.trim().toLowerCase();
         for (const r of recs) {
           const recTopic = r.topic.trim().toLowerCase();
           if (recTopic === storyTitle || storyTitle.includes(recTopic) || recTopic.includes(storyTitle)) {
-            db.updateRecommendationStatus(r.id, 'generated');
+            await db.updateRecommendationStatus(r.id, 'generated');
           }
         }
       } catch (err) {
@@ -63,13 +63,13 @@ export default async function handler(req, res) {
     try {
       const { story_id, publish_all } = req.body || {};
       if (publish_all) {
-        db.publishAllStories();
+        await db.publishAllStories();
       } else if (story_id) {
-        db.publishStory(story_id);
+        await db.publishStory(story_id);
       } else {
         return res.status(400).json({ error: 'Missing story_id or publish_all' });
       }
-      db.exportStoriesToJSON();
+      await db.exportStoriesToJSON();
       return res.status(200).json({ success: true });
     } catch (err) {
       return res.status(500).json({ error: err.message });
@@ -83,7 +83,7 @@ export default async function handler(req, res) {
       if (!story_id || !reaction_type) {
         return res.status(400).json({ error: 'Missing story_id or reaction_type' });
       }
-      const story = db.getStory(story_id);
+      const story = await db.getStory(story_id);
       if (story) {
         if (!story.reactions) {
           story.reactions = { gripping: 0, scared: 0, mindblown: 0, like: 0 };
@@ -100,9 +100,9 @@ export default async function handler(req, res) {
         } else {
           story.reactions[canonicalType] = (story.reactions[canonicalType] || 0) + 1;
         }
-        db.updateStory(story_id, { reactions: story.reactions });
+        await db.updateStory(story_id, { reactions: story.reactions });
         if (!story.draft) {
-          db.exportStoriesToJSON();
+          await db.exportStoriesToJSON();
         }
         const rx = story.reactions;
         return res.status(200).json({
@@ -129,15 +129,15 @@ export default async function handler(req, res) {
   if (req.method === 'PUT' && lastPart && lastPart !== 'stories') {
     try {
       const updates = req.body || {};
-      const story = db.getStory(lastPart);
+      const story = await db.getStory(lastPart);
       if (!story) {
         return res.status(404).json({ error: 'Story not found' });
       }
-      db.updateStory(lastPart, updates);
+      await db.updateStory(lastPart, updates);
       if (!story.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
-      return res.status(200).json({ success: true, story: db.getStory(lastPart) });
+      return res.status(200).json({ success: true, story: await db.getStory(lastPart) });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -147,10 +147,10 @@ export default async function handler(req, res) {
   if (req.method === 'DELETE' && lastPart && lastPart !== 'stories') {
     try {
       const isInvalidId = !lastPart || lastPart === 'undefined' || lastPart === 'null';
-      const story = isInvalidId ? null : db.getStory(lastPart);
-      db.deleteStory(lastPart);
+      const story = isInvalidId ? null : await db.getStory(lastPart);
+      await db.deleteStory(lastPart);
       if (isInvalidId || !story || !story.draft) {
-        db.exportStoriesToJSON();
+        await db.exportStoriesToJSON();
       }
       return res.status(200).json({ success: true });
     } catch (err) {

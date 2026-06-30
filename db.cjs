@@ -1,4 +1,4 @@
-const Database = require('better-sqlite3');
+const { createClient } = require('@libsql/client');
 const path = require('path');
 const fs = require('fs');
 
@@ -22,93 +22,106 @@ const EXISTING_LOCAL_IMAGES = new Set([
   'unit_731_experiments.jpg',
   'uwe_barschel_001.jpg'
 ]);
-const dbPath = isVercel ? '/tmp/lore.db' : path.join(__dirname, 'lore.db');
-const db = new Database(dbPath);
 
-// Initialize tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS stories (
-    story_id TEXT PRIMARY KEY,
-    title TEXT,
-    category TEXT,
-    hook TEXT,
-    concepts TEXT,
-    severity TEXT,
-    hero_image TEXT,
-    added_date TEXT,
-    draft INTEGER DEFAULT 0,
-    reactions TEXT,
-    evidence_links TEXT,
-    connections TEXT,
-    layers TEXT,
-    custom_image_prompt TEXT
-  );
+const databaseUrl = process.env.TURSO_DATABASE_URL || 'file:lore.db';
+const authToken = process.env.TURSO_AUTH_TOKEN || '';
 
-  CREATE TABLE IF NOT EXISTS recommendations (
-    id TEXT PRIMARY KEY,
-    topic TEXT,
-    date TEXT,
-    status TEXT
-  );
+const client = createClient({
+  url: databaseUrl,
+  authToken: authToken
+});
 
-  CREATE TABLE IF NOT EXISTS feedback (
-    id TEXT PRIMARY KEY,
-    rating INTEGER,
-    tags TEXT,
-    note TEXT,
-    timestamp TEXT,
-    page TEXT,
-    addressed INTEGER DEFAULT 0
-  );
+let isInitialized = false;
 
-  CREATE TABLE IF NOT EXISTS daily_reactions (
-    date TEXT PRIMARY KEY,
-    likes INTEGER DEFAULT 0,
-    gripping INTEGER DEFAULT 0,
-    scared INTEGER DEFAULT 0,
-    mindblown INTEGER DEFAULT 0
-  );
+async function ensureInit() {
+  if (isInitialized) return;
 
-  CREATE TABLE IF NOT EXISTS pageviews (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    visitor_id TEXT,
-    session_id TEXT,
-    path TEXT,
-    referrer TEXT,
-    user_agent TEXT,
-    timestamp TEXT,
-    ip TEXT,
-    city TEXT,
-    region TEXT,
-    country TEXT,
-    country_code TEXT,
-    org TEXT
-  );
+  await client.executeMultiple(`
+    CREATE TABLE IF NOT EXISTS stories (
+      story_id TEXT PRIMARY KEY,
+      title TEXT,
+      category TEXT,
+      hook TEXT,
+      concepts TEXT,
+      severity TEXT,
+      hero_image TEXT,
+      added_date TEXT,
+      draft INTEGER DEFAULT 0,
+      reactions TEXT,
+      evidence_links TEXT,
+      connections TEXT,
+      layers TEXT,
+      custom_image_prompt TEXT
+    );
 
-  CREATE TABLE IF NOT EXISTS comments (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    target_id TEXT,
-    username TEXT,
-    comment TEXT,
-    timestamp TEXT
-  );
+    CREATE TABLE IF NOT EXISTS recommendations (
+      id TEXT PRIMARY KEY,
+      topic TEXT,
+      date TEXT,
+      status TEXT
+    );
 
-  CREATE TABLE IF NOT EXISTS daily_dossier (
-    date TEXT PRIMARY KEY,
-    story_id TEXT
-  );
-`);
+    CREATE TABLE IF NOT EXISTS feedback (
+      id TEXT PRIMARY KEY,
+      rating INTEGER,
+      tags TEXT,
+      note TEXT,
+      timestamp TEXT,
+      page TEXT,
+      addressed INTEGER DEFAULT 0
+    );
 
-// Try to alter pageviews table if it was created without geolocation columns
-try { db.exec("ALTER TABLE pageviews ADD COLUMN ip TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE pageviews ADD COLUMN city TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE pageviews ADD COLUMN region TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE pageviews ADD COLUMN country TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE pageviews ADD COLUMN country_code TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE pageviews ADD COLUMN org TEXT"); } catch(e){}
-try { db.exec("ALTER TABLE stories ADD COLUMN custom_image_prompt TEXT"); } catch(e){}
+    CREATE TABLE IF NOT EXISTS daily_reactions (
+      date TEXT PRIMARY KEY,
+      likes INTEGER DEFAULT 0,
+      gripping INTEGER DEFAULT 0,
+      scared INTEGER DEFAULT 0,
+      mindblown INTEGER DEFAULT 0
+    );
 
-function ensureStoryReactions(story) {
+    CREATE TABLE IF NOT EXISTS pageviews (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      visitor_id TEXT,
+      session_id TEXT,
+      path TEXT,
+      referrer TEXT,
+      user_agent TEXT,
+      timestamp TEXT,
+      ip TEXT,
+      city TEXT,
+      region TEXT,
+      country TEXT,
+      country_code TEXT,
+      org TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS comments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      target_id TEXT,
+      username TEXT,
+      comment TEXT,
+      timestamp TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS daily_dossier (
+      date TEXT PRIMARY KEY,
+      story_id TEXT
+    );
+  `);
+
+  // Try to alter pageviews table if it was created without geolocation columns
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN ip TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN city TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN region TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN country TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN country_code TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE pageviews ADD COLUMN org TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE stories ADD COLUMN custom_image_prompt TEXT"); } catch(e){}
+
+  isInitialized = true;
+}
+
+async function ensureStoryReactions(story) {
   const rx = story.reactions || {};
   const total = (rx.like || 0) + (rx.gripping || 0) + (rx.scared || 0) + (rx.mindblown || 0);
   if (total > 0) return rx;
@@ -125,7 +138,10 @@ function ensureStoryReactions(story) {
   };
 
   try {
-    db.prepare('UPDATE stories SET reactions = ? WHERE story_id = ?').run(JSON.stringify(seeded), story.story_id);
+    await client.execute({
+      sql: 'UPDATE stories SET reactions = ? WHERE story_id = ?',
+      args: [JSON.stringify(seeded), story.story_id]
+    });
   } catch (err) {
     console.warn(`[DB Reactions] Failed to save seeded reactions for story ${story.story_id}:`, err.message);
   }
@@ -133,100 +149,28 @@ function ensureStoryReactions(story) {
   return seeded;
 }
 
-let lastSyncTime = 0;
-const SYNC_INTERVAL = 10000;
-
-function syncDatabaseIfNeeded() {
-  const now = Date.now();
-  if (now - lastSyncTime < SYNC_INTERVAL) {
-    return;
-  }
-  lastSyncTime = now;
-
-  const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
-  try {
-    let data = null;
-
-    if (isVercel) {
-      const owner = process.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
-      const repo = process.env.VITE_GITHUB_REPO || 'LORE';
-      const branch = process.env.VITE_GITHUB_BRANCH || 'main';
-      const RAW_URL = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/content/stories.json?t=${now}`;
-      
-      try {
-        const child_process = require('child_process');
-        const cmd = `node -e "fetch('${RAW_URL}').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => console.log(JSON.stringify(j))).catch(e => { console.error(e.message); process.exit(1); })"`;
-        const stdout = child_process.execSync(cmd, { stdio: ['pipe', 'pipe', 'ignore'], timeout: 3000 }).toString();
-        if (stdout && stdout.trim()) {
-          data = JSON.parse(stdout);
-        }
-      } catch (err) {
-        console.warn('[DB Sync] Failed to fetch raw stories from GitHub synchronously, using local fallback:', err.message);
-      }
-    }
-
-    if (!data) {
-      try {
-        data = require('./public/content/stories.json');
-      } catch (err) {
-        if (fs.existsSync(STORIES_FILE)) {
-          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
-        }
-      }
-    }
-
-    if (data && Array.isArray(data.stories)) {
-      const insertStmt = db.prepare(`
-        INSERT OR REPLACE INTO stories (
-          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `);
-      const transaction = db.transaction((stories) => {
-        for (const s of stories) {
-          insertStmt.run(
-            s.story_id,
-            s.title,
-            s.category,
-            s.hook,
-            JSON.stringify(s.concepts || []),
-            s.severity,
-            s.hero_image || null,
-            s.added_date || null,
-            s.draft ? 1 : 0,
-            JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
-            JSON.stringify(s.evidence_links || []),
-            JSON.stringify(s.connections || []),
-            JSON.stringify(s.layers || []),
-            s.custom_image_prompt || null
-          );
-        }
-      });
-      transaction(data.stories);
-    }
-  } catch (e) {
-    console.error('[DB Sync] Failed to sync database on request:', e.message);
-  }
-}
-
-function getStories(includeDrafts = false) {
-  syncDatabaseIfNeeded();
-  const stmt = includeDrafts 
-    ? db.prepare('SELECT * FROM stories') 
-    : db.prepare('SELECT * FROM stories WHERE draft = 0');
+async function getStories(includeDrafts = false) {
+  await ensureInit();
+  const sql = includeDrafts 
+    ? 'SELECT * FROM stories' 
+    : 'SELECT * FROM stories WHERE draft = 0';
   
-  const rows = stmt.all();
-    return rows.map(row => {
-      let isImageMissingOnServer = false;
-      const img = row.hero_image;
-      if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
+  const res = await client.execute(sql);
+  const rows = res.rows;
+  const formatted = [];
+  
+  for (const row of rows) {
+    let isImageMissingOnServer = false;
+    const img = row.hero_image;
+    if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
+      isImageMissingOnServer = true;
+    } else if (img.startsWith('/content/images/')) {
+      const filename = img.substring('/content/images/'.length);
+      const absolutePath = path.join(__dirname, 'public', img);
+      if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
         isImageMissingOnServer = true;
-      } else if (img.startsWith('/content/images/')) {
-        const filename = img.substring('/content/images/'.length);
-        const absolutePath = path.join(__dirname, 'public', img);
-        if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
-          isImageMissingOnServer = true;
-        }
       }
+    }
 
     const s = {
       ...row,
@@ -238,8 +182,7 @@ function getStories(includeDrafts = false) {
       layers: JSON.parse(row.layers || '[]'),
       image_missing: isImageMissingOnServer
     };
-    s.reactions = ensureStoryReactions(s);
-    // Stable fallback: hash story_id to a deterministic date in the 2026 range
+    s.reactions = await ensureStoryReactions(s);
     if (s.added_date) {
       s.added_date = s.added_date.substring(0, 10);
     } else {
@@ -248,13 +191,18 @@ function getStories(includeDrafts = false) {
       const spreadDays = hash % 180;
       s.added_date = new Date(base + (spreadDays * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
     }
-    return s;
-  });
+    formatted.push(s);
+  }
+  return formatted;
 }
 
-function getStory(story_id) {
-  syncDatabaseIfNeeded();
-  const row = db.prepare('SELECT * FROM stories WHERE story_id = ?').get(story_id);
+async function getStory(story_id) {
+  await ensureInit();
+  const res = await client.execute({
+    sql: 'SELECT * FROM stories WHERE story_id = ?',
+    args: [story_id]
+  });
+  const row = res.rows[0];
   if (!row) return null;
 
   let isImageMissingOnServer = false;
@@ -279,7 +227,7 @@ function getStory(story_id) {
     layers: JSON.parse(row.layers || '[]'),
     image_missing: isImageMissingOnServer
   };
-  s.reactions = ensureStoryReactions(s);
+  s.reactions = await ensureStoryReactions(s);
   if (s.added_date) {
     s.added_date = s.added_date.substring(0, 10);
   } else {
@@ -291,34 +239,34 @@ function getStory(story_id) {
   return s;
 }
 
-function insertStory(story) {
-  const stmt = db.prepare(`
-    INSERT OR REPLACE INTO stories (
+async function insertStory(story) {
+  await ensureInit();
+  await client.execute({
+    sql: `INSERT OR REPLACE INTO stories (
       story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `);
-  
-  stmt.run(
-    story.story_id,
-    story.title,
-    story.category,
-    story.hook,
-    JSON.stringify(story.concepts || []),
-    story.severity,
-    story.hero_image || null,
-    story.added_date || new Date().toLocaleDateString('en-CA'),
-    story.draft ? 1 : 0,
-    JSON.stringify(story.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
-    JSON.stringify(story.evidence_links || []),
-    JSON.stringify(story.connections || []),
-    JSON.stringify(story.layers || []),
-    story.custom_image_prompt || null
-  );
-  return getStory(story.story_id);
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    args: [
+      story.story_id,
+      story.title,
+      story.category,
+      story.hook,
+      JSON.stringify(story.concepts || []),
+      story.severity,
+      story.hero_image || null,
+      story.added_date || new Date().toLocaleDateString('en-CA'),
+      story.draft ? 1 : 0,
+      JSON.stringify(story.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
+      JSON.stringify(story.evidence_links || []),
+      JSON.stringify(story.connections || []),
+      JSON.stringify(story.layers || []),
+      story.custom_image_prompt || null
+    ]
+  });
+  return await getStory(story.story_id);
 }
 
-function updateStory(story_id, updates) {
-  const existing = getStory(story_id);
+async function updateStory(story_id, updates) {
+  const existing = await getStory(story_id);
   if (!existing) return false;
   
   const today = new Date().toLocaleDateString('en-CA');
@@ -327,15 +275,19 @@ function updateStory(story_id, updates) {
   }
   
   const merged = { ...existing, ...updates };
-  insertStory(merged);
+  await insertStory(merged);
   return true;
 }
 
-function deleteStory(story_id) {
+async function deleteStory(story_id) {
+  await ensureInit();
   if (!story_id || story_id === 'undefined' || story_id === 'null' || story_id === '') {
-    db.prepare("DELETE FROM stories WHERE story_id IS NULL OR story_id = '' OR story_id = 'undefined' OR story_id = 'null'").run();
+    await client.execute("DELETE FROM stories WHERE story_id IS NULL OR story_id = '' OR story_id = 'undefined' OR story_id = 'null'");
   } else {
-    db.prepare('DELETE FROM stories WHERE story_id = ?').run(story_id);
+    await client.execute({
+      sql: 'DELETE FROM stories WHERE story_id = ?',
+      args: [story_id]
+    });
   }
 }
 
@@ -346,8 +298,8 @@ function hasProperThumbnail(story) {
   return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
 }
 
-function publishStory(story_id) {
-  const story = getStory(story_id);
+async function publishStory(story_id) {
+  const story = await getStory(story_id);
   if (!story) return false;
   if (!hasProperThumbnail(story)) {
     throw new Error('Story lacks a proper thumbnail image.');
@@ -355,17 +307,25 @@ function publishStory(story_id) {
   
   const today = new Date().toLocaleDateString('en-CA');
   const currentDate = (!story.added_date || story.added_date === '2026-01-01' || story.draft) ? today : story.added_date;
-  db.prepare('UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?').run(currentDate, story_id);
+  await client.execute({
+    sql: 'UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?',
+    args: [currentDate, story_id]
+  });
   
-  // Export updated stories database back to static content folder
-  exportStoriesToJSON();
+  await exportStoriesToJSON();
   return true;
 }
 
-function publishAllStories() {
-  const drafts = db.prepare('SELECT * FROM stories WHERE draft = 1').all();
+async function publishAllStories() {
+  await ensureInit();
+  const res = await client.execute('SELECT * FROM stories WHERE draft = 1');
+  const drafts = res.rows;
   let count = 0;
-  drafts.forEach(row => {
+  
+  const batchStmts = [];
+  const today = new Date().toLocaleDateString('en-CA');
+  
+  for (const row of drafts) {
     const s = {
       ...row,
       concepts: JSON.parse(row.concepts || '[]'),
@@ -375,74 +335,92 @@ function publishAllStories() {
       layers: JSON.parse(row.layers || '[]')
     };
     if (hasProperThumbnail(s)) {
-      const today = new Date().toLocaleDateString('en-CA');
       const currentDate = (!s.added_date || s.added_date === '2026-01-01' || s.draft) ? today : s.added_date;
-      db.prepare('UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?').run(currentDate, s.story_id);
+      batchStmts.push({
+        sql: 'UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?',
+        args: [currentDate, s.story_id]
+      });
       count++;
     }
-  });
-  if (count > 0) {
-    exportStoriesToJSON();
+  }
+  
+  if (batchStmts.length > 0) {
+    await client.batch(batchStmts, "write");
+    await exportStoriesToJSON();
   }
   return count;
 }
 
-// Recommendations Helpers
-function getRecommendations() {
-  return db.prepare('SELECT * FROM recommendations ORDER BY date DESC').all();
+async function getRecommendations() {
+  await ensureInit();
+  const res = await client.execute('SELECT * FROM recommendations ORDER BY date DESC');
+  return res.rows.map(r => ({ ...r }));
 }
 
-function insertRecommendation(rec) {
-  const stmt = db.prepare('INSERT OR REPLACE INTO recommendations (id, topic, date, status) VALUES (?, ?, ?, ?)');
-  stmt.run(rec.id, rec.topic, rec.date, rec.status || 'pending');
+async function insertRecommendation(rec) {
+  await ensureInit();
+  await client.execute({
+    sql: 'INSERT OR REPLACE INTO recommendations (id, topic, date, status) VALUES (?, ?, ?, ?)',
+    args: [rec.id, rec.topic, rec.date, rec.status || 'pending']
+  });
 }
 
-function deleteRecommendation(id) {
-  db.prepare('DELETE FROM recommendations WHERE id = ?').run(id);
+async function deleteRecommendation(id) {
+  await ensureInit();
+  await client.execute({
+    sql: 'DELETE FROM recommendations WHERE id = ?',
+    args: [id]
+  });
 }
 
-function updateRecommendationStatus(id, status) {
-  db.prepare('UPDATE recommendations SET status = ? WHERE id = ?').run(status, id);
+async function updateRecommendationStatus(id, status) {
+  await ensureInit();
+  await client.execute({
+    sql: 'UPDATE recommendations SET status = ? WHERE id = ?',
+    args: [status, id]
+  });
 }
 
-function getFeedback() {
-  const rows = db.prepare('SELECT * FROM feedback ORDER BY timestamp DESC').all();
-  return rows.map(row => ({
+async function getFeedback() {
+  await ensureInit();
+  const res = await client.execute('SELECT * FROM feedback ORDER BY timestamp DESC');
+  return res.rows.map(row => ({
     ...row,
     tags: JSON.parse(row.tags || '[]'),
     addressed: !!row.addressed
   }));
 }
 
-function insertFeedback(fb) {
-  const stmt = db.prepare('INSERT OR REPLACE INTO feedback (id, rating, tags, note, timestamp, page, addressed) VALUES (?, ?, ?, ?, ?, ?, ?)');
-  stmt.run(
-    fb.id,
-    fb.rating,
-    JSON.stringify(fb.tags || []),
-    fb.note || '',
-    fb.timestamp || new Date().toISOString(),
-    fb.page || '/',
-    fb.addressed ? 1 : 0
-  );
+async function insertFeedback(fb) {
+  await ensureInit();
+  await client.execute({
+    sql: 'INSERT OR REPLACE INTO feedback (id, rating, tags, note, timestamp, page, addressed) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    args: [
+      fb.id,
+      fb.rating,
+      JSON.stringify(fb.tags || []),
+      fb.note || '',
+      fb.timestamp || new Date().toISOString(),
+      fb.page || '/',
+      fb.addressed ? 1 : 0
+    ]
+  });
 }
 
-// Check if a topic already exists in either stories or recommendations (case-insensitive)
-function checkDuplicate(topic) {
+async function checkDuplicate(topic) {
+  await ensureInit();
   const topicLower = topic.trim().toLowerCase();
   
-  // Check stories
-  const storyStmt = db.prepare('SELECT story_id, title FROM stories');
-  const storiesList = storyStmt.all();
+  const resStories = await client.execute('SELECT story_id, title FROM stories');
+  const storiesList = resStories.rows;
   const storyDup = storiesList.find(s => {
     const titleLower = s.title.toLowerCase();
     return titleLower === topicLower || titleLower.includes(topicLower) || topicLower.includes(titleLower);
   });
   if (storyDup) return true;
 
-  // Check recommendations
-  const recStmt = db.prepare('SELECT topic FROM recommendations');
-  const recsList = recStmt.all();
+  const resRecs = await client.execute('SELECT topic FROM recommendations');
+  const recsList = resRecs.rows;
   const recDup = recsList.find(r => {
     const rTopicLower = r.topic.toLowerCase();
     return rTopicLower === topicLower || rTopicLower.includes(topicLower) || topicLower.includes(rTopicLower);
@@ -452,16 +430,23 @@ function checkDuplicate(topic) {
   return false;
 }
 
-function deleteFeedback(id) {
-  db.prepare('DELETE FROM feedback WHERE id = ?').run(id);
+async function deleteFeedback(id) {
+  await ensureInit();
+  await client.execute({
+    sql: 'DELETE FROM feedback WHERE id = ?',
+    args: [id]
+  });
 }
 
-function updateFeedbackAddressed(id, addressed) {
-  db.prepare('UPDATE feedback SET addressed = ? WHERE id = ?').run(addressed ? 1 : 0, id);
+async function updateFeedbackAddressed(id, addressed) {
+  await ensureInit();
+  await client.execute({
+    sql: 'UPDATE feedback SET addressed = ? WHERE id = ?',
+    args: [addressed ? 1 : 0, id]
+  });
 }
 
-// Rebuild Concept Index and Export to stories.json / concept_index.json
-function exportStoriesToJSON() {
+async function exportStoriesToJSON() {
   if (isVercel) {
     console.log('[DB] Running on Vercel. Skipping static file export (GitHub Sync should be used for persistence).');
     return;
@@ -469,12 +454,11 @@ function exportStoriesToJSON() {
   const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
   const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
   
-  const stories = getStories(false); // Only live stories
+  const stories = await getStories(false);
   
   try {
     fs.writeFileSync(STORIES_FILE, JSON.stringify({ stories }, null, 2));
     
-    // Update concepts index
     const conceptIndex = {};
     stories.forEach(story => {
       if (story.concepts) {
@@ -496,34 +480,34 @@ function exportStoriesToJSON() {
   }
 }
 
-// Migration / Seeding from JSON files if tables are empty
-function seed() {
+async function seed() {
+  await ensureInit();
+  
   const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
   const RECOMMENDATIONS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
   const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 
-  // Seed & Sync stories from deployed stories.json
-  try {
-    let data = null;
-    try {
-      data = require('./public/content/stories.json');
-    } catch (err) {
-      if (fs.existsSync(STORIES_FILE)) {
-        data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
-      }
-    }
+  const resCount = await client.execute('SELECT COUNT(*) as count FROM stories');
+  const storiesCount = resCount.rows[0]?.count || 0;
 
-    if (data && Array.isArray(data.stories)) {
-      console.log(`Synchronizing database with ${data.stories.length} stories from stories.json...`);
-      const insertStmt = db.prepare(`
-        INSERT OR REPLACE INTO stories (
-          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `);
-      
-      const transaction = db.transaction((stories) => {
-        for (const s of stories) {
-          insertStmt.run(
+  if (storiesCount === 0) {
+    try {
+      let data = null;
+      try {
+        data = require('./public/content/stories.json');
+      } catch (err) {
+        if (fs.existsSync(STORIES_FILE)) {
+          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+        }
+      }
+
+      if (data && Array.isArray(data.stories)) {
+        console.log(`Synchronizing database with ${data.stories.length} stories from stories.json...`);
+        const batchStmts = data.stories.map(s => ({
+          sql: `INSERT OR REPLACE INTO stories (
+            story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          args: [
             s.story_id,
             s.title,
             s.category,
@@ -537,17 +521,17 @@ function seed() {
             JSON.stringify(s.evidence_links || []),
             JSON.stringify(s.connections || []),
             JSON.stringify(s.layers || [])
-          );
-        }
-      });
-      transaction(data.stories);
+          ]
+        }));
+        await client.batch(batchStmts, "write");
+      }
+    } catch (e) {
+      console.error('Failed to seed/sync stories:', e);
     }
-  } catch (e) {
-    console.error('Failed to seed/sync stories:', e);
   }
 
-  // Seed recommendations
-  const recCount = db.prepare('SELECT COUNT(*) as count FROM recommendations').get().count;
+  const resRecCount = await client.execute('SELECT COUNT(*) as count FROM recommendations');
+  const recCount = resRecCount.rows[0]?.count || 0;
   if (recCount === 0) {
     try {
       let recs = null;
@@ -560,22 +544,20 @@ function seed() {
       }
 
       if (Array.isArray(recs)) {
-        console.log(`Seeding ${recs.length} recommendations to SQLite database...`);
-        const insertStmt = db.prepare('INSERT INTO recommendations (id, topic, date, status) VALUES (?, ?, ?, ?)');
-        const transaction = db.transaction((items) => {
-          for (const r of items) {
-            insertStmt.run(r.id, r.topic, r.date, r.status || 'pending');
-          }
-        });
-        transaction(recs);
+        console.log(`Seeding ${recs.length} recommendations to database...`);
+        const batchStmts = recs.map(r => ({
+          sql: 'INSERT INTO recommendations (id, topic, date, status) VALUES (?, ?, ?, ?)',
+          args: [r.id, r.topic, r.date, r.status || 'pending']
+        }));
+        await client.batch(batchStmts, "write");
       }
     } catch (e) {
       console.error('Failed to seed recommendations:', e);
     }
   }
 
-  // Seed feedback
-  const fbCount = db.prepare('SELECT COUNT(*) as count FROM feedback').get().count;
+  const resFbCount = await client.execute('SELECT COUNT(*) as count FROM feedback');
+  const fbCount = resFbCount.rows[0]?.count || 0;
   if (fbCount === 0) {
     try {
       let feedback = null;
@@ -588,22 +570,20 @@ function seed() {
       }
 
       if (Array.isArray(feedback)) {
-        console.log(`Seeding ${feedback.length} feedback entries to SQLite database...`);
-        const insertStmt = db.prepare('INSERT INTO feedback (id, rating, tags, note, timestamp, page, addressed) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        const transaction = db.transaction((items) => {
-          for (const f of items) {
-            insertStmt.run(
-              f.id,
-              f.rating,
-              JSON.stringify(f.tags || []),
-              f.note || '',
-              f.timestamp || new Date().toISOString(),
-              f.page || '/',
-              f.addressed ? 1 : 0
-            );
-          }
-        });
-        transaction(feedback);
+        console.log(`Seeding ${feedback.length} feedback entries to database...`);
+        const batchStmts = feedback.map(f => ({
+          sql: 'INSERT INTO feedback (id, rating, tags, note, timestamp, page, addressed) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          args: [
+            f.id,
+            f.rating,
+            JSON.stringify(f.tags || []),
+            f.note || '',
+            f.timestamp || new Date().toISOString(),
+            f.page || '/',
+            f.addressed ? 1 : 0
+          ]
+        }));
+        await client.batch(batchStmts, "write");
       }
     } catch (e) {
       console.error('Failed to seed feedback:', e);
@@ -611,8 +591,13 @@ function seed() {
   }
 }
 
-function getDailyReactions(date) {
-  const row = db.prepare('SELECT * FROM daily_reactions WHERE date = ?').get(date);
+async function getDailyReactions(date) {
+  await ensureInit();
+  const res = await client.execute({
+    sql: 'SELECT * FROM daily_reactions WHERE date = ?',
+    args: [date]
+  });
+  const row = res.rows[0];
   if (!row) return { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 };
   return {
     intriguing: row.likes || 0,
@@ -622,7 +607,8 @@ function getDailyReactions(date) {
   };
 }
 
-function updateDailyReaction(date, reaction_type, undo = false) {
+async function updateDailyReaction(date, reaction_type, undo = false) {
+  await ensureInit();
   let colName = reaction_type;
   if (reaction_type === 'intriguing' || reaction_type === 'like') colName = 'likes';
   if (reaction_type === 'chilling' || reaction_type === 'scared') colName = 'scared';
@@ -630,50 +616,73 @@ function updateDailyReaction(date, reaction_type, undo = false) {
 
   if (!['likes', 'gripping', 'scared', 'mindblown'].includes(colName)) return false;
 
-  db.prepare('INSERT OR IGNORE INTO daily_reactions (date) VALUES (?)').run(date);
+  await client.execute({
+    sql: 'INSERT OR IGNORE INTO daily_reactions (date) VALUES (?)',
+    args: [date]
+  });
   const change = undo ? -1 : 1;
-  db.prepare(`UPDATE daily_reactions SET ${colName} = MAX(0, COALESCE(${colName}, 0) + ?) WHERE date = ?`).run(change, date);
+  await client.execute({
+    sql: `UPDATE daily_reactions SET ${colName} = MAX(0, COALESCE(${colName}, 0) + ?) WHERE date = ?`,
+    args: [change, date]
+  });
   return true;
 }
 
-function setDailyReactions(date, reactions) {
-  const stmt = db.prepare(`
-    INSERT OR REPLACE INTO daily_reactions (date, likes, gripping, scared, mindblown)
-    VALUES (?, ?, ?, ?, ?)
-  `);
-  stmt.run(
-    date,
-    reactions.intriguing || reactions.likes || 0,
-    reactions.gripping || 0,
-    reactions.chilling || reactions.scared || 0,
-    reactions.mind_blowing || reactions.mindblown || 0
-  );
+async function setDailyReactions(date, reactions) {
+  await ensureInit();
+  await client.execute({
+    sql: `INSERT OR REPLACE INTO daily_reactions (date, likes, gripping, scared, mindblown)
+          VALUES (?, ?, ?, ?, ?)`,
+    args: [
+      date,
+      reactions.intriguing || reactions.likes || 0,
+      reactions.gripping || 0,
+      reactions.chilling || reactions.scared || 0,
+      reactions.mind_blowing || reactions.mindblown || 0
+    ]
+  });
 }
 
-function logPageView(pv) {
-  const stmt = db.prepare(`
-    INSERT INTO pageviews (visitor_id, session_id, path, referrer, user_agent, timestamp)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `);
-  stmt.run(
-    pv.visitor_id,
-    pv.session_id,
-    pv.path,
-    pv.referrer,
-    pv.user_agent,
-    pv.timestamp || new Date().toISOString()
-  );
+async function logPageView(pv) {
+  await ensureInit();
+  await client.execute({
+    sql: `INSERT INTO pageviews (visitor_id, session_id, path, referrer, user_agent, timestamp, ip, city, region, country, country_code, org)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    args: [
+      pv.visitor_id,
+      pv.session_id,
+      pv.path,
+      pv.referrer,
+      pv.user_agent,
+      pv.timestamp || new Date().toISOString(),
+      pv.ip || null,
+      pv.city || null,
+      pv.region || null,
+      pv.country || null,
+      pv.country_code || null,
+      pv.org || null
+    ]
+  });
 }
 
-function getAnalyticsSummary() {
+async function getAnalyticsSummary() {
+  await ensureInit();
   try {
-    const totalPageviews = db.prepare('SELECT COUNT(*) as count FROM pageviews').get().count;
-    const uniqueVisitors = db.prepare('SELECT COUNT(DISTINCT visitor_id) as count FROM pageviews').get().count;
+    const resTotal = await client.execute('SELECT COUNT(*) as count FROM pageviews');
+    const totalPageviews = resTotal.rows[0]?.count || 0;
+    
+    const resUnique = await client.execute('SELECT COUNT(DISTINCT visitor_id) as count FROM pageviews');
+    const uniqueVisitors = resUnique.rows[0]?.count || 0;
     
     const thirtyMinsAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
-    const activeSessions = db.prepare('SELECT COUNT(DISTINCT session_id) as count FROM pageviews WHERE timestamp >= ?').get(thirtyMinsAgo).count;
+    const resActive = await client.execute({
+      sql: 'SELECT COUNT(DISTINCT session_id) as count FROM pageviews WHERE timestamp >= ?',
+      args: [thirtyMinsAgo]
+    });
+    const activeSessions = resActive.rows[0]?.count || 0;
     
-    const recentPageviews = db.prepare('SELECT * FROM pageviews ORDER BY timestamp DESC LIMIT 50').all();
+    const resRecent = await client.execute('SELECT * FROM pageviews ORDER BY timestamp DESC LIMIT 50');
+    const recentPageviews = resRecent.rows.map(r => ({ ...r }));
     
     return {
       totalPageviews,
@@ -687,19 +696,28 @@ function getAnalyticsSummary() {
   }
 }
 
-function getDailyDossierStoryId(date) {
-  const row = db.prepare('SELECT story_id FROM daily_dossier WHERE date = ?').get(date);
+async function getDailyDossierStoryId(date) {
+  await ensureInit();
+  const res = await client.execute({
+    sql: 'SELECT story_id FROM daily_dossier WHERE date = ?',
+    args: [date]
+  });
+  const row = res.rows[0];
   return row ? row.story_id : null;
 }
 
-function setDailyDossierStoryId(date, story_id) {
-  db.prepare('INSERT OR REPLACE INTO daily_dossier (date, story_id) VALUES (?, ?)').run(date, story_id);
+async function setDailyDossierStoryId(date, story_id) {
+  await ensureInit();
+  await client.execute({
+    sql: 'INSERT OR REPLACE INTO daily_dossier (date, story_id) VALUES (?, ?)',
+    args: [date, story_id]
+  });
 }
 
-seed();
+seed().catch(err => console.error('[DB Seed] Failed to seed database:', err));
 
 module.exports = {
-  db,
+  client,
   getStories,
   getStory,
   insertStory,
