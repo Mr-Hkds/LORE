@@ -1,10 +1,8 @@
 /**
  * SiteFeedback — floating site-wide feedback button.
- * NOT per-story. This is "How is LORE as a product?"
- * Lives in the bottom-right corner of every screen.
- * Submits to POST /api/feedback.
+ * Clean, always-visible float. No animated width jank.
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X } from 'lucide-react';
 
 const TAGS = [
@@ -19,43 +17,23 @@ const TAGS = [
 ];
 
 export default function SiteFeedback() {
-  const [open, setOpen]           = useState(false);
-  const [rating, setRating]       = useState(0);
-  const [hoverRating, setHover]   = useState(0);
-  const [tags, setTags]           = useState([]);
-  const [note, setNote]           = useState('');
-  const [status, setStatus]       = useState(null); // null | 'sending' | 'sent' | 'error'
-  const [promoVisible, setPromoVisible] = useState(false);
+  const [open, setOpen]         = useState(false);
+  const [rating, setRating]     = useState(0);
+  const [hoverRating, setHover] = useState(0);
+  const [tags, setTags]         = useState([]);
+  const [note, setNote]         = useState('');
+  const [status, setStatus]     = useState(null);
+  const panelRef = useRef(null);
 
-  useEffect(() => {
-    // Only prompt on the homepage
-    const isMainPage = !window.location.hash || window.location.hash === '#';
-    if (!isMainPage) return;
-
-    // Check if we have already nudged in this session
-    const hasNudged = sessionStorage.getItem('lore:nudged');
-    if (hasNudged) return;
-
-    // Wait 30 seconds before showing the single classy nudge
-    const timer = setTimeout(() => {
-      if (!open) {
-        setPromoVisible(true);
-        sessionStorage.setItem('lore:nudged', 'true');
-        setTimeout(() => {
-          setPromoVisible(false);
-        }, 5000); // collapse after 5 seconds
-      }
-    }, 30000);
-
-    return () => clearTimeout(timer);
-  }, [open]);
-
+  // Click outside to close
   useEffect(() => {
     if (!open) return;
     const handleOutsideClick = (e) => {
-      const panel = document.getElementById('site-feedback-panel');
       const trigger = document.getElementById('site-feedback-trigger');
-      if (panel && !panel.contains(e.target) && trigger && !trigger.contains(e.target)) {
+      if (
+        panelRef.current && !panelRef.current.contains(e.target) &&
+        trigger && !trigger.contains(e.target)
+      ) {
         setOpen(false);
       }
     };
@@ -67,7 +45,8 @@ export default function SiteFeedback() {
     };
   }, [open]);
 
-  const toggleTag = (t) => setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
+  const toggleTag = (t) =>
+    setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,17 +66,9 @@ export default function SiteFeedback() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (res.ok) {
-        setStatus('sent');
-      } else {
-        console.warn('Feedback API failed, saving locally to localStorage.');
-        const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
-        localFb.push(payload);
-        localStorage.setItem('lore:local_feedback', JSON.stringify(localFb));
-        setStatus('sent');
-      }
-    } catch (err) {
-      console.warn('Feedback API error, saving locally to localStorage:', err);
+      if (!res.ok) throw new Error('API failed');
+      setStatus('sent');
+    } catch {
       const localFb = JSON.parse(localStorage.getItem('lore:local_feedback') || '[]');
       localFb.push(payload);
       localStorage.setItem('lore:local_feedback', JSON.stringify(localFb));
@@ -116,76 +87,78 @@ export default function SiteFeedback() {
 
   return (
     <>
-      {/* Floating trigger button */}
+      {/* ── Floating trigger ── */}
       <button
         id="site-feedback-trigger"
-        onClick={() => { setOpen(o => !o); setPromoVisible(false); }}
-        aria-label="Give feedback"
+        onClick={() => setOpen(o => !o)}
+        aria-label="Give feedback about LORE"
         title="Give feedback about LORE"
-        className={`fixed bottom-6 right-6 z-[200] h-11 rounded-full border flex items-center transition-all duration-300 active:scale-95 overflow-hidden whitespace-nowrap cursor-pointer hover:-translate-y-0.5 hover:shadow-lg select-none bg-[#0D0B08]/92 backdrop-blur-md border-[#9E7B4C]/25 text-[#EDE8DF] hover:border-[#9E7B4C]/50 hover:bg-[#15120F] ${
-          open 
-            ? 'w-11 px-0 justify-center' 
-            : promoVisible 
-              ? 'w-[210px] px-4 justify-start gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.5)]' 
-              : 'w-11 px-0 justify-center sm:w-auto sm:px-4 sm:justify-start gap-2 animate-pulse-glow'
-        }`}
-        style={{
-          boxShadow: !open && !promoVisible ? undefined : '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
-        }}
+        className="fixed bottom-6 right-6 z-[200] flex items-center gap-2.5 cursor-pointer select-none active:scale-95 group"
+        style={{ transition: 'transform 0.15s ease' }}
       >
-        <div className={`flex items-center justify-center flex-shrink-0 transition-transform duration-500 w-11 h-11 ${open ? 'rotate-180' : 'rotate-0'}`}>
-          {open ? (
-            <X className="w-4 h-4 text-[#EDE8DF]" />
-          ) : (
-            <MessageSquare className="w-4 h-4 text-[#9E7B4C] group-hover:text-[#EDE8DF] transition-colors" />
-          )}
-        </div>
+        {/* Mobile: icon-only circle */}
+        <span
+          className="sm:hidden flex items-center justify-center w-12 h-12 rounded-full border border-[#9E7B4C]/30 bg-[#0D0B08]/95 backdrop-blur-md text-[#9E7B4C] shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
+          style={{ transition: 'border-color 0.2s, box-shadow 0.2s' }}
+        >
+          {open ? <X className="w-4 h-4 text-[#EDE8DF]" /> : <MessageSquare className="w-4 h-4" />}
+        </span>
 
-        {!open && (
-          <>
-            {promoVisible ? (
-              <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] font-bold animate-fade-in">
-                Share your thoughts?
-              </span>
-            ) : (
-              <span className="hidden sm:inline text-[9.5px] font-mono tracking-[0.18em] uppercase text-[#EDE8DF]/90 font-bold pr-0.5">
-                Feedback
-              </span>
-            )}
-          </>
-        )}
+        {/* Desktop: always-visible pill */}
+        <span
+          className="hidden sm:flex items-center gap-2.5 h-11 px-5 rounded-full border border-[#9E7B4C]/30 hover:border-[#9E7B4C]/60 bg-[#0D0B08]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.55)] group-hover:shadow-[0_8px_32px_rgba(0,0,0,0.7),0_0_18px_rgba(158,123,76,0.08)]"
+          style={{ transition: 'border-color 0.25s, box-shadow 0.25s' }}
+        >
+          <span className="relative flex h-2 w-2 flex-shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9E7B4C] opacity-50"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#9E7B4C]/80"></span>
+          </span>
+          {open
+            ? <X className="w-3.5 h-3.5 text-[#EDE8DF]" />
+            : <>
+                <MessageSquare className="w-3.5 h-3.5 text-[#9E7B4C]" />
+                <span className="text-[9.5px] font-mono tracking-[0.18em] uppercase text-[#EDE8DF]/80 font-semibold">
+                  Feedback
+                </span>
+              </>
+          }
+        </span>
       </button>
 
-      {/* Feedback panel */}
+      {/* ── Feedback panel ── */}
       {open && (
         <div
+          ref={panelRef}
           id="site-feedback-panel"
-          className="fixed bottom-20 left-6 right-6 sm:left-auto sm:right-6 sm:w-80 z-[199] rounded-2xl border overflow-hidden animate-scale-up"
+          className="fixed bottom-[4.75rem] right-4 left-4 sm:left-auto sm:right-6 sm:w-[340px] z-[199] rounded-2xl border overflow-hidden animate-scale-up"
           style={{
-            backgroundColor: '#110F0C',
-            borderColor: 'rgba(237,232,223,0.08)',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.8), 0 0 40px rgba(158,123,76,0.02)',
+            backgroundColor: '#0F0D0A',
+            borderColor: 'rgba(158,123,76,0.18)',
+            boxShadow: '0 0 0 1px rgba(158,123,76,0.05), 0 24px 60px rgba(0,0,0,0.85)',
           }}
         >
+          {/* Gold top accent line */}
+          <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.5) 40%, transparent)' }} />
+
           {status === 'sent' ? (
-            <div className="p-6 text-center">
-              <div className="text-2xl mb-3">✦</div>
+            <div className="p-8 text-center">
+              <div className="text-3xl mb-4">✦</div>
               <p className="text-sm font-serif italic" style={{ color: '#EDE8DF' }}>Thank you.</p>
-              <p className="text-[10px] font-mono tracking-widest uppercase mt-1" style={{ color: '#6A6560' }}>Your note is in the archive.</p>
+              <p className="text-[10px] font-mono tracking-widest uppercase mt-2" style={{ color: '#6A6560' }}>Your note is filed in the archive.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               {/* Header */}
-              <div className="px-5 pt-5 pb-4 border-b" style={{ borderColor: 'rgba(237,232,223,0.06)' }}>
-                <p className="text-[9px] font-mono tracking-[0.22em] uppercase" style={{ color: '#9E7B4C' }}>LORE Feedback</p>
-                <p className="font-serif italic text-base mt-1" style={{ color: '#EDE8DF' }}>How is the experience?</p>
+              <div className="px-5 pt-5 pb-4 border-b" style={{ borderColor: 'rgba(158,123,76,0.08)' }}>
+                <p className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: '#9E7B4C' }}>LORE Feedback</p>
+                <p className="font-serif italic text-base mt-1 leading-snug" style={{ color: '#EDE8DF' }}>How is the experience?</p>
               </div>
 
               <div className="p-5 space-y-5">
-                {/* Star rating — using dots not stars */}
+                {/* Rating dots */}
                 <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#6A6560' }}>Overall</p>
-                  <div className="flex gap-3">
+                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#4A4540' }}>Overall rating</p>
+                  <div className="flex items-center gap-3">
                     {[1,2,3,4,5].map(n => (
                       <button
                         key={n}
@@ -195,15 +168,16 @@ export default function SiteFeedback() {
                         onMouseLeave={() => setHover(0)}
                         className="w-7 h-7 rounded-full border transition-all duration-150 cursor-pointer"
                         style={{
-                          borderColor: displayRating >= n ? '#9E7B4C' : 'rgba(237,232,223,0.12)',
-                          backgroundColor: displayRating >= n ? 'rgba(158,123,76,0.2)' : 'transparent',
-                          transform: displayRating >= n ? 'scale(1.15)' : 'scale(1)',
+                          borderColor: displayRating >= n ? '#9E7B4C' : 'rgba(237,232,223,0.1)',
+                          backgroundColor: displayRating >= n ? 'rgba(158,123,76,0.18)' : 'rgba(255,255,255,0.02)',
+                          transform: displayRating >= n ? 'scale(1.2)' : 'scale(1)',
+                          boxShadow: displayRating >= n ? '0 0 8px rgba(158,123,76,0.3)' : 'none',
                         }}
                         aria-label={`Rate ${n}`}
                       />
                     ))}
                     {displayRating > 0 && (
-                      <span className="text-[10px] font-mono self-center" style={{ color: '#9E7B4C', opacity: 0.8 }}>
+                      <span className="text-[10px] font-mono ml-1" style={{ color: '#9E7B4C' }}>
                         {['','Poor','Fair','Good','Great','Perfect'][displayRating]}
                       </span>
                     )}
@@ -212,7 +186,7 @@ export default function SiteFeedback() {
 
                 {/* Tags */}
                 <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#6A6560' }}>What resonates?</p>
+                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#4A4540' }}>What resonates?</p>
                   <div className="flex flex-wrap gap-1.5">
                     {TAGS.map(tag => (
                       <button
@@ -221,9 +195,9 @@ export default function SiteFeedback() {
                         onClick={() => toggleTag(tag)}
                         className="px-2.5 py-1 rounded-full text-[9px] font-mono tracking-wide border transition-all duration-150 cursor-pointer"
                         style={{
-                          borderColor: tags.includes(tag) ? '#9E7B4C' : 'rgba(237,232,223,0.1)',
-                          color: tags.includes(tag) ? '#9E7B4C' : '#6A6560',
-                          backgroundColor: tags.includes(tag) ? 'rgba(158,123,76,0.12)' : 'transparent',
+                          borderColor: tags.includes(tag) ? 'rgba(158,123,76,0.6)' : 'rgba(237,232,223,0.07)',
+                          color: tags.includes(tag) ? '#9E7B4C' : '#5A5550',
+                          backgroundColor: tags.includes(tag) ? 'rgba(158,123,76,0.1)' : 'transparent',
                         }}
                       >
                         {tag}
@@ -234,7 +208,7 @@ export default function SiteFeedback() {
 
                 {/* Note */}
                 <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-2" style={{ color: '#6A6560' }}>Anything else? (optional)</p>
+                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-2" style={{ color: '#4A4540' }}>Anything else?</p>
                   <textarea
                     value={note}
                     onChange={e => setNote(e.target.value)}
@@ -242,13 +216,13 @@ export default function SiteFeedback() {
                     rows={3}
                     className="w-full px-3 py-2.5 text-xs rounded-lg border resize-none focus:outline-none transition-colors"
                     style={{
-                      backgroundColor: 'rgba(255,255,255,0.03)',
-                      borderColor: 'rgba(237,232,223,0.08)',
+                      backgroundColor: 'rgba(255,255,255,0.02)',
+                      borderColor: 'rgba(237,232,223,0.07)',
                       color: '#EDE8DF',
                       caretColor: '#9E7B4C',
                     }}
                     onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.3)'; }}
-                    onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.08)'; }}
+                    onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.07)'; }}
                   />
                 </div>
 
@@ -257,8 +231,8 @@ export default function SiteFeedback() {
                   disabled={rating === 0 || status === 'sending'}
                   className="w-full py-2.5 rounded-lg text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-200 active:scale-95 disabled:opacity-30 cursor-pointer"
                   style={{
-                    backgroundColor: rating > 0 ? 'rgba(158,123,76,0.15)' : 'transparent',
-                    border: '1px solid rgba(158,123,76,0.4)',
+                    backgroundColor: rating > 0 ? 'rgba(158,123,76,0.12)' : 'transparent',
+                    border: '1px solid rgba(158,123,76,0.35)',
                     color: '#9E7B4C',
                   }}
                 >

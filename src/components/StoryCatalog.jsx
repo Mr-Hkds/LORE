@@ -479,12 +479,33 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           <div className="flex items-center gap-4">
             <button
               onClick={onOpenSearch}
-              aria-label="Search archives"
-              className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/50 bg-black/35 hover:bg-[#9E7B4C]/10 transition-all duration-300 cursor-pointer active:scale-95 select-none"
+              aria-label="Search the archive"
+              className="group flex items-center gap-2.5 cursor-pointer active:scale-95 select-none"
+              style={{ transition: 'transform 0.15s ease' }}
             >
-              <Search className="w-3 h-3 text-[#9E7B4C] group-hover:text-[#EDE8DF] transition-colors duration-300" />
-              <span className="hidden sm:inline text-[9px] font-mono tracking-widest text-[#8F8A82]/80 group-hover:text-[#EDE8DF]/90 transition-colors uppercase">
-                Search
+              {/* Mobile: icon only */}
+              <span className="sm:hidden flex items-center justify-center w-8 h-8 rounded-full border border-[#9E7B4C]/20 bg-black/40 text-[#9E7B4C] group-hover:border-[#9E7B4C]/50 transition-all duration-200">
+                <Search className="w-3.5 h-3.5" />
+              </span>
+              {/* Desktop: search bar with ⌘K hint */}
+              <span
+                className="hidden sm:flex items-center gap-2.5 h-8 pl-3 pr-2 rounded-lg border border-[#9E7B4C]/18 group-hover:border-[#9E7B4C]/45 bg-black/30 group-hover:bg-[#0D0B08]/70 transition-all duration-200"
+                style={{ minWidth: '180px' }}
+              >
+                <Search className="w-3 h-3 flex-shrink-0 text-[#9E7B4C]/70 group-hover:text-[#9E7B4C] transition-colors" />
+                <span className="flex-1 text-[10px] font-mono tracking-[0.12em] uppercase text-[#5A5550] group-hover:text-[#8F8A82] transition-colors whitespace-nowrap">
+                  Search archive
+                </span>
+                <kbd
+                  className="flex-shrink-0 flex items-center px-1.5 py-0.5 rounded text-[8px] font-mono"
+                  style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(237,232,223,0.1)',
+                    color: 'rgba(143,138,130,0.45)',
+                  }}
+                >
+                  ⌘K
+                </kbd>
               </span>
             </button>
             <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>

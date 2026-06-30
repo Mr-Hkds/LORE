@@ -1,77 +1,65 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, X, ChevronRight, CornerDownLeft } from 'lucide-react';
+import { Search, X, ChevronRight, ArrowRight } from 'lucide-react';
 
 const CATEGORY_LABELS = {
-  psychology: 'Psychology',
-  true_crime: 'True Crime',
-  paranormal: 'Paranormal',
-  mythology: 'Mythology',
+  psychology:      'Psychology',
+  true_crime:      'True Crime',
+  paranormal:      'Paranormal',
+  mythology:       'Mythology',
   gov_experiments: 'Gov Experiments',
-  conspiracy: 'Conspiracies',
+  conspiracy:      'Conspiracies',
   cyber_mysteries: 'Digital Shadows',
 };
 
-const CATEGORY_COLORS = {
-  psychology: 'text-amber-500 border-amber-500/20 bg-amber-500/5',
-  true_crime: 'text-red-500 border-red-500/20 bg-red-500/5',
-  paranormal: 'text-purple-500 border-purple-500/20 bg-purple-500/5',
-  mythology: 'text-emerald-500 border-emerald-500/20 bg-emerald-500/5',
-  gov_experiments: 'text-blue-500 border-blue-500/20 bg-blue-500/5',
-  conspiracy: 'text-orange-500 border-orange-500/20 bg-orange-500/5',
-  cyber_mysteries: 'text-cyan-500 border-cyan-500/20 bg-cyan-500/5',
+const CATEGORY_ACCENT = {
+  psychology:      { color: '#F59E0B', bg: 'rgba(245,158,11,0.06)', border: 'rgba(245,158,11,0.2)' },
+  true_crime:      { color: '#EF4444', bg: 'rgba(239,68,68,0.06)',  border: 'rgba(239,68,68,0.2)'  },
+  paranormal:      { color: '#A78BFA', bg: 'rgba(167,139,250,0.06)',border: 'rgba(167,139,250,0.2)' },
+  mythology:       { color: '#10B981', bg: 'rgba(16,185,129,0.06)', border: 'rgba(16,185,129,0.2)'  },
+  gov_experiments: { color: '#60A5FA', bg: 'rgba(96,165,250,0.06)', border: 'rgba(96,165,250,0.2)'  },
+  conspiracy:      { color: '#F97316', bg: 'rgba(249,115,22,0.06)', border: 'rgba(249,115,22,0.2)'  },
+  cyber_mysteries: { color: '#22D3EE', bg: 'rgba(34,211,238,0.06)', border: 'rgba(34,211,238,0.2)'  },
 };
 
 export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory }) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery]               = useState('');
   const [activeCategory, setActiveCategory] = useState(null);
-  const inputRef = useRef(null);
-  const overlayRef = useRef(null);
+  const inputRef  = useRef(null);
+  const panelRef  = useRef(null);
 
-  // Focus input on mount/open
+  // Reset + focus on open
   useEffect(() => {
     if (isOpen) {
       setQuery('');
       setActiveCategory(null);
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 80);
+      setTimeout(() => inputRef.current?.focus(), 60);
     }
   }, [isOpen]);
 
-  // Handle ESC key to close
+  // ESC to close
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    const handler = (e) => { if (e.key === 'Escape' && isOpen) onClose(); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, [isOpen, onClose]);
 
-  // Handle outside click
-  const handleOutsideClick = (e) => {
-    if (overlayRef.current && !overlayRef.current.contains(e.target)) {
-      onClose();
-    }
+  // Outside click to close
+  const handleBackdropClick = (e) => {
+    if (panelRef.current && !panelRef.current.contains(e.target)) onClose();
   };
 
-  // Filter logic
+  // Filter
   const filteredStories = useMemo(() => {
     if (!query && !activeCategory) return [];
-    
-    return stories.filter((story) => {
-      const matchesCategory = !activeCategory || story.category === activeCategory;
-      if (!matchesCategory) return false;
-
+    return stories.filter(story => {
+      if (activeCategory && story.category !== activeCategory) return false;
       if (!query) return true;
-
       const q = query.toLowerCase();
-      const matchesTitle = story.title?.toLowerCase().includes(q);
-      const matchesHook = story.hook?.toLowerCase().includes(q);
-      const matchesConcepts = story.concepts?.some(c => c.toLowerCase().includes(q));
-
-      return matchesTitle || matchesHook || matchesConcepts;
+      return (
+        story.title?.toLowerCase().includes(q) ||
+        story.hook?.toLowerCase().includes(q) ||
+        story.concepts?.some(c => c.toLowerCase().includes(q))
+      );
     });
   }, [query, activeCategory, stories]);
 
@@ -79,126 +67,191 @@ export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory 
 
   return (
     <div
-      onClick={handleOutsideClick}
-      className="fixed inset-0 z-[300] bg-[#040302]/78 backdrop-blur-md flex justify-center items-start pt-[12vh] px-4 animate-fade-in"
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-[300] flex justify-center items-start pt-[10vh] px-4 animate-fade-in"
+      style={{ backgroundColor: 'rgba(4,3,2,0.88)', backdropFilter: 'blur(12px)' }}
     >
       <div
-        ref={overlayRef}
-        className="w-full max-w-lg bg-[#0D0B09]/96 border border-[#9E7B4C]/25 rounded-xl overflow-hidden flex flex-col shadow-[0_24px_70px_rgba(0,0,0,0.9),0_0_40px_rgba(158,123,76,0.03)] animate-scale-up"
+        ref={panelRef}
+        className="w-full max-w-[600px] rounded-2xl overflow-hidden flex flex-col animate-scale-up"
+        style={{
+          backgroundColor: '#0C0A08',
+          border: '1px solid rgba(158,123,76,0.22)',
+          boxShadow: '0 0 0 1px rgba(158,123,76,0.04), 0 32px 80px rgba(0,0,0,0.95)',
+        }}
       >
-        {/* Search header bar */}
-        <div className="flex items-center justify-between border-b border-neutral-900/60 px-4 py-3.5 bg-black/20">
-          <div className="flex items-center gap-3 flex-1">
-            <Search className="w-4 h-4 text-[#9E7B4C]" />
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by title, key terms, or events..."
-              className="bg-transparent border-none focus:outline-none focus:ring-0 text-xs w-full text-[#EDE8DF] placeholder-neutral-600 font-sans"
-            />
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-block text-[8px] font-mono tracking-widest px-2 py-0.5 rounded border border-neutral-850 bg-[#090807] text-[#8F8A82]/50 uppercase">
+        {/* Gold top accent line */}
+        <div
+          className="h-px w-full flex-shrink-0"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.65) 45%, transparent)' }}
+        />
+
+        {/* ── Search input row ── */}
+        <div
+          className="flex items-center gap-3 px-5 py-4"
+          style={{ borderBottom: '1px solid rgba(237,232,223,0.05)' }}
+        >
+          <Search className="w-4 h-4 flex-shrink-0" style={{ color: '#9E7B4C' }} />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Search by title, event, or concept..."
+            className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 font-sans"
+            style={{ fontSize: '13px', color: '#EDE8DF', caretColor: '#9E7B4C' }}
+          />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <kbd
+              className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[9px] font-mono uppercase tracking-widest"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(237,232,223,0.1)',
+                color: 'rgba(143,138,130,0.6)',
+              }}
+            >
               ESC
-            </span>
+            </kbd>
             <button
               onClick={onClose}
-              className="p-1 hover:bg-neutral-900 rounded-md transition-colors text-neutral-500 hover:text-[#EDE8DF]"
+              className="flex items-center justify-center w-6 h-6 rounded-md transition-colors"
+              style={{ color: 'rgba(143,138,130,0.5)' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#EDE8DF'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(143,138,130,0.5)'; e.currentTarget.style.background = 'transparent'; }}
             >
               <X className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        {/* Category tags block */}
-        <div className="px-4 py-3 border-b border-neutral-900/40 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none">
+        {/* ── Category filter strip ── */}
+        <div
+          className="flex items-center gap-2 px-5 py-3 overflow-x-auto"
+          style={{ borderBottom: '1px solid rgba(237,232,223,0.04)', scrollbarWidth: 'none' }}
+        >
           <button
             onClick={() => setActiveCategory(null)}
-            className={`text-[8.5px] font-mono tracking-wider uppercase px-2.5 py-1 rounded-full border transition-all duration-300 ${
-              !activeCategory
-                ? 'bg-[#9E7B4C]/15 border-[#9E7B4C]/50 text-[#9E7B4C]'
-                : 'bg-transparent border-neutral-900 text-neutral-500 hover:border-neutral-850 hover:text-neutral-450'
-            }`}
+            className="flex-shrink-0 text-[8.5px] font-mono tracking-[0.18em] uppercase px-3 py-1 rounded-full border transition-all duration-200"
+            style={{
+              borderColor: !activeCategory ? 'rgba(158,123,76,0.5)' : 'rgba(237,232,223,0.07)',
+              color:       !activeCategory ? '#9E7B4C' : '#5A5550',
+              background:  !activeCategory ? 'rgba(158,123,76,0.1)' : 'transparent',
+            }}
           >
             All
           </button>
-          {Object.entries(CATEGORY_LABELS).map(([catId, label]) => (
-            <button
-              key={catId}
-              onClick={() => setActiveCategory(activeCategory === catId ? null : catId)}
-              className={`text-[8.5px] font-mono tracking-wider uppercase px-2.5 py-1 rounded-full border transition-all duration-300 ${
-                activeCategory === catId
-                  ? 'bg-[#9E7B4C]/15 border-[#9E7B4C]/50 text-[#9E7B4C]'
-                  : 'bg-transparent border-neutral-900 text-neutral-500 hover:border-neutral-850 hover:text-neutral-450'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+          {Object.entries(CATEGORY_LABELS).map(([catId, label]) => {
+            const accent = CATEGORY_ACCENT[catId] || { color: '#9E7B4C', bg: 'rgba(158,123,76,0.08)', border: 'rgba(158,123,76,0.3)' };
+            const isActive = activeCategory === catId;
+            return (
+              <button
+                key={catId}
+                onClick={() => setActiveCategory(isActive ? null : catId)}
+                className="flex-shrink-0 text-[8.5px] font-mono tracking-[0.16em] uppercase px-3 py-1 rounded-full border transition-all duration-200"
+                style={{
+                  borderColor: isActive ? accent.border : 'rgba(237,232,223,0.07)',
+                  color:       isActive ? accent.color : '#5A5550',
+                  background:  isActive ? accent.bg    : 'transparent',
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Results layout */}
-        <div className="max-h-[340px] overflow-y-auto overflow-x-hidden p-2 space-y-1">
+        {/* ── Results list ── */}
+        <div className="overflow-y-auto" style={{ maxHeight: '380px', scrollbarWidth: 'thin' }}>
           {filteredStories.length > 0 ? (
-            filteredStories.map((story) => (
-              <div
-                key={story.story_id}
-                onClick={() => {
-                  onSelectStory(story);
-                  onClose();
-                }}
-                className="group w-full text-left px-3 py-2.5 rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between border border-transparent hover:border-[#9E7B4C]/15 hover:bg-[#9E7B4C]/4 active:bg-[#9E7B4C]/8"
-              >
-                <div className="flex-1 min-w-0 pr-4">
-                  {/* Category + Title */}
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className={`text-[7.5px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border ${CATEGORY_COLORS[story.category] || 'text-neutral-400 border-neutral-800'}`}>
-                      {CATEGORY_LABELS[story.category] || story.category}
-                    </span>
-                    {story.severity && (
-                      <span className="text-[7.5px] font-mono text-[#9E7B4C]/70 uppercase tracking-widest">
-                        {story.severity}
-                      </span>
-                    )}
+            <div className="p-2">
+              {filteredStories.map((story, i) => {
+                const accent = CATEGORY_ACCENT[story.category] || { color: '#9E7B4C', bg: 'rgba(158,123,76,0.06)', border: 'rgba(158,123,76,0.25)' };
+                return (
+                  <div
+                    key={story.story_id}
+                    onClick={() => { onSelectStory(story); onClose(); }}
+                    className="group flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-all duration-150"
+                    style={{ '--hover-border': accent.color }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                      e.currentTarget.style.borderLeft = `2px solid ${accent.color}`;
+                      e.currentTarget.style.paddingLeft = '14px';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = '';
+                      e.currentTarget.style.borderLeft = '';
+                      e.currentTarget.style.paddingLeft = '16px';
+                    }}
+                  >
+                    <div className="flex-1 min-w-0 pr-4">
+                      {/* Category tag + severity */}
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-[7.5px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+                          style={{
+                            color: accent.color,
+                            background: accent.bg,
+                            border: `1px solid ${accent.border}`,
+                          }}
+                        >
+                          {CATEGORY_LABELS[story.category] || story.category}
+                        </span>
+                        {story.severity && (
+                          <span className="text-[7.5px] font-mono uppercase tracking-widest" style={{ color: 'rgba(143,138,130,0.5)' }}>
+                            {story.severity}
+                          </span>
+                        )}
+                      </div>
+                      <h4
+                        className="font-serif truncate transition-colors duration-150"
+                        style={{ fontSize: '13px', color: '#D8D3CA', lineHeight: 1.3 }}
+                        onMouseEnter={e => { e.currentTarget.style.color = accent.color; }}
+                        onMouseLeave={e => { e.currentTarget.style.color = '#D8D3CA'; }}
+                      >
+                        {story.title}
+                      </h4>
+                      <p className="text-[11px] mt-0.5 truncate" style={{ color: '#4A4540', fontFamily: 'sans-serif' }}>
+                        {story.hook}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      className="w-3.5 h-3.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-150 -translate-x-1 group-hover:translate-x-0"
+                      style={{ color: accent.color }}
+                    />
                   </div>
-                  <h4 className="text-xs font-serif text-[#EDE8DF] group-hover:text-[#9E7B4C] transition-colors truncate">
-                    {story.title}
-                  </h4>
-                  <p className="text-[10px] text-neutral-500 font-sans line-clamp-1 mt-0.5">
-                    {story.hook}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-[7.5px] font-mono text-neutral-600 flex items-center gap-1">
-                    Read <CornerDownLeft className="w-2 h-2" />
-                  </span>
-                  <ChevronRight className="w-3.5 h-3.5 text-[#9E7B4C]" />
-                </div>
-              </div>
-            ))
+                );
+              })}
+            </div>
           ) : (
-            <div className="py-12 text-center">
+            <div className="py-16 text-center px-6">
               {query || activeCategory ? (
                 <>
-                  <p className="text-xs font-serif text-[#EDE8DF]/50">No dossiers found</p>
-                  <p className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest mt-1">
-                    Try adjusting your search terms
-                  </p>
+                  <p className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: 'rgba(143,138,130,0.3)' }}>— Classified —</p>
+                  <p className="font-serif italic text-sm" style={{ color: 'rgba(237,232,223,0.25)' }}>No records match this query</p>
+                  <p className="text-[10px] font-mono mt-2 tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.25)' }}>Try different terms or remove filters</p>
                 </>
               ) : (
                 <>
-                  <p className="text-xs font-serif text-[#EDE8DF]/40">Search the Archive Registry</p>
-                  <p className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest mt-1">
-                    Type a query or select a category above
-                  </p>
+                  <p className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: 'rgba(143,138,130,0.3)' }}>— Archive Registry —</p>
+                  <p className="font-serif italic text-sm" style={{ color: 'rgba(237,232,223,0.2)' }}>Begin your search above</p>
+                  <p className="text-[10px] font-mono mt-2 tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.2)' }}>Or filter by category to browse</p>
                 </>
               )}
             </div>
           )}
+        </div>
+
+        {/* Footer hint */}
+        <div
+          className="px-5 py-2.5 flex items-center gap-4"
+          style={{ borderTop: '1px solid rgba(237,232,223,0.04)' }}
+        >
+          <span className="text-[8px] font-mono tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.3)' }}>
+            {filteredStories.length > 0 ? `${filteredStories.length} record${filteredStories.length !== 1 ? 's' : ''} found` : 'LORE Archive'}
+          </span>
+          <span className="ml-auto text-[8px] font-mono tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.2)' }}>
+            Enter to open
+          </span>
         </div>
       </div>
     </div>
