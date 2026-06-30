@@ -1025,15 +1025,6 @@
   "insider_threat": [
     "anthrax_attacks_2001_amerithrax"
   ],
-  "loss_of_agency": [
-    "alien_hand_syndrome"
-  ],
-  "brain_disorder": [
-    "alien_hand_syndrome"
-  ],
-  "involuntary_movement": [
-    "alien_hand_syndrome"
-  ],
   "unethical_recruitment": [
     "operation_paperclip_001"
   ],
@@ -1084,5 +1075,14 @@
   ],
   "radicalization": [
     "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "loss_of_agency": [
+    "alien_hand_syndrome"
+  ],
+  "brain_disorder": [
+    "alien_hand_syndrome"
+  ],
+  "involuntary_movement": [
+    "alien_hand_syndrome"
   ]
 }
