@@ -448,13 +448,11 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
   const [filterMissingImages, setFilterMissingImages] = useState(false);
-  const [brokenImageIds, setBrokenImageIds] = useState(new Set());
 
   const isImageMissing = useCallback((story) => {
     if (!story) return true;
-    if (isThumbnailFormatInvalid(story)) return true;
-    return brokenImageIds.has(story.story_id);
-  }, [brokenImageIds]);
+    return !!story.image_missing;
+  }, []);
 
   // Generator form states
   const [genTopic, setGenTopic] = useState('');
@@ -1220,55 +1218,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     loadRecommendations();
     loadAdminStories();
   }, [loadFeedback, loadRecommendations, loadAdminStories]);
-
-  // Real-time check to verify if story cover images actually load successfully (detects 404s)
-  useEffect(() => {
-    if (!adminStories || adminStories.length === 0) return;
-
-    let active = true;
-    const checkImagesAvailability = async () => {
-      const broken = new Set();
-      
-      // Perform initial check on format and placeholding
-      adminStories.forEach(s => {
-        if (isThumbnailFormatInvalid(s)) {
-          console.warn(`[Asset Health Check] Story format invalid or placeholder: ${s.story_id} (${s.hero_image})`);
-          broken.add(s.story_id);
-        }
-      });
-      
-      if (!active) return;
-      setBrokenImageIds(new Set(broken));
-
-      // Asynchronously check network load for the rest
-      const checkPromises = adminStories
-        .filter(s => !isThumbnailFormatInvalid(s))
-        .map(s => {
-          return new Promise(resolve => {
-            const img = new Image();
-            img.src = s.hero_image;
-            img.onload = () => resolve();
-            img.onerror = () => {
-              if (active) {
-                console.warn(`[Asset Health Check] Image load failed (404/CORS/Blocked): ${s.story_id} (${s.hero_image})`);
-                broken.add(s.story_id);
-              }
-              resolve();
-            };
-          });
-        });
-
-      await Promise.all(checkPromises);
-      if (active) {
-        setBrokenImageIds(new Set(broken));
-      }
-    };
-
-    checkImagesAvailability();
-    return () => {
-      active = false;
-    };
-  }, [adminStories]);
 
   // Story editor utilities
   const startEditing = (story) => {

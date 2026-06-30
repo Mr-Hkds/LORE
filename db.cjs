@@ -119,6 +119,17 @@ function getStories(includeDrafts = false) {
   
   const rows = stmt.all();
   return rows.map(row => {
+    let isImageMissingOnServer = false;
+    const img = row.hero_image;
+    if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
+      isImageMissingOnServer = true;
+    } else if (img.startsWith('/content/images/')) {
+      const filePath = path.join(__dirname, 'public', img);
+      if (!fs.existsSync(filePath)) {
+        isImageMissingOnServer = true;
+      }
+    }
+
     const s = {
       ...row,
       draft: !!row.draft,
@@ -126,7 +137,8 @@ function getStories(includeDrafts = false) {
       reactions: JSON.parse(row.reactions || '{}'),
       evidence_links: JSON.parse(row.evidence_links || '[]'),
       connections: JSON.parse(row.connections || '[]'),
-      layers: JSON.parse(row.layers || '[]')
+      layers: JSON.parse(row.layers || '[]'),
+      image_missing: isImageMissingOnServer
     };
     s.reactions = ensureStoryReactions(s);
     // Stable fallback: hash story_id to a deterministic date in the 2026 range
@@ -145,6 +157,18 @@ function getStories(includeDrafts = false) {
 function getStory(story_id) {
   const row = db.prepare('SELECT * FROM stories WHERE story_id = ?').get(story_id);
   if (!row) return null;
+
+  let isImageMissingOnServer = false;
+  const img = row.hero_image;
+  if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
+    isImageMissingOnServer = true;
+  } else if (img.startsWith('/content/images/')) {
+    const filePath = path.join(__dirname, 'public', img);
+    if (!fs.existsSync(filePath)) {
+      isImageMissingOnServer = true;
+    }
+  }
+
   const s = {
     ...row,
     draft: !!row.draft,
@@ -152,7 +176,8 @@ function getStory(story_id) {
     reactions: JSON.parse(row.reactions || '{}'),
     evidence_links: JSON.parse(row.evidence_links || '[]'),
     connections: JSON.parse(row.connections || '[]'),
-    layers: JSON.parse(row.layers || '[]')
+    layers: JSON.parse(row.layers || '[]'),
+    image_missing: isImageMissingOnServer
   };
   s.reactions = ensureStoryReactions(s);
   if (s.added_date) {
