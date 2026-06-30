@@ -3,6 +3,25 @@ const path = require('path');
 const fs = require('fs');
 
 const isVercel = !!process.env.VERCEL;
+
+const EXISTING_LOCAL_IMAGES = new Set([
+  'aman_andom_001.jpg',
+  'burari_deaths_001.jpg',
+  'burari_deaths_001_1782152849860.jpg',
+  'burari_diary.jpg',
+  'burari_family.jpg',
+  'cia_mk_ultra_program.jpg',
+  'daily_dossier.jpg',
+  'facundo_astudillo_castro_001.jpg',
+  'fakhraddin_aboszoda_001.jpg',
+  'pipes_toi.jpg',
+  'said_s_bedair_001.jpg',
+  'the_asch_conformity_experiments.jpg',
+  'the_dyatlov_pass_incident.jpg',
+  'the_philadelphia_experiment.jpg',
+  'unit_731_experiments.jpg',
+  'uwe_barschel_001.jpg'
+]);
 const dbPath = isVercel ? '/tmp/lore.db' : path.join(__dirname, 'lore.db');
 const db = new Database(dbPath);
 
@@ -124,8 +143,8 @@ function getStories(includeDrafts = false) {
     if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
       isImageMissingOnServer = true;
     } else if (img.startsWith('/content/images/')) {
-      const filePath = path.join(__dirname, 'public', img);
-      if (!fs.existsSync(filePath)) {
+      const filename = img.substring('/content/images/'.length);
+      if (!EXISTING_LOCAL_IMAGES.has(filename)) {
         isImageMissingOnServer = true;
       }
     }
@@ -163,8 +182,8 @@ function getStory(story_id) {
   if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
     isImageMissingOnServer = true;
   } else if (img.startsWith('/content/images/')) {
-    const filePath = path.join(__dirname, 'public', img);
-    if (!fs.existsSync(filePath)) {
+    const filename = img.substring('/content/images/'.length);
+    if (!EXISTING_LOCAL_IMAGES.has(filename)) {
       isImageMissingOnServer = true;
     }
   }

@@ -70,13 +70,16 @@ function StoryCardImage({ story, alt, inView }) {
   };
 
   const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
-  const displayUrl = (story.hero_image && !story.image_missing && !fallbackAttempted) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
+  const displayUrl = (story.hero_image && !story.image_missing && !fallbackAttempted) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : fetchedUrl);
 
   if (!displayUrl || imgFailed) {
+    const isResolving = story.image_missing && !imgFailed && !fetchedUrl;
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+      <div className={`w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70 ${isResolving ? 'animate-pulse' : ''}`}>
         <LoreMark size={20} color="currentColor" />
-        <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">CLASSIFIED</span>
+        <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">
+          {isResolving ? "RESOLVING..." : "CLASSIFIED"}
+        </span>
       </div>
     );
   }

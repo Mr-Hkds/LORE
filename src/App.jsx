@@ -210,12 +210,15 @@ export default function App() {
       return;
     }
 
+    // Immediately reset to null to prevent displaying the previous story's image
+    setResolvedStoryImageUrl(null);
+
     if (currentStory.image_missing) {
       let active = true;
       const query = currentStory.image_query || currentStory.title;
       getImageByQuery(query).then(url => {
         if (active) {
-          setResolvedStoryImageUrl(url || currentStory.hero_image);
+          setResolvedStoryImageUrl(url || null);
         }
       });
       return () => {
