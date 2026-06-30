@@ -334,8 +334,8 @@
   ],
   "mass_psychogenic_illness": [
     "dancing_mania_1518_strasbourg",
-    "the_taos_hum",
-    "tanganyika_laughter_epidemic"
+    "tanganyika_laughter_epidemic",
+    "the_taos_hum"
   ],
   "social_contagion": [
     "dancing_mania_1518_strasbourg",
@@ -517,9 +517,9 @@
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
-    "the_taos_hum",
     "the_children_of_woolpit",
-    "tanganyika_laughter_epidemic"
+    "tanganyika_laughter_epidemic",
+    "the_taos_hum"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -836,15 +836,6 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
-  "auditory_perception": [
-    "the_taos_hum"
-  ],
-  "environmental_mystery": [
-    "the_taos_hum"
-  ],
-  "sensory_perception": [
-    "the_taos_hum"
-  ],
   "radio_frequency_interference": [
     "the_russian_woodpecker_duga_3"
   ],
@@ -1084,5 +1075,14 @@
   ],
   "military_disaster": [
     "uss_cyclops_vanishing"
+  ],
+  "auditory_perception": [
+    "the_taos_hum"
+  ],
+  "environmental_mystery": [
+    "the_taos_hum"
+  ],
+  "sensory_perception": [
+    "the_taos_hum"
   ]
 }
