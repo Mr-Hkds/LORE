@@ -1232,6 +1232,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       // Perform initial check on format and placeholding
       adminStories.forEach(s => {
         if (isThumbnailFormatInvalid(s)) {
+          console.warn(`[Asset Health Check] Story format invalid or placeholder: ${s.story_id} (${s.hero_image})`);
           broken.add(s.story_id);
         }
       });
@@ -1249,6 +1250,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
             img.onload = () => resolve();
             img.onerror = () => {
               if (active) {
+                console.warn(`[Asset Health Check] Image load failed (404/CORS/Blocked): ${s.story_id} (${s.hero_image})`);
                 broken.add(s.story_id);
               }
               resolve();
@@ -2532,30 +2534,27 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                 <div 
                   className="p-5 rounded-xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300"
                   style={{
-                    backgroundColor: 'rgba(239, 68, 68, 0.03)',
-                    borderLeft: '4px solid #EF4444',
-                    borderTop: '1px solid rgba(239, 68, 68, 0.1)',
-                    borderRight: '1px solid rgba(239, 68, 68, 0.1)',
-                    borderBottom: '1px solid rgba(239, 68, 68, 0.1)',
+                    backgroundColor: 'rgba(245, 158, 11, 0.03)',
+                    border: '1px solid rgba(245, 158, 11, 0.15)',
                     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.02)'
                   }}
                 >
                   <div className="flex items-start gap-4">
                     <div 
                       className="p-2 rounded-lg flex-shrink-0 flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)' }}
+                      style={{ backgroundColor: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.2)' }}
                     >
-                      <ShieldAlert className="w-5 h-5 text-red-400 animate-pulse" />
+                      <ShieldAlert className="w-5 h-5 text-amber-400 animate-pulse" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-mono font-bold text-red-400 uppercase tracking-[0.2em]">
+                      <p className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-[0.2em]">
                         // ASSET HEALTH COMPLIANCE CHECK
                       </p>
                       <p className="text-xs text-[#EDE8DF]/90 mt-1 leading-relaxed font-serif italic">
                         {missingImageStoriesCount === 1 ? (
-                          <>There is <strong className="text-red-400 font-bold font-sans not-italic">1 archive dossier</strong> currently missing a valid cover image or using an active placeholder.</>
+                          <>There is <strong className="text-amber-400 font-bold font-sans not-italic">1 archive dossier</strong> currently missing its local cover image (using a Wikipedia search fallback).</>
                         ) : (
-                          <>There are <strong className="text-red-400 font-bold font-sans not-italic">{missingImageStoriesCount} archive dossiers</strong> currently missing valid cover images or using active placeholders.</>
+                          <>There are <strong className="text-amber-400 font-bold font-sans not-italic">{missingImageStoriesCount} archive dossiers</strong> currently missing local cover images (using Wikipedia search fallbacks).</>
                         )}
                       </p>
                     </div>
@@ -2564,9 +2563,9 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                     onClick={() => setFilterMissingImages(prev => !prev)}
                     className="px-4 py-2 text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-lg border transition-all duration-200 active:scale-95 flex-shrink-0 cursor-pointer select-none"
                     style={{
-                      color: filterMissingImages ? '#EDE8DF' : '#EF4444',
-                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(239, 68, 68, 0.3)',
-                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(239, 68, 68, 0.06)'
+                      color: filterMissingImages ? '#EDE8DF' : '#F59E0B',
+                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(245, 158, 11, 0.3)',
+                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(245, 158, 11, 0.06)'
                     }}
                   >
                     {filterMissingImages ? "Show All Archives" : "Review Asset Issues"}
@@ -3026,9 +3025,21 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                     )}
 
                                     {isImageMissing(story) && (
-                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
-                                        ⚠️ Missing Image
-                                      </span>
+                                      story.hero_image && story.hero_image.startsWith('/content/images/') ? (
+                                        <span 
+                                          className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase"
+                                          title="The local image file is missing (404), but the client is falling back to Wikipedia search."
+                                        >
+                                          ⚠️ Wiki Fallback Active
+                                        </span>
+                                      ) : (
+                                        <span 
+                                          className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse"
+                                          title="No cover image set or default placeholder is active."
+                                        >
+                                          ⚠️ Missing Image
+                                        </span>
+                                      )
                                     )}
 
                                     {/* Quality Score Badge */}
