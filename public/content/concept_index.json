@@ -15,8 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "operation_gladio",
-    "the_lead_mask_case"
+    "the_lead_mask_case",
+    "operation_gladio"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -33,12 +33,12 @@
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo",
     "operation_gladio",
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
     "tunguska_event_001",
-    "echelon_global_surveillance"
+    "echelon_global_surveillance",
+    "project_blue_book_ufo"
   ],
   "espionage": [
     "uwe_barschel",
@@ -112,9 +112,9 @@
     "black_dahlia_murder",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
+    "the_lead_mask_case",
     "uss_cyclops_vanishing",
-    "roanoke_colony_disappearance",
-    "the_lead_mask_case"
+    "roanoke_colony_disappearance"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -471,8 +471,8 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo",
-    "operation_paperclip_001"
+    "operation_paperclip_001",
+    "project_blue_book_ufo"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships",
@@ -512,13 +512,13 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "project_blue_book_ufo",
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
+    "project_blue_book_ufo",
     "the_children_of_woolpit"
   ],
   "haunted_house": [
@@ -728,14 +728,14 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "ufo": [
-    "project_blue_book_ufo"
+  "occult_rituals": [
+    "the_lead_mask_case"
   ],
-  "military_investigations": [
-    "project_blue_book_ufo"
+  "bizarre_circumstances": [
+    "the_lead_mask_case"
   ],
-  "public_perception": [
-    "project_blue_book_ufo"
+  "cryptic_messages": [
+    "the_lead_mask_case"
   ],
   "extraterrestrial_life": [
     "the_wow_signal",
@@ -1067,14 +1067,14 @@
   "environmental_factors": [
     "roanoke_colony_disappearance"
   ],
-  "occult_rituals": [
-    "the_lead_mask_case"
+  "ufo": [
+    "project_blue_book_ufo"
   ],
-  "bizarre_circumstances": [
-    "the_lead_mask_case"
+  "military_investigations": [
+    "project_blue_book_ufo"
   ],
-  "cryptic_messages": [
-    "the_lead_mask_case"
+  "public_perception": [
+    "project_blue_book_ufo"
   ],
   "historical_mystery": [
     "the_children_of_woolpit"
