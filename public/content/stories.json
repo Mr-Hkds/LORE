@@ -3631,96 +3631,6 @@
       "image_missing": false
     },
     {
-      "story_id": "project_artichoke_mind_control",
-      "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
-      "category": "gov_experiments",
-      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
-      "concepts": [
-        "mind_control",
-        "government_secrecy",
-        "unethical_experimentation",
-        "covert_operations",
-        "cold_war_era",
-        "interrogation_techniques",
-        "psychological_warfare"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/project_artichoke_mind_control.jpg",
-      "added_date": "2026-06-28",
-      "draft": false,
-      "reactions": {
-        "like": 51,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "Murky Projects and Uneven Information Policies: A Case Study of the Psychological Strategy Board and CIA (Susan Maret, 2018)",
-          "url": "https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1034&context=secrecyandsociety"
-        },
-        {
-          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
-          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
-        },
-        {
-          "label": "Militarising the Mind: Assessing the Weapons of the Ultimate Battlefield (Robert C. Bruner, Filippa Lentzos, 2018)",
-          "url": "https://kclpure.kcl.ac.uk/ws/files/94550726/Militarising_the_Mind_LENTZOS_Accepted9February2018_GREEN_AMA.pdf"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "mind_control",
-          "transition_line": "While Project ARTICHOKE laid the disturbing groundwork, its dark legacy would truly blossom in an even more notorious, ambitious, and ethically bankrupt successor: Project MK-Ultra."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: The Hunt for Human Control",
-          "content": "In the aftermath of World War II, a new kind of war began to brew: the Cold War. It was a conflict fought not just with missiles and armies, but with ideologies and the human mind itself. Reports emerged from communist regimes detailing 'brainwashing' techniques used on prisoners of war, leading to confessions and ideological conversions that seemed impossible under normal circumstances. This phenomenon sent shivers through Western intelligence agencies, sparking a desperate quest to understand and replicate, or defend against, such psychological manipulation.",
-          "cliffhanger": "The question wasn't if minds could be controlled, but how extensively, and by whom, setting the stage for a chilling initiative within America's intelligence apparatus."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: A Looming Psychological Threat",
-          "content": "The perceived threat of psychological warfare, particularly from the Soviet Union and China, became a paramount concern for the nascent Central Intelligence Agency (CIA). Agents and analysts observed, with growing alarm, public spectacles of 'show trials' and the seemingly compliant behavior of Western captives after their release. The notion that an adversary could systematically break down an individual's will, alter their beliefs, and even program them to betray their country, was a terrifying prospect for national security planners.",
-          "cliffhanger": "This pervasive fear of foreign mind control ignited a covert race, pushing the CIA to explore radical and uncharted territories of human psychology and pharmacology."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: ARTICHOKE Takes Root",
-          "content": "Officially launched in 1951, Project ARTICHOKE was the CIA's direct response to these burgeoning fears. It was an ambitious, highly classified program, succeeding an even earlier, less formalized effort known as Project CHATTER. ARTICHOKE's primary mandate was clear: to investigate and develop 'special interrogation techniques' and to create a methodology for effectively influencing or controlling individuals.",
-          "cliffhanger": "The project aimed to discover if it was possible to achieve total control over a human being, raising profound ethical questions about the nature of identity and free will that were conveniently ignored in the pursuit of national security."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: Tools of Persuasion and Domination",
-          "content": "Under Project ARTICHOKE, researchers and operatives began experimenting with a wide array of methods designed to break down a subject's psyche and extract information. These included the administration of potent psychoactive drugs like LSD, mescaline, and even heroin, often in conjunction with hypnosis. The goal was to induce states of extreme confusion, suggestibility, and memory loss, creating a blank slate onto which new instructions or beliefs could be imprinted. Subjects were sometimes unwitting, their participation secured under false pretenses.",
-          "cliffhanger": "As the experiments progressed, the project delved into even more invasive techniques, pushing the boundaries of what was considered humanely possible in the name of intelligence gathering."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: Erasing and Rewriting the Self",
-          "content": "The methods employed by ARTICHOKE were often brutal, combining chemical manipulation with sensory deprivation, isolation, and psychological torment. The aim was not merely to extract information, but to achieve complete behavioral control – to create a 'Manchurian Candidate' capable of carrying out actions without conscious recall, or to effectively 'depattern' an individual's personality. These experiments were conducted in clandestine facilities, often with the cooperation of doctors and scientists, blurring the lines between medical research and unethical human experimentation.",
-          "cliffhanger": "The dark ambition of ARTICHOKE began to reveal a truth more disturbing than mere coercion: the chilling possibility of truly erasing a person's identity and replacing it with another."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: Sacrificed Minds and Secret Legacies",
-          "content": "The human cost of Project ARTICHOKE was immense, though often obscured by the secrecy surrounding the program. Many subjects, some of whom were patients in mental institutions or prisoners, suffered severe and lasting psychological trauma. While the 'Manchurian Candidate' objective ultimately proved elusive in a consistently reliable manner, the program did develop highly effective, albeit ethically reprehensible, techniques for interrogation and psychological destabilization. The findings and personnel of ARTICHOKE directly fed into its notorious successor, Project MK-ULTRA, which would continue and expand upon these horrifying experiments with even greater intensity and scope.",
-          "cliffhanger": "The legacy of ARTICHOKE was not just in its methods, but in establishing a precedent for unchecked government experimentation on human subjects, a dark path that would continue for decades under a different, more infamous name."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: Unveiling the Unseen Scars",
-          "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
-        }
-      ],
-      "image_missing": true
-    },
-    {
       "story_id": "edinburgh_vaults_001",
       "title": "The Edinburgh Vaults: Echoes from a Buried City",
       "category": "paranormal",
@@ -6506,7 +6416,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/DUGA_Radar_Array_near_Chernobyl%2C_Ukraine_2014.jpg",
       "added_date": "2026-06-29",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 22,
         "gripping": 20,
@@ -6576,6 +6486,96 @@
           "layer_name": "The Dark Corner - Chernobyl's Shadow",
           "content": "The operational life of the Duga-3 system, particularly the Duga-1 complex near Chernobyl, came to an abrupt and unexpected end not through conflict, but through an unprecedented civilian disaster. On April 26, 1986, the Chernobyl Nuclear Power Plant, located a mere 10 kilometers from the Duga-1 site, suffered a catastrophic meltdown. The resulting radioactive contamination rendered the surrounding area, including the Duga-1 complex, uninhabitable.\n\nWith the entire region evacuated and designated an exclusion zone, maintaining and operating the sophisticated Duga-1 system became impossible. The vast, power-hungry facility was silently decommissioned and abandoned, its mission rendered obsolete by the very catastrophe it was indirectly linked to. The other Duga site in Siberia continued operation for some time but also eventually ceased.\n\nToday, the skeletal remains of Duga-1 stand as a haunting monument within the Chernobyl Exclusion Zone: a silent, rusted behemoth towering over a poisoned landscape. It is a chilling testament to the Soviet Union's immense technological ambition and its ultimate hubris, a relic of a desperate era, forever silenced by the very risks of the atomic age it was built to warn against. Its mechanical 'clack-clack-clack' now only echoes in the annals of history, a ghost from the Cold War's darkest corners.",
           "cliffhanger": null
+        }
+      ],
+      "image_missing": false
+    },
+    {
+      "story_id": "project_artichoke_mind_control",
+      "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
+      "category": "gov_experiments",
+      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
+      "concepts": [
+        "mind_control",
+        "government_secrecy",
+        "unethical_experimentation",
+        "covert_operations",
+        "cold_war_era",
+        "interrogation_techniques",
+        "psychological_warfare"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_the_U.S._Central_Intelligence_Agency.svg/250px-Flag_of_the_U.S._Central_Intelligence_Agency.svg.png",
+      "added_date": "2026-06-28",
+      "draft": 0,
+      "reactions": {
+        "like": 51,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Murky Projects and Uneven Information Policies: A Case Study of the Psychological Strategy Board and CIA (Susan Maret, 2018)",
+          "url": "https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1034&context=secrecyandsociety"
+        },
+        {
+          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
+          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
+        },
+        {
+          "label": "Militarising the Mind: Assessing the Weapons of the Ultimate Battlefield (Robert C. Bruner, Filippa Lentzos, 2018)",
+          "url": "https://kclpure.kcl.ac.uk/ws/files/94550726/Militarising_the_Mind_LENTZOS_Accepted9February2018_GREEN_AMA.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "mind_control",
+          "transition_line": "While Project ARTICHOKE laid the disturbing groundwork, its dark legacy would truly blossom in an even more notorious, ambitious, and ethically bankrupt successor: Project MK-Ultra."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: The Hunt for Human Control",
+          "content": "In the aftermath of World War II, a new kind of war began to brew: the Cold War. It was a conflict fought not just with missiles and armies, but with ideologies and the human mind itself. Reports emerged from communist regimes detailing 'brainwashing' techniques used on prisoners of war, leading to confessions and ideological conversions that seemed impossible under normal circumstances. This phenomenon sent shivers through Western intelligence agencies, sparking a desperate quest to understand and replicate, or defend against, such psychological manipulation.",
+          "cliffhanger": "The question wasn't if minds could be controlled, but how extensively, and by whom, setting the stage for a chilling initiative within America's intelligence apparatus."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: A Looming Psychological Threat",
+          "content": "The perceived threat of psychological warfare, particularly from the Soviet Union and China, became a paramount concern for the nascent Central Intelligence Agency (CIA). Agents and analysts observed, with growing alarm, public spectacles of 'show trials' and the seemingly compliant behavior of Western captives after their release. The notion that an adversary could systematically break down an individual's will, alter their beliefs, and even program them to betray their country, was a terrifying prospect for national security planners.",
+          "cliffhanger": "This pervasive fear of foreign mind control ignited a covert race, pushing the CIA to explore radical and uncharted territories of human psychology and pharmacology."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: ARTICHOKE Takes Root",
+          "content": "Officially launched in 1951, Project ARTICHOKE was the CIA's direct response to these burgeoning fears. It was an ambitious, highly classified program, succeeding an even earlier, less formalized effort known as Project CHATTER. ARTICHOKE's primary mandate was clear: to investigate and develop 'special interrogation techniques' and to create a methodology for effectively influencing or controlling individuals.",
+          "cliffhanger": "The project aimed to discover if it was possible to achieve total control over a human being, raising profound ethical questions about the nature of identity and free will that were conveniently ignored in the pursuit of national security."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: Tools of Persuasion and Domination",
+          "content": "Under Project ARTICHOKE, researchers and operatives began experimenting with a wide array of methods designed to break down a subject's psyche and extract information. These included the administration of potent psychoactive drugs like LSD, mescaline, and even heroin, often in conjunction with hypnosis. The goal was to induce states of extreme confusion, suggestibility, and memory loss, creating a blank slate onto which new instructions or beliefs could be imprinted. Subjects were sometimes unwitting, their participation secured under false pretenses.",
+          "cliffhanger": "As the experiments progressed, the project delved into even more invasive techniques, pushing the boundaries of what was considered humanely possible in the name of intelligence gathering."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: Erasing and Rewriting the Self",
+          "content": "The methods employed by ARTICHOKE were often brutal, combining chemical manipulation with sensory deprivation, isolation, and psychological torment. The aim was not merely to extract information, but to achieve complete behavioral control – to create a 'Manchurian Candidate' capable of carrying out actions without conscious recall, or to effectively 'depattern' an individual's personality. These experiments were conducted in clandestine facilities, often with the cooperation of doctors and scientists, blurring the lines between medical research and unethical human experimentation.",
+          "cliffhanger": "The dark ambition of ARTICHOKE began to reveal a truth more disturbing than mere coercion: the chilling possibility of truly erasing a person's identity and replacing it with another."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: Sacrificed Minds and Secret Legacies",
+          "content": "The human cost of Project ARTICHOKE was immense, though often obscured by the secrecy surrounding the program. Many subjects, some of whom were patients in mental institutions or prisoners, suffered severe and lasting psychological trauma. While the 'Manchurian Candidate' objective ultimately proved elusive in a consistently reliable manner, the program did develop highly effective, albeit ethically reprehensible, techniques for interrogation and psychological destabilization. The findings and personnel of ARTICHOKE directly fed into its notorious successor, Project MK-ULTRA, which would continue and expand upon these horrifying experiments with even greater intensity and scope.",
+          "cliffhanger": "The legacy of ARTICHOKE was not just in its methods, but in establishing a precedent for unchecked government experimentation on human subjects, a dark path that would continue for decades under a different, more infamous name."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: Unveiling the Unseen Scars",
+          "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
         }
       ],
       "image_missing": 0
