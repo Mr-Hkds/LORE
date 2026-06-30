@@ -3866,104 +3866,6 @@
       "image_missing": false
     },
     {
-      "story_id": "guatemalan_syphilis_experiment",
-      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
-      "category": "gov_experiments",
-      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
-      "concepts": [
-        "human_experimentation",
-        "medical_ethics",
-        "government_misconduct",
-        "unethical_research",
-        "public_health_failure",
-        "vulnerable_populations"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://origins.osu.edu/sites/default/files/migrated_files/guatemala%20subjects.jpg",
-      "added_date": "2026-06-29",
-      "draft": 0,
-      "reactions": {
-        "like": 31,
-        "gripping": 44,
-        "scared": 5,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
-        },
-        {
-          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
-          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
-        },
-        {
-          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
-          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
-        },
-        {
-          "story_id": "unit_731_experiments",
-          "shared_concept": "human_experimentation",
-          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper of Forgotten Files",
-          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
-          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Blueprint of 'Scientific' Conquest",
-          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
-          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Unwitting Subjects",
-          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Act of Deliberate Infection",
-          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
-          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The 'Treatment' and Its Cruel Irony",
-          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
-          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss of Forgotten Suffering",
-          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
-          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
-          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
-        }
-      ],
-      "image_missing": 0
-    },
-    {
       "story_id": "operation_paperclip_001",
       "title": "Operation Paperclip: America's Silent Pact with Nazi Science",
       "category": "gov_experiments",
@@ -6492,6 +6394,104 @@
       "image_missing": false
     },
     {
+      "story_id": "guatemalan_syphilis_experiment",
+      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
+      "category": "gov_experiments",
+      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
+      "concepts": [
+        "human_experimentation",
+        "medical_ethics",
+        "government_misconduct",
+        "unethical_research",
+        "public_health_failure",
+        "vulnerable_populations"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://origins.osu.edu/sites/default/files/migrated_files/guatemala%20subjects.jpg",
+      "added_date": "2026-06-29",
+      "draft": false,
+      "reactions": {
+        "like": 31,
+        "gripping": 44,
+        "scared": 5,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
+        },
+        {
+          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
+          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
+        },
+        {
+          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
+          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "unethical_experimentation",
+          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
+        },
+        {
+          "story_id": "unit_731_experiments",
+          "shared_concept": "human_experimentation",
+          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper of Forgotten Files",
+          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
+          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Blueprint of 'Scientific' Conquest",
+          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
+          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Unwitting Subjects",
+          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Act of Deliberate Infection",
+          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
+          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The 'Treatment' and Its Cruel Irony",
+          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
+          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss of Forgotten Suffering",
+          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
+          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
+          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
+        }
+      ],
+      "image_missing": false
+    },
+    {
       "story_id": "enfield_poltergeist_001",
       "title": "The Enfield Poltergeist: A Chronicle of Unseen Terrors",
       "category": "paranormal",
@@ -6504,7 +6504,7 @@
         "skepticism_vs_belief"
       ],
       "severity": "chilling",
-      "hero_image": "https://people.com/thmb/_6XHBb-pv1FchYS3K3k5bVJoeKo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(399x0:401x2):format(webp)/janet-hodgson-800-0a7b66b7eb5b4b55ac82cd4644f476e2.jpg",
+      "hero_image": "https://ichef.bbci.co.uk/images/ic/1200x675/p02ccvcy.jpg",
       "added_date": "2026-06-29",
       "draft": 0,
       "reactions": {
