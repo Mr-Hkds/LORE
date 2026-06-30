@@ -1,9 +1,10 @@
 /**
- * SiteFeedback — floating site-wide feedback button.
- * Clean, always-visible float. No animated width jank.
+ * SiteFeedback — right-side vertical tab.
+ * Always visible at mid-screen regardless of scroll.
+ * Opens a panel anchored to the right edge.
  */
-import { useState, useEffect, useRef } from 'react';
-import { MessageSquare, X } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { X, Star } from 'lucide-react';
 
 const TAGS = [
   'Love the concept',
@@ -24,26 +25,6 @@ export default function SiteFeedback() {
   const [note, setNote]         = useState('');
   const [status, setStatus]     = useState(null);
   const panelRef = useRef(null);
-
-  // Click outside to close
-  useEffect(() => {
-    if (!open) return;
-    const handleOutsideClick = (e) => {
-      const trigger = document.getElementById('site-feedback-trigger');
-      if (
-        panelRef.current && !panelRef.current.contains(e.target) &&
-        trigger && !trigger.contains(e.target)
-      ) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleOutsideClick);
-    document.addEventListener('touchstart', handleOutsideClick);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.removeEventListener('touchstart', handleOutsideClick);
-    };
-  }, [open]);
 
   const toggleTag = (t) =>
     setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
@@ -80,168 +61,265 @@ export default function SiteFeedback() {
       setRating(0);
       setTags([]);
       setNote('');
-    }, 3500);
+    }, 3200);
   };
 
   const displayRating = hoverRating || rating;
 
   return (
     <>
-      {/* ── Floating trigger ── */}
+      {/* ── Right-side vertical tab ── */}
       <button
         id="site-feedback-trigger"
         onClick={() => setOpen(o => !o)}
         aria-label="Give feedback about LORE"
-        title="Give feedback about LORE"
-        className="fixed bottom-6 right-6 z-[200] flex items-center gap-2.5 cursor-pointer select-none active:scale-95 group"
-        style={{ transition: 'transform 0.15s ease' }}
+        className="fixed z-[200] select-none cursor-pointer group"
+        style={{
+          /* Pin to right edge, vertically centered */
+          right: 0,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          /* Rotate so text reads bottom→top */
+          writingMode: 'vertical-rl',
+          textOrientation: 'mixed',
+          /* Tab shape: left side has rounded corners */
+          padding: '18px 10px',
+          borderRadius: '8px 0 0 8px',
+          background: '#0D0B08',
+          border: '1px solid rgba(158,123,76,0.3)',
+          borderRight: 'none',
+          boxShadow: '-4px 0 24px rgba(0,0,0,0.55)',
+          transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = '#14110D';
+          e.currentTarget.style.borderColor = 'rgba(158,123,76,0.6)';
+          e.currentTarget.style.boxShadow = '-6px 0 28px rgba(0,0,0,0.7), 0 0 16px rgba(158,123,76,0.08)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = '#0D0B08';
+          e.currentTarget.style.borderColor = 'rgba(158,123,76,0.3)';
+          e.currentTarget.style.boxShadow = '-4px 0 24px rgba(0,0,0,0.55)';
+        }}
       >
-        {/* Mobile: icon-only circle */}
+        {/* Gold top accent line */}
         <span
-          className="sm:hidden flex items-center justify-center w-12 h-12 rounded-full border border-[#9E7B4C]/30 bg-[#0D0B08]/95 backdrop-blur-md text-[#9E7B4C] shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
-          style={{ transition: 'border-color 0.2s, box-shadow 0.2s' }}
-        >
-          {open ? <X className="w-4 h-4 text-[#EDE8DF]" /> : <MessageSquare className="w-4 h-4" />}
-        </span>
+          className="absolute top-0 left-0 right-0 h-px rounded-t-lg"
+          style={{ background: 'linear-gradient(to right, rgba(158,123,76,0.6), transparent)' }}
+          aria-hidden="true"
+        />
 
-        {/* Desktop: always-visible pill */}
-        <span
-          className="hidden sm:flex items-center gap-2.5 h-11 px-5 rounded-full border border-[#9E7B4C]/30 hover:border-[#9E7B4C]/60 bg-[#0D0B08]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.55)] group-hover:shadow-[0_8px_32px_rgba(0,0,0,0.7),0_0_18px_rgba(158,123,76,0.08)]"
-          style={{ transition: 'border-color 0.25s, box-shadow 0.25s' }}
-        >
-          <span className="relative flex h-2 w-2 flex-shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9E7B4C] opacity-50"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#9E7B4C]/80"></span>
+        {open ? (
+          <X style={{ width: '13px', height: '13px', color: '#EDE8DF' }} />
+        ) : (
+          <span
+            style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '9px',
+              fontWeight: 700,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: '#9E7B4C',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            {/* Dot indicator */}
+            <span
+              style={{
+                display: 'inline-block',
+                width: '5px',
+                height: '5px',
+                borderRadius: '50%',
+                background: '#9E7B4C',
+                flexShrink: 0,
+                opacity: 0.7,
+              }}
+            />
+            Feedback
           </span>
-          {open
-            ? <X className="w-3.5 h-3.5 text-[#EDE8DF]" />
-            : <>
-                <MessageSquare className="w-3.5 h-3.5 text-[#9E7B4C]" />
-                <span className="text-[9.5px] font-mono tracking-[0.18em] uppercase text-[#EDE8DF]/80 font-semibold">
-                  Feedback
-                </span>
-              </>
-          }
-        </span>
+        )}
       </button>
 
-      {/* ── Feedback panel ── */}
+      {/* ── Slide-in panel from right ── */}
       {open && (
-        <div
-          ref={panelRef}
-          id="site-feedback-panel"
-          className="fixed bottom-[4.75rem] right-4 left-4 sm:left-auto sm:right-6 sm:w-[340px] z-[199] rounded-2xl border overflow-hidden animate-scale-up"
-          style={{
-            backgroundColor: '#0F0D0A',
-            borderColor: 'rgba(158,123,76,0.18)',
-            boxShadow: '0 0 0 1px rgba(158,123,76,0.05), 0 24px 60px rgba(0,0,0,0.85)',
-          }}
-        >
-          {/* Gold top accent line */}
-          <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.5) 40%, transparent)' }} />
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-[198] animate-fade-in"
+            style={{ background: 'rgba(4,3,2,0.4)', backdropFilter: 'blur(2px)' }}
+            onClick={() => setOpen(false)}
+          />
 
-          {status === 'sent' ? (
-            <div className="p-8 text-center">
-              <div className="text-3xl mb-4">✦</div>
-              <p className="text-sm font-serif italic" style={{ color: '#EDE8DF' }}>Thank you.</p>
-              <p className="text-[10px] font-mono tracking-widest uppercase mt-2" style={{ color: '#6A6560' }}>Your note is filed in the archive.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              {/* Header */}
-              <div className="px-5 pt-5 pb-4 border-b" style={{ borderColor: 'rgba(158,123,76,0.08)' }}>
-                <p className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: '#9E7B4C' }}>LORE Feedback</p>
-                <p className="font-serif italic text-base mt-1 leading-snug" style={{ color: '#EDE8DF' }}>How is the experience?</p>
+          {/* Panel */}
+          <div
+            ref={panelRef}
+            id="site-feedback-panel"
+            className="fixed right-0 top-0 bottom-0 z-[199] flex flex-col overflow-hidden animate-slide-in-right"
+            style={{
+              width: 'min(340px, 92vw)',
+              backgroundColor: '#0F0D0A',
+              borderLeft: '1px solid rgba(158,123,76,0.2)',
+              boxShadow: '-24px 0 60px rgba(0,0,0,0.85)',
+            }}
+          >
+            {/* Gold top accent */}
+            <div
+              className="h-px w-full flex-shrink-0"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.5) 50%, transparent)' }}
+            />
+
+            {status === 'sent' ? (
+              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
+                <div className="text-3xl mb-5">✦</div>
+                <p className="text-sm font-serif italic" style={{ color: '#EDE8DF' }}>Thank you.</p>
+                <p className="text-[10px] font-mono tracking-widest uppercase mt-2" style={{ color: '#4A4540' }}>
+                  Your note is filed in the archive.
+                </p>
               </div>
-
-              <div className="p-5 space-y-5">
-                {/* Rating dots */}
-                <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#4A4540' }}>Overall rating</p>
-                  <div className="flex items-center gap-3">
-                    {[1,2,3,4,5].map(n => (
-                      <button
-                        key={n}
-                        type="button"
-                        onClick={() => setRating(n)}
-                        onMouseEnter={() => setHover(n)}
-                        onMouseLeave={() => setHover(0)}
-                        className="w-7 h-7 rounded-full border transition-all duration-150 cursor-pointer"
-                        style={{
-                          borderColor: displayRating >= n ? '#9E7B4C' : 'rgba(237,232,223,0.1)',
-                          backgroundColor: displayRating >= n ? 'rgba(158,123,76,0.18)' : 'rgba(255,255,255,0.02)',
-                          transform: displayRating >= n ? 'scale(1.2)' : 'scale(1)',
-                          boxShadow: displayRating >= n ? '0 0 8px rgba(158,123,76,0.3)' : 'none',
-                        }}
-                        aria-label={`Rate ${n}`}
-                      />
-                    ))}
-                    {displayRating > 0 && (
-                      <span className="text-[10px] font-mono ml-1" style={{ color: '#9E7B4C' }}>
-                        {['','Poor','Fair','Good','Great','Perfect'][displayRating]}
-                      </span>
-                    )}
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-y-auto">
+                {/* Header */}
+                <div className="px-6 pt-6 pb-5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(158,123,76,0.08)' }}>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-[9px] font-mono tracking-[0.28em] uppercase mb-1" style={{ color: '#9E7B4C' }}>
+                        LORE Feedback
+                      </p>
+                      <p className="font-serif italic text-lg leading-snug" style={{ color: '#EDE8DF' }}>
+                        How is the experience?
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      className="mt-1 flex-shrink-0"
+                      style={{ color: 'rgba(143,138,130,0.4)', background: 'none', border: 'none', cursor: 'pointer', padding: '2px' }}
+                    >
+                      <X style={{ width: '14px', height: '14px' }} />
+                    </button>
                   </div>
                 </div>
 
-                {/* Tags */}
-                <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-3" style={{ color: '#4A4540' }}>What resonates?</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {TAGS.map(tag => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => toggleTag(tag)}
-                        className="px-2.5 py-1 rounded-full text-[9px] font-mono tracking-wide border transition-all duration-150 cursor-pointer"
-                        style={{
-                          borderColor: tags.includes(tag) ? 'rgba(158,123,76,0.6)' : 'rgba(237,232,223,0.07)',
-                          color: tags.includes(tag) ? '#9E7B4C' : '#5A5550',
-                          backgroundColor: tags.includes(tag) ? 'rgba(158,123,76,0.1)' : 'transparent',
-                        }}
-                      >
-                        {tag}
-                      </button>
-                    ))}
+                <div className="p-6 space-y-6 flex-1">
+                  {/* Rating */}
+                  <div>
+                    <p className="text-[9px] font-mono tracking-[0.2em] uppercase mb-3" style={{ color: '#4A4540' }}>
+                      Overall rating
+                    </p>
+                    <div className="flex items-center gap-3">
+                      {[1,2,3,4,5].map(n => (
+                        <button
+                          key={n}
+                          type="button"
+                          onClick={() => setRating(n)}
+                          onMouseEnter={() => setHover(n)}
+                          onMouseLeave={() => setHover(0)}
+                          className="cursor-pointer transition-all duration-150"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '50%',
+                            border: `1px solid ${displayRating >= n ? 'rgba(158,123,76,0.8)' : 'rgba(237,232,223,0.1)'}`,
+                            background: displayRating >= n ? 'rgba(158,123,76,0.18)' : 'rgba(255,255,255,0.02)',
+                            transform: displayRating >= n ? 'scale(1.2)' : 'scale(1)',
+                            boxShadow: displayRating >= n ? '0 0 10px rgba(158,123,76,0.25)' : 'none',
+                          }}
+                          aria-label={`Rate ${n}`}
+                        />
+                      ))}
+                      {displayRating > 0 && (
+                        <span className="text-[10px] font-mono ml-1" style={{ color: '#9E7B4C' }}>
+                          {['','Poor','Fair','Good','Great','Perfect'][displayRating]}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Tags */}
+                  <div>
+                    <p className="text-[9px] font-mono tracking-[0.2em] uppercase mb-3" style={{ color: '#4A4540' }}>
+                      What resonates?
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {TAGS.map(tag => (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => toggleTag(tag)}
+                          className="cursor-pointer transition-all duration-150"
+                          style={{
+                            padding: '5px 11px',
+                            borderRadius: '20px',
+                            fontSize: '9px',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.08em',
+                            border: `1px solid ${tags.includes(tag) ? 'rgba(158,123,76,0.55)' : 'rgba(237,232,223,0.07)'}`,
+                            color: tags.includes(tag) ? '#9E7B4C' : '#4A4540',
+                            background: tags.includes(tag) ? 'rgba(158,123,76,0.1)' : 'transparent',
+                          }}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Note */}
+                  <div>
+                    <p className="text-[9px] font-mono tracking-[0.2em] uppercase mb-2" style={{ color: '#4A4540' }}>
+                      Anything else?
+                    </p>
+                    <textarea
+                      value={note}
+                      onChange={e => setNote(e.target.value)}
+                      placeholder="Tell us anything..."
+                      rows={4}
+                      className="w-full resize-none focus:outline-none"
+                      style={{
+                        padding: '10px 12px',
+                        fontSize: '12px',
+                        borderRadius: '10px',
+                        border: '1px solid rgba(237,232,223,0.07)',
+                        background: 'rgba(255,255,255,0.02)',
+                        color: '#EDE8DF',
+                        caretColor: '#9E7B4C',
+                        fontFamily: 'sans-serif',
+                      }}
+                      onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.3)'; }}
+                      onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.07)'; }}
+                    />
                   </div>
                 </div>
 
-                {/* Note */}
-                <div>
-                  <p className="text-[9px] font-mono tracking-[0.14em] uppercase mb-2" style={{ color: '#4A4540' }}>Anything else?</p>
-                  <textarea
-                    value={note}
-                    onChange={e => setNote(e.target.value)}
-                    placeholder="Tell us anything..."
-                    rows={3}
-                    className="w-full px-3 py-2.5 text-xs rounded-lg border resize-none focus:outline-none transition-colors"
+                {/* Submit */}
+                <div className="px-6 pb-6 flex-shrink-0">
+                  <button
+                    type="submit"
+                    disabled={rating === 0 || status === 'sending'}
+                    className="w-full transition-all duration-200 active:scale-95 cursor-pointer"
                     style={{
-                      backgroundColor: 'rgba(255,255,255,0.02)',
-                      borderColor: 'rgba(237,232,223,0.07)',
-                      color: '#EDE8DF',
-                      caretColor: '#9E7B4C',
+                      padding: '11px',
+                      borderRadius: '10px',
+                      fontSize: '10px',
+                      fontFamily: 'monospace',
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      background: rating > 0 ? 'rgba(158,123,76,0.12)' : 'transparent',
+                      border: '1px solid rgba(158,123,76,0.35)',
+                      color: '#9E7B4C',
+                      opacity: rating === 0 || status === 'sending' ? 0.35 : 1,
                     }}
-                    onFocus={e => { e.target.style.borderColor = 'rgba(158,123,76,0.3)'; }}
-                    onBlur={e  => { e.target.style.borderColor = 'rgba(237,232,223,0.07)'; }}
-                  />
+                  >
+                    {status === 'sending' ? 'Filing...' : 'Submit'}
+                  </button>
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={rating === 0 || status === 'sending'}
-                  className="w-full py-2.5 rounded-lg text-[10px] font-mono tracking-[0.2em] uppercase transition-all duration-200 active:scale-95 disabled:opacity-30 cursor-pointer"
-                  style={{
-                    backgroundColor: rating > 0 ? 'rgba(158,123,76,0.12)' : 'transparent',
-                    border: '1px solid rgba(158,123,76,0.35)',
-                    color: '#9E7B4C',
-                  }}
-                >
-                  {status === 'sending' ? 'Filing...' : 'Submit'}
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
+              </form>
+            )}
+          </div>
+        </>
       )}
     </>
   );

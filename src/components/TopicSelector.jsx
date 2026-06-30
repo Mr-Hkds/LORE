@@ -341,26 +341,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           </p>
 
 
-          {/* Central Premium Search Trigger */}
-          <div className="mb-14">
-            <div 
-              onClick={onOpenSearch}
-              className="group w-full max-w-[480px] bg-[#0E0C0A]/40 hover:bg-[#12100E] border border-neutral-900/60 hover:border-[#9E7B4C]/45 rounded-xl px-4 py-3 flex items-center justify-between transition-all duration-300 cursor-pointer shadow-md hover:shadow-[#9E7B4C]/4 active:scale-[0.99] select-none"
-              style={{
-                boxShadow: '0 8px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.01)',
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <Search className="w-3.5 h-3.5 text-[#9E7B4C] group-hover:scale-105 transition-transform duration-300" />
-                <span className="text-[11px] font-sans text-neutral-500 group-hover:text-[#EDE8DF]/80 transition-colors">
-                  Search the registry archives...
-                </span>
-              </div>
-              <span className="text-[7.5px] font-mono font-bold tracking-widest px-2.5 py-0.5 rounded border border-neutral-850 bg-[#080706] text-[#8F8A82]/50 uppercase group-hover:border-[#9E7B4C]/30 group-hover:text-[#9E7B4C] transition-colors">
-                Registry
-              </span>
-            </div>
-          </div>
+
 
           {/* Today in the Shadows */}
           <div className="mb-16">
@@ -689,8 +670,68 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </div>
           )}
 
+          {/* Search before categories */}
+          <div className="mb-2" style={{ borderTop: `1px solid ${ru}`, paddingTop: '32px' }}>
+            <div
+              onClick={onOpenSearch}
+              role="button"
+              tabIndex={0}
+              aria-label="Search the archive"
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onOpenSearch(); }}
+              className="group w-full flex items-center gap-4 cursor-pointer select-none active:scale-[0.995]"
+              style={{
+                background: 'rgba(12,10,8,0.6)',
+                border: '1px solid rgba(158,123,76,0.18)',
+                borderRadius: '14px',
+                padding: '14px 20px',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
+                transition: 'border-color 0.25s, box-shadow 0.25s, background 0.25s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(158,123,76,0.45)';
+                e.currentTarget.style.background = 'rgba(15,13,10,0.85)';
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(158,123,76,0.06), inset 0 1px 0 rgba(255,255,255,0.03)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(158,123,76,0.18)';
+                e.currentTarget.style.background = 'rgba(12,10,8,0.6)';
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)';
+              }}
+            >
+              <Search
+                className="flex-shrink-0 transition-colors duration-200"
+                style={{ width: '15px', height: '15px', color: '#9E7B4C', opacity: 0.8 }}
+              />
+              <span
+                className="flex-1 font-sans transition-colors duration-200"
+                style={{ fontSize: '13px', color: 'rgba(143,138,130,0.55)', letterSpacing: '0.01em' }}
+              >
+                Search all archives by title, event, or concept...
+              </span>
+              <div className="flex items-center gap-1.5 flex-shrink-0">
+                <kbd
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '2px 7px',
+                    borderRadius: '5px',
+                    fontSize: '10px',
+                    fontFamily: 'monospace',
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(237,232,223,0.1)',
+                    color: 'rgba(143,138,130,0.4)',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  ⌘K
+                </kbd>
+              </div>
+            </div>
+          </div>
+
           {/* Topic list */}
-          <div style={{ borderTop: `1px solid ${ru}` }}>
+          <div style={{ borderTop: `none` }}>
             {TOPICS.map((topic) => {
               const categoryMap = {
                 'psychology': 'psychology',
