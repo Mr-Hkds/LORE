@@ -3001,16 +3001,16 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                   {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                                   {isImageMissing(story) && (
                                     <div className="mt-2.5 pt-2 border-t border-dashed border-neutral-900/60 flex items-center gap-3">
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`, '_blank');
-                                        }}
-                                        className="text-[8px] font-mono tracking-widest text-[#F59E0B] hover:text-[#F59E0B]/90 bg-[#F59E0B]/5 hover:bg-[#F59E0B]/10 border border-[#F59E0B]/20 px-2.5 py-1 rounded cursor-pointer select-none transition-all duration-200"
+                                      <a
+                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="text-[8px] font-mono tracking-widest text-[#F59E0B] hover:text-[#F59E0B]/90 bg-[#F59E0B]/5 hover:bg-[#F59E0B]/10 border border-[#F59E0B]/20 px-2.5 py-1.5 rounded cursor-pointer select-none transition-all duration-200"
+                                        style={{ textDecoration: 'none' }}
                                       >
                                         🔍 Search Google
-                                      </button>
+                                      </a>
                                       <div className="relative flex-1">
                                         <input
                                           type="text"

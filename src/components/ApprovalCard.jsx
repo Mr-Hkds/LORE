@@ -347,16 +347,16 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 <Clipboard className="w-3.5 h-3.5 text-amber-500" />
                 <span className="text-[10px] font-semibold text-[#EDE8DF]">Instant Clipboard Paste</span>
               </div>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`, '_blank');
-                }}
+              <a
+                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="text-[8.5px] font-mono tracking-widest text-amber-500 hover:underline cursor-pointer select-none bg-transparent border-0 p-0"
+                style={{ textDecoration: 'none' }}
               >
                 🔍 Search Google
-              </button>
+              </a>
             </div>
             
             <div className="relative">
