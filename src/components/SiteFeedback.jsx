@@ -50,6 +50,23 @@ export default function SiteFeedback() {
     return () => clearTimeout(timer);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const handleOutsideClick = (e) => {
+      const panel = document.getElementById('site-feedback-panel');
+      const trigger = document.getElementById('site-feedback-trigger');
+      if (panel && !panel.contains(e.target) && trigger && !trigger.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, [open]);
+
   const toggleTag = (t) => setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
 
   const handleSubmit = async (e) => {
@@ -101,6 +118,7 @@ export default function SiteFeedback() {
     <>
       {/* Floating trigger button */}
       <button
+        id="site-feedback-trigger"
         onClick={() => { setOpen(o => !o); setPromoVisible(false); }}
         aria-label="Give feedback"
         title="Give feedback about LORE"
@@ -141,11 +159,12 @@ export default function SiteFeedback() {
       {/* Feedback panel */}
       {open && (
         <div
-          className="fixed bottom-20 right-6 z-[199] w-80 rounded-2xl border overflow-hidden"
+          id="site-feedback-panel"
+          className="fixed bottom-20 left-6 right-6 sm:left-auto sm:right-6 sm:w-80 z-[199] rounded-2xl border overflow-hidden animate-scale-up"
           style={{
             backgroundColor: '#110F0C',
             borderColor: 'rgba(237,232,223,0.08)',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.7)',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.8), 0 0 40px rgba(158,123,76,0.02)',
           }}
         >
           {status === 'sent' ? (
