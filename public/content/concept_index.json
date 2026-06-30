@@ -836,6 +836,12 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
+  "world_war_i": [
+    "uss_cyclops_vanishing"
+  ],
+  "military_disaster": [
+    "uss_cyclops_vanishing"
+  ],
   "auditory_perception": [
     "the_taos_hum"
   ],
@@ -930,21 +936,6 @@
   "authoritarianism": [
     "the_batavia_shipwreck_mutiny",
     "the_third_wave_experiment"
-  ],
-  "bioterrorism": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "forensic_science": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "government_response": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "public_health_crisis": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "insider_threat": [
-    "anthrax_attacks_2001_amerithrax"
   ],
   "unethical_recruitment": [
     "operation_paperclip_001"
@@ -1076,13 +1067,22 @@
   "psychological_exploitation": [
     "blue_whale_game_001"
   ],
+  "bioterrorism": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "forensic_science": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "government_response": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "public_health_crisis": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "insider_threat": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
   "nihilism": [
     "cotard_delusion_001"
-  ],
-  "world_war_i": [
-    "uss_cyclops_vanishing"
-  ],
-  "military_disaster": [
-    "uss_cyclops_vanishing"
   ]
 }
