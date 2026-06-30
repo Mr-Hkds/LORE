@@ -15,8 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "the_lead_mask_case",
-    "operation_gladio"
+    "operation_gladio",
+    "the_lead_mask_case"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -31,14 +31,14 @@
     "the_numbers_stations",
     "the_phoenix_program",
     "project_sunshine_cadaver_collection",
+    "tunguska_event_001",
+    "echelon_global_surveillance",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo",
     "operation_gladio",
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
-    "tunguska_event_001",
-    "echelon_global_surveillance"
+    "project_blue_book_ufo"
   ],
   "espionage": [
     "uwe_barschel",
@@ -110,19 +110,19 @@
     "the_sodder_children_disappearance",
     "the_cleveland_torso_murders",
     "black_dahlia_murder",
-    "roanoke_colony_disappearance",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
-    "the_lead_mask_case",
-    "uss_cyclops_vanishing"
+    "uss_cyclops_vanishing",
+    "roanoke_colony_disappearance",
+    "the_lead_mask_case"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
   ],
   "disappearance": [
     "malaysia_airlines_mh370",
-    "roanoke_colony_disappearance",
-    "eilean_mor_lighthouse_mystery"
+    "eilean_mor_lighthouse_mystery",
+    "roanoke_colony_disappearance"
   ],
   "black_box": [
     "malaysia_airlines_mh370"
@@ -471,8 +471,8 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo",
-    "operation_paperclip_001"
+    "operation_paperclip_001",
+    "project_blue_book_ufo"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships",
@@ -483,8 +483,8 @@
   ],
   "survival_horror": [
     "franklin_expedition_lost_ships",
-    "roanoke_colony_disappearance",
-    "the_batavia_shipwreck_mutiny"
+    "the_batavia_shipwreck_mutiny",
+    "roanoke_colony_disappearance"
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
@@ -512,14 +512,14 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "project_blue_book_ufo",
+    "tunguska_event_001",
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
     "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
-    "tunguska_event_001"
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -581,6 +581,9 @@
   "captivity_syndrome": [
     "stockholm_syndrome_001"
   ],
+  "cosmic_impact": [
+    "tunguska_event_001"
+  ],
   "mass_hysteria": [
     "salem_witch_trials_001"
   ],
@@ -637,6 +640,22 @@
   "self_identity": [
     "phineas_gage_brain_injury"
   ],
+  "global_surveillance": [
+    "echelon_global_surveillance"
+  ],
+  "signals_intelligence": [
+    "echelon_global_surveillance",
+    "the_russian_woodpecker_duga_3"
+  ],
+  "intelligence_sharing": [
+    "echelon_global_surveillance"
+  ],
+  "cold_war_legacy": [
+    "echelon_global_surveillance"
+  ],
+  "mass_interception": [
+    "echelon_global_surveillance"
+  ],
   "dissociation": [
     "dissociative_identity_disorder_fragmented_self"
   ],
@@ -663,15 +682,6 @@
   ],
   "altered_self_perception": [
     "clinical_lycanthropy"
-  ],
-  "colonial_history": [
-    "roanoke_colony_disappearance"
-  ],
-  "intercultural_relations": [
-    "roanoke_colony_disappearance"
-  ],
-  "environmental_factors": [
-    "roanoke_colony_disappearance"
   ],
   "unidentified_person": [
     "the_isdal_woman"
@@ -737,24 +747,6 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "ufo": [
-    "project_blue_book_ufo"
-  ],
-  "military_investigations": [
-    "project_blue_book_ufo"
-  ],
-  "public_perception": [
-    "project_blue_book_ufo"
-  ],
-  "occult_rituals": [
-    "the_lead_mask_case"
-  ],
-  "bizarre_circumstances": [
-    "the_lead_mask_case"
-  ],
-  "cryptic_messages": [
-    "the_lead_mask_case"
-  ],
   "extraterrestrial_life": [
     "the_wow_signal",
     "the_children_of_woolpit"
@@ -804,10 +796,6 @@
   ],
   "haunted_location": [
     "edinburgh_vaults_001"
-  ],
-  "signals_intelligence": [
-    "the_russian_woodpecker_duga_3",
-    "echelon_global_surveillance"
   ],
   "radio_frequency_interference": [
     "the_russian_woodpecker_duga_3"
@@ -1058,9 +1046,6 @@
   "sensory_perception": [
     "the_taos_hum"
   ],
-  "cosmic_impact": [
-    "tunguska_event_001"
-  ],
   "child_predator": [
     "albert_fish_the_gray_man"
   ],
@@ -1073,16 +1058,31 @@
   "unsolved_cases": [
     "albert_fish_the_gray_man"
   ],
-  "global_surveillance": [
-    "echelon_global_surveillance"
+  "ufo": [
+    "project_blue_book_ufo"
   ],
-  "intelligence_sharing": [
-    "echelon_global_surveillance"
+  "military_investigations": [
+    "project_blue_book_ufo"
   ],
-  "cold_war_legacy": [
-    "echelon_global_surveillance"
+  "public_perception": [
+    "project_blue_book_ufo"
   ],
-  "mass_interception": [
-    "echelon_global_surveillance"
+  "colonial_history": [
+    "roanoke_colony_disappearance"
+  ],
+  "intercultural_relations": [
+    "roanoke_colony_disappearance"
+  ],
+  "environmental_factors": [
+    "roanoke_colony_disappearance"
+  ],
+  "occult_rituals": [
+    "the_lead_mask_case"
+  ],
+  "bizarre_circumstances": [
+    "the_lead_mask_case"
+  ],
+  "cryptic_messages": [
+    "the_lead_mask_case"
   ]
 }
