@@ -153,15 +153,20 @@ export default function SiteFeedback() {
             onClick={() => setOpen(false)}
           />
 
-          {/* Panel */}
+          {/* Panel — vertically centered, capped height */}
           <div
             ref={panelRef}
             id="site-feedback-panel"
-            className="fixed right-0 top-0 bottom-0 z-[199] flex flex-col overflow-hidden animate-slide-in-right"
+            className="fixed right-0 z-[199] flex flex-col overflow-hidden animate-slide-in-right"
             style={{
+              top: '50%',
+              transform: 'translateY(-50%)',
+              height: 'min(620px, 88vh)',
               width: 'min(340px, 92vw)',
               backgroundColor: '#0F0D0A',
-              borderLeft: '1px solid rgba(158,123,76,0.2)',
+              borderRadius: '14px 0 0 14px',
+              border: '1px solid rgba(158,123,76,0.2)',
+              borderRight: 'none',
               boxShadow: '-24px 0 60px rgba(0,0,0,0.85)',
             }}
           >

@@ -48,9 +48,9 @@ export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory 
     if (panelRef.current && !panelRef.current.contains(e.target)) onClose();
   };
 
-  // Filter
+  // Filter — show everything by default, narrow as user types
   const filteredStories = useMemo(() => {
-    if (!query && !activeCategory) return [];
+    if (!query && !activeCategory) return stories;
     return stories.filter(story => {
       if (activeCategory && story.category !== activeCategory) return false;
       if (!query) return true;
@@ -224,19 +224,9 @@ export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory 
             </div>
           ) : (
             <div className="py-16 text-center px-6">
-              {query || activeCategory ? (
-                <>
-                  <p className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: 'rgba(143,138,130,0.3)' }}>— Classified —</p>
-                  <p className="font-serif italic text-sm" style={{ color: 'rgba(237,232,223,0.25)' }}>No records match this query</p>
-                  <p className="text-[10px] font-mono mt-2 tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.25)' }}>Try different terms or remove filters</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: 'rgba(143,138,130,0.3)' }}>— Archive Registry —</p>
-                  <p className="font-serif italic text-sm" style={{ color: 'rgba(237,232,223,0.2)' }}>Begin your search above</p>
-                  <p className="text-[10px] font-mono mt-2 tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.2)' }}>Or filter by category to browse</p>
-                </>
-              )}
+              <p className="text-[11px] font-mono tracking-widest uppercase mb-2" style={{ color: 'rgba(143,138,130,0.3)' }}>— Classified —</p>
+              <p className="font-serif italic text-sm" style={{ color: 'rgba(237,232,223,0.25)' }}>No records match this query</p>
+              <p className="text-[10px] font-mono mt-2 tracking-widest uppercase" style={{ color: 'rgba(143,138,130,0.25)' }}>Try different terms or remove filters</p>
             </div>
           )}
         </div>
