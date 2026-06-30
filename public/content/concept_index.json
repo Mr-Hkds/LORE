@@ -480,14 +480,14 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "edinburgh_vaults_001",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
     "project_blue_book_ufo",
     "the_wow_signal",
     "the_children_of_woolpit",
-    "the_bloop_unexplained_sound"
+    "the_bloop_unexplained_sound",
+    "edinburgh_vaults_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -709,15 +709,6 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "urban_legends": [
-    "edinburgh_vaults_001"
-  ],
-  "historical_trauma": [
-    "edinburgh_vaults_001"
-  ],
-  "haunted_location": [
-    "edinburgh_vaults_001"
-  ],
   "cold_war": [
     "the_russian_woodpecker_duga_3",
     "operation_gladio"
@@ -756,6 +747,18 @@
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment"
+  ],
+  "poltergeist_phenomena": [
+    "enfield_poltergeist_001"
+  ],
+  "paranormal_investigation": [
+    "enfield_poltergeist_001"
+  ],
+  "family_trauma": [
+    "enfield_poltergeist_001"
+  ],
+  "skepticism_vs_belief": [
+    "enfield_poltergeist_001"
   ],
   "unethical_recruitment": [
     "operation_paperclip_001"
@@ -1073,16 +1076,13 @@
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
   ],
-  "poltergeist_phenomena": [
-    "enfield_poltergeist_001"
+  "urban_legends": [
+    "edinburgh_vaults_001"
   ],
-  "paranormal_investigation": [
-    "enfield_poltergeist_001"
+  "historical_trauma": [
+    "edinburgh_vaults_001"
   ],
-  "family_trauma": [
-    "enfield_poltergeist_001"
-  ],
-  "skepticism_vs_belief": [
-    "enfield_poltergeist_001"
+  "haunted_location": [
+    "edinburgh_vaults_001"
   ]
 }
