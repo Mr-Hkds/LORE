@@ -6513,8 +6513,11 @@
     {
       "story_id": "the_wow_signal",
       "title": "The Wow! Signal: A Voice from the Void",
-      "category": "paranormal",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
+      "image_query": "",
       "hook": "For 72 seconds, on a summer night in 1977, humanity received a message. Not from a satellite, but from the chilling silence between stars.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "extraterrestrial_life",
         "unexplained_phenomena",
@@ -6522,37 +6525,6 @@
         "seti",
         "cosmic_communication",
         "existential_mystery"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
-      "added_date": "2026-06-28",
-      "draft": 0,
-      "reactions": {
-        "like": 39,
-        "gripping": 22,
-        "scared": 39,
-        "mindblown": 10
-      },
-      "evidence_links": [
-        {
-          "label": "The “Wow! signal” of the terrestrial genetic code (V.I. Shcherbak, Maxim A. Makukov, 2013)",
-          "url": "https://arxiv.org/pdf/1303.6739"
-        },
-        {
-          "label": "Venusian phosphine: a ‘wow!’ signal in chemistry? (William Bains, Janusz J. Petkowski, 2021)",
-          "url": "https://arxiv.org/pdf/2111.05182"
-        },
-        {
-          "label": "Breakthrough Listen Search for the WOW! Signal* (Karen I. Perez, Wael Farah, 2022)",
-          "url": "https://doi.org/10.3847/2515-5172/ac9408"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "tunguska_event_001",
-          "shared_concept": "unexplained_phenomena",
-          "transition_line": "Just as the 'Wow! Signal' represents a singular, unexplained cosmic event that defies easy classification, the Tunguska Event stands as another unparalleled enigma, leaving behind only questions and theories of an unknown force."
-        }
       ],
       "layers": [
         {
@@ -6596,8 +6568,7 @@
           "layer_name": "The Lingering Question",
           "content": "The 'Wow! Signal' stands as the strongest, most compelling candidate for an extraterrestrial radio transmission ever received. Its singular nature, however, casts a long, unsettling shadow. If it was indeed a message from an intelligent civilization, why was it only sent once? Was it a brief, almost accidental, transmission from an advanced probe? Or a fleeting last gasp from a civilization that has since faded into the cosmic background noise?\n\nThe thought of a brief 'hello' from an alien intelligence, a momentary connection across unimaginable distances, only to be followed by absolute silence, is profoundly chilling. It evokes a sense of cosmic loneliness, the universe hinting at company, only to withdraw the invitation. It forces humanity to consider our place in the cosmos not just as seekers, but as recipients of a message we may never fully understand or answer.\n\nFor those 72 seconds, the Big Ear received an echo of intelligence, a whisper that resonated with the deepest human longing for contact. That single, circled 'Wow!' on a faded printout remains an open question, a haunting reminder that while we listen, the universe may have already spoken, leaving us to wonder if we were truly ready for the reply, or if we merely glimpsed a profound truth that then slipped back into the vast, indifferent void."
         }
-      ],
-      "image_missing": 0
+      ]
     }
   ]
 }
