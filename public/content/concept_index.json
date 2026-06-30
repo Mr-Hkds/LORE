@@ -388,25 +388,25 @@
   ],
   "delusion": [
     "capgras_delusion_001",
-    "cotard_delusion_001",
     "clinical_lycanthropy",
-    "ravaan_character_study"
+    "ravaan_character_study",
+    "cotard_delusion_001"
   ],
   "altered_perception": [
     "capgras_delusion_001"
   ],
   "neurology": [
     "capgras_delusion_001",
-    "cotard_delusion_001",
     "phineas_gage_brain_injury",
     "clinical_lycanthropy",
-    "alien_hand_syndrome"
+    "alien_hand_syndrome",
+    "cotard_delusion_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
     "folie_a_deux_shared_psychosis",
-    "cotard_delusion_001",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "cotard_delusion_001"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -441,13 +441,6 @@
   "identity_erasure": [
     "the_taman_shud_case",
     "the_isdal_woman"
-  ],
-  "nihilism": [
-    "cotard_delusion_001"
-  ],
-  "body_image_disorder": [
-    "cotard_delusion_001",
-    "alien_hand_syndrome"
   ],
   "counter-insurgency": [
     "the_phoenix_program"
@@ -843,12 +836,6 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
-  "world_war_i": [
-    "uss_cyclops_vanishing"
-  ],
-  "military_disaster": [
-    "uss_cyclops_vanishing"
-  ],
   "auditory_perception": [
     "the_taos_hum"
   ],
@@ -944,6 +931,21 @@
     "the_batavia_shipwreck_mutiny",
     "the_third_wave_experiment"
   ],
+  "bioterrorism": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "forensic_science": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "government_response": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "public_health_crisis": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "insider_threat": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
   "unethical_recruitment": [
     "operation_paperclip_001"
   ],
@@ -988,6 +990,10 @@
   ],
   "involuntary_movement": [
     "alien_hand_syndrome"
+  ],
+  "body_image_disorder": [
+    "alien_hand_syndrome",
+    "cotard_delusion_001"
   ],
   "suicide": [
     "aokigahara_suicide_forest"
@@ -1070,19 +1076,13 @@
   "psychological_exploitation": [
     "blue_whale_game_001"
   ],
-  "bioterrorism": [
-    "anthrax_attacks_2001_amerithrax"
+  "nihilism": [
+    "cotard_delusion_001"
   ],
-  "forensic_science": [
-    "anthrax_attacks_2001_amerithrax"
+  "world_war_i": [
+    "uss_cyclops_vanishing"
   ],
-  "government_response": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "public_health_crisis": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "insider_threat": [
-    "anthrax_attacks_2001_amerithrax"
+  "military_disaster": [
+    "uss_cyclops_vanishing"
   ]
 }
