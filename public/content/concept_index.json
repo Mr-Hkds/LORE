@@ -480,14 +480,14 @@
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
-    "the_wow_signal",
+    "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
     "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
     "project_blue_book_ufo",
-    "the_bloop_unexplained_sound"
+    "the_wow_signal"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -709,21 +709,17 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "extraterrestrial_life": [
-    "the_wow_signal",
-    "the_children_of_woolpit"
+  "ultra-low-frequency_sound": [
+    "the_bloop_unexplained_sound"
   ],
-  "radio_astronomy": [
-    "the_wow_signal"
+  "deep_ocean_mystery": [
+    "the_bloop_unexplained_sound"
   ],
-  "seti": [
-    "the_wow_signal"
+  "cryptids": [
+    "the_bloop_unexplained_sound"
   ],
-  "cosmic_communication": [
-    "the_wow_signal"
-  ],
-  "existential_mystery": [
-    "the_wow_signal"
+  "oceanographic_research": [
+    "the_bloop_unexplained_sound"
   ],
   "urban_legends": [
     "edinburgh_vaults_001"
@@ -775,6 +771,10 @@
   ],
   "historical_mystery": [
     "the_children_of_woolpit"
+  ],
+  "extraterrestrial_life": [
+    "the_children_of_woolpit",
+    "the_wow_signal"
   ],
   "isolated_cultures": [
     "the_children_of_woolpit"
@@ -1073,16 +1073,16 @@
   "extrajudicial_killings": [
     "the_phoenix_program"
   ],
-  "ultra-low-frequency_sound": [
-    "the_bloop_unexplained_sound"
+  "radio_astronomy": [
+    "the_wow_signal"
   ],
-  "deep_ocean_mystery": [
-    "the_bloop_unexplained_sound"
+  "seti": [
+    "the_wow_signal"
   ],
-  "cryptids": [
-    "the_bloop_unexplained_sound"
+  "cosmic_communication": [
+    "the_wow_signal"
   ],
-  "oceanographic_research": [
-    "the_bloop_unexplained_sound"
+  "existential_mystery": [
+    "the_wow_signal"
   ]
 }
