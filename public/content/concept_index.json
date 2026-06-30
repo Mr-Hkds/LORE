@@ -57,8 +57,8 @@
     "dancing_mania_1518_strasbourg",
     "salem_witch_trials_001",
     "tanganyika_laughter_epidemic",
-    "the_third_wave_experiment",
-    "the_batavia_shipwreck_mutiny"
+    "the_batavia_shipwreck_mutiny",
+    "the_third_wave_experiment"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -949,10 +949,6 @@
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
   ],
-  "authoritarianism": [
-    "the_third_wave_experiment",
-    "the_batavia_shipwreck_mutiny"
-  ],
   "mutiny": [
     "the_batavia_shipwreck_mutiny"
   ],
@@ -964,6 +960,10 @@
   ],
   "social_hierarchy": [
     "the_batavia_shipwreck_mutiny"
+  ],
+  "authoritarianism": [
+    "the_batavia_shipwreck_mutiny",
+    "the_third_wave_experiment"
   ],
   "bioterrorism": [
     "anthrax_attacks_2001_amerithrax"
