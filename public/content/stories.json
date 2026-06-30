@@ -3631,6 +3631,96 @@
       "image_missing": false
     },
     {
+      "story_id": "project_artichoke_mind_control",
+      "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
+      "category": "gov_experiments",
+      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
+      "concepts": [
+        "mind_control",
+        "government_secrecy",
+        "unethical_experimentation",
+        "covert_operations",
+        "cold_war_era",
+        "interrogation_techniques",
+        "psychological_warfare"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/project_artichoke_mind_control.jpg",
+      "added_date": "2026-06-28",
+      "draft": false,
+      "reactions": {
+        "like": 51,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Murky Projects and Uneven Information Policies: A Case Study of the Psychological Strategy Board and CIA (Susan Maret, 2018)",
+          "url": "https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1034&context=secrecyandsociety"
+        },
+        {
+          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
+          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
+        },
+        {
+          "label": "Militarising the Mind: Assessing the Weapons of the Ultimate Battlefield (Robert C. Bruner, Filippa Lentzos, 2018)",
+          "url": "https://kclpure.kcl.ac.uk/ws/files/94550726/Militarising_the_Mind_LENTZOS_Accepted9February2018_GREEN_AMA.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "mind_control",
+          "transition_line": "While Project ARTICHOKE laid the disturbing groundwork, its dark legacy would truly blossom in an even more notorious, ambitious, and ethically bankrupt successor: Project MK-Ultra."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: The Hunt for Human Control",
+          "content": "In the aftermath of World War II, a new kind of war began to brew: the Cold War. It was a conflict fought not just with missiles and armies, but with ideologies and the human mind itself. Reports emerged from communist regimes detailing 'brainwashing' techniques used on prisoners of war, leading to confessions and ideological conversions that seemed impossible under normal circumstances. This phenomenon sent shivers through Western intelligence agencies, sparking a desperate quest to understand and replicate, or defend against, such psychological manipulation.",
+          "cliffhanger": "The question wasn't if minds could be controlled, but how extensively, and by whom, setting the stage for a chilling initiative within America's intelligence apparatus."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: A Looming Psychological Threat",
+          "content": "The perceived threat of psychological warfare, particularly from the Soviet Union and China, became a paramount concern for the nascent Central Intelligence Agency (CIA). Agents and analysts observed, with growing alarm, public spectacles of 'show trials' and the seemingly compliant behavior of Western captives after their release. The notion that an adversary could systematically break down an individual's will, alter their beliefs, and even program them to betray their country, was a terrifying prospect for national security planners.",
+          "cliffhanger": "This pervasive fear of foreign mind control ignited a covert race, pushing the CIA to explore radical and uncharted territories of human psychology and pharmacology."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: ARTICHOKE Takes Root",
+          "content": "Officially launched in 1951, Project ARTICHOKE was the CIA's direct response to these burgeoning fears. It was an ambitious, highly classified program, succeeding an even earlier, less formalized effort known as Project CHATTER. ARTICHOKE's primary mandate was clear: to investigate and develop 'special interrogation techniques' and to create a methodology for effectively influencing or controlling individuals.",
+          "cliffhanger": "The project aimed to discover if it was possible to achieve total control over a human being, raising profound ethical questions about the nature of identity and free will that were conveniently ignored in the pursuit of national security."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: Tools of Persuasion and Domination",
+          "content": "Under Project ARTICHOKE, researchers and operatives began experimenting with a wide array of methods designed to break down a subject's psyche and extract information. These included the administration of potent psychoactive drugs like LSD, mescaline, and even heroin, often in conjunction with hypnosis. The goal was to induce states of extreme confusion, suggestibility, and memory loss, creating a blank slate onto which new instructions or beliefs could be imprinted. Subjects were sometimes unwitting, their participation secured under false pretenses.",
+          "cliffhanger": "As the experiments progressed, the project delved into even more invasive techniques, pushing the boundaries of what was considered humanely possible in the name of intelligence gathering."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: Erasing and Rewriting the Self",
+          "content": "The methods employed by ARTICHOKE were often brutal, combining chemical manipulation with sensory deprivation, isolation, and psychological torment. The aim was not merely to extract information, but to achieve complete behavioral control – to create a 'Manchurian Candidate' capable of carrying out actions without conscious recall, or to effectively 'depattern' an individual's personality. These experiments were conducted in clandestine facilities, often with the cooperation of doctors and scientists, blurring the lines between medical research and unethical human experimentation.",
+          "cliffhanger": "The dark ambition of ARTICHOKE began to reveal a truth more disturbing than mere coercion: the chilling possibility of truly erasing a person's identity and replacing it with another."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: Sacrificed Minds and Secret Legacies",
+          "content": "The human cost of Project ARTICHOKE was immense, though often obscured by the secrecy surrounding the program. Many subjects, some of whom were patients in mental institutions or prisoners, suffered severe and lasting psychological trauma. While the 'Manchurian Candidate' objective ultimately proved elusive in a consistently reliable manner, the program did develop highly effective, albeit ethically reprehensible, techniques for interrogation and psychological destabilization. The findings and personnel of ARTICHOKE directly fed into its notorious successor, Project MK-ULTRA, which would continue and expand upon these horrifying experiments with even greater intensity and scope.",
+          "cliffhanger": "The legacy of ARTICHOKE was not just in its methods, but in establishing a precedent for unchecked government experimentation on human subjects, a dark path that would continue for decades under a different, more infamous name."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: Unveiling the Unseen Scars",
+          "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
+        }
+      ],
+      "image_missing": true
+    },
+    {
       "story_id": "edinburgh_vaults_001",
       "title": "The Edinburgh Vaults: Echoes from a Buried City",
       "category": "paranormal",
@@ -3774,104 +3864,6 @@
         }
       ],
       "image_missing": false
-    },
-    {
-      "story_id": "guatemalan_syphilis_experiment",
-      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
-      "category": "gov_experiments",
-      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
-      "concepts": [
-        "human_experimentation",
-        "medical_ethics",
-        "government_misconduct",
-        "unethical_research",
-        "public_health_failure",
-        "vulnerable_populations"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/guatemalan_syphilis_experiment.jpg",
-      "added_date": "2026-06-29",
-      "draft": false,
-      "reactions": {
-        "like": 31,
-        "gripping": 44,
-        "scared": 5,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
-        },
-        {
-          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
-          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
-        },
-        {
-          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
-          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
-        },
-        {
-          "story_id": "unit_731_experiments",
-          "shared_concept": "human_experimentation",
-          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper of Forgotten Files",
-          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
-          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Blueprint of 'Scientific' Conquest",
-          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
-          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Unwitting Subjects",
-          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Act of Deliberate Infection",
-          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
-          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The 'Treatment' and Its Cruel Irony",
-          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
-          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss of Forgotten Suffering",
-          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
-          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
-          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
-        }
-      ],
-      "image_missing": true
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -6491,65 +6483,102 @@
       "image_missing": false
     },
     {
-      "story_id": "project_artichoke_mind_control",
-      "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_the_U.S._Central_Intelligence_Agency.svg/250px-Flag_of_the_U.S._Central_Intelligence_Agency.svg.png",
-      "image_query": "",
-      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
+      "story_id": "guatemalan_syphilis_experiment",
+      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
       "concepts": [
-        "mind_control",
-        "government_secrecy",
-        "unethical_experimentation",
-        "covert_operations",
-        "cold_war_era",
-        "interrogation_techniques",
-        "psychological_warfare"
+        "human_experimentation",
+        "medical_ethics",
+        "government_misconduct",
+        "unethical_research",
+        "public_health_failure",
+        "vulnerable_populations"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://origins.osu.edu/sites/default/files/migrated_files/guatemala%20subjects.jpg",
+      "added_date": "2026-06-29",
+      "draft": 0,
+      "reactions": {
+        "like": 31,
+        "gripping": 44,
+        "scared": 5,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
+        },
+        {
+          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
+          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
+        },
+        {
+          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
+          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "unethical_experimentation",
+          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
+        },
+        {
+          "story_id": "unit_731_experiments",
+          "shared_concept": "human_experimentation",
+          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
+        }
       ],
       "layers": [
         {
           "layer": 1,
-          "layer_name": "The Whisper: The Hunt for Human Control",
-          "content": "In the aftermath of World War II, a new kind of war began to brew: the Cold War. It was a conflict fought not just with missiles and armies, but with ideologies and the human mind itself. Reports emerged from communist regimes detailing 'brainwashing' techniques used on prisoners of war, leading to confessions and ideological conversions that seemed impossible under normal circumstances. This phenomenon sent shivers through Western intelligence agencies, sparking a desperate quest to understand and replicate, or defend against, such psychological manipulation.",
-          "cliffhanger": "The question wasn't if minds could be controlled, but how extensively, and by whom, setting the stage for a chilling initiative within America's intelligence apparatus."
+          "layer_name": "The Whisper of Forgotten Files",
+          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
+          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
         },
         {
           "layer": 2,
-          "layer_name": "The Pattern: A Looming Psychological Threat",
-          "content": "The perceived threat of psychological warfare, particularly from the Soviet Union and China, became a paramount concern for the nascent Central Intelligence Agency (CIA). Agents and analysts observed, with growing alarm, public spectacles of 'show trials' and the seemingly compliant behavior of Western captives after their release. The notion that an adversary could systematically break down an individual's will, alter their beliefs, and even program them to betray their country, was a terrifying prospect for national security planners.",
-          "cliffhanger": "This pervasive fear of foreign mind control ignited a covert race, pushing the CIA to explore radical and uncharted territories of human psychology and pharmacology."
+          "layer_name": "The Blueprint of 'Scientific' Conquest",
+          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
+          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
         },
         {
           "layer": 3,
-          "layer_name": "The Incident: ARTICHOKE Takes Root",
-          "content": "Officially launched in 1951, Project ARTICHOKE was the CIA's direct response to these burgeoning fears. It was an ambitious, highly classified program, succeeding an even earlier, less formalized effort known as Project CHATTER. ARTICHOKE's primary mandate was clear: to investigate and develop 'special interrogation techniques' and to create a methodology for effectively influencing or controlling individuals.",
-          "cliffhanger": "The project aimed to discover if it was possible to achieve total control over a human being, raising profound ethical questions about the nature of identity and free will that were conveniently ignored in the pursuit of national security."
+          "layer_name": "The Unwitting Subjects",
+          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
         },
         {
           "layer": 4,
-          "layer_name": "The System: Tools of Persuasion and Domination",
-          "content": "Under Project ARTICHOKE, researchers and operatives began experimenting with a wide array of methods designed to break down a subject's psyche and extract information. These included the administration of potent psychoactive drugs like LSD, mescaline, and even heroin, often in conjunction with hypnosis. The goal was to induce states of extreme confusion, suggestibility, and memory loss, creating a blank slate onto which new instructions or beliefs could be imprinted. Subjects were sometimes unwitting, their participation secured under false pretenses.",
-          "cliffhanger": "As the experiments progressed, the project delved into even more invasive techniques, pushing the boundaries of what was considered humanely possible in the name of intelligence gathering."
+          "layer_name": "The Act of Deliberate Infection",
+          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
+          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
         },
         {
           "layer": 5,
-          "layer_name": "The Research: Erasing and Rewriting the Self",
-          "content": "The methods employed by ARTICHOKE were often brutal, combining chemical manipulation with sensory deprivation, isolation, and psychological torment. The aim was not merely to extract information, but to achieve complete behavioral control – to create a 'Manchurian Candidate' capable of carrying out actions without conscious recall, or to effectively 'depattern' an individual's personality. These experiments were conducted in clandestine facilities, often with the cooperation of doctors and scientists, blurring the lines between medical research and unethical human experimentation.",
-          "cliffhanger": "The dark ambition of ARTICHOKE began to reveal a truth more disturbing than mere coercion: the chilling possibility of truly erasing a person's identity and replacing it with another."
+          "layer_name": "The 'Treatment' and Its Cruel Irony",
+          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
+          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
         },
         {
           "layer": 6,
-          "layer_name": "The Abyss: Sacrificed Minds and Secret Legacies",
-          "content": "The human cost of Project ARTICHOKE was immense, though often obscured by the secrecy surrounding the program. Many subjects, some of whom were patients in mental institutions or prisoners, suffered severe and lasting psychological trauma. While the 'Manchurian Candidate' objective ultimately proved elusive in a consistently reliable manner, the program did develop highly effective, albeit ethically reprehensible, techniques for interrogation and psychological destabilization. The findings and personnel of ARTICHOKE directly fed into its notorious successor, Project MK-ULTRA, which would continue and expand upon these horrifying experiments with even greater intensity and scope.",
-          "cliffhanger": "The legacy of ARTICHOKE was not just in its methods, but in establishing a precedent for unchecked government experimentation on human subjects, a dark path that would continue for decades under a different, more infamous name."
+          "layer_name": "The Abyss of Forgotten Suffering",
+          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
+          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
         },
         {
           "layer": 7,
-          "layer_name": "The Dark Corner: Unveiling the Unseen Scars",
-          "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
+          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
+          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
         }
-      ]
+      ],
+      "image_missing": 0
     }
   ]
 }

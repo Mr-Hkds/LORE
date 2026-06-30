@@ -31,14 +31,14 @@
     "the_numbers_stations",
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
+    "project_artichoke_mind_control",
     "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_blue_book_ufo",
     "operation_gladio",
     "the_phoenix_program",
-    "the_russian_woodpecker_duga_3",
-    "project_artichoke_mind_control"
+    "the_russian_woodpecker_duga_3"
   ],
   "espionage": [
     "uwe_barschel",
@@ -81,9 +81,9 @@
   "covert_operations": [
     "operation_northwoods_001",
     "cia_mk_ultra_program",
+    "project_artichoke_mind_control",
     "operation_gladio",
-    "the_phoenix_program",
-    "project_artichoke_mind_control"
+    "the_phoenix_program"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -218,8 +218,8 @@
     "unit_731_experiments",
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
-    "guatemalan_syphilis_experiment",
-    "monster_study_1939"
+    "monster_study_1939",
+    "guatemalan_syphilis_experiment"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -529,10 +529,10 @@
   "cold_war_era": [
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
+    "project_artichoke_mind_control",
     "operation_paperclip_001",
     "project_blue_book_ufo",
-    "project_shamrock",
-    "project_artichoke_mind_control"
+    "project_shamrock"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -706,6 +706,9 @@
   "small_town_secrets": [
     "circleville_letters"
   ],
+  "interrogation_techniques": [
+    "project_artichoke_mind_control"
+  ],
   "urban_legends": [
     "edinburgh_vaults_001"
   ],
@@ -729,13 +732,6 @@
   ],
   "catastrophic_events": [
     "mystery_of_dwarka"
-  ],
-  "unethical_research": [
-    "guatemalan_syphilis_experiment",
-    "monster_study_1939"
-  ],
-  "vulnerable_populations": [
-    "guatemalan_syphilis_experiment"
   ],
   "poltergeist_phenomena": [
     "enfield_poltergeist_001"
@@ -858,6 +854,10 @@
   ],
   "institutionalization": [
     "the_silent_twins_gibbons"
+  ],
+  "unethical_research": [
+    "monster_study_1939",
+    "guatemalan_syphilis_experiment"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1082,7 +1082,7 @@
   "technological_failure": [
     "the_russian_woodpecker_duga_3"
   ],
-  "interrogation_techniques": [
-    "project_artichoke_mind_control"
+  "vulnerable_populations": [
+    "guatemalan_syphilis_experiment"
   ]
 }
