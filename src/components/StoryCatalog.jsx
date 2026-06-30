@@ -40,6 +40,33 @@ const SIGNAL_LABELS = {
   cyber_mysteries: 'CYBER MYSTERY',
 };
 
+const GRADIENTS = [
+  'radial-gradient(circle at center, #231C16 0%, #0C0A09 100%)', // sepia
+  'radial-gradient(circle at center, #221515 0%, #0C0808 100%)', // crimson
+  'radial-gradient(circle at center, #152219 0%, #080C0A 100%)', // emerald
+  'radial-gradient(circle at center, #151E22 0%, #080B0C 100%)', // teal
+  'radial-gradient(circle at center, #1D1522 0%, #0A080C 100%)', // purple
+];
+
+export const getShortTitle = (title) => {
+  if (!title) return '';
+  let clean = title.split(/[:\-–—]/)[0].trim();
+  const words = clean.split(/\s+/);
+  if (words.length > 4) {
+    clean = words.slice(0, 4).join(' ');
+  }
+  return clean;
+};
+
+const getGradientIndex = (storyId) => {
+  if (!storyId) return 0;
+  let hash = 0;
+  for (let i = 0; i < storyId.length; i++) {
+    hash = storyId.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash) % GRADIENTS.length;
+};
+
 // ── Story card image — accepts inView from parent card ────────────────────
 function StoryCardImage({ story, alt, inView }) {
   const { getImageByQuery } = useStaticContent();
@@ -73,13 +100,41 @@ function StoryCardImage({ story, alt, inView }) {
   const displayUrl = (story.hero_image && !story.image_missing && !fallbackAttempted) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : fetchedUrl);
 
   if (!displayUrl || imgFailed) {
-    const isResolving = story.image_missing && !imgFailed && !fetchedUrl;
+    const shortTitle = getShortTitle(story.title);
+    const gradIndex = getGradientIndex(story.story_id);
+    const bgGradient = GRADIENTS[gradIndex];
+    const freq = (10 + (getGradientIndex(story.story_id + "freq") * 7.7) + (shortTitle.length % 5) * 1.5).toFixed(1);
+    
     return (
-      <div className={`w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70 ${isResolving ? 'animate-pulse' : ''}`}>
-        <LoreMark size={20} color="currentColor" />
-        <span className="text-[8px] font-mono tracking-[0.2em] uppercase mt-2">
-          {isResolving ? "RESOLVING..." : "CLASSIFIED"}
-        </span>
+      <div 
+        className="w-full h-full flex flex-col justify-between p-4.5 relative select-none overflow-hidden border-b border-neutral-900/40"
+        style={{ background: bgGradient }}
+      >
+        {/* Top telemetry detail */}
+        <div className="flex justify-between items-center opacity-35 text-[7px] font-mono tracking-widest text-[#EDE8DF]">
+          <span>[ SEC-ARCHIVE.0{story.story_id ? story.story_id.slice(-2) : 'XX'} ]</span>
+          <span>SIGNAL RES.90</span>
+        </div>
+
+        {/* Center Typography */}
+        <div className="my-auto text-center py-2 px-1">
+          <span 
+            className="block font-serif italic text-neutral-200/60 leading-relaxed uppercase"
+            style={{ 
+              fontSize: '11px',
+              letterSpacing: '0.18em',
+              textShadow: '0 2px 8px rgba(0,0,0,0.8)'
+            }}
+          >
+            {shortTitle}
+          </span>
+        </div>
+
+        {/* Bottom telemetry detail */}
+        <div className="flex justify-between items-center opacity-40 text-[7px] font-mono tracking-widest text-[#9E7B4C]">
+          <span>LEVEL-04</span>
+          <span>{freq} MHz</span>
+        </div>
       </div>
     );
   }
@@ -188,6 +243,16 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
             background: 'linear-gradient(to bottom, rgba(9, 8, 7, 0.95) 0%, rgba(9, 8, 7, 0.4) 18%, transparent 40%, transparent 70%, #090807 98%)'
           }}
         />
+
+        {/* SOTA Archive Abstract HUD Slide-Up Overlay */}
+        <div className="absolute inset-x-0 bottom-0 z-20 p-3.5 bg-gradient-to-t from-[#090807] via-[#090807]/95 to-transparent border-t border-[#9E7B4C]/10 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-end min-h-[90px] pointer-events-none">
+          <span className="text-[7.5px] font-mono tracking-[0.18em] text-[#9E7B4C] uppercase mb-1 font-bold">
+            // Archive Abstract
+          </span>
+          <p className="text-[10px] text-[#EDE8DF]/70 leading-relaxed italic font-serif line-clamp-2">
+            "{redactText(previewSnippet)}..."
+          </p>
+        </div>
       </div>
 
       {/* Content panel */}
@@ -243,15 +308,7 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
             {redactText(story.hook)}
           </p>
 
-          {/* Hover abstract preview snippet */}
-          <div className="hidden sm:block max-h-0 opacity-0 group-hover:max-h-16 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden mt-3 pt-2.5 border-t border-neutral-900/40">
-            <p className="text-[8.5px] font-mono tracking-widest text-[#9E7B4C] uppercase mb-1">
-              // Archive Abstract
-            </p>
-            <p className="text-[10.5px] text-neutral-500 leading-relaxed italic line-clamp-2">
-              "{redactText(previewSnippet)}..."
-            </p>
-          </div>
+
         </div>
 
         {/* Concepts + arrow */}

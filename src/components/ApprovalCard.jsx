@@ -1,7 +1,7 @@
 // ApprovalCard — premium approval UX with local preview state,
 // step indicator, instant publish gate, and loading shimmer.
 import { useState, useRef } from 'react';
-import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight } from 'lucide-react';
+import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight, Clipboard } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const PLACEHOLDER_URL = 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
@@ -331,6 +331,92 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
               >
                 {loading && loadingMethod === 'url' ? '…' : 'Save'}
               </button>
+            </div>
+          </div>
+
+          {/* ─── Option 4: Clipboard Paste (Ctrl+V) ─── */}
+          <div
+            className="rounded-xl p-4 space-y-3"
+            style={{ 
+              background: 'rgba(245,158,11,0.02)', 
+              border: '1px dashed rgba(245,158,11,0.2)',
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Clipboard className="w-3.5 h-3.5 text-amber-500" />
+                <span className="text-[10px] font-semibold text-[#EDE8DF]">Instant Clipboard Paste</span>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`, '_blank');
+                }}
+                className="text-[8.5px] font-mono tracking-widest text-amber-500 hover:underline cursor-pointer select-none bg-transparent border-0 p-0"
+              >
+                🔍 Search Google
+              </button>
+            </div>
+            
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Click here and press Ctrl+V to paste image or URL..."
+                onPaste={async (e) => {
+                  e.preventDefault();
+                  const items = e.clipboardData?.items;
+                  if (!items) return;
+                  
+                  for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    
+                    // Handle image file upload
+                    if (item.type.indexOf('image') !== -1) {
+                      const file = item.getAsFile();
+                      if (file) {
+                        setLoadingMethod('upload');
+                        saveAndPreview(() => new Promise((resolve, reject) => {
+                          const reader = new FileReader();
+                          reader.onloadend = async () => {
+                            try {
+                              await onSaveImage(story.story_id, reader.result);
+                              setPreviewUrl(reader.result);
+                              resolve();
+                            } catch { reject(new Error('Failed to save pasted image file.')); }
+                          };
+                          reader.onerror = () => reject(new Error('Failed to read pasted image file.'));
+                          reader.readAsDataURL(file);
+                        }));
+                        return;
+                      }
+                    }
+                    
+                    // Handle pasted URL
+                    if (item.kind === 'string' && item.type === 'text/plain') {
+                      item.getAsString(async (str) => {
+                        const url = str.trim();
+                        if (url.startsWith('http') || url.startsWith('data:image')) {
+                          setLoadingMethod('url');
+                          saveAndPreview(async () => {
+                            await onSaveImage(story.story_id, url);
+                            setPreviewUrl(url);
+                          });
+                        }
+                      });
+                    }
+                  }
+                }}
+                className="w-full rounded-lg px-3 py-2 text-[10px] focus:outline-none font-mono"
+                style={{
+                  background: 'rgba(0,0,0,0.3)',
+                  border: '1px solid rgba(245,158,11,0.15)',
+                  color: '#EDE8DF',
+                  caretColor: '#F59E0B',
+                }}
+                onFocus={e => { e.target.style.borderColor = 'rgba(245,158,11,0.4)'; }}
+                onBlur={e  => { e.target.style.borderColor = 'rgba(245,158,11,0.15)'; }}
+              />
             </div>
           </div>
 

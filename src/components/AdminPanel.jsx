@@ -2496,14 +2496,15 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                       <ShieldAlert className="w-5 h-5 text-amber-400 animate-pulse" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-[0.2em]">
-                        // ASSET HEALTH COMPLIANCE CHECK
+                      <p className="text-[9px] font-mono font-bold text-[#F59E0B] uppercase tracking-[0.25em] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-ping" />
+                        SYSTEM DEGRADATION REPORT: MISSING MEDIA DETECTED
                       </p>
-                      <p className="text-xs text-[#EDE8DF]/90 mt-1 leading-relaxed font-serif italic">
+                      <p className="text-[11px] text-[#EDE8DF]/80 mt-1.5 leading-relaxed font-serif">
                         {missingImageStoriesCount === 1 ? (
-                          <>There is <strong className="text-amber-400 font-bold font-sans not-italic">1 archive dossier</strong> currently missing its local cover image (using a Wikipedia search fallback).</>
+                          <>Our archive database detects <strong className="text-[#F59E0B] font-bold">1 dossier</strong> with offline cover assets. The terminal is utilizing temporary Wikipedia search API fallbacks to reconstruct telemetry signals for remote viewers.</>
                         ) : (
-                          <>There are <strong className="text-amber-400 font-bold font-sans not-italic">{missingImageStoriesCount} archive dossiers</strong> currently missing local cover images (using Wikipedia search fallbacks).</>
+                          <>Our archive database detects <strong className="text-[#F59E0B] font-bold">{missingImageStoriesCount} dossiers</strong> with offline cover assets. The terminal is utilizing temporary Wikipedia search API fallbacks to reconstruct telemetry signals for remote viewers.</>
                         )}
                       </p>
                     </div>
@@ -3020,6 +3021,68 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                     )}
                                   </div>
                                   {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
+                                  {isImageMissing(story) && (
+                                    <div className="mt-2.5 pt-2 border-t border-dashed border-neutral-900/60 flex items-center gap-3">
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`, '_blank');
+                                        }}
+                                        className="text-[8px] font-mono tracking-widest text-[#F59E0B] hover:text-[#F59E0B]/90 bg-[#F59E0B]/5 hover:bg-[#F59E0B]/10 border border-[#F59E0B]/20 px-2.5 py-1 rounded cursor-pointer select-none transition-all duration-200"
+                                      >
+                                        🔍 Search Google
+                                      </button>
+                                      <div className="relative flex-1">
+                                        <input
+                                          type="text"
+                                          placeholder="Ctrl+V here to paste cover image or URL..."
+                                          onClick={(e) => e.stopPropagation()}
+                                          onPaste={async (e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            const items = e.clipboardData?.items;
+                                            if (!items) return;
+                                            for (let i = 0; i < items.length; i++) {
+                                              const item = items[i];
+                                              
+                                              // Binary file paste
+                                              if (item.type.indexOf('image') !== -1) {
+                                                const file = item.getAsFile();
+                                                if (file) {
+                                                  const reader = new FileReader();
+                                                  reader.onloadend = async () => {
+                                                    try {
+                                                      await handleSaveImageSource(story.story_id, reader.result);
+                                                    } catch (err) {
+                                                      alert('Error saving image: ' + err.message);
+                                                    }
+                                                  };
+                                                  reader.readAsDataURL(file);
+                                                  return;
+                                                }
+                                              }
+                                              
+                                              // Text URL paste
+                                              if (item.kind === 'string' && item.type === 'text/plain') {
+                                                item.getAsString(async (str) => {
+                                                  const url = str.trim();
+                                                  if (url.startsWith('http') || url.startsWith('data:image')) {
+                                                    try {
+                                                      await handleSaveImageSource(story.story_id, url);
+                                                    } catch (err) {
+                                                      alert('Error saving image URL: ' + err.message);
+                                                    }
+                                                  }
+                                                });
+                                              }
+                                            }
+                                          }}
+                                          className="w-full px-2.5 py-1 bg-black text-[#EDE8DF]/90 text-[9px] rounded border border-neutral-900 focus:border-[#F59E0B]/50 focus:outline-none placeholder-neutral-700 font-mono"
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               <div className="flex gap-2 flex-shrink-0">
                                 {story.draft && (
