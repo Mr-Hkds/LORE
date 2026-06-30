@@ -644,56 +644,17 @@ async function setDailyReactions(date, reactions) {
 }
 
 async function logPageView(pv) {
-  await ensureInit();
-  await client.execute({
-    sql: `INSERT INTO pageviews (visitor_id, session_id, path, referrer, user_agent, timestamp, ip, city, region, country, country_code, org)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    args: [
-      pv.visitor_id,
-      pv.session_id,
-      pv.path,
-      pv.referrer,
-      pv.user_agent,
-      pv.timestamp || new Date().toISOString(),
-      pv.ip || null,
-      pv.city || null,
-      pv.region || null,
-      pv.country || null,
-      pv.country_code || null,
-      pv.org || null
-    ]
-  });
+  // Disabled to save database API requests
 }
 
 async function getAnalyticsSummary() {
-  await ensureInit();
-  try {
-    const resTotal = await client.execute('SELECT COUNT(*) as count FROM pageviews');
-    const totalPageviews = resTotal.rows[0]?.count || 0;
-    
-    const resUnique = await client.execute('SELECT COUNT(DISTINCT visitor_id) as count FROM pageviews');
-    const uniqueVisitors = resUnique.rows[0]?.count || 0;
-    
-    const thirtyMinsAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
-    const resActive = await client.execute({
-      sql: 'SELECT COUNT(DISTINCT session_id) as count FROM pageviews WHERE timestamp >= ?',
-      args: [thirtyMinsAgo]
-    });
-    const activeSessions = resActive.rows[0]?.count || 0;
-    
-    const resRecent = await client.execute('SELECT * FROM pageviews ORDER BY timestamp DESC LIMIT 50');
-    const recentPageviews = resRecent.rows.map(r => ({ ...r }));
-    
-    return {
-      totalPageviews,
-      uniqueVisitors,
-      activeSessions,
-      recentPageviews
-    };
-  } catch (err) {
-    console.error('Failed to query analytics:', err.message);
-    return { totalPageviews: 0, uniqueVisitors: 0, activeSessions: 0, recentPageviews: [] };
-  }
+  // Disabled to save database API requests
+  return {
+    totalPageviews: 0,
+    uniqueVisitors: 0,
+    activeSessions: 0,
+    recentPageviews: []
+  };
 }
 
 async function getDailyDossierStoryId(date) {
