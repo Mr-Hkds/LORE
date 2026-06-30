@@ -450,8 +450,29 @@
   ],
   "intelligence_gathering": [
     "the_phoenix_program",
-    "project_stargate_remote_viewing",
+    "project_shamrock",
+    "project_stargate_remote_viewing"
+  ],
+  "government_surveillance": [
     "project_shamrock"
+  ],
+  "privacy_invasion": [
+    "project_shamrock",
+    "echelon_global_surveillance"
+  ],
+  "corporate_complicity": [
+    "project_shamrock"
+  ],
+  "unconstitutional_monitoring": [
+    "project_shamrock"
+  ],
+  "cold_war_era": [
+    "project_shamrock",
+    "project_stargate_remote_viewing",
+    "project_iceworm_secret_city",
+    "project_artichoke_mind_control",
+    "operation_paperclip_001",
+    "project_blue_book_ufo"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships",
@@ -536,14 +557,6 @@
   ],
   "psychic_espionage": [
     "project_stargate_remote_viewing"
-  ],
-  "cold_war_era": [
-    "project_stargate_remote_viewing",
-    "project_iceworm_secret_city",
-    "project_artichoke_mind_control",
-    "operation_paperclip_001",
-    "project_blue_book_ufo",
-    "project_shamrock"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -818,18 +831,6 @@
   "obsession": [
     "ravaan_character_study"
   ],
-  "poltergeist_phenomena": [
-    "enfield_poltergeist_001"
-  ],
-  "paranormal_investigation": [
-    "enfield_poltergeist_001"
-  ],
-  "family_trauma": [
-    "enfield_poltergeist_001"
-  ],
-  "skepticism_vs_belief": [
-    "enfield_poltergeist_001"
-  ],
   "unethical_recruitment": [
     "operation_paperclip_001"
   ],
@@ -1027,10 +1028,6 @@
   "global_surveillance": [
     "echelon_global_surveillance"
   ],
-  "privacy_invasion": [
-    "echelon_global_surveillance",
-    "project_shamrock"
-  ],
   "intelligence_sharing": [
     "echelon_global_surveillance"
   ],
@@ -1076,13 +1073,16 @@
   "deep_state": [
     "operation_gladio"
   ],
-  "government_surveillance": [
-    "project_shamrock"
+  "poltergeist_phenomena": [
+    "enfield_poltergeist_001"
   ],
-  "corporate_complicity": [
-    "project_shamrock"
+  "paranormal_investigation": [
+    "enfield_poltergeist_001"
   ],
-  "unconstitutional_monitoring": [
-    "project_shamrock"
+  "family_trauma": [
+    "enfield_poltergeist_001"
+  ],
+  "skepticism_vs_belief": [
+    "enfield_poltergeist_001"
   ]
 }
