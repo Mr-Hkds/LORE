@@ -2072,42 +2072,46 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     reader.readAsDataURL(file);
   };
 
-  // Helper to fetch local cover images and format them as GitHub commit files
+  // Helper to fetch local cover images and format them as GitHub commit files in parallel
   const getLocalImageCommitFiles = async (storiesList, limitStoryIds = null) => {
-    const files = [];
-    for (const story of storiesList) {
+    const targets = storiesList.filter(story => {
       if (limitStoryIds && !limitStoryIds.includes(story.story_id)) {
-        continue;
+        return false;
       }
-      if (story.hero_image && story.hero_image.startsWith('/content/images/')) {
-        try {
-          const checkUrl = `${window.location.origin}${story.hero_image.startsWith('/') ? '' : '/'}${story.hero_image}`;
-          const res = await fetch(checkUrl);
-          if (res.ok) {
-            const blob = await res.blob();
-            const base64 = await new Promise((resolve, reject) => {
-              const reader = new FileReader();
-              reader.onloadend = () => resolve(reader.result);
-              reader.onerror = reject;
-              reader.readAsDataURL(blob);
-            });
-            const base64Clean = base64.replace(/^data:image\/\w+;base64,/, '');
-            const cleanPath = story.hero_image.startsWith('/') ? story.hero_image.substring(1) : story.hero_image;
-            files.push({
-              path: `public/${cleanPath}`,
-              content: base64Clean,
-              isBinary: true
-            });
-          }
-        } catch (err) {
-          console.warn(`Failed to read local image for story ${story.story_id}:`, err);
+      return story.hero_image && story.hero_image.startsWith('/content/images/');
+    });
+
+    const filePromises = targets.map(async (story) => {
+      try {
+        const checkUrl = `${window.location.origin}${story.hero_image.startsWith('/') ? '' : '/'}${story.hero_image}`;
+        const res = await fetch(checkUrl);
+        if (res.ok) {
+          const blob = await res.blob();
+          const base64 = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          const base64Clean = base64.replace(/^data:image\/\w+;base64,/, '');
+          const cleanPath = story.hero_image.startsWith('/') ? story.hero_image.substring(1) : story.hero_image;
+          return {
+            path: `public/${cleanPath}`,
+            content: base64Clean,
+            isBinary: true
+          };
         }
+      } catch (err) {
+        console.warn(`Failed to read local image for story ${story.story_id}:`, err);
       }
-    }
-    return files;
+      return null;
+    });
+
+    const files = await Promise.all(filePromises);
+    return files.filter(f => f !== null);
   };
 
-  // Commit files directly using REST API
+  // Commit files directly using REST API (Git Database Trees & Commits API for atomic, high-speed multi-file commits)
   const commitFilesToGitHub = async (filesToCommit, commitMessage) => {
     const token = ghToken ? ghToken.trim() : '';
     const owner = ghOwner ? ghOwner.trim() : '';
@@ -2120,63 +2124,114 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     setIsPublishing(true);
     setPublishStatus('Initializing GitHub publish...');
     try {
-      for (const file of filesToCommit) {
-        setPublishStatus(`Fetching metadata for ${file.path}...`);
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${file.path}?ref=${branch}&t=${Date.now()}`;
+      // 1. Get the latest commit and tree SHA from the branch in a single request
+      setPublishStatus('Fetching latest branch reference...');
+      const branchUrl = `https://api.github.com/repos/${owner}/${repo}/branches/${branch}`;
+      const branchRes = await fetch(branchUrl, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (!branchRes.ok) {
+        throw new Error(`Failed to fetch branch reference (HTTP ${branchRes.status})`);
+      }
+      const branchData = await branchRes.json();
+      const latestCommitSha = branchData.commit.sha;
+      const latestTreeSha = branchData.commit.commit.tree.sha;
+
+      // 2. Upload blobs in parallel
+      setPublishStatus('Uploading file contents to GitHub...');
+      const blobPromises = filesToCommit.map(async (file) => {
+        const contentBase64 = file.isBinary 
+          ? file.content 
+          : btoa(unescape(encodeURIComponent(file.content)));
         
-        let sha = null;
-        try {
-          const res = await fetch(url, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Accept': 'application/vnd.github.v3+json'
-            }
-          });
-          if (res.ok) {
-            const data = await res.json();
-            sha = data.sha;
-            if (!sha) {
-              const etag = res.headers.get('etag');
-              if (etag) {
-                sha = etag.replace(/^(W\/)?"/i, '').replace(/"/g, '');
-              }
-            }
-          } else if (res.status !== 404) {
-            const errData = await res.json().catch(() => ({}));
-            throw new Error(`GitHub metadata fetch failed (HTTP ${res.status}): ${errData.message || res.statusText}`);
-          }
-        } catch (err) {
-          if (err.message && err.message.includes('GitHub metadata fetch failed')) {
-            throw err;
-          }
-          console.warn(`File ${file.path} might be new:`, err);
-        }
-
-        setPublishStatus(`Committing ${file.path}...`);
-        const body = {
-          message: commitMessage,
-          content: file.isBinary ? file.content : btoa(unescape(encodeURIComponent(file.content))),
-          branch: branch
-        };
-        if (sha) {
-          body.sha = sha;
-        }
-
-        const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file.path}`, {
-          method: 'PUT',
+        const blobRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
+          method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify({
+            content: contentBase64,
+            encoding: 'base64'
+          })
         });
-
-        if (!putRes.ok) {
-          const errorData = await putRes.json().catch(() => ({}));
-          throw new Error(`GitHub API Error for ${file.path}: ${errorData.message || putRes.statusText}`);
+        if (!blobRes.ok) {
+          throw new Error(`Failed to upload blob for ${file.path} (HTTP ${blobRes.status})`);
         }
+        const blobData = await blobRes.json();
+        return {
+          path: file.path,
+          mode: '100644',
+          type: 'blob',
+          sha: blobData.sha
+        };
+      });
+
+      const treeEntries = await Promise.all(blobPromises);
+
+      // 3. Create a new Tree pointing to the base tree
+      setPublishStatus('Assembling directory tree...');
+      const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          base_tree: latestTreeSha,
+          tree: treeEntries
+        })
+      });
+      if (!treeRes.ok) {
+        throw new Error(`Failed to assemble directory tree (HTTP ${treeRes.status})`);
       }
+      const treeData = await treeRes.json();
+      const newTreeSha = treeData.sha;
+
+      // 4. Create the Commit pointing to the new Tree
+      setPublishStatus('Creating sync commit...');
+      const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/commits`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: commitMessage,
+          tree: newTreeSha,
+          parents: [latestCommitSha]
+        })
+      });
+      if (!commitRes.ok) {
+        throw new Error(`Failed to create commit (HTTP ${commitRes.status})`);
+      }
+      const commitData = await commitRes.json();
+      const newCommitSha = commitData.sha;
+
+      // 5. Update the branch reference pointing to the new Commit
+      setPublishStatus('Finalizing branch sync...');
+      const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sha: newCommitSha,
+          force: false
+        })
+      });
+      if (!refRes.ok) {
+        throw new Error(`Failed to update branch reference (HTTP ${refRes.status})`);
+      }
+
       setPublishStatus('Publish successful!');
       addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
       setGhSyncSuccess(true);
