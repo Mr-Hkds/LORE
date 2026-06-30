@@ -33,12 +33,12 @@
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
     "the_russian_woodpecker_duga_3",
-    "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_blue_book_ufo",
     "operation_gladio",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "operation_paperclip_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -530,9 +530,9 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "operation_paperclip_001",
     "project_blue_book_ufo",
-    "project_shamrock"
+    "project_shamrock",
+    "operation_paperclip_001"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -757,20 +757,17 @@
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment"
   ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
+  "poltergeist_phenomena": [
+    "enfield_poltergeist_001"
   ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
+  "paranormal_investigation": [
+    "enfield_poltergeist_001"
   ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
+  "family_trauma": [
+    "enfield_poltergeist_001"
   ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
+  "skepticism_vs_belief": [
+    "enfield_poltergeist_001"
   ],
   "serial_bomber": [
     "the_unabomber_ted_kaczynski_campaign_of_terror"
@@ -1073,16 +1070,19 @@
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
   ],
-  "poltergeist_phenomena": [
-    "enfield_poltergeist_001"
+  "unethical_recruitment": [
+    "operation_paperclip_001"
   ],
-  "paranormal_investigation": [
-    "enfield_poltergeist_001"
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
   ],
-  "family_trauma": [
-    "enfield_poltergeist_001"
+  "scientific_advancement": [
+    "operation_paperclip_001"
   ],
-  "skepticism_vs_belief": [
-    "enfield_poltergeist_001"
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ]
 }
