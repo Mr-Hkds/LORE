@@ -1318,7 +1318,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
             delete next[story_id];
             return next;
           });
-          window.location.reload();
         }, 1200);
         return;
       }
@@ -1354,7 +1353,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                   delete next[story_id];
                   return next;
                 });
-                window.location.reload();
               }, 1500);
               return;
             }
