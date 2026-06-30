@@ -15,7 +15,7 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
-export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch }) {
+export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch, initialTab }) {
 
   const bg = '#0D0C0A'; // Darker, premium charcoal background
   const fg = '#EDE8DF';
@@ -43,10 +43,17 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
   const [activeTab, setActiveTab] = useState('for-you');
 
+  // Sync activeTab with initialTab from parent (App.jsx bottom navigation)
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
   // Auto-select 'resume' on first render if user has in-progress stories
   const hasAutoSelectedTab = useRef(false);
   useEffect(() => {
-    if (!hasAutoSelectedTab.current && continueReadingStories.length > 0) {
+    if (!hasAutoSelectedTab.current && continueReadingStories.length > 0 && !initialTab) {
       setActiveTab('resume');
       hasAutoSelectedTab.current = true;
     }
@@ -55,7 +62,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       setActiveTab('for-you');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [continueReadingStories.length]);
+  }, [continueReadingStories.length, initialTab]);
 
   // Calculate relative thresholds for engagement and new status
   const relativeThresholds = useMemo(() => {
@@ -289,7 +296,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       </header>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24">
+      <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24 mobile-bottom-nav-pad">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
           {/* Eyebrow row — label + beta badge */}
@@ -705,11 +712,9 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 style={{ borderRadius: '13px' }}
               >
                 <div
-                  className="search-shimmer absolute top-0 bottom-0"
+                  className="search-shimmer absolute inset-0 w-full"
                   style={{
-                    left: '-60%',
-                    width: '55%',
-                    background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.07) 40%, rgba(158,123,76,0.13) 50%, rgba(158,123,76,0.07) 60%, transparent)',
+                    background: 'linear-gradient(90deg, transparent, rgba(158,123,76,0.02) 30%, rgba(158,123,76,0.14) 50%, rgba(158,123,76,0.02) 70%, transparent)',
                   }}
                 />
               </div>

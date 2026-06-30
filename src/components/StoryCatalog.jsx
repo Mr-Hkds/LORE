@@ -9,6 +9,58 @@ import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
 
+// Helper to automatically redact sensitive terms and custom bracketed text
+export function redactText(text) {
+  if (!text) return '';
+  
+  // 1. Check double bracket syntax [[custom redacted]]
+  const customRegex = /\[\[(.*?)\]\]/g;
+  const hasBrackets = /\[\[.*?\]\]/.test(text);
+  
+  if (hasBrackets) {
+    customRegex.lastIndex = 0;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+    while ((match = customRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(text.substring(lastIndex, match.index));
+      }
+      parts.push(
+        <span key={match.index} className="redacted-text" title="CLASSIFIED // HOVER TO DECRYPT">
+          {match[1]}
+        </span>
+      );
+      lastIndex = customRegex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      parts.push(text.substring(lastIndex));
+    }
+    return parts;
+  }
+
+  // 2. Default fallback: Autoredact years, operations, intelligence agencies
+  const sensitiveTerms = /\b(CIA|FBI|KGB|NSA|Pentagon|MI6|Project|MKULTRA|experiment|experiments|military|covert|operations|confidential|secret|secrets|underground|bunker|19\d{2}|20\d{2})\b/gi;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+  while ((match = sensitiveTerms.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+    parts.push(
+      <span key={match.index} className="redacted-text" title="CLASSIFIED // HOVER TO DECRYPT">
+        {match[0]}
+      </span>
+    );
+    lastIndex = sensitiveTerms.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+  return parts.length > 0 ? parts : text;
+}
+
 const SEVERITY_CONFIG = {
   curious:    { label: 'CURIOUS',    dot: '#6B9E6E', glow: 'rgba(107,158,110,0.10)' },
   unsettling: { label: 'UNSETTLING', dot: '#9E7B4C', glow: 'rgba(158,123,76,0.12)' },
@@ -114,7 +166,7 @@ function StoryCardImage({ story, alt, inView }) {
 }
 
 // ── Story card wrapper with IntersectionObserver for color reveal ────────
-function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, mu, relativeThresholds }) {
+function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, mu, relativeThresholds, focused, onMouseEnter }) {
   const [inView, setInView] = useState(false);
   const cardRef = useRef(null);
   const sev   = SEVERITY_CONFIG[story.severity] || SEVERITY_CONFIG.unsettling;
@@ -138,26 +190,23 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     return (rx.intriguing || rx.like || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
   };
 
+  const previewSnippet = story.layers?.[0]?.content?.slice(0, 100) || story.hook || '';
+
   return (
     <article
+      id={`story-card-${idx}`}
       ref={cardRef}
       onClick={() => onSelectStory(story)}
-      className="group relative w-full grid grid-cols-1 sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer"
+      onMouseEnter={onMouseEnter}
+      className={`group relative w-full grid grid-cols-1 sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer transition-all duration-[350ms]`}
       style={{
-        backgroundColor: 'rgba(15, 13, 10, 0.7)',
-        borderColor: 'rgba(237,232,223,0.055)',
-        boxShadow: '0 8px 32px -12px rgba(0,0,0,0.8)',
+        backgroundColor: focused ? 'rgba(15, 13, 10, 0.95)' : 'rgba(15, 13, 10, 0.7)',
+        borderColor: focused ? 'rgba(158,123,76,0.55)' : 'rgba(237,232,223,0.055)',
+        boxShadow: focused
+          ? '0 16px 48px -12px rgba(0,0,0,0.95), 0 0 14px rgba(158,123,76,0.08), inset 0 0 0 1px rgba(158,123,76,0.1)'
+          : '0 8px 32px -12px rgba(0,0,0,0.8)',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(14px)',
-        transition: `opacity 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1), transform 0.55s ${idx * 0.07}s cubic-bezier(0.16,1,0.3,1)`,
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = 'rgba(158,123,76,0.2)';
-        e.currentTarget.style.boxShadow = '0 16px 48px -12px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(158,123,76,0.08)';
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = 'rgba(237,232,223,0.055)';
-        e.currentTarget.style.boxShadow = '0 8px 32px -12px rgba(0,0,0,0.8)';
+        transform: visible ? (focused ? 'translateY(-2px)' : 'translateY(0)') : 'translateY(14px)',
       }}
     >
       {/* Floating Premium Share Button */}
@@ -234,8 +283,18 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
             {story.title}
           </h2>
           <p className="font-sans leading-relaxed text-[11px] sm:text-[13px] line-clamp-2 sm:line-clamp-3" style={{ color: mu, opacity: 0.9 }}>
-            {story.hook}
+            {redactText(story.hook)}
           </p>
+
+          {/* Hover abstract preview snippet */}
+          <div className="hidden sm:block max-h-0 opacity-0 group-hover:max-h-16 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden mt-3 pt-2.5 border-t border-neutral-900/40">
+            <p className="text-[8.5px] font-mono tracking-widest text-[#9E7B4C] uppercase mb-1">
+              // Archive Abstract
+            </p>
+            <p className="text-[10.5px] text-neutral-500 leading-relaxed italic line-clamp-2">
+              "{redactText(previewSnippet)}..."
+            </p>
+          </div>
         </div>
 
         {/* Concepts + arrow */}
@@ -343,6 +402,8 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
   const [sortBy, setSortBy]     = useState('popular');
   const [lastTap, setLastTap]   = useState(0);
   const [tapCount, setTapCount] = useState(0);
+  const [focusedIdx, setFocusedIdx] = useState(-1);
+  const [selectedLevel, setSelectedLevel] = useState('all');
   const { getProgress }         = useReadingProgress();
 
   // Calculate relative thresholds for engagement and new status from all stories
@@ -403,50 +464,102 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
     return rxCount / Math.sqrt(Math.max(1, ageDays) + 1);
   };
 
-  const sortedStories = [...stories].sort((a, b) => {
-    if (sortBy === 'popular') {
-      const scoreA = getTrendingScore(a);
-      const scoreB = getTrendingScore(b);
-      if (scoreA !== scoreB) return scoreB - scoreA;
-      if (a.added_date && b.added_date) {
-        return new Date(b.added_date) - new Date(a.added_date);
+  const sortedStories = useMemo(() => {
+    return [...stories].sort((a, b) => {
+      if (sortBy === 'popular') {
+        const scoreA = getTrendingScore(a);
+        const scoreB = getTrendingScore(b);
+        if (scoreA !== scoreB) return scoreB - scoreA;
+        if (a.added_date && b.added_date) {
+          return new Date(b.added_date) - new Date(a.added_date);
+        }
+        return 0;
+      }
+      if (sortBy === 'engaged') {
+        const rxA = getTotalReactions(a);
+        const rxB = getTotalReactions(b);
+        if (rxA !== rxB) return rxB - rxA;
+        if (a.added_date && b.added_date) {
+          return new Date(b.added_date) - new Date(a.added_date);
+        }
+        return 0;
+      }
+      if (sortBy === 'newest') {
+        if (a.added_date && b.added_date) {
+          const dateDiff = new Date(b.added_date) - new Date(a.added_date);
+          if (dateDiff !== 0) return dateDiff;
+        }
+        return getTotalReactions(b) - getTotalReactions(a);
+      }
+      if (sortBy === 'progress') {
+        const progA = getProgress(a.story_id);
+        const progB = getProgress(b.story_id);
+        
+        const statusA = progA?.completed ? 2 : (progA?.lastLayer > 0 ? 0 : 1); // 0 = in progress, 1 = unread, 2 = completed
+        const statusB = progB?.completed ? 2 : (progB?.lastLayer > 0 ? 0 : 1);
+        
+        if (statusA !== statusB) return statusA - statusB;
+        if (statusA === 0) {
+          return (progB.lastLayer || 0) - (progA.lastLayer || 0);
+        }
+        if (a.added_date && b.added_date) {
+          return new Date(b.added_date) - new Date(a.added_date);
+        }
+        return 0;
       }
       return 0;
-    }
-    if (sortBy === 'engaged') {
-      const rxA = getTotalReactions(a);
-      const rxB = getTotalReactions(b);
-      if (rxA !== rxB) return rxB - rxA;
-      if (a.added_date && b.added_date) {
-        return new Date(b.added_date) - new Date(a.added_date);
+    });
+  }, [stories, sortBy, getProgress]);
+
+  // Dynamic Level filtering: Surface, Deep, Abyss
+  const filteredStories = useMemo(() => {
+    return sortedStories.filter(story => {
+      if (selectedLevel === 'all') return true;
+      if (selectedLevel === 'surface') {
+        return ['curious', 'unsettling'].includes(story.severity || 'unsettling');
       }
-      return 0;
-    }
-    if (sortBy === 'newest') {
-      if (a.added_date && b.added_date) {
-        const dateDiff = new Date(b.added_date) - new Date(a.added_date);
-        if (dateDiff !== 0) return dateDiff;
+      if (selectedLevel === 'deep') {
+        return ['disturbing', 'harrowing'].includes(story.severity);
       }
-      return getTotalReactions(b) - getTotalReactions(a);
-    }
-    if (sortBy === 'progress') {
-      const progA = getProgress(a.story_id);
-      const progB = getProgress(b.story_id);
-      
-      const statusA = progA?.completed ? 2 : (progA?.lastLayer > 0 ? 0 : 1); // 0 = in progress, 1 = unread, 2 = completed
-      const statusB = progB?.completed ? 2 : (progB?.lastLayer > 0 ? 0 : 1);
-      
-      if (statusA !== statusB) return statusA - statusB;
-      if (statusA === 0) {
-        return (progB.lastLayer || 0) - (progA.lastLayer || 0);
+      if (selectedLevel === 'forbidden') {
+        return story.severity === 'forbidden';
       }
-      if (a.added_date && b.added_date) {
-        return new Date(b.added_date) - new Date(a.added_date);
+      return true;
+    });
+  }, [sortedStories, selectedLevel]);
+
+  // J/K/Enter keyboard listener
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const activeEl = document.activeElement?.tagName?.toLowerCase();
+      if (activeEl === 'input' || activeEl === 'textarea' || document.getElementById('search-overlay')) {
+        return;
       }
-      return 0;
-    }
-    return 0;
-  });
+
+      if (e.key.toLowerCase() === 'j') {
+        e.preventDefault();
+        setFocusedIdx(prev => {
+          const next = prev < filteredStories.length - 1 ? prev + 1 : prev;
+          const el = document.getElementById(`story-card-${next}`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return next;
+        });
+      } else if (e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setFocusedIdx(prev => {
+          const next = prev > 0 ? prev - 1 : 0;
+          const el = document.getElementById(`story-card-${next}`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return next;
+        });
+      } else if (e.key === 'Enter' && focusedIdx >= 0 && focusedIdx < filteredStories.length) {
+        e.preventDefault();
+        onSelectStory(filteredStories[focusedIdx]);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [filteredStories, focusedIdx, onSelectStory]);
 
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
@@ -521,7 +634,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
       </header>
 
       {/* Main */}
-      <main className="flex-1 flex flex-col px-4 sm:px-8 md:px-10 py-12 md:py-16 pb-24">
+      <main className="flex-1 flex flex-col px-4 sm:px-8 md:px-10 py-12 md:py-16 pb-24 mobile-bottom-nav-pad">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
           {/* Title */}
@@ -530,6 +643,30 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
               style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 600, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
               {categoryLabel}
             </h1>
+          </div>
+
+          {/* Rational Descent Selector */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-5 border-b border-neutral-900/40 scrollbar-none">
+            <span className="text-[8px] font-mono tracking-widest uppercase text-neutral-500 mr-2 flex-shrink-0">Descent Level:</span>
+            {[
+              { id: 'all',       label: 'All Depths' },
+              { id: 'surface',   label: 'Level I: Surface' },
+              { id: 'deep',      label: 'Level II: Deep' },
+              { id: 'forbidden', label: 'Level III: The Abyss' },
+            ].map(level => (
+              <button
+                key={level.id}
+                onClick={() => { setSelectedLevel(level.id); setFocusedIdx(-1); }}
+                className="text-[9px] font-mono tracking-[0.12em] uppercase px-3.5 py-1 rounded-full border transition-all duration-200 cursor-pointer active:scale-95 flex-shrink-0"
+                style={{
+                  borderColor: selectedLevel === level.id ? '#9E7B4C' : 'rgba(237,232,223,0.06)',
+                  color:       selectedLevel === level.id ? '#9E7B4C' : '#5A5550',
+                  backgroundColor: selectedLevel === level.id ? 'rgba(158,123,76,0.1)' : 'transparent',
+                }}
+              >
+                {level.label}
+              </button>
+            ))}
           </div>
 
           {/* Sort tab pills: Trending · Recent · Top Rated · Reading */}
@@ -543,7 +680,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             ].map(opt => (
               <button
                 key={opt.value}
-                onClick={() => setSortBy(opt.value)}
+                onClick={() => { setSortBy(opt.value); setFocusedIdx(-1); }}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase whitespace-nowrap flex-shrink-0 cursor-pointer border-b-2 focus:outline-none transition-all duration-150"
                 style={{
                   color: sortBy === opt.value ? fg : mu,
@@ -557,14 +694,14 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           </div>
 
           {/* ── Story Cards ── */}
-          {stories.length === 0 ? (
+          {filteredStories.length === 0 ? (
             <div className="text-center py-24" style={{ color: mu }}>
               <p className="font-serif italic text-xl mb-3" style={{ opacity: 0.5 }}>No dossiers filed yet.</p>
-              <p className="text-[10px] uppercase tracking-[0.2em]" style={{ opacity: 0.3 }}>The archive is being compiled.</p>
+              <p className="text-[10px] uppercase tracking-[0.2em]" style={{ opacity: 0.3 }}>The archive is being compiled for this depth.</p>
             </div>
           ) : (
             <div className="space-y-4">
-              {sortedStories.map((story, idx) => (
+              {filteredStories.map((story, idx) => (
                 <StoryCard
                   key={story.story_id}
                   story={story}
@@ -576,6 +713,8 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
                   fg={fg}
                   mu={mu}
                   relativeThresholds={relativeThresholds}
+                  focused={focusedIdx === idx}
+                  onMouseEnter={() => setFocusedIdx(idx)}
                 />
               ))}
             </div>

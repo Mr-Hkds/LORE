@@ -375,11 +375,37 @@ img {
 
 /* Search bar shimmer sweep */
 @keyframes searchShimmer {
-  0%   { transform: translateX(-120%); }
-  55%  { transform: translateX(120%); }
-  100% { transform: translateX(120%); }
+  0%   { transform: translateX(-100%); }
+  55%  { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
 }
 
 .search-shimmer {
   animation: searchShimmer 4s ease-in-out infinite;
 }
+
+/* Redacted text effect */
+.redacted-text {
+  background-color: #24201C;
+  color: transparent;
+  border-radius: 2.5px;
+  padding: 0 4px;
+  margin: 0 1px;
+  cursor: help;
+  user-select: none;
+  transition: background-color 0.22s ease, color 0.22s ease;
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+}
+.redacted-text:hover {
+  background-color: transparent;
+  color: inherit;
+  user-select: auto;
+}
+
+/* Mobile bottom nav safe padding area */
+@media (max-width: 640px) {
+  main.mobile-bottom-nav-pad {
+    padding-bottom: 96px !important;
+  }
+}
+

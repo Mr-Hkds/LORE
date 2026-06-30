@@ -85,6 +85,127 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows'
 };
 
+// Story Quality Score calculation helper
+export function getQualityScore(story) {
+  let score = 0;
+  // 1. Cover Image (25 pts)
+  const hasCover = story.hero_image && 
+                   story.hero_image.startsWith('http') && 
+                   !story.hero_image.includes('unsplash.com/photo-1509248961158-e54f6934749c');
+  if (hasCover) score += 25;
+
+  // 2. Word Count (25 pts)
+  let totalWords = 0;
+  if (story.layers && Array.isArray(story.layers)) {
+    story.layers.forEach(l => {
+      if (l && l.content) {
+        totalWords += l.content.split(/\s+/).filter(Boolean).length;
+      }
+    });
+  } else if (story.content) {
+    totalWords += story.content.split(/\s+/).filter(Boolean).length;
+  }
+  if (totalWords > 400) score += 25;
+  else if (totalWords > 200) score += 15;
+  else if (totalWords > 100) score += 5;
+
+  // 3. Layer Count (25 pts)
+  const layerCount = story.layers ? story.layers.filter(l => l && l.content && l.content.trim() !== '').length : 0;
+  if (layerCount >= 5) score += 25;
+  else if (layerCount >= 3) score += 15;
+  else if (layerCount >= 1) score += 5;
+
+  // 4. Hook Length (15 pts)
+  const hookLen = story.hook ? story.hook.trim().length : 0;
+  if (hookLen >= 80 && hookLen <= 200) score += 15;
+  else if (hookLen > 0) score += 5;
+
+  // 5. Concepts (10 pts)
+  const conceptCount = story.concepts ? story.concepts.filter(Boolean).length : 0;
+  if (conceptCount >= 3) score += 10;
+  else if (conceptCount >= 1) score += 5;
+
+  return score;
+}
+
+export function getQualityBadge(story) {
+  const score = getQualityScore(story);
+  let grade = 'F';
+  let color = '#EF4444';
+  let bg = 'rgba(239, 68, 68, 0.08)';
+  let border = 'rgba(239, 68, 68, 0.2)';
+
+  if (score >= 90) {
+    grade = 'A+';
+    color = '#10B981';
+    bg = 'rgba(16, 185, 129, 0.08)';
+    border = 'rgba(16, 185, 129, 0.2)';
+  } else if (score >= 75) {
+    grade = 'A';
+    color = '#10B981';
+    bg = 'rgba(16, 185, 129, 0.08)';
+    border = 'rgba(16, 185, 129, 0.2)';
+  } else if (score >= 60) {
+    grade = 'B';
+    color = '#F59E0B';
+    bg = 'rgba(245, 158, 11, 0.08)';
+    border = 'rgba(245, 158, 11, 0.2)';
+  } else if (score >= 40) {
+    grade = 'C';
+    color = '#F97316';
+    bg = 'rgba(249, 115, 22, 0.08)';
+    border = 'rgba(249, 115, 22, 0.2)';
+  }
+  
+  return { score, grade, color, bg, border };
+}
+
+// Concept tags & Title overlap duplicate check helper
+export function findPotentialDuplicate(story, allStories) {
+  if (!allStories || !Array.isArray(allStories)) return null;
+
+  const currentTitleWords = (story.title || '').toLowerCase().split(/\s+/).filter(w => w.length > 2);
+  if (currentTitleWords.length === 0) return null;
+
+  for (const other of allStories) {
+    if (other.story_id === story.story_id) continue;
+    
+    // Exact title match
+    if ((other.title || '').trim().toLowerCase() === (story.title || '').trim().toLowerCase()) {
+      return { title: other.title, reason: 'Exact title match' };
+    }
+
+    // Overlap match (title words)
+    const otherTitleWords = (other.title || '').toLowerCase().split(/\s+/).filter(w => w.length > 2);
+    if (otherTitleWords.length === 0) continue;
+
+    let overlap = 0;
+    currentTitleWords.forEach(w => {
+      if (otherTitleWords.includes(w)) overlap++;
+    });
+
+    const ratio = overlap / Math.max(currentTitleWords.length, otherTitleWords.length);
+    if (ratio >= 0.6) {
+      return { title: other.title, reason: `${Math.round(ratio * 100)}% title similarity` };
+    }
+
+    // Concept tags match
+    const otherConcepts = other.concepts || [];
+    const currentConcepts = story.concepts || [];
+    if (currentConcepts.length >= 3 && otherConcepts.length >= 3) {
+      let conceptOverlap = 0;
+      currentConcepts.forEach(c => {
+        if (otherConcepts.map(x => x.toLowerCase()).includes(c.toLowerCase())) conceptOverlap++;
+      });
+      if (conceptOverlap >= 3 && conceptOverlap === currentConcepts.length) {
+        return { title: other.title, reason: 'Identical concepts' };
+      }
+    }
+  }
+
+  return null;
+}
+
 export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
@@ -2725,42 +2846,65 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                           {CATEGORY_LABELS[categoryKey] || categoryKey} ({list.length})
                         </h3>
                         <div className="grid grid-cols-1 gap-3">
-                          {list.map(story => (
-                            <div
-                              key={story.story_id}
-                              className="p-4 rounded-xl border transition-all hover:bg-white/2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#0D0B08]"
-                              style={{ borderColor: story.draft ? 'rgba(158, 123, 76, 0.25)' : ru }}
-                            >
-                              <div className="text-left min-w-0 flex-1">
-                                <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="font-serif italic text-[#EDE8DF] text-base leading-snug">{story.title}</span>
-                                  {story.draft ? (
-                                    <div className="flex gap-1.5 items-center">
-                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
-                                        Draft
-                                      </span>
-                                      {(!story.hero_image || !story.hero_image.startsWith('http')) && (
-                                        <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
-                                          ⚠️ Missing Image
+                          {list.map(story => {
+                            const qb = getQualityBadge(story);
+                            const dup = findPotentialDuplicate(story, stories);
+                            return (
+                              <div
+                                key={story.story_id}
+                                className="p-4 rounded-xl border transition-all hover:bg-white/2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#0D0B08]"
+                                style={{ borderColor: story.draft ? 'rgba(158, 123, 76, 0.25)' : ru }}
+                              >
+                                <div className="text-left min-w-0 flex-1">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="font-serif italic text-[#EDE8DF] text-base leading-snug">{story.title}</span>
+                                    {story.draft ? (
+                                      <div className="flex gap-1.5 items-center">
+                                        <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
+                                          Draft
                                         </span>
-                                      )}
-                                    </div>
-                                  ) : (
-                                    <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">
-                                      Live
+                                        {(!story.hero_image || !story.hero_image.startsWith('http')) && (
+                                          <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
+                                            ⚠️ Missing Image
+                                          </span>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">
+                                        Live
+                                      </span>
+                                    )}
+
+                                    {/* Quality Score Badge */}
+                                    <span 
+                                      className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border uppercase"
+                                      style={{ color: qb.color, backgroundColor: qb.bg, borderColor: qb.border }}
+                                      title={`Quality Score: ${qb.score}/100. Based on words, cover, layers, and tags.`}
+                                    >
+                                      Score: {qb.grade} ({qb.score}%)
                                     </span>
-                                  )}
-                                  <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
-                                    {story.severity}
-                                  </span>
-                                  {story.added_date && (
-                                    <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-500 uppercase tracking-widest">
-                                      PUBLISHED: {story.added_date}
+
+                                    {/* Duplicate Warning */}
+                                    {dup && (
+                                      <span 
+                                        className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 uppercase"
+                                        title={`Warning: shares similarity with "${dup.title}" (${dup.reason})`}
+                                      >
+                                        ⚠️ Duplicate ({dup.reason})
+                                      </span>
+                                    )}
+
+                                    <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
+                                      {story.severity}
                                     </span>
-                                  )}
+                                    {story.added_date && (
+                                      <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-500 uppercase tracking-widest">
+                                        PUBLISHED: {story.added_date}
+                                      </span>
+                                    )}
+                                  </div>
+                                  {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                                 </div>
-                                {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
-                              </div>
                               <div className="flex gap-2 flex-shrink-0">
                                 {story.draft && (
                                   <button
@@ -2785,7 +2929,8 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                 </button>
                               </div>
                             </div>
-                          ))}
+                          );
+                        })}
                         </div>
                       </div>
                     ))}
