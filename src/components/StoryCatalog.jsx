@@ -48,16 +48,16 @@ function StoryCardImage({ story, alt, inView }) {
   const [fallbackAttempted, setFallbackAttempted] = useState(false);
 
   useEffect(() => {
-    if (!story.hero_image) {
+    if (!story.hero_image || story.image_missing) {
       let active = true;
       const query = story.image_query || story.title;
       getImageByQuery(query).then(url => { if (active) setFetchedUrl(url); });
       return () => { active = false; };
     }
-  }, [story.hero_image, story.image_query, story.title, getImageByQuery]);
+  }, [story.hero_image, story.image_missing, story.image_query, story.title, getImageByQuery]);
 
   const handleImageError = () => {
-    if (story.hero_image && !fallbackAttempted) {
+    if (story.hero_image && !story.image_missing && !fallbackAttempted) {
       setFallbackAttempted(true);
       const query = story.image_query || story.title;
       getImageByQuery(query).then(url => {
@@ -70,7 +70,7 @@ function StoryCardImage({ story, alt, inView }) {
   };
 
   const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
-  const displayUrl = (!fallbackAttempted && story.hero_image) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
+  const displayUrl = (story.hero_image && !story.image_missing && !fallbackAttempted) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : (fetchedUrl || story.hero_image));
 
   if (!displayUrl || imgFailed) {
     return (

@@ -12,7 +12,7 @@ function isValidImage(url) {
 
 export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) {
   // Local preview tracks the image immediately after any save action
-  const initialPreview = isValidImage(story.hero_image) ? story.hero_image : null;
+  const initialPreview = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
   const [previewUrl, setPreviewUrl]   = useState(initialPreview);
   const [remoteUrl, setRemoteUrl]     = useState('');
   const [aiPrompt, setAiPrompt]       = useState('');

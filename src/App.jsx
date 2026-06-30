@@ -39,6 +39,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentStory, setCurrentStory] = useState(null);
   const [activeLayer, setActiveLayer] = useState(1);
+  const [resolvedStoryImageUrl, setResolvedStoryImageUrl] = useState(null);
   const [localStories, setLocalStories] = useState([]);
   const [shareTarget, setShareTarget] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -65,6 +66,7 @@ export default function App() {
     getConnectedStories,
     refetchStories,
     updateStoryReactions,
+    getImageByQuery,
   } = useStaticContent();
 
   const {
@@ -200,6 +202,29 @@ export default function App() {
     window.addEventListener('hashchange', logPageView);
     return () => window.removeEventListener('hashchange', logPageView);
   }, []);
+
+  // Resolve image URL (including Wikipedia fallbacks) when currentStory changes
+  useEffect(() => {
+    if (!currentStory) {
+      setResolvedStoryImageUrl(null);
+      return;
+    }
+
+    if (currentStory.image_missing) {
+      let active = true;
+      const query = currentStory.image_query || currentStory.title;
+      getImageByQuery(query).then(url => {
+        if (active) {
+          setResolvedStoryImageUrl(url || currentStory.hero_image);
+        }
+      });
+      return () => {
+        active = false;
+      };
+    } else {
+      setResolvedStoryImageUrl(currentStory.hero_image);
+    }
+  }, [currentStory, getImageByQuery]);
 
   // Get all stories for a given category (merged list)
   const getStoriesByCategory = useCallback((categoryId) => {
@@ -672,7 +697,7 @@ export default function App() {
       reactions: currentStory.reactions || { intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 },
       layerName: layerData.layer_name || null,
       cards,
-      imageUrl: layerNum === 1 ? currentStory.hero_image : null,
+      imageUrl: layerNum === 1 ? resolvedStoryImageUrl : null,
       contextImage: (currentStory.context_images || []).find(ci => ci.layer === layerNum) || null,
       evidenceLinks: layerNum === 7 ? (currentStory.evidence_links || []) : [],
       wikipediaSearchQuery: '',
