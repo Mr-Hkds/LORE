@@ -98,15 +98,14 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
     const cat = story.category || '';
     const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
     
-    let defaultBase = '';
-    let enhanced = '';
+    let enhanced;
     
     if (isDocumentType) {
-      defaultBase = `A photocopied declassified government document about ${story.title}`;
+      const defaultBase = `A photocopied declassified government document about ${story.title}`;
       const base = aiPrompt.trim() || defaultBase;
       enhanced = `${base.replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture, raw evidence photo`;
     } else {
-      defaultBase = `A vintage forensic archive photo related to ${story.title}`;
+      const defaultBase = `A vintage forensic archive photo related to ${story.title}`;
       const base = aiPrompt.trim() || defaultBase;
       enhanced = `${base.replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
     }
@@ -410,7 +409,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 <span className="text-[10px] font-semibold text-[#EDE8DF]">Instant Clipboard Paste</span>
               </div>
               <a
-                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:\-]/)[0].trim() + ' conceptual art')}`}
+                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:-]/)[0].trim() + ' conceptual art')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}

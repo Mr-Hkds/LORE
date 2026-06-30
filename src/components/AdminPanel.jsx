@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
 import ApprovalCard from './ApprovalCard';
-import { ShieldAlert } from 'lucide-react';
 
 // Helper to clean and parse JSON from AI model response
 function cleanAndParseJSON(text) {
@@ -2199,7 +2198,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           throw new Error(`${label} failed (HTTP ${res.status}): ${errBody.message || res.statusText}`);
         } catch (err) {
           if (err.message?.includes('failed (HTTP')) throw err; // Don't retry client errors
-          if (attempt >= maxRetries) throw new Error(`${label} failed after ${maxRetries} attempts: ${err.message}`);
+          if (attempt >= maxRetries) throw new Error(`${label} failed after ${maxRetries} attempts: ${err.message}`, { cause: err });
           const delay = Math.pow(2, attempt) * 1000;
           console.warn(`[${label}] Network error, retrying in ${delay}ms:`, err.message);
           await new Promise(r => setTimeout(r, delay));
@@ -3370,7 +3369,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                                   {isImageMissing(story) && (
                                     <div className="mt-2.5 pt-2 border-t border-dashed border-neutral-900/60 flex items-center gap-3">
                                       <a
-                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:\-]/)[0].trim() + ' conceptual art')}`}
+                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:-]/)[0].trim() + ' conceptual art')}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
