@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
+import ApprovalCard from './ApprovalCard';
 
 // Helper to clean and parse JSON from AI model response
 function cleanAndParseJSON(text) {
@@ -261,6 +262,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   // Search & Filter in Catalog
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [filterDate, setFilterDate] = useState('all');
 
   // Generator form states
   const [genTopic, setGenTopic] = useState('');
@@ -892,8 +894,41 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     setToast({ text: `Loaded topic "${topic}" into the AI Generator form.`, type: 'info' });
   };
 
+  const handleSaveImageSource = async (storyId, imageSource) => {
+    try {
+      const targetStory = adminStories.find(s => s.story_id === storyId);
+      if (!targetStory) return;
+
+      const newHeroImage = await saveRemoteImageLocally(storyId, imageSource);
+      
+      const res = await fetch(`/api/stories/${storyId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...targetStory, hero_image: newHeroImage })
+      });
+      
+      if (res.ok) {
+        setToast({ text: 'Cover image updated successfully!', type: 'success' });
+        await loadAdminStories();
+        if (refetchStories) await refetchStories();
+      } else {
+        throw new Error('Database save failed');
+      }
+    } catch (err) {
+      setToast({ text: `Failed to save cover image: ${err.message}`, type: 'error' });
+      throw err;
+    }
+  };
+
   // Publish / Push to Live story logic
   const handlePublishStory = async (storyId) => {
+    const targetStory = adminStories.find(s => s.story_id === storyId);
+    if (!hasProperThumbnail(targetStory)) {
+      setToast({ text: 'Story lacks a proper thumbnail. Transferred to Approval Queue.', type: 'error' });
+      setActiveTab('approval');
+      return;
+    }
+
     try {
       setPublishStatus('Publishing draft story to archive...');
       setIsPublishing(true);
@@ -1911,20 +1946,58 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
 
   // Filtered stories in catalog (includes drafts and live)
   const filteredStories = useMemo(() => {
+    const now = new Date();
+    const todayStr = now.toLocaleDateString('en-CA');
+    
+    const yesterday = new Date();
+    yesterday.setDate(now.getDate() - 1);
+    const yesterdayStr = yesterday.toLocaleDateString('en-CA');
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(now.getDate() - 7);
+    const sevenDaysAgoTime = sevenDaysAgo.getTime();
+
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(now.getDate() - 30);
+    const thirtyDaysAgoTime = thirtyDaysAgo.getTime();
+
     return adminStories.filter(story => {
       const title = story.title || '';
       const storyId = story.story_id || '';
       const hook = story.hook || '';
       const query = searchQuery ? searchQuery.toLowerCase() : '';
+      
       const matchesSearch = title.toLowerCase().includes(query) || 
                             storyId.toLowerCase().includes(query) ||
                             hook.toLowerCase().includes(query);
+      
       const matchesCategory = filterCategory === 'all' || story.category === filterCategory;
-      return matchesSearch && matchesCategory;
+      
+      let matchesDate = true;
+      if (filterDate !== 'all') {
+        if (!story.added_date) {
+          matchesDate = false;
+        } else {
+          const cleanDate = story.added_date.substring(0, 10);
+          const storyTime = new Date(story.added_date).getTime();
+          
+          if (filterDate === 'today') {
+            matchesDate = cleanDate === todayStr;
+          } else if (filterDate === 'yesterday') {
+            matchesDate = cleanDate === yesterdayStr;
+          } else if (filterDate === 'week') {
+            matchesDate = storyTime >= sevenDaysAgoTime;
+          } else if (filterDate === 'month') {
+            matchesDate = storyTime >= thirtyDaysAgoTime;
+          }
+        }
+      }
+      
+      return matchesSearch && matchesCategory && matchesDate;
     });
-  }, [adminStories, searchQuery, filterCategory]);
+  }, [adminStories, searchQuery, filterCategory, filterDate]);
 
-  // Grouped filtered stories by category
+  // Grouped filtered stories by category, sorted by date descending
   const groupedStories = useMemo(() => {
     const groups = {};
     Object.keys(CATEGORY_LABELS).forEach(cat => {
@@ -1937,6 +2010,16 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       }
       groups[cat].push(story);
     });
+
+    // Sort stories within each group by date descending
+    Object.keys(groups).forEach(cat => {
+      groups[cat].sort((a, b) => {
+        const dateA = a.added_date ? new Date(a.added_date).getTime() : 0;
+        const dateB = b.added_date ? new Date(b.added_date).getTime() : 0;
+        return dateB - dateA;
+      });
+    });
+
     // Return only groups that have stories
     return Object.entries(groups).filter(([, list]) => list.length > 0);
   }, [filteredStories]);
@@ -1959,9 +2042,20 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     });
   }, [adminStories]);
 
+  const hasProperThumbnail = useCallback((story) => {
+    if (!story || !story.hero_image) return false;
+    const img = story.hero_image;
+    if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
+    return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
+  }, []);
+
   const draftStories = useMemo(() => {
-    return adminStories.filter(s => s.draft);
-  }, [adminStories]);
+    return adminStories.filter(s => s.draft && hasProperThumbnail(s));
+  }, [adminStories, hasProperThumbnail]);
+
+  const approvalStories = useMemo(() => {
+    return adminStories.filter(s => s.draft && !hasProperThumbnail(s));
+  }, [adminStories, hasProperThumbnail]);
 
   const avgRating = useMemo(() => {
     if (feedbackItems.length === 0) return 0;
@@ -2094,6 +2188,19 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
             }`}
           >
             Dossier Catalog ({adminStories.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('approval')}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer flex justify-between items-center ${
+              activeTab === 'approval' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            <span>Approval Queue</span>
+            {approvalStories.length > 0 && (
+              <span className="bg-red-500/20 border border-red-500/40 text-red-400 text-[9px] px-1.5 py-0.5 rounded-md font-mono font-bold animate-pulse">
+                {approvalStories.length}
+              </span>
+            )}
           </button>
           <button
             onClick={() => {
@@ -2595,6 +2702,17 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                         <option key={k} value={k}>{label}</option>
                       ))}
                     </select>
+                    <select
+                      value={filterDate}
+                      onChange={e => setFilterDate(e.target.value)}
+                      className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded-lg border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none cursor-pointer min-w-[150px]"
+                    >
+                      <option value="all">All Dates</option>
+                      <option value="today">Added Today</option>
+                      <option value="yesterday">Added Yesterday</option>
+                      <option value="week">Past 7 Days</option>
+                      <option value="month">Past 30 Days</option>
+                    </select>
                   </div>
 
                   {/* Grouped Catalog List */}
@@ -2679,6 +2797,42 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                       </div>
                     )}
                   </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab: Approval Queue */}
+          {activeTab === 'approval' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b pb-4 text-left" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">Approval Queue</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">
+                    Dossier drafts missing a valid cover thumbnail. Add an image or generate one using Flux AI to publish.
+                  </p>
+                </div>
+              </div>
+
+              {approvalStories.length === 0 ? (
+                <div className="py-16 text-center border border-dashed rounded-xl bg-neutral-950/10 border-neutral-800 space-y-3">
+                  <div className="text-2xl text-[#9E7B4C]/40">✓</div>
+                  <p className="font-serif italic text-[#EDE8DF]/75">No dossiers require approval.</p>
+                  <p className="text-[10px] font-mono text-[#6A6560] uppercase tracking-wider">
+                    All current drafts have valid thumbnail images assigned.
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-6">
+                  {approvalStories.map((story) => (
+                    <ApprovalCard
+                      key={story.story_id}
+                      story={story}
+                      onSaveImage={handleSaveImageSource}
+                      onPublish={handlePublishStory}
+                      onEdit={() => startEditing(story)}
+                    />
+                  ))}
                 </div>
               )}
             </div>

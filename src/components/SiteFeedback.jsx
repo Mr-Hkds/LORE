@@ -5,6 +5,7 @@
  * Submits to POST /api/feedback.
  */
 import { useState, useEffect } from 'react';
+import { MessageSquare, X } from 'lucide-react';
 
 const TAGS = [
   'Love the concept',
@@ -103,26 +104,37 @@ export default function SiteFeedback() {
         onClick={() => { setOpen(o => !o); setPromoVisible(false); }}
         aria-label="Give feedback"
         title="Give feedback about LORE"
-        className="fixed bottom-6 right-6 z-[200] h-10 rounded-full border flex items-center justify-center transition-all duration-350 active:scale-95 overflow-hidden whitespace-nowrap"
+        className={`fixed bottom-6 right-6 z-[200] h-11 rounded-full border flex items-center transition-all duration-300 active:scale-95 overflow-hidden whitespace-nowrap cursor-pointer hover:-translate-y-0.5 hover:shadow-lg select-none bg-[#0D0B08]/92 backdrop-blur-md border-[#9E7B4C]/25 text-[#EDE8DF] hover:border-[#9E7B4C]/50 hover:bg-[#15120F] ${
+          open 
+            ? 'w-11 px-0 justify-center' 
+            : promoVisible 
+              ? 'w-[210px] px-4 justify-start gap-2' 
+              : 'w-11 px-0 justify-center sm:w-auto sm:px-4 sm:justify-start gap-2'
+        }`}
         style={{
-          backgroundColor: 'rgba(13,11,8,0.92)',
-          borderColor: 'rgba(158,123,76,0.35)',
-          backdropFilter: 'blur(8px)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.5)',
-          width: open ? '40px' : promoVisible ? '190px' : '40px',
-          padding: promoVisible && !open ? '0 16px' : '0',
-          justifyContent: promoVisible && !open ? 'flex-start' : 'center',
-          gap: '8px',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
-        <span style={{ fontSize: '14px' }} className="flex-shrink-0">{open ? '✕' : '✦'}</span>
-        {promoVisible && !open && (
-          <span 
-            className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] transition-opacity duration-300"
-            style={{ opacity: promoVisible ? 1 : 0 }}
-          >
-            Share your thoughts?
-          </span>
+        <div className="flex items-center justify-center flex-shrink-0">
+          {open ? (
+            <X className="w-4 h-4 text-[#EDE8DF]" />
+          ) : (
+            <MessageSquare className="w-4.5 h-4.5 text-[#9E7B4C]" />
+          )}
+        </div>
+
+        {!open && (
+          <>
+            {promoVisible ? (
+              <span className="text-[9px] font-mono tracking-[0.2em] uppercase text-[#9E7B4C] font-bold animate-fade-in">
+                Share your thoughts?
+              </span>
+            ) : (
+              <span className="hidden sm:inline text-[9.5px] font-mono tracking-[0.18em] uppercase text-[#EDE8DF]/90 font-bold pr-0.5">
+                Feedback
+              </span>
+            )}
+          </>
         )}
       </button>
 

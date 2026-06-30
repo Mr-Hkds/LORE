@@ -14,7 +14,7 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
-export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
+export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch }) {
 
   const bg = '#0D0C0A'; // Darker, premium charcoal background
   const fg = '#EDE8DF';
@@ -242,13 +242,21 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </span>
           </div>
 
-          {/* Right side — tagline hidden on mobile */}
-          <span
-            className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
-            style={{ color: mu, opacity: 0.7 }}
-          >
-            A guided descent
-          </span>
+          {/* Right side — Search button + Tagline */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onOpenSearch}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-[#9E7B4C] hover:text-[#EDE8DF] transition-colors cursor-pointer select-none bg-black/40 hover:bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/45 rounded-lg active:scale-95 duration-200"
+            >
+              <span>🔍</span> Search
+            </button>
+            <span
+              className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
+              style={{ color: mu, opacity: 0.7 }}
+            >
+              A guided descent
+            </span>
+          </div>
         </div>
       </header>
 

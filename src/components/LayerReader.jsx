@@ -43,6 +43,7 @@ export default function LayerReader({
   const [reacted, setReacted] = useState(getStoredReacted);
   const [animatingReaction, setAnimatingReaction] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
 
 
 
@@ -228,16 +229,23 @@ export default function LayerReader({
                       </div>
 
                       {/* Foreground image viewport area — renders below the header bar */}
-                      <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
+                      <div 
+                        onClick={() => setIsZoomed(true)}
+                        className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D] cursor-zoom-in group/img"
+                      >
                         <img
                           src={data.imageUrl}
                           alt={topic.label}
                           width="800"
                           height="450"
                           onError={() => setImgFailed(true)}
-                          className="relative z-10 max-h-full max-w-full object-contain transition-transform duration-700 hover:scale-[1.01]"
+                          className="relative z-10 max-h-full max-w-full object-contain transition-transform duration-700 hover:scale-[1.02]"
                           loading="lazy"
                         />
+                        {/* Zoom text overlay on hover */}
+                        <div className="absolute bottom-2.5 right-2.5 z-20 bg-black/60 backdrop-blur-sm border border-white/10 rounded px-2 py-0.5 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 pointer-events-none">
+                          <span className="text-[7px] font-mono text-white/70 uppercase tracking-widest font-bold">Tap to expand</span>
+                        </div>
                       </div>
                     </>
                   )}
@@ -518,6 +526,29 @@ export default function LayerReader({
             Scroll down to descend
           </span>
           <div className="mt-2 text-base text-center animate-bounce">↓</div>
+        </div>
+      )}
+      {/* Fullscreen Mobile-Optimized Lightbox Overlay */}
+      {isZoomed && (
+        <div
+          onClick={() => setIsZoomed(false)}
+          className="fixed inset-0 z-[200] bg-[#090807]/98 flex items-center justify-center cursor-zoom-out p-4 backdrop-blur-md animate-fade-in"
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setIsZoomed(false)}
+            className="absolute top-4 right-4 z-[201] w-8 h-8 rounded-full border border-white/10 bg-black/50 text-white/75 hover:text-white flex items-center justify-center transition-colors cursor-pointer text-xs"
+          >
+            ✕
+          </button>
+          <img
+            src={data.imageUrl}
+            alt={topic.label}
+            className="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500 animate-scale-up lightbox-img"
+          />
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-[9px] font-mono tracking-widest uppercase pointer-events-none">
+            Tap anywhere to return
+          </div>
         </div>
       )}
     </section>

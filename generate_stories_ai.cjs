@@ -527,16 +527,34 @@ async function run() {
     console.log('No pending recommendations. AI will search/invent new topics...');
     try {
       const existingTitles = storiesData.stories.map(s => s.title).join(', ');
+      
+      // Calculate category counts to find the 2 least represented categories
+      const categories = ['psychology', 'mythology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
+      const counts = {};
+      categories.forEach(c => { counts[c] = 0; });
+      storiesData.stories.forEach(s => {
+        if (counts[s.category] !== undefined) counts[s.category]++;
+      });
+      
+      // Sort categories by count ascending
+      const sortedCategories = [...categories].sort((a, b) => counts[a] - counts[b]);
+      const targetCat1 = sortedCategories[0];
+      const targetCat2 = sortedCategories[1];
+      
+      console.log(`Least represented categories: "${targetCat1}" (${counts[targetCat1]} stories) and "${targetCat2}" (${counts[targetCat2]} stories).`);
+      
       const categoryOptions = 'psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries';
       const selectPrompt = `Select 2 distinct, highly engaging, creepy, or dark real-world topics (historical mysteries, psychology phenomena, digital shadows, or classified experiments).
 CRITICAL: You must choose well-documented, established historical, scientific, or psychological cases that have a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
+One topic MUST fit the category "${targetCat1}".
+The other topic MUST fit the category "${targetCat2}".
 They must NOT be similar to these existing archive stories:
 [${existingTitles}]
 
-Return a JSON array of objects, each with 'topic' (string) and 'category' (must be one of: ${categoryOptions}). Example:
+Return a JSON array of objects, each with 'topic' (string) and 'category' (must be "${targetCat1}" for the first topic, and "${targetCat2}" for the second topic). Example:
 [
-  {"topic": "Project MKUltra", "category": "gov_experiments"},
-  {"topic": "The Mariana Web", "category": "cyber_mysteries"}
+  {"topic": "Project MKUltra", "category": "${targetCat1}"},
+  {"topic": "The Mariana Web", "category": "${targetCat2}"}
 ]`;
       const aiResponse = await callGemini(selectPrompt);
       const chosen = cleanAndParseJSON(aiResponse);
@@ -547,9 +565,17 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
       }));
     } catch (e) {
       console.warn('Failed to choose topics automatically, falling back to defaults. Error:', e.message);
+      // Fallback: pick the least represented categories directly
+      const categories = ['psychology', 'mythology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
+      const counts = {};
+      categories.forEach(c => { counts[c] = 0; });
+      storiesData.stories.forEach(s => {
+        if (counts[s.category] !== undefined) counts[s.category]++;
+      });
+      const sortedCategories = [...categories].sort((a, b) => counts[a] - counts[b]);
       topicsToGenerate = [
-        { topic: 'Project MKUltra', category: 'gov_experiments', recId: null },
-        { topic: 'The Salem Witch Trials', category: 'true_crime', recId: null }
+        { topic: 'Project MKUltra', category: sortedCategories[0], recId: null },
+        { topic: 'The Salem Witch Trials', category: sortedCategories[1], recId: null }
       ];
     }
   }

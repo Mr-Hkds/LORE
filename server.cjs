@@ -249,7 +249,7 @@ async function runAutomation(isManual = false) {
     const list = db.getStories(true); // Get all, including drafts
 
     // 2. Count categories to balance coverage
-    const categories = ['psychology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
+    const categories = ['psychology', 'mythology', 'true_crime', 'paranormal', 'conspiracy', 'gov_experiments', 'cyber_mysteries'];
     const counts = {};
     categories.forEach(c => { counts[c] = 0; });
     list.forEach(s => {
@@ -292,7 +292,9 @@ async function runAutomation(isManual = false) {
 
     const prompt = `Write a complete, highly-detailed 7-layer documentary story in simple, professional English about a famous, documented, real-world case or event.
     
-    Target Category: "${targetCategory}" (If writing about a user-recommended topic, you can classify it into whichever category fits best).
+    Target Category: "${targetCategory}" (If writing about a user-recommended topic, you can classify it into whichever category fits best from the Allowed Categories below).
+    
+    Allowed Categories: "psychology", "mythology", "true_crime", "gov_experiments", "paranormal", "conspiracy", "cyber_mysteries".
     
     User-Recommended Topics:
     ${pendingTopicsText || 'None. Please choose your own topic.'}
@@ -314,7 +316,7 @@ async function runAutomation(isManual = false) {
     {
       "story_id": "lowercase_slug_with_underscores",
       "title": "Compelling Title",
-      "category": "category_name",
+      "category": "Must be one of the following exact strings: psychology, mythology, true_crime, gov_experiments, paranormal, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
       "hook": "Teaser description of this case (max 150 chars) in clean, professional English.",
       "concepts": ["concept1", "concept2", "concept3"],
       "severity": "unsettling | disturbing | extreme (choose based on topic intensity)",

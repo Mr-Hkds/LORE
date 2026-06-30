@@ -201,9 +201,19 @@ function deleteStory(story_id) {
   }
 }
 
+function hasProperThumbnail(story) {
+  if (!story || !story.hero_image) return false;
+  const img = story.hero_image;
+  if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
+  return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
+}
+
 function publishStory(story_id) {
   const story = getStory(story_id);
   if (!story) return false;
+  if (!hasProperThumbnail(story)) {
+    throw new Error('Story lacks a proper thumbnail image.');
+  }
   db.prepare('UPDATE stories SET draft = 0 WHERE story_id = ?').run(story_id);
   
   // Export updated stories database back to static content folder
@@ -212,8 +222,26 @@ function publishStory(story_id) {
 }
 
 function publishAllStories() {
-  db.prepare('UPDATE stories SET draft = 0').run();
-  exportStoriesToJSON();
+  const drafts = db.prepare('SELECT * FROM stories WHERE draft = 1').all();
+  let count = 0;
+  drafts.forEach(row => {
+    const s = {
+      ...row,
+      concepts: JSON.parse(row.concepts || '[]'),
+      reactions: JSON.parse(row.reactions || '{}'),
+      evidence_links: JSON.parse(row.evidence_links || '[]'),
+      connections: JSON.parse(row.connections || '[]'),
+      layers: JSON.parse(row.layers || '[]')
+    };
+    if (hasProperThumbnail(s)) {
+      db.prepare('UPDATE stories SET draft = 0 WHERE story_id = ?').run(s.story_id);
+      count++;
+    }
+  });
+  if (count > 0) {
+    exportStoriesToJSON();
+  }
+  return count;
 }
 
 // Recommendations Helpers

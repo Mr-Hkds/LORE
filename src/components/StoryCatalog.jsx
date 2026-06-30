@@ -332,7 +332,7 @@ function EngagementBar({ reactions }) {
 
 
 // ── Main catalog component ────────────────────────────────────────────────
-export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory }) {
+export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory, onOpenSearch }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#8F8A82';
@@ -475,8 +475,14 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             </span>
           </div>
 
-          {/* Right: dossier count + back */}
-          <div className="flex items-center gap-3">
+          {/* Right: Search, dossier count + back */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onOpenSearch}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-[#9E7B4C] hover:text-[#EDE8DF] transition-colors cursor-pointer select-none bg-black/40 hover:bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/45 rounded-lg active:scale-95 duration-200"
+            >
+              <span>🔍</span> Search
+            </button>
             <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>
               {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
             </span>
