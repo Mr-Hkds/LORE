@@ -39,6 +39,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- Auto-recovery for asset loading failures (forces reload on new deployment chunk mismatches) -->
+    <script>
+      window.addEventListener('error', function(e) {
+        var target = e.target || e.srcElement;
+        if (target && (target.tagName === 'LINK' || target.tagName === 'SCRIPT')) {
+          console.warn('Resource load failed, possible new deployment. Reloading page...', target.src || target.href);
+          var lastReload = localStorage.getItem('lore:last_auto_reload');
+          var now = Date.now();
+          if (!lastReload || (now - parseInt(lastReload, 10) > 15000)) {
+            localStorage.setItem('lore:last_auto_reload', now);
+            window.location.reload();
+          }
+        }
+      }, true);
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
