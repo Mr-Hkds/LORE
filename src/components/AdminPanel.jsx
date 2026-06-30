@@ -2481,44 +2481,31 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
               {/* Asset Health Warning Alert Banner */}
               {!editingStoryId && missingImageStoriesCount > 0 && (
                 <div 
-                  className="p-5 rounded-xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300"
+                  className="p-4 rounded-lg text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300 font-mono"
                   style={{
-                    backgroundColor: 'rgba(245, 158, 11, 0.03)',
-                    border: '1px solid rgba(245, 158, 11, 0.15)',
-                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.02)'
+                    backgroundColor: 'rgba(239, 68, 68, 0.02)',
+                    border: '1px solid rgba(239, 68, 68, 0.25)',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
                   }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div 
-                      className="p-2 rounded-lg flex-shrink-0 flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.2)' }}
-                    >
-                      <ShieldAlert className="w-5 h-5 text-amber-400 animate-pulse" />
+                  <div className="flex flex-col gap-1">
+                    <div className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                      <span>[!] SYSTEM ALERT: DEGRADED MEDIA SIGNAL</span>
                     </div>
-                    <div>
-                      <p className="text-[9px] font-mono font-bold text-[#F59E0B] uppercase tracking-[0.25em] flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-ping" />
-                        SYSTEM DEGRADATION REPORT: MISSING MEDIA DETECTED
-                      </p>
-                      <p className="text-[11px] text-[#EDE8DF]/80 mt-1.5 leading-relaxed font-serif">
-                        {missingImageStoriesCount === 1 ? (
-                          <>Our archive database detects <strong className="text-[#F59E0B] font-bold">1 dossier</strong> with offline cover assets. The terminal is utilizing temporary Wikipedia search API fallbacks to reconstruct telemetry signals for remote viewers.</>
-                        ) : (
-                          <>Our archive database detects <strong className="text-[#F59E0B] font-bold">{missingImageStoriesCount} dossiers</strong> with offline cover assets. The terminal is utilizing temporary Wikipedia search API fallbacks to reconstruct telemetry signals for remote viewers.</>
-                        )}
-                      </p>
-                    </div>
+                    <p className="text-xs text-neutral-400 mt-1">
+                      Detected <strong className="text-red-400 font-bold">{missingImageStoriesCount} {missingImageStoriesCount === 1 ? "dossier" : "dossiers"}</strong> with missing cover assets. Upload or paste media to restore system integrity.
+                    </p>
                   </div>
                   <button
                     onClick={() => setFilterMissingImages(prev => !prev)}
-                    className="px-4 py-2 text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-lg border transition-all duration-200 active:scale-95 flex-shrink-0 cursor-pointer select-none"
+                    className="px-3.5 py-1.5 text-[9px] font-mono font-bold tracking-[0.15em] uppercase rounded border transition-all duration-200 active:scale-95 flex-shrink-0 cursor-pointer select-none"
                     style={{
-                      color: filterMissingImages ? '#EDE8DF' : '#F59E0B',
-                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(245, 158, 11, 0.3)',
-                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(245, 158, 11, 0.06)'
+                      color: filterMissingImages ? '#EDE8DF' : '#EF4444',
+                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(239, 68, 68, 0.35)',
+                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(239, 68, 68, 0.06)'
                     }}
                   >
-                    {filterMissingImages ? "Show All Archives" : "Review Asset Issues"}
+                    {filterMissingImages ? "Show All Archives" : "Filter Missing"}
                   </button>
                 </div>
               )}
@@ -2975,21 +2962,12 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                     )}
 
                                     {isImageMissing(story) && (
-                                      story.hero_image && story.hero_image.startsWith('/content/images/') ? (
-                                        <span 
-                                          className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase"
-                                          title="The local image file is missing (404), but the client is falling back to Wikipedia search."
-                                        >
-                                          ⚠️ Wiki Fallback Active
-                                        </span>
-                                      ) : (
-                                        <span 
-                                          className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse"
-                                          title="No cover image set or default placeholder is active."
-                                        >
-                                          ⚠️ Missing Image
-                                        </span>
-                                      )
+                                      <span 
+                                        className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase"
+                                        title="No cover image set or file path is offline."
+                                      >
+                                        ⚠️ Missing Image
+                                      </span>
                                     )}
 
                                     {/* Quality Score Badge */}
