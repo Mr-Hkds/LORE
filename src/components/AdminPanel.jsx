@@ -449,6 +449,26 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [filterDate, setFilterDate] = useState('all');
   const [filterMissingImages, setFilterMissingImages] = useState(false);
   const [rowPreviews, setRowPreviews] = useState({});
+  const [editImageFailed, setEditImageFailed] = useState(false);
+
+  const getShortTitle = (title) => {
+    if (!title) return '';
+    const parts = title.split(/[:\-–—]/);
+    return parts[0].trim();
+  };
+
+  const getHashGradient = (id) => {
+    const hash = (id || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const gradients = [
+      'radial-gradient(circle at center, #261E14 0%, #0F0B08 100%)',
+      'radial-gradient(circle at center, #221415 0%, #0F0808 100%)',
+      'radial-gradient(circle at center, #152219 0%, #080F0A 100%)',
+      'radial-gradient(circle at center, #141B26 0%, #080B0F 100%)',
+      'radial-gradient(circle at center, #1E1426 0%, #0B080F 100%)',
+      'radial-gradient(circle at center, #262414 0%, #0F0E08 100%)'
+    ];
+    return gradients[hash % gradients.length];
+  };
 
   const isImageMissing = useCallback((story) => {
     if (!story) return true;
@@ -1223,6 +1243,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   // Story editor utilities
   const startEditing = (story) => {
     setEditingStoryId(story.story_id);
+    setEditImageFailed(false);
     setEditForm({
       story_id: story.story_id || '',
       title: story.title || '',
@@ -2641,11 +2662,36 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                   <div className="text-left space-y-3">
                     {/* Current image preview */}
                     {editForm.hero_image && (
-                      <div className="flex gap-3 items-start p-2.5 bg-neutral-950/60 rounded-lg border border-neutral-800">
-                        <img src={editForm.hero_image} alt="Cover preview" className="w-20 h-16 object-cover rounded border border-neutral-800 bg-black flex-shrink-0" onError={e => { e.target.style.display = 'none'; }} />
+                      <div className="flex gap-3 items-center p-2.5 bg-neutral-950/60 rounded-lg border border-neutral-800 font-mono">
+                        <div className="w-20 h-16 rounded border border-neutral-800 overflow-hidden bg-black flex-shrink-0 flex items-center justify-center relative select-none">
+                          {!editImageFailed ? (
+                            <img 
+                              src={editForm.hero_image} 
+                              alt="Cover preview" 
+                              className="w-full h-full object-cover" 
+                              onError={() => setEditImageFailed(true)} 
+                            />
+                          ) : (
+                            /* Small typographic cover helper */
+                            <div 
+                              className="w-full h-full flex flex-col justify-between p-1.5 overflow-hidden text-[5px]"
+                              style={{ background: getHashGradient(editForm.story_id) }}
+                            >
+                              <div className="text-[4px] tracking-widest text-[#9E7B4C] uppercase text-left font-bold">
+                                // OFFLINE
+                              </div>
+                              <div className="text-center font-serif italic text-[#EDE8DF]/90 text-[7px] leading-tight line-clamp-2 px-0.5">
+                                {getShortTitle(editForm.title)}
+                              </div>
+                              <div className="text-[4px] tracking-widest text-neutral-500 text-right uppercase">
+                                CL-4 // ERR
+                              </div>
+                            </div>
+                          )}
+                        </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-[8px] font-mono text-[#9E7B4C] uppercase tracking-wider mb-1">Current Cover Image</p>
-                          <p className="text-[8px] text-[#6A6560] font-mono truncate">{editForm.hero_image}</p>
+                          <p className="text-[8.5px] text-[#6A6560] font-mono truncate" title={editForm.hero_image}>{editForm.hero_image}</p>
                         </div>
                       </div>
                     )}
@@ -2657,7 +2703,10 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                         <input
                           type="text"
                           value={editForm.hero_image}
-                          onChange={(e) => setEditForm(prev => ({ ...prev, hero_image: e.target.value }))}
+                          onChange={(e) => {
+                            setEditForm(prev => ({ ...prev, hero_image: e.target.value }));
+                            setEditImageFailed(false);
+                          }}
                           className="flex-1 px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
                           placeholder="/content/images/... or https://"
                         />
@@ -3048,37 +3097,39 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                           disabled={!!rowPreviews[story.story_id]}
                                           onClick={(e) => e.stopPropagation()}
                                           onPaste={async (e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            const items = e.clipboardData?.items;
-                                            if (!items) return;
-                                            for (let i = 0; i < items.length; i++) {
-                                              const item = items[i];
-                                              
-                                              // Binary file paste
-                                              if (item.type.indexOf('image') !== -1) {
-                                                const file = item.getAsFile();
-                                                if (file) {
-                                                  const reader = new FileReader();
-                                                  reader.onloadend = async () => {
-                                                    await executeUploadAndPublish(reader.result);
-                                                  };
-                                                  reader.readAsDataURL(file);
-                                                  return;
-                                                }
-                                              }
-                                              
-                                              // Text URL paste
-                                              if (item.kind === 'string' && item.type === 'text/plain') {
-                                                item.getAsString(async (str) => {
-                                                  const url = str.trim();
-                                                  if (url.startsWith('http') || url.startsWith('data:image')) {
-                                                    await executeUploadAndPublish(url);
-                                                  }
-                                                });
-                                              }
-                                            }
-                                          }}
+                                             e.preventDefault();
+                                             e.stopPropagation();
+                                             
+                                             let pastedText = e.clipboardData?.getData('text')?.trim() || '';
+                                             if (pastedText.startsWith('//')) {
+                                               pastedText = 'https:' + pastedText;
+                                             } else if (pastedText.startsWith('/') && !pastedText.startsWith('/content/')) {
+                                               pastedText = 'https://media.cnn.com' + pastedText;
+                                             }
+                                             
+                                             if (pastedText.startsWith('http') || pastedText.startsWith('data:image')) {
+                                               await executeUploadAndPublish(pastedText);
+                                               return;
+                                             }
+                                             
+                                             const items = e.clipboardData?.items;
+                                             if (items) {
+                                               for (let i = 0; i < items.length; i++) {
+                                                 const item = items[i];
+                                                 if (item.type.indexOf('image') !== -1) {
+                                                   const file = item.getAsFile();
+                                                   if (file) {
+                                                     const reader = new FileReader();
+                                                     reader.onloadend = async () => {
+                                                       await executeUploadAndPublish(reader.result);
+                                                     };
+                                                     reader.readAsDataURL(file);
+                                                     return;
+                                                   }
+                                                 }
+                                               }
+                                             }
+                                           }}
                                           className="w-full px-2.5 py-1 bg-black text-[#EDE8DF]/90 text-[9px] rounded border border-neutral-900 focus:border-[#F59E0B]/50 focus:outline-none placeholder-neutral-700 font-mono disabled:opacity-50"
                                         />
                                       </div>

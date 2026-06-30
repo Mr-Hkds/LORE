@@ -412,45 +412,48 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 placeholder="Click here and press Ctrl+V to paste image or URL..."
                 onPaste={async (e) => {
                   e.preventDefault();
-                  const items = e.clipboardData?.items;
-                  if (!items) return;
                   
-                  for (let i = 0; i < items.length; i++) {
-                    const item = items[i];
-                    
-                    // Handle image file upload
-                    if (item.type.indexOf('image') !== -1) {
-                      const file = item.getAsFile();
-                      if (file) {
-                        setLoadingMethod('upload');
-                        saveAndPreview(() => new Promise((resolve, reject) => {
-                          const reader = new FileReader();
-                          reader.onloadend = async () => {
-                            try {
-                              await onSaveImage(story.story_id, reader.result);
-                              setPreviewUrl(reader.result);
-                              resolve();
-                            } catch { reject(new Error('Failed to save pasted image file.')); }
-                          };
-                          reader.onerror = () => reject(new Error('Failed to read pasted image file.'));
-                          reader.readAsDataURL(file);
-                        }));
-                        return;
-                      }
-                    }
-                    
-                    // Handle pasted URL
-                    if (item.kind === 'string' && item.type === 'text/plain') {
-                      item.getAsString(async (str) => {
-                        const url = str.trim();
-                        if (url.startsWith('http') || url.startsWith('data:image')) {
-                          setLoadingMethod('url');
-                          saveAndPreview(async () => {
-                            await onSaveImage(story.story_id, url);
-                            setPreviewUrl(url);
-                          });
+                  let pastedText = e.clipboardData?.getData('text')?.trim() || '';
+                  if (pastedText.startsWith('//')) {
+                    pastedText = 'https:' + pastedText;
+                  } else if (pastedText.startsWith('/') && !pastedText.startsWith('/content/')) {
+                    pastedText = 'https://media.cnn.com' + pastedText;
+                  }
+                  
+                  if (pastedText.startsWith('http') || pastedText.startsWith('data:image')) {
+                    setLoadingMethod('url');
+                    saveAndPreview(async () => {
+                      await onSaveImage(story.story_id, pastedText);
+                      setPreviewUrl(pastedText);
+                    });
+                    return;
+                  }
+                  
+                  const items = e.clipboardData?.items;
+                  if (items) {
+                    for (let i = 0; i < items.length; i++) {
+                      const item = items[i];
+                      
+                      // Handle image file upload
+                      if (item.type.indexOf('image') !== -1) {
+                        const file = item.getAsFile();
+                        if (file) {
+                          setLoadingMethod('upload');
+                          saveAndPreview(() => new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onloadend = async () => {
+                              try {
+                                await onSaveImage(story.story_id, reader.result);
+                                setPreviewUrl(reader.result);
+                                resolve();
+                              } catch { reject(new Error('Failed to save pasted image file.')); }
+                            };
+                            reader.onerror = () => reject(new Error('Failed to read pasted image file.'));
+                            reader.readAsDataURL(file);
+                          }));
+                          return;
                         }
-                      });
+                      }
                     }
                   }
                 }}
