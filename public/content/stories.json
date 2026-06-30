@@ -3633,11 +3633,8 @@
     {
       "story_id": "project_artichoke_mind_control",
       "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_the_U.S._Central_Intelligence_Agency.svg/250px-Flag_of_the_U.S._Central_Intelligence_Agency.svg.png",
-      "image_query": "",
-      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
       "concepts": [
         "mind_control",
         "government_secrecy",
@@ -3646,6 +3643,37 @@
         "cold_war_era",
         "interrogation_techniques",
         "psychological_warfare"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/project_artichoke_mind_control.jpg",
+      "added_date": "2026-06-28",
+      "draft": false,
+      "reactions": {
+        "like": 51,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Murky Projects and Uneven Information Policies: A Case Study of the Psychological Strategy Board and CIA (Susan Maret, 2018)",
+          "url": "https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1034&context=secrecyandsociety"
+        },
+        {
+          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
+          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
+        },
+        {
+          "label": "Militarising the Mind: Assessing the Weapons of the Ultimate Battlefield (Robert C. Bruner, Filippa Lentzos, 2018)",
+          "url": "https://kclpure.kcl.ac.uk/ws/files/94550726/Militarising_the_Mind_LENTZOS_Accepted9February2018_GREEN_AMA.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "mind_control",
+          "transition_line": "While Project ARTICHOKE laid the disturbing groundwork, its dark legacy would truly blossom in an even more notorious, ambitious, and ethically bankrupt successor: Project MK-Ultra."
+        }
       ],
       "layers": [
         {
@@ -3690,12 +3718,7 @@
           "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
         }
       ],
-      "reactions": {
-        "like": 51,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 12
-      }
+      "image_missing": true
     },
     {
       "story_id": "edinburgh_vaults_001",
@@ -6471,17 +6494,45 @@
     {
       "story_id": "enfield_poltergeist_001",
       "title": "The Enfield Poltergeist: A Chronicle of Unseen Terrors",
-      "hero_image": "https://ichef.bbci.co.uk/images/ic/1200x675/p02ccvcy.jpg",
-      "image_query": "",
-      "hook": "In 1977, a modest council house in Enfield, North London, became the epicenter of a poltergeist haunting so intense it captured global attention and defied simple explanation.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "In 1977, a modest council house in Enfield, North London, became the epicenter of a poltergeist haunting so intense it captured global attention and defied simple explanation.",
       "concepts": [
         "poltergeist_phenomena",
         "paranormal_investigation",
         "family_trauma",
         "unexplained_events",
         "skepticism_vs_belief"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://www.telegraph.co.uk/content/dam/films/2016/06/13/enfield3_3286300b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=350",
+      "added_date": "2026-06-29",
+      "draft": 0,
+      "reactions": {
+        "like": 48,
+        "gripping": 36,
+        "scared": 53,
+        "mindblown": 4
+      },
+      "evidence_links": [
+        {
+          "label": "This House is Haunted: The Amazing Inside Story of the Enfield Poltergeist by Guy Lyon Playfair (Rosemarie Pilkington, 2018)",
+          "url": "https://doaj.org/article/b9abda47811640afa265c17edab7cdc3"
+        },
+        {
+          "label": "A Detailed Phenomenology of Poltergeist Events (Eric Dullin, 2024)",
+          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/3263/2181"
+        },
+        {
+          "label": "The Enfield Poltergeist Tapes: One of the Most Disturbing Cases in History. What really happened? by Melwyn J. Willin (Michael Nahm, 2019)",
+          "url": "https://doaj.org/article/800af79002504af8b5aac3a9081a4a5a"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "winchester_mystery_house",
+          "shared_concept": "paranormal_activity",
+          "transition_line": "Just as the Enfield Poltergeist left a family grappling with unseen forces, the Winchester Mystery House stands as a monument to a widow's desperate, endless construction, driven by the belief in persistent paranormal activity."
+        }
       ],
       "layers": [
         {
@@ -6526,7 +6577,8 @@
           "content": "The absolute darkest truth of the Enfield Poltergeist is not a definitive answer, but the profound, unsettling ambiguity that persists to this day. Despite extensive documentation, eyewitness accounts from police and journalists, and the exhaustive efforts of dedicated paranormal investigators, no single, universally accepted explanation has ever emerged. For proponents of the paranormal, it remains one of the strongest cases for poltergeist activity and intelligent haunting. For skeptics, it is a testament to mass hysteria, childhood mischief, and confirmation bias, expertly amplified by media attention.\n\nThe case forces a confrontation with the limits of human understanding and scientific explanation. Was it a genuine, malevolent spirit, a complex psychological manifestation of a traumatized family, or an elaborate, sustained deception? The lack of a clear resolution, the lingering doubts, and the conflicting evidence ensure that the Enfield Poltergeist continues to haunt collective consciousness, a chilling reminder that some phenomena defy easy categorization, leaving us to grapple with the terrifying possibility of the truly inexplicable.",
           "cliffhanger": null
         }
-      ]
+      ],
+      "image_missing": 0
     }
   ]
 }
