@@ -388,25 +388,25 @@
   ],
   "delusion": [
     "capgras_delusion_001",
-    "cotard_delusion_001",
     "clinical_lycanthropy",
-    "ravaan_character_study"
+    "ravaan_character_study",
+    "cotard_delusion_001"
   ],
   "altered_perception": [
     "capgras_delusion_001"
   ],
   "neurology": [
     "capgras_delusion_001",
-    "cotard_delusion_001",
     "phineas_gage_brain_injury",
     "clinical_lycanthropy",
-    "alien_hand_syndrome"
+    "alien_hand_syndrome",
+    "cotard_delusion_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
     "folie_a_deux_shared_psychosis",
-    "cotard_delusion_001",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "cotard_delusion_001"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -441,13 +441,6 @@
   "identity_erasure": [
     "the_taman_shud_case",
     "the_isdal_woman"
-  ],
-  "nihilism": [
-    "cotard_delusion_001"
-  ],
-  "body_image_disorder": [
-    "cotard_delusion_001",
-    "alien_hand_syndrome"
   ],
   "counter-insurgency": [
     "the_phoenix_program"
@@ -1004,6 +997,10 @@
   "involuntary_movement": [
     "alien_hand_syndrome"
   ],
+  "body_image_disorder": [
+    "alien_hand_syndrome",
+    "cotard_delusion_001"
+  ],
   "suicide": [
     "aokigahara_suicide_forest"
   ],
@@ -1084,5 +1081,8 @@
   ],
   "psychological_exploitation": [
     "blue_whale_game_001"
+  ],
+  "nihilism": [
+    "cotard_delusion_001"
   ]
 }
