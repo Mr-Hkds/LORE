@@ -1,6 +1,6 @@
 // ApprovalCard — premium approval UX with local preview state,
 // step indicator, instant publish gate, and loading shimmer.
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight, Clipboard } from 'lucide-react';
 import LoreMark from './LoreMark';
 
@@ -14,7 +14,27 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
   // Local preview tracks the image immediately after any save action
   const initialPreview = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
   const [previewUrl, setPreviewUrl]   = useState(initialPreview);
+  const [imageFailed, setImageFailed] = useState(false);
   const [remoteUrl, setRemoteUrl]     = useState('');
+
+  const getShortTitle = (title) => {
+    if (!title) return '';
+    const parts = title.split(/[:\-–—]/);
+    return parts[0].trim();
+  };
+
+  const getHashGradient = (id) => {
+    const hash = (id || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const gradients = [
+      'radial-gradient(circle at center, #261E14 0%, #0F0B08 100%)',
+      'radial-gradient(circle at center, #221415 0%, #0F0808 100%)',
+      'radial-gradient(circle at center, #152219 0%, #080F0A 100%)',
+      'radial-gradient(circle at center, #141B26 0%, #080B0F 100%)',
+      'radial-gradient(circle at center, #1E1426 0%, #0B080F 100%)',
+      'radial-gradient(circle at center, #262414 0%, #0F0E08 100%)'
+    ];
+    return gradients[hash % gradients.length];
+  };
   const [aiPrompt, setAiPrompt]       = useState('');
   const [loading, setLoading]         = useState(false);
   const [loadingMethod, setLoadingMethod] = useState(null); // 'upload' | 'ai' | 'url'
@@ -22,10 +42,17 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
   const [publishing, setPublishing]   = useState(false);
   const fileInputRef = useRef(null);
 
+  useEffect(() => {
+    const validImg = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
+    setPreviewUrl(validImg);
+    setImageFailed(false);
+  }, [story.hero_image, story.image_missing]);
+
   // ── Helpers ──────────────────────────────────────────────────────────
   const saveAndPreview = async (fn) => {
     setError('');
     setLoading(true);
+    setImageFailed(false);
     try {
       await fn();
     } catch (e) {
@@ -141,13 +168,13 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
             className="relative rounded-xl overflow-hidden"
             style={{ aspectRatio: '16/9', background: 'rgba(0,0,0,0.5)' }}
           >
-            {previewUrl ? (
+            {previewUrl && !imageFailed ? (
               <>
                 <img
                   src={previewUrl}
                   alt={story.title}
                   className="w-full h-full object-cover"
-                  onError={() => setPreviewUrl(null)}
+                  onError={() => setImageFailed(true)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <span
@@ -167,11 +194,31 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                   </span>
                 </div>
               ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4">
-                  <AlertCircle className="w-6 h-6" style={{ color: 'rgba(158,123,76,0.3)' }} />
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-center" style={{ color: 'rgba(143,138,130,0.4)' }}>
-                    No cover image
-                  </span>
+                <div 
+                  className="w-full h-full flex flex-col justify-between p-3 select-none relative font-mono overflow-hidden"
+                  style={{ background: getHashGradient(story.story_id) }}
+                >
+                  {/* HUD borders */}
+                  <div className="absolute top-2 left-2 text-[6px] tracking-widest text-[#9E7B4C]/45 uppercase">
+                    CL-4 // EYES ONLY
+                  </div>
+                  <div className="absolute top-2 right-2 text-[6px] tracking-widest text-red-500/50 uppercase">
+                    MISSING TELEMETRY
+                  </div>
+                  
+                  <div className="flex-1 flex flex-col items-center justify-center text-center px-2 mt-2">
+                    <h4 className="font-serif italic text-xs text-[#EDE8DF]/90 leading-snug line-clamp-2">
+                      {getShortTitle(story.title)}
+                    </h4>
+                    <p className="text-[6px] uppercase tracking-widest text-[#9E7B4C]/40 mt-1">
+                      SYS-VAL-REQUIRED
+                    </p>
+                  </div>
+                  
+                  <div className="flex justify-between items-center text-[5.5px] tracking-wider text-neutral-500/60 mt-1">
+                    <span>SIG. {((story.story_id || '').charCodeAt(0) || 75) % 100} // ERR</span>
+                    <span>NO DATA STACK</span>
+                  </div>
                 </div>
               )
             )}
