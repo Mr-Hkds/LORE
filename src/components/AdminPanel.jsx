@@ -2182,7 +2182,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
           {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ sha: commitData.sha, force: false })
+            body: JSON.stringify({ sha: commitData.sha, force: true })
           },
           'Ref update'
         );
