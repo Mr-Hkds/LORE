@@ -456,8 +456,8 @@
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
-    "the_mary_celeste_mystery",
-    "uss_cyclops_vanishing"
+    "uss_cyclops_vanishing",
+    "the_mary_celeste_mystery"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -482,12 +482,12 @@
     "winchester_mystery_house",
     "the_wow_signal",
     "the_bloop_unexplained_sound",
+    "edinburgh_vaults_001",
     "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
-    "project_blue_book_ufo",
-    "edinburgh_vaults_001"
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -592,20 +592,6 @@
   "drug_policy": [
     "the_rat_park_experiment_001"
   ],
-  "ghost_ship": [
-    "the_mary_celeste_mystery"
-  ],
-  "maritime_mystery": [
-    "the_mary_celeste_mystery",
-    "eilean_mor_lighthouse_mystery",
-    "uss_cyclops_vanishing"
-  ],
-  "abandoned_vessel": [
-    "the_mary_celeste_mystery"
-  ],
-  "sea_legends": [
-    "the_mary_celeste_mystery"
-  ],
   "brain_injury": [
     "phineas_gage_brain_injury"
   ],
@@ -656,6 +642,11 @@
   ],
   "military_infrastructure": [
     "project_iceworm_secret_city"
+  ],
+  "maritime_mystery": [
+    "eilean_mor_lighthouse_mystery",
+    "uss_cyclops_vanishing",
+    "the_mary_celeste_mystery"
   ],
   "isolated_location": [
     "eilean_mor_lighthouse_mystery"
@@ -736,6 +727,15 @@
   ],
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
+  ],
+  "urban_legends": [
+    "edinburgh_vaults_001"
+  ],
+  "historical_trauma": [
+    "edinburgh_vaults_001"
+  ],
+  "haunted_location": [
+    "edinburgh_vaults_001"
   ],
   "cold_war": [
     "the_russian_woodpecker_duga_3",
@@ -1076,13 +1076,13 @@
   "extrajudicial_killings": [
     "the_phoenix_program"
   ],
-  "urban_legends": [
-    "edinburgh_vaults_001"
+  "ghost_ship": [
+    "the_mary_celeste_mystery"
   ],
-  "historical_trauma": [
-    "edinburgh_vaults_001"
+  "abandoned_vessel": [
+    "the_mary_celeste_mystery"
   ],
-  "haunted_location": [
-    "edinburgh_vaults_001"
+  "sea_legends": [
+    "the_mary_celeste_mystery"
   ]
 }
