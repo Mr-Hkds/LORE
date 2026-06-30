@@ -455,6 +455,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [pasteError, setPasteError] = useState(null);
   const [pasteSuccess, setPasteSuccess] = useState(false);
   const [pasteStatusText, setPasteStatusText] = useState('');
+  const [pasteProgress, setPasteProgress] = useState(0);
 
   const getShortTitle = (title) => {
     if (!title) return '';
@@ -1279,13 +1280,23 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     if (!pasteConfirmation) return;
     setPasteUploading(true);
     setPasteError(null);
+    setPasteProgress(0);
     setPasteStatusText('Initiating database sync...');
     
     const { story_id, imageSource, story } = pasteConfirmation;
     let savedImageUrl = imageSource;
     
+    const progressTimer = setInterval(() => {
+      setPasteProgress(prev => {
+        if (prev < 40) return prev + 8;
+        if (prev < 70) return prev + 4;
+        if (prev < 90) return prev + 2;
+        return prev;
+      });
+    }, 600);
+    
     try {
-      setPasteStatusText('Updating local SQLite database...');
+      setPasteStatusText('Updating SQLite database & pushing to GitHub...');
       const savedImg = await handleSaveImageSource(story_id, imageSource);
       if (savedImg) {
         savedImageUrl = savedImg;
@@ -1294,6 +1305,8 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       // Publishing drafts is now handled directly inside handleSaveImageSource
       
       if (!ghToken) {
+        clearInterval(progressTimer);
+        setPasteProgress(100);
         setPasteSuccess(true);
         setPasteStatusText('Database synchronized.');
         setTimeout(() => {
@@ -1306,12 +1319,12 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
             return next;
           });
           window.location.reload();
-        }, 1500);
+        }, 1200);
         return;
       }
       
       let attempts = 0;
-      const maxAttempts = 24; // 2 minutes max
+      const maxAttempts = 30; // 90 seconds max
       setPasteStatusText('Deploying telemetry live to Vercel CDN (building static bundle)...');
       
       const pollInterval = setInterval(async () => {
@@ -1327,6 +1340,8 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
             
             if (liveStory && liveStory.hero_image === savedImageUrl) {
               clearInterval(pollInterval);
+              clearInterval(progressTimer);
+              setPasteProgress(100);
               setPasteSuccess(true);
               setPasteStatusText('Vercel Edge CDN verified: Thumbnail is 100% Live!');
               
@@ -1340,7 +1355,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                   return next;
                 });
                 window.location.reload();
-              }, 2000);
+              }, 1500);
               return;
             }
           }
@@ -1350,12 +1365,14 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         
         if (attempts >= maxAttempts) {
           clearInterval(pollInterval);
+          clearInterval(progressTimer);
           setPasteError('Vercel CDN build is taking longer than expected to compile. The changes are saved on GitHub and will display live in a minute.');
           setPasteUploading(false);
         }
-      }, 5000);
+      }, 3000);
       
     } catch (err) {
+      clearInterval(progressTimer);
       setPasteError(err.message || 'Sync failed.');
       setPasteUploading(false);
       setRowPreviews(prev => {
@@ -4285,17 +4302,34 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
             <div className="p-4 space-y-4">
               <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-900 bg-neutral-950 flex items-center justify-center">
                 {pasteUploading && (
-                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center gap-3 z-10 px-4 text-center">
+                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center gap-3 z-10 px-6 text-center">
                     <span className="w-8 h-8 rounded-full border-2 border-t-transparent border-[#9E7B4C] animate-spin" />
-                    <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] font-bold animate-pulse">Syncing visual telemetry...</p>
-                    <p className="text-[8px] text-neutral-400 font-mono max-w-xs">{pasteStatusText}</p>
+                    <div className="space-y-1 w-full max-w-[240px]">
+                      <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] font-bold animate-pulse">Syncing visual telemetry...</p>
+                      <p className="text-[7.5px] text-neutral-400 font-mono truncate">{pasteStatusText}</p>
+                    </div>
+                    <div className="w-full max-w-[200px] h-1 bg-neutral-900 rounded-full overflow-hidden border border-neutral-950 mt-1">
+                      <div 
+                        className="h-full bg-[#9E7B4C] transition-all duration-300 ease-out"
+                        style={{ width: `${pasteProgress}%` }}
+                      />
+                    </div>
+                    <span className="text-[7.5px] font-mono text-[#9E7B4C]/80">{pasteProgress}%</span>
                   </div>
                 )}
                 {pasteSuccess && (
-                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2 z-10 px-4 text-center">
+                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2.5 z-10 px-6 text-center">
                     <span className="text-xl text-[#10B981]">✓</span>
-                    <p className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold">Signal Synchronized</p>
-                    <p className="text-[8px] text-neutral-400 font-mono">{pasteStatusText || 'Dossier successfully published live.'}</p>
+                    <div className="space-y-1 w-full max-w-[240px]">
+                      <p className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold">Signal Synchronized</p>
+                      <p className="text-[7.5px] text-neutral-400 font-mono truncate">{pasteStatusText || 'Dossier successfully published live.'}</p>
+                    </div>
+                    <div className="w-full max-w-[200px] h-1 bg-[#10B981]/20 rounded-full overflow-hidden border border-neutral-950 mt-1">
+                      <div 
+                        className="h-full bg-[#10B981] transition-all duration-300 ease-out"
+                        style={{ width: '100%' }}
+                      />
+                    </div>
                   </div>
                 )}
                 {pasteError ? (
