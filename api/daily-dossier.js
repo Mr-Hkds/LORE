@@ -256,7 +256,6 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
     return existing;
   }
 
-  console.log(`[AI Reactions] Seeding reactions for daily dossier date: ${dateStr}...`);
   const hash = dateStr.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + (title || '').length;
   
   const defaultReactions = {
@@ -265,34 +264,6 @@ async function getReactionsWithAiFallback(dateStr, title, category, year) {
     chilling: (category === 'paranormal' || category === 'true_crime' || category.includes('horror') || category.includes('tragedy')) ? 30 + (hash % 50) : 2 + (hash % 8),
     mind_blowing: (category === 'psychology' || category === 'conspiracy' || category.includes('experiment')) ? 35 + (hash % 60) : 5 + (hash % 12)
   };
-
-  try {
-    const prompt = `Given a dark historical topic: "${title}", category: "${category}", year: "${year}". How relevant is this story for readers? Rate the sentiment and interest of the audience on four metrics: intriguing, gripping, chilling, and mind_blowing. Return ONLY a JSON object of integers between 15 and 150 representing number of users who reacted. Format: {"intriguing": X, "gripping": Y, "chilling": Z, "mind_blowing": W}`;
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), 3000);
-    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, { signal: controller.signal });
-    clearTimeout(id);
-
-    if (res.ok) {
-      const text = await res.text();
-      const cleanJson = text.match(/\{[\s\S]*?\}/);
-      if (cleanJson) {
-        const parsed = JSON.parse(cleanJson[0]);
-        if (typeof parsed.intriguing === 'number' || typeof parsed.likes === 'number') {
-          const aiReactions = {
-            intriguing: Math.max(10, parsed.intriguing || parsed.likes || 0),
-            gripping: Math.max(10, parsed.gripping || 0),
-            chilling: Math.max(0, parsed.chilling || parsed.scared || 0),
-            mind_blowing: Math.max(0, parsed.mind_blowing || parsed.mindblown || 0)
-          };
-          await db.setDailyReactions(dateStr, aiReactions);
-          return aiReactions;
-        }
-      }
-    }
-  } catch (err) {
-    console.warn('[AI Reactions] Failed to fetch custom reactions from Pollinations:', err.message);
-  }
 
   await db.setDailyReactions(dateStr, defaultReactions);
   return defaultReactions;

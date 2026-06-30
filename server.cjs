@@ -197,31 +197,16 @@ function cleanAndParseJSON(text) {
 // Background seed reactions with Pollinations AI if needed
 async function ensureStoryReactionsWithAi(story) {
   try {
-    const queryPrompt = `Generate a JSON object containing realistic reaction metrics for a documentary story about "${story.title}" (${story.category}). The severity level is "${story.severity}".
-Return exactly this JSON structure:
-{
-  "like": number (realistic value between 50 and 200),
-  "gripping": number (realistic value between 40 and 180),
-  "scared": number (realistic value between 10 and 120),
-  "mindblown": number (realistic value between 30 and 190)
-}
-Return only the raw JSON. Do not include markdown code block formatting.`;
-    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(queryPrompt)}`);
-    if (res.ok) {
-      const text = await res.text();
-      const parsed = cleanAndParseJSON(text);
-      if (parsed && typeof parsed.like === 'number') {
-        const reactions = {
-          like: parsed.like || 0,
-          gripping: parsed.gripping || 0,
-          scared: parsed.scared || 0,
-          mindblown: parsed.mindblown || 0,
-          ai: 1
-        };
-        await db.updateStory(story.story_id, { reactions });
-        console.log(`[AI Reactions] Seeding reactions using Pollinations AI succeeded for: "${story.title}"`);
-      }
-    }
+    const hash = (story.title || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const reactions = {
+      like: 50 + (hash % 150),
+      gripping: 40 + (hash % 140),
+      scared: (story.category === 'paranormal' || story.category === 'true_crime') ? 30 + (hash % 90) : 5 + (hash % 15),
+      mindblown: 30 + (hash % 160),
+      ai: 1
+    };
+    await db.updateStory(story.story_id, { reactions });
+    console.log(`[AI Reactions] Seeding reactions locally succeeded for: "${story.title}"`);
   } catch (err) {
     console.warn(`[AI Reactions] Failed to seed reactions for "${story.title}":`, err.message);
   }
