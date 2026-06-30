@@ -2099,101 +2099,119 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     };
 
     setIsPublishing(true);
-    setPublishStatus('Initializing GitHub publish...');
-    try {
-      // 1. Get the latest commit and tree SHA from the branch
-      setPublishStatus('Fetching latest branch reference...');
-      const branchRes = await ghFetch(
-        `https://api.github.com/repos/${owner}/${repo}/branches/${branch}`,
-        {},
-        'Branch ref'
-      );
-      const branchData = await branchRes.json();
-      const latestCommitSha = branchData.commit.sha;
-      const latestTreeSha = branchData.commit.commit.tree.sha;
-
-      // 2. Upload blobs in parallel
-      setPublishStatus(`Uploading ${filesToCommit.length} files to GitHub...`);
-      const blobPromises = filesToCommit.map(async (file) => {
-        const contentBase64 = file.isBinary 
-          ? file.content 
-          : btoa(unescape(encodeURIComponent(file.content)));
+    const maxGlobalRetries = 3;
+    
+    for (let gAttempt = 1; gAttempt <= maxGlobalRetries; gAttempt++) {
+      try {
+        setPublishStatus(`Initializing GitHub publish (attempt ${gAttempt}/${maxGlobalRetries})...`);
         
-        const blobRes = await ghFetch(
-          `https://api.github.com/repos/${owner}/${repo}/git/blobs`,
+        // 1. Get the latest commit and tree SHA from the branch
+        setPublishStatus('Fetching latest branch reference...');
+        const branchRes = await ghFetch(
+          `https://api.github.com/repos/${owner}/${repo}/branches/${branch}`,
+          {},
+          'Branch ref'
+        );
+        const branchData = await branchRes.json();
+        const latestCommitSha = branchData.commit.sha;
+        const latestTreeSha = branchData.commit.commit.tree.sha;
+
+        // 2. Upload blobs in parallel
+        setPublishStatus(`Uploading ${filesToCommit.length} files to GitHub (attempt ${gAttempt})...`);
+        const blobPromises = filesToCommit.map(async (file) => {
+          const contentBase64 = file.isBinary 
+            ? file.content 
+            : btoa(unescape(encodeURIComponent(file.content)));
+          
+          const blobRes = await ghFetch(
+            `https://api.github.com/repos/${owner}/${repo}/git/blobs`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ content: contentBase64, encoding: 'base64' })
+            },
+            `Blob upload (${file.path.split('/').pop()})`
+          );
+          const blobData = await blobRes.json();
+          return {
+            path: file.path,
+            mode: '100644',
+            type: 'blob',
+            sha: blobData.sha
+          };
+        });
+
+        const treeEntries = await Promise.all(blobPromises);
+
+        // 3. Create a new Tree pointing to the base tree
+        setPublishStatus('Assembling commit tree...');
+        const treeRes = await ghFetch(
+          `https://api.github.com/repos/${owner}/${repo}/git/trees`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ content: contentBase64, encoding: 'base64' })
+            body: JSON.stringify({ base_tree: latestTreeSha, tree: treeEntries })
           },
-          `Blob upload (${file.path.split('/').pop()})`
+          'Tree assembly'
         );
-        const blobData = await blobRes.json();
-        return {
-          path: file.path,
-          mode: '100644',
-          type: 'blob',
-          sha: blobData.sha
-        };
-      });
+        const treeData = await treeRes.json();
 
-      const treeEntries = await Promise.all(blobPromises);
+        // 4. Create the Commit
+        setPublishStatus('Creating commit...');
+        const commitRes = await ghFetch(
+          `https://api.github.com/repos/${owner}/${repo}/git/commits`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: commitMessage, tree: treeData.sha, parents: [latestCommitSha] })
+          },
+          'Commit creation'
+        );
+        const commitData = await commitRes.json();
 
-      // 3. Create a new Tree pointing to the base tree
-      setPublishStatus('Assembling commit tree...');
-      const treeRes = await ghFetch(
-        `https://api.github.com/repos/${owner}/${repo}/git/trees`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ base_tree: latestTreeSha, tree: treeEntries })
-        },
-        'Tree assembly'
-      );
-      const treeData = await treeRes.json();
+        // 5. Update the branch ref
+        setPublishStatus('Finalizing branch sync...');
+        await ghFetch(
+          `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`,
+          {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sha: commitData.sha, force: false })
+          },
+          'Ref update'
+        );
 
-      // 4. Create the Commit
-      setPublishStatus('Creating commit...');
-      const commitRes = await ghFetch(
-        `https://api.github.com/repos/${owner}/${repo}/git/commits`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: commitMessage, tree: treeData.sha, parents: [latestCommitSha] })
-        },
-        'Commit creation'
-      );
-      const commitData = await commitRes.json();
-
-      // 5. Update the branch ref
-      setPublishStatus('Finalizing branch sync...');
-      await ghFetch(
-        `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`,
-        {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sha: commitData.sha, force: false })
-        },
-        'Ref update'
-      );
-
-      setPublishStatus('Publish successful!');
-      addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
-      setGhSyncSuccess(true);
-      localStorage.setItem('lore:github:success', 'true');
-      return true;
-    } catch (err) {
-      console.error('GitHub Sync failed:', err);
-      setPublishStatus(`Error: ${err.message}`);
-      addLog(`❌ GitHub Commit Sync Failed: ${err.message}`);
-      setGhSyncSuccess(false);
-      localStorage.setItem('lore:github:success', 'false');
-      throw err;
-    } finally {
-      setTimeout(() => {
-        setIsPublishing(false);
-        setPublishStatus('');
-      }, 1500);
+        setPublishStatus('Publish successful!');
+        addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
+        setGhSyncSuccess(true);
+        localStorage.setItem('lore:github:success', 'true');
+        
+        setTimeout(() => {
+          setIsPublishing(false);
+          setPublishStatus('');
+        }, 1500);
+        return true;
+      } catch (err) {
+        console.warn(`[GitHub Sync] Attempt ${gAttempt} failed:`, err.message);
+        addLog(`⚠️ Attempt ${gAttempt} failed: ${err.message}`);
+        
+        if (gAttempt >= maxGlobalRetries) {
+          console.error('GitHub Sync failed completely:', err);
+          setPublishStatus(`Error: ${err.message}`);
+          addLog(`❌ GitHub Commit Sync Failed: ${err.message}`);
+          setGhSyncSuccess(false);
+          localStorage.setItem('lore:github:success', 'false');
+          setTimeout(() => {
+            setIsPublishing(false);
+            setPublishStatus('');
+          }, 1500);
+          throw err;
+        }
+        
+        const delay = gAttempt * 2500;
+        setPublishStatus(`Sync conflict or error detected. Retrying in ${delay / 1000}s...`);
+        await new Promise(r => setTimeout(r, delay));
+      }
     }
   };
 
