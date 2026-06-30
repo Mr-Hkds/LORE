@@ -3211,7 +3211,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                   {isImageMissing(story) && (
                                     <div className="mt-2.5 pt-2 border-t border-dashed border-neutral-900/60 flex items-center gap-3">
                                       <a
-                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`}
+                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:\-]/)[0].trim() + ' conceptual art')}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}

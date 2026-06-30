@@ -395,7 +395,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 <span className="text-[10px] font-semibold text-[#EDE8DF]">Instant Clipboard Paste</span>
               </div>
               <a
-                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(story.title + ' conceptual art')}`}
+                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:\-]/)[0].trim() + ' conceptual art')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
