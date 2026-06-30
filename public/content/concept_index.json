@@ -1110,7 +1110,8 @@
     "shadow_brokers_leak"
   ],
   "cyber_warfare": [
-    "shadow_brokers_leak"
+    "shadow_brokers_leak",
+    "the_conficker_worm"
   ],
   "data_breach": [
     "shadow_brokers_leak"
@@ -1129,5 +1130,20 @@
   ],
   "industrial_espionage": [
     "operation_shady_rat"
+  ],
+  "botnet": [
+    "the_conficker_worm"
+  ],
+  "unidentified_threat_actors": [
+    "the_conficker_worm"
+  ],
+  "zero-day_exploit": [
+    "the_conficker_worm"
+  ],
+  "malware_analysis": [
+    "the_conficker_worm"
+  ],
+  "global_cyberattack": [
+    "the_conficker_worm"
   ]
 }
