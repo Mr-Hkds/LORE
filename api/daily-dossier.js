@@ -119,20 +119,59 @@ async function getWikipediaThumbnail(query) {
   if (!query) return null;
   if (wikiThumbnailCache.has(query)) return wikiThumbnailCache.get(query);
   try {
-    const formattedQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
-    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'
-      }
+    // 1. Try search API first to resolve capitalization/spelling mismatches
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=1&format=json&origin=*`;
+    const searchRes = await fetch(searchUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
     });
+    let resolvedTitle = query;
+    if (searchRes.ok) {
+      const searchData = await searchRes.json();
+      if (searchData?.query?.search && searchData.query.search.length > 0) {
+        resolvedTitle = searchData.query.search[0].title;
+      }
+    }
+    
+    // 2. Query Page Summary with the resolved title
+    const formattedQuery = encodeURIComponent(resolvedTitle.trim().replace(/ /g, '_'));
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
+    });
+    let imgUrl = null;
     if (res.ok) {
       const matched = await res.json();
-      const imgUrl = matched?.thumbnail?.source || null;
-      wikiThumbnailCache.set(query, imgUrl);
-      return imgUrl;
+      imgUrl = matched?.thumbnail?.source || null;
     }
+    
+    // Fallback directly to original query if resolved title fails or returns no image
+    if (!imgUrl && resolvedTitle !== query) {
+      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
+      const fallbackRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
+      });
+      if (fallbackRes.ok) {
+        const fallbackMatched = await fallbackRes.json();
+        imgUrl = fallbackMatched?.thumbnail?.source || null;
+      }
+    }
+    
+    wikiThumbnailCache.set(query, imgUrl);
+    return imgUrl;
   } catch (err) {
     console.warn(`[WikiCache] Failed to fetch Wikipedia thumbnail for "${query}":`, err.message);
+    // Simple direct fallback as last resort
+    try {
+      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
+      });
+      if (res.ok) {
+        const matched = await res.json();
+        return matched?.thumbnail?.source || null;
+      }
+    } catch {
+      return null;
+    }
   }
   return null;
 }

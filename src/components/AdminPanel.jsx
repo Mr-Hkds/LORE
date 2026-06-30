@@ -206,6 +206,58 @@ export function findPotentialDuplicate(story, allStories) {
   return null;
 }
 
+export async function robustFetchWikipediaThumbnail(query) {
+  if (!query) return null;
+  try {
+    // 1. Try search API first to resolve capitalization/spelling mismatches
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=1&format=json&origin=*`;
+    const searchRes = await fetch(searchUrl);
+    let resolvedTitle = query;
+    if (searchRes.ok) {
+      const searchData = await searchRes.json();
+      if (searchData?.query?.search && searchData.query.search.length > 0) {
+        resolvedTitle = searchData.query.search[0].title;
+      }
+    }
+    
+    // 2. Query Page Summary with the resolved title
+    const formattedQuery = encodeURIComponent(resolvedTitle.trim().replace(/ /g, '_'));
+    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`);
+    let imgUrl = null;
+    if (res.ok) {
+      const matched = await res.json();
+      imgUrl = matched?.thumbnail?.source || matched?.originalimage?.source || null;
+    }
+    
+    // Fallback directly to original query if resolved title fails or returns no image
+    if (!imgUrl && resolvedTitle !== query) {
+      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
+      const fallbackRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`);
+      if (fallbackRes.ok) {
+        const fallbackMatched = await fallbackRes.json();
+        imgUrl = fallbackMatched?.thumbnail?.source || fallbackMatched?.originalimage?.source || null;
+      }
+    }
+    
+    return imgUrl;
+  } catch (err) {
+    console.warn(`[WikiCache] Failed to fetch Wikipedia thumbnail for "${query}":`, err);
+    // Simple direct fallback as last resort
+    try {
+      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`);
+      if (res.ok) {
+        const matched = await res.json();
+        return matched?.thumbnail?.source || matched?.originalimage?.source || null;
+      }
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+
 export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
@@ -672,11 +724,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       const imgSearchQuery = storyObj.image_query || storyObj.title;
       let imageUrl = null;
       try {
-        const matched = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(imgSearchQuery.replace(/ /g, '_'))}`);
-        if (matched.ok) {
-          const matchedData = await matched.json();
-          imageUrl = matchedData?.thumbnail?.source || null;
-        }
+        imageUrl = await robustFetchWikipediaThumbnail(imgSearchQuery);
       } catch (err) {
         console.warn('Wikipedia image search failed:', err);
       }
@@ -1360,17 +1408,11 @@ ${aiPromptTopic}`;
     setWikiPreviewState('loading');
     setWikiPreviewImg(null);
     try {
-      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term)}`);
-      if (res.ok) {
-        const data = await res.json();
-        const imgUrl = data?.thumbnail?.source || data?.originalimage?.source || null;
-        if (imgUrl) {
-          setWikiPreviewImg(imgUrl);
-          setWikiPreviewTitle(data.title || term);
-          setWikiPreviewState('found');
-        } else {
-          setWikiPreviewState('notfound');
-        }
+      const imgUrl = await robustFetchWikipediaThumbnail(term);
+      if (imgUrl) {
+        setWikiPreviewImg(imgUrl);
+        setWikiPreviewTitle(term);
+        setWikiPreviewState('found');
       } else {
         setWikiPreviewState('notfound');
       }
@@ -1666,11 +1708,7 @@ ${aiPromptTopic}`;
         const imgSearchQuery = story.image_query || story.title;
         let imageUrl = null;
         try {
-          const matched = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(imgSearchQuery.replace(/ /g, '_'))}`);
-          if (matched.ok) {
-            const matchedData = await matched.json();
-            imageUrl = matchedData?.thumbnail?.source || null;
-          }
+          imageUrl = await robustFetchWikipediaThumbnail(imgSearchQuery);
         } catch (err) {
           console.warn('Wikipedia image search failed:', err);
         }
