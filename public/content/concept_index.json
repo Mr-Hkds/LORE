@@ -15,8 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "the_lead_mask_case",
-    "operation_gladio"
+    "operation_gladio",
+    "the_lead_mask_case"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -112,9 +112,9 @@
     "black_dahlia_murder",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
-    "the_lead_mask_case",
     "uss_cyclops_vanishing",
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "the_lead_mask_case"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -728,15 +728,6 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "occult_rituals": [
-    "the_lead_mask_case"
-  ],
-  "bizarre_circumstances": [
-    "the_lead_mask_case"
-  ],
-  "cryptic_messages": [
-    "the_lead_mask_case"
-  ],
   "extraterrestrial_life": [
     "the_wow_signal",
     "the_children_of_woolpit"
@@ -1075,6 +1066,15 @@
   ],
   "public_perception": [
     "project_blue_book_ufo"
+  ],
+  "occult_rituals": [
+    "the_lead_mask_case"
+  ],
+  "bizarre_circumstances": [
+    "the_lead_mask_case"
+  ],
+  "cryptic_messages": [
+    "the_lead_mask_case"
   ],
   "historical_mystery": [
     "the_children_of_woolpit"
