@@ -454,6 +454,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [pasteUploading, setPasteUploading] = useState(false);
   const [pasteError, setPasteError] = useState(null);
   const [pasteSuccess, setPasteSuccess] = useState(false);
+  const [pasteStatusText, setPasteStatusText] = useState('');
 
   const getShortTitle = (title) => {
     if (!title) return '';
@@ -1129,6 +1130,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         setToast({ text: 'Cover image updated successfully!', type: 'success' });
         await loadAdminStories();
         if (refetchStories) await refetchStories();
+        return newHeroImage;
       } else {
         throw new Error('Database save failed');
       }
@@ -1256,35 +1258,91 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     if (!pasteConfirmation) return;
     setPasteUploading(true);
     setPasteError(null);
+    setPasteStatusText('Initiating database sync...');
+    
+    const { story_id, imageSource, story } = pasteConfirmation;
+    let savedImageUrl = imageSource;
+    
     try {
-      const { story_id, imageSource, story } = pasteConfirmation;
+      setPasteStatusText('Updating local SQLite database...');
+      const savedImg = await handleSaveImageSource(story_id, imageSource);
+      if (savedImg) {
+        savedImageUrl = savedImg;
+      }
       
-      // Save image source to database
-      await handleSaveImageSource(story_id, imageSource);
-      
-      // Auto-publish if draft
       if (story.draft) {
+        setPasteStatusText('Publishing dossier to local archive...');
         await handlePublishStory(story_id, true);
       }
       
-      setPasteSuccess(true);
-      setTimeout(() => {
-        setPasteConfirmation(null);
-        setPasteSuccess(false);
-        setPasteUploading(false);
-        setRowPreviews(prev => {
-          const next = { ...prev };
-          delete next[story_id];
-          return next;
-        });
-        window.location.reload();
-      }, 1500);
+      if (!ghToken) {
+        setPasteSuccess(true);
+        setPasteStatusText('Database synchronized.');
+        setTimeout(() => {
+          setPasteConfirmation(null);
+          setPasteSuccess(false);
+          setPasteUploading(false);
+          setRowPreviews(prev => {
+            const next = { ...prev };
+            delete next[story_id];
+            return next;
+          });
+          window.location.reload();
+        }, 1500);
+        return;
+      }
+      
+      let attempts = 0;
+      const maxAttempts = 24; // 2 minutes max
+      setPasteStatusText('Deploying telemetry live to Vercel CDN (building static bundle)...');
+      
+      const pollInterval = setInterval(async () => {
+        attempts++;
+        setPasteStatusText(`Deploying telemetry live to Vercel CDN... [Attempt ${attempts}/${maxAttempts}]`);
+        
+        try {
+          const res = await fetch(`/content/stories.json?t=${Date.now()}`);
+          if (res.ok) {
+            const data = await res.json();
+            const storiesList = data.stories || [];
+            const liveStory = storiesList.find(s => s.story_id === story_id);
+            
+            if (liveStory && liveStory.hero_image === savedImageUrl) {
+              clearInterval(pollInterval);
+              setPasteSuccess(true);
+              setPasteStatusText('Vercel Edge CDN verified: Thumbnail is 100% Live!');
+              
+              setTimeout(() => {
+                setPasteConfirmation(null);
+                setPasteSuccess(false);
+                setPasteUploading(false);
+                setRowPreviews(prev => {
+                  const next = { ...prev };
+                  delete next[story_id];
+                  return next;
+                });
+                window.location.reload();
+              }, 2000);
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn('Polling error:', e);
+        }
+        
+        if (attempts >= maxAttempts) {
+          clearInterval(pollInterval);
+          setPasteError('Vercel CDN build is taking longer than expected to compile. The changes are saved on GitHub and will display live in a minute.');
+          setPasteUploading(false);
+        }
+      }, 5000);
+      
     } catch (err) {
       setPasteError(err.message || 'Sync failed.');
       setPasteUploading(false);
       setRowPreviews(prev => {
         const next = { ...prev };
-        delete next[pasteConfirmation.story_id];
+        delete next[story_id];
         return next;
       });
     }
@@ -4209,16 +4267,17 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
             <div className="p-4 space-y-4">
               <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-900 bg-neutral-950 flex items-center justify-center">
                 {pasteUploading && (
-                  <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-3 z-10">
+                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center gap-3 z-10 px-4 text-center">
                     <span className="w-8 h-8 rounded-full border-2 border-t-transparent border-[#9E7B4C] animate-spin" />
-                    <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] animate-pulse">Syncing visual telemetry...</p>
+                    <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] font-bold animate-pulse">Syncing visual telemetry...</p>
+                    <p className="text-[8px] text-neutral-400 font-mono max-w-xs">{pasteStatusText}</p>
                   </div>
                 )}
                 {pasteSuccess && (
-                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2 z-10">
+                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2 z-10 px-4 text-center">
                     <span className="text-xl text-[#10B981]">✓</span>
                     <p className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold">Signal Synchronized</p>
-                    <p className="text-[8px] text-neutral-500 font-mono">Dossier successfully published live.</p>
+                    <p className="text-[8px] text-neutral-400 font-mono">{pasteStatusText || 'Dossier successfully published live.'}</p>
                   </div>
                 )}
                 {pasteError ? (
