@@ -1508,8 +1508,11 @@
     {
       "story_id": "jonestown_massacre_001",
       "title": "Jonestown: The Cult of Revolutionary Suicide",
-      "category": "true_crime",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
+      "image_query": "jonestown_massacre",
       "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "cults",
         "mass_suicide",
@@ -1518,18 +1521,6 @@
         "groupthink",
         "obedience_to_authority"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 13,
-        "scared": 60,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -1574,7 +1565,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 13,
+        "scared": 60,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "the_numbers_stations",
@@ -2279,8 +2275,11 @@
     {
       "story_id": "winchester_mystery_house",
       "title": "The Winchester Mystery House: A Widow's Endless Construction",
-      "category": "paranormal",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
+      "image_query": "",
       "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "paranormal_activity",
         "grief_and_madness",
@@ -2289,18 +2288,6 @@
         "unexplained_phenomena",
         "haunted_house"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 18,
-        "scared": 50,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2339,7 +2326,12 @@
           "content": "The darkest documented truth of the Winchester Mystery House lies not solely in its spectral claims, which remain subjective, but in the profound human tragedy that underlies its very existence. Sarah Winchester was undeniably a woman consumed by overwhelming grief and a deep-seated sense of guilt, exacerbated by her vast fortune and the deadly legacy of the Winchester rifle.\n\nWhile the concept of vengeful spirits driving her to build is a captivating narrative, the historical record confirms her debilitating losses and her earnest embrace of spiritualism as a coping mechanism. Her immense wealth allowed her to manifest this internal anguish into an unprecedented, tangible reality, transforming a farmhouse into a bewildering monument of her psyche.\n\nThe house, therefore, stands as a haunting testament to one woman's lifelong attempt to outrun or appease the shadows of her past. The 'curse' was perhaps less about literal spirits and more about the crushing weight of loss, the immense guilt associated with her family's fortune built on death, and a profound psychological haunting made terrifyingly manifest in brick, wood, and a never-ending labyrinth."
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 18,
+        "scared": 50,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2415,8 +2407,11 @@
     {
       "story_id": "the_cleveland_torso_murders",
       "title": "The Cleveland Torso Murders: The Unseen Butcher of Kingsbury Run",
-      "category": "true_crime",
+      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
+      "image_query": "",
       "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "serial_killer",
         "unsolved_mystery",
@@ -2425,18 +2420,6 @@
         "forensic_challenge",
         "political_pressure"
       ],
-      "severity": "chilling",
-      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 25,
-        "gripping": 13,
-        "scared": 25,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2481,13 +2464,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 25,
+        "gripping": 13,
+        "scared": 25,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "project_stargate_remote_viewing",
       "title": "Project Stargate: The Secret Quest for Psychic Espionage",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
+      "image_query": "",
       "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "remote_viewing",
         "government_experiments",
@@ -2498,18 +2489,6 @@
         "unethical_experimentation",
         "scientific_skepticism"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 33,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2554,13 +2533,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 33,
+        "scared": 6,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "stockholm_syndrome_001",
       "title": "Stockholm Syndrome: The Unsettling Bond of Captivity",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
+      "image_query": "Stockholm Syndrome",
       "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "hostage_psychology",
         "trauma_bonding",
@@ -2568,18 +2555,6 @@
         "cognitive_dissonance",
         "captivity_syndrome"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 46,
-        "gripping": 24,
-        "scared": 5,
-        "mindblown": 59
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2624,30 +2599,26 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 46,
+        "gripping": 24,
+        "scared": 5,
+        "mindblown": 59
+      }
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
       "title": "Project Sunshine: The Covert Harvest of the Dead",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
+      "image_query": "",
       "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "human_experimentation",
         "government_secrecy",
         "medical_ethics"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 40,
-        "gripping": 38,
-        "scared": 5,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2692,13 +2663,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 40,
+        "gripping": 38,
+        "scared": 5,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "salem_witch_trials_001",
       "title": "The Salem Witch Trials: A Village Consumed by Fear",
-      "category": "true_crime",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "image_query": "Salem witch trials",
       "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "mass_hysteria",
         "groupthink",
@@ -2706,18 +2685,6 @@
         "religious_extremism",
         "spectral_evidence"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 18,
-        "gripping": 26,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2762,13 +2729,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 33,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "the_rat_park_experiment_001",
       "title": "The Rat Park Experiment: Rewriting the Narrative of Addiction",
-      "category": "psychology",
+      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
+      "image_query": "",
       "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
+      "category": "psychology",
+      "severity": "disturbing",
       "concepts": [
         "addiction",
         "environment_vs_biology",
@@ -2778,18 +2753,6 @@
         "drug_policy",
         "social_pathology"
       ],
-      "severity": "disturbing",
-      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 17,
-        "gripping": 25,
-        "scared": 3,
-        "mindblown": 25
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2834,7 +2797,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 17,
+        "gripping": 25,
+        "scared": 3,
+        "mindblown": 25
+      }
     },
     {
       "story_id": "the_mary_celeste_mystery",
@@ -2849,9 +2817,9 @@
         "sea_legends"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHnEHExR-xzMrQ0Jw8vuQKSCf9itW9SC8WoUq1cJUiRg&s",
+      "hero_image": "/content/images/the_mary_celeste_mystery.jpg",
       "added_date": "2026-06-27",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 16,
         "gripping": 34,
@@ -2923,13 +2891,16 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "phineas_gage_brain_injury",
       "title": "The Case of Phineas Gage: The Man Whose Mind Was Shattered",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
+      "image_query": "Phineas Gage",
       "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "brain_injury",
         "personality_change",
@@ -2937,18 +2908,6 @@
         "frontal_lobe",
         "self_identity"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 55,
-        "gripping": 18,
-        "scared": 2,
-        "mindblown": 48
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2993,13 +2952,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 55,
+        "gripping": 18,
+        "scared": 2,
+        "mindblown": 48
+      }
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
       "title": "Dissociative Identity Disorder: The Shattered Self",
-      "category": "psychology",
+      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
+      "image_query": "",
       "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "dissociation",
         "trauma_response",
@@ -3007,18 +2974,6 @@
         "alter_personalities",
         "coping_mechanisms"
       ],
-      "severity": "chilling",
-      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 46,
-        "gripping": 19,
-        "scared": 5,
-        "mindblown": 44
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3063,13 +3018,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 46,
+        "gripping": 19,
+        "scared": 5,
+        "mindblown": 44
+      }
     },
     {
       "story_id": "black_dahlia_murder",
       "title": "The Black Dahlia Murder: Hollywood's Unsolved Nightmare",
-      "category": "true_crime",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
+      "image_query": "",
       "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unsolved_mystery",
         "brutal_murder",
@@ -3078,18 +3041,6 @@
         "forensic_challenge",
         "police_misconduct"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 54,
-        "gripping": 27,
-        "scared": 49,
-        "mindblown": 10
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3134,13 +3085,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 54,
+        "gripping": 27,
+        "scared": 49,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "clinical_lycanthropy",
       "title": "Clinical Lycanthropy: When the Human Mind Becomes a Beast",
-      "category": "psychology",
+      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
+      "image_query": "",
       "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "delusion",
         "psychosis",
@@ -3148,18 +3107,6 @@
         "neurology",
         "mental_health"
       ],
-      "severity": "chilling",
-      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 23,
-        "scared": 3,
-        "mindblown": 28
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3204,13 +3151,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 23,
+        "scared": 3,
+        "mindblown": 28
+      }
     },
     {
       "story_id": "the_isdal_woman",
       "title": "The Isdal Woman: Europe's Unidentified Shadow",
-      "category": "true_crime",
+      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
+      "image_query": "",
       "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unidentified_person",
         "espionage",
@@ -3218,18 +3173,6 @@
         "unexplained_deaths",
         "cold_case"
       ],
-      "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3274,13 +3217,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 33,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "project_iceworm_secret_city",
       "title": "Project ICEWORM: The US Army's Secret City Under the Ice",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
+      "image_query": "",
       "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "cold_war_era",
         "government_secrecy",
@@ -3288,18 +3239,6 @@
         "climate_change_impact",
         "military_infrastructure"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 23,
-        "gripping": 31,
-        "scared": 6,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3344,13 +3283,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 23,
+        "gripping": 31,
+        "scared": 6,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
       "title": "The Vanished Keepers of Eilean Mòr: A Lighthouse's Silent Riddle",
-      "category": "true_crime",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
+      "image_query": "",
       "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unsolved_mystery",
         "disappearance",
@@ -3358,18 +3305,6 @@
         "isolated_location",
         "unexplained_events"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 44,
-        "gripping": 22,
-        "scared": 49,
-        "mindblown": 10
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3414,13 +3349,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 44,
+        "gripping": 22,
+        "scared": 49,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "harold_shipman_serial_killer",
       "title": "The Angel of Death: Harold Shipman's Betrayal",
-      "category": "true_crime",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
+      "image_query": "",
       "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "serial_killer",
         "medical_malpractice",
@@ -3429,18 +3372,6 @@
         "systemic_failure",
         "power_dynamics"
       ],
-      "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 56,
-        "gripping": 34,
-        "scared": 71,
-        "mindblown": 12
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3485,13 +3416,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 56,
+        "gripping": 34,
+        "scared": 71,
+        "mindblown": 12
+      }
     },
     {
       "story_id": "the_ganzfeld_experiment",
       "title": "The Ganzfeld Experiment: The Science of Unseen Minds",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
+      "image_query": "Ganzfeld experiment",
       "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
+      "category": "psychology",
+      "severity": "unsettling",
       "concepts": [
         "parapsychology",
         "ESP",
@@ -3502,18 +3441,6 @@
         "replication_crisis",
         "perception_biases"
       ],
-      "severity": "unsettling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 4,
-        "mindblown": 31
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3558,13 +3485,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 4,
+        "mindblown": 31
+      }
     },
     {
       "story_id": "circleville_letters",
       "title": "The Circleville Letters: A Town Held Hostage by Anonymous Fear",
-      "category": "true_crime",
+      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
+      "image_query": "",
       "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "anonymous_harassment",
         "unsolved_mystery",
@@ -3572,18 +3507,6 @@
         "psychological_warfare",
         "small_town_secrets"
       ],
-      "severity": "chilling",
-      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 24,
-        "gripping": 22,
-        "scared": 54,
-        "mindblown": 5
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3628,7 +3551,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 54,
+        "mindblown": 5
+      }
     },
     {
       "story_id": "project_artichoke_mind_control",
@@ -3645,9 +3573,9 @@
         "psychological_warfare"
       ],
       "severity": "chilling",
-      "hero_image": "https://media.licdn.com/dms/image/v2/D4D12AQERuTfKacprMA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1723116633309?e=2147483647&v=beta&t=-tYAdJmu2Qxpgp91poQebBsx4R2BaUnO2THfWvkd2AU",
+      "hero_image": "/content/images/project_artichoke_mind_control.jpg",
       "added_date": "2026-06-28",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 51,
         "gripping": 29,
@@ -3718,7 +3646,7 @@
           "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "the_wow_signal",
@@ -3734,9 +3662,9 @@
         "existential_mystery"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
+      "hero_image": "/content/images/the_wow_signal.jpg",
       "added_date": "2026-06-28",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 39,
         "gripping": 22,
@@ -3807,7 +3735,7 @@
           "content": "The 'Wow! Signal' stands as the strongest, most compelling candidate for an extraterrestrial radio transmission ever received. Its singular nature, however, casts a long, unsettling shadow. If it was indeed a message from an intelligent civilization, why was it only sent once? Was it a brief, almost accidental, transmission from an advanced probe? Or a fleeting last gasp from a civilization that has since faded into the cosmic background noise?\n\nThe thought of a brief 'hello' from an alien intelligence, a momentary connection across unimaginable distances, only to be followed by absolute silence, is profoundly chilling. It evokes a sense of cosmic loneliness, the universe hinting at company, only to withdraw the invitation. It forces humanity to consider our place in the cosmos not just as seekers, but as recipients of a message we may never fully understand or answer.\n\nFor those 72 seconds, the Big Ear received an echo of intelligence, a whisper that resonated with the deepest human longing for contact. That single, circled 'Wow!' on a faded printout remains an open question, a haunting reminder that while we listen, the universe may have already spoken, leaving us to wonder if we were truly ready for the reply, or if we merely glimpsed a profound truth that then slipped back into the vast, indifferent void."
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "the_bloop_unexplained_sound",
@@ -3822,9 +3750,9 @@
         "oceanographic_research"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv5zhgnlK1qE4uZzipch2ysofCbJbhSyfpUTc16kK_0Q&s=10",
+      "hero_image": "/content/images/the_bloop_unexplained_sound.jpg",
       "added_date": "2026-06-28",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 26,
         "gripping": 14,
@@ -3883,7 +3811,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "edinburgh_vaults_001",
@@ -3898,9 +3826,9 @@
         "haunted_location"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfQsR2QKjLQnl3erXKILqlLvi8jvFiWuDpeMIOMLUmxJfGjIceZs4FgMw&s=10",
+      "hero_image": "/content/images/edinburgh_vaults_001.jpg",
       "added_date": "2026-06-28",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 31,
         "gripping": 34,
@@ -3964,7 +3892,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -3980,9 +3908,9 @@
         "technological_failure"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQFuRwDgJR9NogAxXOAgMNXX1THrUvRXWvvFOi0KmMYBDQghGUDhNmwIh&s=10",
+      "hero_image": "/content/images/the_russian_woodpecker_duga_3.jpg",
       "added_date": "2026-06-29",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 22,
         "gripping": 20,
@@ -4054,13 +3982,16 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "mystery_of_dwarka",
       "title": "The Sunken Kingdom: Dwarka's Enduring Mystery",
-      "category": "mythology",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
+      "image_query": "",
       "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
+      "category": "mythology",
+      "severity": "unsettling",
       "concepts": [
         "lost_civilizations",
         "mythology",
@@ -4068,18 +3999,6 @@
         "historical_validation",
         "catastrophic_events"
       ],
-      "severity": "unsettling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 41,
-        "gripping": 24,
-        "scared": 3,
-        "mindblown": 7
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4118,50 +4037,125 @@
           "cliffhanger": "The evidence of a lost city was strong, but the story of its fall, and its true identity, remained submerged in the waters of uncertainty."
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 41,
+        "gripping": 24,
+        "scared": 3,
+        "mindblown": 7
+      }
+    },
+    {
+      "story_id": "guatemalan_syphilis_experiment",
+      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
+      "category": "gov_experiments",
+      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
+      "concepts": [
+        "human_experimentation",
+        "medical_ethics",
+        "government_misconduct",
+        "unethical_research",
+        "public_health_failure",
+        "vulnerable_populations"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/guatemalan_syphilis_experiment.jpg",
+      "added_date": "2026-06-29",
+      "draft": false,
+      "reactions": {
+        "like": 31,
+        "gripping": 44,
+        "scared": 5,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
+        },
+        {
+          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
+          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
+        },
+        {
+          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
+          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "unethical_experimentation",
+          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
+        },
+        {
+          "story_id": "unit_731_experiments",
+          "shared_concept": "human_experimentation",
+          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper of Forgotten Files",
+          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
+          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Blueprint of 'Scientific' Conquest",
+          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
+          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Unwitting Subjects",
+          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Act of Deliberate Infection",
+          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
+          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The 'Treatment' and Its Cruel Irony",
+          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
+          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss of Forgotten Suffering",
+          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
+          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
+          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
+        }
+      ],
+      "image_missing": true
     },
     {
       "story_id": "the_children_of_woolpit",
       "title": "The Green Children of Woolpit: An Unearthly Mystery",
-      "category": "paranormal",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU8cGedkJCzo2f_Dt96V_31-nylw14nLd6ZLw1HxKw0BDSwL9qCkZsi2J0&s=10",
+      "image_query": "",
       "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "unexplained_phenomena",
         "historical_mystery",
         "extraterrestrial_life",
         "isolated_cultures",
         "folklore"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://orion-uploads.openroadmedia.com/xl_1cc398f9476d-greenchildrenwoolpit_featured.jpg",
-      "added_date": "2026-06-29",
-      "draft": 0,
-      "reactions": {
-        "like": 46,
-        "gripping": 44,
-        "scared": 31,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "John Clark. The Green Children of Woolpit: Chronicles, Fairies and Facts in Medieval England. University of Exeter Press, 2024. ISBN: 978-1-80413-136-7 . 260 pp. (Veronika Nikiforova, 2025)",
-          "url": "https://revistas.ucm.es/index.php/AMAL/article/download/97557/4564456573040"
-        },
-        {
-          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
-          "url": "https://revistaselectronicas.ujaen.es/index.php/blo/article/download/9628/9770"
-        },
-        {
-          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
-          "url": "https://doi.org/10.17561/blo.v15.9628"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_wow_signal",
-          "shared_concept": "unexplained_phenomena",
-          "transition_line": "Just as the 'Wow! Signal' captured a fleeting whisper from the cosmos, the tale of the Green Children of Woolpit echoes an unexplained phenomenon, challenging our perceptions of what exists just beyond our known world."
-        }
       ],
       "layers": [
         {
@@ -4207,7 +4201,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "reactions": {
+        "like": 46,
+        "gripping": 44,
+        "scared": 31,
+        "mindblown": 12
+      }
     },
     {
       "story_id": "ravaan_character_study",
@@ -4224,9 +4223,9 @@
         "obsession"
       ],
       "severity": "disturbing",
-      "hero_image": "https://www.saibabaofindia.com/images/blackravana.jpg",
+      "hero_image": "/content/images/ravaan_character_study.jpg",
       "added_date": "2026-06-29",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 51,
         "gripping": 29,
@@ -4297,7 +4296,7 @@
           "content": "The final battle between Rama and Ravana is not just a clash of titans, but a profound psychological examination of self-destruction. Even in the face of insurmountable odds, Ravana refused to surrender, to seek peace, or to admit his profound errors. His hubris dictated that death in battle was preferable to any perceived dishonor or concession. His psychological construction of himself as invincible meant that true defeat was an existential impossibility.\n\nHis multiple heads and lives, granted by boons, became a metaphor for his inability to truly 'die' to his ego. Each time a head was severed, it would regrow, symbolizing the persistence of his destructive pride. Ultimately, it was not merely Rama's arrow, but the full weight of his own psychological failings—his unchecked narcissism, his delusional grandiosity, and his profound inability to accept limitations—that led to his final, irreversible demise. Ravana's story stands as a timeless cautionary tale, depicting how the unchecked human ego, even when combined with immense power and intellect, inevitably leads to an ultimate, self-inflicted ruin, a chilling testament to the darkest corners of the human psyche."
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -4312,9 +4311,9 @@
         "skepticism_vs_belief"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMV-9XHf0I-kqGE67AbgasLcPLOKdsoGnCn1u-eXZV1g&s=10",
+      "hero_image": "/content/images/enfield_poltergeist_001.jpg",
       "added_date": "2026-06-29",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 48,
         "gripping": 36,
@@ -4386,7 +4385,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "operation_paperclip_001",
@@ -4403,9 +4402,9 @@
         "human_rights_violations"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6WQ6duEPiEZS-jnAwH2DSoN7i3yR08aPJ1kuK8wby_A&s",
+      "hero_image": "/content/images/operation_paperclip_001.jpg",
       "added_date": "2026-06-30",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 13,
         "gripping": 26,
@@ -4482,7 +4481,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
@@ -4764,94 +4763,6 @@
           "layer": 7,
           "layer_name": "The Dark Corner - The Implications of Manifestation",
           "content": "The Philip Experiment ultimately demonstrated that a group of individuals, through sustained collective focus and the suspension of disbelief, could seemingly manifest physical phenomena attributed to a nonexistent entity. The researchers concluded that the phenomena were likely a form of psychokinesis driven by the subconscious minds of the group, possibly mediated by an ideomotor effect — involuntary muscular movements influenced by suggestion or expectation, or a more profound manifestation of 'thought forms' from the collective unconscious.\n\nWhile the experiment did not prove the existence of traditional spirits, it offered compelling evidence for the powerful, yet often unrecognized, capacity of the human mind to influence its physical environment. The unsettling truth lies in the potential for mass belief to generate a perceived reality, blurring the lines between fiction and fact, and suggesting that even our deepest fears or most fervent hopes might, under certain conditions, take on a tangible, if ephemeral, form. The Philip Experiment remains a chilling testament to the unknown depths of human psychological power.",
-          "cliffhanger": null
-        }
-      ],
-      "image_missing": false
-    },
-    {
-      "story_id": "the_mandela_effect",
-      "title": "The Mandela Effect: When Reality Itself Seemed to Shift",
-      "category": "psychology",
-      "hook": "A significant number of people vividly recall Nelson Mandela dying in prison in the 1980s, despite historical records confirming his release in 1990 and his death in 2013. This collective misremembrance forms the unsettling core of a global phenomenon.",
-      "concepts": [
-        "false_memory",
-        "cognitive_bias",
-        "collective_memory",
-        "reality_perception"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
-      "added_date": "2026-06-28",
-      "draft": false,
-      "reactions": {
-        "like": 41,
-        "gripping": 19,
-        "scared": 6,
-        "mindblown": 54
-      },
-      "evidence_links": [
-        {
-          "label": "Health and Health Care in South Africa — 20 Years after Mandela (Bongani M. Mayosi, Solomon R. Benatar, 2014)",
-          "url": "https://www.nejm.org/doi/pdf/10.1056/NEJMsr1405012?articleTools=true"
-        },
-        {
-          "label": "The Mandela Effect and New Memory (Aaron M. French, 2018)",
-          "url": "https://doaj.org/article/383666474adc44e0884472bbe5dfd32b"
-        },
-        {
-          "label": "The Visual Mandela Effect as evidence for shared and specific false memories across people (Deepasri Prasad, Wilma Bainbridge, 2021)",
-          "url": "https://psyarxiv.com/nzh3s/download"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "folie_a_deux_shared_psychosis",
-          "shared_concept": "shared_delusion",
-          "transition_line": "Just as the Mandela Effect exposes the collective vulnerability of memory to shared misremembering, the chilling phenomenon of 'Folie à Deux' reveals how delusions, though not identical to false memories, can similarly become a shared reality, binding individuals in a mutually reinforced, distorted perception of the world."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Mandela Enigma",
-          "content": "In a world seemingly grounded in shared history, a disturbing anomaly surfaced: a widespread, deeply held belief that Nelson Mandela had died in prison in the 1980s. For many, this wasn't a vague recollection, but a vivid memory complete with news reports, mourning, and even specific details of his funeral. Yet, documented history unequivocally states that Mandela was released from prison in 1990 and went on to become the first President of post-apartheid South Africa, dying peacefully in 2013.\n\nThe profound shock experienced by those confronting this historical discrepancy was palpable. It wasn't merely a factual error, but a direct contradiction of what they felt, with absolute certainty, they had lived through. This sensation of having experienced a different past, shared by a significant portion of the population, became the bedrock of a modern mystery.",
-          "cliffhanger": "But was this an isolated incident, or merely the first ripple in a deeper, unsettling pattern that questioned the very nature of our shared reality?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "Echoes from a Different Timeline",
-          "content": "The 'Mandela Effect' soon expanded beyond its namesake, revealing an unnerving pattern of collective misremembrance across various cultural touchstones. Countless individuals were certain that Darth Vader uttered the line 'Luke, I am your father' in 'Star Wars: The Empire Strikes Back', only to discover the actual dialogue is 'No, I am your father'. Similarly, an entire generation grew up believing the popular children's book series was 'The Berenstein Bears', until countless online discussions revealed it was, and always had been, 'The Berenstain Bears'.\n\nThese were not isolated quirks of individual memory. These were specific, detailed recollections, shared by thousands across different demographics and geographies, all contradicting verifiable facts. From the alleged monocle on the Monopoly Man, which he never had, to the exact lyrics of iconic songs, the phenomenon highlighted a disconcerting consistency in these widespread false memories, suggesting a fundamental glitch in how we perceive and recall reality.",
-          "cliffhanger": "How could so many people vividly remember things that never happened, and what did it imply about the solidity of our collective history?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Genesis of a Phenomenon",
-          "content": "The term 'Mandela Effect' was coined in 2010 by paranormal researcher Fiona Broome. She first publicly discussed her clear, detailed memories of Nelson Mandela's death in prison during a convention, only to discover that others shared her conviction.\n\nBroome created a website to document these collective false memories, seeking to understand why so many people could recall the same non-existent events with such clarity. Her efforts provided a platform for individuals to share their own experiences, recognizing that their 'alternate' memories were not unique aberrations, but part of a shared, perplexing phenomenon that transcended individual psychology.",
-          "cliffhanger": "As Broome's observations resonated globally, a community emerged, each member bringing forth more examples, questioning the very fabric of shared history and perception."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Digital Amplification",
-          "content": "The advent of the internet and social media proved to be a powerful catalyst for the Mandela Effect's proliferation. Online forums, discussion boards, and social media groups became fertile ground for individuals to share their experiences and validate each other's 'alternate' memories.\n\nThis digital ecosystem allowed for rapid dissemination of new examples and fostered a collective sense of wonder, confusion, and sometimes, unease. The sheer volume of shared experiences reinforced the belief that something profound was occurring, transforming individual cognitive quirks into a widespread cultural phenomenon that challenged conventional understanding of memory and reality.",
-          "cliffhanger": "This digital echo chamber didn't just spread the phenomenon; it transformed it from isolated instances into a widespread cultural enigma, demanding an explanation."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Cognitive Explanation",
-          "content": "From a scientific perspective, the Mandela Effect is largely attributed to the complex and often fallible nature of human memory. Psychologists point to phenomena such as confabulation, where the brain fills in gaps in memory with plausible but false information; source monitoring errors, where individuals forget the origin of a memory and internalize it as their own; and suggestibility, where external information or social cues can inadvertently shape recollections.\n\nFurthermore, the concept of 'false memories' is well-documented. Collective narratives, cultural repetition, and even post-event information can embed inaccurate details into shared consciousness, making them feel as vivid and real as genuine experiences. The brain, rather than recording events like a video camera, reconstructs them, making it susceptible to these subtle, yet powerful, distortions.",
-          "cliffhanger": "While scientific explanations offer logical frameworks for individual instances, they often struggle to fully account for the profound emotional conviction and the specific, consistent details shared by thousands across disparate events."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Quantum Dilemma",
-          "content": "For many, conventional psychological explanations feel insufficient to explain the profound sense of 'knowing' and the sheer scale of shared misremembrance. This has led to more speculative and chilling theories, often venturing into the realm of theoretical physics and metaphysics.\n\nSome adherents propose the Mandela Effect is evidence of parallel universes 'colliding' or 'shifting', causing subtle alterations in our shared timeline and historical record. Others suggest that these discrepancies are echoes from alternate realities, or even proof of sophisticated, unnoticed changes to our very existence. While these theories remain in the realm of conjecture and lack empirical support, they underscore the depth of confusion and the desperate search for an explanation beyond the conventional, hinting at a reality far more fluid than we comprehend.",
-          "cliffhanger": "The implications are profound: if our collective memory can be so demonstrably wrong, what else might we be misremembering, and who, or what, is orchestrating these subtle alterations?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Vulnerability of Reality",
-          "content": "Regardless of its underlying cause—whether a complex interplay of cognitive biases, the influence of social contagion, or something far more esoteric—the Mandela Effect serves as a stark, chilling testament to the inherent fragility and reconstructive nature of human memory. It reveals that our perception of reality is far more subjective and susceptible to influence than we often believe, both individually and collectively.\n\nThis phenomenon forces us to question the reliability of our own minds, the authenticity of our shared historical narratives, and ultimately, the very foundation of what we understand as truth. It suggests that even the most deeply ingrained 'facts' can be, for a multitude of people, nothing more than collectively fabricated illusions, leaving a profound and unsettling uncertainty about the past we think we know.",
           "cliffhanger": null
         }
       ],
@@ -5241,8 +5152,11 @@
     {
       "story_id": "blue_whale_game_001",
       "title": "The Blue Whale Challenge: A Digital Descent into Despair",
-      "category": "cyber_mysteries",
+      "hero_image": "/content/images/blue_whale_game_001.jpg",
+      "image_query": "",
       "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
+      "category": "cyber_mysteries",
+      "severity": "chilling",
       "concepts": [
         "social_pressure",
         "vulnerability",
@@ -5251,18 +5165,6 @@
         "digital_threats",
         "psychological_exploitation"
       ],
-      "severity": "chilling",
-      "hero_image": "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/08/26/Pictures/print_229ba15a-8a8c-11e7-b7bc-fa1568cb40f1.jpg",
-      "added_date": "2026-06-30",
-      "draft": false,
-      "reactions": {
-        "like": 13,
-        "gripping": 11,
-        "scared": 2,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -5307,7 +5209,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 13,
+        "gripping": 11,
+        "scared": 2,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -6502,102 +6409,63 @@
       "image_missing": false
     },
     {
-      "story_id": "guatemalan_syphilis_experiment",
-      "title": "The Guatemala Experiment: A Shadowed Chapter of Medical Betrayal",
-      "category": "gov_experiments",
-      "hook": "Before the world learned of Tuskegee, another, more aggressive chapter of human experimentation unfolded, where vulnerable populations were intentionally infected with venereal diseases in a hidden study.",
-      "concepts": [
-        "human_experimentation",
-        "medical_ethics",
-        "government_misconduct",
-        "unethical_research",
-        "public_health_failure",
-        "vulnerable_populations"
-      ],
+      "story_id": "the_mandela_effect",
+      "title": "The Mandela Effect: When Reality Itself Seemed to Shift",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
+      "image_query": "",
+      "hook": "A significant number of people vividly recall Nelson Mandela dying in prison in the 1980s, despite historical records confirming his release in 1990 and his death in 2013. This collective misremembrance forms the unsettling core of a global phenomenon.",
+      "category": "psychology",
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCCKvQv8yISCYZnnYiVrQv_spEVWQ1Xd2o7VGDe3Y17e1B6G7I-SYuSQ-g&s=10",
-      "added_date": "2026-06-29",
-      "draft": 0,
-      "reactions": {
-        "like": 31,
-        "gripping": 44,
-        "scared": 5,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "“Normal Exposure” and Inoculation Syphilis: A PHS “Tuskegee” Doctor in Guatemala, 1946–1948 (Susan M. Reverby, 2011)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BEC952071E283DC07D2ED377645D102B/S0898030610000291a.pdf/div-class-title-normal-exposure-and-inoculation-syphilis-a-phs-tuskegee-doctor-in-guatemala-1946-1948-div.pdf"
-        },
-        {
-          "label": "Ethical Failures and History Lessons: The U.S. Public Health Service Research Studies in Tuskegee and Guatemala (Susan M. Reverby, 2012)",
-          "url": "https://publichealthreviews.biomedcentral.com/track/pdf/10.1007/BF03391665"
-        },
-        {
-          "label": "Secondary Syphilis in Cali, Colombia: New Concepts in Disease Pathogenesis (Adriana R. Cruz, Allan Pillay, 2010)",
-          "url": "https://journals.plos.org/plosntds/article/file?id=10.1371/journal.pntd.0000690&type=printable"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Much like the shadow cast by the Tuskegee Syphilis Study, the Guatemala Experiment stands as another dark monument to systemic medical malfeasance."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "And just as Project MK-Ultra revealed the lengths to which government entities would go in pursuit of scientific advantage, the Guatemala Experiment stripped away any pretense of ethical conduct in the name of public health research."
-        },
-        {
-          "story_id": "unit_731_experiments",
-          "shared_concept": "human_experimentation",
-          "transition_line": "The chilling echoes of Unit 731's horrific human experimentation during wartime find a peacetime parallel in the deliberate infection of the vulnerable in Guatemala."
-        }
+      "concepts": [
+        "false_memory",
+        "cognitive_bias",
+        "collective_memory",
+        "reality_perception"
       ],
       "layers": [
         {
           "layer": 1,
-          "layer_name": "The Whisper of Forgotten Files",
-          "content": "In 2010, Dr. Susan Reverby, a professor of women's studies at Wellesley College, stumbled upon a chilling collection of archived documents while researching the infamous Tuskegee Syphilis Study. These files, largely unexamined for decades, detailed a series of medical experiments conducted by the U.S. Public Health Service between 1946 and 1948. What they revealed was not merely neglect or withholding of treatment, but an active, deliberate campaign of human infection.",
-          "cliffhanger": "These dusty records hinted at a scientific endeavor far more audacious and ethically bankrupt than anything previously acknowledged, setting the stage for a darker narrative."
+          "layer_name": "The Mandela Enigma",
+          "content": "In a world seemingly grounded in shared history, a disturbing anomaly surfaced: a widespread, deeply held belief that Nelson Mandela had died in prison in the 1980s. For many, this wasn't a vague recollection, but a vivid memory complete with news reports, mourning, and even specific details of his funeral. Yet, documented history unequivocally states that Mandela was released from prison in 1990 and went on to become the first President of post-apartheid South Africa, dying peacefully in 2013.\n\nThe profound shock experienced by those confronting this historical discrepancy was palpable. It wasn't merely a factual error, but a direct contradiction of what they felt, with absolute certainty, they had lived through. This sensation of having experienced a different past, shared by a significant portion of the population, became the bedrock of a modern mystery.",
+          "cliffhanger": "But was this an isolated incident, or merely the first ripple in a deeper, unsettling pattern that questioned the very nature of our shared reality?"
         },
         {
           "layer": 2,
-          "layer_name": "The Blueprint of 'Scientific' Conquest",
-          "content": "However, the methods proposed veered sharply from ethical norms. The U.S. Public Health Service, in conjunction with the Pan American Sanitary Bureau (now PAHO) and Guatemalan health officials, decided to conduct a study in Guatemala. The rationale was simple, if deeply flawed: Guatemala presented a population deemed 'suitable' for experimental infection due to existing societal vulnerabilities and a less stringent ethical oversight. This collaboration would enable researchers to perform experiments that would have been unthinkable on American soil.",
-          "cliffhanger": "What began as an insidious 'scientific' proposal soon escalated into a full-scale operation, targeting those least able to defend themselves."
+          "layer_name": "Echoes from a Different Timeline",
+          "content": "The 'Mandela Effect' soon expanded beyond its namesake, revealing an unnerving pattern of collective misremembrance across various cultural touchstones. Countless individuals were certain that Darth Vader uttered the line 'Luke, I am your father' in 'Star Wars: The Empire Strikes Back', only to discover the actual dialogue is 'No, I am your father'. Similarly, an entire generation grew up believing the popular children's book series was 'The Berenstein Bears', until countless online discussions revealed it was, and always had been, 'The Berenstain Bears'.\n\nThese were not isolated quirks of individual memory. These were specific, detailed recollections, shared by thousands across different demographics and geographies, all contradicting verifiable facts. From the alleged monocle on the Monopoly Man, which he never had, to the exact lyrics of iconic songs, the phenomenon highlighted a disconcerting consistency in these widespread false memories, suggesting a fundamental glitch in how we perceive and recall reality.",
+          "cliffhanger": "How could so many people vividly remember things that never happened, and what did it imply about the solidity of our collective history?"
         },
         {
           "layer": 3,
-          "layer_name": "The Unwitting Subjects",
-          "content": "The researchers established a clandestine infrastructure, leveraging existing institutions to house and observe their human subjects. The mental asylum, in particular, became a crucial site, where individuals with severe cognitive impairments were subjected to the experiments, utterly incapable of understanding or consenting to their fate. For the U.S. medical establishment involved, these individuals were not patients, but mere vectors for disease and data points for observation."
+          "layer_name": "The Genesis of a Phenomenon",
+          "content": "The term 'Mandela Effect' was coined in 2010 by paranormal researcher Fiona Broome. She first publicly discussed her clear, detailed memories of Nelson Mandela's death in prison during a convention, only to discover that others shared her conviction.\n\nBroome created a website to document these collective false memories, seeking to understand why so many people could recall the same non-existent events with such clarity. Her efforts provided a platform for individuals to share their own experiences, recognizing that their 'alternate' memories were not unique aberrations, but part of a shared, perplexing phenomenon that transcended individual psychology.",
+          "cliffhanger": "As Broome's observations resonated globally, a community emerged, each member bringing forth more examples, questioning the very fabric of shared history and perception."
         },
         {
           "layer": 4,
-          "layer_name": "The Act of Deliberate Infection",
-          "content": "In other, even more direct instances, the scientists inoculated the subjects themselves. This involved introducing syphilis and gonorrhea bacteria directly into their bodies, sometimes through abrasions on the genitals, other times through spinal punctures, or even by injecting the pathogens directly into the bloodstream. There was no pretense of treatment or consent before these deliberate infections took place; the sole purpose was to observe the onset and progression of the diseases in a controlled environment.",
-          "cliffhanger": "The meticulous recording of these infections stood in stark contrast to the utter disregard for the human beings whose lives were being irrevocably altered."
+          "layer_name": "The Digital Amplification",
+          "content": "The advent of the internet and social media proved to be a powerful catalyst for the Mandela Effect's proliferation. Online forums, discussion boards, and social media groups became fertile ground for individuals to share their experiences and validate each other's 'alternate' memories.\n\nThis digital ecosystem allowed for rapid dissemination of new examples and fostered a collective sense of wonder, confusion, and sometimes, unease. The sheer volume of shared experiences reinforced the belief that something profound was occurring, transforming individual cognitive quirks into a widespread cultural phenomenon that challenged conventional understanding of memory and reality.",
+          "cliffhanger": "This digital echo chamber didn't just spread the phenomenon; it transformed it from isolated instances into a widespread cultural enigma, demanding an explanation."
         },
         {
           "layer": 5,
-          "layer_name": "The 'Treatment' and Its Cruel Irony",
-          "content": "Many subjects received little to no follow-up care, even after demonstrating symptoms of advanced syphilis or gonorrhea. The study lacked any meaningful ethical framework, reducing human beings to living laboratories. The irony was profound: a study ostensibly about public health and treatment was founded on practices that actively created public health crises for its subjects, demonstrating a profound betrayal of the Hippocratic oath.",
-          "cliffhanger": "The legacy of these experiments was not just compromised health, but a harrowing trail of suffering, death, and a silent cover-up that would last for decades."
+          "layer_name": "The Cognitive Explanation",
+          "content": "From a scientific perspective, the Mandela Effect is largely attributed to the complex and often fallible nature of human memory. Psychologists point to phenomena such as confabulation, where the brain fills in gaps in memory with plausible but false information; source monitoring errors, where individuals forget the origin of a memory and internalize it as their own; and suggestibility, where external information or social cues can inadvertently shape recollections.\n\nFurthermore, the concept of 'false memories' is well-documented. Collective narratives, cultural repetition, and even post-event information can embed inaccurate details into shared consciousness, making them feel as vivid and real as genuine experiences. The brain, rather than recording events like a video camera, reconstructs them, making it susceptible to these subtle, yet powerful, distortions.",
+          "cliffhanger": "While scientific explanations offer logical frameworks for individual instances, they often struggle to fully account for the profound emotional conviction and the specific, consistent details shared by thousands across disparate events."
         },
         {
           "layer": 6,
-          "layer_name": "The Abyss of Forgotten Suffering",
-          "content": "The U.S. government quietly terminated the experiment in 1948, the year before the Nuremberg Code laid down fundamental ethical principles for human experimentation. The records were subsequently filed away, obscured from public view, and the memory of the study itself faded into the shadows. The victims and their families were left to contend with the devastating health consequences, unaware that their suffering was the result of a deliberate, calculated scientific endeavor orchestrated by foreign powers.",
-          "cliffhanger": "The truth remained buried for over six decades, a testament to a shocking chapter of medical history awaiting its inevitable, public revelation."
+          "layer_name": "The Quantum Dilemma",
+          "content": "For many, conventional psychological explanations feel insufficient to explain the profound sense of 'knowing' and the sheer scale of shared misremembrance. This has led to more speculative and chilling theories, often venturing into the realm of theoretical physics and metaphysics.\n\nSome adherents propose the Mandela Effect is evidence of parallel universes 'colliding' or 'shifting', causing subtle alterations in our shared timeline and historical record. Others suggest that these discrepancies are echoes from alternate realities, or even proof of sophisticated, unnoticed changes to our very existence. While these theories remain in the realm of conjecture and lack empirical support, they underscore the depth of confusion and the desperate search for an explanation beyond the conventional, hinting at a reality far more fluid than we comprehend.",
+          "cliffhanger": "The implications are profound: if our collective memory can be so demonstrably wrong, what else might we be misremembering, and who, or what, is orchestrating these subtle alterations?"
         },
         {
           "layer": 7,
-          "layer_name": "The Dark Corner: Reckoning with a Deliberate Crime",
-          "content": "The Guatemala Experiment stands as a chilling reminder of the critical importance of informed consent, ethical oversight, and the enduring dangers when scientific ambition overshadows fundamental human dignity. Its revelation reshaped international medical ethics discussions and underscored the need for constant vigilance against abuses of power in the name of progress."
+          "layer_name": "The Vulnerability of Reality",
+          "content": "Regardless of its underlying cause—whether a complex interplay of cognitive biases, the influence of social contagion, or something far more esoteric—the Mandela Effect serves as a stark, chilling testament to the inherent fragility and reconstructive nature of human memory. It reveals that our perception of reality is far more subjective and susceptible to influence than we often believe, both individually and collectively.\n\nThis phenomenon forces us to question the reliability of our own minds, the authenticity of our shared historical narratives, and ultimately, the very foundation of what we understand as truth. It suggests that even the most deeply ingrained 'facts' can be, for a multitude of people, nothing more than collectively fabricated illusions, leaving a profound and unsettling uncertainty about the past we think we know.",
+          "cliffhanger": null
         }
-      ],
-      "image_missing": 0
+      ]
     }
   ]
 }

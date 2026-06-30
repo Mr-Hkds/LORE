@@ -218,8 +218,8 @@
     "unit_731_experiments",
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -778,6 +778,13 @@
   "catastrophic_events": [
     "mystery_of_dwarka"
   ],
+  "unethical_research": [
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
+  ],
+  "vulnerable_populations": [
+    "guatemalan_syphilis_experiment"
+  ],
   "historical_mystery": [
     "the_children_of_woolpit"
   ],
@@ -899,18 +906,6 @@
   "ideomotor_effect": [
     "the_philip_experiment"
   ],
-  "false_memory": [
-    "the_mandela_effect"
-  ],
-  "cognitive_bias": [
-    "the_mandela_effect"
-  ],
-  "collective_memory": [
-    "the_mandela_effect"
-  ],
-  "reality_perception": [
-    "the_mandela_effect"
-  ],
   "authoritarianism": [
     "the_third_wave_experiment",
     "the_batavia_shipwreck_mutiny"
@@ -926,10 +921,6 @@
   ],
   "institutionalization": [
     "the_silent_twins_gibbons"
-  ],
-  "unethical_research": [
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1082,7 +1073,16 @@
   "extrajudicial_killings": [
     "the_phoenix_program"
   ],
-  "vulnerable_populations": [
-    "guatemalan_syphilis_experiment"
+  "false_memory": [
+    "the_mandela_effect"
+  ],
+  "cognitive_bias": [
+    "the_mandela_effect"
+  ],
+  "collective_memory": [
+    "the_mandela_effect"
+  ],
+  "reality_perception": [
+    "the_mandela_effect"
   ]
 }
