@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/stories/add", "destination": "/api/stories" },
+    { "source": "/api/stories/publish", "destination": "/api/stories" },
+    { "source": "/api/stories/react", "destination": "/api/stories" },
+    { "source": "/api/stories/:id", "destination": "/api/stories" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
