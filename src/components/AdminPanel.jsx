@@ -1309,6 +1309,15 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         setPasteProgress(100);
         setPasteSuccess(true);
         setPasteStatusText('Database synchronized.');
+        
+        setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
+          ...s, 
+          hero_image: savedImageUrl, 
+          image_missing: 0, 
+          draft: 0,
+          added_date: new Date().toLocaleDateString('en-CA')
+        } : s));
+        
         setTimeout(() => {
           setPasteConfirmation(null);
           setPasteSuccess(false);
@@ -1343,6 +1352,14 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
               setPasteProgress(100);
               setPasteSuccess(true);
               setPasteStatusText('Vercel Edge CDN verified: Thumbnail is 100% Live!');
+              
+              setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
+                ...s, 
+                hero_image: savedImageUrl, 
+                image_missing: 0, 
+                draft: 0,
+                added_date: new Date().toLocaleDateString('en-CA')
+              } : s));
               
               setTimeout(() => {
                 setPasteConfirmation(null);
