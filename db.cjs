@@ -40,7 +40,8 @@ db.exec(`
     reactions TEXT,
     evidence_links TEXT,
     connections TEXT,
-    layers TEXT
+    layers TEXT,
+    custom_image_prompt TEXT
   );
 
   CREATE TABLE IF NOT EXISTS recommendations (
@@ -105,6 +106,7 @@ try { db.exec("ALTER TABLE pageviews ADD COLUMN region TEXT"); } catch(e){}
 try { db.exec("ALTER TABLE pageviews ADD COLUMN country TEXT"); } catch(e){}
 try { db.exec("ALTER TABLE pageviews ADD COLUMN country_code TEXT"); } catch(e){}
 try { db.exec("ALTER TABLE pageviews ADD COLUMN org TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE stories ADD COLUMN custom_image_prompt TEXT"); } catch(e){}
 
 function ensureStoryReactions(story) {
   const rx = story.reactions || {};
@@ -155,8 +157,8 @@ function syncDatabaseIfNeeded() {
     if (data && Array.isArray(data.stories)) {
       const insertStmt = db.prepare(`
         INSERT OR REPLACE INTO stories (
-          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `);
       const transaction = db.transaction((stories) => {
         for (const s of stories) {
@@ -173,7 +175,8 @@ function syncDatabaseIfNeeded() {
             JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
             JSON.stringify(s.evidence_links || []),
             JSON.stringify(s.connections || []),
-            JSON.stringify(s.layers || [])
+            JSON.stringify(s.layers || []),
+            s.custom_image_prompt || null
           );
         }
       });
@@ -270,8 +273,8 @@ function getStory(story_id) {
 function insertStory(story) {
   const stmt = db.prepare(`
     INSERT OR REPLACE INTO stories (
-      story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   
   stmt.run(
@@ -287,7 +290,8 @@ function insertStory(story) {
     JSON.stringify(story.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
     JSON.stringify(story.evidence_links || []),
     JSON.stringify(story.connections || []),
-    JSON.stringify(story.layers || [])
+    JSON.stringify(story.layers || []),
+    story.custom_image_prompt || null
   );
   return getStory(story.story_id);
 }

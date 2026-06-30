@@ -602,42 +602,74 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     return [];
   };
 
-  // Client-side image converter & local uploader
-  const saveRemoteImageLocally = async (storyId, remoteUrl) => {
-    if (!isLocal || serverOffline) return remoteUrl;
+  // Fetches a remote image's base64 content via the serverless CORS proxy
+  const fetchRemoteImageBase64 = async (remoteUrl) => {
+    if (!remoteUrl) return null;
+    // If it's already a base64 string, parse out metadata and return it
+    if (remoteUrl.startsWith('data:image/')) {
+      const clean = remoteUrl.replace(/^data:image\/\w+;base64,/, '');
+      return { base64Clean: clean, contentType: 'image/jpeg' };
+    }
     try {
-      const response = await fetch(remoteUrl);
-      const blob = await response.blob();
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = async () => {
-          try {
-            const base64Data = reader.result;
-            const res = await fetch('/api/upload-image', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                storyId,
-                filename: 'cover.jpg',
-                base64Data
-              })
-            });
-            if (res.ok) {
-              const data = await res.json();
-              resolve(data.path || remoteUrl);
-              return;
-            }
-          } catch {
-            void 0;
-          }
-          resolve(remoteUrl);
-        };
-        reader.readAsDataURL(blob);
-      });
-    } catch {
-      return remoteUrl;
+      const proxyUrl = `/api/cors-proxy?url=${encodeURIComponent(remoteUrl)}`;
+      const proxyRes = await fetch(proxyUrl);
+      if (!proxyRes.ok) {
+        throw new Error(`CORS proxy failed with status ${proxyRes.status}`);
+      }
+      const data = await proxyRes.json();
+      return {
+        base64Clean: data.base64Clean,
+        contentType: data.contentType
+      };
+    } catch (err) {
+      console.warn(`[fetchRemoteImageBase64] Failed to fetch remote image via CORS proxy:`, err.message);
+      return null;
     }
   };
+
+  // Archives a remote image (local dev write + returns details for GitHub commit)
+  const archiveRemoteImage = async (storyId, remoteUrl) => {
+    if (!remoteUrl) return { path: '', base64Clean: null };
+    
+    // If already local, just return it
+    if (remoteUrl.startsWith('/content/images/')) {
+      return { path: remoteUrl, base64Clean: null };
+    }
+
+    const folderName = storyId || 'general';
+    const filename = 'cover.jpg';
+    const relativePath = `/content/images/${folderName}/${filename}`;
+
+    // 1. Fetch base64 content
+    const imgData = await fetchRemoteImageBase64(remoteUrl);
+    if (!imgData) {
+      // Failed to download: return original url as fallback
+      return { path: remoteUrl, base64Clean: null };
+    }
+
+    // 2. Save locally if on dev server (optional, best-effort)
+    if (isLocal && !serverOffline) {
+      try {
+        await fetch('/api/upload-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            storyId: folderName,
+            filename,
+            base64Data: imgData.base64Clean
+          })
+        });
+      } catch (err) {
+        console.warn('Local dev save failed:', err.message);
+      }
+    }
+
+    return {
+      path: relativePath,
+      base64Clean: imgData.base64Clean
+    };
+  };
+
 
   // Trigger manual compile story
   const handleGenerateStory = async () => {
@@ -778,18 +810,28 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       } catch (err) {
         console.warn('Wikipedia image search failed:', err);
       }
-
+      let imageBase64ToCommit = null;
       if (imageUrl) {
         addLog(`Downloading Wikipedia cover photo...`);
-        storyObj.hero_image = await saveRemoteImageLocally(storyObj.story_id, imageUrl);
+        const archiveResult = await archiveRemoteImage(storyObj.story_id, imageUrl);
+        storyObj.hero_image = archiveResult.path;
+        imageBase64ToCommit = archiveResult.base64Clean;
       } else {
         addLog(`No Wikipedia photo found. Instructing Gemini to generate custom visual prompt...`);
-        const imagePrompt = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${topic}".
-This image will be the main cover art of a dark mystery/history dossier. Focus on a concrete, atmospheric, and highly symbolic visual composition representing the topic.
-Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
-Highlight a single, mysterious focal point in a realistic documentary style.
-Absolutely FORBIDDEN styling: plastic smooth surfaces, oversaturated colors, neon glow, generic digital art, 3D illustrations, airbrushing, or digital smoothing.
+        
+        const cat = storyObj.category || '';
+        const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
+        
+        let imagePrompt = '';
+        if (isDocumentType) {
+          imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical topic: "${storyObj.title}".
+This is a government secret or conspiracy. Describe a photocopied declassified US government document from 1975, typewritten black ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture.
 Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+        } else {
+          imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical/psychological topic: "${storyObj.title}".
+Describe a vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details.
+Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+        }
 
         let aiPromptText = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
         try {
@@ -803,10 +845,18 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           console.warn('Failed to generate cover prompt via Gemini:', err);
         }
 
-        const enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+        let enhancedPrompt = '';
+        if (isDocumentType) {
+          enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
+        } else {
+          enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
+        }
+
         const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
         addLog(`Generating premium AI cover image using Flux engine...`);
-        storyObj.hero_image = await saveRemoteImageLocally(storyObj.story_id, pollinationsUrl);
+        const archiveResult = await archiveRemoteImage(storyObj.story_id, pollinationsUrl);
+        storyObj.hero_image = archiveResult.path;
+        imageBase64ToCommit = archiveResult.base64Clean;
       }
 
       // Fetch related scholarly research PDFs from OpenAlex
@@ -851,12 +901,17 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           addLog('GitHub Sync configured. Preparing repository commit...');
           const updatedStories = [...stories.filter(s => s.story_id !== storyObj.story_id), storyObj];
           const newConceptIndex = rebuildConceptIndex(updatedStories);
-          const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyObj.story_id]);
           const filesToCommit = [
             { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
             { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
-            ...imageFiles
           ];
+          if (imageBase64ToCommit) {
+            filesToCommit.push({
+              path: `public${storyObj.hero_image}`,
+              content: imageBase64ToCommit,
+              isBinary: true
+            });
+          }
           try {
             await commitFilesToGitHub(filesToCommit, `admin: generate story "${storyObj.title}" via manual generator`);
             addLog('🚀 Successfully committed generated story and images to GitHub repo!');
@@ -1125,7 +1180,8 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       const targetStory = adminStories.find(s => s.story_id === storyId);
       if (!targetStory) return null;
 
-      const newHeroImage = await saveRemoteImageLocally(storyId, imageSource);
+      const archiveResult = await archiveRemoteImage(storyId, imageSource);
+      const newHeroImage = archiveResult.path;
       
       const updatedStoryObj = { 
         ...targetStory, 
@@ -1151,17 +1207,21 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {
-        // Use adminStories (full list including drafts) to avoid dropping stories
         const updatedStories = adminStories
           .filter(s => s.story_id !== storyId && !s.draft)
           .concat(updatedStoryObj);
         const newConceptIndex = rebuildConceptIndex(updatedStories);
-        const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyId]);
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
-          ...imageFiles
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
         ];
+        if (archiveResult.base64Clean) {
+          filesToCommit.push({
+            path: `public${newHeroImage}`,
+            content: archiveResult.base64Clean,
+            isBinary: true
+          });
+        }
         await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
       }
       
@@ -1586,12 +1646,24 @@ ${aiPromptTopic}`;
 
   // ── AI Image Preview Generator ───────────────────────────────────────────
   const handleGenerateAiImagePreview = async () => {
-    const subject = editForm.title || editForm.story_id || 'mysterious historical event';
     setAiImagePreviewState('loading');
     setAiImagePreviewUrl(null);
     try {
-      const prompt = `Dark atmospheric historical photograph of ${subject}, black and white, archival, dramatic, cinematic, high detail`;
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=800&height=600&nologo=true&private=true&model=flux&seed=${Date.now()}`;
+      let enhanced = '';
+      if (editForm.custom_image_prompt && editForm.custom_image_prompt.trim().length > 0) {
+        enhanced = editForm.custom_image_prompt.trim();
+      } else {
+        const subject = editForm.title || editForm.story_id || 'mysterious historical event';
+        const cat = editForm.category || '';
+        const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
+        if (isDocumentType) {
+          enhanced = `A photocopied declassified government document about ${subject}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
+        } else {
+          enhanced = `A vintage forensic archive photo related to ${subject}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
+        }
+      }
+
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=800&height=600&nologo=true&private=true&model=flux&seed=${Date.now()}`;
       // Preload to check it resolves
       await new Promise((resolve, reject) => {
         const img = new Image();
@@ -1855,6 +1927,8 @@ ${aiPromptTopic}`;
     addLog(`Found ${missing.length} stories missing or broken cover images. Starting process...`);
 
     let successCount = 0;
+    const imagesToCommit = [];
+    const updatedMissingStories = [];
 
     for (let i = 0; i < missing.length; i++) {
       const story = missing[i];
@@ -1868,15 +1942,24 @@ ${aiPromptTopic}`;
           console.warn('Wikipedia image search failed:', err);
         }
 
-        let newHeroImage = null;
+        let archiveResult = null;
         if (imageUrl) {
           addLog(`Found Wikipedia cover photo. Downloading...`);
-          newHeroImage = await saveRemoteImageLocally(story.story_id, imageUrl);
+          archiveResult = await archiveRemoteImage(story.story_id, imageUrl);
         } else {
-          const imagePrompt = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${story.title}".
-Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
-Highlight a single, mysterious focal point in a realistic documentary style.
-Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+          const cat = story.category || '';
+          const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
+          
+          let imagePrompt = '';
+          if (isDocumentType) {
+            imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical topic: "${story.title}".
+This is a government secret or conspiracy. Describe a photocopied declassified US government document from 1975, typewritten black ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture.
+Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+          } else {
+            imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical/psychological topic: "${story.title}".
+Describe a vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details.
+Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
+          }
 
           let aiPromptText = `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
           if (apiKey) {
@@ -1895,22 +1978,40 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
             addLog(`No Wikipedia photo found. Gemini API key missing. Using template fallback for Flux prompt.`);
           }
 
-          const enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+          let enhancedPrompt = '';
+          if (isDocumentType) {
+            enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
+          } else {
+            enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
+          }
+
           const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
           addLog(`Generating premium AI cover image using Flux engine...`);
-          newHeroImage = await saveRemoteImageLocally(story.story_id, pollinationsUrl);
+          archiveResult = await archiveRemoteImage(story.story_id, pollinationsUrl);
         }
 
-        if (newHeroImage) {
+        if (archiveResult && archiveResult.path) {
+          const newHeroImage = archiveResult.path;
           addLog(`Updating story database record with new image...`);
           const res = await fetch(`/api/stories/${story.story_id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...story, hero_image: newHeroImage })
+            body: JSON.stringify({ ...story, hero_image: newHeroImage, image_missing: 0 })
           });
           if (res.ok) {
             successCount++;
             addLog(`✓ Successfully updated cover for "${story.title}"`);
+            
+            const updatedStory = { ...story, hero_image: newHeroImage, image_missing: 0 };
+            updatedMissingStories.push(updatedStory);
+            
+            if (archiveResult.base64Clean) {
+              imagesToCommit.push({
+                path: `public${newHeroImage}`,
+                content: archiveResult.base64Clean,
+                isBinary: true
+              });
+            }
           } else {
             addLog(`❌ Failed to update database record for "${story.title}"`);
           }
@@ -1931,20 +2032,22 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       addLog('Pushing updated stories to GitHub repository...');
       setPublishStatus('Syncing updates to GitHub live site...');
       try {
-        const storiesRes = await fetch('/api/stories');
-        if (storiesRes.ok) {
-          const freshStories = await storiesRes.json();
-          const newConceptIndex = rebuildConceptIndex(freshStories);
-          const generatedIds = missing.map(s => s.story_id);
-          const imageFiles = await getLocalImageCommitFiles(freshStories, generatedIds);
-          const filesToCommit = [
-            { path: 'public/content/stories.json', content: JSON.stringify({ stories: freshStories }, null, 2) },
-            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
-            ...imageFiles
-          ];
-          await commitFilesToGitHub(filesToCommit, `admin: generate cover images for ${successCount} stories`);
-          addLog('🚀 Successfully committed and synced cover images to GitHub!');
-        }
+        const updatedStories = adminStories.map(s => {
+          const match = updatedMissingStories.find(um => um.story_id === s.story_id);
+          return match ? match : s;
+        });
+
+        const liveStories = updatedStories.filter(s => !s.draft);
+        const newConceptIndex = rebuildConceptIndex(liveStories);
+        
+        const filesToCommit = [
+          { path: 'public/content/stories.json', content: JSON.stringify({ stories: liveStories }, null, 2) },
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+          ...imagesToCommit
+        ];
+
+        await commitFilesToGitHub(filesToCommit, `admin: generate cover images for ${successCount} stories`);
+        addLog('🚀 Successfully committed and synced cover images directly to GitHub!');
       } catch (err) {
         addLog(`❌ GitHub Sync failed: ${err.message}`);
       }
@@ -2981,7 +3084,19 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                     {/* AI Image Generator */}
                     <div className="p-3 rounded-lg border border-neutral-800/60 bg-black/30 space-y-2">
                       <label className="block text-[9px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-1">✦ AI Image Generator (Flux)</label>
-                      <p className="text-[8px] text-[#6A6560] font-mono">// Generates a dark atmospheric image based on the story title using Flux AI.</p>
+                      <p className="text-[8px] text-[#6A6560] font-mono">// Generates a dark atmospheric image using Flux AI. Leave empty to use category-based defaults.</p>
+                      
+                      <div>
+                        <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Custom Image Prompt Override</label>
+                        <textarea
+                          value={editForm.custom_image_prompt || ''}
+                          onChange={(e) => setEditForm(prev => ({ ...prev, custom_image_prompt: e.target.value }))}
+                          rows={2}
+                          className="w-full px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none font-sans"
+                          placeholder="e.g. Vintage 1970s grainy Polaroid scan of a mysterious government base, heavy analog noise, redacted labels..."
+                        />
+                      </div>
+
                       <button
                         type="button"
                         onClick={handleGenerateAiImagePreview}

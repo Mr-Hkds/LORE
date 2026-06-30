@@ -94,8 +94,23 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
 
   const handleGenerateAiImage = () => {
     setLoadingMethod('ai');
-    const base = aiPrompt.trim() || `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
-    const enhanced = `${base.replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
+    
+    const cat = story.category || '';
+    const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
+    
+    let defaultBase = '';
+    let enhanced = '';
+    
+    if (isDocumentType) {
+      defaultBase = `A photocopied declassified government document about ${story.title}`;
+      const base = aiPrompt.trim() || defaultBase;
+      enhanced = `${base.replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture, raw evidence photo`;
+    } else {
+      defaultBase = `A vintage forensic archive photo related to ${story.title}`;
+      const base = aiPrompt.trim() || defaultBase;
+      enhanced = `${base.replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
+    }
+
     const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=800&height=600&nologo=true&private=true&model=flux`;
     saveAndPreview(async () => {
       await onSaveImage(story.story_id, pollinationsUrl);

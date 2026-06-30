@@ -67,18 +67,32 @@ const getGradientIndex = (storyId) => {
   return Math.abs(hash) % GRADIENTS.length;
 };
 
+// Memory cache for resolved image queries
+const IMAGE_QUERY_CACHE = {};
+
 // ── Story card image — accepts inView from parent card ────────────────────
 function StoryCardImage({ story, alt, inView }) {
   const { getImageByQuery } = useStaticContent();
   const [fetchedUrl, setFetchedUrl] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [fallbackAttempted, setFallbackAttempted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!story.hero_image || story.image_missing) {
-      let active = true;
       const query = story.image_query || story.title;
-      getImageByQuery(query).then(url => { if (active) setFetchedUrl(url); });
+      if (IMAGE_QUERY_CACHE[query]) {
+        setFetchedUrl(IMAGE_QUERY_CACHE[query]);
+        return;
+      }
+
+      let active = true;
+      getImageByQuery(query).then(url => {
+        if (url) {
+          IMAGE_QUERY_CACHE[query] = url;
+          if (active) setFetchedUrl(url);
+        }
+      });
       return () => { active = false; };
     }
   }, [story.hero_image, story.image_missing, story.image_query, story.title, getImageByQuery]);
@@ -87,9 +101,17 @@ function StoryCardImage({ story, alt, inView }) {
     if (story.hero_image && !story.image_missing && !fallbackAttempted) {
       setFallbackAttempted(true);
       const query = story.image_query || story.title;
+      if (IMAGE_QUERY_CACHE[query]) {
+        setFetchedUrl(IMAGE_QUERY_CACHE[query]);
+        return;
+      }
       getImageByQuery(query).then(url => {
-        if (url) setFetchedUrl(url);
-        else setImgFailed(true);
+        if (url) {
+          IMAGE_QUERY_CACHE[query] = url;
+          setFetchedUrl(url);
+        } else {
+          setImgFailed(true);
+        }
       }).catch(() => setImgFailed(true));
     } else {
       setImgFailed(true);
@@ -160,15 +182,35 @@ function StoryCardImage({ story, alt, inView }) {
           }}
         >CLASSIFIED</span>
       </div>
+
+      {/* Retro telemetry decryption overlay while loading */}
+      {!loaded && (
+        <div 
+          className="absolute inset-0 flex flex-col items-center justify-center bg-[#090807] animate-pulse space-y-1.5 z-10"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(158, 123, 76, 0.05) 1px, transparent 1px)',
+            backgroundSize: '100% 4px',
+          }}
+        >
+          <div className="w-4 h-4 rounded-full border border-dashed border-[#9E7B4C]/45 animate-spin" />
+          <span className="text-[7.5px] font-mono tracking-[0.25em] text-[#9E7B4C]/80 uppercase animate-pulse">
+            [ DECRYPTING MEDIA ]
+          </span>
+        </div>
+      )}
+
       {/* Image — grayscale by default, full color when card is in viewport or hovered */}
       <img
         src={displayUrl}
         alt={alt}
         width="200"
         height="150"
+        onLoad={() => setLoaded(true)}
         onError={handleImageError}
-        className={`w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
-          inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]'
+        className={`w-full h-full object-cover transition-all duration-[1000ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
+          loaded 
+            ? (inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]') 
+            : 'opacity-0 scale-95 grayscale'
         }`}
         style={{ objectPosition: 'center 18%' }}
         loading="lazy"

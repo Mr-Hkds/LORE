@@ -1215,6 +1215,41 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Route: GET /api/cors-proxy
+  if (req.method === 'GET' && pathname === '/api/cors-proxy') {
+    try {
+      const urlParam = urlObj.searchParams.get('url');
+      if (!urlParam) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing url parameter' }));
+        return;
+      }
+
+      const decodedUrl = decodeURIComponent(urlParam);
+      const response = await fetch(decodedUrl);
+      if (!response.ok) {
+        res.writeHead(response.status, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: `Failed to fetch image: ${response.statusText}` }));
+        return;
+      }
+
+      const contentType = response.headers.get('content-type') || 'image/jpeg';
+      const buffer = await response.arrayBuffer();
+      const base64Clean = Buffer.from(buffer).toString('base64');
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: true,
+        base64Clean,
+        contentType
+      }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Route: POST /api/upload-image
   if (req.method === 'POST' && pathname === '/api/upload-image') {
     try {
