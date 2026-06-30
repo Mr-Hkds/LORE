@@ -13,8 +13,21 @@ import ShareModal from './components/ShareModal';
 import SearchOverlay from './components/SearchOverlay';
 import { TOPICS } from './constants/topics';
 
-const AdminPanel = lazy(() => import('./components/AdminPanel'));
-const SiteFeedback = lazy(() => import('./components/SiteFeedback'));
+// Helper to catch chunk load failures (common during new deployments when file hashes change)
+function safeLazy(importFn) {
+  return lazy(async () => {
+    try {
+      return await importFn();
+    } catch (err) {
+      console.warn("Dynamic import failed. Forcing page reload to load the latest deployment.", err);
+      window.location.reload();
+      return { default: () => null };
+    }
+  });
+}
+
+const AdminPanel = safeLazy(() => import('./components/AdminPanel'));
+const SiteFeedback = safeLazy(() => import('./components/SiteFeedback'));
 
 const TOTAL_LAYERS = 7;
 
