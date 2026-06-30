@@ -38,7 +38,8 @@
     "project_blue_book_ufo",
     "operation_gladio",
     "the_phoenix_program",
-    "the_russian_woodpecker_duga_3"
+    "the_russian_woodpecker_duga_3",
+    "shadow_brokers_leak"
   ],
   "espionage": [
     "uwe_barschel",
@@ -463,7 +464,8 @@
     "franklin_expedition_lost_ships"
   ],
   "cannibalism": [
-    "franklin_expedition_lost_ships"
+    "franklin_expedition_lost_ships",
+    "wendigo_psychosis_algonquin_folklore"
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
@@ -1084,5 +1086,32 @@
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
+  ],
+  "wendigo_psychosis": [
+    "wendigo_psychosis_algonquin_folklore"
+  ],
+  "algonquin_folklore": [
+    "wendigo_psychosis_algonquin_folklore"
+  ],
+  "culture_bound_syndrome": [
+    "wendigo_psychosis_algonquin_folklore"
+  ],
+  "starvation_madness": [
+    "wendigo_psychosis_algonquin_folklore"
+  ],
+  "mental_health_in_indigenous_cultures": [
+    "wendigo_psychosis_algonquin_folklore"
+  ],
+  "cyber_espionage": [
+    "shadow_brokers_leak"
+  ],
+  "zero-day_exploits": [
+    "shadow_brokers_leak"
+  ],
+  "cyber_warfare": [
+    "shadow_brokers_leak"
+  ],
+  "data_breach": [
+    "shadow_brokers_leak"
   ]
 }
