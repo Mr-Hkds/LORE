@@ -146,11 +146,32 @@ function syncDatabaseIfNeeded() {
   const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
   try {
     let data = null;
-    try {
-      data = require('./public/content/stories.json');
-    } catch (err) {
-      if (fs.existsSync(STORIES_FILE)) {
-        data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+
+    if (isVercel) {
+      const owner = process.env.VITE_GITHUB_OWNER || 'Mr-Hkds';
+      const repo = process.env.VITE_GITHUB_REPO || 'LORE';
+      const branch = process.env.VITE_GITHUB_BRANCH || 'main';
+      const RAW_URL = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/public/content/stories.json?t=${now}`;
+      
+      try {
+        const child_process = require('child_process');
+        const cmd = `node -e "fetch('${RAW_URL}').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => console.log(JSON.stringify(j))).catch(e => { console.error(e.message); process.exit(1); })"`;
+        const stdout = child_process.execSync(cmd, { stdio: ['pipe', 'pipe', 'ignore'], timeout: 3000 }).toString();
+        if (stdout && stdout.trim()) {
+          data = JSON.parse(stdout);
+        }
+      } catch (err) {
+        console.warn('[DB Sync] Failed to fetch raw stories from GitHub synchronously, using local fallback:', err.message);
+      }
+    }
+
+    if (!data) {
+      try {
+        data = require('./public/content/stories.json');
+      } catch (err) {
+        if (fs.existsSync(STORIES_FILE)) {
+          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+        }
       }
     }
 

@@ -2271,7 +2271,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: commitMessage, tree: treeData.sha, parents: [latestCommitSha] })
+            body: JSON.stringify({ message: `${commitMessage} [skip ci]`, tree: treeData.sha, parents: [latestCommitSha] })
           },
           'Commit creation'
         );
