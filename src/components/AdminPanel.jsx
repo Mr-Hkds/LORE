@@ -448,6 +448,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
   const [filterMissingImages, setFilterMissingImages] = useState(false);
+  const [rowPreviews, setRowPreviews] = useState({});
 
   const isImageMissing = useCallback((story) => {
     if (!story) return true;
@@ -1114,9 +1115,9 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   };
 
   // Publish / Push to Live story logic
-  const handlePublishStory = async (storyId) => {
+  const handlePublishStory = async (storyId, bypassImageCheck = false) => {
     const targetStory = adminStories.find(s => s.story_id === storyId);
-    if (isImageMissing(targetStory)) {
+    if (!bypassImageCheck && isImageMissing(targetStory)) {
       setToast({ text: 'Story lacks a proper thumbnail. Transferred to Approval Queue.', type: 'error' });
       setActiveTab('approval');
       return;
@@ -2942,6 +2943,27 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                           {list.map(story => {
                             const qb = getQualityBadge(story);
                             const dup = findPotentialDuplicate(story, stories);
+
+                            const executeUploadAndPublish = async (sourceUrl) => {
+                              try {
+                                setRowPreviews(prev => ({ ...prev, [story.story_id]: sourceUrl }));
+                                await handleSaveImageSource(story.story_id, sourceUrl);
+                                if (story.draft) {
+                                  await handlePublishStory(story.story_id, true);
+                                }
+                                setTimeout(() => {
+                                  window.location.reload();
+                                }, 1200);
+                              } catch (err) {
+                                alert('Upload failed: ' + err.message);
+                                setRowPreviews(prev => {
+                                  const next = { ...prev };
+                                  delete next[story.story_id];
+                                  return next;
+                                });
+                              }
+                            };
+
                             return (
                               <div
                                 key={story.story_id}
@@ -3011,10 +3033,19 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                       >
                                         🔍 Search Google
                                       </a>
-                                      <div className="relative flex-1">
+                                      <div className="flex-1 flex items-center gap-2">
+                                        {rowPreviews[story.story_id] && (
+                                          <div className="w-8 h-6 rounded border border-neutral-800 overflow-hidden flex-shrink-0 bg-black flex items-center justify-center relative">
+                                            <img src={rowPreviews[story.story_id]} alt="Pasted preview" className="w-full h-full object-cover" />
+                                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                                              <span className="w-2 h-2 rounded-full border-t border-b border-amber-500 animate-spin" />
+                                            </div>
+                                          </div>
+                                        )}
                                         <input
                                           type="text"
-                                          placeholder="Ctrl+V here to paste cover image or URL..."
+                                          placeholder={rowPreviews[story.story_id] ? "Signal acquired, synchronizing database..." : "Ctrl+V here to paste cover image or URL..."}
+                                          disabled={!!rowPreviews[story.story_id]}
                                           onClick={(e) => e.stopPropagation()}
                                           onPaste={async (e) => {
                                             e.preventDefault();
@@ -3030,11 +3061,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                                 if (file) {
                                                   const reader = new FileReader();
                                                   reader.onloadend = async () => {
-                                                    try {
-                                                      await handleSaveImageSource(story.story_id, reader.result);
-                                                    } catch (err) {
-                                                      alert('Error saving image: ' + err.message);
-                                                    }
+                                                    await executeUploadAndPublish(reader.result);
                                                   };
                                                   reader.readAsDataURL(file);
                                                   return;
@@ -3046,17 +3073,13 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                                 item.getAsString(async (str) => {
                                                   const url = str.trim();
                                                   if (url.startsWith('http') || url.startsWith('data:image')) {
-                                                    try {
-                                                      await handleSaveImageSource(story.story_id, url);
-                                                    } catch (err) {
-                                                      alert('Error saving image URL: ' + err.message);
-                                                    }
+                                                    await executeUploadAndPublish(url);
                                                   }
                                                 });
                                               }
                                             }
                                           }}
-                                          className="w-full px-2.5 py-1 bg-black text-[#EDE8DF]/90 text-[9px] rounded border border-neutral-900 focus:border-[#F59E0B]/50 focus:outline-none placeholder-neutral-700 font-mono"
+                                          className="w-full px-2.5 py-1 bg-black text-[#EDE8DF]/90 text-[9px] rounded border border-neutral-900 focus:border-[#F59E0B]/50 focus:outline-none placeholder-neutral-700 font-mono disabled:opacity-50"
                                         />
                                       </div>
                                     </div>
