@@ -6424,11 +6424,8 @@
     {
       "story_id": "the_wow_signal",
       "title": "The Wow! Signal: A Voice from the Void",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
-      "image_query": "",
-      "hook": "For 72 seconds, on a summer night in 1977, humanity received a message. Not from a satellite, but from the chilling silence between stars.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "For 72 seconds, on a summer night in 1977, humanity received a message. Not from a satellite, but from the chilling silence between stars.",
       "concepts": [
         "extraterrestrial_life",
         "unexplained_phenomena",
@@ -6437,6 +6434,18 @@
         "cosmic_communication",
         "existential_mystery"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
+      "added_date": "2026-02-28",
+      "draft": false,
+      "reactions": {
+        "like": 39,
+        "gripping": 22,
+        "scared": 39,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -6480,27 +6489,50 @@
           "content": "The 'Wow! Signal' stands as the strongest, most compelling candidate for an extraterrestrial radio transmission ever received. Its singular nature, however, casts a long, unsettling shadow. If it was indeed a message from an intelligent civilization, why was it only sent once? Was it a brief, almost accidental, transmission from an advanced probe? Or a fleeting last gasp from a civilization that has since faded into the cosmic background noise?\n\nThe thought of a brief 'hello' from an alien intelligence, a momentary connection across unimaginable distances, only to be followed by absolute silence, is profoundly chilling. It evokes a sense of cosmic loneliness, the universe hinting at company, only to withdraw the invitation. It forces humanity to consider our place in the cosmos not just as seekers, but as recipients of a message we may never fully understand or answer.\n\nFor those 72 seconds, the Big Ear received an echo of intelligence, a whisper that resonated with the deepest human longing for contact. That single, circled 'Wow!' on a faded printout remains an open question, a haunting reminder that while we listen, the universe may have already spoken, leaving us to wonder if we were truly ready for the reply, or if we merely glimpsed a profound truth that then slipped back into the vast, indifferent void."
         }
       ],
-      "reactions": {
-        "like": 39,
-        "gripping": 22,
-        "scared": 39,
-        "mindblown": 10
-      }
+      "image_missing": false
     },
     {
       "story_id": "the_children_of_woolpit",
       "title": "The Green Children of Woolpit: An Unearthly Mystery",
-      "hero_image": "https://i0.wp.com/curiousrambler.com/wp-content/uploads/2017/05/996px-peasant_children_at_rest_by_konstantin_makovsky.jpg?resize=600%2C287&ssl=1",
-      "image_query": "",
-      "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
       "concepts": [
         "unexplained_phenomena",
         "historical_mystery",
         "extraterrestrial_life",
         "isolated_cultures",
         "folklore"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://i0.wp.com/curiousrambler.com/wp-content/uploads/2017/05/996px-peasant_children_at_rest_by_konstantin_makovsky.jpg?resize=600%2C287&ssl=1",
+      "added_date": "2026-06-29",
+      "draft": 0,
+      "reactions": {
+        "like": 46,
+        "gripping": 44,
+        "scared": 31,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "John Clark. The Green Children of Woolpit: Chronicles, Fairies and Facts in Medieval England. University of Exeter Press, 2024. ISBN: 978-1-80413-136-7 . 260 pp. (Veronika Nikiforova, 2025)",
+          "url": "https://revistas.ucm.es/index.php/AMAL/article/download/97557/4564456573040"
+        },
+        {
+          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
+          "url": "https://revistaselectronicas.ujaen.es/index.php/blo/article/download/9628/9770"
+        },
+        {
+          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
+          "url": "https://doi.org/10.17561/blo.v15.9628"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_wow_signal",
+          "shared_concept": "unexplained_phenomena",
+          "transition_line": "Just as the 'Wow! Signal' captured a fleeting whisper from the cosmos, the tale of the Green Children of Woolpit echoes an unexplained phenomenon, challenging our perceptions of what exists just beyond our known world."
+        }
       ],
       "layers": [
         {
@@ -6545,7 +6577,8 @@
           "content": "Ultimately, 'The Children of Woolpit' stands as one of history's most enduring and perplexing mysteries. No single theory – whether medical, cultural, or purely fantastical – definitively accounts for all the documented details: the green skin, the unknown language, their sudden, disoriented appearance, and the girl's narrative of a subterranean, twilight world. The contemporary accounts, recorded by respected chroniclers shortly after the events, lend the tale historical weight, yet offer no concrete, satisfying answers to its profound questions.\n\nWas it a rare combination of severe chlorosis and a genuine cultural or linguistic misunderstanding, perhaps of orphaned Flemish children? Was it a long-forgotten tribe, isolated and perhaps inbred, living in deep famine within an uncharted valley or cave system, their distinct features simply misinterpreted through the lens of medieval superstition? Or was it, as some still dare to wonder, an ancient visitation, a brief, enigmatic encounter with beings from another realm or dimension, leaving behind only questions and a chilling sense of the unknown?\n\nThe green children emerged from an enigma, briefly touched our world, and then, with the boy's death and the girl's assimilation, receded back into the shadows from which they came. They left behind not a resolution, but a persistent ghost story in the annals of history, a chilling reminder that some truths may simply be too strange, too alien, or too deeply buried for us ever to fully grasp.",
           "cliffhanger": null
         }
-      ]
+      ],
+      "image_missing": 0
     }
   ]
 }
