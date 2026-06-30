@@ -422,51 +422,48 @@ function seed() {
   const RECOMMENDATIONS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
   const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 
-  // Seed stories
-  const storyCount = db.prepare('SELECT COUNT(*) as count FROM stories').get().count;
-  if (storyCount === 0) {
+  // Seed & Sync stories from deployed stories.json
+  try {
+    let data = null;
     try {
-      let data = null;
-      try {
-        data = require('./public/content/stories.json');
-      } catch (err) {
-        if (fs.existsSync(STORIES_FILE)) {
-          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
-        }
+      data = require('./public/content/stories.json');
+    } catch (err) {
+      if (fs.existsSync(STORIES_FILE)) {
+        data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
       }
-
-      if (data && Array.isArray(data.stories)) {
-        console.log(`Seeding ${data.stories.length} stories to SQLite database...`);
-        const insertStmt = db.prepare(`
-          INSERT INTO stories (
-            story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `);
-        
-        const transaction = db.transaction((stories) => {
-          for (const s of stories) {
-            insertStmt.run(
-              s.story_id,
-              s.title,
-              s.category,
-              s.hook,
-              JSON.stringify(s.concepts || []),
-              s.severity,
-              s.hero_image || null,
-              s.added_date || null,
-              s.draft ? 1 : 0,
-              JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
-              JSON.stringify(s.evidence_links || []),
-              JSON.stringify(s.connections || []),
-              JSON.stringify(s.layers || [])
-            );
-          }
-        });
-        transaction(data.stories);
-      }
-    } catch (e) {
-      console.error('Failed to seed stories:', e);
     }
+
+    if (data && Array.isArray(data.stories)) {
+      console.log(`Synchronizing database with ${data.stories.length} stories from stories.json...`);
+      const insertStmt = db.prepare(`
+        INSERT OR REPLACE INTO stories (
+          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      
+      const transaction = db.transaction((stories) => {
+        for (const s of stories) {
+          insertStmt.run(
+            s.story_id,
+            s.title,
+            s.category,
+            s.hook,
+            JSON.stringify(s.concepts || []),
+            s.severity,
+            s.hero_image || null,
+            s.added_date || null,
+            s.draft ? 1 : 0,
+            JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
+            JSON.stringify(s.evidence_links || []),
+            JSON.stringify(s.connections || []),
+            JSON.stringify(s.layers || [])
+          );
+        }
+      });
+      transaction(data.stories);
+    }
+  } catch (e) {
+    console.error('Failed to seed/sync stories:', e);
   }
 
   // Seed recommendations
