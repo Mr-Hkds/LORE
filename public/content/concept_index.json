@@ -32,13 +32,13 @@
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "the_russian_woodpecker_duga_3",
+    "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_blue_book_ufo",
     "operation_gladio",
     "the_phoenix_program",
-    "operation_paperclip_001"
+    "the_russian_woodpecker_duga_3"
   ],
   "espionage": [
     "uwe_barschel",
@@ -530,9 +530,9 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
+    "operation_paperclip_001",
     "project_blue_book_ufo",
-    "project_shamrock",
-    "operation_paperclip_001"
+    "project_shamrock"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -718,23 +718,6 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
-  "cold_war": [
-    "the_russian_woodpecker_duga_3",
-    "operation_gladio"
-  ],
-  "signals_intelligence": [
-    "the_russian_woodpecker_duga_3",
-    "echelon_global_surveillance"
-  ],
-  "radio_frequency_interference": [
-    "the_russian_woodpecker_duga_3"
-  ],
-  "over-the_horizon_radar": [
-    "the_russian_woodpecker_duga_3"
-  ],
-  "technological_failure": [
-    "the_russian_woodpecker_duga_3"
-  ],
   "lost_civilizations": [
     "mystery_of_dwarka"
   ],
@@ -768,6 +751,21 @@
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
+  ],
+  "unethical_recruitment": [
+    "operation_paperclip_001"
+  ],
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
+  ],
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ],
   "serial_bomber": [
     "the_unabomber_ted_kaczynski_campaign_of_terror"
@@ -951,6 +949,10 @@
   "global_surveillance": [
     "echelon_global_surveillance"
   ],
+  "signals_intelligence": [
+    "echelon_global_surveillance",
+    "the_russian_woodpecker_duga_3"
+  ],
   "privacy_invasion": [
     "echelon_global_surveillance",
     "project_shamrock"
@@ -990,6 +992,10 @@
   ],
   "cryptic_messages": [
     "the_lead_mask_case"
+  ],
+  "cold_war": [
+    "operation_gladio",
+    "the_russian_woodpecker_duga_3"
   ],
   "anti_communism": [
     "operation_gladio"
@@ -1070,19 +1076,13 @@
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
   ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
+  "radio_frequency_interference": [
+    "the_russian_woodpecker_duga_3"
   ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
+  "over-the_horizon_radar": [
+    "the_russian_woodpecker_duga_3"
   ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
-  ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
+  "technological_failure": [
+    "the_russian_woodpecker_duga_3"
   ]
 }
