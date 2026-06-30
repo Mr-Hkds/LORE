@@ -218,8 +218,8 @@
     "unit_731_experiments",
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -711,19 +711,6 @@
   "military_infrastructure": [
     "project_iceworm_secret_city"
   ],
-  "unethical_research": [
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
-  ],
-  "psychological_harm": [
-    "monster_study_1939"
-  ],
-  "stuttering": [
-    "monster_study_1939"
-  ],
-  "eugenics_influence": [
-    "monster_study_1939"
-  ],
   "isolated_location": [
     "eilean_mor_lighthouse_mystery"
   ],
@@ -894,6 +881,10 @@
   ],
   "catastrophic_events": [
     "mystery_of_dwarka"
+  ],
+  "unethical_research": [
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment"
@@ -1084,5 +1075,14 @@
   ],
   "institutionalization": [
     "the_silent_twins_gibbons"
+  ],
+  "psychological_harm": [
+    "monster_study_1939"
+  ],
+  "stuttering": [
+    "monster_study_1939"
+  ],
+  "eugenics_influence": [
+    "monster_study_1939"
   ]
 }
