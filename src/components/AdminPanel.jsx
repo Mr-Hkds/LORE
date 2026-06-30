@@ -450,6 +450,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [filterMissingImages, setFilterMissingImages] = useState(false);
   const [rowPreviews, setRowPreviews] = useState({});
   const [editImageFailed, setEditImageFailed] = useState(false);
+  const [pasteConfirmation, setPasteConfirmation] = useState(null);
+  const [pasteUploading, setPasteUploading] = useState(false);
+  const [pasteError, setPasteError] = useState(null);
+  const [pasteSuccess, setPasteSuccess] = useState(false);
 
   const getShortTitle = (title) => {
     if (!title) return '';
@@ -1239,6 +1243,54 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     loadRecommendations();
     loadAdminStories();
   }, [loadFeedback, loadRecommendations, loadAdminStories]);
+
+  const handlePasteTrigger = (story, sourceUrl) => {
+    setRowPreviews(prev => ({ ...prev, [story.story_id]: sourceUrl }));
+    setPasteConfirmation({
+      story_id: story.story_id,
+      title: story.title,
+      imageSource: sourceUrl,
+      story
+    });
+  };
+
+  const handleConfirmPastePublish = async () => {
+    if (!pasteConfirmation) return;
+    setPasteUploading(true);
+    setPasteError(null);
+    try {
+      const { story_id, imageSource, story } = pasteConfirmation;
+      
+      // Save image source to database
+      await handleSaveImageSource(story_id, imageSource);
+      
+      // Auto-publish if draft
+      if (story.draft) {
+        await handlePublishStory(story_id, true);
+      }
+      
+      setPasteSuccess(true);
+      setTimeout(() => {
+        setPasteConfirmation(null);
+        setPasteSuccess(false);
+        setPasteUploading(false);
+        setRowPreviews(prev => {
+          const next = { ...prev };
+          delete next[story_id];
+          return next;
+        });
+        window.location.reload();
+      }, 1500);
+    } catch (err) {
+      setPasteError(err.message || 'Sync failed.');
+      setPasteUploading(false);
+      setRowPreviews(prev => {
+        const next = { ...prev };
+        delete next[pasteConfirmation.story_id];
+        return next;
+      });
+    }
+  };
 
   // Story editor utilities
   const startEditing = (story) => {
@@ -2993,26 +3045,6 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                             const qb = getQualityBadge(story);
                             const dup = findPotentialDuplicate(story, stories);
 
-                            const executeUploadAndPublish = async (sourceUrl) => {
-                              try {
-                                setRowPreviews(prev => ({ ...prev, [story.story_id]: sourceUrl }));
-                                await handleSaveImageSource(story.story_id, sourceUrl);
-                                if (story.draft) {
-                                  await handlePublishStory(story.story_id, true);
-                                }
-                                setTimeout(() => {
-                                  window.location.reload();
-                                }, 1200);
-                              } catch (err) {
-                                alert('Upload failed: ' + err.message);
-                                setRowPreviews(prev => {
-                                  const next = { ...prev };
-                                  delete next[story.story_id];
-                                  return next;
-                                });
-                              }
-                            };
-
                             return (
                               <div
                                 key={story.story_id}
@@ -3108,7 +3140,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                              }
                                              
                                              if (pastedText.startsWith('http') || pastedText.startsWith('data:image')) {
-                                               await executeUploadAndPublish(pastedText);
+                                               handlePasteTrigger(story, pastedText);
                                                return;
                                              }
                                              
@@ -3121,7 +3153,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                                    if (file) {
                                                      const reader = new FileReader();
                                                      reader.onloadend = async () => {
-                                                       await executeUploadAndPublish(reader.result);
+                                                       handlePasteTrigger(story, reader.result);
                                                      };
                                                      reader.readAsDataURL(file);
                                                      return;
@@ -4136,6 +4168,139 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
           >
             [Close]
           </button>
+        </div>
+      )}
+
+      {/* Paste Confirmation Modal Popup */}
+      {pasteConfirmation && (
+        <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+          <div 
+            className="w-full max-w-md bg-[#0C0A08] border rounded-2xl overflow-hidden shadow-2xl flex flex-col font-mono text-left"
+            style={{ borderColor: 'rgba(158,123,76,0.3)' }}
+          >
+            {/* Header */}
+            <div className="p-4 border-b border-neutral-900 bg-neutral-950 flex items-center justify-between">
+              <div className="space-y-0.5">
+                <span className="text-[7.5px] tracking-widest text-[#9E7B4C] uppercase font-bold">
+                  // TELEMETRY IMAGE SYNC GATING
+                </span>
+                <h3 className="font-serif italic text-sm text-[#EDE8DF] truncate max-w-[280px]">
+                  {pasteConfirmation.title}
+                </h3>
+              </div>
+              <button
+                disabled={pasteUploading}
+                onClick={() => {
+                  setPasteConfirmation(null);
+                  setPasteError(null);
+                  setPasteSuccess(false);
+                  setPasteUploading(false);
+                  setRowPreviews(prev => {
+                    const next = { ...prev };
+                    delete next[pasteConfirmation.story_id];
+                    return next;
+                  });
+                }}
+                className="text-[9px] font-mono tracking-widest uppercase hover:opacity-60 cursor-pointer text-neutral-500 disabled:opacity-30"
+              >
+                [ESC]
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="p-4 space-y-4">
+              <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-900 bg-neutral-950 flex items-center justify-center">
+                {pasteUploading && (
+                  <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-3 z-10">
+                    <span className="w-8 h-8 rounded-full border-2 border-t-transparent border-[#9E7B4C] animate-spin" />
+                    <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] animate-pulse">Syncing visual telemetry...</p>
+                  </div>
+                )}
+                {pasteSuccess && (
+                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2 z-10">
+                    <span className="text-xl text-[#10B981]">✓</span>
+                    <p className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold">Signal Synchronized</p>
+                    <p className="text-[8px] text-neutral-500 font-mono">Dossier successfully published live.</p>
+                  </div>
+                )}
+                {pasteError ? (
+                  <div className="absolute inset-0 bg-red-950/90 flex flex-col items-center justify-center gap-2 p-4 text-center z-10">
+                    <span className="text-xl">⚠️</span>
+                    <p className="text-[9px] uppercase tracking-widest text-red-500 font-bold">Signal Error</p>
+                    <p className="text-[8px] text-neutral-400 mt-1 max-w-[280px] break-words line-clamp-3">{pasteError}</p>
+                    <button
+                      onClick={() => handleConfirmPastePublish()}
+                      className="mt-2 text-[8px] uppercase tracking-widest text-red-400 hover:text-red-300 font-bold underline cursor-pointer"
+                    >
+                      Retry sync
+                    </button>
+                  </div>
+                ) : null}
+                <img 
+                  src={pasteConfirmation.imageSource} 
+                  alt="Pasted preview" 
+                  className="w-full h-full object-cover"
+                  onError={() => {
+                    console.warn('Pasted image failed to load in frontend canvas.');
+                  }}
+                />
+              </div>
+
+              <div className="space-y-3">
+                <div className="rounded-lg bg-black/40 border border-neutral-900 p-2.5 space-y-1 text-[8px]">
+                  <div className="flex justify-between">
+                    <span className="text-[#6A6560]">DOSSIER ID:</span>
+                    <span className="text-neutral-400 font-bold">{pasteConfirmation.story_id}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#6A6560]">STATUS:</span>
+                    <span className={pasteConfirmation.story.draft ? "text-amber-500 font-bold" : "text-emerald-500 font-bold"}>
+                      {pasteConfirmation.story.draft ? "DRAFT (AUTO-PUBLISH ON SAVE)" : "LIVE"}
+                    </span>
+                  </div>
+                  <div className="space-y-0.5 mt-1 border-t border-neutral-900 pt-1.5 text-left">
+                    <span className="text-[#6A6560] block">RESOLVED SOURCE URI:</span>
+                    <span className="text-neutral-500 font-mono break-all line-clamp-2 block bg-black/60 p-1 rounded mt-0.5 select-all">
+                      {pasteConfirmation.imageSource}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-neutral-900 bg-neutral-950 flex justify-between gap-3">
+              <button
+                disabled={pasteUploading || pasteSuccess}
+                onClick={() => {
+                  setPasteConfirmation(null);
+                  setPasteError(null);
+                  setPasteSuccess(false);
+                  setPasteUploading(false);
+                  setRowPreviews(prev => {
+                    const next = { ...prev };
+                    delete next[pasteConfirmation.story_id];
+                    return next;
+                  });
+                }}
+                className="px-3.5 py-2 bg-transparent hover:bg-white/5 border border-neutral-800 text-neutral-400 hover:text-[#EDE8DF] text-[9px] font-bold uppercase tracking-widest rounded-lg active:scale-95 transition-all cursor-pointer disabled:opacity-30"
+              >
+                Abort Sync
+              </button>
+              <button
+                disabled={pasteUploading || pasteSuccess}
+                onClick={handleConfirmPastePublish}
+                className="px-4 py-2 text-white text-[9px] font-bold uppercase tracking-widest rounded-lg active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-30"
+                style={{
+                  background: 'rgba(158,123,76,0.25)',
+                  border: '1px solid rgba(158,123,76,0.4)',
+                  color: '#EDE8DF',
+                }}
+              >
+                {pasteUploading ? 'Synchronizing...' : '✓ Confirm & Publish Live'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
