@@ -389,8 +389,8 @@
   "delusion": [
     "capgras_delusion_001",
     "clinical_lycanthropy",
-    "ravaan_character_study",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "ravaan_character_study"
   ],
   "altered_perception": [
     "capgras_delusion_001"
@@ -482,12 +482,12 @@
     "winchester_mystery_house",
     "the_wow_signal",
     "the_bloop_unexplained_sound",
+    "edinburgh_vaults_001",
     "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
-    "project_blue_book_ufo",
-    "edinburgh_vaults_001"
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -737,6 +737,15 @@
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
   ],
+  "urban_legends": [
+    "edinburgh_vaults_001"
+  ],
+  "historical_trauma": [
+    "edinburgh_vaults_001"
+  ],
+  "haunted_location": [
+    "edinburgh_vaults_001"
+  ],
   "cold_war": [
     "the_russian_woodpecker_duga_3",
     "operation_gladio"
@@ -784,24 +793,6 @@
   ],
   "folklore": [
     "the_children_of_woolpit"
-  ],
-  "narcissism": [
-    "ravaan_character_study"
-  ],
-  "hubris": [
-    "ravaan_character_study"
-  ],
-  "power_corruption": [
-    "ravaan_character_study"
-  ],
-  "ego_inflation": [
-    "ravaan_character_study"
-  ],
-  "self_destruction": [
-    "ravaan_character_study"
-  ],
-  "obsession": [
-    "ravaan_character_study"
   ],
   "poltergeist_phenomena": [
     "enfield_poltergeist_001"
@@ -1076,13 +1067,22 @@
   "extrajudicial_killings": [
     "the_phoenix_program"
   ],
-  "urban_legends": [
-    "edinburgh_vaults_001"
+  "narcissism": [
+    "ravaan_character_study"
   ],
-  "historical_trauma": [
-    "edinburgh_vaults_001"
+  "hubris": [
+    "ravaan_character_study"
   ],
-  "haunted_location": [
-    "edinburgh_vaults_001"
+  "power_corruption": [
+    "ravaan_character_study"
+  ],
+  "ego_inflation": [
+    "ravaan_character_study"
+  ],
+  "self_destruction": [
+    "ravaan_character_study"
+  ],
+  "obsession": [
+    "ravaan_character_study"
   ]
 }
