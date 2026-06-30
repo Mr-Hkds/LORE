@@ -420,8 +420,8 @@
   "mental_health": [
     "folie_a_deux_shared_psychosis",
     "clinical_lycanthropy",
-    "the_silent_twins_gibbons",
-    "aokigahara_suicide_forest"
+    "aokigahara_suicide_forest",
+    "the_silent_twins_gibbons"
   ],
   "cyber warfare": [
     "stuxnet_cyberweapon_nuclear_facilities"
@@ -847,18 +847,6 @@
   "oceanographic_research": [
     "the_bloop_unexplained_sound"
   ],
-  "shared_psychosis": [
-    "the_silent_twins_gibbons"
-  ],
-  "selective_mutism": [
-    "the_silent_twins_gibbons"
-  ],
-  "sibling_interdependence": [
-    "the_silent_twins_gibbons"
-  ],
-  "institutionalization": [
-    "the_silent_twins_gibbons"
-  ],
   "urban_legends": [
     "edinburgh_vaults_001"
   ],
@@ -1084,5 +1072,17 @@
   ],
   "reality_perception": [
     "the_mandela_effect"
+  ],
+  "shared_psychosis": [
+    "the_silent_twins_gibbons"
+  ],
+  "selective_mutism": [
+    "the_silent_twins_gibbons"
+  ],
+  "sibling_interdependence": [
+    "the_silent_twins_gibbons"
+  ],
+  "institutionalization": [
+    "the_silent_twins_gibbons"
   ]
 }
