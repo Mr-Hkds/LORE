@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Fingerprint, Eye, Skull, HelpCircle, Share2 } from 'lucide-react';
 import LoreMark from './LoreMark';
+import { LOCAL_DICTIONARY } from '../constants/dictionary';
 
 export default function LayerReader({
   topic,
@@ -44,6 +45,141 @@ export default function LayerReader({
   const [animatingReaction, setAnimatingReaction] = useState(null);
   const [imgFailed, setImgFailed] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  // Look-up dictionary state
+  const [lookup, setLookup] = useState({
+    isOpen: false,
+    word: '',
+    definition: '',
+    loading: false,
+    x: 0,
+    y: 0,
+    isCustom: false
+  });
+
+  // Auto-close lookup popup on clicking outside
+  useEffect(() => {
+    if (!lookup.isOpen) return;
+    const handleOutsideClick = () => {
+      setLookup(prev => ({ ...prev, isOpen: false }));
+    };
+    window.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
+  }, [lookup.isOpen]);
+
+  const handleWordLookup = async (originalWord, lowerWord, clientX, clientY) => {
+    // Clean punctuation
+    const cleanWord = lowerWord.replace(/[^a-zA-Z]/g, '');
+    const cleanOriginal = originalWord.replace(/[^a-zA-Z]/g, '');
+    if (!cleanWord || cleanWord.length <= 1) return;
+
+    if (LOCAL_DICTIONARY[cleanWord]) {
+      setLookup({
+        isOpen: true,
+        word: cleanOriginal,
+        definition: LOCAL_DICTIONARY[cleanWord],
+        loading: false,
+        x: clientX,
+        y: clientY,
+        isCustom: false
+      });
+      return;
+    }
+
+    // Fallback to Live Dictionary API
+    setLookup({
+      isOpen: true,
+      word: cleanOriginal,
+      definition: '',
+      loading: true,
+      x: clientX,
+      y: clientY,
+      isCustom: true
+    });
+
+    try {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord)}`);
+      if (!res.ok) throw new Error("Word not found");
+      const data = await res.json();
+      const def = data?.[0]?.meanings?.[0]?.definitions?.[0]?.definition;
+      const partOfSpeech = data?.[0]?.meanings?.[0]?.partOfSpeech || 'noun';
+      
+      if (def) {
+        setLookup(prev => ({
+          ...prev,
+          definition: `(${partOfSpeech}) ${def}`,
+          loading: false
+        }));
+      } else {
+        throw new Error("No definition");
+      }
+    } catch (err) {
+      setLookup(prev => ({
+        ...prev,
+        definition: `Could not find a simple definition for "${cleanOriginal}". Double-click to search or verify spelling.`,
+        loading: false
+      }));
+    }
+  };
+
+  const handleContainerDoubleClick = (e) => {
+    const selection = window.getSelection();
+    if (!selection) return;
+    const selectedText = selection.toString().trim();
+    if (selectedText.length > 1 && selectedText.length < 30 && /^[a-zA-Z\s'-]+$/.test(selectedText)) {
+      handleWordLookup(selectedText, selectedText.toLowerCase(), e.clientX, e.clientY);
+    }
+  };
+
+  // Function to highlight difficult words in paragraph text
+  const formatTextWithLookup = (text) => {
+    if (!text) return "";
+    
+    // Sort keys descending by length
+    const keys = Object.keys(LOCAL_DICTIONARY).sort((a, b) => b.length - a.length);
+    const escapedKeys = keys.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const pattern = new RegExp(`\\b(${escapedKeys.join('|')})\\b`, 'gi');
+    
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+    
+    while ((match = pattern.exec(text)) !== null) {
+      const matchIndex = match.index;
+      const matchText = match[0];
+      
+      if (matchIndex > lastIndex) {
+        parts.push(text.substring(lastIndex, matchIndex));
+      }
+      
+      const lowerWord = matchText.toLowerCase();
+      parts.push(
+        <span
+          key={matchIndex}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleWordLookup(matchText, lowerWord, e.clientX, e.clientY);
+          }}
+          className="cursor-help font-medium border-b border-dashed transition-all hover:opacity-85 select-none"
+          style={{
+            borderColor: 'rgba(158, 123, 76, 0.75)',
+            color: '#9E7B4C',
+          }}
+          title={`Click to view simple definition of "${matchText}"`}
+        >
+          {matchText}
+        </span>
+      );
+      
+      lastIndex = pattern.lastIndex;
+    }
+    
+    if (lastIndex < text.length) {
+      parts.push(text.substring(lastIndex));
+    }
+    
+    return parts.length > 0 ? parts : text;
+  };
 
 
 
@@ -198,7 +334,7 @@ export default function LayerReader({
             }}
           >
             {/* Single column layout for maximum reading focus */}
-            <div className="max-w-2xl mx-auto w-full">
+            <div className="max-w-2xl mx-auto w-full" onDoubleClick={handleContainerDoubleClick}>
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
                 <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex flex-col relative bg-[#090807] dossier-image-container" style={{ borderColor: cardBorder }}>
@@ -263,7 +399,7 @@ export default function LayerReader({
                     fontWeight: '400',
                   }}
                 >
-                  {hookText}
+                  {formatTextWithLookup(hookText)}
                 </p>
               )}
 
@@ -287,14 +423,12 @@ export default function LayerReader({
                           fontWeight: '400',
                         }}
                       >
-                        {note.text}
+                        {formatTextWithLookup(note.text)}
                       </p>
                     </div>
                   ))}
                 </div>
               )}
-
-
 
               {/* Cliffhanger */}
               {cliffhangerText && (
@@ -315,7 +449,7 @@ export default function LayerReader({
                       color: cardTextPrimary,
                     }}
                   >
-                    {cliffhangerText}
+                    {formatTextWithLookup(cliffhangerText)}
                   </p>
                 </div>
               )}
@@ -549,6 +683,56 @@ export default function LayerReader({
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-[9px] font-mono tracking-widest uppercase pointer-events-none">
             Tap anywhere to return
           </div>
+        </div>
+      )}
+
+      {/* Floating Look-Up Popover Dialog */}
+      {lookup.isOpen && (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="fixed z-[999] w-72 p-4 rounded-xl border bg-[#0F0D0A]/95 backdrop-blur-md text-left transition-all duration-300 animate-scale-up"
+          style={{
+            left: `${Math.min(window.innerWidth - 300, Math.max(16, lookup.x - 144))}px`,
+            top: `${Math.min(window.innerHeight - 200, Math.max(16, lookup.y - 120))}px`,
+            borderColor: '#9E7B4C',
+            boxShadow: '0 12px 36px rgba(0,0,0,0.85), inset 0 0 12px rgba(158,123,76,0.12)',
+            color: '#EDE8DF',
+          }}
+        >
+          <div className="flex justify-between items-center border-b pb-2 mb-2" style={{ borderColor: 'rgba(158,123,76,0.2)' }}>
+            <div className="flex items-center gap-1.5 text-xs font-serif italic text-[#9E7B4C]">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>Dossier Look-Up</span>
+            </div>
+            <button
+              onClick={() => setLookup(prev => ({ ...prev, isOpen: false }))}
+              className="text-[9px] font-mono tracking-widest text-neutral-500 hover:text-white uppercase bg-transparent border-none cursor-pointer focus:outline-none"
+            >
+              Close [X]
+            </button>
+          </div>
+          
+          <h4 className="font-serif text-base font-bold text-white leading-tight capitalize mb-1">
+            {lookup.word}
+          </h4>
+          
+          {lookup.loading ? (
+            <div className="py-4 flex flex-col items-center justify-center gap-2">
+              <div className="w-4 h-4 rounded-full border border-[#9E7B4C]/20 border-t-[#9E7B4C] animate-spin" />
+              <span className="text-[8px] font-mono text-neutral-400 uppercase tracking-widest">Searching dictionary...</span>
+            </div>
+          ) : (
+            <div>
+              <p className="text-xs font-sans leading-relaxed text-[#EDE8DF]/90 font-light">
+                {lookup.definition}
+              </p>
+              {lookup.isCustom && (
+                <div className="mt-2 pt-2 border-t border-white/5 flex justify-between items-center">
+                  <span className="text-[7px] font-mono text-[#9E7B4C] uppercase tracking-wider">Live Web Definition</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </section>
