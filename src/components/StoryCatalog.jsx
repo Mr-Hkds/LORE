@@ -202,7 +202,20 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     return (rx.intriguing || rx.like || 0) + (rx.gripping || rx.heart || 0) + (rx.chilling || rx.scared || 0) + (rx.mind_blowing || rx.mindblown || 0);
   };
 
-  const previewSnippet = story.layers?.[0]?.content?.slice(0, 100) || story.hook || '';
+  const previewSnippet = useMemo(() => {
+    const content = story.layers?.[0]?.content || story.hook || '';
+    if (!content) return '';
+    const sentenceMatch = content.match(/^[^.!?]+[.!?]/);
+    if (sentenceMatch) {
+      const sentence = sentenceMatch[0].trim();
+      if (sentence.length < 50) {
+        const twoSentencesMatch = content.match(/^([^.!?]+[.!?]\s*[^.!?]+[.!?])/);
+        if (twoSentencesMatch) return twoSentencesMatch[0].trim();
+      }
+      return sentence;
+    }
+    return content.length > 120 ? content.slice(0, 120).trim() + '...' : content;
+  }, [story.layers, story.hook]);
 
   return (
     <article
@@ -245,13 +258,19 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         />
 
         {/* SOTA Archive Abstract HUD Slide-Up Overlay */}
-        <div className="absolute inset-x-0 bottom-0 z-20 p-3.5 bg-gradient-to-t from-[#090807] via-[#090807]/95 to-transparent border-t border-[#9E7B4C]/10 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-end min-h-[90px] pointer-events-none">
-          <span className="text-[7.5px] font-mono tracking-[0.18em] text-[#9E7B4C] uppercase mb-1 font-bold">
-            // Archive Abstract
-          </span>
-          <p className="text-[10px] text-[#EDE8DF]/70 leading-relaxed italic font-serif line-clamp-2">
-            "{redactText(previewSnippet)}..."
-          </p>
+        <div className="absolute inset-0 z-20 p-4 bg-[#090807]/95 border-t border-[#9E7B4C]/12 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between pointer-events-none select-none">
+          <div>
+            <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#9E7B4C] uppercase mb-2 block font-bold">
+              // Archive Abstract
+            </span>
+            <p className="text-[10px] sm:text-[10.5px] text-[#EDE8DF]/80 leading-relaxed italic font-serif">
+              "{redactText(previewSnippet)}"
+            </p>
+          </div>
+          <div className="flex justify-between items-center opacity-30 text-[6.5px] font-mono tracking-widest text-[#EDE8DF] mt-2">
+            <span>DPT.0{story.layers?.length || 7} // SECURED</span>
+            <span>SIGNAL STRENGTH 98%</span>
+          </div>
         </div>
       </div>
 
