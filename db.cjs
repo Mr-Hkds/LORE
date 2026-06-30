@@ -166,8 +166,8 @@ function getStories(includeDrafts = false) {
     } else {
       const hash = (s.story_id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
       const base = new Date('2026-01-01').getTime();
-      const spread = 180 * 24 * 60 * 60 * 1000; // spread over 180 days
-      s.added_date = new Date(base + (hash % spread)).toISOString().split('T')[0];
+      const spreadDays = hash % 180;
+      s.added_date = new Date(base + (spreadDays * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
     }
     return s;
   });
@@ -204,7 +204,8 @@ function getStory(story_id) {
   } else {
     const hash = (s.story_id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
     const base = new Date('2026-01-01').getTime();
-    s.added_date = new Date(base + (hash % (180 * 24 * 60 * 60 * 1000))).toISOString().split('T')[0];
+    const spreadDays = hash % 180;
+    s.added_date = new Date(base + (spreadDays * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
   }
   return s;
 }
@@ -237,6 +238,12 @@ function insertStory(story) {
 function updateStory(story_id, updates) {
   const existing = getStory(story_id);
   if (!existing) return false;
+  
+  const today = new Date().toLocaleDateString('en-CA');
+  if (updates.hero_image && (!existing.added_date || existing.added_date === '2026-01-01')) {
+    updates.added_date = today;
+  }
+  
   const merged = { ...existing, ...updates };
   insertStory(merged);
   return true;
@@ -263,7 +270,10 @@ function publishStory(story_id) {
   if (!hasProperThumbnail(story)) {
     throw new Error('Story lacks a proper thumbnail image.');
   }
-  db.prepare('UPDATE stories SET draft = 0 WHERE story_id = ?').run(story_id);
+  
+  const today = new Date().toLocaleDateString('en-CA');
+  const currentDate = (!story.added_date || story.added_date === '2026-01-01' || story.draft) ? today : story.added_date;
+  db.prepare('UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?').run(currentDate, story_id);
   
   // Export updated stories database back to static content folder
   exportStoriesToJSON();
@@ -283,7 +293,9 @@ function publishAllStories() {
       layers: JSON.parse(row.layers || '[]')
     };
     if (hasProperThumbnail(s)) {
-      db.prepare('UPDATE stories SET draft = 0 WHERE story_id = ?').run(s.story_id);
+      const today = new Date().toLocaleDateString('en-CA');
+      const currentDate = (!s.added_date || s.added_date === '2026-01-01' || s.draft) ? today : s.added_date;
+      db.prepare('UPDATE stories SET draft = 0, added_date = ? WHERE story_id = ?').run(currentDate, s.story_id);
       count++;
     }
   });
