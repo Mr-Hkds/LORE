@@ -37,7 +37,8 @@
     "project_artichoke_mind_control",
     "project_blue_book_ufo",
     "operation_gladio",
-    "the_russian_woodpecker_duga_3"
+    "the_russian_woodpecker_duga_3",
+    "operation_paperclip_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -477,7 +478,8 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "operation_paperclip_001"
   ],
   "maritime_disaster": [
     "franklin_expedition_lost_ships",
@@ -1046,5 +1048,41 @@
   ],
   "involuntary_movement": [
     "alien_hand_syndrome"
+  ],
+  "serial_bomber": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "anti_technology": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "manifesto": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "hermit": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "domestic_terrorism": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "psychological_motivation": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "radicalization": [
+    "the_unabomber_ted_kaczynski_campaign_of_terror"
+  ],
+  "unethical_recruitment": [
+    "operation_paperclip_001"
+  ],
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
+  ],
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ]
 }
