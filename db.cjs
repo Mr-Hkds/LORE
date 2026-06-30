@@ -137,17 +137,18 @@ function getStories(includeDrafts = false) {
     : db.prepare('SELECT * FROM stories WHERE draft = 0');
   
   const rows = stmt.all();
-  return rows.map(row => {
-    let isImageMissingOnServer = false;
-    const img = row.hero_image;
-    if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
-      isImageMissingOnServer = true;
-    } else if (img.startsWith('/content/images/')) {
-      const filename = img.substring('/content/images/'.length);
-      if (!EXISTING_LOCAL_IMAGES.has(filename)) {
+    return rows.map(row => {
+      let isImageMissingOnServer = false;
+      const img = row.hero_image;
+      if (!img || img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') {
         isImageMissingOnServer = true;
+      } else if (img.startsWith('/content/images/')) {
+        const filename = img.substring('/content/images/'.length);
+        const absolutePath = path.join(__dirname, 'public', img);
+        if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
+          isImageMissingOnServer = true;
+        }
       }
-    }
 
     const s = {
       ...row,
@@ -183,7 +184,8 @@ function getStory(story_id) {
     isImageMissingOnServer = true;
   } else if (img.startsWith('/content/images/')) {
     const filename = img.substring('/content/images/'.length);
-    if (!EXISTING_LOCAL_IMAGES.has(filename)) {
+    const absolutePath = path.join(__dirname, 'public', img);
+    if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
       isImageMissingOnServer = true;
     }
   }
