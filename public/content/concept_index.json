@@ -398,7 +398,8 @@
     "capgras_delusion_001",
     "cotard_delusion_001",
     "phineas_gage_brain_injury",
-    "clinical_lycanthropy"
+    "clinical_lycanthropy",
+    "alien_hand_syndrome"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -444,7 +445,8 @@
     "cotard_delusion_001"
   ],
   "body_image_disorder": [
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "alien_hand_syndrome"
   ],
   "counter-insurgency": [
     "the_phoenix_program"
@@ -1020,5 +1022,29 @@
   ],
   "social_hierarchy": [
     "the_batavia_shipwreck_mutiny"
+  ],
+  "bioterrorism": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "forensic_science": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "government_response": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "public_health_crisis": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "insider_threat": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "loss_of_agency": [
+    "alien_hand_syndrome"
+  ],
+  "brain_disorder": [
+    "alien_hand_syndrome"
+  ],
+  "involuntary_movement": [
+    "alien_hand_syndrome"
   ]
 }
