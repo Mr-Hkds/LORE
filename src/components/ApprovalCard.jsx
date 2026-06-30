@@ -24,7 +24,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
       try {
         const base64Data = reader.result;
         await onSaveImage(story.story_id, base64Data);
-      } catch (err) {
+      } catch {
         setError('Failed to upload image file.');
       } finally {
         setLoading(false);
@@ -44,7 +44,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
     try {
       await onSaveImage(story.story_id, remoteUrl.trim());
       setRemoteUrl('');
-    } catch (err) {
+    } catch {
       setError('Failed to download image from the provided URL.');
     } finally {
       setLoading(false);
@@ -59,7 +59,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
       const enhancedPrompt = `${promptText.replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
       const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
       await onSaveImage(story.story_id, pollinationsUrl);
-    } catch (err) {
+    } catch {
       setError('Failed to generate image with Flux AI.');
     } finally {
       setLoading(false);

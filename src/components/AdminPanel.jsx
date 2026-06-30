@@ -1158,7 +1158,7 @@ ${tone}
 1. All details must be historically accurate and verifiable. Never fabricate facts.
 2. Output ONLY valid raw JSON — no markdown fences, no explanations.
 3. Start with \`{\` and end with \`}\`.
-4. Escape all inner quotes with \\\".
+4. Escape all inner double-quotes.
 5. No trailing commas.
 6. Exactly 7 descent layers — escalating depth and intensity.
 7. Use \\n\\n to separate paragraphs in "content" values.
@@ -1665,7 +1665,6 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
         const folderName = storyId || 'general';
         const relativePath = `/content/images/${folderName}/${filename}`;
 
-        let savedLocally = false;
         if (isLocal && !serverOffline) {
           const res = await fetch('/api/upload-image', {
             method: 'POST',
@@ -1678,7 +1677,6 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
           });
           if (res.ok) {
             const data = await res.json();
-            savedLocally = true;
             addLog(`Successfully uploaded custom image to local server: ${data.path}`);
           }
         }
