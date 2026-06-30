@@ -388,25 +388,25 @@
   ],
   "delusion": [
     "capgras_delusion_001",
+    "cotard_delusion_001",
     "clinical_lycanthropy",
-    "ravaan_character_study",
-    "cotard_delusion_001"
+    "ravaan_character_study"
   ],
   "altered_perception": [
     "capgras_delusion_001"
   ],
   "neurology": [
     "capgras_delusion_001",
+    "cotard_delusion_001",
     "phineas_gage_brain_injury",
     "clinical_lycanthropy",
-    "alien_hand_syndrome",
-    "cotard_delusion_001"
+    "alien_hand_syndrome"
   ],
   "psychosis": [
     "capgras_delusion_001",
     "folie_a_deux_shared_psychosis",
-    "clinical_lycanthropy",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "clinical_lycanthropy"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -441,6 +441,13 @@
   "identity_erasure": [
     "the_taman_shud_case",
     "the_isdal_woman"
+  ],
+  "nihilism": [
+    "cotard_delusion_001"
+  ],
+  "body_image_disorder": [
+    "cotard_delusion_001",
+    "alien_hand_syndrome"
   ],
   "counter-insurgency": [
     "the_phoenix_program"
@@ -937,21 +944,6 @@
     "the_batavia_shipwreck_mutiny",
     "the_third_wave_experiment"
   ],
-  "bioterrorism": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "forensic_science": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "government_response": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "public_health_crisis": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
-  "insider_threat": [
-    "anthrax_attacks_2001_amerithrax"
-  ],
   "unethical_recruitment": [
     "operation_paperclip_001"
   ],
@@ -996,10 +988,6 @@
   ],
   "involuntary_movement": [
     "alien_hand_syndrome"
-  ],
-  "body_image_disorder": [
-    "alien_hand_syndrome",
-    "cotard_delusion_001"
   ],
   "suicide": [
     "aokigahara_suicide_forest"
@@ -1082,7 +1070,19 @@
   "psychological_exploitation": [
     "blue_whale_game_001"
   ],
-  "nihilism": [
-    "cotard_delusion_001"
+  "bioterrorism": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "forensic_science": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "government_response": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "public_health_crisis": [
+    "anthrax_attacks_2001_amerithrax"
+  ],
+  "insider_threat": [
+    "anthrax_attacks_2001_amerithrax"
   ]
 }
