@@ -15,8 +15,8 @@
     "barney_barnato",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "the_lead_mask_case",
-    "operation_gladio"
+    "operation_gladio",
+    "the_lead_mask_case"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -112,9 +112,9 @@
     "black_dahlia_murder",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
-    "the_lead_mask_case",
     "uss_cyclops_vanishing",
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "the_lead_mask_case"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -515,11 +515,11 @@
     "the_wow_signal",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
+    "the_children_of_woolpit",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
     "tunguska_event_001",
-    "project_blue_book_ufo",
-    "the_children_of_woolpit"
+    "project_blue_book_ufo"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -728,15 +728,6 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "occult_rituals": [
-    "the_lead_mask_case"
-  ],
-  "bizarre_circumstances": [
-    "the_lead_mask_case"
-  ],
-  "cryptic_messages": [
-    "the_lead_mask_case"
-  ],
   "extraterrestrial_life": [
     "the_wow_signal",
     "the_children_of_woolpit"
@@ -821,6 +812,15 @@
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment"
+  ],
+  "historical_mystery": [
+    "the_children_of_woolpit"
+  ],
+  "isolated_cultures": [
+    "the_children_of_woolpit"
+  ],
+  "folklore": [
+    "the_children_of_woolpit"
   ],
   "narcissism": [
     "ravaan_character_study"
@@ -1076,13 +1076,13 @@
   "public_perception": [
     "project_blue_book_ufo"
   ],
-  "historical_mystery": [
-    "the_children_of_woolpit"
+  "occult_rituals": [
+    "the_lead_mask_case"
   ],
-  "isolated_cultures": [
-    "the_children_of_woolpit"
+  "bizarre_circumstances": [
+    "the_lead_mask_case"
   ],
-  "folklore": [
-    "the_children_of_woolpit"
+  "cryptic_messages": [
+    "the_lead_mask_case"
   ]
 }
