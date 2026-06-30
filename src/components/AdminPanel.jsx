@@ -202,8 +202,14 @@ export function findPotentialDuplicate(story, allStories) {
       }
     }
   }
-
   return null;
+}
+
+export function hasProperThumbnail(story) {
+  if (!story || !story.hero_image) return false;
+  const img = story.hero_image;
+  if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
+  return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
 }
 
 export async function robustFetchWikipediaThumbnail(query) {
@@ -2155,7 +2161,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       
       return matchesSearch && matchesCategory && matchesDate && matchesMissingImage;
     });
-  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages, hasProperThumbnail]);
+  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages]);
 
   // Grouped filtered stories by category, sorted by date descending
   const groupedStories = useMemo(() => {
@@ -2202,20 +2208,13 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     });
   }, [adminStories]);
 
-  const hasProperThumbnail = useCallback((story) => {
-    if (!story || !story.hero_image) return false;
-    const img = story.hero_image;
-    if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
-    return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
-  }, []);
-
   const draftStories = useMemo(() => {
     return adminStories.filter(s => s.draft && hasProperThumbnail(s));
-  }, [adminStories, hasProperThumbnail]);
+  }, [adminStories]);
 
   const approvalStories = useMemo(() => {
     return adminStories.filter(s => s.draft && !hasProperThumbnail(s));
-  }, [adminStories, hasProperThumbnail]);
+  }, [adminStories]);
 
   const avgRating = useMemo(() => {
     if (feedbackItems.length === 0) return 0;
@@ -2233,7 +2232,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
 
   const missingImageStoriesCount = useMemo(() => {
     return adminStories.filter(s => !hasProperThumbnail(s)).length;
-  }, [adminStories, hasProperThumbnail]);
+  }, [adminStories]);
 
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: bg, color: fg }}>
