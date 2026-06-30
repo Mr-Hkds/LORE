@@ -1488,11 +1488,8 @@
     {
       "story_id": "jonestown_massacre_001",
       "title": "Jonestown: The Cult of Revolutionary Suicide",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
-      "image_query": "jonestown_massacre",
-      "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
       "concepts": [
         "cults",
         "mass_suicide",
@@ -1501,6 +1498,18 @@
         "groupthink",
         "obedience_to_authority"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 13,
+        "scared": 60,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -1544,13 +1553,7 @@
           "content": "The Jonestown Massacre remains a chilling case study in the dynamics of cults, charismatic leadership, and social control. The meticulous psychological conditioning, the enforced isolation, and the complete erosion of individual critical thinking created an environment where obedience superseded self-preservation. Jones expertly exploited his followers' desires for community, equality, and meaning, twisting these aspirations into tools of his own power.\n\nPost-mortem analyses revealed a complex tapestry of motivations among the victims: some were true believers, convinced of Jones's divinity and the righteousness of their 'revolutionary suicide.' Others were coerced, trapped, and saw no viable escape, succumbing to the overwhelming social pressure and fear of retribution. The event serves as a stark reminder of the devastating potential when a leader's paranoia combines with unquestioning loyalty and an isolated, vulnerable populace.\n\nJonestown's legacy is a profound warning against unchecked authority and the dangers of groupthink. It highlights the importance of critical thinking, personal autonomy, and skepticism toward any ideology that demands absolute loyalty and isolates its followers from external scrutiny. The memory of Jonestown continues to echo, a permanent dark corner in human history, reminding us of the extreme fragility of the human will when subjected to sustained, totalitarian manipulation.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 20,
-        "gripping": 13,
-        "scared": 60,
-        "mindblown": 11
-      }
+      ]
     },
     {
       "story_id": "the_numbers_stations",
@@ -2512,11 +2515,8 @@
     {
       "story_id": "winchester_mystery_house",
       "title": "The Winchester Mystery House: A Widow's Endless Construction",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
-      "image_query": "",
-      "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
       "concepts": [
         "paranormal_activity",
         "grief_and_madness",
@@ -2525,6 +2525,18 @@
         "unexplained_phenomena",
         "haunted_house"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 18,
+        "scared": 50,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2562,13 +2574,7 @@
           "layer_name": "The Darkest Documented Truth",
           "content": "The darkest documented truth of the Winchester Mystery House lies not solely in its spectral claims, which remain subjective, but in the profound human tragedy that underlies its very existence. Sarah Winchester was undeniably a woman consumed by overwhelming grief and a deep-seated sense of guilt, exacerbated by her vast fortune and the deadly legacy of the Winchester rifle.\n\nWhile the concept of vengeful spirits driving her to build is a captivating narrative, the historical record confirms her debilitating losses and her earnest embrace of spiritualism as a coping mechanism. Her immense wealth allowed her to manifest this internal anguish into an unprecedented, tangible reality, transforming a farmhouse into a bewildering monument of her psyche.\n\nThe house, therefore, stands as a haunting testament to one woman's lifelong attempt to outrun or appease the shadows of her past. The 'curse' was perhaps less about literal spirits and more about the crushing weight of loss, the immense guilt associated with her family's fortune built on death, and a profound psychological haunting made terrifyingly manifest in brick, wood, and a never-ending labyrinth."
         }
-      ],
-      "reactions": {
-        "like": 20,
-        "gripping": 18,
-        "scared": 50,
-        "mindblown": 11
-      }
+      ]
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2643,11 +2649,8 @@
     {
       "story_id": "the_cleveland_torso_murders",
       "title": "The Cleveland Torso Murders: The Unseen Butcher of Kingsbury Run",
-      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
-      "image_query": "",
-      "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
       "concepts": [
         "serial_killer",
         "unsolved_mystery",
@@ -2656,6 +2659,18 @@
         "forensic_challenge",
         "political_pressure"
       ],
+      "severity": "chilling",
+      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 25,
+        "gripping": 13,
+        "scared": 25,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2699,22 +2714,13 @@
           "content": "The Cleveland Torso Murders officially concluded in 1938 with the discovery of the final recognized victim, but the killings ceased without an arrest or a clear explanation. Though many believed Dr. Sweeney was the killer, especially Eliot Ness who continued to pursue him even after his tenure, the case remains officially unsolved, shrouded in the grim anonymity of its victims and the enigmatic nature of its perpetrator.\n\nThe terror of the 'Mad Butcher' cast a long shadow over Cleveland, symbolizing the era's deep-seated anxieties and vulnerabilities. The murders exposed the forgotten lives of the marginalized, highlighting how easily individuals could vanish from society during a period of national crisis. The case remains a chilling testament to a serial killer who operated with unparalleled brutality and managed to escape justice entirely, leaving behind only fragmented bodies and an enduring, unsettling mystery.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 25,
-        "gripping": 13,
-        "scared": 25,
-        "mindblown": 6
-      }
+      ]
     },
     {
       "story_id": "project_stargate_remote_viewing",
       "title": "Project Stargate: The Secret Quest for Psychic Espionage",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
-      "image_query": "",
-      "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
       "concepts": [
         "remote_viewing",
         "government_experiments",
@@ -2725,6 +2731,18 @@
         "unethical_experimentation",
         "scientific_skepticism"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 33,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2768,22 +2786,13 @@
           "content": "By the mid-1990s, with the Cold War over and scientific skepticism mounting, the CIA finally declassified many of Project Stargate's documents. The agency commissioned an independent review by leading scientists, including statisticians and psychologists. Their findings were unambiguous: while some anomalous results were observed, remote viewing failed to produce consistently accurate and reliable intelligence.\n\nThe final report concluded that while individuals might occasionally show 'anomalous mental phenomena,' these effects were too inconsistent and too weak to be useful for intelligence gathering. The program was formally terminated in 1995. Project Stargate remains a chilling testament to how national security fears can lead governments to explore the most unconventional and ethically fraught avenues, blurring the lines between science and pseudoscience in a desperate quest for an advantage. It exposed the profound lengths to which institutions would go, and the unsettling questions that linger about the human mind's untapped potential, even if it could not be weaponized as once hoped.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 20,
-        "gripping": 33,
-        "scared": 6,
-        "mindblown": 6
-      }
+      ]
     },
     {
       "story_id": "stockholm_syndrome_001",
       "title": "Stockholm Syndrome: The Unsettling Bond of Captivity",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
-      "image_query": "Stockholm Syndrome",
-      "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
       "concepts": [
         "hostage_psychology",
         "trauma_bonding",
@@ -2791,6 +2800,18 @@
         "cognitive_dissonance",
         "captivity_syndrome"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 24,
+        "scared": 5,
+        "mindblown": 59
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2834,27 +2855,30 @@
           "content": "While often associated with hostage situations, the principles underlying Stockholm Syndrome are recognized in other contexts of prolonged abuse and power imbalance. Victims of domestic violence, child abuse, cults, and even human trafficking can exhibit similar patterns of allegiance or difficulty separating from their abusers. The dynamics of isolation, dependency, and intermittent kindness can foster a 'trauma bond,' making escape and recovery incredibly complex.\n\nThe syndrome serves as a stark reminder of the human mind's desperate struggle for survival, even if it means constructing a reality where the abuser becomes a protector. For survivors, the journey to recovery is often fraught with internal conflict, guilt, and a profound struggle to disentangle their identity from the psychological prison they endured. It reveals a chilling truth: our minds can betray us in the ultimate pursuit of staying alive, leaving deep, unseen scars that linger long after freedom is attained.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 46,
-        "gripping": 24,
-        "scared": 5,
-        "mindblown": 59
-      }
+      ]
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
       "title": "Project Sunshine: The Covert Harvest of the Dead",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
-      "image_query": "",
-      "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
       "concepts": [
         "human_experimentation",
         "government_secrecy",
         "medical_ethics"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 40,
+        "gripping": 38,
+        "scared": 5,
+        "mindblown": 11
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2898,13 +2922,7 @@
           "content": "Project Sunshine stands as a chilling testament to a period when scientific advancement, driven by Cold War anxieties, often overshadowed ethical considerations. The justification for collecting cadavers without consent was often framed as a national security imperative, where the 'greater good' superseded individual rights and family wishes. This rationale allowed a morally indefensible practice to become an institutionalized, albeit secret, program.\n\nWhile the scientific data gathered from Project Sunshine was undeniably valuable in understanding the biological impact of nuclear fallout, the profound ethical transgressions cannot be overlooked. The program highlighted a systemic failure to protect the most vulnerable — the deceased, whose bodies were treated as mere biological samples rather than the remains of human beings with a right to dignity. The revelations served as a critical, if painful, lesson in the absolute necessity of informed consent, even in death, and the dangers inherent when scientific ambition is divorced from moral accountability.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 40,
-        "gripping": 38,
-        "scared": 5,
-        "mindblown": 11
-      }
+      ]
     },
     {
       "story_id": "tunguska_event_001",
@@ -2995,11 +3013,8 @@
     {
       "story_id": "salem_witch_trials_001",
       "title": "The Salem Witch Trials: A Village Consumed by Fear",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
-      "image_query": "Salem witch trials",
-      "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
       "concepts": [
         "mass_hysteria",
         "groupthink",
@@ -3007,6 +3022,18 @@
         "religious_extremism",
         "spectral_evidence"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3050,22 +3077,13 @@
           "content": "By the time the Salem Witch Trials concluded, a horrific toll had been exacted: nineteen people were hanged on Gallows Hill, one man, Giles Corey, was pressed to death for refusing to enter a plea, and several others died in prison awaiting trial. Over 200 individuals were accused, their reputations shattered and their lives irrevocably altered. The darkest truth of Salem is not merely the unjust deaths, but the swift ease with which an entire community succumbed to mass hysteria, turning on its own members in a paroxysm of fear and religious fervor.\n\nIn the aftermath, surviving victims and their families sought justice and compensation. By 1711, the Massachusetts General Court passed a bill clearing the names of many of the accused and providing financial restitution to their heirs. However, it took centuries for full exoneration for all those implicated. The events revealed deep-seated social anxieties, economic resentments, rigid religious dogma, and the dangerous power of suggestion and groupthink in a confined, isolated community.\n\nThe Salem Witch Trials stand as a chilling historical testament to the fragility of justice when confronted by unfounded accusations, collective panic, and the unchecked authority of those who claim to speak for truth. It serves as a stark reminder of the devastating consequences when reason is abandoned and fear is allowed to dictate judgment, a dark corner of history where the human capacity for cruelty and irrationality was laid bare.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 18,
-        "gripping": 26,
-        "scared": 33,
-        "mindblown": 4
-      }
+      ]
     },
     {
       "story_id": "the_rat_park_experiment_001",
       "title": "The Rat Park Experiment: Rewriting the Narrative of Addiction",
-      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
-      "image_query": "",
-      "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
       "category": "psychology",
-      "severity": "disturbing",
+      "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
       "concepts": [
         "addiction",
         "environment_vs_biology",
@@ -3075,6 +3093,18 @@
         "drug_policy",
         "social_pathology"
       ],
+      "severity": "disturbing",
+      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 17,
+        "gripping": 25,
+        "scared": 3,
+        "mindblown": 25
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3118,13 +3148,7 @@
           "content": "The absolute darkest truth gleaned from the Rat Park experiment is not just about rats or drugs, but about human society itself. If addiction is primarily a response to a lack of meaningful connection, purpose, and an enriched environment, then the high rates of addiction in human populations serve as a chilling indictment of societal structures that foster isolation, despair, and systemic deprivation. It suggests that many modern societies, despite their material advancements, might be creating their own versions of 'isolated cages' for vast numbers of people.\n\nThis perspective shifts the blame from the individual addict – often seen as weak or morally corrupt – to the broader social and economic conditions that contribute to their suffering. It implies that mass incarceration for drug offenses, often involving solitary confinement or severely deprived environments, may exacerbate rather than alleviate addiction. The experiment forces us to consider that our cities, our economic systems, and our social policies might, in their failure to provide universal connection and flourishing, be inadvertently pushing vulnerable individuals toward the 'morphine water' as their only accessible escape.\n\nThe Rat Park experiment ultimately asks us to confront a disturbing question: are we, as a species, so focused on eradicating the 'drug' that we ignore the profound suffering inherent in the 'cage' we build around ourselves and others? Its enduring legacy is a powerful, unsettling call to re-evaluate how we structure our world, recognizing that true liberation from addiction may lie not in chemical warfare, but in radical social empathy and connection.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 17,
-        "gripping": 25,
-        "scared": 3,
-        "mindblown": 25
-      }
+      ]
     },
     {
       "story_id": "the_mary_celeste_mystery",
@@ -3217,11 +3241,8 @@
     {
       "story_id": "phineas_gage_brain_injury",
       "title": "The Case of Phineas Gage: The Man Whose Mind Was Shattered",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
-      "image_query": "Phineas Gage",
-      "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
       "concepts": [
         "brain_injury",
         "personality_change",
@@ -3229,6 +3250,18 @@
         "frontal_lobe",
         "self_identity"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 55,
+        "gripping": 18,
+        "scared": 2,
+        "mindblown": 48
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3272,13 +3305,7 @@
           "content": "Phineas Gage lived for another 12 years after his accident, a testament to his sheer physical tenacity. However, his life was marked by itinerancy and a struggle to regain any semblance of his former self. He worked briefly as a stable hand, then traveled to South America, working as a coach driver for a stagecoach line, an occupation that surprisingly suited his diminished cognitive abilities, as it required minimal planning or complex social interaction.\n\nHe even spent time in New York, exhibiting himself and his infamous tamping iron to medical students and curious audiences, a living testament to medical anomaly. This public display underscored the tragic loss of his former, respected identity, reducing him to a curiosity. He eventually suffered a series of epileptic seizures, likely a delayed consequence of his severe brain trauma, and passed away in San Francisco in 1860.\n\nGage's skull and the tamping iron were exhumed and preserved, becoming invaluable artifacts for scientific study. His case remains a chilling reminder of the brain's profound influence over who we are. It forces us to confront the unsettling fragility of identity, suggesting that our most cherished attributes—our character, our morality, our very sense of self—are fundamentally rooted in the complex, yet vulnerable, physical structure of our brain. The man was alive, but the self was undeniably dead, leaving a legacy of unanswered questions about the essence of being.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 55,
-        "gripping": 18,
-        "scared": 2,
-        "mindblown": 48
-      }
+      ]
     },
     {
       "story_id": "echelon_global_surveillance",
@@ -3373,11 +3400,8 @@
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
       "title": "Dissociative Identity Disorder: The Shattered Self",
-      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
-      "image_query": "",
-      "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
       "concepts": [
         "dissociation",
         "trauma_response",
@@ -3385,6 +3409,18 @@
         "alter_personalities",
         "coping_mechanisms"
       ],
+      "severity": "chilling",
+      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 19,
+        "scared": 5,
+        "mindblown": 44
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3428,22 +3464,13 @@
           "content": "The darkest documented truth of Dissociative Identity Disorder lies in the chilling testament it provides to the enduring, devastating impact of severe, repetitive childhood trauma. The existence of a shattered self is a profound illustration of the human psyche's extraordinary, albeit often dysfunctional, capacity to adapt and survive unimaginable circumstances.\n\nEven with successful long-term therapy, complete integration into a singular, seamless identity is not always achieved, nor is it necessarily the universal goal. Many individuals learn to live cooperatively with their internal system, achieving a functional state where alters communicate and collaborate effectively, leading to a much improved quality of life. However, the scars of fragmentation, including lingering amnesia, internal conflicts, and a pervasive sense of an incomplete self, often remain.\n\nDID forces us to confront the fragility of identity and the brutal reality of how early life experiences can warp the very core of who we are. It is a testament to both the unbearable suffering of profound abuse and the tenacious, if fractured, will to survive, leaving a permanent mark on the landscape of the self.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 46,
-        "gripping": 19,
-        "scared": 5,
-        "mindblown": 44
-      }
+      ]
     },
     {
       "story_id": "black_dahlia_murder",
       "title": "The Black Dahlia Murder: Hollywood's Unsolved Nightmare",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
-      "image_query": "",
-      "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
       "concepts": [
         "unsolved_mystery",
         "brutal_murder",
@@ -3452,6 +3479,18 @@
         "forensic_challenge",
         "police_misconduct"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 54,
+        "gripping": 27,
+        "scared": 49,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3495,22 +3534,13 @@
           "content": "The absolute darkest documented truth of the Black Dahlia murder is its enduring status as a cold case. Despite renewed interest, advanced forensic techniques, and tireless efforts by both official and unofficial investigators, Elizabeth Short's killer was never identified, tried, or punished. The perpetrator successfully vanished into the ether, leaving behind only the horrific legacy of their crime and an indelible mark on American true crime history.\n\nThis unsolved nightmare serves as a grim testament to the fact that even the most sensational and publicly scrutinized crimes can slip through the grasp of justice. The precise motive, the identity of the killer, and the full extent of the meticulously orchestrated cruelty remain forever shrouded in mystery. The Black Dahlia murder continues to symbolize the dark, predatory forces that can lurk beneath the surface of ambition and glamour, forever reminding us of a young woman whose life was brutally extinguished, her story frozen in an eternal, horrifying question mark.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 54,
-        "gripping": 27,
-        "scared": 49,
-        "mindblown": 10
-      }
+      ]
     },
     {
       "story_id": "clinical_lycanthropy",
       "title": "Clinical Lycanthropy: When the Human Mind Becomes a Beast",
-      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
-      "image_query": "",
-      "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
       "concepts": [
         "delusion",
         "psychosis",
@@ -3518,6 +3548,18 @@
         "neurology",
         "mental_health"
       ],
+      "severity": "chilling",
+      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 23,
+        "scared": 3,
+        "mindblown": 28
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3561,13 +3603,7 @@
           "content": "The darkest truth of clinical lycanthropy lies in its profound challenge to the very foundation of self-identity. Treatment typically involves antipsychotic medication, often in high doses, to manage the underlying psychotic disorder. However, the delusion itself can be incredibly resistant, deeply ingrained in the patient's altered reality. While medication can sometimes alleviate the intensity of the symptoms or reduce the frequency of the delusional episodes, full remission of the specific lycanthropic delusion remains a significant clinical challenge.\n\nPatients may fluctuate between periods of lucidity and intense delusion, leaving them in a perpetual state of uncertainty about their own being. This condition stands as a chilling testament to the brain's capacity for self-deception and the thin veil that separates our perception of reality from the abyss of profound mental alteration. It reminds us that sometimes, the most terrifying monsters are not lurking in shadows, but are conjured within the very confines of our own minds, irrevocably transforming the self.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 20,
-        "gripping": 23,
-        "scared": 3,
-        "mindblown": 28
-      }
+      ]
     },
     {
       "story_id": "roanoke_colony_disappearance",
@@ -3661,11 +3697,8 @@
     {
       "story_id": "the_isdal_woman",
       "title": "The Isdal Woman: Europe's Unidentified Shadow",
-      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
-      "image_query": "",
-      "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
       "concepts": [
         "unidentified_person",
         "espionage",
@@ -3673,6 +3706,18 @@
         "unexplained_deaths",
         "cold_case"
       ],
+      "severity": "chilling",
+      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3716,22 +3761,13 @@
           "content": "The case of the Isdal Woman remains officially unsolved, perched between two chilling probabilities: either she was murdered to protect a profound secret, or she meticulously orchestrated her own death as a final act of self-erasure, perhaps to protect others or a cause. The absence of a solid motive, a verifiable identity, or a clear killer leaves a void. She stands as a potent symbol of complete anonymity, a life so carefully constructed on deception that its true form vanished with her, leaving only a ghost story in the Norwegian mountains.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 33,
-        "mindblown": 4
-      }
+      ]
     },
     {
       "story_id": "project_iceworm_secret_city",
       "title": "Project ICEWORM: The US Army's Secret City Under the Ice",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
-      "image_query": "",
-      "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
       "category": "gov_experiments",
-      "severity": "chilling",
+      "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
       "concepts": [
         "cold_war_era",
         "government_secrecy",
@@ -3739,6 +3775,18 @@
         "climate_change_impact",
         "military_infrastructure"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 23,
+        "gripping": 31,
+        "scared": 6,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3782,13 +3830,7 @@
           "content": "Today, Project ICEWORM's legacy is no longer a hidden secret but a looming environmental catastrophe. The warming climate has accelerated the melting of the Greenland ice sheet at an unprecedented rate. Scientific projections now indicate that the ice covering Camp Century will melt, exposing the buried toxic waste within decades, far sooner than anticipated in the 1960s. This includes an estimated 200,000 liters of diesel fuel, 240,000 liters of waste water, and an unknown quantity of low-level radioactive coolant, along with various pollutants and biological waste.\n\nThe melting ice will release these contaminants directly into the environment, potentially impacting fragile Arctic ecosystems and local communities. The geopolitical implications are complex, as the facility lies within Danish territory (Greenland is an autonomous territory within the Kingdom of Denmark), yet the waste was deposited by the United States. Neither country had initially assumed responsibility for the long-term clean-up, creating a potential international environmental crisis. Project ICEWORM stands as a chilling reminder of how Cold War ambitions, coupled with a miscalculation of environmental stability, can leave a dangerous, enduring scar on the planet, now activated by the very changes humanity has wrought upon the climate.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 23,
-        "gripping": 31,
-        "scared": 6,
-        "mindblown": 4
-      }
+      ]
     },
     {
       "story_id": "monster_study_1939",
@@ -3886,11 +3928,8 @@
     {
       "story_id": "eilean_mor_lighthouse_mystery",
       "title": "The Vanished Keepers of Eilean Mòr: A Lighthouse's Silent Riddle",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
-      "image_query": "",
-      "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
       "concepts": [
         "unsolved_mystery",
         "disappearance",
@@ -3898,6 +3937,18 @@
         "isolated_location",
         "unexplained_events"
       ],
+      "severity": "chilling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 22,
+        "scared": 49,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3941,22 +3992,13 @@
           "content": "Over a century later, the Eilean Mòr Lighthouse Mystery remains officially unsolved, a chilling testament to the sea's indifferent power and the vulnerabilities of those who stand watch against it. Despite extensive searches, inquiries, and countless theories, no definitive evidence has ever emerged to explain the disappearance of James Ducat, Thomas Marshall, and William McArthur. Their bodies were never recovered, leaving no physical trace of their fate.\n\nThe 'darkest truth' is the profound absence of truth itself. The lighthouse keepers simply vanished, absorbed by an environment they spent their lives mastering. The Eilean Mòr case continues to haunt, not because of a definitive horror, but because of its terrifying lack of resolution. It stands as a stark reminder of the isolation of such posts, the unforgiving nature of the elements, and the fragility of human existence when confronted by forces beyond comprehension or control. The lighthouse, now automated, still stands sentinel, but its silent chambers forever guard the secret of its vanished keepers.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 44,
-        "gripping": 22,
-        "scared": 49,
-        "mindblown": 10
-      }
+      ]
     },
     {
       "story_id": "harold_shipman_serial_killer",
       "title": "The Angel of Death: Harold Shipman's Betrayal",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
-      "image_query": "",
-      "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
       "concepts": [
         "serial_killer",
         "medical_malpractice",
@@ -3965,6 +4007,18 @@
         "systemic_failure",
         "power_dynamics"
       ],
+      "severity": "chilling",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 56,
+        "gripping": 34,
+        "scared": 71,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4008,22 +4062,13 @@
           "content": "Harold Shipman's reign of terror irrevocably altered the landscape of British healthcare and profoundly damaged public trust in the medical profession. The sheer scale and duration of his crimes necessitated sweeping changes to medical practices and regulatory oversight. Controls on prescribing and administering controlled drugs were significantly tightened, and the process for certifying deaths was reformed, including mandatory independent reviews of cremation forms.\n\nCrucially, the Shipman case highlighted the dangers of unchecked autonomy within professional roles and underscored the need for robust systems of accountability and scrutiny, even for those held in the highest regard. The inquiry's recommendations led to the establishment of new regulatory bodies and enhanced patient safety protocols, aiming to prevent any similar betrayal of trust from ever occurring again. The memory of 'Dr. Shipman' continues to serve as a stark reminder of the potential for malevolence within seemingly benevolent institutions.\n\nThe enduring legacy of Harold Shipman is the chilling realization that a serial killer could operate in plain sight for decades, hiding behind the sanctity of his profession, and abusing the ultimate trust bestowed upon him. It stands as a dark testament to the fragility of human trust and the devastating consequences when those sworn to heal instead choose to destroy, leaving a permanent shadow over the relationship between doctor and patient, and a deeply unsettling question about the darkness that can reside within seemingly ordinary individuals.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 56,
-        "gripping": 34,
-        "scared": 71,
-        "mindblown": 12
-      }
+      ]
     },
     {
       "story_id": "the_ganzfeld_experiment",
       "title": "The Ganzfeld Experiment: The Science of Unseen Minds",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
-      "image_query": "Ganzfeld experiment",
-      "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
       "category": "psychology",
-      "severity": "unsettling",
+      "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
       "concepts": [
         "parapsychology",
         "ESP",
@@ -4034,6 +4079,18 @@
         "replication_crisis",
         "perception_biases"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 4,
+        "mindblown": 31
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4077,22 +4134,13 @@
           "content": "Today, the scientific consensus largely remains skeptical about the existence of ESP, and the Ganzfeld experiment, despite its sophistication compared to earlier methods, has not provided the 'extraordinary evidence' required to overturn that skepticism. While some meta-analyses still suggest a small, statistically significant effect above chance, the consistency and replicability remain major issues. No independent lab has reliably demonstrated the effect under truly rigorous conditions, free from all potential confounding factors.\n\nThe 'darkest truth' here is not of a malicious cover-up, but of the unsettling reality that our desire for profound, unseen connections can lead us to interpret ambiguous data in ways that confirm our hopes. It underscores the immense difficulty in objectively studying phenomena that defy conventional physics and psychology, and how easily human perception and cognitive biases can create an illusion of the paranormal. The Ganzfeld experiment stands as a testament to the scientific method's rigorous demands, even as it leaves a whisper of possibility that some aspects of consciousness remain just beyond our current grasp, perhaps forever hidden in the 'noise' of the universe or the depths of our own minds.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 4,
-        "mindblown": 31
-      }
+      ]
     },
     {
       "story_id": "circleville_letters",
       "title": "The Circleville Letters: A Town Held Hostage by Anonymous Fear",
-      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
-      "image_query": "",
-      "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
       "category": "true_crime",
-      "severity": "chilling",
+      "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
       "concepts": [
         "anonymous_harassment",
         "unsolved_mystery",
@@ -4100,6 +4148,18 @@
         "psychological_warfare",
         "small_town_secrets"
       ],
+      "severity": "chilling",
+      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 54,
+        "mindblown": 5
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4143,13 +4203,7 @@
           "content": "Paul Freshour was eventually released from prison in 1994, having consistently maintained his innocence regarding the anonymous letters. To his dying day in 2012, he continued to claim he was framed, asserting that a network of individuals in Circleville was involved in the harassment campaign. The letters themselves tapered off in the late 1980s, but the true identity of the original 'Circleville Writer' was never definitively proven or brought to justice.\n\nThe case of the Circleville Letters remains one of America's most disturbing unsolved mysteries. It stands as a chilling testament to the power of anonymous harassment, its capacity to dismantle lives, corrupt the judicial system, and leave an indelible mark of paranoia on a community. The possibility that the real writer, or writers, walked free, silently observing the chaos they created, is a profoundly unsettling thought, ensuring that Circleville's secrets may forever remain unmasked.",
           "cliffhanger": null
         }
-      ],
-      "reactions": {
-        "like": 24,
-        "gripping": 22,
-        "scared": 54,
-        "mindblown": 5
-      }
+      ]
     },
     {
       "story_id": "albert_fish_the_gray_man",
@@ -5440,11 +5494,8 @@
     {
       "story_id": "mystery_of_dwarka",
       "title": "The Sunken Kingdom: Dwarka's Enduring Mystery",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
-      "image_query": "",
-      "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
       "category": "mythology",
-      "severity": "unsettling",
+      "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
       "concepts": [
         "lost_civilizations",
         "mythology",
@@ -5452,6 +5503,18 @@
         "historical_validation",
         "catastrophic_events"
       ],
+      "severity": "unsettling",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 41,
+        "gripping": 24,
+        "scared": 3,
+        "mindblown": 7
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -5489,13 +5552,7 @@
           "content": "Despite the impressive findings, the interpretation of the 'Mystery of Dwarka' remains fraught with scientific skepticism. Critics point to the inherent difficulties of underwater archaeology, where natural rock formations can sometimes be mistaken for man-made structures. They emphasize the need for more extensive excavation, controlled sample collection, and independent verification of dating results to firmly establish the site's urban character and chronology.\n\nFurthermore, the exact mechanism of the city's submergence is debated. While some theories suggest a sudden tsunami or rapid sea-level rise, others propose a gradual inundation over centuries, consistent with known geological shifts in the region. The lack of clear evidence for a single, catastrophic event that matches the mythological description adds another layer of complexity, preventing a definitive scientific endorsement of the legend.",
           "cliffhanger": "The evidence of a lost city was strong, but the story of its fall, and its true identity, remained submerged in the waters of uncertainty."
         }
-      ],
-      "reactions": {
-        "like": 41,
-        "gripping": 24,
-        "scared": 3,
-        "mindblown": 7
-      }
+      ]
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -6328,96 +6385,6 @@
       ]
     },
     {
-      "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
-      "title": "The Unabomber: Ted Kaczynski's Decades of Calculated Terror",
-      "category": "true_crime",
-      "hook": "For nearly two decades, an unseen assailant terrorized America with meticulously crafted package bombs, leaving a trail of death and profound fear, all driven by a singular, destructive ideology.",
-      "concepts": [
-        "serial_bomber",
-        "anti_technology",
-        "manifesto",
-        "hermit",
-        "domestic_terrorism",
-        "psychological_motivation",
-        "radicalization"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800",
-      "added_date": "2026-06-30",
-      "draft": false,
-      "reactions": {
-        "like": 39,
-        "gripping": 22,
-        "scared": 44,
-        "mindblown": 5
-      },
-      "evidence_links": [
-        {
-          "label": "Bombing Alone: Tracing the Motivations and Antecedent Behaviors of Lone‐Actor Terrorists,, (Paul Gill, John Horgan, 2013)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/1556-4029.12312"
-        },
-        {
-          "label": "Searching for Ecoterrorism: The Crucial Case of the Unabomber (Sean Fleming, 2024)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/EC862D788A13F848A001D6DD097C272E/S000305542300148Xa.pdf/div-class-title-searching-for-ecoterrorism-the-crucial-case-of-the-unabomber-div.pdf"
-        },
-        {
-          "label": "A requiem for the Unabomber (James C. Oleson, 2023)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/10282580.2023.2279312?needAccess=true"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "unethical_experimentation",
-          "transition_line": "Before he became the Unabomber, Ted Kaczynski was a brilliant young mind, whose early experiences, including participation in psychological experiments, raise unsettling questions about the roots of radicalization, much like the controversial trials explored in the dossier on 'MK-Ultra: The CIA's Mind Control Experiments'."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - The First Explosions",
-          "content": "In May 1978, a seemingly innocuous package appeared at the University of Illinois at Chicago. Inside, an explosive device detonated, causing minor injuries. This was the first whisper of a terror that would plague America for 17 years, an act initially dismissed as an isolated incident, perhaps a prank gone wrong, but one that contained the nascent seeds of a calculated campaign.\n\nThe following year, a similar package was discovered on an American Airlines flight, intended for delivery. Though it failed to fully detonate, the intent was clear: to cause harm. These early attacks lacked a discernible pattern, target profile, or motive, leaving investigators baffled. The perpetrator seemed to strike at random, leaving behind crude but effective devices that offered few clues about the individual behind them.\n\nYet, even in these initial, scattered incidents, there was a chilling consistency in the method – homemade bombs designed to inflict injury or death through mail or package delivery. No one knew then that these were the opening salvos from a highly intelligent, intensely reclusive individual who would soon earn a moniker synonymous with technological terror.",
-          "cliffhanger": "Who was this phantom bomber, and what dark purpose fueled his silent, escalating war?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - A Campaign Emerges",
-          "content": "As the 1980s progressed, the attacks continued, growing in frequency, sophistication, and lethality. Targets shifted, no longer solely confined to academic institutions, but expanding to airlines, computer stores, and eventually, specific individuals in the technology sector. The FBI, recognizing a disturbing pattern, established a special task force in 1979, dubbing the unknown assailant 'UNABOM', an acronym derived from University and Airline BOMber.\n\nThe bomber's methods evolved. His devices became more complex, incorporating intricate booby traps and various unconventional components, making forensic analysis exceptionally challenging. Each bomb was a carefully crafted puzzle, designed not just to explode, but to conceal the identity and motivations of its maker. Three deaths and 23 injuries eventually resulted from these attacks, spreading a pervasive sense of unease among academics and those in technological fields.\n\nDespite an intense federal investigation, the bomber remained an enigma. No fingerprints, no witnesses, no discernible organization behind the attacks. The UNABOM task force amassed a vast collection of evidence, but it pointed to an individual who operated outside conventional criminal profiles – a phantom striking from the shadows, whose meticulous planning suggested a formidable intellect driven by an unknown, yet increasingly sinister, agenda.",
-          "cliffhanger": "The attacks escalated, the targets narrowed, and the specter of a singular, vengeful mind began to take chilling shape, but the bomber's true identity remained stubbornly out of reach."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - The Manifesto's Demand",
-          "content": "The campaign of terror reached a critical juncture in April 1995 with two pivotal events. First, the Unabomber sent a package bomb to the home of Gilbert Murray, president of the California Forestry Association, in Sacramento. Murray was killed instantly, becoming the third fatality of the Unabomber's spree. This murder underscored the increasing lethality and deliberate targeting of the attacks, raising the stakes considerably for federal investigators.\n\nShortly after Murray's death, the Unabomber made a dramatic move: he sent letters to The New York Times and The Washington Post, demanding the publication of his lengthy manuscript, 'Industrial Society and Its Future', also known as the 'Unabomber Manifesto'. He threatened to escalate his bombings if his demands were not met, promising to 'desist from terrorism' if his anti-technology treatise was published in full by a major newspaper or magazine.\n\nThe dilemma for authorities was profound: capitulate to a terrorist's demands, or risk more lives. The decision was made to publish the manifesto, a calculated gamble to potentially prevent further bloodshed and, crucially, to use the publication as a means to solicit public assistance in identifying the author. This bold move transformed the hunt from a purely forensic and investigative endeavor into a psychological battle, forcing the nation to confront not just the bombs, but the radical ideology behind them.",
-          "cliffhanger": "With the publication of his manifesto, the Unabomber stepped out of the shadows, not as a face, but as a chilling voice, broadcasting his grievances to the entire world, and unwittingly, providing the first real crack in his impenetrable anonymity."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Anti-Technology Doctrine",
-          "content": "The 'Unabomber Manifesto,' a dense, 35,000-word essay, laid bare the perpetrator's ideology: a vehement rejection of modern industrial-technological society. Published in September 1995 by The New York Times and The Washington Post at the urging of the FBI and Attorney General Janet Reno, the document argued that technology inevitably leads to the erosion of human freedom, dignity, and autonomy. It posited that humans are being systematically alienated from nature and their true selves by the relentless march of technological progress.\n\nThe manifesto, though rambling in parts, was remarkably coherent in its core arguments, displaying a sophisticated understanding of history, sociology, and philosophy. It meticulously outlined the mechanisms by which technological systems control and manipulate individuals, advocating for a return to a more primitive, agrarian existence. The author signed his work with the moniker 'FC' – 'Freedom Club' – an organization that, in reality, consisted of only himself.\n\nFor the first time, the public and investigators had direct insight into the mind of the bomber. The document revealed not a random psychopath, but a highly intelligent, meticulously logical individual driven by deeply held, albeit profoundly violent, convictions. It was a chilling window into an intellectual fortress, constructed brick by brick from a radical anti-industrial philosophy, now broadcast for all to read.",
-          "cliffhanger": "The words were now public, revealing a complex mind behind the terror, but it was a quiet, unassuming man, far removed from the public eye, who held the key to deciphering the author's true identity."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - A Brother's Agonizing Choice",
-          "content": "The publication of the manifesto proved to be the Unabomber's undoing. David Kaczynski, Ted's younger brother, read excerpts of the manifesto and was struck by the familiar tone and specific turns of phrase, eerily similar to writings he had seen from his reclusive older brother. For years, David and his mother had harbored growing concerns about Ted's increasing isolation, his extremist views on technology, and his erratic behavior.\n\nDavid and his wife, Linda Patrik, cautiously began to review Ted's old letters and essays. The parallels to the manifesto were undeniable: shared concepts, a distinctive vocabulary, even identical sentence structures. The realization that his own brother might be the notorious Unabomber was a devastating blow, forcing David into an agonizing moral quandary between familial loyalty and civic duty. He understood the potential consequences, both for his brother and for himself.\n\nAfter considerable deliberation, and with the immense emotional support of his wife, David Kaczynski made the courageous and profoundly difficult decision to contact the FBI. He provided them with samples of Ted's writing, detailing his brother's anti-technology ideology and reclusive lifestyle in a remote Montana cabin. This act of profound sacrifice and responsibility finally provided the break investigators had desperately sought for nearly two decades.",
-          "cliffhanger": "David's agonizing confession set in motion a covert operation that would lead federal agents to the very edge of civilization, to a hidden world where the bomber's dark philosophy had been nurtured in solitude."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Hermit's Lair",
-          "content": "On April 3, 1996, a team of FBI agents, acting on David Kaczynski's information, descended upon a secluded, dilapidated cabin nestled deep within the Montana wilderness, outside Lincoln. Inside, they found Theodore Kaczynski, the brilliant but deeply disturbed recluse, living in primitive conditions with no electricity or running water. The cabin was a testament to his radical ideology, a stark rejection of modern comforts and conveniences.\n\nWhat they discovered within the 10x12 foot structure was staggering. Hidden beneath a trapdoor was an arsenal of bomb-making components, chemicals, tools, and, most damningly, a fully assembled bomb ready for deployment. Alongside these materials were extensive journals, meticulously detailing 20 years of Kaczynski's life, including every single bombing attack he had carried out, sometimes in chillingly dispassionate terms. His writings outlined his anti-technology philosophy, his motivations, and his precise methods.\n\nInvestigators also found the original copies of the 'Unabomber Manifesto' and other anti-technology treatises. The cabin was not merely a dwelling; it was a fortress of isolation, a workshop of terror, and the meticulously organized archive of a singular mind dedicated to its destructive cause. The capture brought an end to the longest and most expensive manhunt in FBI history.",
-          "cliffhanger": "The tools of terror and the twisted ideology were now exposed, but the true depth of Kaczynski's psychological landscape, and the unresolved questions of his sanity, were yet to be fully uncovered in the stark light of the legal system."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - Legacy of a Lone Wolf",
-          "content": "Ted Kaczynski's capture led to a complex legal battle. His defense team attempted to present an insanity defense, arguing he suffered from paranoid schizophrenia. This diagnosis was supported by court-ordered psychiatric evaluations. However, Kaczynski vehemently rejected this defense, fearing it would undermine the intellectual validity of his anti-technology manifesto and portray him as merely a madman, rather than a principled revolutionary.\n\nHe insisted on representing himself or pursuing a different defense strategy, leading to deep conflicts with his appointed lawyers. Ultimately, to avoid the death penalty and against his stated wishes to argue his case based on his ideology, Kaczynski entered a guilty plea to all charges, receiving eight consecutive life sentences without the possibility of parole. He was incarcerated at ADX Florence, a supermax prison in Colorado, where he continued to advocate for his radical anti-technological beliefs through letters and essays.\n\nThe case of the Unabomber remains a chilling study in domestic terrorism, fueled by extreme ideology and the profound isolation of a highly intelligent individual. Kaczynski's campaign prompted critical debates about the impact of technology on society, the nature of radicalization, and the psychological complexities of a perpetrator who saw himself as a necessary agent of change. His legacy is one of calculated terror, a stark reminder of the dark corners where intellect can twist into destructive fanaticism.",
-          "cliffhanger": null
-        }
-      ]
-    },
-    {
       "story_id": "operation_paperclip_001",
       "title": "Operation Paperclip: America's Silent Pact with Nazi Science",
       "category": "gov_experiments",
@@ -6515,11 +6482,8 @@
     {
       "story_id": "blue_whale_game_001",
       "title": "The Blue Whale Challenge: A Digital Descent into Despair",
-      "hero_image": "/content/images/blue_whale_game_001.jpg",
-      "image_query": "",
-      "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
       "category": "cyber_mysteries",
-      "severity": "chilling",
+      "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
       "concepts": [
         "social_pressure",
         "vulnerability",
@@ -6528,6 +6492,18 @@
         "digital_threats",
         "psychological_exploitation"
       ],
+      "severity": "chilling",
+      "hero_image": "/content/images/blue_whale_game_001.jpg",
+      "added_date": "2026-01-01",
+      "draft": false,
+      "reactions": {
+        "like": 13,
+        "gripping": 11,
+        "scared": 2,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -6569,6 +6545,68 @@
           "layer": 7,
           "layer_name": "The Dark Corner",
           "content": "The absolute darkest truth of the 'Blue Whale Challenge' is not solely about a single, monolithic 'game' but about the enduring reality of online manipulation and its devastating consequences. While much of the global panic surrounding 'Blue Whale' was fueled by sensationalism and the spread of misinformation, the underlying threat it represented — individuals exploiting vulnerable youth through psychological means in online spaces — is undeniably real. The cases linked to Philipp Budeikin and others demonstrated that organized groups did actively engage in coercive behavior, leading to self-harm and suicide among their victims.\n\nThe 'Blue Whale Challenge' became a potent symbol, a cautionary tale that exposed the urgent need for digital literacy, robust online safety measures, and comprehensive mental health support for adolescents. It forced a global conversation about the darker side of internet culture, parental vigilance, and the responsibility of social media platforms. The most chilling legacy is the reminder that the human capacity for cruelty, amplified by anonymity and accessibility, can find its most insidious expressions in the very spaces designed for connection, transforming them into arenas of psychological warfare against the most susceptible.",
+          "cliffhanger": null
+        }
+      ]
+    },
+    {
+      "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
+      "title": "The Unabomber: Ted Kaczynski's Decades of Calculated Terror",
+      "hero_image": "https://c.files.bbci.co.uk/C00D/production/_130056194_gettyimages-1301274454.jpg",
+      "image_query": "",
+      "hook": "For nearly two decades, an unseen assailant terrorized America with meticulously crafted package bombs, leaving a trail of death and profound fear, all driven by a singular, destructive ideology.",
+      "category": "true_crime",
+      "severity": "chilling",
+      "concepts": [
+        "serial_bomber",
+        "anti_technology",
+        "manifesto",
+        "hermit",
+        "domestic_terrorism",
+        "psychological_motivation",
+        "radicalization"
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - The First Explosions",
+          "content": "In May 1978, a seemingly innocuous package appeared at the University of Illinois at Chicago. Inside, an explosive device detonated, causing minor injuries. This was the first whisper of a terror that would plague America for 17 years, an act initially dismissed as an isolated incident, perhaps a prank gone wrong, but one that contained the nascent seeds of a calculated campaign.\n\nThe following year, a similar package was discovered on an American Airlines flight, intended for delivery. Though it failed to fully detonate, the intent was clear: to cause harm. These early attacks lacked a discernible pattern, target profile, or motive, leaving investigators baffled. The perpetrator seemed to strike at random, leaving behind crude but effective devices that offered few clues about the individual behind them.\n\nYet, even in these initial, scattered incidents, there was a chilling consistency in the method – homemade bombs designed to inflict injury or death through mail or package delivery. No one knew then that these were the opening salvos from a highly intelligent, intensely reclusive individual who would soon earn a moniker synonymous with technological terror.",
+          "cliffhanger": "Who was this phantom bomber, and what dark purpose fueled his silent, escalating war?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - A Campaign Emerges",
+          "content": "As the 1980s progressed, the attacks continued, growing in frequency, sophistication, and lethality. Targets shifted, no longer solely confined to academic institutions, but expanding to airlines, computer stores, and eventually, specific individuals in the technology sector. The FBI, recognizing a disturbing pattern, established a special task force in 1979, dubbing the unknown assailant 'UNABOM', an acronym derived from University and Airline BOMber.\n\nThe bomber's methods evolved. His devices became more complex, incorporating intricate booby traps and various unconventional components, making forensic analysis exceptionally challenging. Each bomb was a carefully crafted puzzle, designed not just to explode, but to conceal the identity and motivations of its maker. Three deaths and 23 injuries eventually resulted from these attacks, spreading a pervasive sense of unease among academics and those in technological fields.\n\nDespite an intense federal investigation, the bomber remained an enigma. No fingerprints, no witnesses, no discernible organization behind the attacks. The UNABOM task force amassed a vast collection of evidence, but it pointed to an individual who operated outside conventional criminal profiles – a phantom striking from the shadows, whose meticulous planning suggested a formidable intellect driven by an unknown, yet increasingly sinister, agenda.",
+          "cliffhanger": "The attacks escalated, the targets narrowed, and the specter of a singular, vengeful mind began to take chilling shape, but the bomber's true identity remained stubbornly out of reach."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The Manifesto's Demand",
+          "content": "The campaign of terror reached a critical juncture in April 1995 with two pivotal events. First, the Unabomber sent a package bomb to the home of Gilbert Murray, president of the California Forestry Association, in Sacramento. Murray was killed instantly, becoming the third fatality of the Unabomber's spree. This murder underscored the increasing lethality and deliberate targeting of the attacks, raising the stakes considerably for federal investigators.\n\nShortly after Murray's death, the Unabomber made a dramatic move: he sent letters to The New York Times and The Washington Post, demanding the publication of his lengthy manuscript, 'Industrial Society and Its Future', also known as the 'Unabomber Manifesto'. He threatened to escalate his bombings if his demands were not met, promising to 'desist from terrorism' if his anti-technology treatise was published in full by a major newspaper or magazine.\n\nThe dilemma for authorities was profound: capitulate to a terrorist's demands, or risk more lives. The decision was made to publish the manifesto, a calculated gamble to potentially prevent further bloodshed and, crucially, to use the publication as a means to solicit public assistance in identifying the author. This bold move transformed the hunt from a purely forensic and investigative endeavor into a psychological battle, forcing the nation to confront not just the bombs, but the radical ideology behind them.",
+          "cliffhanger": "With the publication of his manifesto, the Unabomber stepped out of the shadows, not as a face, but as a chilling voice, broadcasting his grievances to the entire world, and unwittingly, providing the first real crack in his impenetrable anonymity."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Anti-Technology Doctrine",
+          "content": "The 'Unabomber Manifesto,' a dense, 35,000-word essay, laid bare the perpetrator's ideology: a vehement rejection of modern industrial-technological society. Published in September 1995 by The New York Times and The Washington Post at the urging of the FBI and Attorney General Janet Reno, the document argued that technology inevitably leads to the erosion of human freedom, dignity, and autonomy. It posited that humans are being systematically alienated from nature and their true selves by the relentless march of technological progress.\n\nThe manifesto, though rambling in parts, was remarkably coherent in its core arguments, displaying a sophisticated understanding of history, sociology, and philosophy. It meticulously outlined the mechanisms by which technological systems control and manipulate individuals, advocating for a return to a more primitive, agrarian existence. The author signed his work with the moniker 'FC' – 'Freedom Club' – an organization that, in reality, consisted of only himself.\n\nFor the first time, the public and investigators had direct insight into the mind of the bomber. The document revealed not a random psychopath, but a highly intelligent, meticulously logical individual driven by deeply held, albeit profoundly violent, convictions. It was a chilling window into an intellectual fortress, constructed brick by brick from a radical anti-industrial philosophy, now broadcast for all to read.",
+          "cliffhanger": "The words were now public, revealing a complex mind behind the terror, but it was a quiet, unassuming man, far removed from the public eye, who held the key to deciphering the author's true identity."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - A Brother's Agonizing Choice",
+          "content": "The publication of the manifesto proved to be the Unabomber's undoing. David Kaczynski, Ted's younger brother, read excerpts of the manifesto and was struck by the familiar tone and specific turns of phrase, eerily similar to writings he had seen from his reclusive older brother. For years, David and his mother had harbored growing concerns about Ted's increasing isolation, his extremist views on technology, and his erratic behavior.\n\nDavid and his wife, Linda Patrik, cautiously began to review Ted's old letters and essays. The parallels to the manifesto were undeniable: shared concepts, a distinctive vocabulary, even identical sentence structures. The realization that his own brother might be the notorious Unabomber was a devastating blow, forcing David into an agonizing moral quandary between familial loyalty and civic duty. He understood the potential consequences, both for his brother and for himself.\n\nAfter considerable deliberation, and with the immense emotional support of his wife, David Kaczynski made the courageous and profoundly difficult decision to contact the FBI. He provided them with samples of Ted's writing, detailing his brother's anti-technology ideology and reclusive lifestyle in a remote Montana cabin. This act of profound sacrifice and responsibility finally provided the break investigators had desperately sought for nearly two decades.",
+          "cliffhanger": "David's agonizing confession set in motion a covert operation that would lead federal agents to the very edge of civilization, to a hidden world where the bomber's dark philosophy had been nurtured in solitude."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Hermit's Lair",
+          "content": "On April 3, 1996, a team of FBI agents, acting on David Kaczynski's information, descended upon a secluded, dilapidated cabin nestled deep within the Montana wilderness, outside Lincoln. Inside, they found Theodore Kaczynski, the brilliant but deeply disturbed recluse, living in primitive conditions with no electricity or running water. The cabin was a testament to his radical ideology, a stark rejection of modern comforts and conveniences.\n\nWhat they discovered within the 10x12 foot structure was staggering. Hidden beneath a trapdoor was an arsenal of bomb-making components, chemicals, tools, and, most damningly, a fully assembled bomb ready for deployment. Alongside these materials were extensive journals, meticulously detailing 20 years of Kaczynski's life, including every single bombing attack he had carried out, sometimes in chillingly dispassionate terms. His writings outlined his anti-technology philosophy, his motivations, and his precise methods.\n\nInvestigators also found the original copies of the 'Unabomber Manifesto' and other anti-technology treatises. The cabin was not merely a dwelling; it was a fortress of isolation, a workshop of terror, and the meticulously organized archive of a singular mind dedicated to its destructive cause. The capture brought an end to the longest and most expensive manhunt in FBI history.",
+          "cliffhanger": "The tools of terror and the twisted ideology were now exposed, but the true depth of Kaczynski's psychological landscape, and the unresolved questions of his sanity, were yet to be fully uncovered in the stark light of the legal system."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - Legacy of a Lone Wolf",
+          "content": "Ted Kaczynski's capture led to a complex legal battle. His defense team attempted to present an insanity defense, arguing he suffered from paranoid schizophrenia. This diagnosis was supported by court-ordered psychiatric evaluations. However, Kaczynski vehemently rejected this defense, fearing it would undermine the intellectual validity of his anti-technology manifesto and portray him as merely a madman, rather than a principled revolutionary.\n\nHe insisted on representing himself or pursuing a different defense strategy, leading to deep conflicts with his appointed lawyers. Ultimately, to avoid the death penalty and against his stated wishes to argue his case based on his ideology, Kaczynski entered a guilty plea to all charges, receiving eight consecutive life sentences without the possibility of parole. He was incarcerated at ADX Florence, a supermax prison in Colorado, where he continued to advocate for his radical anti-technological beliefs through letters and essays.\n\nThe case of the Unabomber remains a chilling study in domestic terrorism, fueled by extreme ideology and the profound isolation of a highly intelligent individual. Kaczynski's campaign prompted critical debates about the impact of technology on society, the nature of radicalization, and the psychological complexities of a perpetrator who saw himself as a necessary agent of change. His legacy is one of calculated terror, a stark reminder of the dark corners where intellect can twist into destructive fanaticism.",
           "cliffhanger": null
         }
       ]
