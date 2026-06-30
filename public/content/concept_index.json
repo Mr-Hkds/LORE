@@ -218,8 +218,8 @@
     "unit_731_experiments",
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -733,17 +733,12 @@
   "catastrophic_events": [
     "mystery_of_dwarka"
   ],
-  "poltergeist_phenomena": [
-    "enfield_poltergeist_001"
+  "unethical_research": [
+    "guatemalan_syphilis_experiment",
+    "monster_study_1939"
   ],
-  "paranormal_investigation": [
-    "enfield_poltergeist_001"
-  ],
-  "family_trauma": [
-    "enfield_poltergeist_001"
-  ],
-  "skepticism_vs_belief": [
-    "enfield_poltergeist_001"
+  "vulnerable_populations": [
+    "guatemalan_syphilis_experiment"
   ],
   "unethical_recruitment": [
     "operation_paperclip_001"
@@ -854,10 +849,6 @@
   ],
   "institutionalization": [
     "the_silent_twins_gibbons"
-  ],
-  "unethical_research": [
-    "monster_study_1939",
-    "guatemalan_syphilis_experiment"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1082,7 +1073,16 @@
   "technological_failure": [
     "the_russian_woodpecker_duga_3"
   ],
-  "vulnerable_populations": [
-    "guatemalan_syphilis_experiment"
+  "poltergeist_phenomena": [
+    "enfield_poltergeist_001"
+  ],
+  "paranormal_investigation": [
+    "enfield_poltergeist_001"
+  ],
+  "family_trauma": [
+    "enfield_poltergeist_001"
+  ],
+  "skepticism_vs_belief": [
+    "enfield_poltergeist_001"
   ]
 }
