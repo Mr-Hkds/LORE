@@ -131,7 +131,61 @@ function ensureStoryReactions(story) {
   return seeded;
 }
 
+let lastSyncTime = 0;
+const SYNC_INTERVAL = 10000;
+
+function syncDatabaseIfNeeded() {
+  const now = Date.now();
+  if (now - lastSyncTime < SYNC_INTERVAL) {
+    return;
+  }
+  lastSyncTime = now;
+
+  const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
+  try {
+    let data = null;
+    try {
+      data = require('./public/content/stories.json');
+    } catch (err) {
+      if (fs.existsSync(STORIES_FILE)) {
+        data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+      }
+    }
+
+    if (data && Array.isArray(data.stories)) {
+      const insertStmt = db.prepare(`
+        INSERT OR REPLACE INTO stories (
+          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      const transaction = db.transaction((stories) => {
+        for (const s of stories) {
+          insertStmt.run(
+            s.story_id,
+            s.title,
+            s.category,
+            s.hook,
+            JSON.stringify(s.concepts || []),
+            s.severity,
+            s.hero_image || null,
+            s.added_date || null,
+            s.draft ? 1 : 0,
+            JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
+            JSON.stringify(s.evidence_links || []),
+            JSON.stringify(s.connections || []),
+            JSON.stringify(s.layers || [])
+          );
+        }
+      });
+      transaction(data.stories);
+    }
+  } catch (e) {
+    console.error('[DB Sync] Failed to sync database on request:', e.message);
+  }
+}
+
 function getStories(includeDrafts = false) {
+  syncDatabaseIfNeeded();
   const stmt = includeDrafts 
     ? db.prepare('SELECT * FROM stories') 
     : db.prepare('SELECT * FROM stories WHERE draft = 0');
@@ -175,6 +229,7 @@ function getStories(includeDrafts = false) {
 }
 
 function getStory(story_id) {
+  syncDatabaseIfNeeded();
   const row = db.prepare('SELECT * FROM stories WHERE story_id = ?').get(story_id);
   if (!row) return null;
 

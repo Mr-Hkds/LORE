@@ -2867,6 +2867,12 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                             setEditForm(prev => ({ ...prev, hero_image: e.target.value }));
                             setEditImageFailed(false);
                           }}
+                          onPaste={(e) => {
+                            e.preventDefault();
+                            const pasted = e.clipboardData?.getData('text')?.trim() || '';
+                            setEditForm(prev => ({ ...prev, hero_image: pasted }));
+                            setEditImageFailed(false);
+                          }}
                           className="flex-1 px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono"
                           placeholder="/content/images/... or https://"
                         />
