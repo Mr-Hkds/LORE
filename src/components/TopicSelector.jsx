@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { Search } from 'lucide-react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
@@ -15,7 +14,7 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
-export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch }) {
+export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
 
   const bg = '#0D0C0A'; // Darker, premium charcoal background
   const fg = '#EDE8DF';
@@ -243,21 +242,13 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </span>
           </div>
 
-          {/* Right side — Search button + Tagline */}
-          <div className="flex items-center gap-4">
-            <button
-              onClick={onOpenSearch}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-[#9E7B4C] hover:text-[#EDE8DF] transition-colors cursor-pointer select-none bg-black/40 hover:bg-[#9E7B4C]/10 border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/45 rounded-lg active:scale-95 duration-200"
-            >
-              <span>🔍</span> Search
-            </button>
-            <span
-              className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
-              style={{ color: mu, opacity: 0.7 }}
-            >
-              A guided descent
-            </span>
-          </div>
+          {/* Right side — tagline hidden on mobile */}
+          <span
+            className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
+            style={{ color: mu, opacity: 0.7 }}
+          >
+            A guided descent
+          </span>
         </div>
       </header>
 
@@ -312,27 +303,6 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             Seven layers of real, documented knowledge.<br />
             Each one darker than the last.
           </p>
-
-          {/* Central Premium Search Trigger */}
-          <div className="mb-14">
-            <div 
-              onClick={onOpenSearch}
-              className="group w-full max-w-[480px] bg-black/30 hover:bg-[#12100E]/70 border border-neutral-900 hover:border-[#9E7B4C]/40 rounded-xl px-4 py-3 flex items-center justify-between transition-all duration-300 cursor-pointer shadow-md hover:shadow-[#9E7B4C]/5 active:scale-[0.99] select-none"
-              style={{
-                boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.01)',
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <Search className="w-3.5 h-3.5 text-[#9E7B4C] group-hover:scale-105 transition-transform duration-300" />
-                <span className="text-[11px] font-sans text-neutral-500 group-hover:text-[#EDE8DF]/75 transition-colors">
-                  Search stories, concepts, or records...
-                </span>
-              </div>
-              <span className="text-[7.5px] font-mono font-bold tracking-widest px-2 py-0.5 rounded border border-neutral-850 bg-[#090807] text-[#8F8A82]/70 uppercase group-hover:border-[#9E7B4C]/20 group-hover:text-[#9E7B4C] transition-colors">
-                Registry
-              </span>
-            </div>
-          </div>
 
           {/* Today in the Shadows */}
           <div className="mb-16">
