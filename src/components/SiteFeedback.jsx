@@ -133,11 +133,11 @@ export default function SiteFeedback() {
           boxShadow: !open && !promoVisible ? undefined : '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
-        <div className="flex items-center justify-center flex-shrink-0">
+        <div className={`flex items-center justify-center flex-shrink-0 transition-transform duration-500 w-11 h-11 ${open ? 'rotate-180' : 'rotate-0'}`}>
           {open ? (
             <X className="w-4 h-4 text-[#EDE8DF]" />
           ) : (
-            <MessageSquare className="w-4.5 h-4.5 text-[#9E7B4C]" />
+            <MessageSquare className="w-4 h-4 text-[#9E7B4C] group-hover:text-[#EDE8DF] transition-colors" />
           )}
         </div>
 

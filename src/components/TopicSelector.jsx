@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { Search } from 'lucide-react';
 import { TOPICS } from '../constants/topics';
 import LoreMark from './LoreMark';
 import { useReadingProgress } from '../hooks/useReadingProgress';
@@ -14,7 +15,7 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
-export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [] }) {
+export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch }) {
 
   const bg = '#0D0C0A'; // Darker, premium charcoal background
   const fg = '#EDE8DF';
@@ -242,13 +243,25 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </span>
           </div>
 
-          {/* Right side — tagline hidden on mobile */}
-          <span
-            className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
-            style={{ color: mu, opacity: 0.7 }}
-          >
-            A guided descent
-          </span>
+          {/* Right side — Search button + Tagline */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onOpenSearch}
+              aria-label="Search archives"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/50 bg-black/35 hover:bg-[#9E7B4C]/10 transition-all duration-300 cursor-pointer active:scale-95 select-none"
+            >
+              <Search className="w-3 h-3 text-[#9E7B4C] group-hover:text-[#EDE8DF] transition-colors duration-300" />
+              <span className="hidden sm:inline text-[9px] font-mono tracking-widest text-[#8F8A82]/80 group-hover:text-[#EDE8DF]/90 transition-colors uppercase">
+                Search
+              </span>
+            </button>
+            <span
+              className="hidden sm:block text-[9px] font-mono tracking-[0.14em] uppercase"
+              style={{ color: mu, opacity: 0.7 }}
+            >
+              A guided descent
+            </span>
+          </div>
         </div>
       </header>
 
@@ -303,6 +316,28 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             Seven layers of real, documented knowledge.<br />
             Each one darker than the last.
           </p>
+
+
+          {/* Central Premium Search Trigger */}
+          <div className="mb-14">
+            <div 
+              onClick={onOpenSearch}
+              className="group w-full max-w-[480px] bg-[#0E0C0A]/40 hover:bg-[#12100E] border border-neutral-900/60 hover:border-[#9E7B4C]/45 rounded-xl px-4 py-3 flex items-center justify-between transition-all duration-300 cursor-pointer shadow-md hover:shadow-[#9E7B4C]/4 active:scale-[0.99] select-none"
+              style={{
+                boxShadow: '0 8px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.01)',
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <Search className="w-3.5 h-3.5 text-[#9E7B4C] group-hover:scale-105 transition-transform duration-300" />
+                <span className="text-[11px] font-sans text-neutral-500 group-hover:text-[#EDE8DF]/80 transition-colors">
+                  Search the registry archives...
+                </span>
+              </div>
+              <span className="text-[7.5px] font-mono font-bold tracking-widest px-2.5 py-0.5 rounded border border-neutral-850 bg-[#080706] text-[#8F8A82]/50 uppercase group-hover:border-[#9E7B4C]/30 group-hover:text-[#9E7B4C] transition-colors">
+                Registry
+              </span>
+            </div>
+          </div>
 
           {/* Today in the Shadows */}
           <div className="mb-16">

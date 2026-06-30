@@ -9,6 +9,7 @@ import DepthMeter from './components/DepthMeter';
 import LoreMark from './components/LoreMark';
 import LoadingState from './components/LoadingState';
 import ShareModal from './components/ShareModal';
+import SearchOverlay from './components/SearchOverlay';
 import { TOPICS } from './constants/topics';
 
 const AdminPanel = lazy(() => import('./components/AdminPanel'));
@@ -26,6 +27,7 @@ export default function App() {
   const [activeLayer, setActiveLayer] = useState(1);
   const [localStories, setLocalStories] = useState([]);
   const [shareTarget, setShareTarget] = useState(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -392,6 +394,13 @@ export default function App() {
           onSelect={handleSelectTopic}
           categoryCounts={categoryCounts}
           allStories={stories}
+          onOpenSearch={() => setIsSearchOpen(true)}
+        />
+        <SearchOverlay
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          stories={stories}
+          onSelectStory={handleSelectStory}
         />
         <Suspense fallback={null}>
           <SiteFeedback />
@@ -424,6 +433,13 @@ export default function App() {
           onSelectStory={handleSelectStory}
           onBack={handleBackToTopics}
           onShareStory={(story) => setShareTarget({ story, layerNum: 1 })}
+          onOpenSearch={() => setIsSearchOpen(true)}
+        />
+        <SearchOverlay
+          isOpen={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          stories={stories}
+          onSelectStory={handleSelectStory}
         />
         <ShareModal
           isOpen={!!shareTarget}

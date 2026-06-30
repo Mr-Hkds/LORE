@@ -72,6 +72,11 @@ db.exec(`
     comment TEXT,
     timestamp TEXT
   );
+
+  CREATE TABLE IF NOT EXISTS daily_dossier (
+    date TEXT PRIMARY KEY,
+    story_id TEXT
+  );
 `);
 
 // Try to alter pageviews table if it was created without geolocation columns
@@ -547,6 +552,15 @@ function getAnalyticsSummary() {
   }
 }
 
+function getDailyDossierStoryId(date) {
+  const row = db.prepare('SELECT story_id FROM daily_dossier WHERE date = ?').get(date);
+  return row ? row.story_id : null;
+}
+
+function setDailyDossierStoryId(date, story_id) {
+  db.prepare('INSERT OR REPLACE INTO daily_dossier (date, story_id) VALUES (?, ?)').run(date, story_id);
+}
+
 seed();
 
 module.exports = {
@@ -572,5 +586,7 @@ module.exports = {
   updateDailyReaction,
   setDailyReactions,
   logPageView,
-  getAnalyticsSummary
+  getAnalyticsSummary,
+  getDailyDossierStoryId,
+  setDailyDossierStoryId
 };

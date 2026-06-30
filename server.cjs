@@ -626,21 +626,118 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && pathname === '/api/daily-dossier') {
     const todayObj = new Date();
     const dayOfWeek = todayObj.getDay();
-    const dossier = generateDailyDossier(dayOfWeek);
     const dateStr = todayObj.toISOString().split('T')[0];
-    dossier.date = dateStr;
+    
+    // 1. Check if a selection is already saved in the database
+    let selectedStoryId = db.getDailyDossierStoryId(dateStr);
+    let selectedStory = null;
+    
+    if (selectedStoryId) {
+      selectedStory = db.getStory(selectedStoryId);
+    }
+    
+    // 2. If no selection or the story was deleted, select one dynamically
+    if (!selectedStory) {
+      const list = db.getStories(false); // Get published stories only
+      if (list && list.length > 0) {
+        // Collect recently shown stories (last 6 days) to avoid repeating
+        const last6DaysStoryIds = [];
+        for (let i = 1; i <= 6; i++) {
+          const pastDate = new Date();
+          pastDate.setDate(todayObj.getDate() - i);
+          const pastDateStr = pastDate.toISOString().split('T')[0];
+          const pastStoryId = db.getDailyDossierStoryId(pastDateStr);
+          if (pastStoryId) last6DaysStoryIds.push(pastStoryId);
+        }
+        
+        // Filter candidates by theme category
+        const categoryMap = {
+          0: ['gov_experiments', 'conspiracy'],
+          1: ['paranormal', 'cyber_mysteries'],
+          2: ['true_crime', 'conspiracy'],
+          3: ['gov_experiments', 'psychology'],
+          4: ['paranormal'],
+          5: ['true_crime', 'conspiracy'],
+          6: ['true_crime']
+        };
+        const themeCats = categoryMap[dayOfWeek] || [];
+        let candidates = list.filter(s => !last6DaysStoryIds.includes(s.story_id) && themeCats.includes(s.category));
+        
+        if (candidates.length === 0) {
+          candidates = list.filter(s => !last6DaysStoryIds.includes(s.story_id));
+        }
+        if (candidates.length === 0) {
+          candidates = list;
+        }
+        
+        selectedStory = candidates[Math.floor(Math.random() * candidates.length)];
+        if (selectedStory) {
+          db.setDailyDossierStoryId(dateStr, selectedStory.story_id);
+        }
+      }
+    }
+    
+    let dossier = null;
+    const activeTheme = DAILY_THEMES[dayOfWeek];
+    
+    if (selectedStory) {
+      // Map DB story to Dossier layout
+      const layers = typeof selectedStory.layers === 'string' ? JSON.parse(selectedStory.layers) : (selectedStory.layers || []);
+      const theories = [];
+      if (layers.length >= 7) {
+        theories.push({ 
+          name: layers[2].layer_name || 'Conspiracy Hypotheses', 
+          explanation: layers[2].content ? (layers[2].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified records.' 
+        });
+        theories.push({ 
+          name: layers[4].layer_name || 'Anomalous Evidence', 
+          explanation: layers[4].content ? (layers[4].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified evidence.' 
+        });
+        theories.push({ 
+          name: layers[6].layer_name || 'Forbidden Truth', 
+          explanation: layers[6].content ? (layers[6].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified conclusion.' 
+        });
+      } else {
+        theories.push({ name: 'Classification Alpha', explanation: selectedStory.hook });
+      }
+      
+      const addedYear = selectedStory.added_date ? selectedStory.added_date.substring(0, 4) : todayObj.getFullYear().toString();
+      
+      dossier = {
+        title: selectedStory.title,
+        year: addedYear,
+        text: selectedStory.hook || 'Classified file.',
+        wikiQuery: selectedStory.image_query || selectedStory.title,
+        wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(selectedStory.image_query || selectedStory.title)}`,
+        wikiSummary: selectedStory.hook,
+        thumbnail: selectedStory.hero_image,
+        theme: activeTheme.name,
+        date: dateStr,
+        theories,
+        suspicionLabel: 'Archive Anomaly Rating',
+        defaultSuspicion: selectedStory.severity === 'extreme' ? 95 : selectedStory.severity === 'disturbing' ? 82 : 68
+      };
+    } else {
+      // Fallback to static theme fallback if no stories exist in DB
+      dossier = generateDailyDossier(dayOfWeek);
+      dossier.date = dateStr;
+    }
+    
     dossier.reactions = db.getDailyReactions(dateStr);
     
-    try {
-      const query = dossier.wikiQuery || dossier.title;
-      const thumbnail = await getWikipediaThumbnail(query);
-      if (thumbnail) {
-        dossier.thumbnail = thumbnail;
+    // Dynamic wiki thumbnail check if no thumbnail matches
+    if (!dossier.thumbnail || dossier.thumbnail.includes('unsplash.com')) {
+      try {
+        const query = dossier.wikiQuery || dossier.title;
+        const thumbnail = await getWikipediaThumbnail(query);
+        if (thumbnail) {
+          dossier.thumbnail = thumbnail;
+        }
+      } catch (err) {
+        // Ignored
       }
-    } catch (err) {
-      // Fallback to unsplash thumbnail is already set
     }
-
+    
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(dossier));
     return;

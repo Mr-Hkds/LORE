@@ -4,7 +4,7 @@
  * Cards show depth signal, not badges like "TRENDING".
  */
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { Share2 } from 'lucide-react';
+import { Share2, Search } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -332,7 +332,7 @@ function EngagementBar({ reactions }) {
 
 
 // ── Main catalog component ────────────────────────────────────────────────
-export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory }) {
+export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory, onOpenSearch }) {
   const bg = '#0D0B08';
   const fg = '#EDE8DF';
   const mu = '#8F8A82';
@@ -475,8 +475,18 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             </span>
           </div>
 
-          {/* Right: dossier count + back */}
-          <div className="flex items-center gap-3">
+          {/* Right: Search, dossier count + back */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onOpenSearch}
+              aria-label="Search archives"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#9E7B4C]/20 hover:border-[#9E7B4C]/50 bg-black/35 hover:bg-[#9E7B4C]/10 transition-all duration-300 cursor-pointer active:scale-95 select-none"
+            >
+              <Search className="w-3 h-3 text-[#9E7B4C] group-hover:text-[#EDE8DF] transition-colors duration-300" />
+              <span className="hidden sm:inline text-[9px] font-mono tracking-widest text-[#8F8A82]/80 group-hover:text-[#EDE8DF]/90 transition-colors uppercase">
+                Search
+              </span>
+            </button>
             <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>
               {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
             </span>
