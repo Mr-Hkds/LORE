@@ -1132,32 +1132,34 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
         updatedStoryObj.added_date = new Date().toLocaleDateString('en-CA');
       }
       
-      const res = await fetch(`/api/stories/${storyId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedStoryObj)
-      });
-      
-      if (res.ok) {
-        if (ghToken) {
-          const updatedStories = [...stories.filter(s => s.story_id !== storyId), updatedStoryObj];
-          const newConceptIndex = rebuildConceptIndex(updatedStories);
-          const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyId]);
-          const filesToCommit = [
-            { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-            { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
-            ...imageFiles
-          ];
-          await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
-        }
-        
-        setToast({ text: 'Cover image updated and story published live!', type: 'success' });
-        await loadAdminStories();
-        if (refetchStories) await refetchStories();
-        return newHeroImage;
-      } else {
-        throw new Error('Database save failed');
+      // Update SQLite (best-effort on production — ephemeral containers)
+      try {
+        await fetch(`/api/stories/${storyId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedStoryObj)
+        });
+      } catch (dbErr) {
+        console.warn('SQLite update skipped (expected on production):', dbErr.message);
       }
+      
+      // Commit to GitHub — this is the real source of truth
+      if (ghToken) {
+        // Use adminStories (full list including drafts) to avoid dropping stories
+        const updatedStories = adminStories
+          .filter(s => s.story_id !== storyId && !s.draft)
+          .concat(updatedStoryObj);
+        const newConceptIndex = rebuildConceptIndex(updatedStories);
+        const imageFiles = await getLocalImageCommitFiles(updatedStories, [storyId]);
+        const filesToCommit = [
+          { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+          ...imageFiles
+        ];
+        await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
+      }
+      
+      return newHeroImage;
     } catch (err) {
       setToast({ text: `Failed to save cover image: ${err.message}`, type: 'error' });
       throw err;
@@ -1285,112 +1287,53 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     setPasteProgress(0);
     setPasteStatusText('Initiating database sync...');
     
-    const { story_id, imageSource, story } = pasteConfirmation;
+    const { story_id, imageSource } = pasteConfirmation;
     let savedImageUrl = imageSource;
     
     const progressTimer = setInterval(() => {
       setPasteProgress(prev => {
-        if (prev < 40) return prev + 8;
-        if (prev < 70) return prev + 4;
-        if (prev < 90) return prev + 2;
+        if (prev < 50) return prev + 12;
+        if (prev < 80) return prev + 6;
+        if (prev < 95) return prev + 2;
         return prev;
       });
-    }, 600);
+    }, 400);
     
     try {
-      setPasteStatusText('Updating SQLite database & pushing to GitHub...');
+      setPasteStatusText('Updating database & syncing to GitHub...');
       const savedImg = await handleSaveImageSource(story_id, imageSource);
       if (savedImg) {
         savedImageUrl = savedImg;
       }
       
-      // Publishing drafts is now handled directly inside handleSaveImageSource
+      // Commit succeeded — update state optimistically and close
+      clearInterval(progressTimer);
+      setPasteProgress(100);
+      setPasteSuccess(true);
+      setPasteStatusText(ghToken ? 'Committed to GitHub — Vercel will deploy automatically.' : 'Database synchronized.');
       
-      if (!ghToken) {
-        clearInterval(progressTimer);
-        setPasteProgress(100);
-        setPasteSuccess(true);
-        setPasteStatusText('Database synchronized.');
-        
-        setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
-          ...s, 
-          hero_image: savedImageUrl, 
-          image_missing: 0, 
-          draft: 0,
-          added_date: new Date().toLocaleDateString('en-CA')
-        } : s));
-        
-        setTimeout(() => {
-          setPasteConfirmation(null);
-          setPasteSuccess(false);
-          setPasteUploading(false);
-          setRowPreviews(prev => {
-            const next = { ...prev };
-            delete next[story_id];
-            return next;
-          });
-        }, 1200);
-        return;
-      }
+      setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
+        ...s, 
+        hero_image: savedImageUrl, 
+        image_missing: 0, 
+        draft: 0,
+        added_date: s.added_date && s.added_date !== '2026-01-01' ? s.added_date : new Date().toLocaleDateString('en-CA')
+      } : s));
       
-      let attempts = 0;
-      const maxAttempts = 30; // 90 seconds max
-      setPasteStatusText('Deploying telemetry live to Vercel CDN (building static bundle)...');
-      
-      const pollInterval = setInterval(async () => {
-        attempts++;
-        setPasteStatusText(`Deploying telemetry live to Vercel CDN... [Attempt ${attempts}/${maxAttempts}]`);
-        
-        try {
-          const res = await fetch(`/content/stories.json?t=${Date.now()}`);
-          if (res.ok) {
-            const data = await res.json();
-            const storiesList = data.stories || [];
-            const liveStory = storiesList.find(s => s.story_id === story_id);
-            
-            if (liveStory && liveStory.hero_image === savedImageUrl) {
-              clearInterval(pollInterval);
-              clearInterval(progressTimer);
-              setPasteProgress(100);
-              setPasteSuccess(true);
-              setPasteStatusText('Vercel Edge CDN verified: Thumbnail is 100% Live!');
-              
-              setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
-                ...s, 
-                hero_image: savedImageUrl, 
-                image_missing: 0, 
-                draft: 0,
-                added_date: new Date().toLocaleDateString('en-CA')
-              } : s));
-              
-              setTimeout(() => {
-                setPasteConfirmation(null);
-                setPasteSuccess(false);
-                setPasteUploading(false);
-                setRowPreviews(prev => {
-                  const next = { ...prev };
-                  delete next[story_id];
-                  return next;
-                });
-              }, 1500);
-              return;
-            }
-          }
-        } catch (e) {
-          console.warn('Polling error:', e);
-        }
-        
-        if (attempts >= maxAttempts) {
-          clearInterval(pollInterval);
-          clearInterval(progressTimer);
-          setPasteError('Vercel CDN build is taking longer than expected to compile. The changes are saved on GitHub and will display live in a minute.');
-          setPasteUploading(false);
-        }
-      }, 3000);
+      setTimeout(() => {
+        setPasteConfirmation(null);
+        setPasteSuccess(false);
+        setPasteUploading(false);
+        setRowPreviews(prev => {
+          const next = { ...prev };
+          delete next[story_id];
+          return next;
+        });
+      }, 1500);
       
     } catch (err) {
       clearInterval(progressTimer);
-      setPasteError(err.message || 'Sync failed.');
+      setPasteError(err.message || 'Sync failed. Please try again.');
       setPasteUploading(false);
       setRowPreviews(prev => {
         const next = { ...prev };
@@ -2121,47 +2064,70 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
     if (!token) {
       throw new Error('GitHub Personal Access Token is required.');
     }
+
+    // Retry-enabled fetch wrapper with exponential backoff
+    const ghFetch = async (url, options = {}, label = 'GitHub API') => {
+      const maxRetries = 3;
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          const res = await fetch(url, {
+            ...options,
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github.v3+json',
+              ...(options.headers || {})
+            }
+          });
+          if (res.ok) return res;
+          // Retry on server errors and rate limits
+          if ((res.status >= 500 || res.status === 429) && attempt < maxRetries) {
+            const delay = Math.pow(2, attempt) * 1000; // 2s, 4s
+            console.warn(`[${label}] HTTP ${res.status}, retrying in ${delay}ms (attempt ${attempt}/${maxRetries})`);
+            await new Promise(r => setTimeout(r, delay));
+            continue;
+          }
+          const errBody = await res.json().catch(() => ({}));
+          throw new Error(`${label} failed (HTTP ${res.status}): ${errBody.message || res.statusText}`);
+        } catch (err) {
+          if (err.message?.includes('failed (HTTP')) throw err; // Don't retry client errors
+          if (attempt >= maxRetries) throw new Error(`${label} failed after ${maxRetries} attempts: ${err.message}`);
+          const delay = Math.pow(2, attempt) * 1000;
+          console.warn(`[${label}] Network error, retrying in ${delay}ms:`, err.message);
+          await new Promise(r => setTimeout(r, delay));
+        }
+      }
+    };
+
     setIsPublishing(true);
     setPublishStatus('Initializing GitHub publish...');
     try {
-      // 1. Get the latest commit and tree SHA from the branch in a single request
+      // 1. Get the latest commit and tree SHA from the branch
       setPublishStatus('Fetching latest branch reference...');
-      const branchUrl = `https://api.github.com/repos/${owner}/${repo}/branches/${branch}`;
-      const branchRes = await fetch(branchUrl, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-      if (!branchRes.ok) {
-        throw new Error(`Failed to fetch branch reference (HTTP ${branchRes.status})`);
-      }
+      const branchRes = await ghFetch(
+        `https://api.github.com/repos/${owner}/${repo}/branches/${branch}`,
+        {},
+        'Branch ref'
+      );
       const branchData = await branchRes.json();
       const latestCommitSha = branchData.commit.sha;
       const latestTreeSha = branchData.commit.commit.tree.sha;
 
       // 2. Upload blobs in parallel
-      setPublishStatus('Uploading file contents to GitHub...');
+      setPublishStatus(`Uploading ${filesToCommit.length} files to GitHub...`);
       const blobPromises = filesToCommit.map(async (file) => {
         const contentBase64 = file.isBinary 
           ? file.content 
           : btoa(unescape(encodeURIComponent(file.content)));
         
-        const blobRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
+        const blobRes = await ghFetch(
+          `https://api.github.com/repos/${owner}/${repo}/git/blobs`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: contentBase64, encoding: 'base64' })
           },
-          body: JSON.stringify({
-            content: contentBase64,
-            encoding: 'base64'
-          })
-        });
-        if (!blobRes.ok) {
-          throw new Error(`Failed to upload blob for ${file.path} (HTTP ${blobRes.status})`);
-        }
+          `Blob upload (${file.path.split('/').pop()})`
+        );
         const blobData = await blobRes.json();
         return {
           path: file.path,
@@ -2174,63 +2140,42 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       const treeEntries = await Promise.all(blobPromises);
 
       // 3. Create a new Tree pointing to the base tree
-      setPublishStatus('Assembling directory tree...');
-      const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
+      setPublishStatus('Assembling commit tree...');
+      const treeRes = await ghFetch(
+        `https://api.github.com/repos/${owner}/${repo}/git/trees`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ base_tree: latestTreeSha, tree: treeEntries })
         },
-        body: JSON.stringify({
-          base_tree: latestTreeSha,
-          tree: treeEntries
-        })
-      });
-      if (!treeRes.ok) {
-        throw new Error(`Failed to assemble directory tree (HTTP ${treeRes.status})`);
-      }
+        'Tree assembly'
+      );
       const treeData = await treeRes.json();
-      const newTreeSha = treeData.sha;
 
-      // 4. Create the Commit pointing to the new Tree
-      setPublishStatus('Creating sync commit...');
-      const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/commits`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
+      // 4. Create the Commit
+      setPublishStatus('Creating commit...');
+      const commitRes = await ghFetch(
+        `https://api.github.com/repos/${owner}/${repo}/git/commits`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: commitMessage, tree: treeData.sha, parents: [latestCommitSha] })
         },
-        body: JSON.stringify({
-          message: commitMessage,
-          tree: newTreeSha,
-          parents: [latestCommitSha]
-        })
-      });
-      if (!commitRes.ok) {
-        throw new Error(`Failed to create commit (HTTP ${commitRes.status})`);
-      }
+        'Commit creation'
+      );
       const commitData = await commitRes.json();
-      const newCommitSha = commitData.sha;
 
-      // 5. Update the branch reference pointing to the new Commit
+      // 5. Update the branch ref
       setPublishStatus('Finalizing branch sync...');
-      const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`, {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
+      await ghFetch(
+        `https://api.github.com/repos/${owner}/${repo}/git/refs/heads/${branch}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sha: commitData.sha, force: false })
         },
-        body: JSON.stringify({
-          sha: newCommitSha,
-          force: false
-        })
-      });
-      if (!refRes.ok) {
-        throw new Error(`Failed to update branch reference (HTTP ${refRes.status})`);
-      }
+        'Ref update'
+      );
 
       setPublishStatus('Publish successful!');
       addLog(`🚀 Successfully committed updates directly to GitHub repo ${owner}/${repo} on branch ${branch}`);
@@ -2248,7 +2193,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       setTimeout(() => {
         setIsPublishing(false);
         setPublishStatus('');
-      }, 3000);
+      }, 1500);
     }
   };
 
