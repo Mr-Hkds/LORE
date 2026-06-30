@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, no-unused-vars, no-empty */
 const Database = require('better-sqlite3');
 const { createClient } = require('@libsql/client');
 const fs = require('fs');
@@ -13,7 +12,7 @@ if (!tursoUrl || !tursoToken) {
   console.log('Usage example:');
   console.log('  $env:TURSO_DATABASE_URL="libsql://your-db.turso.io"');
   console.log('  $env:TURSO_AUTH_TOKEN="your-token"');
-  console.log('  node migrate-to-turso.js');
+  console.log('  node migrate-to-turso.cjs');
   process.exit(1);
 }
 
