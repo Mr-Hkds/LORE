@@ -181,6 +181,46 @@ export default function LayerReader({
     return parts.length > 0 ? parts : text;
   };
 
+  // Parses [VERIFIED], [CLAIMED], [DISPUTED], [UNVERIFIED] tags from narrative
+  const parseConfidenceTags = (text) => {
+    if (!text) return "";
+    const tagRegex = /(\[VERIFIED\]|\[CLAIMED\]|\[DISPUTED\]|\[UNVERIFIED\])/gi;
+    const tokens = text.split(tagRegex);
+    
+    return tokens.map((token, idx) => {
+      const upperToken = token.toUpperCase();
+      if (upperToken === '[VERIFIED]') {
+        return (
+          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-emerald-500/40 text-emerald-400 rounded bg-emerald-950/20 select-none align-middle tracking-wider">
+            VERIFIED
+          </span>
+        );
+      }
+      if (upperToken === '[CLAIMED]') {
+        return (
+          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-neutral-500/40 text-neutral-400 rounded bg-neutral-950/20 select-none align-middle tracking-wider">
+            CLAIMED
+          </span>
+        );
+      }
+      if (upperToken === '[DISPUTED]') {
+        return (
+          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-amber-500/40 text-amber-400 rounded bg-amber-950/20 select-none align-middle tracking-wider">
+            DISPUTED
+          </span>
+        );
+      }
+      if (upperToken === '[UNVERIFIED]') {
+        return (
+          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-red-500/40 text-red-400 rounded bg-red-950/25 select-none align-middle tracking-wider">
+            UNVERIFIED
+          </span>
+        );
+      }
+      return formatTextWithLookup(token);
+    });
+  };
+
 
 
   // Sync reactions counts when data updates (normalize on the way in)
@@ -399,7 +439,7 @@ export default function LayerReader({
                     fontWeight: '400',
                   }}
                 >
-                  {formatTextWithLookup(hookText)}
+                  {parseConfidenceTags(hookText)}
                 </p>
               )}
 
@@ -423,7 +463,7 @@ export default function LayerReader({
                           fontWeight: '400',
                         }}
                       >
-                        {formatTextWithLookup(note.text)}
+                        {parseConfidenceTags(note.text)}
                       </p>
                     </div>
                   ))}
@@ -449,7 +489,7 @@ export default function LayerReader({
                       color: cardTextPrimary,
                     }}
                   >
-                    {formatTextWithLookup(cliffhangerText)}
+                    {parseConfidenceTags(cliffhangerText)}
                   </p>
                 </div>
               )}

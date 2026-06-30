@@ -677,6 +677,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
      5. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
      6. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
      7. RESPECT AND SENSITIVITY FOR MYTHOLOGY/RELIGION: When writing about religious, sacred, or mythological topics (e.g., Shiva / Shiv Ji, ancient deities, sacred rituals, scriptures), you MUST remain strictly respectful and objective. Write the story as an informative, intellectually interesting, and historically/philosophically sound account. DO NOT exaggerate, dark-frame, or invent cheap, sinister, or morbid narrative elements that could hurt religious sentiments. Focus on the mystery, philosophy, and awe, keeping it premium and educational, not cheap or offensive.
+     8. INLINE FACT-CHECKING TAGS: Throughout the content paragraphs, you are encouraged to inject the following uppercase tags to denote evidence strength:
+         - [VERIFIED] for claims backed directly by official declassified documents, court files, or standard forensics.
+         - [CLAIMED] for official statements, press releases, or institutional/mainstream accounts.
+         - [DISPUTED] for claims contradicted by eyewitness testimonies, biological evidence, or other official records.
+         - [UNVERIFIED] for rumors, claims lacking files, or speculation.
+         Use these tags naturally in the sentences (e.g., 'The CIA formally authorized Project MKULTRA in a memo signed by Dulles on [VERIFIED] April 13, 1953...' or 'The agency originally [CLAIMED] the records were destroyed in a routine cleanup...'). Use them sparingly but effectively (about 1-2 tags per layer).
     
     Structure the story exactly in the following JSON format:
     {
