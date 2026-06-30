@@ -104,13 +104,86 @@ const DAILY_STATIC_FALLBACKS = {
   }
 };
 
-function generateDailyDossier(dayOfWeek) {
-  const dossier = { ...DAILY_STATIC_FALLBACKS[dayOfWeek] };
-  dossier.theme = DAILY_THEMES[dayOfWeek].name;
-  dossier.wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(dossier.wikiQuery || dossier.title)}`;
-  dossier.wikiSummary = dossier.text;
-  dossier.thumbnail = `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
-  return dossier;
+function generateDailyDossier(dateStr, dayOfWeek) {
+  let selectedStory = null;
+  try {
+    const list = db.getStories(false);
+    if (list && list.length > 0) {
+      const categoryMap = {
+        0: ['gov_experiments', 'conspiracy'],
+        1: ['paranormal', 'cyber_mysteries'],
+        2: ['true_crime', 'conspiracy'],
+        3: ['gov_experiments', 'psychology'],
+        4: ['paranormal'],
+        5: ['true_crime', 'conspiracy'],
+        6: ['true_crime']
+      };
+      const themeCats = categoryMap[dayOfWeek] || [];
+      let candidates = list.filter(s => themeCats.includes(s.category));
+      if (candidates.length === 0) {
+        candidates = list;
+      }
+      candidates.sort((a, b) => (a.story_id || '').localeCompare(b.story_id || ''));
+
+      let hash = 0;
+      for (let i = 0; i < dateStr.length; i++) {
+        hash = (hash * 31 + dateStr.charCodeAt(i)) | 0;
+      }
+      hash = Math.abs(hash);
+
+      selectedStory = candidates[hash % candidates.length];
+    }
+  } catch (err) {
+    console.warn('[DailyDossier] Failed to load dynamic stories:', err.message);
+  }
+
+  const activeTheme = DAILY_THEMES[dayOfWeek];
+
+  if (selectedStory) {
+    const layers = typeof selectedStory.layers === 'string' ? JSON.parse(selectedStory.layers) : (selectedStory.layers || []);
+    const theories = [];
+    if (layers.length >= 7) {
+      theories.push({ 
+        name: layers[2].layer_name || 'Conspiracy Hypotheses', 
+        explanation: layers[2].content ? (layers[2].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified records.' 
+      });
+      theories.push({ 
+        name: layers[4].layer_name || 'Anomalous Evidence', 
+        explanation: layers[4].content ? (layers[4].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified evidence.' 
+      });
+      theories.push({ 
+        name: layers[6].layer_name || 'Forbidden Truth', 
+        explanation: layers[6].content ? (layers[6].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified truth.' 
+      });
+    } else {
+      theories.push({ name: 'Classified Records', explanation: selectedStory.hook || 'Access restricted.' });
+    }
+
+    return {
+      title: selectedStory.title,
+      year: selectedStory.added_date ? selectedStory.added_date.substring(0, 4) : 'Classified',
+      text: selectedStory.hook || '',
+      wikiQuery: selectedStory.image_query || selectedStory.title,
+      theories,
+      suspicionLabel: 'Dossier Threat Level',
+      defaultSuspicion: 50 + ((selectedStory.title || '').length % 40),
+      story_id: selectedStory.story_id,
+      theme: activeTheme.name,
+      wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(selectedStory.image_query || selectedStory.title)}`,
+      wikiSummary: selectedStory.hook || '',
+      thumbnail: selectedStory.hero_image || 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800'
+    };
+  }
+
+  // Fallback to static fallback stories
+  const fallback = { ...DAILY_STATIC_FALLBACKS[dayOfWeek] };
+  return {
+    ...fallback,
+    theme: activeTheme.name,
+    wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(fallback.wikiQuery || fallback.title)}`,
+    wikiSummary: fallback.text,
+    thumbnail: fallback.thumbnail || `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`
+  };
 }
 
 const wikiThumbnailCache = new Map();
@@ -239,7 +312,7 @@ export default async function handler(req, res) {
   const dayOfWeek = todayObj.getDay();
 
   if (req.method === 'GET') {
-    const dossier = generateDailyDossier(dayOfWeek);
+    const dossier = generateDailyDossier(dateStr, dayOfWeek);
     dossier.date = dateStr;
 
     try {

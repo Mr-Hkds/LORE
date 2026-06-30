@@ -663,17 +663,6 @@ const server = http.createServer(async (req, res) => {
     if (!selectedStory) {
       const list = db.getStories(false); // Get published stories only
       if (list && list.length > 0) {
-        // Collect recently shown stories (last 6 days) to avoid repeating
-        const last6DaysStoryIds = [];
-        for (let i = 1; i <= 6; i++) {
-          const pastDate = new Date();
-          pastDate.setDate(todayObj.getDate() - i);
-          const pastDateStr = pastDate.toISOString().split('T')[0];
-          const pastStoryId = db.getDailyDossierStoryId(pastDateStr);
-          if (pastStoryId) last6DaysStoryIds.push(pastStoryId);
-        }
-        
-        // Filter candidates by theme category
         const categoryMap = {
           0: ['gov_experiments', 'conspiracy'],
           1: ['paranormal', 'cyber_mysteries'],
@@ -684,16 +673,19 @@ const server = http.createServer(async (req, res) => {
           6: ['true_crime']
         };
         const themeCats = categoryMap[dayOfWeek] || [];
-        let candidates = list.filter(s => !last6DaysStoryIds.includes(s.story_id) && themeCats.includes(s.category));
-        
-        if (candidates.length === 0) {
-          candidates = list.filter(s => !last6DaysStoryIds.includes(s.story_id));
-        }
+        let candidates = list.filter(s => themeCats.includes(s.category));
         if (candidates.length === 0) {
           candidates = list;
         }
-        
-        selectedStory = candidates[Math.floor(Math.random() * candidates.length)];
+        candidates.sort((a, b) => (a.story_id || '').localeCompare(b.story_id || ''));
+
+        let hash = 0;
+        for (let i = 0; i < dateStr.length; i++) {
+          hash = (hash * 31 + dateStr.charCodeAt(i)) | 0;
+        }
+        hash = Math.abs(hash);
+
+        selectedStory = candidates[hash % candidates.length];
         if (selectedStory) {
           db.setDailyDossierStoryId(dateStr, selectedStory.story_id);
         }

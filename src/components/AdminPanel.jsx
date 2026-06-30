@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
 import ApprovalCard from './ApprovalCard';
+import { ShieldAlert } from 'lucide-react';
 
 // Helper to clean and parse JSON from AI model response
 function cleanAndParseJSON(text) {
@@ -955,13 +956,20 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
       if (res.ok) {
         const data = await res.json();
         setAdminStories(data);
+      } else {
+        if (stories && stories.length > 0) {
+          setAdminStories(stories);
+        }
       }
     } catch (err) {
-      console.warn('Failed to load admin stories from database:', err);
+      console.warn('Failed to load admin stories from database, using static fallback:', err);
+      if (stories && stories.length > 0) {
+        setAdminStories(stories);
+      }
     } finally {
       setAdminStoriesLoading(false);
     }
-  }, []);
+  }, [stories]);
 
   // Feedback loader
   const loadFeedback = useCallback(async () => {
@@ -2463,21 +2471,47 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
 
               {/* Asset Health Warning Alert Banner */}
               {!editingStoryId && missingImageStoriesCount > 0 && (
-                <div className="p-4 bg-red-950/20 border border-red-900/40 rounded-xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex items-start sm:items-center gap-3">
-                    <span className="text-xl">⚠️</span>
+                <div 
+                  className="p-5 rounded-xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300"
+                  style={{
+                    backgroundColor: 'rgba(239, 68, 68, 0.03)',
+                    borderLeft: '4px solid #EF4444',
+                    borderTop: '1px solid rgba(239, 68, 68, 0.1)',
+                    borderRight: '1px solid rgba(239, 68, 68, 0.1)',
+                    borderBottom: '1px solid rgba(239, 68, 68, 0.1)',
+                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.02)'
+                  }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div 
+                      className="p-2 rounded-lg flex-shrink-0 flex items-center justify-center"
+                      style={{ backgroundColor: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)' }}
+                    >
+                      <ShieldAlert className="w-5 h-5 text-red-400 animate-pulse" />
+                    </div>
                     <div>
-                      <p className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest">// ASSET HEALTH ALERT</p>
-                      <p className="text-[11px] text-[#EDE8DF]/80 mt-0.5 leading-relaxed">
-                        There are <strong className="text-red-400 font-bold">{missingImageStoriesCount} archive dossiers</strong> currently missing a valid cover image or using placeholders.
+                      <p className="text-[10px] font-mono font-bold text-red-400 uppercase tracking-[0.2em]">
+                        // ASSET HEALTH COMPLIANCE CHECK
+                      </p>
+                      <p className="text-xs text-[#EDE8DF]/90 mt-1 leading-relaxed font-serif italic">
+                        {missingImageStoriesCount === 1 ? (
+                          <>There is <strong className="text-red-400 font-bold font-sans not-italic">1 archive dossier</strong> currently missing a valid cover image or using an active placeholder.</>
+                        ) : (
+                          <>There are <strong className="text-red-400 font-bold font-sans not-italic">{missingImageStoriesCount} archive dossiers</strong> currently missing valid cover images or using active placeholders.</>
+                        )}
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setFilterMissingImages(prev => !prev)}
-                    className="px-3.5 py-1.5 bg-red-900/40 hover:bg-red-900/60 text-red-400 border border-red-800/40 text-[9px] font-mono font-bold tracking-widest uppercase rounded transition-all cursor-pointer select-none active:scale-95 flex-shrink-0"
+                    className="px-4 py-2 text-[9px] font-mono font-bold tracking-[0.18em] uppercase rounded-lg border transition-all duration-200 active:scale-95 flex-shrink-0 cursor-pointer select-none"
+                    style={{
+                      color: filterMissingImages ? '#EDE8DF' : '#EF4444',
+                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(239, 68, 68, 0.3)',
+                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(239, 68, 68, 0.06)'
+                    }}
                   >
-                    {filterMissingImages ? "Show All Archives" : "Filter Missing Cover Images"}
+                    {filterMissingImages ? "Show All Archives" : "Review Asset Issues"}
                   </button>
                 </div>
               )}

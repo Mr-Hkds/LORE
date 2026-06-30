@@ -445,6 +445,13 @@ export default function TodayInShadows() {
 
                 {/* Foreground image viewport area — renders below the header bar */}
                 <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
+                  {/* Blurry Background image to cover full width */}
+                  <img
+                    src={wikiImgUrl || dossier.thumbnail}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 pointer-events-none scale-115"
+                  />
                   <img
                     src={wikiImgUrl || dossier.thumbnail}
                     alt={dossier.title}
