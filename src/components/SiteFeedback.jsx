@@ -126,11 +126,11 @@ export default function SiteFeedback() {
           open 
             ? 'w-11 px-0 justify-center' 
             : promoVisible 
-              ? 'w-[210px] px-4 justify-start gap-2' 
-              : 'w-11 px-0 justify-center sm:w-auto sm:px-4 sm:justify-start gap-2'
+              ? 'w-[210px] px-4 justify-start gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.5)]' 
+              : 'w-11 px-0 justify-center sm:w-auto sm:px-4 sm:justify-start gap-2 animate-pulse-glow'
         }`}
         style={{
-          boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
+          boxShadow: !open && !promoVisible ? undefined : '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
         <div className="flex items-center justify-center flex-shrink-0">
