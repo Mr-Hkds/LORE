@@ -1508,8 +1508,11 @@
     {
       "story_id": "jonestown_massacre_001",
       "title": "Jonestown: The Cult of Revolutionary Suicide",
-      "category": "true_crime",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
+      "image_query": "jonestown_massacre",
       "hook": "On November 18, 1978, in a remote jungle commune in Guyana, over 900 people, including more than 300 children, died in a single day, consuming a cyanide-laced drink. It was the largest single loss of American civilian life in a deliberate act until 9/11.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "cults",
         "mass_suicide",
@@ -1518,18 +1521,6 @@
         "groupthink",
         "obedience_to_authority"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 13,
-        "scared": 60,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -1574,7 +1565,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 13,
+        "scared": 60,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "the_numbers_stations",
@@ -2279,8 +2275,11 @@
     {
       "story_id": "winchester_mystery_house",
       "title": "The Winchester Mystery House: A Widow's Endless Construction",
-      "category": "paranormal",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
+      "image_query": "",
       "hook": "A mansion ceaselessly built for 38 years features stairs to ceilings and doors to walls, an architectural enigma born from a wealthy widow's chilling belief in haunting spirits.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "paranormal_activity",
         "grief_and_madness",
@@ -2289,18 +2288,6 @@
         "unexplained_phenomena",
         "haunted_house"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 18,
-        "scared": 50,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2339,7 +2326,12 @@
           "content": "The darkest documented truth of the Winchester Mystery House lies not solely in its spectral claims, which remain subjective, but in the profound human tragedy that underlies its very existence. Sarah Winchester was undeniably a woman consumed by overwhelming grief and a deep-seated sense of guilt, exacerbated by her vast fortune and the deadly legacy of the Winchester rifle.\n\nWhile the concept of vengeful spirits driving her to build is a captivating narrative, the historical record confirms her debilitating losses and her earnest embrace of spiritualism as a coping mechanism. Her immense wealth allowed her to manifest this internal anguish into an unprecedented, tangible reality, transforming a farmhouse into a bewildering monument of her psyche.\n\nThe house, therefore, stands as a haunting testament to one woman's lifelong attempt to outrun or appease the shadows of her past. The 'curse' was perhaps less about literal spirits and more about the crushing weight of loss, the immense guilt associated with her family's fortune built on death, and a profound psychological haunting made terrifyingly manifest in brick, wood, and a never-ending labyrinth."
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 18,
+        "scared": 50,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2415,8 +2407,11 @@
     {
       "story_id": "the_cleveland_torso_murders",
       "title": "The Cleveland Torso Murders: The Unseen Butcher of Kingsbury Run",
-      "category": "true_crime",
+      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
+      "image_query": "",
       "hook": "In the shadow of the Great Depression, a chilling predator dismembered at least a dozen victims, leaving their torsos to be discovered in the industrial ravines of Cleveland.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "serial_killer",
         "unsolved_mystery",
@@ -2425,18 +2420,6 @@
         "forensic_challenge",
         "political_pressure"
       ],
-      "severity": "chilling",
-      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 25,
-        "gripping": 13,
-        "scared": 25,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2481,13 +2464,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 25,
+        "gripping": 13,
+        "scared": 25,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "project_stargate_remote_viewing",
       "title": "Project Stargate: The Secret Quest for Psychic Espionage",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
+      "image_query": "",
       "hook": "For decades, the United States government funded secret programs exploring the unthinkable: using psychic abilities as a weapon in the Cold War's shadowy intelligence game.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "remote_viewing",
         "government_experiments",
@@ -2498,18 +2489,6 @@
         "unethical_experimentation",
         "scientific_skepticism"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 33,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2554,13 +2533,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 33,
+        "scared": 6,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "stockholm_syndrome_001",
       "title": "Stockholm Syndrome: The Unsettling Bond of Captivity",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
+      "image_query": "Stockholm Syndrome",
       "hook": "Under unimaginable duress, individuals can form powerful, even affectionate, bonds with those who hold them captive, a profound psychological paradox.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "hostage_psychology",
         "trauma_bonding",
@@ -2568,18 +2555,6 @@
         "cognitive_dissonance",
         "captivity_syndrome"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 46,
-        "gripping": 24,
-        "scared": 5,
-        "mindblown": 59
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2624,30 +2599,26 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 46,
+        "gripping": 24,
+        "scared": 5,
+        "mindblown": 59
+      }
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
       "title": "Project Sunshine: The Covert Harvest of the Dead",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
+      "image_query": "",
       "hook": "Invisible atomic dust, born from nuclear tests, silently settled across the globe, prompting a desperate scientific quest into its human impact. This quest, however, would delve into forbidden territory, harvesting the bodies of the dead without consent.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "human_experimentation",
         "government_secrecy",
         "medical_ethics"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 40,
-        "gripping": 38,
-        "scared": 5,
-        "mindblown": 11
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2692,13 +2663,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 40,
+        "gripping": 38,
+        "scared": 5,
+        "mindblown": 11
+      }
     },
     {
       "story_id": "salem_witch_trials_001",
       "title": "The Salem Witch Trials: A Village Consumed by Fear",
-      "category": "true_crime",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "image_query": "Salem witch trials",
       "hook": "In 1692, in the small Puritan village of Salem, Massachusetts, a series of bizarre afflictions among young girls ignited a terrifying judicial frenzy that led to the execution of nineteen innocent people.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "mass_hysteria",
         "groupthink",
@@ -2706,18 +2685,6 @@
         "religious_extremism",
         "spectral_evidence"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 18,
-        "gripping": 26,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2762,13 +2729,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 33,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "the_rat_park_experiment_001",
       "title": "The Rat Park Experiment: Rewriting the Narrative of Addiction",
-      "category": "psychology",
+      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
+      "image_query": "",
       "hook": "For decades, addiction was understood as an inevitable consequence of drug exposure. Yet, one audacious experiment with rats challenged this fundamental premise, suggesting the cage, not the chemical, might be the true culprit.",
+      "category": "psychology",
+      "severity": "disturbing",
       "concepts": [
         "addiction",
         "environment_vs_biology",
@@ -2778,18 +2753,6 @@
         "drug_policy",
         "social_pathology"
       ],
-      "severity": "disturbing",
-      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 17,
-        "gripping": 25,
-        "scared": 3,
-        "mindblown": 25
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2834,13 +2797,110 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 17,
+        "gripping": 25,
+        "scared": 3,
+        "mindblown": 25
+      }
+    },
+    {
+      "story_id": "the_mary_celeste_mystery",
+      "title": "The Ghost Ship: The Unsolved Mystery of the Mary Celeste",
+      "category": "paranormal",
+      "hook": "For nearly 150 years, the perfectly sound vessel, Mary Celeste, was found adrift, sails partially set, food on the tables, but every soul aboard vanished without a trace.",
+      "concepts": [
+        "ghost_ship",
+        "maritime_mystery",
+        "unexplained_disappearance",
+        "abandoned_vessel",
+        "sea_legends"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/the_mary_celeste_mystery.jpg",
+      "added_date": "2026-06-27",
+      "draft": false,
+      "reactions": {
+        "like": 16,
+        "gripping": 34,
+        "scared": 56,
+        "mindblown": 7
+      },
+      "evidence_links": [
+        {
+          "label": "Fully Human and Fully Divine: The Birth of Christ and the Role of Mary (Ann Milliken Pederson, Gretchen Spars-McKee, 2015)",
+          "url": "https://www.mdpi.com/2077-1444/6/1/172/pdf?version=1425646371"
+        },
+        {
+          "label": "Mary Somerville and Margaret Huggins: a collaborative voice at the embryonic stages of nineteenth-century astronomical specializations (Jean Koo, 2013)",
+          "url": "http://hdl.handle.net/10315/31915"
+        },
+        {
+          "label": "Gendered interventions: narrative discourse in the Victorian novel (Robyn Warhol, 1990)",
+          "url": "https://kb.osu.edu/bitstreams/cd2b02d4-66a2-5413-9ced-da61c469c29d/download"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "malaysia_airlines_mh370",
+          "shared_concept": "unexplained_disappearance",
+          "transition_line": "Just as the ocean swallowed the crew of the Mary Celeste, leaving only a ghost ship behind, a modern air tragedy would echo this chilling void, prompting questions that continue to haunt global consciousness."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: A Phantom at Sea",
+          "content": "On December 4, 1872, in the vast expanse of the Atlantic Ocean, a British brigantine named 'Dei Gratia' spotted a vessel behaving erratically. Approaching cautiously, Captain David Morehouse and his crew observed the ship was in disarray, its sails partially set, yet no one appeared on deck to answer their hails. This unsettling silence was the first sign of a maritime enigma that would baffle the world for centuries: the mystery of the 'Mary Celeste'.\n\nThe vessel was well-known, a sturdy American brigantine that had departed New York a month prior, bound for Genoa, Italy, with a cargo of industrial alcohol. Its captain, Benjamin Briggs, was an experienced and respected mariner, accompanied by his wife, young daughter, and a capable crew. The initial sight of a ship adrift is not uncommon, but the sheer absence of life, coupled with the seeming lack of distress, immediately cast a pall of deep unease over the observers. It was as if the sea itself had consumed its occupants, leaving behind an empty shell.\n\nWhat could have possibly transpired on the open ocean to cause an entire crew, including a captain and his family, to abandon a perfectly seaworthy ship without any apparent struggle or reason?",
+          "cliffhanger": "The real horror began when the 'Dei Gratia' crew boarded the abandoned vessel, revealing a scene far more chilling than a simple shipwreck."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: A Paradox of Normalcy and Absence",
+          "content": "Upon boarding the 'Mary Celeste', the salvage crew from the 'Dei Gratia' discovered a scene frozen in time, yet utterly devoid of human presence. The ship's single lifeboat was missing, a critical detail, but otherwise, the vessel itself was largely intact. There were no signs of a struggle; no bloodstains, no damage to the hull, and the valuable cargo of 1,701 barrels of alcohol remained untouched in the hold. It was not piracy, nor was it a storm that had torn the ship apart.\n\nPersonal effects belonging to Captain Briggs, his family, and the crew were found undisturbed in their cabins. Clothes, tobacco pipes, navigation tools, even Captain Briggs's sword, were all present. A sewing machine, personal chests, and children's toys lay as they had been left. In the galley, a meal had seemingly been prepared, with cups and plates still on the table. A slate in the mate's cabin held a calculation and the last entry in the logbook was dated November 25, indicating the ship's position some 100 miles west of the Azores.\n\nThe most perplexing elements were the missing chronometer and sextant – crucial navigational instruments that any sailor would take if abandoning a ship in an emergency. Their absence suggested a planned, though hasty, departure, yet the lack of a clear reason for such an evacuation, given the ship's seemingly sound condition, only deepened the mystery. The 'Mary Celeste' presented a haunting paradox: a vessel seemingly ready for continued voyaging, yet utterly deserted.",
+          "cliffhanger": "To understand this baffling abandonment, we must first look at the ship and its captain, whose reputations made such an act seem unimaginable."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: A Journey Interrupted",
+          "content": "The 'Mary Celeste' had departed from New York Harbor on November 7, 1872, bound for Genoa, Italy, carrying a consignment of denatured alcohol. Aboard were Captain Benjamin Briggs, his wife Sarah, their two-year-old daughter Sophia, and a crew of seven experienced sailors. The voyage had begun uneventfully, crossing the Atlantic under fair skies, with regular log entries indicating normal progress and conditions.\n\nThe ship was sighted by the 'Dei Gratia' on December 4, 1872, approximately 600 miles off the coast of Portugal, almost a month after its departure. The 'Dei Gratia', under Captain David Morehouse, had actually departed New York a week after the 'Mary Celeste' and was also bound for Genoa. It was a bizarre coincidence that two ships from the same port, heading to the same destination, would encounter each other under such inexplicable circumstances.\n\nAfter waiting for two hours with no response from the 'Mary Celeste', and noticing its erratic course, Captain Morehouse sent his First Mate, Oliver Deveau, and two seamen to investigate. Their findings would initiate one of the most enduring maritime legends, for what they discovered was not merely an abandoned ship, but a ghost ship, whose crew had vanished into the unknown, leaving behind only questions and an eerie silence.",
+          "cliffhanger": "The formal inquiry into the 'Mary Celeste' mystery soon began, but instead of finding answers, it quickly descended into a realm of suspicion and dark accusations."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: The Unsettling Inquiry",
+          "content": "The 'Mary Celeste' was towed to Gibraltar, where a Vice Admiralty Court salvage hearing was immediately convened. The case fell under the jurisdiction of Frederick Solly Flood, the Attorney General of Gibraltar, a man known for his rigid demeanor and deep suspicion. Flood's initial assumption was that a crime had been committed, specifically that the crew of the 'Dei Gratia' had orchestrated the abandonment to claim salvage money, or that the 'Mary Celeste's' own crew had mutinied.\n\nFlood meticulously examined the ship, searching for any signs of foul play. He noted what he believed were bloodstains on the captain's sword and slight indentations on the rail, suggesting violence. However, subsequent forensic analysis revealed that the alleged 'bloodstains' were not human blood, and the marks on the rail were consistent with normal wear and tear on a vessel. Despite this, Flood's conviction of wrongdoing persisted, tainting the early stages of the investigation.\n\nThe inquiry painstakingly documented every detail of the ship's condition, the cargo, and the few clues available. Expert testimony confirmed the 'Mary Celeste' was seaworthy and its cargo intact. Yet, no definitive conclusion could be reached regarding the fate of Captain Briggs, his family, and his crew. The proceedings were ultimately inconclusive, but the lingering shadow of Flood's accusations cast suspicion on Captain Morehouse and the 'Dei Gratia' crew for years, despite their eventual exoneration and receiving only a fraction of the salvage claim.",
+          "cliffhanger": "With official channels exhausted and suspicions unfounded, the door opened for a multitude of theories, some grounded in logic, others venturing into the truly bizarre."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: Competing Explanations",
+          "content": "Over the decades, numerous theories have emerged to explain the inexplicable disappearance of the 'Mary Celeste's' occupants. Early theories focused on piracy or mutiny, fueled by the era's romanticized, often violent, narratives of the sea. However, the untouched cargo and personal valuables aboard the ship quickly debunked the piracy hypothesis. The idea of mutiny also held little weight, as Captain Briggs was well-respected, and no signs of struggle were found. Moreover, why would mutineers abandon a perfectly good vessel and vanish into the open ocean?\n\nOne of the more enduring and plausible theories revolves around the ship's cargo: 1,701 barrels of industrial alcohol. It was suggested that some barrels might have leaked, creating potent, explosive fumes. Captain Briggs, fearing an imminent explosion, may have ordered everyone into the lifeboat, intending to wait for the danger to pass and then re-board. This theory is supported by the discovery of a temporarily improvised sounding-rod, perhaps used to check the cargo without exposing the crew to the fumes, and the missing chronometer and sextant, which would be taken in a planned, if urgent, evacuation.\n\nAnother hypothesis posits a natural phenomenon, such as a seaquake or a rogue wave, which could have suddenly deluged the deck, convincing Captain Briggs that the ship was sinking. The crew might have quickly boarded the lifeboat, which then became separated from the 'Mary Celeste' by strong currents or unexpected weather. However, the subsequent discovery of the 'Mary Celeste' relatively unscathed challenges this, as a force strong enough to dislodge a lifeboat and separate it would likely have caused more significant damage to the vessel itself.",
+          "cliffhanger": "Despite these attempts at rational explanation, the complete lack of human remains or any definitive trace of the missing ten souls continues to push the 'Mary Celeste' into the realm of enduring enigma."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: Whispers of the Unseen",
+          "content": "Beyond the more conventional explanations, the 'Mary Celeste' mystery has inspired theories that delve into the extraordinary, reflecting humanity's struggle to rationalize the truly unexplainable. Some speculate about a massive waterspout, a rare but powerful column of rotating air and water, which could have lifted the crew from the deck or caused extreme damage, leading to an immediate, unplanned abandonment. Yet, the relative calm and good condition of the ship when found make this scenario difficult to reconcile with the evidence.\n\nMore fantastical notions include encounters with giant squid or other unknown sea creatures, drawing on the deep-seated fear of the ocean's uncharted depths. While tales of kraken-like beasts have long permeated maritime folklore, there is absolutely no physical evidence to support such an attack on the 'Mary Celeste'. Similarly, theories of alien abduction or time-slips have been proposed by those seeking explanations beyond the earthly realm, though these remain purely speculative without any corroborating facts.\n\nThe enduring allure of the 'Mary Celeste' lies in this very void of concrete answers. The absence of bodies, the absence of a distress signal, and the abandonment of a ship that was otherwise perfectly sound creates a vacuum that human imagination rushes to fill. It taps into primal fears of disappearance, of the unknown forces that can snatch lives away without a trace, leaving only a ghost ship to bear witness to an unseen horror.",
+          "cliffhanger": "Ultimately, the true fate of the 'Mary Celeste's' crew remains sealed by the ocean, ensuring its place as one of history's most chilling and intractable maritime mysteries."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: An Enduring Echo",
+          "content": "The 'Mary Celeste' itself continued its life at sea, though it was plagued by a reputation as an unlucky or 'cursed' ship. It changed ownership multiple times, often enduring further mishaps and minor incidents, seemingly carrying the weight of its chilling past. Its final, ignominious end came in 1885 when its then-owner, Captain Gilman C. Parker, deliberately wrecked it off the coast of Haiti in an insurance fraud scheme. This act brought a inglorious end to a vessel whose earlier mystery had already cemented its place in legend.\n\nDespite numerous investigations, books, and even fictional accounts like Arthur Conan Doyle's 'J. Habakuk Jephson's Statement', no definitive explanation for the crew's disappearance has ever been accepted. The 'Mary Celeste' remains the quintessential 'ghost ship', a symbol of the ocean's capacity to absorb lives and secrets without a trace. It serves as a stark reminder that even with advanced navigation and communication, the sea can still claim its victims in ways that defy all logic and understanding.\n\nThe Mary Celeste mystery is not merely a historical footnote; it is a chilling testament to the fragility of human existence against the vast indifference of nature, and the persistent human drive to find answers even when none are forthcoming. It leaves us with a profound sense of unease, a lingering question mark etched into the annals of maritime history, forever whispering of lives vanished without a trace.",
+          "cliffhanger": null
+        }
+      ],
+      "image_missing": true
     },
     {
       "story_id": "phineas_gage_brain_injury",
       "title": "The Case of Phineas Gage: The Man Whose Mind Was Shattered",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
+      "image_query": "Phineas Gage",
       "hook": "Imagine a man's personality, his very essence, utterly transformed not by a lifetime of experiences, but by a single, catastrophic moment.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "brain_injury",
         "personality_change",
@@ -2848,18 +2908,6 @@
         "frontal_lobe",
         "self_identity"
       ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 55,
-        "gripping": 18,
-        "scared": 2,
-        "mindblown": 48
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2904,13 +2952,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 55,
+        "gripping": 18,
+        "scared": 2,
+        "mindblown": 48
+      }
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
       "title": "Dissociative Identity Disorder: The Shattered Self",
-      "category": "psychology",
+      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
+      "image_query": "",
       "hook": "Imagine waking to find hours, or even days, of your life erased, replaced by actions and memories that feel profoundly alien yet undeniably your own.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "dissociation",
         "trauma_response",
@@ -2918,18 +2974,6 @@
         "alter_personalities",
         "coping_mechanisms"
       ],
-      "severity": "chilling",
-      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 46,
-        "gripping": 19,
-        "scared": 5,
-        "mindblown": 44
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -2974,13 +3018,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 46,
+        "gripping": 19,
+        "scared": 5,
+        "mindblown": 44
+      }
     },
     {
       "story_id": "black_dahlia_murder",
       "title": "The Black Dahlia Murder: Hollywood's Unsolved Nightmare",
-      "category": "true_crime",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
+      "image_query": "",
       "hook": "On a frigid Los Angeles morning in January 1947, a mother walking with her child stumbled upon a sight that would forever brand itself into the annals of crime history: the bisected body of a young woman.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unsolved_mystery",
         "brutal_murder",
@@ -2989,18 +3041,6 @@
         "forensic_challenge",
         "police_misconduct"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 54,
-        "gripping": 27,
-        "scared": 49,
-        "mindblown": 10
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3045,13 +3085,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 54,
+        "gripping": 27,
+        "scared": 49,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "clinical_lycanthropy",
       "title": "Clinical Lycanthropy: When the Human Mind Becomes a Beast",
-      "category": "psychology",
+      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
+      "image_query": "",
       "hook": "Imagine a mind so utterly fractured that it genuinely believes its own flesh and blood have transformed, not into another human, but into the primal form of a beast.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "delusion",
         "psychosis",
@@ -3059,18 +3107,6 @@
         "neurology",
         "mental_health"
       ],
-      "severity": "chilling",
-      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 23,
-        "scared": 3,
-        "mindblown": 28
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3115,13 +3151,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 23,
+        "scared": 3,
+        "mindblown": 28
+      }
     },
     {
       "story_id": "the_isdal_woman",
       "title": "The Isdal Woman: Europe's Unidentified Shadow",
-      "category": "true_crime",
+      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
+      "image_query": "",
       "hook": "In 1970, deep within Norway's Isdalen valley, a woman's partially burned body was discovered, meticulously stripped of any identifiable trace.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unidentified_person",
         "espionage",
@@ -3129,18 +3173,6 @@
         "unexplained_deaths",
         "cold_case"
       ],
-      "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3185,13 +3217,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 33,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "project_iceworm_secret_city",
       "title": "Project ICEWORM: The US Army's Secret City Under the Ice",
-      "category": "gov_experiments",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
+      "image_query": "",
       "hook": "Beneath Greenland's vast, unforgiving ice sheet, a secret city once hummed with life, a clandestine outpost born of Cold War paranoia and audacious engineering.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "cold_war_era",
         "government_secrecy",
@@ -3199,18 +3239,6 @@
         "climate_change_impact",
         "military_infrastructure"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 23,
-        "gripping": 31,
-        "scared": 6,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3255,13 +3283,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 23,
+        "gripping": 31,
+        "scared": 6,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
       "title": "The Vanished Keepers of Eilean Mòr: A Lighthouse's Silent Riddle",
-      "category": "true_crime",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
+      "image_query": "",
       "hook": "On a remote Scottish isle, three seasoned lighthouse keepers vanished without a trace, leaving behind an untouched meal, an overturned chair, and a mystery that has haunted mariners for over a century.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "unsolved_mystery",
         "disappearance",
@@ -3269,18 +3305,6 @@
         "isolated_location",
         "unexplained_events"
       ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 44,
-        "gripping": 22,
-        "scared": 49,
-        "mindblown": 10
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3325,13 +3349,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 44,
+        "gripping": 22,
+        "scared": 49,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "harold_shipman_serial_killer",
       "title": "The Angel of Death: Harold Shipman's Betrayal",
-      "category": "true_crime",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
+      "image_query": "",
       "hook": "A general practitioner, a pillar of his community, systematically murdered hundreds of his patients, abusing the ultimate trust placed in a doctor.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "serial_killer",
         "medical_malpractice",
@@ -3340,18 +3372,6 @@
         "systemic_failure",
         "power_dynamics"
       ],
-      "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 56,
-        "gripping": 34,
-        "scared": 71,
-        "mindblown": 12
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3396,13 +3416,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 56,
+        "gripping": 34,
+        "scared": 71,
+        "mindblown": 12
+      }
     },
     {
       "story_id": "the_ganzfeld_experiment",
       "title": "The Ganzfeld Experiment: The Science of Unseen Minds",
-      "category": "psychology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
+      "image_query": "Ganzfeld experiment",
       "hook": "For centuries, the whispers of telepathy and clairvoyance have tantalized humanity, yet science consistently dismissed them as illusion. But what if a meticulously designed experiment could finally bridge the chasm between belief and empirical proof?",
+      "category": "psychology",
+      "severity": "unsettling",
       "concepts": [
         "parapsychology",
         "ESP",
@@ -3413,18 +3441,6 @@
         "replication_crisis",
         "perception_biases"
       ],
-      "severity": "unsettling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 33,
-        "gripping": 41,
-        "scared": 4,
-        "mindblown": 31
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3469,13 +3485,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 33,
+        "gripping": 41,
+        "scared": 4,
+        "mindblown": 31
+      }
     },
     {
       "story_id": "circleville_letters",
       "title": "The Circleville Letters: A Town Held Hostage by Anonymous Fear",
-      "category": "true_crime",
+      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
+      "image_query": "",
       "hook": "In the quiet town of Circleville, Ohio, a sinister secret began to leak onto doorsteps. Anonymous letters exposed the most intimate and shameful details of residents' lives, whispering truths only their closest confidants should have known.",
+      "category": "true_crime",
+      "severity": "chilling",
       "concepts": [
         "anonymous_harassment",
         "unsolved_mystery",
@@ -3483,18 +3507,6 @@
         "psychological_warfare",
         "small_town_secrets"
       ],
-      "severity": "chilling",
-      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 24,
-        "gripping": 22,
-        "scared": 54,
-        "mindblown": 5
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -3539,7 +3551,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 54,
+        "mindblown": 5
+      }
     },
     {
       "story_id": "project_artichoke_mind_control",
@@ -3721,82 +3738,6 @@
       "image_missing": true
     },
     {
-      "story_id": "the_bloop_unexplained_sound",
-      "title": "The Bloop: Echoes from the Unseen Deep",
-      "category": "paranormal",
-      "hook": "Below the ocean's tranquil surface, a sound of unprecedented power was once captured, hinting at a presence vast beyond human comprehension.",
-      "concepts": [
-        "ultra-low-frequency_sound",
-        "deep_ocean_mystery",
-        "unexplained_phenomena",
-        "cryptids",
-        "oceanographic_research"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f2sztpw2_FXT3ssVNrTXAd26Ygw_3dtfP0VKQTdDk2SgtGgAmho9CXvU&s=10",
-      "added_date": "2026-06-28",
-      "draft": 0,
-      "reactions": {
-        "like": 26,
-        "gripping": 14,
-        "scared": 56,
-        "mindblown": 7
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "the_mary_celeste_mystery",
-          "shared_concept": "maritime_mystery",
-          "transition_line": "Just as the Mary Celeste left behind an unsettling void, The Bloop emerged from the deep, a cryptic signal hinting at unknown entities lurking beneath the waves."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Ocean's Silent Roar",
-          "content": "The vast, crushing darkness of the deep ocean holds secrets far beyond human grasp. In the late 20th century, amidst this silent realm, an anomaly shattered all known understanding of marine acoustics. It was a sound unlike any ever recorded, emanating from the profound depths, a sound so potent it defied conventional explanation.\n\nThis wasn't a whisper carried on currents, but a monumental roar, specifically an ultra-low-frequency hydroacoustic event that resonated across thousands of miles of ocean. Its very existence challenged scientists to reconsider the boundaries of marine life, or perhaps, the sheer power of our planet's hidden geological forces.",
-          "cliffhanger": "But what advanced technology was in place to detect such an impossible sound from so far beneath the waves?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Eavesdropping Network",
-          "content": "The detection of 'The Bloop' was not a random occurrence, but a testament to a covert network born from Cold War necessities. Established by the United States Navy, this intricate system of hydrophones was designed to detect Soviet submarines, a vigilant ear beneath the waves. Known as the Sound Surveillance System, or SOSUS, it comprised highly sensitive microphones strategically placed on the ocean floor, primarily in the Atlantic and Pacific.\n\nThese submerged arrays were capable of monitoring vast expanses of the ocean, picking up subtle acoustic signatures from vessels and other underwater phenomena. While initially a military asset, after the Cold War's intensity waned, portions of SOSUS were declassified and made available to scientific research institutions, offering an unprecedented window into the hidden acoustic world of the deep.",
-          "cliffhanger": "It was through this secret listening post, repurposed for scientific discovery, that an unidentifiable signal pierced the silence of the abyss."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Anomaly's Voice",
-          "content": "The sound itself, later named 'The Bloop', was unlike any previously recorded. It was an ultra-low-frequency sound, below the range of human hearing but powerfully resonant. On a spectrogram, it appeared as a distinct, fluctuating signal that rapidly rose in frequency over approximately one minute before gradually fading out. Its spectral characteristics bore some resemblance to those of large marine animals, particularly baleen whales, known for their powerful, low-frequency vocalizations.\n\nHowever, the sheer amplitude of The Bloop dwarfed any known biological sound. Scientists estimated that its source had to be several times more powerful than the loudest sounds produced by blue whales, the largest animals on Earth. This unprecedented acoustic signature immediately set it apart, signaling something truly extraordinary emanating from the ocean's depths.",
-          "cliffhanger": "It was this unique, powerful signature that led researchers to pinpoint its origin to a remote and foreboding region of the South Pacific."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Moment of Detection",
-          "content": "In the summer of 1997, this peculiar sound was picked up by multiple hydrophones across a staggering distance of over 3,000 miles in the equatorial Pacific. Specifically, the network of submerged microphones, operated by the U.S. National Oceanic and Atmospheric Administration (NOAA) for scientific monitoring, triangulated the source to an isolated area around 50°S 100°W, a vast expanse of ocean west of Chile, largely unexplored and thousands of miles from human activity.\n\nThe detection of The Bloop by multiple distant sensors provided critical data: not only its location but also confirmed its immense power and coherent propagation through the water. This wasn't a localized anomaly but a grand acoustic event that reverberated across an entire ocean basin, suggesting a source of monumental proportions and enigmatic nature. The implications were immediate and profound.",
-          "cliffhanger": "With the location and characteristics confirmed, scientists grappled with a chilling question: what colossal entity could possibly produce such an astounding roar?"
-        },
-        {
-          "layer": 5,
-          "layer_name": "Ruling Out the Known",
-          "content": "Upon analyzing The Bloop, NOAA hydroacoustics specialists immediately began ruling out potential sources. It wasn't a submarine; man-made vessels have distinct acoustic profiles. It wasn't a bomb or explosive, which produce sharp, impulsive sounds. Geological events like earthquakes or underwater volcanoes typically generate broadband seismic rumbles, not the specific, fluctuating frequency pattern of The Bloop. The sheer power required to register across such a vast distance also pointed away from smaller, localized phenomena.\n\nInitial hypotheses included the possibility of a colossal, undiscovered marine animal. The sound characteristics—its ultra-low frequency and varying amplitude—were consistent with those produced by large biological organisms, such as blue whales, but on a scale that dwarfed any known creature. This led to intense speculation about cryptids or unknown megafauna residing in the ocean's deepest trenches.",
-          "cliffhanger": "The enigma deepened as researchers considered the immense power needed to create a sound that traveled across an entire ocean."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Implied Leviathan",
-          "content": "The most chilling aspect of The Bloop was not just its mystery, but the implied scale of its source. For a sound to be detected across 3,000 miles, its generating force had to be immense. If biological in origin, it would necessitate an animal far larger than any creature currently documented in scientific records—something potentially colossal enough to dwarf even the largest whales. The deep ocean, largely unexplored, could theoretically harbor such leviathans, leading to unsettling thoughts about what truly lurks beneath.\n\nThe depth of the signal's origin also added to the chilling contemplation. The vast majority of the ocean remains unmapped and unexplored, particularly its abyssal plains and hadal zones. These environments are subject to extreme pressures and perpetual darkness, conditions under which entirely new forms of life could evolve, hidden from humanity's gaze. The Bloop served as a stark reminder of the ocean's unfathomable capacity for housing the unknown.",
-          "cliffhanger": "For years, the specter of an unknown deep-sea titan haunted the imaginations of researchers, until a new, unsettling explanation began to emerge from the data."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: An Iceberg's Roar",
-          "content": "The absolute darkest truth, while perhaps less fantastical than an unknown leviathan, remains chilling in its implications for the scale of natural phenomena. Years after The Bloop was first recorded, advancements in acoustic modeling and a deeper understanding of cryoseisms provided a compelling, though still unsettling, explanation: the sound was likely generated by a massive icequake. These seismic events occur when large icebergs fracture and crack, releasing immense amounts of energy.\n\nThe acoustic signature of large icebergs grinding, cracking, and breaking apart can indeed match the characteristics of The Bloop—its ultra-low frequency, its varying amplitude over time, and the sheer power needed to travel thousands of miles. The detected location of The Bloop, west of the southern tip of South America, is within a region known for colossal icebergs calving off Antarctica. While this explanation offers scientific closure, it doesn't diminish the initial profound mystery or the chilling realization of the sheer power and unknown acoustic landscape of our planet. It highlights that even in a world increasingly mapped and understood, there are natural forces at play so grand they can mimic the sounds of mythical beasts, reminding us of the humbling scale of the natural world and the vast unknown that still exists.",
-          "cliffhanger": null
-        }
-      ],
-      "image_missing": 0
-    },
-    {
       "story_id": "edinburgh_vaults_001",
       "title": "The Edinburgh Vaults: Echoes from a Buried City",
       "category": "paranormal",
@@ -3809,9 +3750,9 @@
         "haunted_location"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFTf-c0XPFGsv1Phdz5pqJWGnz5vAPidw2Ms-ocUG72g&s=10",
+      "hero_image": "/content/images/edinburgh_vaults_001.jpg",
       "added_date": "2026-06-28",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 31,
         "gripping": 34,
@@ -3875,7 +3816,7 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": 0
+      "image_missing": true
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -3970,8 +3911,11 @@
     {
       "story_id": "mystery_of_dwarka",
       "title": "The Sunken Kingdom: Dwarka's Enduring Mystery",
-      "category": "mythology",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
+      "image_query": "",
       "hook": "For millennia, ancient Indian texts describe a magnificent city, Dwarka, built by a deity and then swallowed by the unforgiving sea.",
+      "category": "mythology",
+      "severity": "unsettling",
       "concepts": [
         "lost_civilizations",
         "mythology",
@@ -3979,18 +3923,6 @@
         "historical_validation",
         "catastrophic_events"
       ],
-      "severity": "unsettling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
-      "added_date": "2026-01-01",
-      "draft": false,
-      "reactions": {
-        "like": 41,
-        "gripping": 24,
-        "scared": 3,
-        "mindblown": 7
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -4029,7 +3961,12 @@
           "cliffhanger": "The evidence of a lost city was strong, but the story of its fall, and its true identity, remained submerged in the waters of uncertainty."
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 41,
+        "gripping": 24,
+        "scared": 3,
+        "mindblown": 7
+      }
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -4132,45 +4069,17 @@
     {
       "story_id": "the_children_of_woolpit",
       "title": "The Green Children of Woolpit: An Unearthly Mystery",
-      "category": "paranormal",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU8cGedkJCzo2f_Dt96V_31-nylw14nLd6ZLw1HxKw0BDSwL9qCkZsi2J0&s=10",
+      "image_query": "",
       "hook": "In the heart of Suffolk, England, a tale from the 12th century defies logic: two children, emerging from a wolf pit, their skin an astonishing, vibrant green.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "unexplained_phenomena",
         "historical_mystery",
         "extraterrestrial_life",
         "isolated_cultures",
         "folklore"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/the_children_of_woolpit.jpg",
-      "added_date": "2026-06-29",
-      "draft": false,
-      "reactions": {
-        "like": 46,
-        "gripping": 44,
-        "scared": 31,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "John Clark. The Green Children of Woolpit: Chronicles, Fairies and Facts in Medieval England. University of Exeter Press, 2024. ISBN: 978-1-80413-136-7 . 260 pp. (Veronika Nikiforova, 2025)",
-          "url": "https://revistas.ucm.es/index.php/AMAL/article/download/97557/4564456573040"
-        },
-        {
-          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
-          "url": "https://revistaselectronicas.ujaen.es/index.php/blo/article/download/9628/9770"
-        },
-        {
-          "label": "Clark, John (2024): The Green Children of Woolpit. Chronicles, Fairies and Facts in Medieval England, Exeter, University of Exeter Press (Exeter New Approaches to Legend, Folklore and Popular Belief), 260 pp. (Adriana Guillén Ortiz, 2025)",
-          "url": "https://doi.org/10.17561/blo.v15.9628"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_wow_signal",
-          "shared_concept": "unexplained_phenomena",
-          "transition_line": "Just as the 'Wow! Signal' captured a fleeting whisper from the cosmos, the tale of the Green Children of Woolpit echoes an unexplained phenomenon, challenging our perceptions of what exists just beyond our known world."
-        }
       ],
       "layers": [
         {
@@ -4216,13 +4125,21 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": true
+      "reactions": {
+        "like": 46,
+        "gripping": 44,
+        "scared": 31,
+        "mindblown": 12
+      }
     },
     {
       "story_id": "ravaan_character_study",
       "title": "The Ten-Headed Echo: A Psychological Deconstruction of Ravana",
-      "category": "mythology",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuCQQPPbh6nD_5kqhNYHyTJwMYXSrT2wS_Kz7R8-YvWiCkzLYzREHP0z2I&s=10",
+      "image_query": "",
       "hook": "The legend speaks of a king with ten heads, not merely a physical marvel, but a profound symbol of a fragmented psyche consumed by power and destructive ego.",
+      "category": "mythology",
+      "severity": "disturbing",
       "concepts": [
         "narcissism",
         "hubris",
@@ -4231,37 +4148,6 @@
         "self_destruction",
         "delusion",
         "obsession"
-      ],
-      "severity": "disturbing",
-      "hero_image": "/content/images/ravaan_character_study.jpg",
-      "added_date": "2026-06-29",
-      "draft": false,
-      "reactions": {
-        "like": 51,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "Sufi Political Thought (Milad Milani, 2017)",
-          "url": "https://api.taylorfrancis.com/content/books/mono/download?identifierName=doi&identifierValue=10.4324/9781315766294&type=googlepdf"
-        },
-        {
-          "label": "Expression of p190 BCR-ABL fusion gene in a patient with chronic myeloid leukemia (Paulo Villas-Boas Carvalho, Gustavo Jacob Lourenço, 2003)",
-          "url": "http://www.scielo.br/pdf/rbhh/v25n3/v25n3a09.pdf"
-        },
-        {
-          "label": "THE INFLUENCE OF ISLAMIC CORPORATE GOVERNANCE AND INTERNAL CONTROL ON INDICATIONS OF FRAUD IN ISLAMIC COMMERCIAL BANKS IN INDONESIA (Uus Ahmad Husaeni, 2021)",
-          "url": "http://jurnal.unissula.ac.id/index.php/ijibe/article/download/15252/5900"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "stanford_prison_experiment_001",
-          "shared_concept": "power_dynamics",
-          "transition_line": "Just as the Stanford Prison Experiment laid bare the corrupting influence of unchecked power on individuals, the legend of Ravana vividly illustrates how absolute authority can warp a leader's psyche and dismantle an entire societal structure."
-        }
       ],
       "layers": [
         {
@@ -4306,7 +4192,12 @@
           "content": "The final battle between Rama and Ravana is not just a clash of titans, but a profound psychological examination of self-destruction. Even in the face of insurmountable odds, Ravana refused to surrender, to seek peace, or to admit his profound errors. His hubris dictated that death in battle was preferable to any perceived dishonor or concession. His psychological construction of himself as invincible meant that true defeat was an existential impossibility.\n\nHis multiple heads and lives, granted by boons, became a metaphor for his inability to truly 'die' to his ego. Each time a head was severed, it would regrow, symbolizing the persistence of his destructive pride. Ultimately, it was not merely Rama's arrow, but the full weight of his own psychological failings—his unchecked narcissism, his delusional grandiosity, and his profound inability to accept limitations—that led to his final, irreversible demise. Ravana's story stands as a timeless cautionary tale, depicting how the unchecked human ego, even when combined with immense power and intellect, inevitably leads to an ultimate, self-inflicted ruin, a chilling testament to the darkest corners of the human psyche."
         }
       ],
-      "image_missing": true
+      "reactions": {
+        "like": 51,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      }
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -4781,44 +4672,16 @@
     {
       "story_id": "the_mandela_effect",
       "title": "The Mandela Effect: When Reality Itself Seemed to Shift",
-      "category": "psychology",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
+      "image_query": "",
       "hook": "A significant number of people vividly recall Nelson Mandela dying in prison in the 1980s, despite historical records confirming his release in 1990 and his death in 2013. This collective misremembrance forms the unsettling core of a global phenomenon.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "false_memory",
         "cognitive_bias",
         "collective_memory",
         "reality_perception"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
-      "added_date": "2026-06-28",
-      "draft": false,
-      "reactions": {
-        "like": 41,
-        "gripping": 19,
-        "scared": 6,
-        "mindblown": 54
-      },
-      "evidence_links": [
-        {
-          "label": "Health and Health Care in South Africa — 20 Years after Mandela (Bongani M. Mayosi, Solomon R. Benatar, 2014)",
-          "url": "https://www.nejm.org/doi/pdf/10.1056/NEJMsr1405012?articleTools=true"
-        },
-        {
-          "label": "The Mandela Effect and New Memory (Aaron M. French, 2018)",
-          "url": "https://doaj.org/article/383666474adc44e0884472bbe5dfd32b"
-        },
-        {
-          "label": "The Visual Mandela Effect as evidence for shared and specific false memories across people (Deepasri Prasad, Wilma Bainbridge, 2021)",
-          "url": "https://psyarxiv.com/nzh3s/download"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "folie_a_deux_shared_psychosis",
-          "shared_concept": "shared_delusion",
-          "transition_line": "Just as the Mandela Effect exposes the collective vulnerability of memory to shared misremembering, the chilling phenomenon of 'Folie à Deux' reveals how delusions, though not identical to false memories, can similarly become a shared reality, binding individuals in a mutually reinforced, distorted perception of the world."
-        }
       ],
       "layers": [
         {
@@ -4864,7 +4727,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 41,
+        "gripping": 19,
+        "scared": 6,
+        "mindblown": 54
+      }
     },
     {
       "story_id": "the_third_wave_experiment",
@@ -5250,8 +5118,11 @@
     {
       "story_id": "blue_whale_game_001",
       "title": "The Blue Whale Challenge: A Digital Descent into Despair",
-      "category": "cyber_mysteries",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhagoRxtesPzPsBVwesnSNVBp79GEfrB-q5Z4YQfuslAUU9u21hnvVebDw&s=10",
+      "image_query": "",
       "hook": "A series of cryptic online tasks, delivered by unseen 'curators', began to propagate a terrifying descent into self-harm, culminating in the alleged demand for suicide among vulnerable teenagers.",
+      "category": "cyber_mysteries",
+      "severity": "chilling",
       "concepts": [
         "social_pressure",
         "vulnerability",
@@ -5260,18 +5131,6 @@
         "digital_threats",
         "psychological_exploitation"
       ],
-      "severity": "chilling",
-      "hero_image": "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/08/26/Pictures/print_229ba15a-8a8c-11e7-b7bc-fa1568cb40f1.jpg",
-      "added_date": "2026-06-30",
-      "draft": false,
-      "reactions": {
-        "like": 13,
-        "gripping": 11,
-        "scared": 2,
-        "mindblown": 4
-      },
-      "evidence_links": [],
-      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -5316,7 +5175,12 @@
           "cliffhanger": null
         }
       ],
-      "image_missing": false
+      "reactions": {
+        "like": 13,
+        "gripping": 11,
+        "scared": 2,
+        "mindblown": 4
+      }
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -6511,93 +6375,64 @@
       "image_missing": false
     },
     {
-      "story_id": "the_mary_celeste_mystery",
-      "title": "The Ghost Ship: The Unsolved Mystery of the Mary Celeste",
+      "story_id": "the_bloop_unexplained_sound",
+      "title": "The Bloop: Echoes from the Unseen Deep",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f2sztpw2_FXT3ssVNrTXAd26Ygw_3dtfP0VKQTdDk2SgtGgAmho9CXvU&s=10",
+      "image_query": "",
+      "hook": "Below the ocean's tranquil surface, a sound of unprecedented power was once captured, hinting at a presence vast beyond human comprehension.",
       "category": "paranormal",
-      "hook": "For nearly 150 years, the perfectly sound vessel, Mary Celeste, was found adrift, sails partially set, food on the tables, but every soul aboard vanished without a trace.",
-      "concepts": [
-        "ghost_ship",
-        "maritime_mystery",
-        "unexplained_disappearance",
-        "abandoned_vessel",
-        "sea_legends"
-      ],
       "severity": "chilling",
-      "hero_image": "https://res.cloudinary.com/aenetworks/image/upload/c_fill,ar_2,w_3840,h_1920,g_auto/dpr_auto/f_auto/q_auto:eco/v1/mary-celeste-gettyimages-3246358?_a=BAVMn6DY0",
-      "added_date": "2026-06-27",
-      "draft": 0,
-      "reactions": {
-        "like": 16,
-        "gripping": 34,
-        "scared": 56,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "Fully Human and Fully Divine: The Birth of Christ and the Role of Mary (Ann Milliken Pederson, Gretchen Spars-McKee, 2015)",
-          "url": "https://www.mdpi.com/2077-1444/6/1/172/pdf?version=1425646371"
-        },
-        {
-          "label": "Mary Somerville and Margaret Huggins: a collaborative voice at the embryonic stages of nineteenth-century astronomical specializations (Jean Koo, 2013)",
-          "url": "http://hdl.handle.net/10315/31915"
-        },
-        {
-          "label": "Gendered interventions: narrative discourse in the Victorian novel (Robyn Warhol, 1990)",
-          "url": "https://kb.osu.edu/bitstreams/cd2b02d4-66a2-5413-9ced-da61c469c29d/download"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "malaysia_airlines_mh370",
-          "shared_concept": "unexplained_disappearance",
-          "transition_line": "Just as the ocean swallowed the crew of the Mary Celeste, leaving only a ghost ship behind, a modern air tragedy would echo this chilling void, prompting questions that continue to haunt global consciousness."
-        }
+      "concepts": [
+        "ultra-low-frequency_sound",
+        "deep_ocean_mystery",
+        "unexplained_phenomena",
+        "cryptids",
+        "oceanographic_research"
       ],
       "layers": [
         {
           "layer": 1,
-          "layer_name": "The Whisper: A Phantom at Sea",
-          "content": "On December 4, 1872, in the vast expanse of the Atlantic Ocean, a British brigantine named 'Dei Gratia' spotted a vessel behaving erratically. Approaching cautiously, Captain David Morehouse and his crew observed the ship was in disarray, its sails partially set, yet no one appeared on deck to answer their hails. This unsettling silence was the first sign of a maritime enigma that would baffle the world for centuries: the mystery of the 'Mary Celeste'.\n\nThe vessel was well-known, a sturdy American brigantine that had departed New York a month prior, bound for Genoa, Italy, with a cargo of industrial alcohol. Its captain, Benjamin Briggs, was an experienced and respected mariner, accompanied by his wife, young daughter, and a capable crew. The initial sight of a ship adrift is not uncommon, but the sheer absence of life, coupled with the seeming lack of distress, immediately cast a pall of deep unease over the observers. It was as if the sea itself had consumed its occupants, leaving behind an empty shell.\n\nWhat could have possibly transpired on the open ocean to cause an entire crew, including a captain and his family, to abandon a perfectly seaworthy ship without any apparent struggle or reason?",
-          "cliffhanger": "The real horror began when the 'Dei Gratia' crew boarded the abandoned vessel, revealing a scene far more chilling than a simple shipwreck."
+          "layer_name": "The Ocean's Silent Roar",
+          "content": "The vast, crushing darkness of the deep ocean holds secrets far beyond human grasp. In the late 20th century, amidst this silent realm, an anomaly shattered all known understanding of marine acoustics. It was a sound unlike any ever recorded, emanating from the profound depths, a sound so potent it defied conventional explanation.\n\nThis wasn't a whisper carried on currents, but a monumental roar, specifically an ultra-low-frequency hydroacoustic event that resonated across thousands of miles of ocean. Its very existence challenged scientists to reconsider the boundaries of marine life, or perhaps, the sheer power of our planet's hidden geological forces.",
+          "cliffhanger": "But what advanced technology was in place to detect such an impossible sound from so far beneath the waves?"
         },
         {
           "layer": 2,
-          "layer_name": "The Pattern: A Paradox of Normalcy and Absence",
-          "content": "Upon boarding the 'Mary Celeste', the salvage crew from the 'Dei Gratia' discovered a scene frozen in time, yet utterly devoid of human presence. The ship's single lifeboat was missing, a critical detail, but otherwise, the vessel itself was largely intact. There were no signs of a struggle; no bloodstains, no damage to the hull, and the valuable cargo of 1,701 barrels of alcohol remained untouched in the hold. It was not piracy, nor was it a storm that had torn the ship apart.\n\nPersonal effects belonging to Captain Briggs, his family, and the crew were found undisturbed in their cabins. Clothes, tobacco pipes, navigation tools, even Captain Briggs's sword, were all present. A sewing machine, personal chests, and children's toys lay as they had been left. In the galley, a meal had seemingly been prepared, with cups and plates still on the table. A slate in the mate's cabin held a calculation and the last entry in the logbook was dated November 25, indicating the ship's position some 100 miles west of the Azores.\n\nThe most perplexing elements were the missing chronometer and sextant – crucial navigational instruments that any sailor would take if abandoning a ship in an emergency. Their absence suggested a planned, though hasty, departure, yet the lack of a clear reason for such an evacuation, given the ship's seemingly sound condition, only deepened the mystery. The 'Mary Celeste' presented a haunting paradox: a vessel seemingly ready for continued voyaging, yet utterly deserted.",
-          "cliffhanger": "To understand this baffling abandonment, we must first look at the ship and its captain, whose reputations made such an act seem unimaginable."
+          "layer_name": "The Eavesdropping Network",
+          "content": "The detection of 'The Bloop' was not a random occurrence, but a testament to a covert network born from Cold War necessities. Established by the United States Navy, this intricate system of hydrophones was designed to detect Soviet submarines, a vigilant ear beneath the waves. Known as the Sound Surveillance System, or SOSUS, it comprised highly sensitive microphones strategically placed on the ocean floor, primarily in the Atlantic and Pacific.\n\nThese submerged arrays were capable of monitoring vast expanses of the ocean, picking up subtle acoustic signatures from vessels and other underwater phenomena. While initially a military asset, after the Cold War's intensity waned, portions of SOSUS were declassified and made available to scientific research institutions, offering an unprecedented window into the hidden acoustic world of the deep.",
+          "cliffhanger": "It was through this secret listening post, repurposed for scientific discovery, that an unidentifiable signal pierced the silence of the abyss."
         },
         {
           "layer": 3,
-          "layer_name": "The Incident: A Journey Interrupted",
-          "content": "The 'Mary Celeste' had departed from New York Harbor on November 7, 1872, bound for Genoa, Italy, carrying a consignment of denatured alcohol. Aboard were Captain Benjamin Briggs, his wife Sarah, their two-year-old daughter Sophia, and a crew of seven experienced sailors. The voyage had begun uneventfully, crossing the Atlantic under fair skies, with regular log entries indicating normal progress and conditions.\n\nThe ship was sighted by the 'Dei Gratia' on December 4, 1872, approximately 600 miles off the coast of Portugal, almost a month after its departure. The 'Dei Gratia', under Captain David Morehouse, had actually departed New York a week after the 'Mary Celeste' and was also bound for Genoa. It was a bizarre coincidence that two ships from the same port, heading to the same destination, would encounter each other under such inexplicable circumstances.\n\nAfter waiting for two hours with no response from the 'Mary Celeste', and noticing its erratic course, Captain Morehouse sent his First Mate, Oliver Deveau, and two seamen to investigate. Their findings would initiate one of the most enduring maritime legends, for what they discovered was not merely an abandoned ship, but a ghost ship, whose crew had vanished into the unknown, leaving behind only questions and an eerie silence.",
-          "cliffhanger": "The formal inquiry into the 'Mary Celeste' mystery soon began, but instead of finding answers, it quickly descended into a realm of suspicion and dark accusations."
+          "layer_name": "The Anomaly's Voice",
+          "content": "The sound itself, later named 'The Bloop', was unlike any previously recorded. It was an ultra-low-frequency sound, below the range of human hearing but powerfully resonant. On a spectrogram, it appeared as a distinct, fluctuating signal that rapidly rose in frequency over approximately one minute before gradually fading out. Its spectral characteristics bore some resemblance to those of large marine animals, particularly baleen whales, known for their powerful, low-frequency vocalizations.\n\nHowever, the sheer amplitude of The Bloop dwarfed any known biological sound. Scientists estimated that its source had to be several times more powerful than the loudest sounds produced by blue whales, the largest animals on Earth. This unprecedented acoustic signature immediately set it apart, signaling something truly extraordinary emanating from the ocean's depths.",
+          "cliffhanger": "It was this unique, powerful signature that led researchers to pinpoint its origin to a remote and foreboding region of the South Pacific."
         },
         {
           "layer": 4,
-          "layer_name": "The System: The Unsettling Inquiry",
-          "content": "The 'Mary Celeste' was towed to Gibraltar, where a Vice Admiralty Court salvage hearing was immediately convened. The case fell under the jurisdiction of Frederick Solly Flood, the Attorney General of Gibraltar, a man known for his rigid demeanor and deep suspicion. Flood's initial assumption was that a crime had been committed, specifically that the crew of the 'Dei Gratia' had orchestrated the abandonment to claim salvage money, or that the 'Mary Celeste's' own crew had mutinied.\n\nFlood meticulously examined the ship, searching for any signs of foul play. He noted what he believed were bloodstains on the captain's sword and slight indentations on the rail, suggesting violence. However, subsequent forensic analysis revealed that the alleged 'bloodstains' were not human blood, and the marks on the rail were consistent with normal wear and tear on a vessel. Despite this, Flood's conviction of wrongdoing persisted, tainting the early stages of the investigation.\n\nThe inquiry painstakingly documented every detail of the ship's condition, the cargo, and the few clues available. Expert testimony confirmed the 'Mary Celeste' was seaworthy and its cargo intact. Yet, no definitive conclusion could be reached regarding the fate of Captain Briggs, his family, and his crew. The proceedings were ultimately inconclusive, but the lingering shadow of Flood's accusations cast suspicion on Captain Morehouse and the 'Dei Gratia' crew for years, despite their eventual exoneration and receiving only a fraction of the salvage claim.",
-          "cliffhanger": "With official channels exhausted and suspicions unfounded, the door opened for a multitude of theories, some grounded in logic, others venturing into the truly bizarre."
+          "layer_name": "The Moment of Detection",
+          "content": "In the summer of 1997, this peculiar sound was picked up by multiple hydrophones across a staggering distance of over 3,000 miles in the equatorial Pacific. Specifically, the network of submerged microphones, operated by the U.S. National Oceanic and Atmospheric Administration (NOAA) for scientific monitoring, triangulated the source to an isolated area around 50°S 100°W, a vast expanse of ocean west of Chile, largely unexplored and thousands of miles from human activity.\n\nThe detection of The Bloop by multiple distant sensors provided critical data: not only its location but also confirmed its immense power and coherent propagation through the water. This wasn't a localized anomaly but a grand acoustic event that reverberated across an entire ocean basin, suggesting a source of monumental proportions and enigmatic nature. The implications were immediate and profound.",
+          "cliffhanger": "With the location and characteristics confirmed, scientists grappled with a chilling question: what colossal entity could possibly produce such an astounding roar?"
         },
         {
           "layer": 5,
-          "layer_name": "The Research: Competing Explanations",
-          "content": "Over the decades, numerous theories have emerged to explain the inexplicable disappearance of the 'Mary Celeste's' occupants. Early theories focused on piracy or mutiny, fueled by the era's romanticized, often violent, narratives of the sea. However, the untouched cargo and personal valuables aboard the ship quickly debunked the piracy hypothesis. The idea of mutiny also held little weight, as Captain Briggs was well-respected, and no signs of struggle were found. Moreover, why would mutineers abandon a perfectly good vessel and vanish into the open ocean?\n\nOne of the more enduring and plausible theories revolves around the ship's cargo: 1,701 barrels of industrial alcohol. It was suggested that some barrels might have leaked, creating potent, explosive fumes. Captain Briggs, fearing an imminent explosion, may have ordered everyone into the lifeboat, intending to wait for the danger to pass and then re-board. This theory is supported by the discovery of a temporarily improvised sounding-rod, perhaps used to check the cargo without exposing the crew to the fumes, and the missing chronometer and sextant, which would be taken in a planned, if urgent, evacuation.\n\nAnother hypothesis posits a natural phenomenon, such as a seaquake or a rogue wave, which could have suddenly deluged the deck, convincing Captain Briggs that the ship was sinking. The crew might have quickly boarded the lifeboat, which then became separated from the 'Mary Celeste' by strong currents or unexpected weather. However, the subsequent discovery of the 'Mary Celeste' relatively unscathed challenges this, as a force strong enough to dislodge a lifeboat and separate it would likely have caused more significant damage to the vessel itself.",
-          "cliffhanger": "Despite these attempts at rational explanation, the complete lack of human remains or any definitive trace of the missing ten souls continues to push the 'Mary Celeste' into the realm of enduring enigma."
+          "layer_name": "Ruling Out the Known",
+          "content": "Upon analyzing The Bloop, NOAA hydroacoustics specialists immediately began ruling out potential sources. It wasn't a submarine; man-made vessels have distinct acoustic profiles. It wasn't a bomb or explosive, which produce sharp, impulsive sounds. Geological events like earthquakes or underwater volcanoes typically generate broadband seismic rumbles, not the specific, fluctuating frequency pattern of The Bloop. The sheer power required to register across such a vast distance also pointed away from smaller, localized phenomena.\n\nInitial hypotheses included the possibility of a colossal, undiscovered marine animal. The sound characteristics—its ultra-low frequency and varying amplitude—were consistent with those produced by large biological organisms, such as blue whales, but on a scale that dwarfed any known creature. This led to intense speculation about cryptids or unknown megafauna residing in the ocean's deepest trenches.",
+          "cliffhanger": "The enigma deepened as researchers considered the immense power needed to create a sound that traveled across an entire ocean."
         },
         {
           "layer": 6,
-          "layer_name": "The Abyss: Whispers of the Unseen",
-          "content": "Beyond the more conventional explanations, the 'Mary Celeste' mystery has inspired theories that delve into the extraordinary, reflecting humanity's struggle to rationalize the truly unexplainable. Some speculate about a massive waterspout, a rare but powerful column of rotating air and water, which could have lifted the crew from the deck or caused extreme damage, leading to an immediate, unplanned abandonment. Yet, the relative calm and good condition of the ship when found make this scenario difficult to reconcile with the evidence.\n\nMore fantastical notions include encounters with giant squid or other unknown sea creatures, drawing on the deep-seated fear of the ocean's uncharted depths. While tales of kraken-like beasts have long permeated maritime folklore, there is absolutely no physical evidence to support such an attack on the 'Mary Celeste'. Similarly, theories of alien abduction or time-slips have been proposed by those seeking explanations beyond the earthly realm, though these remain purely speculative without any corroborating facts.\n\nThe enduring allure of the 'Mary Celeste' lies in this very void of concrete answers. The absence of bodies, the absence of a distress signal, and the abandonment of a ship that was otherwise perfectly sound creates a vacuum that human imagination rushes to fill. It taps into primal fears of disappearance, of the unknown forces that can snatch lives away without a trace, leaving only a ghost ship to bear witness to an unseen horror.",
-          "cliffhanger": "Ultimately, the true fate of the 'Mary Celeste's' crew remains sealed by the ocean, ensuring its place as one of history's most chilling and intractable maritime mysteries."
+          "layer_name": "The Implied Leviathan",
+          "content": "The most chilling aspect of The Bloop was not just its mystery, but the implied scale of its source. For a sound to be detected across 3,000 miles, its generating force had to be immense. If biological in origin, it would necessitate an animal far larger than any creature currently documented in scientific records—something potentially colossal enough to dwarf even the largest whales. The deep ocean, largely unexplored, could theoretically harbor such leviathans, leading to unsettling thoughts about what truly lurks beneath.\n\nThe depth of the signal's origin also added to the chilling contemplation. The vast majority of the ocean remains unmapped and unexplored, particularly its abyssal plains and hadal zones. These environments are subject to extreme pressures and perpetual darkness, conditions under which entirely new forms of life could evolve, hidden from humanity's gaze. The Bloop served as a stark reminder of the ocean's unfathomable capacity for housing the unknown.",
+          "cliffhanger": "For years, the specter of an unknown deep-sea titan haunted the imaginations of researchers, until a new, unsettling explanation began to emerge from the data."
         },
         {
           "layer": 7,
-          "layer_name": "The Dark Corner: An Enduring Echo",
-          "content": "The 'Mary Celeste' itself continued its life at sea, though it was plagued by a reputation as an unlucky or 'cursed' ship. It changed ownership multiple times, often enduring further mishaps and minor incidents, seemingly carrying the weight of its chilling past. Its final, ignominious end came in 1885 when its then-owner, Captain Gilman C. Parker, deliberately wrecked it off the coast of Haiti in an insurance fraud scheme. This act brought a inglorious end to a vessel whose earlier mystery had already cemented its place in legend.\n\nDespite numerous investigations, books, and even fictional accounts like Arthur Conan Doyle's 'J. Habakuk Jephson's Statement', no definitive explanation for the crew's disappearance has ever been accepted. The 'Mary Celeste' remains the quintessential 'ghost ship', a symbol of the ocean's capacity to absorb lives and secrets without a trace. It serves as a stark reminder that even with advanced navigation and communication, the sea can still claim its victims in ways that defy all logic and understanding.\n\nThe Mary Celeste mystery is not merely a historical footnote; it is a chilling testament to the fragility of human existence against the vast indifference of nature, and the persistent human drive to find answers even when none are forthcoming. It leaves us with a profound sense of unease, a lingering question mark etched into the annals of maritime history, forever whispering of lives vanished without a trace.",
+          "layer_name": "The Dark Corner: An Iceberg's Roar",
+          "content": "The absolute darkest truth, while perhaps less fantastical than an unknown leviathan, remains chilling in its implications for the scale of natural phenomena. Years after The Bloop was first recorded, advancements in acoustic modeling and a deeper understanding of cryoseisms provided a compelling, though still unsettling, explanation: the sound was likely generated by a massive icequake. These seismic events occur when large icebergs fracture and crack, releasing immense amounts of energy.\n\nThe acoustic signature of large icebergs grinding, cracking, and breaking apart can indeed match the characteristics of The Bloop—its ultra-low frequency, its varying amplitude over time, and the sheer power needed to travel thousands of miles. The detected location of The Bloop, west of the southern tip of South America, is within a region known for colossal icebergs calving off Antarctica. While this explanation offers scientific closure, it doesn't diminish the initial profound mystery or the chilling realization of the sheer power and unknown acoustic landscape of our planet. It highlights that even in a world increasingly mapped and understood, there are natural forces at play so grand they can mimic the sounds of mythical beasts, reminding us of the humbling scale of the natural world and the vast unknown that still exists.",
           "cliffhanger": null
         }
-      ],
-      "image_missing": 0
+      ]
     }
   ]
 }
