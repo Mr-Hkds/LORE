@@ -206,11 +206,15 @@ export function findPotentialDuplicate(story, allStories) {
   return null;
 }
 
-export function hasProperThumbnail(story) {
-  if (!story || !story.hero_image) return false;
+export function isThumbnailFormatInvalid(story) {
+  if (!story || !story.hero_image) return true;
   const img = story.hero_image;
-  if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
-  return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
+  if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return true;
+  return !img.startsWith('http') && !img.startsWith('/') && !img.startsWith('data:');
+}
+
+export function hasProperThumbnail(story) {
+  return !isThumbnailFormatInvalid(story);
 }
 
 export async function robustFetchWikipediaThumbnail(query) {
@@ -444,6 +448,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
   const [filterMissingImages, setFilterMissingImages] = useState(false);
+  const [brokenImageIds, setBrokenImageIds] = useState(new Set());
+
+  const isImageMissing = useCallback((story) => {
+    if (!story) return true;
+    if (isThumbnailFormatInvalid(story)) return true;
+    return brokenImageIds.has(story.story_id);
+  }, [brokenImageIds]);
 
   // Generator form states
   const [genTopic, setGenTopic] = useState('');
@@ -1107,7 +1118,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
   // Publish / Push to Live story logic
   const handlePublishStory = async (storyId) => {
     const targetStory = adminStories.find(s => s.story_id === storyId);
-    if (!hasProperThumbnail(targetStory)) {
+    if (isImageMissing(targetStory)) {
       setToast({ text: 'Story lacks a proper thumbnail. Transferred to Approval Queue.', type: 'error' });
       setActiveTab('approval');
       return;
@@ -1209,6 +1220,53 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
     loadRecommendations();
     loadAdminStories();
   }, [loadFeedback, loadRecommendations, loadAdminStories]);
+
+  // Real-time check to verify if story cover images actually load successfully (detects 404s)
+  useEffect(() => {
+    if (!adminStories || adminStories.length === 0) return;
+
+    let active = true;
+    const checkImagesAvailability = async () => {
+      const broken = new Set();
+      
+      // Perform initial check on format and placeholding
+      adminStories.forEach(s => {
+        if (isThumbnailFormatInvalid(s)) {
+          broken.add(s.story_id);
+        }
+      });
+      
+      if (!active) return;
+      setBrokenImageIds(new Set(broken));
+
+      // Asynchronously check network load for the rest
+      const checkPromises = adminStories
+        .filter(s => !isThumbnailFormatInvalid(s))
+        .map(s => {
+          return new Promise(resolve => {
+            const img = new Image();
+            img.src = s.hero_image;
+            img.onload = () => resolve();
+            img.onerror = () => {
+              if (active) {
+                broken.add(s.story_id);
+              }
+              resolve();
+            };
+          });
+        });
+
+      await Promise.all(checkPromises);
+      if (active) {
+        setBrokenImageIds(new Set(broken));
+      }
+    };
+
+    checkImagesAvailability();
+    return () => {
+      active = false;
+    };
+  }, [adminStories]);
 
   // Story editor utilities
   const startEditing = (story) => {
@@ -2165,11 +2223,11 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
         }
       }
       
-      const matchesMissingImage = !filterMissingImages || !hasProperThumbnail(story);
+      const matchesMissingImage = !filterMissingImages || isImageMissing(story);
       
       return matchesSearch && matchesCategory && matchesDate && matchesMissingImage;
     });
-  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages]);
+  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages, isImageMissing]);
 
   // Grouped filtered stories by category, sorted by date descending
   const groupedStories = useMemo(() => {
@@ -2217,12 +2275,12 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
   }, [adminStories]);
 
   const draftStories = useMemo(() => {
-    return adminStories.filter(s => s.draft && hasProperThumbnail(s));
-  }, [adminStories]);
+    return adminStories.filter(s => s.draft && !isImageMissing(s));
+  }, [adminStories, isImageMissing]);
 
   const approvalStories = useMemo(() => {
-    return adminStories.filter(s => s.draft && !hasProperThumbnail(s));
-  }, [adminStories]);
+    return adminStories.filter(s => s.draft && isImageMissing(s));
+  }, [adminStories, isImageMissing]);
 
   const avgRating = useMemo(() => {
     if (feedbackItems.length === 0) return 0;
@@ -2239,8 +2297,8 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
   }, [feedbackItems, feedbackFilter]);
 
   const missingImageStoriesCount = useMemo(() => {
-    return adminStories.filter(s => !hasProperThumbnail(s)).length;
-  }, [adminStories]);
+    return adminStories.filter(s => isImageMissing(s)).length;
+  }, [adminStories, isImageMissing]);
 
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: bg, color: fg }}>
@@ -2967,7 +3025,7 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                       </span>
                                     )}
 
-                                    {!hasProperThumbnail(story) && (
+                                    {isImageMissing(story) && (
                                       <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
                                         ⚠️ Missing Image
                                       </span>
