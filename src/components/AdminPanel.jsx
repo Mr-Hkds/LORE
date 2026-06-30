@@ -436,6 +436,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
+  const [filterMissingImages, setFilterMissingImages] = useState(false);
 
   // Generator form states
   const [genTopic, setGenTopic] = useState('');
@@ -2150,9 +2151,11 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
         }
       }
       
-      return matchesSearch && matchesCategory && matchesDate;
+      const matchesMissingImage = !filterMissingImages || !hasProperThumbnail(story);
+      
+      return matchesSearch && matchesCategory && matchesDate && matchesMissingImage;
     });
-  }, [adminStories, searchQuery, filterCategory, filterDate]);
+  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages, hasProperThumbnail]);
 
   // Grouped filtered stories by category, sorted by date descending
   const groupedStories = useMemo(() => {
@@ -2227,6 +2230,10 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
       return true;
     });
   }, [feedbackItems, feedbackFilter]);
+
+  const missingImageStoriesCount = useMemo(() => {
+    return adminStories.filter(s => !hasProperThumbnail(s)).length;
+  }, [adminStories, hasProperThumbnail]);
 
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: bg, color: fg }}>
@@ -2454,6 +2461,27 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                   </button>
                 </div>
               </div>
+
+              {/* Asset Health Warning Alert Banner */}
+              {!editingStoryId && missingImageStoriesCount > 0 && (
+                <div className="p-4 bg-red-950/20 border border-red-900/40 rounded-xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-start sm:items-center gap-3">
+                    <span className="text-xl">⚠️</span>
+                    <div>
+                      <p className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest">// ASSET HEALTH ALERT</p>
+                      <p className="text-[11px] text-[#EDE8DF]/80 mt-0.5 leading-relaxed">
+                        There are <strong className="text-red-400 font-bold">{missingImageStoriesCount} archive dossiers</strong> currently missing a valid cover image or using placeholders.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setFilterMissingImages(prev => !prev)}
+                    className="px-3.5 py-1.5 bg-red-900/40 hover:bg-red-900/60 text-red-400 border border-red-800/40 text-[9px] font-mono font-bold tracking-widest uppercase rounded transition-all cursor-pointer select-none active:scale-95 flex-shrink-0"
+                  >
+                    {filterMissingImages ? "Show All Archives" : "Filter Missing Cover Images"}
+                  </button>
+                </div>
+              )}
 
               {genProgress && (
                 <div className="p-4 bg-[#0D0B08] border border-indigo-900/30 rounded-xl space-y-2 text-left">
@@ -2897,19 +2925,18 @@ Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output th
                                   <div className="flex items-center gap-2 flex-wrap">
                                     <span className="font-serif italic text-[#EDE8DF] text-base leading-snug">{story.title}</span>
                                     {story.draft ? (
-                                      <div className="flex gap-1.5 items-center">
-                                        <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
-                                          Draft
-                                        </span>
-                                        {(!story.hero_image || !story.hero_image.startsWith('http')) && (
-                                          <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
-                                            ⚠️ Missing Image
-                                          </span>
-                                        )}
-                                      </div>
+                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase">
+                                        Draft
+                                      </span>
                                     ) : (
                                       <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase">
                                         Live
+                                      </span>
+                                    )}
+
+                                    {!hasProperThumbnail(story) && (
+                                      <span className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase animate-pulse">
+                                        ⚠️ Missing Image
                                       </span>
                                     )}
 
