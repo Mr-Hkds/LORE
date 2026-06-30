@@ -6493,8 +6493,11 @@
     {
       "story_id": "project_artichoke_mind_control",
       "title": "Project ARTICHOKE: The CIA's First Foray into Mind Control",
-      "category": "gov_experiments",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_the_U.S._Central_Intelligence_Agency.svg/250px-Flag_of_the_U.S._Central_Intelligence_Agency.svg.png",
+      "image_query": "",
       "hook": "In the shadow of the Cold War, a secret program was born, seeking to unlock and manipulate the very essence of human thought, turning minds into weapons or tools.",
+      "category": "gov_experiments",
+      "severity": "chilling",
       "concepts": [
         "mind_control",
         "government_secrecy",
@@ -6503,37 +6506,6 @@
         "cold_war_era",
         "interrogation_techniques",
         "psychological_warfare"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_the_U.S._Central_Intelligence_Agency.svg/250px-Flag_of_the_U.S._Central_Intelligence_Agency.svg.png",
-      "added_date": "2026-06-28",
-      "draft": 0,
-      "reactions": {
-        "like": 51,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "Murky Projects and Uneven Information Policies: A Case Study of the Psychological Strategy Board and CIA (Susan Maret, 2018)",
-          "url": "https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1034&context=secrecyandsociety"
-        },
-        {
-          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
-          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
-        },
-        {
-          "label": "Militarising the Mind: Assessing the Weapons of the Ultimate Battlefield (Robert C. Bruner, Filippa Lentzos, 2018)",
-          "url": "https://kclpure.kcl.ac.uk/ws/files/94550726/Militarising_the_Mind_LENTZOS_Accepted9February2018_GREEN_AMA.pdf"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "mind_control",
-          "transition_line": "While Project ARTICHOKE laid the disturbing groundwork, its dark legacy would truly blossom in an even more notorious, ambitious, and ethically bankrupt successor: Project MK-Ultra."
-        }
       ],
       "layers": [
         {
@@ -6577,8 +6549,7 @@
           "layer_name": "The Dark Corner: Unveiling the Unseen Scars",
           "content": "Project ARTICHOKE stands as a chilling reminder of how easily the pursuit of national security can descend into scientific and moral depravity, leaving behind unseen scars on the fabric of society and on the very definition of humanity itself. The lessons learned, or rather, the ethical lines crossed, continue to haunt the history of intelligence operations."
         }
-      ],
-      "image_missing": 0
+      ]
     }
   ]
 }
