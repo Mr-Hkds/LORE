@@ -1103,7 +1103,8 @@
     "wendigo_psychosis_algonquin_folklore"
   ],
   "cyber_espionage": [
-    "shadow_brokers_leak"
+    "shadow_brokers_leak",
+    "operation_shady_rat"
   ],
   "zero-day_exploits": [
     "shadow_brokers_leak"
@@ -1113,5 +1114,20 @@
   ],
   "data_breach": [
     "shadow_brokers_leak"
+  ],
+  "state_sponsored_hacking": [
+    "operation_shady_rat"
+  ],
+  "data_theft": [
+    "operation_shady_rat"
+  ],
+  "advanced_persistent_threat": [
+    "operation_shady_rat"
+  ],
+  "supply_chain_attack": [
+    "operation_shady_rat"
+  ],
+  "industrial_espionage": [
+    "operation_shady_rat"
   ]
 }
