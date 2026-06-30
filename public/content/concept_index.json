@@ -57,8 +57,8 @@
     "dancing_mania_1518_strasbourg",
     "salem_witch_trials_001",
     "tanganyika_laughter_epidemic",
-    "the_batavia_shipwreck_mutiny",
-    "the_third_wave_experiment"
+    "the_third_wave_experiment",
+    "the_batavia_shipwreck_mutiny"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -788,18 +788,6 @@
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
-  "false_memory": [
-    "the_mandela_effect"
-  ],
-  "cognitive_bias": [
-    "the_mandela_effect"
-  ],
-  "collective_memory": [
-    "the_mandela_effect"
-  ],
-  "reality_perception": [
-    "the_mandela_effect"
-  ],
   "ufo": [
     "project_blue_book_ufo"
   ],
@@ -961,6 +949,10 @@
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
   ],
+  "authoritarianism": [
+    "the_third_wave_experiment",
+    "the_batavia_shipwreck_mutiny"
+  ],
   "mutiny": [
     "the_batavia_shipwreck_mutiny"
   ],
@@ -972,10 +964,6 @@
   ],
   "social_hierarchy": [
     "the_batavia_shipwreck_mutiny"
-  ],
-  "authoritarianism": [
-    "the_batavia_shipwreck_mutiny",
-    "the_third_wave_experiment"
   ],
   "bioterrorism": [
     "anthrax_attacks_2001_amerithrax"
@@ -1084,5 +1072,17 @@
   ],
   "ideomotor_effect": [
     "the_philip_experiment"
+  ],
+  "false_memory": [
+    "the_mandela_effect"
+  ],
+  "cognitive_bias": [
+    "the_mandela_effect"
+  ],
+  "collective_memory": [
+    "the_mandela_effect"
+  ],
+  "reality_perception": [
+    "the_mandela_effect"
   ]
 }
