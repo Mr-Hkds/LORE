@@ -39,7 +39,8 @@
     "operation_gladio",
     "the_phoenix_program",
     "the_russian_woodpecker_duga_3",
-    "shadow_brokers_leak"
+    "shadow_brokers_leak",
+    "rendlesham_forest_incident_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -489,7 +490,8 @@
     "project_blue_book_ufo",
     "the_wow_signal",
     "the_children_of_woolpit",
-    "the_bloop_unexplained_sound"
+    "the_bloop_unexplained_sound",
+    "rendlesham_forest_incident_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -534,7 +536,8 @@
     "project_artichoke_mind_control",
     "operation_paperclip_001",
     "project_blue_book_ufo",
-    "project_shamrock"
+    "project_shamrock",
+    "rendlesham_forest_incident_001"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -963,7 +966,8 @@
     "roanoke_colony_disappearance"
   ],
   "ufo": [
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "rendlesham_forest_incident_001"
   ],
   "military_investigations": [
     "project_blue_book_ufo"
@@ -1145,5 +1149,8 @@
   ],
   "global_cyberattack": [
     "the_conficker_worm"
+  ],
+  "military_witnesses": [
+    "rendlesham_forest_incident_001"
   ]
 }
