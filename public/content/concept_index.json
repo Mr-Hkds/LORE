@@ -74,7 +74,8 @@
     "operation_northwoods_001"
   ],
   "national_security": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "ghostnet_cyber_espionage_network"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -85,7 +86,8 @@
     "cia_mk_ultra_program",
     "project_artichoke_mind_control",
     "operation_gladio",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "ghostnet_cyber_espionage_network"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -998,7 +1000,8 @@
     "operation_gladio"
   ],
   "government_surveillance": [
-    "project_shamrock"
+    "project_shamrock",
+    "ghostnet_cyber_espionage_network"
   ],
   "corporate_complicity": [
     "project_shamrock"
@@ -1108,7 +1111,8 @@
   ],
   "cyber_espionage": [
     "shadow_brokers_leak",
-    "operation_shady_rat"
+    "operation_shady_rat",
+    "ghostnet_cyber_espionage_network"
   ],
   "zero-day_exploits": [
     "shadow_brokers_leak"
@@ -1124,10 +1128,12 @@
     "operation_shady_rat"
   ],
   "data_theft": [
-    "operation_shady_rat"
+    "operation_shady_rat",
+    "ghostnet_cyber_espionage_network"
   ],
   "advanced_persistent_threat": [
-    "operation_shady_rat"
+    "operation_shady_rat",
+    "ghostnet_cyber_espionage_network"
   ],
   "supply_chain_attack": [
     "operation_shady_rat"
@@ -1152,5 +1158,8 @@
   ],
   "military_witnesses": [
     "rendlesham_forest_incident_001"
+  ],
+  "remote_control": [
+    "ghostnet_cyber_espionage_network"
   ]
 }
