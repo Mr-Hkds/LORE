@@ -17,7 +17,8 @@
     "the_taman_shud_case",
     "the_isdal_woman",
     "the_lead_mask_case",
-    "operation_gladio"
+    "operation_gladio",
+    "spontaneous_human_combustion"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -220,7 +221,8 @@
   "secret_societies": [
     "cicada_3301",
     "bilderberg_groups_secret_meetings",
-    "the_cult_of_mithras"
+    "the_cult_of_mithras",
+    "the_thuggee_cult_of_india"
   ],
   "biological_warfare": [
     "unit_731_experiments"
@@ -480,7 +482,8 @@
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
-    "edinburgh_vaults_001"
+    "edinburgh_vaults_001",
+    "spontaneous_human_combustion"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -501,7 +504,8 @@
     "the_wow_signal",
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
-    "rendlesham_forest_incident_001"
+    "rendlesham_forest_incident_001",
+    "spontaneous_human_combustion"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -1212,5 +1216,17 @@
   ],
   "human_intelligence": [
     "operation_ivy_bells_undersea_wiretap"
+  ],
+  "ritual_murder": [
+    "the_thuggee_cult_of_india"
+  ],
+  "religious_fanaticism": [
+    "the_thuggee_cult_of_india"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion"
+  ],
+  "the_wick_effect": [
+    "spontaneous_human_combustion"
   ]
 }
