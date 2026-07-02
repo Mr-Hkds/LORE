@@ -1125,7 +1125,8 @@
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "solarwinds_supply_chain_attack_001"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1167,7 +1168,8 @@
   ],
   "cyber_warfare": [
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "solarwinds_supply_chain_attack_001"
   ],
   "botnet": [
     "conficker_worm"
@@ -1254,5 +1256,14 @@
   ],
   "forensic_mystery": [
     "spontaneous_human_combustion_shc"
+  ],
+  "supply_chain_attack": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
   ]
 }
