@@ -16,7 +16,8 @@
     "the_taman_shud_case",
     "the_isdal_woman",
     "the_lead_mask_case",
-    "operation_gladio"
+    "operation_gladio",
+    "curse_of_tutankhamun"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -563,7 +564,8 @@
     "stockholm_syndrome_001"
   ],
   "mass_hysteria": [
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "curse_of_tutankhamun"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -1084,5 +1086,14 @@
   ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
+  ],
+  "ancient_egyptian_curses": [
+    "curse_of_tutankhamun"
+  ],
+  "superstition": [
+    "curse_of_tutankhamun"
+  ],
+  "archaeology": [
+    "curse_of_tutankhamun"
   ]
 }
