@@ -18,7 +18,8 @@
     "the_lead_mask_case",
     "operation_gladio",
     "curse_of_tutankhamun",
-    "jfk_assassination_001"
+    "jfk_assassination_001",
+    "spontaneous_human_combustion_shc"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -478,7 +479,8 @@
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
-    "edinburgh_vaults_001"
+    "edinburgh_vaults_001",
+    "spontaneous_human_combustion_shc"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -498,7 +500,8 @@
     "the_wow_signal",
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
-    "edinburgh_vaults_001"
+    "edinburgh_vaults_001",
+    "spontaneous_human_combustion_shc"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -901,7 +904,8 @@
     "albert_fish_the_gray_man"
   ],
   "sadism": [
-    "albert_fish_the_gray_man"
+    "albert_fish_the_gray_man",
+    "elizabeth_bathory_blood_countess"
   ],
   "psychopathy": [
     "albert_fish_the_gray_man"
@@ -1226,5 +1230,29 @@
   ],
   "mind_control_claims": [
     "haarp_climate_control_conspiracy"
+  ],
+  "nobility_abuse_of_power": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "torture": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "historical_horror": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "blood_rituals": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "serial_killing": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "unexplained_evil": [
+    "elizabeth_bathory_blood_countess"
+  ],
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
   ]
 }
