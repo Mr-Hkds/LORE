@@ -230,7 +230,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         >
           {/* Logo + wordmark — tap 5× for admin */}
           <div
-            className="flex items-center gap-2.5 cursor-pointer select-none"
+            className="flex items-center gap-2 cursor-pointer select-none animate-fade-in"
             onClick={handleLogoTap}
             title="Tap 5 times to open Admin Console"
           >
@@ -247,6 +247,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               }}
             >
               SevenDescents
+            </span>
+            <div className="w-[1px] h-3 bg-neutral-850" />
+            <span className="font-mono text-[7.5px] tracking-widest text-[#9E7B4C] uppercase whitespace-nowrap">
+              {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </span>
           </div>
 
@@ -319,32 +323,30 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <h1
             className="font-serif italic leading-none tracking-tight"
             style={{
-              fontSize: 'clamp(2rem, 6.5vw, 3.6rem)',
+              fontSize: 'clamp(2.2rem, 6.8vw, 3.8rem)',
               fontWeight: 400,
               color: fg,
               letterSpacing: '-0.04em',
-              lineHeight: 0.95,
-              marginBottom: '48px',
+              lineHeight: 1.0,
+              marginBottom: '32px',
             }}
           >
-            What do you want<br className="hidden sm:inline" /> to explore today?
+            Anomalous Records &<br />Documented Shadows
           </h1>
 
           {/* Subtitle */}
           <p
             className="font-serif leading-relaxed"
             style={{
-              fontSize: 'clamp(1.05rem, 2.2vw, 1.22rem)',
+              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
               fontWeight: 400,
-              lineHeight: 1.85,
-              color: fg,
-              opacity: 0.88, // Increased opacity for better mobile contrast
-              maxWidth: '42ch',
-              marginBottom: '64px',
+              lineHeight: 1.75,
+              color: 'rgba(212, 207, 199, 0.75)',
+              maxWidth: '52ch',
+              marginBottom: '56px',
             }}
           >
-            Seven layers of real, documented knowledge.<br />
-            Each one darker than the last.
+            A curated digital catalog of historical conspiracies, unresolved disappearances, and dark psychological experiments. Unveiled progressively across seven layers of depth.
           </p>
 
 
@@ -872,16 +874,29 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
         </div>
 
-        <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase transition-colors duration-500" style={{ borderColor: ru, color: mu }}>
-          <p className="opacity-60">
-            © {new Date().getFullYear()} SEVENDESCENTS ·{' '}
-            <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
-              CONSOLE
-            </a>
+        <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
+          {/* Disclaimer row */}
+          <p className="text-[8px] font-mono tracking-[0.16em] uppercase opacity-45 leading-relaxed text-center sm:text-left">
+            Disclaimer: The material compiled in SevenDescents is curated for historical, psychological, and investigative research. The archives document anomalous, classified, and extreme human events. User discretion is advised.
           </p>
-          <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-            <span className="mr-lotus-premium transition-all duration-300">SYS_OPERATOR // MR. LOTUS</span>
-          </p>
+          
+          {/* Bottom meta row */}
+          <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
+            <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
+              <span className="opacity-60">© {new Date().getFullYear()} SEVENDESCENTS</span>
+              <span className="opacity-30">|</span>
+              <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
+                CONSOLE
+              </a>
+              <span className="opacity-30">|</span>
+              <span className="text-[#9E7B4C]/80">VERSION 2.4.1</span>
+              <span className="opacity-30">|</span>
+              <span className="text-neutral-500">TEST ACCESS: ACTIVE</span>
+            </div>
+            <div className="flex items-center gap-2 opacity-95">
+              <span>SYS_OPERATOR // MR. LOTUS</span>
+            </div>
+          </div>
         </footer>
       </main>
     </div>

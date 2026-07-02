@@ -1309,6 +1309,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       }))
     });
     setEditFormActiveLayer(1);
+    setActiveTab('catalog');
   };
 
   const handleCreateNewStory = () => {

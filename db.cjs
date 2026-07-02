@@ -497,37 +497,49 @@ async function seed() {
   }
   const localStoriesCount = (data && Array.isArray(data.stories)) ? data.stories.length : 0;
 
-  const resCount = await client.execute('SELECT COUNT(*) as count FROM stories');
-  const storiesCount = resCount.rows[0]?.count || 0;
-
-  if (storiesCount === 0 || storiesCount < localStoriesCount) {
+  if (data && Array.isArray(data.stories)) {
     try {
-      if (data && Array.isArray(data.stories)) {
-        console.log(`Synchronizing database with ${data.stories.length} stories from stories.json...`);
-        const batchStmts = data.stories.map(s => ({
-          sql: `INSERT OR REPLACE INTO stories (
-            story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          args: [
-            s.story_id,
-            s.title,
-            s.category,
-            s.hook,
-            JSON.stringify(s.concepts || []),
-            s.severity,
-            s.hero_image || null,
-            s.added_date || null,
-            s.draft ? 1 : 0,
-            JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
-            JSON.stringify(s.evidence_links || []),
-            JSON.stringify(s.connections || []),
-            JSON.stringify(s.layers || [])
-          ]
-        }));
-        await client.batch(batchStmts, "write");
+      console.log(`Aligning database with ${data.stories.length} stories from stories.json...`);
+      const batchStmts = data.stories.map(s => ({
+        sql: `INSERT OR REPLACE INTO stories (
+          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        args: [
+          s.story_id,
+          s.title,
+          s.category,
+          s.hook,
+          JSON.stringify(s.concepts || []),
+          s.severity,
+          s.hero_image || null,
+          s.added_date || null,
+          s.draft ? 1 : 0,
+          JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
+          JSON.stringify(s.evidence_links || []),
+          JSON.stringify(s.connections || []),
+          JSON.stringify(s.layers || [])
+        ]
+      }));
+
+      // Delete any extra stories from database that are not present in stories.json
+      const idsInJson = data.stories.map(s => s.story_id);
+      if (idsInJson.length > 0) {
+        const placeholders = idsInJson.map(() => '?').join(',');
+        batchStmts.push({
+          sql: `DELETE FROM stories WHERE story_id NOT IN (${placeholders})`,
+          args: idsInJson
+        });
+      } else {
+        batchStmts.push({
+          sql: `DELETE FROM stories`,
+          args: []
+        });
       }
+
+      await client.batch(batchStmts, "write");
+      console.log(`Database stories alignment complete.`);
     } catch (e) {
-      console.error('Failed to seed/sync stories:', e);
+      console.error('Failed to align stories in database:', e);
     }
   }
 

@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle, ShieldAlert, Cpu, Terminal, Unlock } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { Fingerprint, Eye, Skull, HelpCircle, Terminal, Unlock } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -434,13 +434,7 @@ export default function TodayInShadows() {
   const [animatingReaction, setAnimatingReaction] = useState(null);
 
   // ── Decryption States ──────────────────────────────────────────────────
-  const [isDecrypted, setIsDecrypted] = useState(false);
-  const [clickedNodes, setClickedNodes] = useState([]);
-  const [isDecrypting, setIsDecrypting] = useState(false);
-  const [decryptProgress, setDecryptProgress] = useState(0);
-  const [scramblingText, setScramblingText] = useState('0x000000');
-  const [gridData, setGridData] = useState([]);
-  const [targetNodes, setTargetNodes] = useState([]);
+  const [isDecrypted] = useState(true);
 
   const dateKey = useMemo(() => new Date().toLocaleDateString('en-CA'), []);
   const dayOfWeek = new Date().getDay();
@@ -456,46 +450,7 @@ export default function TodayInShadows() {
     return WIKIPEDIA_DOSSIERS[hash % WIKIPEDIA_DOSSIERS.length];
   }, [dateKey]);
 
-  // Initialize interactive hex grid memory nodes
-  useEffect(() => {
-    const chars = '0123456789ABCDEF';
-    const grid = [];
-    for (let i = 0; i < 25; i++) {
-      const hex = chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)];
-      grid.push({ index: i, value: hex });
-    }
-    setGridData(grid);
-
-    // Pick 3 random cells to be the targets
-    const targets = [];
-    while (targets.length < 3) {
-      const idx = Math.floor(Math.random() * 25);
-      if (!targets.includes(idx)) targets.push(idx);
-    }
-    setTargetNodes(targets);
-
-    // Check sessionStorage to bypass decrypt if already resolved today
-    const solved = sessionStorage.getItem(`lore:dossier:decrypted:${dateKey}`);
-    if (solved === 'true') {
-      setIsDecrypted(true);
-    }
-  }, [dateKey]);
-
-  // Handle flickering effect on non-clicked hex blocks
-  useEffect(() => {
-    if (isDecrypting || isDecrypted) return;
-    const interval = setInterval(() => {
-      const chars = '0123456789ABCDEF';
-      setGridData(prev => prev.map(cell => {
-        // Flicker 15% of cells
-        if (Math.random() > 0.85 && !targetNodes.includes(cell.index) && !clickedNodes.includes(cell.index)) {
-          return { ...cell, value: chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)] };
-        }
-        return cell;
-      }));
-    }, 400);
-    return () => clearInterval(interval);
-  }, [isDecrypting, isDecrypted, targetNodes, clickedNodes]);
+  // Decryption grid removed. Dossier decrypted directly.
 
   // Load dossier and fetch Wikipedia thumbnail/details dynamically
   useEffect(() => {
@@ -651,48 +606,7 @@ export default function TodayInShadows() {
     setUserReaction(stored || null);
   }, [dossier, dateKey]);
 
-  // Trigger decryption progress bar animation
-  const triggerDecryption = useCallback(() => {
-    setIsDecrypting(true);
-    let progress = 0;
-    const progressInterval = setInterval(() => {
-      progress += 4;
-      setDecryptProgress(progress);
-      
-      // Randomly scramble characters
-      const hackChars = '&$%*#@!X?_#@[]%/{}<>';
-      let text = '0x';
-      for (let i = 0; i < 6; i++) {
-        text += hackChars[Math.floor(Math.random() * hackChars.length)];
-      }
-      setScramblingText(text);
-
-      if (progress >= 100) {
-        clearInterval(progressInterval);
-        setIsDecrypted(true);
-        setIsDecrypting(false);
-        sessionStorage.setItem(`lore:dossier:decrypted:${dateKey}`, 'true');
-      }
-    }, 45);
-  }, [dateKey]);
-
-  const handleNodeClick = (index) => {
-    if (isDecrypting || isDecrypted) return;
-    if (clickedNodes.includes(index)) return;
-
-    if (targetNodes.includes(index)) {
-      const nextClicked = [...clickedNodes, index];
-      setClickedNodes(nextClicked);
-      if (nextClicked.length === 3) {
-        triggerDecryption();
-      }
-    } else {
-      // Glitch reset on wrong click
-      setClickedNodes([]);
-      setScramblingText('INT_ERR_SYS_FLUSH');
-      setTimeout(() => setScramblingText('0x000000'), 500);
-    }
-  };
+  // Decryption event handlers removed.
 
   const handleReact = async (type) => {
     if (!dossier) return;
@@ -802,87 +716,6 @@ export default function TodayInShadows() {
           boxShadow: '0 12px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.03)',
         }}
       >
-        {/* ── 1. ENCRYPTED TERMINAL DECRYPTOR CONSOLE ── */}
-        {!isDecrypted && (
-          <div className="p-6 flex flex-col items-center justify-center flex-grow font-mono text-neutral-400 select-none min-h-[350px]">
-            {/* Header Status Bar */}
-            <div className="w-full flex items-center justify-between border-b border-neutral-900 pb-3 mb-6">
-              <div className="flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-[#9E7B4C] animate-pulse" />
-                <span className="text-[10px] tracking-wider font-bold text-[#EDE8DF] uppercase">
-                  {isDecrypting ? 'DECRYPTING ARCHIVE...' : 'RESTRICTED FREQUENCY INBOUND'}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-600 animate-ping" />
-                <span className="text-[8px] text-red-500 uppercase tracking-widest font-bold">SIGNAL LOCKED</span>
-              </div>
-            </div>
-
-            {/* Scrambler display */}
-            <div className="w-full bg-[#0a0807] border border-neutral-900/60 p-4 rounded-lg text-center mb-6 flex flex-col justify-center items-center h-18 select-none">
-              <span className="text-xs text-neutral-500 tracking-[0.2em] uppercase mb-1">Decryption Register</span>
-              <span className="text-base text-[#9E7B4C] font-semibold tracking-widest animate-pulse font-mono">
-                {scramblingText}
-              </span>
-            </div>
-
-            {/* 5x5 Matrix Hex Grid */}
-            <div className="grid grid-cols-5 gap-2 max-w-[280px] w-full mb-6 relative">
-              {gridData.map((cell) => {
-                const isTarget = targetNodes.includes(cell.index);
-                const isClicked = clickedNodes.includes(cell.index);
-                const isBlinking = isTarget && !isClicked && (Math.floor(Date.now() / 400) % 2 === 0);
-
-                let cellBg = 'bg-[#1a1715]/40';
-                let cellBorder = 'border-neutral-900';
-                let cellText = 'text-neutral-500';
-
-                if (isClicked) {
-                  cellBg = 'bg-[#9E7B4C]/10';
-                  cellBorder = 'border-[#9E7B4C]/50';
-                  cellText = 'text-[#9E7B4C] font-bold';
-                } else if (isBlinking && !isDecrypting) {
-                  cellBorder = 'border-[#9E7B4C]/25';
-                  cellText = 'text-[#9E7B4C]/80';
-                }
-
-                return (
-                  <button
-                    key={cell.index}
-                    onClick={() => handleNodeClick(cell.index)}
-                    disabled={isDecrypting}
-                    className={`h-10 rounded border flex items-center justify-center text-[10px] transition-all active:scale-95 duration-200 cursor-pointer font-bold ${cellBg} ${cellBorder} ${cellText} ${!isDecrypting && 'hover:bg-neutral-900/40 hover:border-[#9E7B4C]/20'}`}
-                  >
-                    {isClicked ? '✓' : cell.value}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Instruction Footer or Progress Bar */}
-            {isDecrypting ? (
-              <div className="w-full max-w-[280px] flex flex-col gap-2">
-                <div className="h-1 bg-neutral-900 rounded-full w-full overflow-hidden relative">
-                  <div
-                    className="h-full bg-[#9E7B4C] transition-all duration-75"
-                    style={{ width: `${decryptProgress}%` }}
-                  />
-                </div>
-                <div className="flex justify-between text-[8px] tracking-wider uppercase text-neutral-500">
-                  <span>bypass in progress</span>
-                  <span>{decryptProgress}%</span>
-                </div>
-              </div>
-            ) : (
-              <div className="text-center text-[8.5px] max-w-xs text-neutral-500 tracking-wider flex items-center gap-1.5 uppercase leading-normal">
-                <Cpu className="w-3 h-3 text-[#9E7B4C]" />
-                <span>Locate & click 3 blinking signal nodes to decrypt daily intelligence dispatch</span>
-              </div>
-            )}
-          </div>
-        )}
-
         {/* ── 2. DECRYPTED DAILY DOSSIER CONTENT ── */}
         {isDecrypted && (
           <>
