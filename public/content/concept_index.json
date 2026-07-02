@@ -45,7 +45,8 @@
     "rendlesham_forest_incident_001",
     "bilderberg_groups_secret_meetings",
     "operation_ivy_bells_undersea_wiretap",
-    "operation_mockingbird_cia_media"
+    "operation_mockingbird_cia_media",
+    "moonlight_maze_cyber_espionage"
   ],
   "espionage": [
     "uwe_barschel",
@@ -970,7 +971,8 @@
     "echelon_global_surveillance"
   ],
   "cold_war_legacy": [
-    "echelon_global_surveillance"
+    "echelon_global_surveillance",
+    "moonlight_maze_cyber_espionage"
   ],
   "mass_interception": [
     "echelon_global_surveillance"
@@ -1129,7 +1131,8 @@
   "cyber_espionage": [
     "shadow_brokers_leak",
     "operation_shady_rat",
-    "ghostnet_cyber_espionage_network"
+    "ghostnet_cyber_espionage_network",
+    "moonlight_maze_cyber_espionage"
   ],
   "zero-day_exploits": [
     "shadow_brokers_leak"
@@ -1142,12 +1145,14 @@
     "shadow_brokers_leak"
   ],
   "state_sponsored_hacking": [
-    "operation_shady_rat"
+    "operation_shady_rat",
+    "moonlight_maze_cyber_espionage"
   ],
   "data_theft": [
     "operation_shady_rat",
     "ghostnet_cyber_espionage_network",
-    "operation_ivy_bells_undersea_wiretap"
+    "operation_ivy_bells_undersea_wiretap",
+    "moonlight_maze_cyber_espionage"
   ],
   "advanced_persistent_threat": [
     "operation_shady_rat",
