@@ -89,7 +89,7 @@ function downloadImage(url, destPath) {
   });
 }
 
-// Fetch from Wikipedia or fall back to Pollinations AI to generate and save a story cover image
+// Fetch from Wikipedia to save a story cover image, or return null if none exists
 async function generateAndSaveImage(storyId, topic, apiKey) {
   const imagesDir = path.join(__dirname, 'public', 'content', 'images');
   if (!fs.existsSync(imagesDir)) {
@@ -98,70 +98,24 @@ async function generateAndSaveImage(storyId, topic, apiKey) {
   const localPath = path.join(imagesDir, `${storyId}.jpg`);
   const relativePath = `/content/images/${storyId}.jpg`;
 
-  let hasPerfectPhoto = false;
   try {
-    const checkPrompt = `For the topic "${topic}", does there exist a highly iconic, recognizable, and visually compelling real photograph of the event (e.g. the 11 pipes of Burari, or the slashed tent of Dyatlov Pass)?
-Reply with YES only if such a specific, famous, iconic, and visually striking real photo exists.
-Reply with NO if there is no such iconic photo (e.g., if there are only generic drawings, portraits of individuals, maps, diagrams, or no photos at all).
-Output YES or NO only. Do not include markdown or explanations.`;
-    
-    const decisionText = await callPollinationsText(checkPrompt, "You are a decision bot. Output YES or NO only.");
-    const decision = decisionText?.trim()?.toUpperCase() || 'NO';
-    hasPerfectPhoto = decision.includes('YES');
-    console.log(`[IMAGE ENGINE] Pollinations decision on perfect real photo for "${topic}": ${decision}`);
-  } catch (err) {
-    console.warn(`[IMAGE ENGINE] Failed to check perfect photo status for "${topic}":`, err.message);
-  }
-
-  // Step 1: Try Wikipedia first if iconic real photo exists
-  if (hasPerfectPhoto) {
-    try {
-      const imgRes = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&generator=search&gsrsearch=${encodeURIComponent(topic)}&gsrlimit=1&origin=*`);
-      const pages = imgRes.query?.pages;
-      if (pages) {
-        const firstPageId = Object.keys(pages)[0];
-        const imageUrl = pages[firstPageId]?.thumbnail?.source;
-        if (imageUrl) {
-          console.log(`[IMAGE ENGINE] Downloading Wikipedia image for ${topic}...`);
-          await downloadImage(imageUrl, localPath);
-          return relativePath;
-        }
+    console.log(`[IMAGE ENGINE] Searching Wikipedia for an iconic image for "${topic}"...`);
+    const imgRes = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&generator=search&gsrsearch=${encodeURIComponent(topic)}&gsrlimit=1&origin=*`);
+    const pages = imgRes.query?.pages;
+    if (pages) {
+      const firstPageId = Object.keys(pages)[0];
+      const imageUrl = pages[firstPageId]?.thumbnail?.source;
+      if (imageUrl) {
+        console.log(`[IMAGE ENGINE] Downloading Wikipedia image for "${topic}"...`);
+        await downloadImage(imageUrl, localPath);
+        return relativePath;
       }
-    } catch (err) {
-      console.warn(`[IMAGE ENGINE] Wikipedia image search failed for ${topic}:`, err.message);
     }
-  }
-
-  // Step 2: Fallback to Pollinations AI
-  console.log(`[IMAGE ENGINE] No perfect real photo available for ${topic}. Generating AI cover image...`);
-  try {
-    const promptInstructions = `Create a highly descriptive, visually compelling image generation prompt for the dark historical/psychological topic: "${topic}".
-This image will be the main cover art of a dark mystery/history dossier. Focus on a concrete, atmospheric, and highly symbolic visual composition representing the topic.
-Describe a cinematic 35mm film photograph with low-key chiaroscuro lighting, deep evocative shadows, subtle film grain, muted realistic colors, and authentic textures.
-Highlight a single, mysterious focal point in a realistic documentary style.
-Absolutely FORBIDDEN styling: plastic smooth surfaces, oversaturated colors, neon glow, generic digital art, 3D illustrations, airbrushing, or digital smoothing.
-Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
-    
-    let aiPrompt = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
-    try {
-      const generated = await callPollinationsText(promptInstructions, "You are an expert image prompt engineer.");
-      if (generated) {
-        aiPrompt = generated;
-      }
-    } catch (err) {
-      console.warn(`[IMAGE ENGINE] Failed to generate AI prompt for "${topic}":`, err.message);
-    }
-    
-    aiPrompt = aiPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
-    
-    const enhancedPrompt = `${aiPrompt.trim().replace(/\.$/, '')}, cinematic 35mm photograph, documentary photojournalism style, low-key chiaroscuro lighting, deep atmospheric shadows, subtle film grain, muted colors, authentic textures, dark history archive aesthetic, shot on Leica M6, realistic details`;
-    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
-    console.log(`[IMAGE ENGINE] Downloading Pollinations AI image from: ${pollinationsUrl}`);
-    await downloadImage(pollinationsUrl, localPath);
-    return relativePath;
+    console.log(`[IMAGE ENGINE] No Wikipedia cover image found for "${topic}". Using typographic fallback.`);
+    return null;
   } catch (err) {
-    console.error(`[IMAGE ENGINE] AI Image generation failed for ${topic}:`, err.message);
-    return `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
+    console.warn(`[IMAGE ENGINE] Wikipedia image search failed for "${topic}":`, err.message);
+    return null;
   }
 }
 

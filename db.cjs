@@ -487,20 +487,21 @@ async function seed() {
   const RECOMMENDATIONS_FILE = path.join(__dirname, 'public', 'content', 'recommendations.json');
   const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 
+  let data = null;
+  try {
+    data = require('./public/content/stories.json');
+  } catch (err) {
+    if (fs.existsSync(STORIES_FILE)) {
+      data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+    }
+  }
+  const localStoriesCount = (data && Array.isArray(data.stories)) ? data.stories.length : 0;
+
   const resCount = await client.execute('SELECT COUNT(*) as count FROM stories');
   const storiesCount = resCount.rows[0]?.count || 0;
 
-  if (storiesCount === 0) {
+  if (storiesCount === 0 || storiesCount < localStoriesCount) {
     try {
-      let data = null;
-      try {
-        data = require('./public/content/stories.json');
-      } catch (err) {
-        if (fs.existsSync(STORIES_FILE)) {
-          data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
-        }
-      }
-
       if (data && Array.isArray(data.stories)) {
         console.log(`Synchronizing database with ${data.stories.length} stories from stories.json...`);
         const batchStmts = data.stories.map(s => ({

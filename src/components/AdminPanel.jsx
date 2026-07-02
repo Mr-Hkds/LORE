@@ -433,10 +433,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [wikiPreviewImg, setWikiPreviewImg] = useState(null);
   const [wikiPreviewTitle, setWikiPreviewTitle] = useState('');
 
-  // AI image preview engine
-  const [aiImagePreviewState, setAiImagePreviewState] = useState('idle'); // idle | loading | ready
-  const [aiImagePreviewUrl, setAiImagePreviewUrl] = useState(null);
-
   // Database Console states
   const [dbSqlQuery, setDbSqlQuery] = useState('SELECT story_id, title, category, severity, draft FROM stories LIMIT 10;');
   const [dbQueryResults, setDbQueryResults] = useState(null);
@@ -1641,48 +1637,6 @@ ${aiPromptTopic}`;
       setEditForm(prev => ({ ...prev, hero_image: wikiPreviewImg, image_query: wikiSearchTerm || prev.image_query }));
       setWikiPreviewState('idle');
       setWikiPreviewImg(null);
-    }
-  };
-
-  // ── AI Image Preview Generator ───────────────────────────────────────────
-  const handleGenerateAiImagePreview = async () => {
-    setAiImagePreviewState('loading');
-    setAiImagePreviewUrl(null);
-    try {
-      let enhanced = '';
-      if (editForm.custom_image_prompt && editForm.custom_image_prompt.trim().length > 0) {
-        enhanced = editForm.custom_image_prompt.trim();
-      } else {
-        const subject = editForm.title || editForm.story_id || 'mysterious historical event';
-        const cat = editForm.category || '';
-        const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
-        if (isDocumentType) {
-          enhanced = `A photocopied declassified government document about ${subject}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
-        } else {
-          enhanced = `A vintage forensic archive photo related to ${subject}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
-        }
-      }
-
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=800&height=600&nologo=true&private=true&model=flux&seed=${Date.now()}`;
-      // Preload to check it resolves
-      await new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = url;
-      });
-      setAiImagePreviewUrl(url);
-      setAiImagePreviewState('ready');
-    } catch {
-      setAiImagePreviewState('idle');
-    }
-  };
-
-  const handleApproveAiImage = () => {
-    if (aiImagePreviewUrl) {
-      setEditForm(prev => ({ ...prev, hero_image: aiImagePreviewUrl }));
-      setAiImagePreviewState('idle');
-      setAiImagePreviewUrl(null);
     }
   };
 
@@ -3079,58 +3033,6 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                           placeholder="Wikipedia article title (e.g. Project MKUltra)"
                         />
                       </div>
-                    </div>
-
-                    {/* AI Image Generator */}
-                    <div className="p-3 rounded-lg border border-neutral-800/60 bg-black/30 space-y-2">
-                      <label className="block text-[9px] font-mono tracking-wider uppercase text-[#9E7B4C] mb-1">✦ AI Image Generator (Flux)</label>
-                      <p className="text-[8px] text-[#6A6560] font-mono">// Generates a dark atmospheric image using Flux AI. Leave empty to use category-based defaults.</p>
-                      
-                      <div>
-                        <label className="block text-[8px] font-mono tracking-wider uppercase text-[#6A6560] mb-1">Custom Image Prompt Override</label>
-                        <textarea
-                          value={editForm.custom_image_prompt || ''}
-                          onChange={(e) => setEditForm(prev => ({ ...prev, custom_image_prompt: e.target.value }))}
-                          rows={2}
-                          className="w-full px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none resize-none font-sans"
-                          placeholder="e.g. Vintage 1970s grainy Polaroid scan of a mysterious government base, heavy analog noise, redacted labels..."
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={handleGenerateAiImagePreview}
-                        disabled={aiImagePreviewState === 'loading'}
-                        className="px-3 py-1.5 bg-violet-950/30 hover:bg-violet-900/40 border border-violet-800/40 text-violet-300 text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer disabled:opacity-50"
-                      >
-                        {aiImagePreviewState === 'loading' ? 'Generating...' : '✦ Generate AI Image Preview'}
-                      </button>
-
-                      {aiImagePreviewState === 'ready' && aiImagePreviewUrl && (
-                        <div className="flex gap-3 items-center p-2.5 bg-neutral-950/60 rounded-lg border border-violet-900/40 mt-2">
-                          <img src={aiImagePreviewUrl} alt="AI generated" className="w-16 h-14 object-cover rounded border border-neutral-800 bg-black flex-shrink-0" />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-[8.5px] font-mono text-violet-400 uppercase tracking-wider mb-0.5">✦ AI Image Ready</p>
-                            <p className="text-[7.5px] text-[#6A6560] font-mono">Flux model — dark atmospheric style</p>
-                          </div>
-                          <div className="flex flex-col gap-1">
-                            <button
-                              type="button"
-                              onClick={handleApproveAiImage}
-                              className="px-3 py-1 bg-violet-900/30 hover:bg-violet-800/40 border border-violet-700/50 text-violet-300 text-[9px] font-mono tracking-widest uppercase rounded transition-all cursor-pointer"
-                            >
-                              Use This
-                            </button>
-                            <button
-                              type="button"
-                              onClick={handleGenerateAiImagePreview}
-                              className="px-3 py-1 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-neutral-300 text-[9px] font-mono uppercase rounded transition-all cursor-pointer"
-                            >
-                              Regenerate
-                            </button>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
 

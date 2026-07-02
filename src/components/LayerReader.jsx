@@ -57,6 +57,15 @@ export default function LayerReader({
     isCustom: false
   });
 
+  const closeTimeoutRef = useRef(null);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
+
   // Auto-close lookup popup on clicking outside
   useEffect(() => {
     if (!lookup.isOpen) return;
@@ -158,14 +167,30 @@ export default function LayerReader({
           key={matchIndex}
           onClick={(e) => {
             e.stopPropagation();
+            if (closeTimeoutRef.current) {
+              clearTimeout(closeTimeoutRef.current);
+              closeTimeoutRef.current = null;
+            }
             handleWordLookup(matchText, lowerWord, e.clientX, e.clientY);
+          }}
+          onMouseEnter={(e) => {
+            if (closeTimeoutRef.current) {
+              clearTimeout(closeTimeoutRef.current);
+              closeTimeoutRef.current = null;
+            }
+            handleWordLookup(matchText, lowerWord, e.clientX, e.clientY);
+          }}
+          onMouseLeave={() => {
+            closeTimeoutRef.current = setTimeout(() => {
+              setLookup(prev => ({ ...prev, isOpen: false }));
+            }, 300);
           }}
           className="cursor-help font-medium border-b border-dashed transition-all hover:opacity-85 select-none"
           style={{
             borderColor: 'rgba(158, 123, 76, 0.75)',
             color: '#9E7B4C',
           }}
-          title={`Click to view simple definition of "${matchText}"`}
+          title={`Hover or click to view definition of "${matchText}"`}
         >
           {matchText}
         </span>
@@ -725,10 +750,20 @@ export default function LayerReader({
         </div>
       )}
 
-      {/* Floating Look-Up Popover Dialog */}
       {lookup.isOpen && (
         <div
           onClick={(e) => e.stopPropagation()}
+          onMouseEnter={() => {
+            if (closeTimeoutRef.current) {
+              clearTimeout(closeTimeoutRef.current);
+              closeTimeoutRef.current = null;
+            }
+          }}
+          onMouseLeave={() => {
+            closeTimeoutRef.current = setTimeout(() => {
+              setLookup(prev => ({ ...prev, isOpen: false }));
+            }, 200);
+          }}
           className="fixed z-[999] w-72 p-4 rounded-xl border bg-[#0F0D0A]/95 backdrop-blur-md text-left transition-all duration-300 animate-scale-up"
           style={{
             left: `${Math.min(window.innerWidth - 300, Math.max(16, lookup.x - 144))}px`,

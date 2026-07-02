@@ -1,7 +1,7 @@
 // ApprovalCard — premium approval UX with local preview state,
 // step indicator, instant publish gate, and loading shimmer.
 import { useState, useRef, useEffect } from 'react';
-import { Upload, Sparkles, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight, Clipboard } from 'lucide-react';
+import { Upload, Link as LinkIcon, Check, AlertCircle, Edit, ChevronRight, Clipboard } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const PLACEHOLDER_URL = 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
@@ -35,9 +35,8 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
     ];
     return gradients[hash % gradients.length];
   };
-  const [aiPrompt, setAiPrompt]       = useState('');
   const [loading, setLoading]         = useState(false);
-  const [loadingMethod, setLoadingMethod] = useState(null); // 'upload' | 'ai' | 'url'
+  const [loadingMethod, setLoadingMethod] = useState(null); // 'upload' | 'url'
   const [error, setError]             = useState('');
   const [publishing, setPublishing]   = useState(false);
   const fileInputRef = useRef(null);
@@ -92,30 +91,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
     });
   };
 
-  const handleGenerateAiImage = () => {
-    setLoadingMethod('ai');
-    
-    const cat = story.category || '';
-    const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
-    
-    let enhanced;
-    
-    if (isDocumentType) {
-      const defaultBase = `A photocopied declassified government document about ${story.title}`;
-      const base = aiPrompt.trim() || defaultBase;
-      enhanced = `${base.replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture, raw evidence photo`;
-    } else {
-      const defaultBase = `A vintage forensic archive photo related to ${story.title}`;
-      const base = aiPrompt.trim() || defaultBase;
-      enhanced = `${base.replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
-    }
 
-    const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhanced)}?width=800&height=600&nologo=true&private=true&model=flux`;
-    saveAndPreview(async () => {
-      await onSaveImage(story.story_id, pollinationsUrl);
-      setPreviewUrl(pollinationsUrl);
-    });
-  };
 
   const handlePublish = async () => {
     if (!previewUrl) return;
@@ -204,7 +180,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                   <div className="w-full h-full absolute inset-0 animate-pulse" style={{ background: 'linear-gradient(90deg, #0D0B09, rgba(158,123,76,0.08), #0D0B09)' }} />
                   <span className="relative text-[9px] font-mono uppercase tracking-widest" style={{ color: 'rgba(158,123,76,0.6)' }}>
-                    {loadingMethod === 'ai' ? 'Generating with Flux AI...' : 'Processing...'}
+                    Processing...
                   </span>
                 </div>
               ) : (
@@ -289,45 +265,6 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
             </div>
           )}
 
-          {/* ─── Option 1: Flux AI ─── */}
-          <div
-            className="rounded-xl p-4 space-y-3"
-            style={{ background: 'rgba(99,102,241,0.05)', border: '1px solid rgba(99,102,241,0.15)' }}
-          >
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5" style={{ color: '#818CF8' }} />
-              <span className="text-[10px] font-semibold" style={{ color: '#EDE8DF' }}>Flux AI Generation</span>
-              <span className="text-[8px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: 'rgba(99,102,241,0.15)', color: '#818CF8' }}>Recommended</span>
-            </div>
-            <textarea
-              value={aiPrompt}
-              onChange={e => setAiPrompt(e.target.value)}
-              placeholder={`Defaults to: "Cinematic dark photo of ${story.title?.slice(0, 40)}..."`}
-              rows={2}
-              className="w-full rounded-lg px-3 py-2 text-xs resize-none focus:outline-none font-sans"
-              style={{
-                background: 'rgba(0,0,0,0.3)',
-                border: '1px solid rgba(99,102,241,0.2)',
-                color: '#EDE8DF',
-                caretColor: '#818CF8',
-              }}
-              onFocus={e => { e.target.style.borderColor = 'rgba(99,102,241,0.5)'; }}
-              onBlur={e  => { e.target.style.borderColor = 'rgba(99,102,241,0.2)'; }}
-            />
-            <button
-              disabled={loading}
-              onClick={handleGenerateAiImage}
-              className="w-full py-2 rounded-lg text-[9px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 cursor-pointer disabled:opacity-40 flex items-center justify-center gap-1.5"
-              style={{
-                background: 'rgba(99,102,241,0.15)',
-                border: '1px solid rgba(99,102,241,0.3)',
-                color: '#818CF8',
-              }}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              {loading && loadingMethod === 'ai' ? 'Generating…' : 'Generate Cover'}
-            </button>
-          </div>
 
           {/* ─── Option 2: File upload ─── */}
           <div
