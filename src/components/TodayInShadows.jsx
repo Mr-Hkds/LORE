@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle } from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Fingerprint, Eye, Skull, HelpCircle, ShieldAlert, Cpu, Terminal, Unlock } from 'lucide-react';
 import LoreMark from './LoreMark';
 
 const DAY_THEMES = {
@@ -12,101 +12,297 @@ const DAY_THEMES = {
   6: { name: 'Sinister Saturday' }
 };
 
-const STATIC_FALLBACKS = {
-  0: {
+const WIKIPEDIA_DOSSIERS = [
+  {
+    title: 'Wow! signal',
+    year: '1977',
+    text: 'In August 1977, a strong narrowband radio signal was received by Ohio State University\'s Big Ear radio telescope. The signal bore expected hallmarks of extraterrestrial origin.',
+    wikiQuery: 'Wow! signal',
+    theories: [
+      { name: 'Extraterrestrial Source', explanation: 'A highly focused transmission sent by an advanced civilization near the Sagittarius constellation.' },
+      { name: 'Comet Outgassing', explanation: 'Hydrogen gas clouds surrounding passing comets 266P/Christensen and P/2008 Y2 generated the radio spike.' },
+      { name: 'Satellite Bleed', explanation: 'A secret military satellite transmitting on a protected frequency accidentally bounced off space debris.' }
+    ],
+    suspicionLabel: 'Extraterrestrial Probability',
+    defaultSuspicion: 89
+  },
+  {
     title: 'Project MKUltra',
     year: '1953',
-    text: '1953 mein CIA ne ek secret mind control project start kiya tha. Bina consent ke logo par LSD, hypnosis aur sensory deprivation test kiye gaye.',
+    text: 'A highly classified CIA mind-control project started in 1953, exposing unwitting citizens to chemical agents, sensory deprivation, and hypnosis.',
     wikiQuery: 'Project MKUltra',
     theories: [
-      { name: 'Mind Control Success', explanation: 'Suno to, kuch logs sochte hain ki CIA ne actually mind control achieve kar liya tha aur aaj bhi secret agents trigger words se activate hote hain.' },
-      { name: 'Mass Drug Tests', explanation: 'Yeh theory kehti hai ki MKUltra sirf ek pilot project tha, aur actual chemicals ko local water supply ya public areas mein test kiya gaya tha.' },
-      { name: 'Covert Brainwashing', explanation: 'Kaha jata hai ki project band nahi hua, balki use modern digital methods aur sub-audible frequencies mein convert kar diya gaya.' }
+      { name: 'Subproject 68', explanation: 'Dr. Ewen Cameron kept patients in drug-induced comas for weeks to reprogram their subconscious minds.' },
+      { name: 'Midnight Climax', explanation: 'CIA safehouses used operatives to secretly dose clients with LSD to study behavioral effects.' },
+      { name: 'Continuous Operation', explanation: 'The program was officially shut down, but some believe it transitioned into sub-audible digital waves.' }
     ],
     suspicionLabel: 'Government Coverup Index',
-    defaultSuspicion: 92
-  },
-  1: {
-    title: 'Diatlov Pass Incident',
-    year: '1959',
-    text: '1959 mein Russian Urals mein 9 experienced hikers ajeeb halat mein mare gaye. Unka tent andar se fata tha aur bodies par radiation ke traces mile.',
-    wikiQuery: 'Diatlov Pass incident',
-    theories: [
-      { name: 'Infrasound Hysteria', explanation: 'Mausam ke vajah se wind ne infrasound create kiya, jisne hikers ke dimaag mein panic daal diya aur woh bina kapdo ke baahar bhaag nikle.' },
-      { name: 'Soviet Weapons Test', explanation: 'Pass ke paas koi secret military testing chal rahi thi, aur wahan ke radioactive fallout ya kisi shockwave ne unhe maar diya.' },
-      { name: 'Indigenous Mansi Attack', explanation: 'Local tribes ne apne sacred mountain ko defend karne ke liye hikers par secretly aisi techniques se war kiya jisse koi external wound na dikhe.' }
-    ],
-    suspicionLabel: 'Supernatural Odds',
-    defaultSuspicion: 85
-  },
-  2: {
-    title: 'Klaus Fuchs Espionage',
-    year: '1950',
-    text: 'Klaus Fuchs ek German physicist aur atomic spy tha, jisne Manhattan Project ke secrets secretly Soviet Union ko leak kar diye, jiske baad use 9 saal ki saza hui.',
-    wikiQuery: 'Klaus Fuchs',
-    theories: [
-      { name: 'Double Agent Play', explanation: 'Kuch records kehte hain ki Klaus British intelligence ke liye ek double agent tha aur jaanbujhkar misinformation leak kar raha tha.' },
-      { name: 'Hidden Microfilm Cache', explanation: 'Uski leak ki gayi microfilms ka ek bada hissa aaj bhi Dresden ke kisi secret underground vault mein chhupa hua hai.' },
-      { name: 'Los Alamos Ring', explanation: 'Fuchs akele kaam nahi kar raha tha, balki Los Alamos ke andar ek aur bada spy network tha jise FBI kabhi pakad nahi payi.' }
-    ],
-    suspicionLabel: 'Espionage Intrigue Level',
-    defaultSuspicion: 78
-  },
-  3: {
-    title: 'Tuskegee Syphilis Study',
-    year: '1932',
-    text: '1932 mein government doctors ne 600 black individuals par bina consent ke clinical trials chalaye aur unhe treatment se door rakha taaki disease ka development track ho sake.',
-    wikiQuery: 'Tuskegee Syphilis Study',
-    theories: [
-      { name: 'Deliberate Infection', explanation: 'Kuch claims kehte hain ki doctors ne participants ko track hi nahi kiya balki unhe intentionally virus se inject kiya tha.' },
-      { name: 'Institutional Racism Test', explanation: 'Yeh study healthcare systems mein minority populations ko check karne ke liye ek pre-planned psychological benchmark bani thi.' },
-      { name: 'Post-war Coverup', explanation: '1940s mein penicillin standard treatment banne ke baad bhi government ne information ko deliberately suppress kiya taaki experiment continue rahe.' }
-    ],
-    suspicionLabel: 'Medical Betrayal Index',
     defaultSuspicion: 95
   },
-  4: {
-    title: 'Salem Witch Trials',
-    year: '1692',
-    text: '1692 mein Salem Massachusetts mein mass hysteria fail gaya. Aapas mein hi ek doosre par witchcraft ka jhootha arop lagakar kai masoom logo ko execute kar diya gaya.',
-    wikiQuery: 'Salem witch trials',
+  {
+    title: 'Dyatlov Pass Incident',
+    year: '1959',
+    text: 'Nine experienced Soviet hikers died under mysterious circumstances in the Ural Mountains. Their tent was cut open from the inside and their bodies showed bizarre trauma.',
+    wikiQuery: 'Dyatlov Pass incident',
     theories: [
-      { name: 'Ergot Poisoning', explanation: 'Rye grain par ek fungus (ergot) grow ho gaya tha, jise khane se logon ko hallucinogenic fits aur seizures pad rahe the, jise unhone witchcraft samajh liya.' },
-      { name: 'Property Land Grabbing', explanation: 'Wealthy landowners ne poor families ko witch accuse kiya taaki court unki land seize kar le aur use saste mein auction kiya ja sake.' },
-      { name: 'Puritan Mass Delusion', explanation: 'Ek intense religious environment aur native American attacks ke darr se pure community ka mental health collapse ho gaya tha.' }
+      { name: 'Infrasound Panic', explanation: 'Wind patterns generated low-frequency infrasound that induced extreme panic, driving hikers out into freezing winds.' },
+      { name: 'Soviet Weapons Test', explanation: 'Pass was near a secret Soviet weapons testing range; hikers were killed by a shockwave or chemical exposure.' },
+      { name: 'Indigenous Mansi Attack', explanation: 'Local tribesfolk defended their sacred mountain by attacking hikers with invisible concussive forces.' }
     ],
-    suspicionLabel: 'Mass Hysteria Probability',
+    suspicionLabel: 'Anomalous Threat Level',
     defaultSuspicion: 88
   },
-  5: {
-    title: 'Sinking of the Titanic',
-    year: '1912',
-    text: '1912 ki raat ko us waqt ka sabse bada aur secure ship Titanic ek iceberg se takra kar Atlantic Ocean ke freezing paani mein doob gaya, jismein 1500 se zyada log maare gaye.',
-    wikiQuery: 'Sinking of the Titanic',
+  {
+    title: 'Cicada 3301',
+    year: '2012',
+    text: 'An anonymous organization posted complex cryptographic puzzles online to recruit highly intelligent cryptanalysts. Its organizers and purpose remain unknown.',
+    wikiQuery: 'Cicada 3301',
     theories: [
-      { name: 'Olympic Insurance Swap', explanation: 'Owner company JP Morgan ne actual Titanic ko uski damaged sister ship Olympic se swap kar diya tha insurance money recover karne ke liye.' },
-      { name: 'Deliberate Iceberg Course', explanation: 'Kaha jata hai ki Captain Smith ko ice warnings milne ke baad bhi speed badhane ka order mila tha taaki travel records break ho sakein.' },
-      { name: 'Secret Target Assassination', explanation: 'Federal Reserve ke against khade teen sabse bade billionaires (Astor, Guggenheim, Straus) is ship par the aur unhe eliminate karne ke liye ship doobayi gayi.' }
+      { name: 'Intelligence Agency Recruitment', explanation: 'The CIA, NSA, or MI6 created the puzzles to scout high-level mathematical talent without bureaucratic overhead.' },
+      { name: 'Cyber Mercenary Syndicate', explanation: 'A black-hat cyber-mercenary organization recruited elite hackers to build secure communication networks.' },
+      { name: 'Ancient Cyber Cult', explanation: 'An esoteric online society seeking to develop digital cryptography into a new technologist philosophy.' }
     ],
-    suspicionLabel: 'Sinking Conspiracy Index',
-    defaultSuspicion: 65
-  },
-  6: {
-    title: 'Isabella Stewart Gardner Heist',
-    year: '1990',
-    text: '1990 mein do chor police officer bankar Boston ke museum mein ghuse aur 500 million dollars ki paintings chura kar gayab ho gaye. Yeh robbery aaj tak unresolved hai.',
-    wikiQuery: 'Isabella Stewart Gardner Museum heist',
-    theories: [
-      { name: 'Inside Security Job', explanation: 'Museum guard Richard Abath ne doors ko unlock kiya aur motion detectors ke signals bypass karne mein choro ki madad ki.' },
-      { name: 'Irish Mob Funding', explanation: 'Churayi gayi paintings Boston ke Irish Mob ke paas gayi aur unhe collateral ke roop mein arms deals aur drug trafficking ke liye use kiya gaya.' },
-      { name: 'Hidden European Collector', explanation: 'Yeh theft ek wealthy European private collector ke command par hui thi, jisne paintings ko kisi bunker mein chhipakar rakha hai.' }
-    ],
-    suspicionLabel: 'Insider Assistance Odds',
+    suspicionLabel: 'Cryptographic Complexity',
     defaultSuspicion: 82
+  },
+  {
+    title: 'Voynich Manuscript',
+    year: '15th Century',
+    text: 'An illustrated codex handwritten in an unknown writing system. Carbon-dated to the early 15th century, its pages depict bizarre plants, astronomical charts, and bathing females.',
+    wikiQuery: 'Voynich manuscript',
+    theories: [
+      { name: 'Cipher Codebook', explanation: 'An early European alchemist encoded secret medicinal formulas to protect them from the Inquisition.' },
+      { name: 'Elaborate Hoax', explanation: 'A clever Renaissance con artist manufactured the document to sell as a rare manuscript to wealthy patrons.' },
+      { name: 'Unknown Lost Language', explanation: 'Written in a natural phonetic language that has since vanished, utilizing a custom phonetic script.' }
+    ],
+    suspicionLabel: 'Unsolved Cipher Index',
+    defaultSuspicion: 90
+  },
+  {
+    title: 'Bermuda Triangle',
+    year: '1945',
+    text: 'A region in the western part of the North Atlantic Ocean where a number of aircraft and surface vessels are rumored to have disappeared under mysterious circumstances.',
+    wikiQuery: 'Bermuda Triangle',
+    theories: [
+      { name: 'Methane Hydrate Eruptions', explanation: 'Gas pockets releasing from the seabed decreased water density, instantly sinking ships and stalling plane engines.' },
+      { name: 'Magnetic Anomaly', explanation: 'Local electromagnetic distortions caused navigational instruments to spin erratically, leading pilots off course.' },
+      { name: 'Temporal Portals', explanation: 'Fringe hypotheses suggest wormhole gateways that bend local space-time coordinates.' }
+    ],
+    suspicionLabel: 'Anomaly Probability',
+    defaultSuspicion: 72
+  },
+  {
+    title: 'Roswell UFO Incident',
+    year: '1947',
+    text: 'In mid-1947, a United States Army Air Forces balloon crashed at a ranch near Roswell, New Mexico, sparking decades of alien spacecraft recovery rumors.',
+    wikiQuery: 'Roswell UFO incident',
+    theories: [
+      { name: 'Project Mogul', explanation: 'The crash was a top-secret spy balloon designed to detect Soviet atomic bomb tests using low-frequency acoustics.' },
+      { name: 'Extraterrestrial Recovery', explanation: 'A genuine alien disc crashed, and the occupants were transported to Wright-Patterson Air Force Base.' },
+      { name: 'Experimental Jet Crash', explanation: 'An advanced Horten flying wing prototype crashed, and the military fabricated the flying saucer story to distract foreign agents.' }
+    ],
+    suspicionLabel: 'Coverup Threat Rating',
+    defaultSuspicion: 91
+  },
+  {
+    title: 'Tunguska Event',
+    year: '1908',
+    text: 'A massive 12-megaton explosion flattened 80 million trees over 830 square miles of Siberian forest. No impact crater was ever found.',
+    wikiQuery: 'Tunguska event',
+    theories: [
+      { name: 'Air Burst Meteorite', explanation: 'A stony asteroid exploded 5 miles above the surface, releasing massive thermal energy without a surface impact.' },
+      { name: 'Micro Black Hole', explanation: 'A microscopic black hole passed through Earth, entering in Siberia and exiting through the Atlantic Ocean.' },
+      { name: 'Wardenclyffe Discharge', explanation: 'Nikola Tesla was testing his wireless power transmitter in New York, and the electrical beam overshot to Siberia.' }
+    ],
+    suspicionLabel: 'Destruction Anomaly Index',
+    defaultSuspicion: 80
+  },
+  {
+    title: 'Mary Celeste',
+    year: '1872',
+    text: 'An American merchant brigantine was discovered under partial sail in the Atlantic Ocean, completely abandoned. The crew was never heard from again, leaving cargo and personal items intact.',
+    wikiQuery: 'Mary Celeste',
+    theories: [
+      { name: 'Alcohol Vapor Explosion', explanation: 'Fumes leaking from the ship\'s cargo of denatured alcohol caused a minor explosion, prompting a panic evacuation.' },
+      { name: 'Waterspout Strike', explanation: 'A violent waterspout hit the vessel, disabling instruments and convincing the captain that the ship was sinking.' },
+      { name: 'Mutiny', explanation: 'The crew murdered the captain, threw the body overboard, and sailed to a nearby island in a secret lifeboat.' }
+    ],
+    suspicionLabel: 'Disappearance Mystery',
+    defaultSuspicion: 75
+  },
+  {
+    title: 'D. B. Cooper',
+    year: '1971',
+    text: 'An unidentified man extorted $200,000 in ransom and parachuted from a Boeing 727 flying over Washington state. He was never seen or identified again.',
+    wikiQuery: 'D. B. Cooper',
+    theories: [
+      { name: 'Fatal Jump', explanation: 'Cooper jumped into freezing rain over dense forest without proper goggles or winter gear, dying upon landing.' },
+      { name: 'Richard McCoy Jr.', explanation: 'A copycat hijacker who executed an identical heist months later was the real D.B. Cooper under an alias.' },
+      { name: 'CIA Asset Escape', explanation: 'Cooper was a black-ops operative who used the heist to disappear from surveillance, aided by an inside ground crew.' }
+    ],
+    suspicionLabel: 'Survival Probability',
+    defaultSuspicion: 68
+  },
+  {
+    title: 'Zodiac Killer',
+    year: '1968',
+    text: 'A serial killer who terrorized Northern California in the late 1960s, sending taunting letters and complex cryptograms containing details of his victims to local newspapers.',
+    wikiQuery: 'Zodiac Killer',
+    theories: [
+      { name: 'Arthur Leigh Allen', explanation: 'The prime suspect who possessed a Zodiac watch and matches, but whose handwriting and DNA never matched the forensic print.' },
+      { name: 'Multiple Copycats', explanation: 'The letters were written by a single mastermind, but the murders were executed by different copycat killers.' },
+      { name: 'Decoy Informant', explanation: 'An inside member of the local police department used the identity to distract investigators from department corruption.' }
+    ],
+    suspicionLabel: 'Identity Unresolved Rate',
+    defaultSuspicion: 96
+  },
+  {
+    title: 'Black Knight Satellite',
+    year: '1954',
+    text: 'Conspiracy theorists claim an alien satellite has orbited Earth in a near-polar trajectory for over 13,000 years, broadcasting radio signals.',
+    wikiQuery: 'Black Knight satellite conspiracy theory',
+    theories: [
+      { name: 'Thermal Blanket Debris', explanation: 'Photographs of the object from a 1998 Space Shuttle mission actually show a lost thermal protection blanket.' },
+      { name: 'Tesla Signal Intercept', explanation: 'In 1899, Nikola Tesla intercepted repeating radio signals which modern advocates trace back to this polar satellite.' },
+      { name: 'LDE Echoes', explanation: 'Long Delay Echoes (LDE) received by ham radio operators in the 1920s were reflection pings from the probe.' }
+    ],
+    suspicionLabel: 'Orbital Anomaly Odds',
+    defaultSuspicion: 83
+  },
+  {
+    title: 'Tamam Shud Case',
+    year: '1948',
+    text: 'An unidentified man was found dead on Somerton Beach in Australia. Inside a secret pocket in his trousers, police found a scrap of paper torn from a Persian poetry book reading "Tamam Shud" (Finished).',
+    wikiQuery: 'Tamam Shud case',
+    theories: [
+      { name: 'Soviet Espionage', explanation: 'The Somerton Man was a Soviet spy poisoned with an untraceable toxin, and the book contained a matching code key.' },
+      { name: 'Forbidden Romance Suicide', explanation: 'He traveled to Adelaide to find a former nurse who had given him the book, committing suicide after being rejected.' },
+      { name: 'Military Chemical Agent', explanation: 'A military researcher who strayed too close to Australia\'s Woomera chemical testing facility and was silenced.' }
+    ],
+    suspicionLabel: 'Unsolved Case Rating',
+    defaultSuspicion: 87
+  },
+  {
+    title: 'Antikythera Mechanism',
+    year: '150 BC',
+    text: 'A complex 2,000-year-old bronze geared mechanism recovered from a Greek shipwreck, capable of calculating astronomical positions and eclipses centuries ahead of its time.',
+    wikiQuery: 'Antikythera mechanism',
+    theories: [
+      { name: 'Lost Hellenistic Technology', explanation: 'Ancient Greek mechanicians possessed gearing capabilities that were completely lost during the dark ages.' },
+      { name: 'Archimedean Prototype', explanation: 'Constructed by or heavily inspired by Archimedes, designed as a teaching model of the geocentric solar system.' },
+      { name: 'Anachronistic Intercept', explanation: 'A highly controversial theory that the device was dropped by a time-displaced traveler.' }
+    ],
+    suspicionLabel: 'Technical Anachronism Rating',
+    defaultSuspicion: 60
+  },
+  {
+    title: 'Georgia Guidestones',
+    year: '1980',
+    text: 'A large granite monument erected in Georgia inscribed with ten guidelines for a post-apocalyptic era in eight modern languages, commissioned by an anonymous client under the pseudonym R.C. Christian.',
+    wikiQuery: 'Georgia Guidestones',
+    theories: [
+      { name: 'Rosicrucian Blueprint', explanation: 'The monument was funded by the Rosicrucian Order, using "R.C. Christian" as a tribute to their founder Christian Rosenkreuz.' },
+      { name: 'New World Order Manifesto', explanation: 'An elite global group commissioned the stones to outline instructions for massive population reduction.' },
+      { name: 'Nuclear Cold War Target', explanation: 'Built during the height of the Cold War as a survival compass and beacon for fallout survivors.' }
+    ],
+    suspicionLabel: 'Conspiracy Intent Index',
+    defaultSuspicion: 79
+  },
+  {
+    title: 'Dancing Plague of 1518',
+    year: '1518',
+    text: 'In July 1518, a woman stepped into a street in Strasbourg and began to dance. Within a month, 400 people were dancing uncontrollably, some dying of heart attacks.',
+    wikiQuery: 'Dancing plague of 1518',
+    theories: [
+      { name: 'Ergot Poisoning', explanation: 'Ingestion of psychotropic ergot fungi growing on damp rye caused mass hallucinations and muscle spasms.' },
+      { name: 'St. Vitus Demonic Curse', explanation: 'A religious mass panic triggered by a local belief in the St. Vitus curse, causing hysterical mimics.' },
+      { name: 'Occult Gathering', explanation: 'A secret heretical cult conducting trans-state ritualistic movements to escape social pressures.' }
+    ],
+    suspicionLabel: 'Hysteria Anomaly Rating',
+    defaultSuspicion: 74
+  },
+  {
+    title: 'The Bloop',
+    year: '1997',
+    text: 'An ultra-low-frequency, high-amplitude underwater sound detected by NOAA in 1997. It was traced to a remote point in the Pacific, reminiscent of H.P. Lovecraft\'s R\'lyeh.',
+    wikiQuery: 'Bloop',
+    theories: [
+      { name: 'Glacial Icequake', explanation: 'A giant Antarctic iceberg cracking, breaking, and dragging across the sea floor, creating a deep resonance.' },
+      { name: 'Gargantuan Marine Species', explanation: 'An unknown deep-sea organism, several times larger than a blue whale, vocalizing at extreme depth.' },
+      { name: 'Secret Sonar Project', explanation: 'A highly classified underwater naval acoustic weapon test using low-frequency shock waves.' }
+    ],
+    suspicionLabel: 'Deep Sea Threat Level',
+    defaultSuspicion: 81
+  },
+  {
+    title: 'Kryptos',
+    year: '1990',
+    text: 'A sculpture on the grounds of the CIA Headquarters in Langley, Virginia. Containing four encrypted messages, the final fourth section remains unsolved to this day.',
+    wikiQuery: 'Kryptos',
+    theories: [
+      { name: 'Coordinates to Vault', explanation: 'The decoded letters reveal geographic coordinates to a buried time capsule or secret archive at CIA grounds.' },
+      { name: 'Double Transposition Cipher', explanation: 'The fourth passage uses a custom, multi-layered matrix cipher that requires a specific paper key.' },
+      { name: 'Sanborn\'s Riddle', explanation: 'The sculptor Jim Sanborn left the puzzle unresolved as an artistic commentary on the nature of secrets.' }
+    ],
+    suspicionLabel: 'Intrusion Difficulty',
+    defaultSuspicion: 94
+  },
+  {
+    title: 'Max Headroom Hijacking',
+    year: '1987',
+    text: 'In November 1987, two television stations in Chicago had their broadcast signals hijacked by an unknown intruder wearing a Max Headroom mask.',
+    wikiQuery: 'Max Headroom signal hijacking',
+    theories: [
+      { name: 'Local Video Hobbyists', explanation: 'Underground telecom hobbyists used a home-built transmitter targeting the line-of-sight microwave link dish.' },
+      { name: 'Insider Station Hack', explanation: 'An engineer within the station setup the override patch from the inside to demonstrate security flaws.' },
+      { name: 'Experimental Syndicate', explanation: 'An art collective testing signal interception vectors for tactical media disruptions.' }
+    ],
+    suspicionLabel: 'Signal Security Failure',
+    defaultSuspicion: 77
+  },
+  {
+    title: 'Lead Masks Case',
+    year: '1966',
+    text: 'In 1966, two Brazilian electronic technicians were found dead on a hill wearing formal suits and lead eye masks. Beside them was a notebook with cryptic instructions.',
+    wikiQuery: 'Lead Masks Case',
+    theories: [
+      { name: 'Psychedelic Contact Experiment', explanation: 'The technicians took LSD and constructed lead masks to protect their eyes from blinding cosmic radiation during contact.' },
+      { name: 'UFO Cult Deception', explanation: 'A spiritualist group tricked the men into taking ingestion pills to transcend their physical bodies.' },
+      { name: 'Espionage Coverup', explanation: 'The technicians were assembling a secret radio transmitter for smugglers and were executed with custom toxins.' }
+    ],
+    suspicionLabel: 'Occult Intrigue Level',
+    defaultSuspicion: 86
+  }
+];
+
+const getTheoriesForType = (type) => {
+  if (type === 'disappearance') {
+    return [
+      { name: "Sudden Environmental Hazard", explanation: "The subjects encountered a rapid, localized atmospheric or oceanographic anomaly that bypassed standard radio frequencies." },
+      { name: "Covert Extraction", explanation: "High-level intelligence agencies orchestrated a complete identity scrub and relocation for espionage purposes." },
+      { name: "Uncharted Dimensional Rift", explanation: "Fringe investigators claim the coordinates align with repeating space-time fluctuation zones." }
+    ];
+  } else if (type === 'crime') {
+    return [
+      { name: "Lone Wolf Distraction", explanation: "The perpetrator acted as a decoy to draw security forces away while a secondary, professional operator executed the target." },
+      { name: "Deep-State Directive", explanation: "Unclassified archives suggest the target was silenced due to their imminent exposure of classified projects." },
+      { name: "Altered Forensic Evidence", explanation: "Subsequent autopsy reviews showed entry wounds and toxicology profiles inconsistent with the official weapon." }
+    ];
+  } else if (type === 'accident') {
+    return [
+      { name: "Systemic Sabotage", explanation: "A concealed explosive device or targeted electromagnetic pulse was deployed to disable navigation and communications." },
+      { name: "Experimental Weapons Fail", explanation: "The event was a catastrophic misfire of a classified prototype weapon tested in public corridors." },
+      { name: "Systemic Oversight", explanation: "Corporate or military commanders ignored critical safety warnings to force a specific political or financial timeline." }
+    ];
+  } else {
+    return [
+      { name: "Classified Intervention", explanation: "Foreign intelligence operatives deployed advanced technology to execute the event and vanish without a trace." },
+      { name: "Hidden Coordinates", explanation: "The event occurred at a precise geomagnetic grid node, triggering a short-lived physical anomaly." },
+      { name: "Mass Delusion Trigger", explanation: "Local media reports and panic amplified minor incidents into a widespread psychological contagion." }
+    ];
   }
 };
 
-// ── Reaction config ───────────────────────────────────────────────────────
 const REACTION_CONFIG = [
   {
     id: 'intriguing',
@@ -150,12 +346,10 @@ const REACTION_CONFIG = [
   },
 ];
 
-// ── Premium animated reaction pill ───────────────────────────────────────
 function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
   const { id, label, Icon, activeColor, activeBg, activeBorder, glowColor, emoji } = reaction;
   return (
     <div className="relative flex-1 min-w-[75px]">
-      {/* Floating emoji + plus-one burst */}
       {animating && (
         <div className="absolute top-[-18px] left-1/2 -translate-x-1/2 pointer-events-none select-none z-30 flex flex-col items-center">
           <span
@@ -188,7 +382,6 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
             : '0 3px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}
       >
-        {/* Shimmer / light effect on select */}
         {isSelected && (
           <div
             className="absolute inset-0 pointer-events-none opacity-40"
@@ -197,8 +390,6 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
             }}
           />
         )}
-        
-        {/* Bottom light bar */}
         <div 
           className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] transition-all duration-500 rounded-full"
           style={{
@@ -207,7 +398,6 @@ function ReactionPill({ reaction, isSelected, count, onReact, animating }) {
             boxShadow: `0 0 6px ${activeColor}`,
           }}
         />
-
         <Icon
           className="w-3.5 h-3.5 relative z-10 transition-all duration-500 ease-out"
           style={{
@@ -238,90 +428,277 @@ export default function TodayInShadows() {
   const [loading, setLoading] = useState(true);
   const [imgFailed, setImgFailed] = useState(false);
   const [wikiImgUrl, setWikiImgUrl] = useState(null);
+  const [wikiPageUrl, setWikiPageUrl] = useState('');
   const [reactions, setReactions] = useState({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
   const [userReaction, setUserReaction] = useState(null);
   const [animatingReaction, setAnimatingReaction] = useState(null);
 
+  // ── Decryption States ──────────────────────────────────────────────────
+  const [isDecrypted, setIsDecrypted] = useState(false);
+  const [clickedNodes, setClickedNodes] = useState([]);
+  const [isDecrypting, setIsDecrypting] = useState(false);
+  const [decryptProgress, setDecryptProgress] = useState(0);
+  const [scramblingText, setScramblingText] = useState('0x000000');
+  const [gridData, setGridData] = useState([]);
+  const [targetNodes, setTargetNodes] = useState([]);
+
+  const dateKey = useMemo(() => new Date().toLocaleDateString('en-CA'), []);
   const dayOfWeek = new Date().getDay();
   const activeTheme = DAY_THEMES[dayOfWeek];
 
-  // Load dossier
+  // Pick the daily dossier based on the date hash
+  const selectedDossier = useMemo(() => {
+    let hash = 0;
+    for (let i = 0; i < dateKey.length; i++) {
+      hash = (hash * 31 + dateKey.charCodeAt(i)) | 0;
+    }
+    hash = Math.abs(hash);
+    return WIKIPEDIA_DOSSIERS[hash % WIKIPEDIA_DOSSIERS.length];
+  }, [dateKey]);
+
+  // Initialize interactive hex grid memory nodes
+  useEffect(() => {
+    const chars = '0123456789ABCDEF';
+    const grid = [];
+    for (let i = 0; i < 25; i++) {
+      const hex = chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)];
+      grid.push({ index: i, value: hex });
+    }
+    setGridData(grid);
+
+    // Pick 3 random cells to be the targets
+    const targets = [];
+    while (targets.length < 3) {
+      const idx = Math.floor(Math.random() * 25);
+      if (!targets.includes(idx)) targets.push(idx);
+    }
+    setTargetNodes(targets);
+
+    // Check sessionStorage to bypass decrypt if already resolved today
+    const solved = sessionStorage.getItem(`lore:dossier:decrypted:${dateKey}`);
+    if (solved === 'true') {
+      setIsDecrypted(true);
+    }
+  }, [dateKey]);
+
+  // Handle flickering effect on non-clicked hex blocks
+  useEffect(() => {
+    if (isDecrypting || isDecrypted) return;
+    const interval = setInterval(() => {
+      const chars = '0123456789ABCDEF';
+      setGridData(prev => prev.map(cell => {
+        // Flicker 15% of cells
+        if (Math.random() > 0.85 && !targetNodes.includes(cell.index) && !clickedNodes.includes(cell.index)) {
+          return { ...cell, value: chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)] };
+        }
+        return cell;
+      }));
+    }, 400);
+    return () => clearInterval(interval);
+  }, [isDecrypting, isDecrypted, targetNodes, clickedNodes]);
+
+  // Load dossier and fetch Wikipedia thumbnail/details dynamically
   useEffect(() => {
     let active = true;
-    const fetchDossier = async () => {
+    const fetchWikiInfo = async () => {
+      let resolvedDossier = null;
+
       try {
-        const res = await fetch('/api/daily-dossier');
+        const today = new Date();
+        const monthNum = String(today.getMonth() + 1).padStart(2, '0');
+        const dayNum = String(today.getDate()).padStart(2, '0');
+
+        // 1. Fetch Wikipedia's Selected Events for Today
+        const onThisDayUrl = `https://en.wikipedia.org/api/rest_v1/feed/onthisday/selected/${monthNum}/${dayNum}`;
+        const res = await fetch(onThisDayUrl, {
+          headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) SevenDescents/1.0' }
+        });
+
         if (res.ok) {
           const data = await res.json();
-          if (data && data.title && active) {
-            setDossier(data);
-            setLoading(false);
-            return;
+          const events = data.selected || data.events || [];
+          
+          let bestEvent = null;
+          let bestScore = -1;
+          let bestType = 'general';
+
+          for (const ev of events) {
+            const textLower = (ev.text || '').toLowerCase();
+            let score = 0;
+            let type = 'general';
+
+            if (/\b(disappear|missing|lost|vanish|abduction|ufo|alien|ghost|paranormal|occult|conspiracy|secret)\b/.test(textLower)) {
+              score += 10;
+              type = 'disappearance';
+            }
+            if (/\b(assassinated|assassination|murder|killed|shot|executed|hanged|poisoned|killer|crime|theft|robbery|heist)\b/.test(textLower)) {
+              score += 8;
+              type = 'crime';
+            }
+            if (/\b(crash|accident|sank|sunk|disaster|tragedy|explosion|destroyed|fire|plague|epidemic)\b/.test(textLower)) {
+              score += 6;
+              type = 'accident';
+            }
+
+            if (score > bestScore) {
+              bestScore = score;
+              bestEvent = ev;
+              bestType = type;
+            }
+          }
+
+          if (bestEvent) {
+            const primaryPage = bestEvent.pages?.[0];
+            const cleanText = bestEvent.text.replace(/^\d+\s*[-–—]\s*/, '');
+            resolvedDossier = {
+              title: primaryPage?.title || "Classified Incident",
+              year: String(bestEvent.year || today.getFullYear()),
+              text: cleanText,
+              wikiQuery: primaryPage?.title || "",
+              theories: getTheoriesForType(bestType),
+              suspicionLabel: 'Threat Assessment Level',
+              defaultSuspicion: 50 + ((primaryPage?.title?.length || 0) % 45),
+              story_id: 'WIKI_OTD_' + String(bestEvent.year || '0000'),
+              wikiUrl: primaryPage?.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(primaryPage?.title || '')}`,
+              thumbnail: primaryPage?.thumbnail?.source || null
+            };
+
+            if (active) {
+              setWikiImgUrl(resolvedDossier.thumbnail);
+              setWikiPageUrl(resolvedDossier.wikiUrl);
+            }
           }
         }
       } catch (err) {
-        console.warn('[Dossier Widget] Failed to fetch:', err.message);
+        console.warn('[Dossier OnThisDay Fetch] Failed, falling back to static dossiers:', err.message);
       }
+
+      // 2. Fallback to static date-hashed dossiers if OnThisDay fetch failed or returned nothing
+      if (!resolvedDossier) {
+        resolvedDossier = {
+          ...selectedDossier,
+          wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(selectedDossier.wikiQuery.replace(/ /g, '_'))}`
+        };
+        try {
+          const query = selectedDossier.wikiQuery || selectedDossier.title;
+          const cleanQuery = query.split(/[:\-–—]/)[0].trim();
+          
+          const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=1&format=json&origin=*`;
+          const searchRes = await fetch(searchUrl);
+          let resolvedTitle = cleanQuery;
+          if (searchRes.ok) {
+            const searchData = await searchRes.json();
+            if (searchData?.query?.search && searchData.query.search.length > 0) {
+              resolvedTitle = searchData.query.search[0].title;
+            }
+          }
+          
+          const formattedQuery = encodeURIComponent(resolvedTitle.trim().replace(/ /g, '_'));
+          const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`;
+          const summaryRes = await fetch(summaryUrl);
+          if (summaryRes.ok && active) {
+            const matched = await summaryRes.json();
+            resolvedDossier.thumbnail = matched.thumbnail?.source || null;
+            resolvedDossier.wikiUrl = matched.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${formattedQuery}`;
+            if (active) {
+              setWikiImgUrl(resolvedDossier.thumbnail);
+              setWikiPageUrl(resolvedDossier.wikiUrl);
+            }
+          }
+        } catch (err) {
+          console.warn('[Dossier Fallback Wiki Fetch] Failed:', err.message);
+        }
+      }
+
+      // Load server-side reactions counts
+      try {
+        const res = await fetch(`/api/daily-dossier?date=${dateKey}`);
+        if (res.ok && active) {
+          const data = await res.json();
+          if (data?.reactions) {
+            const rx = data.reactions;
+            setReactions({
+              intriguing: rx.intriguing || rx.likes || rx.like || 0,
+              gripping: rx.gripping || 0,
+              chilling: rx.chilling || rx.scared || 0,
+              mind_blowing: rx.mind_blowing || rx.mindblown || 0
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('[Reactions Fetch] Failed:', err.message);
+      }
+
       if (active) {
-        const fallback = STATIC_FALLBACKS[dayOfWeek];
-        const dateStr = new Date().toISOString().split('T')[0];
         setDossier({
-          ...fallback,
-          date: dateStr,
-          thumbnail: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800',
-          wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(fallback.wikiQuery.replace(/ /g, '_'))}`,
-          wikiSummary: fallback.text,
+          ...resolvedDossier,
+          date: dateKey,
           theme: activeTheme.name
         });
         setLoading(false);
       }
     };
-    fetchDossier();
-    return () => { active = false; };
-  }, [dayOfWeek, activeTheme.name]);
 
-  // Load reactions from localStorage + server when dossier is ready
+    fetchWikiInfo();
+    return () => { active = false; };
+  }, [selectedDossier, dateKey, activeTheme.name]);
+
+  // Load reactions from localStorage fallback
   useEffect(() => {
     if (!dossier) return;
     setImgFailed(false);
-    setWikiImgUrl(null);
-    const dateKey = dossier.date || new Date().toISOString().split('T')[0];
-
-    // Always restore the user's vote from localStorage first
     const stored = localStorage.getItem(`lore:dossier:reaction:${dateKey}`);
     setUserReaction(stored || null);
+  }, [dossier, dateKey]);
 
-    // Load counts: prefer server's actual database counts, fallback to local cache
-    if (dossier.reactions) {
-      const rx = dossier.reactions;
-      setReactions({
-        intriguing: rx.intriguing || rx.likes || rx.like || 0,
-        gripping: rx.gripping || 0,
-        chilling: rx.chilling || rx.scared || 0,
-        mind_blowing: rx.mind_blowing || rx.mindblown || 0
-      });
-    } else {
-      try {
-        const cached = localStorage.getItem(`lore:dossier:counts:${dateKey}`);
-        if (cached) {
-          setReactions(JSON.parse(cached));
-        } else {
-          setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
-        }
-      } catch {
-        setReactions({ intriguing: 0, gripping: 0, chilling: 0, mind_blowing: 0 });
+  // Trigger decryption progress bar animation
+  const triggerDecryption = useCallback(() => {
+    setIsDecrypting(true);
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      progress += 4;
+      setDecryptProgress(progress);
+      
+      // Randomly scramble characters
+      const hackChars = '&$%*#@!X?_#@[]%/{}<>';
+      let text = '0x';
+      for (let i = 0; i < 6; i++) {
+        text += hackChars[Math.floor(Math.random() * hackChars.length)];
       }
+      setScramblingText(text);
+
+      if (progress >= 100) {
+        clearInterval(progressInterval);
+        setIsDecrypted(true);
+        setIsDecrypting(false);
+        sessionStorage.setItem(`lore:dossier:decrypted:${dateKey}`, 'true');
+      }
+    }, 45);
+  }, [dateKey]);
+
+  const handleNodeClick = (index) => {
+    if (isDecrypting || isDecrypted) return;
+    if (clickedNodes.includes(index)) return;
+
+    if (targetNodes.includes(index)) {
+      const nextClicked = [...clickedNodes, index];
+      setClickedNodes(nextClicked);
+      if (nextClicked.length === 3) {
+        triggerDecryption();
+      }
+    } else {
+      // Glitch reset on wrong click
+      setClickedNodes([]);
+      setScramblingText('INT_ERR_SYS_FLUSH');
+      setTimeout(() => setScramblingText('0x000000'), 500);
     }
-  }, [dossier]);
-
-
+  };
 
   const handleReact = async (type) => {
     if (!dossier) return;
     const wasSelected = userReaction === type;
     const oldReaction = userReaction;
     const newReaction = wasSelected ? null : type;
-    const dateKey = dossier.date || new Date().toISOString().split('T')[0];
 
     if (!wasSelected) {
       setAnimatingReaction(type);
@@ -339,7 +716,6 @@ export default function TodayInShadows() {
           next[oldReaction] = Math.max(0, (next[oldReaction] || 1) - 1);
         }
       }
-      // Persist counts locally so they never reset on page load
       try { localStorage.setItem(`lore:dossier:counts:${dateKey}`, JSON.stringify(next)); } catch { /* ignore */ }
       return next;
     });
@@ -350,7 +726,6 @@ export default function TodayInShadows() {
       localStorage.setItem(`lore:dossier:reaction:${dateKey}`, type);
     }
 
-    // Sync to server using unified atomic API
     try {
       const res = await fetch('/api/daily-dossier', {
         method: 'POST',
@@ -382,8 +757,8 @@ export default function TodayInShadows() {
 
   if (loading) {
     return (
-      <div className="p-5 rounded-xl border border-neutral-800/40 bg-neutral-950/20 animate-pulse flex items-center justify-center min-h-[100px]">
-        <span className="text-[10px] font-mono tracking-widest text-neutral-500 uppercase">Retrieving daily dossier...</span>
+      <div className="p-5 rounded-xl border border-neutral-800/40 bg-neutral-950/20 animate-pulse flex items-center justify-center min-h-[150px]">
+        <span className="text-[10px] font-mono tracking-widest text-neutral-500 uppercase">INCOMING SIGNAL INTERCEPT...</span>
       </div>
     );
   }
@@ -403,116 +778,230 @@ export default function TodayInShadows() {
           20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
           100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
         }
+        .scanlines {
+          position: relative;
+          overflow: hidden;
+        }
+        .scanlines::before {
+          content: " ";
+          display: block;
+          position: absolute;
+          top: 0; left: 0; bottom: 0; right: 0;
+          background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+          z-index: 10;
+          background-size: 100% 4px, 6px 100%;
+          pointer-events: none;
+        }
       `}</style>
-      
-      {/* ── Dossier Card on Homepage ──────────────────────────────────── */}
+
+      {/* ── Outer Shell ── */}
       <div
-        className="rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/45 group relative overflow-hidden"
+        className="rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/45 group relative overflow-hidden scanlines min-h-[400px]"
         style={{
           backgroundColor: '#151311',
           borderColor: 'rgba(158, 123, 76, 0.18)',
           boxShadow: '0 12px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.03)',
         }}
       >
-        {/* Cinematic Banner Image */}
-        {dossier.thumbnail && (
-          <div className="w-full h-60 sm:h-64 md:h-72 overflow-hidden bg-[#090807] flex flex-col border-b border-neutral-900/60">
-            {imgFailed ? (
-              <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
-                <LoreMark size={24} color="currentColor" />
-                <span className="text-[8px] font-mono tracking-[0.15em] uppercase mt-2">CLASSIFIED</span>
+        {/* ── 1. ENCRYPTED TERMINAL DECRYPTOR CONSOLE ── */}
+        {!isDecrypted && (
+          <div className="p-6 flex flex-col items-center justify-center flex-grow font-mono text-neutral-400 select-none min-h-[350px]">
+            {/* Header Status Bar */}
+            <div className="w-full flex items-center justify-between border-b border-neutral-900 pb-3 mb-6">
+              <div className="flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-[#9E7B4C] animate-pulse" />
+                <span className="text-[10px] tracking-wider font-bold text-[#EDE8DF] uppercase">
+                  {isDecrypting ? 'DECRYPTING ARCHIVE...' : 'RESTRICTED FREQUENCY INBOUND'}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-600 animate-ping" />
+                <span className="text-[8px] text-red-500 uppercase tracking-widest font-bold">SIGNAL LOCKED</span>
+              </div>
+            </div>
+
+            {/* Scrambler display */}
+            <div className="w-full bg-[#0a0807] border border-neutral-900/60 p-4 rounded-lg text-center mb-6 flex flex-col justify-center items-center h-18 select-none">
+              <span className="text-xs text-neutral-500 tracking-[0.2em] uppercase mb-1">Decryption Register</span>
+              <span className="text-base text-[#9E7B4C] font-semibold tracking-widest animate-pulse font-mono">
+                {scramblingText}
+              </span>
+            </div>
+
+            {/* 5x5 Matrix Hex Grid */}
+            <div className="grid grid-cols-5 gap-2 max-w-[280px] w-full mb-6 relative">
+              {gridData.map((cell) => {
+                const isTarget = targetNodes.includes(cell.index);
+                const isClicked = clickedNodes.includes(cell.index);
+                const isBlinking = isTarget && !isClicked && (Math.floor(Date.now() / 400) % 2 === 0);
+
+                let cellBg = 'bg-[#1a1715]/40';
+                let cellBorder = 'border-neutral-900';
+                let cellText = 'text-neutral-500';
+
+                if (isClicked) {
+                  cellBg = 'bg-[#9E7B4C]/10';
+                  cellBorder = 'border-[#9E7B4C]/50';
+                  cellText = 'text-[#9E7B4C] font-bold';
+                } else if (isBlinking && !isDecrypting) {
+                  cellBorder = 'border-[#9E7B4C]/25';
+                  cellText = 'text-[#9E7B4C]/80';
+                }
+
+                return (
+                  <button
+                    key={cell.index}
+                    onClick={() => handleNodeClick(cell.index)}
+                    disabled={isDecrypting}
+                    className={`h-10 rounded border flex items-center justify-center text-[10px] transition-all active:scale-95 duration-200 cursor-pointer font-bold ${cellBg} ${cellBorder} ${cellText} ${!isDecrypting && 'hover:bg-neutral-900/40 hover:border-[#9E7B4C]/20'}`}
+                  >
+                    {isClicked ? '✓' : cell.value}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Instruction Footer or Progress Bar */}
+            {isDecrypting ? (
+              <div className="w-full max-w-[280px] flex flex-col gap-2">
+                <div className="h-1 bg-neutral-900 rounded-full w-full overflow-hidden relative">
+                  <div
+                    className="h-full bg-[#9E7B4C] transition-all duration-75"
+                    style={{ width: `${decryptProgress}%` }}
+                  />
+                </div>
+                <div className="flex justify-between text-[8px] tracking-wider uppercase text-neutral-500">
+                  <span>bypass in progress</span>
+                  <span>{decryptProgress}%</span>
+                </div>
               </div>
             ) : (
-              <>
-                {/* Top Dossier Bar with backdrop-blur */}
-                <div className="w-full h-9 z-20 flex-shrink-0 flex items-center justify-between px-3.5 bg-black/45 backdrop-blur-md border-b border-white/5 select-none">
-                  <div className="flex items-center gap-1.5">
-                    <LoreMark size={8} color="#9E7B4C" />
-                    <span
-                      style={{
-                        fontFamily: "'Space Mono', monospace",
-                        fontSize: '7.5px',
-                        color: '#EDE8DF',
-                        letterSpacing: '0.22em',
-                        fontWeight: 700,
-                      }}
-                    >CLASSIFIED</span>
-                  </div>
-                  <span className="font-mono text-[6.5px] text-neutral-500 tracking-wider">
-                    SEC-DOSS.00{dossier.story_id ? dossier.story_id.slice(-2) : 'XX'}
-                  </span>
-                </div>
-
-                {/* Foreground image viewport area — renders below the header bar */}
-                <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
-                  {/* Blurry Background image to cover full width */}
-                  <img
-                    src={wikiImgUrl || dossier.thumbnail}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 pointer-events-none scale-115"
-                  />
-                  <img
-                    src={wikiImgUrl || dossier.thumbnail}
-                    alt={dossier.title}
-                    onError={() => setImgFailed(true)}
-                    className="relative z-10 max-h-full max-w-full object-contain md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
-                    loading="lazy"
-                  />
-                </div>
-              </>
+              <div className="text-center text-[8.5px] max-w-xs text-neutral-500 tracking-wider flex items-center gap-1.5 uppercase leading-normal">
+                <Cpu className="w-3 h-3 text-[#9E7B4C]" />
+                <span>Locate & click 3 blinking signal nodes to decrypt daily intelligence dispatch</span>
+              </div>
             )}
           </div>
         )}
 
-        {/* Content Block */}
-        <div className="p-5 sm:p-6 md:p-7 flex flex-col justify-between flex-1">
-          <div>
-            <div className="flex items-center gap-2 mb-3.5 flex-wrap">
-              <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2.5 py-0.5 rounded-sm">
-                WHAT HAPPENED TODAY · {dossier.theme?.toUpperCase()}
-              </span>
-              {dossier.year && (
-                <span className="text-[10px] font-mono text-[#8F8A82] tracking-widest uppercase">
-                  YEAR: {dossier.year}
-                </span>
-              )}
+        {/* ── 2. DECRYPTED DAILY DOSSIER CONTENT ── */}
+        {isDecrypted && (
+          <>
+            {/* Cinematic Banner Image */}
+            {wikiImgUrl && (
+              <div className="w-full h-60 sm:h-64 md:h-72 overflow-hidden bg-[#090807] flex flex-col border-b border-neutral-900/60 relative">
+                {imgFailed ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
+                    <LoreMark size={24} color="currentColor" />
+                    <span className="text-[8px] font-mono tracking-[0.15em] uppercase mt-2">DECRYPTED</span>
+                  </div>
+                ) : (
+                  <>
+                    {/* Top Dossier Bar */}
+                    <div className="w-full h-9 z-20 flex-shrink-0 flex items-center justify-between px-3.5 bg-black/55 backdrop-blur-md border-b border-white/5 select-none">
+                      <div className="flex items-center gap-1.5">
+                        <Unlock className="w-3.5 h-3.5 text-[#9E7B4C]" />
+                        <span className="font-mono text-[7.5px] text-[#EDE8DF] tracking-[0.22em] font-bold">SIGNAL DECRYPTED</span>
+                      </div>
+                      <span className="font-mono text-[6.5px] text-neutral-500 tracking-wider">
+                        SEC-DOSS.00{dossier.story_id ? dossier.story_id.slice(-2) : 'XX'}
+                      </span>
+                    </div>
+
+                    {/* Viewport */}
+                    <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center bg-[#110F0D]">
+                      <img
+                        src={wikiImgUrl}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 pointer-events-none scale-115"
+                      />
+                      <img
+                        src={wikiImgUrl}
+                        alt={dossier.title}
+                        onError={() => setImgFailed(true)}
+                        className="relative z-10 max-h-full max-w-full object-contain md:grayscale-[30%] md:opacity-90 md:group-hover:grayscale-0 md:group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.015]"
+                        loading="lazy"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Content Block */}
+            <div className="p-5 sm:p-6 md:p-7 flex flex-col justify-between flex-1">
+              <div>
+                <div className="flex items-center gap-2 mb-3.5 flex-wrap">
+                  <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2.5 py-0.5 rounded-sm">
+                    INTELLIGENCE DISPATCH · {dossier.theme?.toUpperCase()}
+                  </span>
+                  {dossier.year && (
+                    <span className="text-[10px] font-mono text-[#8F8A82] tracking-widest uppercase">
+                      YEAR: {dossier.year}
+                    </span>
+                  )}
+                </div>
+                <h4 className="font-serif italic text-xl sm:text-2xl text-[#EDE8DF] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
+                <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-6">
+                  {dossier.text}
+                </p>
+
+                {/* Theories List Section */}
+                <div className="space-y-4 mb-6 border-t border-neutral-900/60 pt-5">
+                  <div className="flex items-center gap-1.5 text-[9px] font-mono tracking-widest uppercase text-neutral-500 mb-2">
+                    <Terminal className="w-3 h-3 text-[#9E7B4C]" />
+                    <span>Investigative Hypotheses</span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {dossier.theories && dossier.theories.map((t, idx) => (
+                      <div key={idx} className="bg-neutral-900/20 border border-neutral-900/60 p-3 rounded-lg flex flex-col">
+                        <span className="text-[9px] font-mono text-[#9E7B4C] uppercase tracking-wider mb-1 font-bold">
+                          0{idx + 1} · {t.name}
+                        </span>
+                        <p className="text-[11px] leading-relaxed text-neutral-400 font-sans">
+                          {t.explanation}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action & Reaction Footer */}
+              <div className="flex flex-col gap-5 pt-4 border-t border-neutral-900/60 w-full">
+                {wikiPageUrl ? (
+                  <a
+                    href={wikiPageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none w-fit"
+                  >
+                    Read Declassified Wikipedia Source <span className="text-xs">→</span>
+                  </a>
+                ) : <div />}
+
+                {/* Animated reaction pills */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center w-full">
+                  {REACTION_CONFIG.map((r) => {
+                    const isSelected = userReaction === r.id;
+                    const count = reactions[r.id] || 0;
+                    return (
+                      <ReactionPill
+                        key={r.id}
+                        reaction={r}
+                        isSelected={isSelected}
+                        count={count}
+                        onReact={handleReact}
+                        animating={animatingReaction === r.id}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-            <h4 className="font-serif italic text-xl sm:text-2xl text-[#EDE8DF] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
-            <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-6">
-              {dossier.text}
-            </p>
-          </div>
-          <div className="flex flex-col gap-5 pt-4 border-t border-neutral-900/60 w-full">
-            {dossier.wikiUrl ? (
-              <a
-                href={dossier.wikiUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#9E7B4C] hover:text-[#b08c5c] uppercase transition-colors active:scale-95 duration-200 cursor-pointer focus:outline-none w-fit"
-              >
-                Read Wikipedia Article <span className="text-xs">→</span>
-              </a>
-            ) : <div />}
-            {/* Animated premium reaction pills */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center w-full">
-              {REACTION_CONFIG.map((r) => {
-                const isSelected = userReaction === r.id;
-                const count = reactions[r.id] || 0;
-                return (
-                  <ReactionPill
-                    key={r.id}
-                    reaction={r}
-                    isSelected={isSelected}
-                    count={count}
-                    onReact={handleReact}
-                    animating={animatingReaction === r.id}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </>
   );

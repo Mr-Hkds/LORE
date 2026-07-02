@@ -303,7 +303,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   });
 
   const [ghSyncSuccess, setGhSyncSuccess] = useState(() => localStorage.getItem('lore:github:success') === 'true');
-  const [genProgress, setGenProgress] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
 
@@ -813,46 +812,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         storyObj.hero_image = archiveResult.path;
         imageBase64ToCommit = archiveResult.base64Clean;
       } else {
-        addLog(`No Wikipedia photo found. Instructing Gemini to generate custom visual prompt...`);
-        
-        const cat = storyObj.category || '';
-        const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
-        
-        let imagePrompt = '';
-        if (isDocumentType) {
-          imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical topic: "${storyObj.title}".
-This is a government secret or conspiracy. Describe a photocopied declassified US government document from 1975, typewritten black ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture.
-Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
-        } else {
-          imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical/psychological topic: "${storyObj.title}".
-Describe a vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details.
-Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
-        }
-
-        let aiPromptText = `A cinematic, atmospheric dark photo of ${topic}, highly realistic, dramatic lighting`;
-        try {
-          const generatedPrompt = await callGeminiApi([
-            { role: 'user', parts: [{ text: imagePrompt }] }
-          ]);
-          if (generatedPrompt && generatedPrompt.trim().length > 5) {
-            aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
-          }
-        } catch (err) {
-          console.warn('Failed to generate cover prompt via Gemini:', err);
-        }
-
-        let enhancedPrompt = '';
-        if (isDocumentType) {
-          enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
-        } else {
-          enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
-        }
-
-        const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
-        addLog(`Generating premium AI cover image using Flux engine...`);
-        const archiveResult = await archiveRemoteImage(storyObj.story_id, pollinationsUrl);
-        storyObj.hero_image = archiveResult.path;
-        imageBase64ToCommit = archiveResult.base64Clean;
+        addLog(`No Wikipedia photo found. Using typographic fallback cover.`);
+        storyObj.hero_image = null;
       }
 
       // Fetch related scholarly research PDFs from OpenAlex
@@ -1832,188 +1793,7 @@ ${aiPromptTopic}`;
     }
   };
 
-  const handleGenerateMissingImages = async () => {
-    setIsPublishing(true);
-    setPublishStatus('Scanning for missing or broken cover images...');
-    addLog('Scanning database stories for missing or broken cover images...');
 
-    const missing = [];
-    for (let i = 0; i < adminStories.length; i++) {
-      const s = adminStories[i];
-      const img = s.hero_image;
-      let isMissing = false;
-
-      if (!img || img.trim() === '' || img.includes('undefined') || img.includes('null')) {
-        isMissing = true;
-      } else if (!img.startsWith('http://') && !img.startsWith('https://')) {
-        try {
-          const checkUrl = `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
-          const res = await fetch(checkUrl, { method: 'HEAD' });
-          if (!res.ok) {
-            isMissing = true;
-          }
-        } catch {
-          isMissing = true;
-        }
-      }
-
-      if (isMissing) {
-        missing.push(s);
-      }
-    }
-
-    if (missing.length === 0) {
-      setIsPublishing(false);
-      setPublishStatus('');
-      alert('All stories already have valid cover images!');
-      return;
-    }
-
-    if (!window.confirm(`Generate missing/broken cover images for ${missing.length} stories?`)) {
-      setIsPublishing(false);
-      setPublishStatus('');
-      return;
-    }
-
-    setIsPublishing(true);
-    setGenProgress({ current: 0, total: missing.length, percentage: 0 });
-    setPublishStatus('Generating cover images...');
-    addLog(`Found ${missing.length} stories missing or broken cover images. Starting process...`);
-
-    let successCount = 0;
-    const imagesToCommit = [];
-    const updatedMissingStories = [];
-
-    for (let i = 0; i < missing.length; i++) {
-      const story = missing[i];
-      addLog(`[${i + 1}/${missing.length}] Processing story: "${story.title}"...`);
-      try {
-        const imgSearchQuery = story.image_query || story.title;
-        let imageUrl = null;
-        try {
-          imageUrl = await robustFetchWikipediaThumbnail(imgSearchQuery);
-        } catch (err) {
-          console.warn('Wikipedia image search failed:', err);
-        }
-
-        let archiveResult = null;
-        if (imageUrl) {
-          addLog(`Found Wikipedia cover photo. Downloading...`);
-          archiveResult = await archiveRemoteImage(story.story_id, imageUrl);
-        } else {
-          const cat = story.category || '';
-          const isDocumentType = cat === 'gov_experiments' || cat === 'conspiracy' || cat === 'cyber_mysteries';
-          
-          let imagePrompt = '';
-          if (isDocumentType) {
-            imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical topic: "${story.title}".
-This is a government secret or conspiracy. Describe a photocopied declassified US government document from 1975, typewritten black ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture.
-Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
-          } else {
-            imagePrompt = `Create a highly descriptive, detailed image generation prompt for the dark historical/psychological topic: "${story.title}".
-Describe a vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details.
-Write a single descriptive sentence. Do NOT use words like "photorealistic", "ultra-detailed", or markdown. Output the prompt text only.`;
-          }
-
-          let aiPromptText = `A cinematic, atmospheric dark photo of ${story.title}, ${story.hook || 'highly realistic, dramatic lighting'}`;
-          if (apiKey) {
-            addLog(`No Wikipedia photo found. Generating Flux prompt with Gemini...`);
-            try {
-              const generatedPrompt = await callGeminiApi([
-                { role: 'user', parts: [{ text: imagePrompt }] }
-              ]);
-              if (generatedPrompt && generatedPrompt.trim().length > 5) {
-                aiPromptText = generatedPrompt.trim().replace(/"/g, '').replace(/\n/g, ' ');
-              }
-            } catch (err) {
-              console.warn('Failed to generate prompt via Gemini:', err);
-            }
-          } else {
-            addLog(`No Wikipedia photo found. Gemini API key missing. Using template fallback for Flux prompt.`);
-          }
-
-          let enhancedPrompt = '';
-          if (isDocumentType) {
-            enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, photocopied declassified US government document scan, black typewritten ink text redacted with thick black marker, red ink SECRET stamp at top, vintage paper grain, photocopier scanner artifacts, authentic retro forensic document texture`;
-          } else {
-            enhancedPrompt = `${aiPromptText.trim().replace(/\.$/, '')}, vintage grainy 1970s Polaroid police archival photo, flash glare reflection, low-key chiaroscuro lighting, deep atmospheric shadows, subtle analog film grain, muted realistic colors, authentic forensic photography details, shot on vintage film camera`;
-          }
-
-          const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=800&height=600&nologo=true&private=true&model=flux`;
-          addLog(`Generating premium AI cover image using Flux engine...`);
-          archiveResult = await archiveRemoteImage(story.story_id, pollinationsUrl);
-        }
-
-        if (archiveResult && archiveResult.path) {
-          const newHeroImage = archiveResult.path;
-          addLog(`Updating story database record with new image...`);
-          const res = await fetch(`/api/stories/${story.story_id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...story, hero_image: newHeroImage, image_missing: 0 })
-          });
-          if (res.ok) {
-            successCount++;
-            addLog(`✓ Successfully updated cover for "${story.title}"`);
-            
-            const updatedStory = { ...story, hero_image: newHeroImage, image_missing: 0 };
-            updatedMissingStories.push(updatedStory);
-            
-            if (archiveResult.base64Clean) {
-              imagesToCommit.push({
-                path: `public${newHeroImage}`,
-                content: archiveResult.base64Clean,
-                isBinary: true
-              });
-            }
-          } else {
-            addLog(`❌ Failed to update database record for "${story.title}"`);
-          }
-        }
-      } catch (err) {
-        addLog(`❌ Error generating image for "${story.title}": ${err.message}`);
-      }
-      setGenProgress({
-        current: i + 1,
-        total: missing.length,
-        percentage: Math.round(((i + 1) / missing.length) * 100)
-      });
-    }
-
-    addLog(`Process complete. Successfully updated ${successCount} out of ${missing.length} cover images.`);
-
-    if (successCount > 0 && ghToken) {
-      addLog('Pushing updated stories to GitHub repository...');
-      setPublishStatus('Syncing updates to GitHub live site...');
-      try {
-        const updatedStories = adminStories.map(s => {
-          const match = updatedMissingStories.find(um => um.story_id === s.story_id);
-          return match ? match : s;
-        });
-
-        const liveStories = updatedStories.filter(s => !s.draft);
-        const newConceptIndex = rebuildConceptIndex(liveStories);
-        
-        const filesToCommit = [
-          { path: 'public/content/stories.json', content: JSON.stringify({ stories: liveStories }, null, 2) },
-          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
-          ...imagesToCommit
-        ];
-
-        await commitFilesToGitHub(filesToCommit, `admin: generate cover images for ${successCount} stories`);
-        addLog('🚀 Successfully committed and synced cover images directly to GitHub!');
-      } catch (err) {
-        addLog(`❌ GitHub Sync failed: ${err.message}`);
-      }
-    }
-
-    setToast({ text: `Generated cover images for ${successCount} stories!`, type: 'success' });
-    setIsPublishing(false);
-    setPublishStatus('');
-    setGenProgress(null);
-    await loadAdminStories();
-    if (refetchStories) refetchStories();
-  };
 
   // Image Upload handler
   const handleUploadImage = async (e, storyId) => {
@@ -2738,15 +2518,8 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                     </button>
                   )}
                   <button
-                    onClick={handleGenerateMissingImages}
-                    disabled={isPublishing}
-                    className="px-3.5 py-2 bg-indigo-900/80 hover:bg-indigo-800 disabled:opacity-50 text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
-                  >
-                    <span>⚡</span> Generate Missing Images
-                  </button>
-                  <button
                     onClick={handleCreateNewStory}
-                    className="px-3.5 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer"
+                    className="px-3.5 py-2 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-[10px] font-bold tracking-wider uppercase rounded-lg active:scale-95 transition-all cursor-pointer font-bold"
                   >
                     + Create New Story
                   </button>
@@ -2785,23 +2558,7 @@ Write a single descriptive sentence. Do NOT use words like "photorealistic", "ul
                 </div>
               )}
 
-              {genProgress && (
-                <div className="p-4 bg-[#0D0B08] border border-indigo-900/30 rounded-xl space-y-2 text-left">
-                  <div className="flex justify-between items-center text-xs font-mono text-[#EDE8DF]">
-                    <span className="tracking-widest uppercase text-[#9E7B4C] flex items-center gap-1.5 animate-pulse font-bold">
-                      <span>⚡</span> Compiling Cover Images
-                    </span>
-                    <span>{genProgress.current} / {genProgress.total} ({genProgress.percentage}%)</span>
-                  </div>
-                  <div className="w-full bg-[#110F0D] h-2 rounded-full overflow-hidden border border-neutral-900">
-                    <div
-                      className="bg-indigo-600 h-full rounded-full transition-all duration-300"
-                      style={{ width: `${genProgress.percentage}%` }}
-                    />
-                  </div>
-                  <p className="text-[10px] text-[#6A6560] font-mono">{publishStatus}</p>
-                </div>
-              )}
+
 
               {editingStoryId ? (
                 // Story Editor Panel
