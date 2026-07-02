@@ -456,8 +456,8 @@
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
-    "the_mary_celeste_mystery",
-    "uss_cyclops_vanishing"
+    "uss_cyclops_vanishing",
+    "the_mary_celeste_mystery"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -592,20 +592,6 @@
   "drug_policy": [
     "the_rat_park_experiment_001"
   ],
-  "ghost_ship": [
-    "the_mary_celeste_mystery"
-  ],
-  "maritime_mystery": [
-    "the_mary_celeste_mystery",
-    "eilean_mor_lighthouse_mystery",
-    "uss_cyclops_vanishing"
-  ],
-  "abandoned_vessel": [
-    "the_mary_celeste_mystery"
-  ],
-  "sea_legends": [
-    "the_mary_celeste_mystery"
-  ],
   "brain_injury": [
     "phineas_gage_brain_injury"
   ],
@@ -656,6 +642,11 @@
   ],
   "military_infrastructure": [
     "project_iceworm_secret_city"
+  ],
+  "maritime_mystery": [
+    "eilean_mor_lighthouse_mystery",
+    "uss_cyclops_vanishing",
+    "the_mary_celeste_mystery"
   ],
   "isolated_location": [
     "eilean_mor_lighthouse_mystery"
@@ -1084,5 +1075,14 @@
   ],
   "haunted_location": [
     "edinburgh_vaults_001"
+  ],
+  "ghost_ship": [
+    "the_mary_celeste_mystery"
+  ],
+  "abandoned_vessel": [
+    "the_mary_celeste_mystery"
+  ],
+  "sea_legends": [
+    "the_mary_celeste_mystery"
   ]
 }
