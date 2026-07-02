@@ -73,7 +73,8 @@
     "operation_northwoods_001"
   ],
   "national_security": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "moonlight_maze_cyber_espionage"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -453,7 +454,8 @@
   "survival_horror": [
     "franklin_expedition_lost_ships",
     "the_batavia_shipwreck_mutiny",
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "wendigo_insatiable_hunger"
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
@@ -464,7 +466,8 @@
     "franklin_expedition_lost_ships"
   ],
   "cannibalism": [
-    "franklin_expedition_lost_ships"
+    "franklin_expedition_lost_ships",
+    "wendigo_insatiable_hunger"
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
@@ -912,7 +915,8 @@
     "echelon_global_surveillance"
   ],
   "cold_war_legacy": [
-    "echelon_global_surveillance"
+    "echelon_global_surveillance",
+    "moonlight_maze_cyber_espionage"
   ],
   "mass_interception": [
     "echelon_global_surveillance"
@@ -1110,5 +1114,23 @@
   ],
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
+  ],
+  "cyber_espionage": [
+    "moonlight_maze_cyber_espionage"
+  ],
+  "state-sponsored_hacking": [
+    "moonlight_maze_cyber_espionage"
+  ],
+  "data_theft": [
+    "moonlight_maze_cyber_espionage"
+  ],
+  "unseen_warfare": [
+    "moonlight_maze_cyber_espionage"
+  ],
+  "wendigo_psychosis": [
+    "wendigo_insatiable_hunger"
+  ],
+  "cultural_fear": [
+    "wendigo_insatiable_hunger"
   ]
 }
