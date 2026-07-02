@@ -248,8 +248,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             >
               SevenDescents
             </span>
-            <div className="w-[1px] h-3 bg-neutral-850" />
-            <span className="font-mono text-[7px] tracking-[0.14em] text-[#EDE8DF]/90 bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2 py-0.5 rounded-sm uppercase whitespace-nowrap">
+            <div className="w-[1px] h-3 bg-neutral-800" />
+            <span className="font-mono text-[7.5px] tracking-[0.16em] text-[#EDE8DF] bg-[#9E7B4C]/12 border border-[#9E7B4C]/35 px-2.5 py-0.5 rounded-sm uppercase whitespace-nowrap">
               {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </span>
           </div>
@@ -876,9 +876,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
         <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
           {/* Disclaimer row */}
-          <div className="w-full text-center border-b border-dashed pb-6" style={{ borderColor: 'rgba(237,232,223,0.06)' }}>
-            <p className="text-[8px] font-mono tracking-[0.16em] uppercase opacity-40 leading-relaxed max-w-xl mx-auto">
-              Disclaimer: The material compiled in SevenDescents is curated for historical, psychological, and investigative research. The archives document anomalous, classified, and extreme human events. User discretion is advised.
+          <div className="w-full max-w-2xl mx-auto text-center border-t border-b border-dashed py-5 my-2" style={{ borderColor: 'rgba(158, 123, 76, 0.12)', backgroundColor: 'rgba(158, 123, 76, 0.01)' }}>
+            <span className="block text-[8px] font-mono tracking-[0.25em] text-[#9E7B4C] mb-2 uppercase font-bold">
+              PUBLIC NOTICE // ARCHIVAL PROTOCOL
+            </span>
+            <p className="text-[8px] font-mono tracking-[0.15em] uppercase opacity-45 leading-relaxed max-w-xl mx-auto px-4">
+              The contents of the SevenDescents digital database are compiled strictly for historical, academic, and psychological research. The archives document verified events, anomalous reports, and psychological phenomena. User discretion is advised.
             </p>
           </div>
           
