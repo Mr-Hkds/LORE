@@ -32,13 +32,13 @@
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_blue_book_ufo",
     "operation_gladio",
     "the_phoenix_program",
-    "the_russian_woodpecker_duga_3"
+    "the_russian_woodpecker_duga_3",
+    "operation_paperclip_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -456,8 +456,8 @@
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
-    "uss_cyclops_vanishing",
-    "the_mary_celeste_mystery"
+    "the_mary_celeste_mystery",
+    "uss_cyclops_vanishing"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -530,9 +530,9 @@
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
     "project_artichoke_mind_control",
-    "operation_paperclip_001",
     "project_blue_book_ufo",
-    "project_shamrock"
+    "project_shamrock",
+    "operation_paperclip_001"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -592,6 +592,20 @@
   "drug_policy": [
     "the_rat_park_experiment_001"
   ],
+  "ghost_ship": [
+    "the_mary_celeste_mystery"
+  ],
+  "maritime_mystery": [
+    "the_mary_celeste_mystery",
+    "eilean_mor_lighthouse_mystery",
+    "uss_cyclops_vanishing"
+  ],
+  "abandoned_vessel": [
+    "the_mary_celeste_mystery"
+  ],
+  "sea_legends": [
+    "the_mary_celeste_mystery"
+  ],
   "brain_injury": [
     "phineas_gage_brain_injury"
   ],
@@ -642,11 +656,6 @@
   ],
   "military_infrastructure": [
     "project_iceworm_secret_city"
-  ],
-  "maritime_mystery": [
-    "eilean_mor_lighthouse_mystery",
-    "uss_cyclops_vanishing",
-    "the_mary_celeste_mystery"
   ],
   "isolated_location": [
     "eilean_mor_lighthouse_mystery"
@@ -714,21 +723,6 @@
   ],
   "catastrophic_events": [
     "mystery_of_dwarka"
-  ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
-  ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
-  ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
-  ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
   ],
   "serial_bomber": [
     "the_unabomber_ted_kaczynski_campaign_of_terror"
@@ -1076,13 +1070,19 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
-  "ghost_ship": [
-    "the_mary_celeste_mystery"
+  "unethical_recruitment": [
+    "operation_paperclip_001"
   ],
-  "abandoned_vessel": [
-    "the_mary_celeste_mystery"
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
   ],
-  "sea_legends": [
-    "the_mary_celeste_mystery"
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ]
 }
