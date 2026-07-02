@@ -6680,7 +6680,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/curse_of_tutankhamun/cover.jpg",
       "added_date": "2026-07-02",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 52,
         "gripping": 40,
@@ -6740,7 +6740,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6755,6 +6755,23 @@
         "enduring_belief"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/sapta_chiranjeevi_unseen_guardians/cover.jpg",
+      "added_date": "2026-07-02",
+      "draft": 0,
+      "reactions": {
+        "like": 33,
+        "gripping": 36,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "mahadev_and_sati_dossier",
+          "shared_concept": "ancient_legends",
+          "transition_line": "Just as the enduring grief of Mahadev shaped cosmic reality, the timeless tales of the Sapta Chiranjeevi remind us that some ancient forces continue to silently weave through the fabric of our modern world."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -6799,15 +6816,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "mahadev_and_sati_dossier",
-          "shared_concept": "ancient_legends",
-          "transition_line": "Just as the enduring grief of Mahadev shaped cosmic reality, the timeless tales of the Sapta Chiranjeevi remind us that some ancient forces continue to silently weave through the fabric of our modern world."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
