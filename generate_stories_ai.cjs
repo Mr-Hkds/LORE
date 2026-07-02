@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const db = require('./db.cjs');
 
 // Helper to find API key
 function getApiKey() {
@@ -656,6 +657,15 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       storiesData.stories.push(storyObj);
       console.log(`Story generated successfully: "${storyObj.title}"`);
 
+      // Save directly to database (remote Turso or local SQLite fallback)
+      try {
+        console.log(`[DB ENGINE] Saving generated story "${storyObj.title}" to database...`);
+        await db.insertStory(storyObj);
+        console.log('[DB ENGINE] Successfully saved story to database.');
+      } catch (dbErr) {
+        console.error('[DB ENGINE] Failed to save story to database:', dbErr.message);
+      }
+
       // Update concept index
       if (storyObj.concepts) {
         // Clear old occurrences
@@ -676,6 +686,11 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       if (item.recId) {
         recommendations = recommendations.map(r => r.id === item.recId ? { ...r, status: 'generated' } : r);
         console.log(`Marked recommendation ID: ${item.recId} as generated.`);
+        try {
+          await db.updateRecommendationStatus(item.recId, 'generated');
+        } catch (dbErr) {
+          console.warn('[DB ENGINE] Failed to update recommendation status:', dbErr.message);
+        }
       }
     } catch (e) {
       console.error(`FAILED to generate story for: "${item.topic}". Error:`, e.message);
@@ -706,6 +721,15 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
     console.error('Failed to write automation status file:', err.message);
   }
 
+  // Close database client to allow process to exit cleanly
+  try {
+    if (db.client && typeof db.client.close === 'function') {
+      db.client.close();
+    }
+  } catch (err) {
+    // Ignore close errors
+  }
+
   console.log('\n--- ARCHIVE REPOSITORY FILES UPDATED SUCCESSFULLY ---');
 }
 
@@ -727,5 +751,12 @@ run().catch(err => {
   } catch (writeErr) {
     console.error('Failed to write failure status file:', writeErr.message);
   }
+  
+  try {
+    if (db.client && typeof db.client.close === 'function') {
+      db.client.close();
+    }
+  } catch (e) {}
+
   process.exit(1);
 });
