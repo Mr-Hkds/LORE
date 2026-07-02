@@ -442,15 +442,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDate, setFilterDate] = useState('all');
-  const [filterMissingImages, setFilterMissingImages] = useState(false);
-  const [rowPreviews, setRowPreviews] = useState({});
   const [editImageFailed, setEditImageFailed] = useState(false);
-  const [pasteConfirmation, setPasteConfirmation] = useState(null);
-  const [pasteUploading, setPasteUploading] = useState(false);
-  const [pasteError, setPasteError] = useState(null);
-  const [pasteSuccess, setPasteSuccess] = useState(false);
-  const [pasteStatusText, setPasteStatusText] = useState('');
-  const [pasteProgress, setPasteProgress] = useState(0);
 
   const getShortTitle = (title) => {
     if (!title) return '';
@@ -1193,7 +1185,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const handlePublishStory = async (storyId, bypassImageCheck = false) => {
     const targetStory = adminStories.find(s => s.story_id === storyId);
     if (!bypassImageCheck && isImageMissing(targetStory)) {
-      setToast({ text: 'Story lacks a proper thumbnail. Transferred to Approval Queue.', type: 'error' });
+      setToast({ text: 'Story lacks a proper thumbnail. Transferred to Missing Images tab.', type: 'error' });
       setActiveTab('approval');
       return;
     }
@@ -1293,78 +1285,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     loadAdminStories();
   }, [loadFeedback, loadRecommendations, loadAdminStories]);
 
-  const handlePasteTrigger = (story, sourceUrl) => {
-    setRowPreviews(prev => ({ ...prev, [story.story_id]: sourceUrl }));
-    setPasteConfirmation({
-      story_id: story.story_id,
-      title: story.title,
-      imageSource: sourceUrl,
-      story
-    });
-  };
 
-  const handleConfirmPastePublish = async () => {
-    if (!pasteConfirmation) return;
-    setPasteUploading(true);
-    setPasteError(null);
-    setPasteProgress(0);
-    setPasteStatusText('Initiating database sync...');
-    
-    const { story_id, imageSource } = pasteConfirmation;
-    let savedImageUrl = imageSource;
-    
-    const progressTimer = setInterval(() => {
-      setPasteProgress(prev => {
-        if (prev < 50) return prev + 12;
-        if (prev < 80) return prev + 6;
-        if (prev < 95) return prev + 2;
-        return prev;
-      });
-    }, 400);
-    
-    try {
-      setPasteStatusText('Updating database & syncing to GitHub...');
-      const savedImg = await handleSaveImageSource(story_id, imageSource);
-      if (savedImg) {
-        savedImageUrl = savedImg;
-      }
-      
-      // Commit succeeded — update state optimistically and close
-      clearInterval(progressTimer);
-      setPasteProgress(100);
-      setPasteSuccess(true);
-      setPasteStatusText(ghToken ? 'Committed to GitHub — Vercel will deploy automatically.' : 'Database synchronized.');
-      
-      setAdminStories(prev => prev.map(s => s.story_id === story_id ? { 
-        ...s, 
-        hero_image: savedImageUrl, 
-        image_missing: 0, 
-        draft: 0,
-        added_date: s.added_date && s.added_date !== '2026-01-01' ? s.added_date : new Date().toLocaleDateString('en-CA')
-      } : s));
-      
-      setTimeout(() => {
-        setPasteConfirmation(null);
-        setPasteSuccess(false);
-        setPasteUploading(false);
-        setRowPreviews(prev => {
-          const next = { ...prev };
-          delete next[story_id];
-          return next;
-        });
-      }, 1500);
-      
-    } catch (err) {
-      clearInterval(progressTimer);
-      setPasteError(err.message || 'Sync failed. Please try again.');
-      setPasteUploading(false);
-      setRowPreviews(prev => {
-        const next = { ...prev };
-        delete next[story_id];
-        return next;
-      });
-    }
-  };
+
 
   // Story editor utilities
   const startEditing = (story) => {
@@ -2229,11 +2151,9 @@ ${aiPromptTopic}`;
         }
       }
       
-      const matchesMissingImage = !filterMissingImages || isImageMissing(story);
-      
-      return matchesSearch && matchesCategory && matchesDate && matchesMissingImage;
+      return matchesSearch && matchesCategory && matchesDate;
     });
-  }, [adminStories, searchQuery, filterCategory, filterDate, filterMissingImages, isImageMissing]);
+  }, [adminStories, searchQuery, filterCategory, filterDate]);
 
   // Grouped filtered stories by category, sorted by date descending
   const groupedStories = useMemo(() => {
@@ -2285,7 +2205,7 @@ ${aiPromptTopic}`;
   }, [adminStories, isImageMissing]);
 
   const approvalStories = useMemo(() => {
-    return adminStories.filter(s => s.draft && isImageMissing(s));
+    return adminStories.filter(s => isImageMissing(s));
   }, [adminStories, isImageMissing]);
 
   const avgRating = useMemo(() => {
@@ -2302,9 +2222,6 @@ ${aiPromptTopic}`;
     });
   }, [feedbackItems, feedbackFilter]);
 
-  const missingImageStoriesCount = useMemo(() => {
-    return adminStories.filter(s => isImageMissing(s)).length;
-  }, [adminStories, isImageMissing]);
 
   return (
     <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: bg, color: fg }}>
@@ -2430,9 +2347,9 @@ ${aiPromptTopic}`;
               activeTab === 'approval' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
-            <span>Approval Queue</span>
+            <span>Missing Images</span>
             {approvalStories.length > 0 && (
-              <span className="bg-red-500/20 border border-red-500/40 text-red-400 text-[9px] px-1.5 py-0.5 rounded-md font-mono font-bold animate-pulse">
+              <span className="bg-[#9E7B4C]/20 border border-[#9E7B4C]/45 text-[#9E7B4C] text-[9px] px-1.5 py-0.5 rounded-md font-mono font-bold">
                 {approvalStories.length}
               </span>
             )}
@@ -2526,37 +2443,7 @@ ${aiPromptTopic}`;
                 </div>
               </div>
 
-              {/* Asset Health Warning Alert Banner */}
-              {!editingStoryId && missingImageStoriesCount > 0 && (
-                <div 
-                  className="p-4 rounded-lg text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all duration-300 font-mono"
-                  style={{
-                    backgroundColor: 'rgba(239, 68, 68, 0.02)',
-                    border: '1px solid rgba(239, 68, 68, 0.25)',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-                  }}
-                >
-                  <div className="flex flex-col gap-1">
-                    <div className="text-[10px] font-bold text-red-500 uppercase tracking-[0.2em] flex items-center gap-2">
-                      <span>[!] SYSTEM ALERT: DEGRADED MEDIA SIGNAL</span>
-                    </div>
-                    <p className="text-xs text-neutral-400 mt-1">
-                      Detected <strong className="text-red-400 font-bold">{missingImageStoriesCount} {missingImageStoriesCount === 1 ? "dossier" : "dossiers"}</strong> with missing cover assets. Upload or paste media to restore system integrity.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setFilterMissingImages(prev => !prev)}
-                    className="px-3.5 py-1.5 text-[9px] font-mono font-bold tracking-[0.15em] uppercase rounded border transition-all duration-200 active:scale-95 flex-shrink-0 cursor-pointer select-none"
-                    style={{
-                      color: filterMissingImages ? '#EDE8DF' : '#EF4444',
-                      borderColor: filterMissingImages ? 'rgba(237, 232, 223, 0.2)' : 'rgba(239, 68, 68, 0.35)',
-                      backgroundColor: filterMissingImages ? 'rgba(255,255,255,0.05)' : 'rgba(239, 68, 68, 0.06)'
-                    }}
-                  >
-                    {filterMissingImages ? "Show All Archives" : "Filter Missing"}
-                  </button>
-                </div>
-              )}
+
 
 
 
@@ -2988,14 +2875,7 @@ ${aiPromptTopic}`;
                                       </span>
                                     )}
 
-                                    {isImageMissing(story) && (
-                                      <span 
-                                        className="text-[8px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 uppercase"
-                                        title="No cover image set or file path is offline."
-                                      >
-                                        ⚠️ Missing Image
-                                      </span>
-                                    )}
+
 
                                     {/* Quality Score Badge */}
                                     <span 
@@ -3026,71 +2906,7 @@ ${aiPromptTopic}`;
                                     )}
                                   </div>
                                   {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
-                                  {isImageMissing(story) && (
-                                    <div className="mt-2.5 pt-2 border-t border-dashed border-neutral-900/60 flex items-center gap-3">
-                                      <a
-                                        href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:-]/)[0].trim() + ' conceptual art')}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="text-[8px] font-mono tracking-widest text-[#F59E0B] hover:text-[#F59E0B]/90 bg-[#F59E0B]/5 hover:bg-[#F59E0B]/10 border border-[#F59E0B]/20 px-2.5 py-1.5 rounded cursor-pointer select-none transition-all duration-200"
-                                        style={{ textDecoration: 'none' }}
-                                      >
-                                        🔍 Search Google
-                                      </a>
-                                      <div className="flex-1 flex items-center gap-2">
-                                        {rowPreviews[story.story_id] && (
-                                          <div className="w-8 h-6 rounded border border-neutral-800 overflow-hidden flex-shrink-0 bg-black flex items-center justify-center relative">
-                                            <img src={rowPreviews[story.story_id]} alt="Pasted preview" className="w-full h-full object-cover" />
-                                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                                              <span className="w-2 h-2 rounded-full border-t border-b border-amber-500 animate-spin" />
-                                            </div>
-                                          </div>
-                                        )}
-                                        <input
-                                          type="text"
-                                          placeholder={rowPreviews[story.story_id] ? "Signal acquired, synchronizing database..." : "Ctrl+V here to paste cover image or URL..."}
-                                          disabled={!!rowPreviews[story.story_id]}
-                                          onClick={(e) => e.stopPropagation()}
-                                          onPaste={async (e) => {
-                                             e.preventDefault();
-                                             e.stopPropagation();
-                                             
-                                             let pastedText = e.clipboardData?.getData('text')?.trim() || '';
-                                             if (pastedText.startsWith('//')) {
-                                               pastedText = 'https:' + pastedText;
-                                             } else if (pastedText.startsWith('/') && !pastedText.startsWith('/content/')) {
-                                               pastedText = 'https://media.cnn.com' + pastedText;
-                                             }
-                                             
-                                             if (pastedText.startsWith('http') || pastedText.startsWith('data:image')) {
-                                               handlePasteTrigger(story, pastedText);
-                                               return;
-                                             }
-                                             
-                                             const items = e.clipboardData?.items;
-                                             if (items) {
-                                               for (let i = 0; i < items.length; i++) {
-                                                 const item = items[i];
-                                                 if (item.type.indexOf('image') !== -1) {
-                                                   const file = item.getAsFile();
-                                                   if (file) {
-                                                     const reader = new FileReader();
-                                                     reader.onloadend = async () => {
-                                                       handlePasteTrigger(story, reader.result);
-                                                     };
-                                                     reader.readAsDataURL(file);
-                                                     return;
-                                                   }
-                                                 }
-                                               }
-                                             }
-                                           }}
-                                          className="w-full px-2.5 py-1 bg-black text-[#EDE8DF]/90 text-[9px] rounded border border-neutral-900 focus:border-[#F59E0B]/50 focus:outline-none placeholder-neutral-700 font-mono disabled:opacity-50"
-                                        />
-                                      </div>
-                                    </div>
-                                  )}
+                                  {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                                 </div>
                               <div className="flex gap-2 flex-shrink-0">
                                 {story.draft && (
@@ -3132,14 +2948,14 @@ ${aiPromptTopic}`;
             </div>
           )}
 
-          {/* Tab: Approval Queue */}
+          {/* Tab: Missing Images */}
           {activeTab === 'approval' && (
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b pb-4 text-left" style={{ borderColor: ru }}>
                 <div className="text-left">
-                  <h2 className="font-serif italic text-2xl">Approval Queue</h2>
+                  <h2 className="font-serif italic text-2xl">Missing Images</h2>
                   <p className="text-xs text-[#6A6560] mt-1">
-                    Dossier drafts missing a valid cover thumbnail. Add an image or generate one using Flux AI to publish.
+                    All active dossiers missing a valid cover thumbnail image. Add a cover image or paste a URL to make them complete.
                   </p>
                 </div>
               </div>
@@ -3147,9 +2963,9 @@ ${aiPromptTopic}`;
               {approvalStories.length === 0 ? (
                 <div className="py-16 text-center border border-dashed rounded-xl bg-neutral-950/10 border-neutral-800 space-y-3">
                   <div className="text-2xl text-[#9E7B4C]/40">✓</div>
-                  <p className="font-serif italic text-[#EDE8DF]/75">No dossiers require approval.</p>
+                  <p className="font-serif italic text-[#EDE8DF]/75">No dossiers have missing images.</p>
                   <p className="text-[10px] font-mono text-[#6A6560] uppercase tracking-wider">
-                    All current drafts have valid thumbnail images assigned.
+                    All archives have valid cover thumbnail images assigned.
                   </p>
                 </div>
               ) : (
@@ -4095,156 +3911,7 @@ ${aiPromptTopic}`;
         </div>
       )}
 
-      {/* Paste Confirmation Modal Popup */}
-      {pasteConfirmation && (
-        <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
-          <div 
-            className="w-full max-w-md bg-[#0C0A08] border rounded-2xl overflow-hidden shadow-2xl flex flex-col font-mono text-left"
-            style={{ borderColor: 'rgba(158,123,76,0.3)' }}
-          >
-            {/* Header */}
-            <div className="p-4 border-b border-neutral-900 bg-neutral-950 flex items-center justify-between">
-              <div className="space-y-0.5">
-                <span className="text-[7.5px] tracking-widest text-[#9E7B4C] uppercase font-bold">
-                  // TELEMETRY IMAGE SYNC GATING
-                </span>
-                <h3 className="font-serif italic text-sm text-[#EDE8DF] truncate max-w-[280px]">
-                  {pasteConfirmation.title}
-                </h3>
-              </div>
-              <button
-                disabled={pasteUploading}
-                onClick={() => {
-                  setPasteConfirmation(null);
-                  setPasteError(null);
-                  setPasteSuccess(false);
-                  setPasteUploading(false);
-                  setRowPreviews(prev => {
-                    const next = { ...prev };
-                    delete next[pasteConfirmation.story_id];
-                    return next;
-                  });
-                }}
-                className="text-[9px] font-mono tracking-widest uppercase hover:opacity-60 cursor-pointer text-neutral-500 disabled:opacity-30"
-              >
-                [ESC]
-              </button>
-            </div>
 
-            {/* Body */}
-            <div className="p-4 space-y-4">
-              <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-900 bg-neutral-950 flex items-center justify-center">
-                {pasteUploading && (
-                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center gap-3 z-10 px-6 text-center">
-                    <span className="w-8 h-8 rounded-full border-2 border-t-transparent border-[#9E7B4C] animate-spin" />
-                    <div className="space-y-1 w-full max-w-[240px]">
-                      <p className="text-[9px] uppercase tracking-widest text-[#9E7B4C] font-bold animate-pulse">Syncing visual telemetry...</p>
-                      <p className="text-[7.5px] text-neutral-400 font-mono truncate">{pasteStatusText}</p>
-                    </div>
-                    <div className="w-full max-w-[200px] h-1 bg-neutral-900 rounded-full overflow-hidden border border-neutral-950 mt-1">
-                      <div 
-                        className="h-full bg-[#9E7B4C] transition-all duration-300 ease-out"
-                        style={{ width: `${pasteProgress}%` }}
-                      />
-                    </div>
-                    <span className="text-[7.5px] font-mono text-[#9E7B4C]/80">{pasteProgress}%</span>
-                  </div>
-                )}
-                {pasteSuccess && (
-                  <div className="absolute inset-0 bg-black/95 flex flex-col items-center justify-center gap-2.5 z-10 px-6 text-center">
-                    <span className="text-xl text-[#10B981]">✓</span>
-                    <div className="space-y-1 w-full max-w-[240px]">
-                      <p className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold">Signal Synchronized</p>
-                      <p className="text-[7.5px] text-neutral-400 font-mono truncate">{pasteStatusText || 'Dossier successfully published live.'}</p>
-                    </div>
-                    <div className="w-full max-w-[200px] h-1 bg-[#10B981]/20 rounded-full overflow-hidden border border-neutral-950 mt-1">
-                      <div 
-                        className="h-full bg-[#10B981] transition-all duration-300 ease-out"
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                  </div>
-                )}
-                {pasteError ? (
-                  <div className="absolute inset-0 bg-red-950/90 flex flex-col items-center justify-center gap-2 p-4 text-center z-10">
-                    <span className="text-xl">⚠️</span>
-                    <p className="text-[9px] uppercase tracking-widest text-red-500 font-bold">Signal Error</p>
-                    <p className="text-[8px] text-neutral-400 mt-1 max-w-[280px] break-words line-clamp-3">{pasteError}</p>
-                    <button
-                      onClick={() => handleConfirmPastePublish()}
-                      className="mt-2 text-[8px] uppercase tracking-widest text-red-400 hover:text-red-300 font-bold underline cursor-pointer"
-                    >
-                      Retry sync
-                    </button>
-                  </div>
-                ) : null}
-                <img 
-                  src={pasteConfirmation.imageSource} 
-                  alt="Pasted preview" 
-                  className="w-full h-full object-cover"
-                  onError={() => {
-                    console.warn('Pasted image failed to load in frontend canvas.');
-                  }}
-                />
-              </div>
-
-              <div className="space-y-3">
-                <div className="rounded-lg bg-black/40 border border-neutral-900 p-2.5 space-y-1 text-[8px]">
-                  <div className="flex justify-between">
-                    <span className="text-[#6A6560]">DOSSIER ID:</span>
-                    <span className="text-neutral-400 font-bold">{pasteConfirmation.story_id}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-[#6A6560]">STATUS:</span>
-                    <span className={pasteConfirmation.story.draft ? "text-amber-500 font-bold" : "text-emerald-500 font-bold"}>
-                      {pasteConfirmation.story.draft ? "DRAFT (AUTO-PUBLISH ON SAVE)" : "LIVE"}
-                    </span>
-                  </div>
-                  <div className="space-y-0.5 mt-1 border-t border-neutral-900 pt-1.5 text-left">
-                    <span className="text-[#6A6560] block">RESOLVED SOURCE URI:</span>
-                    <span className="text-neutral-500 font-mono break-all line-clamp-2 block bg-black/60 p-1 rounded mt-0.5 select-all">
-                      {pasteConfirmation.imageSource}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="p-4 border-t border-neutral-900 bg-neutral-950 flex justify-between gap-3">
-              <button
-                disabled={pasteUploading || pasteSuccess}
-                onClick={() => {
-                  setPasteConfirmation(null);
-                  setPasteError(null);
-                  setPasteSuccess(false);
-                  setPasteUploading(false);
-                  setRowPreviews(prev => {
-                    const next = { ...prev };
-                    delete next[pasteConfirmation.story_id];
-                    return next;
-                  });
-                }}
-                className="px-3.5 py-2 bg-transparent hover:bg-white/5 border border-neutral-800 text-neutral-400 hover:text-[#EDE8DF] text-[9px] font-bold uppercase tracking-widest rounded-lg active:scale-95 transition-all cursor-pointer disabled:opacity-30"
-              >
-                Abort Sync
-              </button>
-              <button
-                disabled={pasteUploading || pasteSuccess}
-                onClick={handleConfirmPastePublish}
-                className="px-4 py-2 text-white text-[9px] font-bold uppercase tracking-widest rounded-lg active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-30"
-                style={{
-                  background: 'rgba(158,123,76,0.25)',
-                  border: '1px solid rgba(158,123,76,0.4)',
-                  color: '#EDE8DF',
-                }}
-              >
-                {pasteUploading ? 'Synchronizing...' : '✓ Confirm & Publish Live'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
