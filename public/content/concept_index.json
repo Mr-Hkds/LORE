@@ -568,7 +568,8 @@
   ],
   "mass_hysteria": [
     "salem_witch_trials_001",
-    "curse_of_tutankhamun"
+    "curse_of_tutankhamun",
+    "vampire_panic_eastern_europe"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -901,7 +902,8 @@
     "albert_fish_the_gray_man"
   ],
   "global_surveillance": [
-    "echelon_global_surveillance"
+    "echelon_global_surveillance",
+    "ghostnet_global_cyber_espionage"
   ],
   "signals_intelligence": [
     "echelon_global_surveillance",
@@ -1017,7 +1019,8 @@
     "the_children_of_woolpit"
   ],
   "folklore": [
-    "the_children_of_woolpit"
+    "the_children_of_woolpit",
+    "vampire_panic_eastern_europe"
   ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
@@ -1095,7 +1098,8 @@
     "curse_of_tutankhamun"
   ],
   "superstition": [
-    "curse_of_tutankhamun"
+    "curse_of_tutankhamun",
+    "vampire_panic_eastern_europe"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1116,21 +1120,34 @@
     "sapta_chiranjeevi_unseen_guardians"
   ],
   "cyber_espionage": [
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
   ],
   "state-sponsored_hacking": [
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
   ],
   "data_theft": [
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
   ],
   "unseen_warfare": [
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
   ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
   ],
   "cultural_fear": [
     "wendigo_insatiable_hunger"
+  ],
+  "advanced_persistent_threat": [
+    "ghostnet_global_cyber_espionage"
+  ],
+  "post_mortem_changes": [
+    "vampire_panic_eastern_europe"
+  ],
+  "public_panic": [
+    "vampire_panic_eastern_europe"
   ]
 }
