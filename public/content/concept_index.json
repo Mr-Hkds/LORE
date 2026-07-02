@@ -31,14 +31,14 @@
     "the_numbers_stations",
     "project_sunshine_cadaver_collection",
     "project_iceworm_secret_city",
-    "project_artichoke_mind_control",
+    "operation_paperclip_001",
     "tunguska_event_001",
     "echelon_global_surveillance",
     "project_blue_book_ufo",
     "operation_gladio",
     "the_phoenix_program",
     "the_russian_woodpecker_duga_3",
-    "operation_paperclip_001"
+    "project_artichoke_mind_control"
   ],
   "espionage": [
     "uwe_barschel",
@@ -81,9 +81,9 @@
   "covert_operations": [
     "operation_northwoods_001",
     "cia_mk_ultra_program",
-    "project_artichoke_mind_control",
     "operation_gladio",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "project_artichoke_mind_control"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -529,10 +529,10 @@
   "cold_war_era": [
     "project_stargate_remote_viewing",
     "project_iceworm_secret_city",
-    "project_artichoke_mind_control",
+    "operation_paperclip_001",
     "project_blue_book_ufo",
     "project_shamrock",
-    "operation_paperclip_001"
+    "project_artichoke_mind_control"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -706,9 +706,6 @@
   "small_town_secrets": [
     "circleville_letters"
   ],
-  "interrogation_techniques": [
-    "project_artichoke_mind_control"
-  ],
   "lost_civilizations": [
     "mystery_of_dwarka"
   ],
@@ -723,6 +720,21 @@
   ],
   "catastrophic_events": [
     "mystery_of_dwarka"
+  ],
+  "unethical_recruitment": [
+    "operation_paperclip_001"
+  ],
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
+  ],
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ],
   "serial_bomber": [
     "the_unabomber_ted_kaczynski_campaign_of_terror"
@@ -1070,19 +1082,7 @@
   "haunted_location": [
     "edinburgh_vaults_001"
   ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
-  ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
-  ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
-  ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
+  "interrogation_techniques": [
+    "project_artichoke_mind_control"
   ]
 }
