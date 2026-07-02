@@ -561,13 +561,107 @@ const DAILY_STATIC_FALLBACKS = {
   }
 };
 
-function generateDailyDossier(dayOfWeek) {
-  const dossier = { ...DAILY_STATIC_FALLBACKS[dayOfWeek] };
-  dossier.theme = DAILY_THEMES[dayOfWeek].name;
-  dossier.wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(dossier.wikiQuery || dossier.title)}`;
-  dossier.wikiSummary = dossier.text;
-  dossier.thumbnail = `https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800`;
-  return dossier;
+const WIKIPEDIA_DAILY_TOPICS = [
+  "Wow! signal", "Project MKUltra", "Dyatlov Pass incident", "Tuskegee Syphilis Study",
+  "Salem witch trials", "Sinking of the Titanic", "Isabella Stewart Gardner Museum heist",
+  "Bermuda Triangle", "Roswell UFO incident", "Tunguska event", "Mary Celeste", "Kryptos",
+  "Cicada 3301", "Voynich manuscript", "Max Headroom signal hijacking", "D. B. Cooper",
+  "Zodiac Killer", "Jack the Ripper", "Babushka Lady", "The Hum", "Black Knight satellite conspiracy theory",
+  "Dancing plague of 1518", "Bloop", "Patterson–Gimlin film", "Lake Anjikuni", "Marfa lights",
+  "Spontaneous human combustion", "Oak Island mystery", "Mothman", "Flatwoods monster",
+  "Spring-heeled Jack", "Loch Ness Monster", "Chupacabra", "Jersey Devil", "Beast of Gévaudan",
+  "Nazca Lines", "Georgia Guidestones", "Coral Castle", "Toynbee tiles", "Lead Masks Case",
+  "Tamam Shud case", "Ourang Medan", "Carroll A. Deering", "MV Joyita", "Kaz II", "Flight 19",
+  "Disappearance of MH370", "Disappearance of Amelia Earhart", "Disappearance of Jimmy Hoffa",
+  "Disappearance of Harold Holt", "Disappearance of Percy Fawcett", "Lost Colony",
+  "Shugborough inscription", "Phaistos Disc", "Antikythera mechanism", "Baghdad Battery"
+];
+
+async function getAiDossierContent(title, summary, themeName) {
+  const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) return null;
+
+  const prompt = `Generate a dark, atmospheric terminal-style dossier summary (1-2 sentences) and exactly 3 intriguing/chilling conspiracy or investigative theories for this historical mystery/anomaly: "${title}".
+Wikipedia Summary: "${summary}"
+Theme Category: "${themeName}"
+
+Return ONLY a JSON object in this format (no markdown formatting, no code blocks):
+{
+  "hook": "1-2 sentences in Hinglish or simple English describing the dark core mystery...",
+  "theories": [
+    {"name": "Theory Name 1", "explanation": "Brief 1-sentence theory details..."},
+    {"name": "Theory Name 2", "explanation": "Brief 1-sentence theory details..."},
+    {"name": "Theory Name 3", "explanation": "Brief 1-sentence theory details..."}
+  ],
+  "suspicion": 85
+}`;
+
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { responseMimeType: 'application/json' }
+      })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) {
+        return JSON.parse(text.trim());
+      }
+    }
+  } catch (err) {
+    console.warn('[DailyDossier AI] Failed to generate AI content:', err.message);
+  }
+  return null;
+}
+
+async function generateDailyDossier(dateStr, dayOfWeek) {
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = (hash * 31 + dateStr.charCodeAt(i)) | 0;
+  }
+  hash = Math.abs(hash);
+
+  const activeTheme = DAILY_THEMES[dayOfWeek];
+  const selectedTopic = WIKIPEDIA_DAILY_TOPICS[hash % WIKIPEDIA_DAILY_TOPICS.length];
+
+  // Resolve dynamic Wikipedia details
+  const wikiInfo = await resolveWikipediaPageInfo(selectedTopic);
+  const title = wikiInfo?.title || selectedTopic;
+  const summary = wikiInfo?.summary || 'Classified file records.';
+  const url = wikiInfo?.url || `https://en.wikipedia.org/wiki/${encodeURIComponent(selectedTopic.replace(/ /g, '_'))}`;
+  const thumbnail = wikiInfo?.thumbnail || 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800';
+
+  // Try generating immersive AI content dynamically
+  let aiContent = await getAiDossierContent(title, summary, activeTheme.name);
+
+  let hook = aiContent?.hook || summary;
+  let theories = aiContent?.theories || [
+    { name: 'Theory Alpha (Standard Hypothesis)', explanation: 'Official records state this is an unexplained anomaly.' },
+    { name: 'Theory Beta (Conspiracy)', explanation: 'Classification of intelligence data suggests external coverups.' },
+    { name: 'Theory Gamma (Unresolved)', explanation: 'Ongoing forensic audits continue to query trace signatures.' }
+  ];
+  let suspicion = aiContent?.suspicion || (50 + (title.length % 40));
+
+  return {
+    title,
+    year: 'Classified',
+    text: hook,
+    wikiQuery: title,
+    theories,
+    suspicionLabel: 'Dossier Threat Level',
+    defaultSuspicion: suspicion,
+    story_id: 'WIKI_' + Math.abs(hash).toString(16).toUpperCase(),
+    theme: activeTheme.name,
+    wikiUrl: url,
+    wikiSummary: summary,
+    thumbnail
+  };
 }
 
 const wikiInfoCache = new Map();
@@ -638,113 +732,10 @@ const server = http.createServer(async (req, res) => {
     const todayObj = new Date();
     const dayOfWeek = todayObj.getDay();
     const dateStr = todayObj.toISOString().split('T')[0];
-    
-    // 1. Check if a selection is already saved in the database
-    let selectedStoryId = await db.getDailyDossierStoryId(dateStr);
-    let selectedStory = null;
-    
-    if (selectedStoryId) {
-      selectedStory = await db.getStory(selectedStoryId);
-    }
-    
-    // 2. If no selection or the story was deleted, select one dynamically
-    if (!selectedStory) {
-      const list = await db.getStories(false); // Get published stories only
-      if (list && list.length > 0) {
-        const categoryMap = {
-          0: ['gov_experiments', 'conspiracy'],
-          1: ['paranormal', 'cyber_mysteries'],
-          2: ['true_crime', 'conspiracy'],
-          3: ['gov_experiments', 'psychology'],
-          4: ['paranormal'],
-          5: ['true_crime', 'conspiracy'],
-          6: ['true_crime']
-        };
-        const themeCats = categoryMap[dayOfWeek] || [];
-        let candidates = list.filter(s => themeCats.includes(s.category));
-        if (candidates.length === 0) {
-          candidates = list;
-        }
-        candidates.sort((a, b) => (a.story_id || '').localeCompare(b.story_id || ''));
 
-        let hash = 0;
-        for (let i = 0; i < dateStr.length; i++) {
-          hash = (hash * 31 + dateStr.charCodeAt(i)) | 0;
-        }
-        hash = Math.abs(hash);
-
-        selectedStory = candidates[hash % candidates.length];
-        if (selectedStory) {
-          await db.setDailyDossierStoryId(dateStr, selectedStory.story_id);
-        }
-      }
-    }
-    
-    let dossier = null;
-    const activeTheme = DAILY_THEMES[dayOfWeek];
-    
-    if (selectedStory) {
-      // Map DB story to Dossier layout
-      const layers = typeof selectedStory.layers === 'string' ? JSON.parse(selectedStory.layers) : (selectedStory.layers || []);
-      const theories = [];
-      if (layers.length >= 7) {
-        theories.push({ 
-          name: layers[2].layer_name || 'Conspiracy Hypotheses', 
-          explanation: layers[2].content ? (layers[2].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified records.' 
-        });
-        theories.push({ 
-          name: layers[4].layer_name || 'Anomalous Evidence', 
-          explanation: layers[4].content ? (layers[4].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified evidence.' 
-        });
-        theories.push({ 
-          name: layers[6].layer_name || 'Forbidden Truth', 
-          explanation: layers[6].content ? (layers[6].content.split('\n\n')[0].substring(0, 180) + '...') : 'Classified conclusion.' 
-        });
-      } else {
-        theories.push({ name: 'Classification Alpha', explanation: selectedStory.hook });
-      }
-      
-      const addedYear = selectedStory.added_date ? selectedStory.added_date.substring(0, 4) : todayObj.getFullYear().toString();
-      
-      dossier = {
-        title: selectedStory.title,
-        year: addedYear,
-        text: selectedStory.hook || 'Classified file.',
-        wikiQuery: selectedStory.image_query || selectedStory.title,
-        wikiUrl: `https://en.wikipedia.org/wiki/${encodeURIComponent(selectedStory.image_query || selectedStory.title)}`,
-        wikiSummary: selectedStory.hook,
-        thumbnail: selectedStory.hero_image,
-        theme: activeTheme.name,
-        date: dateStr,
-        theories,
-        suspicionLabel: 'Archive Anomaly Rating',
-        defaultSuspicion: selectedStory.severity === 'extreme' ? 95 : selectedStory.severity === 'disturbing' ? 82 : 68
-      };
-    } else {
-      // Fallback to static theme fallback if no stories exist in DB
-      dossier = await generateDailyDossier(dayOfWeek);
-      dossier.date = dateStr;
-    }
-    
+    const dossier = await generateDailyDossier(dateStr, dayOfWeek);
+    dossier.date = dateStr;
     dossier.reactions = await db.getDailyReactions(dateStr);
-    
-    // Resolve dynamic Wikipedia page details (ensuring correct URL and title)
-    try {
-      const query = dossier.wikiQuery || dossier.title;
-      const wikiInfo = await resolveWikipediaPageInfo(query);
-      if (wikiInfo) {
-        dossier.wikiUrl = wikiInfo.url;
-        dossier.wikiQuery = wikiInfo.title;
-        if (wikiInfo.summary) {
-          dossier.wikiSummary = wikiInfo.summary;
-        }
-        if (wikiInfo.thumbnail) {
-          dossier.thumbnail = wikiInfo.thumbnail;
-        }
-      }
-    } catch (err) {
-      console.warn('[WikiResolution] Dev server warning:', err.message);
-    }
     
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(dossier));
