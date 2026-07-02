@@ -29,3 +29,6 @@ dist-ssr
 scratch/
 lore.db
 *.db
+*.db-shm
+*.db-wal
+.vercel/

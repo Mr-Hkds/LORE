@@ -299,19 +299,19 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24 mobile-bottom-nav-pad">
         <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
 
-          {/* Eyebrow row — label + beta badge */}
+          {/* Eyebrow — label + dossier count */}
           <div className="flex items-center gap-3 flex-wrap" style={{ marginBottom: '24px' }}>
             <p
               className="text-[11px] sm:text-xs font-semibold tracking-[0.26em] uppercase"
               style={{ color: ac, opacity: 0.95 }}
             >
-              Select your rabbit hole
+              Explore the archive
             </p>
             <span
               className="text-[8px] font-mono tracking-[0.12em] uppercase px-2 py-0.5 rounded border select-none"
-              style={{ borderColor: 'rgba(158,123,76,0.3)', color: '#9E7B4C', background: 'rgba(158,123,76,0.06)' }}
+              style={{ borderColor: 'rgba(158,123,76,0.2)', color: 'rgba(158,123,76,0.7)', background: 'rgba(158,123,76,0.05)' }}
             >
-              Beta Access
+              {allStories.length} dossiers
             </span>
           </div>
 

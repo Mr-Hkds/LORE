@@ -778,25 +778,24 @@ export default function TodayInShadows() {
           20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
           100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
         }
-        .scanlines {
+        .tis-card {
           position: relative;
           overflow: hidden;
         }
-        .scanlines::before {
-          content: " ";
-          display: block;
+        .tis-card::before {
+          content: '';
           position: absolute;
-          top: 0; left: 0; bottom: 0; right: 0;
-          background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-          z-index: 10;
-          background-size: 100% 4px, 6px 100%;
+          top: 0; left: 0; right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(158,123,76,0.4), transparent);
+          z-index: 5;
           pointer-events: none;
         }
       `}</style>
 
       {/* ── Outer Shell ── */}
       <div
-        className="rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/45 group relative overflow-hidden scanlines min-h-[400px]"
+        className="tis-card rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/40 group relative overflow-hidden min-h-[400px]"
         style={{
           backgroundColor: '#151311',
           borderColor: 'rgba(158, 123, 76, 0.18)',
