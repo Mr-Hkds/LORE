@@ -570,44 +570,47 @@ function generateDailyDossier(dayOfWeek) {
   return dossier;
 }
 
-const wikiThumbnailCache = new Map();
-async function getWikipediaThumbnail(query) {
+const wikiInfoCache = new Map();
+async function resolveWikipediaPageInfo(query) {
   if (!query) return null;
-  if (wikiThumbnailCache.has(query)) return wikiThumbnailCache.get(query);
+  if (wikiInfoCache.has(query)) return wikiInfoCache.get(query);
+
+  const cleanQuery = query.split(/[:\-–—]/)[0].trim();
   try {
-    // 1. Try search API first to resolve capitalization/spelling mismatches
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=1&format=json&origin=*`;
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=1&format=json&origin=*`;
     const searchRes = await fetchUrl(searchUrl);
-    let resolvedTitle = query;
+    
+    let resolvedTitle = cleanQuery;
     if (searchRes?.query?.search && searchRes.query.search.length > 0) {
       resolvedTitle = searchRes.query.search[0].title;
     }
-    
-    // 2. Query Page Summary with the resolved title
+
     const formattedQuery = encodeURIComponent(resolvedTitle.trim().replace(/ /g, '_'));
     const matched = await fetchUrl(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`);
-    let imgUrl = matched?.thumbnail?.source || null;
-    
-    // Fallback directly to original query if resolved title fails or returns no image
-    if (!imgUrl && resolvedTitle !== query) {
-      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
-      const fallbackMatched = await fetchUrl(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`);
-      imgUrl = fallbackMatched?.thumbnail?.source || null;
+
+    if (matched) {
+      const info = {
+        title: resolvedTitle,
+        url: matched.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${formattedQuery}`,
+        summary: matched.extract || '',
+        thumbnail: matched.thumbnail?.source || null
+      };
+      wikiInfoCache.set(query, info);
+      return info;
     }
-    
-    wikiThumbnailCache.set(query, imgUrl);
-    return imgUrl;
   } catch (err) {
-    console.warn(`[WikiCache] Failed to fetch Wikipedia thumbnail for "${query}":`, err.message);
-    // Simple direct fallback as last resort
-    try {
-      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
-      const fallbackMatched = await fetchUrl(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`);
-      return fallbackMatched?.thumbnail?.source || null;
-    } catch {
-      return null;
-    }
+    console.warn(`[WikiResolution] Failed for "${query}":`, err.message);
   }
+
+  const formattedQuery = encodeURIComponent(cleanQuery.trim().replace(/ /g, '_'));
+  const fallbackInfo = {
+    title: cleanQuery,
+    url: `https://en.wikipedia.org/wiki/${formattedQuery}`,
+    summary: '',
+    thumbnail: null
+  };
+  wikiInfoCache.set(query, fallbackInfo);
+  return fallbackInfo;
 }
 
 
@@ -725,17 +728,22 @@ const server = http.createServer(async (req, res) => {
     
     dossier.reactions = await db.getDailyReactions(dateStr);
     
-    // Dynamic wiki thumbnail check if no thumbnail matches
-    if (!dossier.thumbnail || dossier.thumbnail.includes('unsplash.com')) {
-      try {
-        const query = dossier.wikiQuery || dossier.title;
-        const thumbnail = await getWikipediaThumbnail(query);
-        if (thumbnail) {
-          dossier.thumbnail = thumbnail;
+    // Resolve dynamic Wikipedia page details (ensuring correct URL and title)
+    try {
+      const query = dossier.wikiQuery || dossier.title;
+      const wikiInfo = await resolveWikipediaPageInfo(query);
+      if (wikiInfo) {
+        dossier.wikiUrl = wikiInfo.url;
+        dossier.wikiQuery = wikiInfo.title;
+        if (wikiInfo.summary) {
+          dossier.wikiSummary = wikiInfo.summary;
         }
-      } catch (err) {
-        // Ignored
+        if (wikiInfo.thumbnail) {
+          dossier.thumbnail = wikiInfo.thumbnail;
+        }
       }
+    } catch (err) {
+      console.warn('[WikiResolution] Dev server warning:', err.message);
     }
     
     res.writeHead(200, { 'Content-Type': 'application/json' });

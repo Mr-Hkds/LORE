@@ -186,67 +186,55 @@ async function generateDailyDossier(dateStr, dayOfWeek) {
   };
 }
 
-const wikiThumbnailCache = new Map();
+const wikiInfoCache = new Map();
 
-async function getWikipediaThumbnail(query) {
+async function resolveWikipediaPageInfo(query) {
   if (!query) return null;
-  if (wikiThumbnailCache.has(query)) return wikiThumbnailCache.get(query);
+  if (wikiInfoCache.has(query)) return wikiInfoCache.get(query);
+
+  const cleanQuery = query.split(/[:\-–—]/)[0].trim();
   try {
-    // 1. Try search API first to resolve capitalization/spelling mismatches
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&utf8=1&format=json&origin=*`;
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=1&format=json&origin=*`;
     const searchRes = await fetch(searchUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) SevenDescents/1.0' }
     });
-    let resolvedTitle = query;
+    let resolvedTitle = cleanQuery;
     if (searchRes.ok) {
       const searchData = await searchRes.json();
       if (searchData?.query?.search && searchData.query.search.length > 0) {
         resolvedTitle = searchData.query.search[0].title;
       }
     }
-    
-    // 2. Query Page Summary with the resolved title
+
     const formattedQuery = encodeURIComponent(resolvedTitle.trim().replace(/ /g, '_'));
-    const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
+    const summaryRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) SevenDescents/1.0' }
     });
-    let imgUrl = null;
-    if (res.ok) {
-      const matched = await res.json();
-      imgUrl = matched?.thumbnail?.source || null;
+
+    if (summaryRes.ok) {
+      const matched = await summaryRes.json();
+      const info = {
+        title: resolvedTitle,
+        url: matched.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${formattedQuery}`,
+        summary: matched.extract || '',
+        thumbnail: matched.thumbnail?.source || null
+      };
+      wikiInfoCache.set(query, info);
+      return info;
     }
-    
-    // Fallback directly to original query if resolved title fails or returns no image
-    if (!imgUrl && resolvedTitle !== query) {
-      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
-      const fallbackRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
-      });
-      if (fallbackRes.ok) {
-        const fallbackMatched = await fallbackRes.json();
-        imgUrl = fallbackMatched?.thumbnail?.source || null;
-      }
-    }
-    
-    wikiThumbnailCache.set(query, imgUrl);
-    return imgUrl;
   } catch (err) {
-    console.warn(`[WikiCache] Failed to fetch Wikipedia thumbnail for "${query}":`, err.message);
-    // Simple direct fallback as last resort
-    try {
-      const fallbackQuery = encodeURIComponent(query.trim().replace(/ /g, '_'));
-      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${fallbackQuery}`, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201' }
-      });
-      if (res.ok) {
-        const matched = await res.json();
-        return matched?.thumbnail?.source || null;
-      }
-    } catch {
-      return null;
-    }
+    console.warn(`[WikiResolution] Failed for "${query}":`, err.message);
   }
-  return null;
+
+  const formattedQuery = encodeURIComponent(cleanQuery.trim().replace(/ /g, '_'));
+  const fallbackInfo = {
+    title: cleanQuery,
+    url: `https://en.wikipedia.org/wiki/${formattedQuery}`,
+    summary: '',
+    thumbnail: null
+  };
+  wikiInfoCache.set(query, fallbackInfo);
+  return fallbackInfo;
 }
 
 async function getReactionsWithAiFallback(dateStr, title, category, year) {
@@ -288,12 +276,19 @@ export default async function handler(req, res) {
 
     try {
       const query = dossier.wikiQuery || dossier.title;
-      const thumbnail = await getWikipediaThumbnail(query);
-      if (thumbnail) {
-        dossier.thumbnail = thumbnail;
+      const wikiInfo = await resolveWikipediaPageInfo(query);
+      if (wikiInfo) {
+        dossier.wikiUrl = wikiInfo.url;
+        dossier.wikiQuery = wikiInfo.title;
+        if (wikiInfo.summary) {
+          dossier.wikiSummary = wikiInfo.summary;
+        }
+        if (wikiInfo.thumbnail) {
+          dossier.thumbnail = wikiInfo.thumbnail;
+        }
       }
     } catch (err) {
-      // Fallback is already set
+      console.warn('[WikiResolution] Error during daily dossier resolution:', err.message);
     }
 
     try {
