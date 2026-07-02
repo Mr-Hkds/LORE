@@ -230,7 +230,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         >
           {/* Logo + wordmark — tap 5× for admin */}
           <div
-            className="flex items-center gap-2 cursor-pointer select-none animate-fade-in"
+            className="flex items-center gap-2.5 cursor-pointer select-none animate-fade-in"
             onClick={handleLogoTap}
             title="Tap 5 times to open Admin Console"
           >
@@ -249,7 +249,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               SevenDescents
             </span>
             <div className="w-[1px] h-3 bg-neutral-850" />
-            <span className="font-mono text-[7.5px] tracking-widest text-[#9E7B4C] uppercase whitespace-nowrap">
+            <span className="font-mono text-[7px] tracking-[0.14em] text-[#EDE8DF]/90 bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2 py-0.5 rounded-sm uppercase whitespace-nowrap">
               {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </span>
           </div>
@@ -876,9 +876,11 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
         <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
           {/* Disclaimer row */}
-          <p className="text-[8px] font-mono tracking-[0.16em] uppercase opacity-45 leading-relaxed text-center sm:text-left">
-            Disclaimer: The material compiled in SevenDescents is curated for historical, psychological, and investigative research. The archives document anomalous, classified, and extreme human events. User discretion is advised.
-          </p>
+          <div className="w-full text-center border-b border-dashed pb-6" style={{ borderColor: 'rgba(237,232,223,0.06)' }}>
+            <p className="text-[8px] font-mono tracking-[0.16em] uppercase opacity-40 leading-relaxed max-w-xl mx-auto">
+              Disclaimer: The material compiled in SevenDescents is curated for historical, psychological, and investigative research. The archives document anomalous, classified, and extreme human events. User discretion is advised.
+            </p>
+          </div>
           
           {/* Bottom meta row */}
           <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
