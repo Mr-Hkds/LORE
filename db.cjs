@@ -167,7 +167,7 @@ async function getStories(includeDrafts = false) {
     } else if (img.startsWith('/content/images/')) {
       const filename = img.substring('/content/images/'.length);
       const absolutePath = path.join(__dirname, 'public', img);
-      if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
+      if (!isVercel && !EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
         isImageMissingOnServer = true;
       }
     }
@@ -212,7 +212,7 @@ async function getStory(story_id) {
   } else if (img.startsWith('/content/images/')) {
     const filename = img.substring('/content/images/'.length);
     const absolutePath = path.join(__dirname, 'public', img);
-    if (!EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
+    if (!isVercel && !EXISTING_LOCAL_IMAGES.has(filename) && !fs.existsSync(absolutePath)) {
       isImageMissingOnServer = true;
     }
   }

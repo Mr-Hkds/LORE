@@ -1153,6 +1153,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       } catch (dbErr) {
         console.warn('SQLite update skipped (expected on production):', dbErr.message);
       }
+
+      setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
+      if (refetchStories) refetchStories();
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {

@@ -797,17 +797,34 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           )}
 
           {/* Footer */}
-          <footer className="mt-32 pt-10 pb-6 border-t flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase"
-            style={{ borderColor: ru, color: mu }}>
-            <p className="opacity-60">
-              © {new Date().getFullYear()} SEVENDESCENTS ·{' '}
-              <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
-                CONSOLE
-              </a>
-            </p>
-            <p className="mt-4 sm:mt-0 flex items-center gap-2 opacity-95">
-              <span className="mr-lotus-premium transition-all duration-300">SYS_OPERATOR // MR. LOTUS</span>
-            </p>
+          <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
+            {/* Disclaimer row */}
+            <div className="w-full max-w-2xl mx-auto text-center border-t border-b border-dashed py-5 my-2" style={{ borderColor: 'rgba(158, 123, 76, 0.12)', backgroundColor: 'rgba(158, 123, 76, 0.01)' }}>
+              <span className="block text-[8px] font-mono tracking-[0.25em] text-[#9E7B4C] mb-2 uppercase font-bold">
+                Archival Disclosure // Research Registry
+              </span>
+              <p className="text-[8px] font-mono tracking-[0.15em] uppercase opacity-45 leading-relaxed max-w-xl mx-auto px-4">
+                SevenDescents functions as a curated digital registry documenting historical conspiracies, unresolved disappearances, and cognitive anomalies. All records are compiled from verifiable public domains, investigative logs, and historical research dispatches. This database is compiled strictly for educational and archival purposes.
+              </p>
+            </div>
+            
+            {/* Bottom meta row */}
+            <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
+              <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
+                <span className="opacity-60">© {new Date().getFullYear()} SEVENDESCENTS</span>
+                <span className="opacity-30">|</span>
+                <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
+                  CONSOLE
+                </a>
+                <span className="opacity-30">|</span>
+                <span className="text-[#9E7B4C]/80">VERSION 2.4.1</span>
+                <span className="opacity-30">|</span>
+                <span className="text-neutral-500">TEST ACCESS: ACTIVE</span>
+              </div>
+              <div className="flex items-center gap-2 opacity-95">
+                <span className="mr-lotus-premium transition-all duration-300">SYS_OPERATOR // MR. LOTUS</span>
+              </div>
+            </div>
           </footer>
         </div>
       </main>

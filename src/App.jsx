@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react
 import { useStaticContent } from './hooks/useStaticContent';
 import { useReadingProgress } from './hooks/useReadingProgress';
 import { getLayer } from './constants/layers';
-import { Compass, Search, Bookmark, ShieldAlert } from 'lucide-react';
+
 import TopicSelector from './components/TopicSelector';
 import StoryCatalog from './components/StoryCatalog';
 import LayerReader from './components/LayerReader';
@@ -43,7 +43,7 @@ export default function App() {
   const [localStories, setLocalStories] = useState([]);
   const [shareTarget, setShareTarget] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [selectorTab, setSelectorTab] = useState('for-you');
+  const [selectorTab] = useState('for-you');
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -463,61 +463,6 @@ export default function App() {
           <SiteFeedback />
         </Suspense>
 
-        {/* Mobile Bottom Navigation Bar */}
-        <nav
-          className="sm:hidden fixed bottom-0 left-0 right-0 z-[290] flex justify-around items-center py-2.5 bg-[#0C0A08]/95 backdrop-blur-md border-t"
-          style={{
-            borderColor: 'rgba(158,123,76,0.15)',
-            boxShadow: '0 -4px 24px rgba(0,0,0,0.85)',
-          }}
-        >
-          <button
-            onClick={() => {
-              setSelectorTab('for-you');
-              window.location.hash = '';
-              setPhase('select');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'select' && selectorTab === 'for-you' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Compass className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Explore</span>
-          </button>
-          
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: isSearchOpen ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Search className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Search</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setSelectorTab('bookmarks');
-              window.location.hash = '';
-              setPhase('select');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'select' && selectorTab === 'bookmarks' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Bookmark className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Saved</span>
-          </button>
-
-          <button
-            onClick={() => {
-              window.location.hash = '#console';
-              setPhase('admin');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'admin' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <ShieldAlert className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Console</span>
-          </button>
-        </nav>
       </>
     );
   }
@@ -565,61 +510,6 @@ export default function App() {
           <SiteFeedback />
         </Suspense>
 
-        {/* Mobile Bottom Navigation Bar */}
-        <nav
-          className="sm:hidden fixed bottom-0 left-0 right-0 z-[290] flex justify-around items-center py-2.5 bg-[#0C0A08]/95 backdrop-blur-md border-t"
-          style={{
-            borderColor: 'rgba(158,123,76,0.15)',
-            boxShadow: '0 -4px 24px rgba(0,0,0,0.85)',
-          }}
-        >
-          <button
-            onClick={() => {
-              setSelectorTab('for-you');
-              window.location.hash = '';
-              setPhase('select');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'select' && selectorTab === 'for-you' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Compass className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Explore</span>
-          </button>
-          
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: isSearchOpen ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Search className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Search</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setSelectorTab('bookmarks');
-              window.location.hash = '';
-              setPhase('select');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'select' && selectorTab === 'bookmarks' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <Bookmark className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Saved</span>
-          </button>
-
-          <button
-            onClick={() => {
-              window.location.hash = '#console';
-              setPhase('admin');
-            }}
-            className="flex flex-col items-center justify-center gap-1 bg-transparent border-none cursor-pointer focus:outline-none w-14"
-            style={{ color: phase === 'admin' ? '#9E7B4C' : '#6A6560' }}
-          >
-            <ShieldAlert className="w-3.5 h-3.5 transition-transform active:scale-90" />
-            <span className="text-[7px] font-mono tracking-widest uppercase">Console</span>
-          </button>
-        </nav>
       </>
     );
   }

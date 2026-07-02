@@ -878,10 +878,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           {/* Disclaimer row */}
           <div className="w-full max-w-2xl mx-auto text-center border-t border-b border-dashed py-5 my-2" style={{ borderColor: 'rgba(158, 123, 76, 0.12)', backgroundColor: 'rgba(158, 123, 76, 0.01)' }}>
             <span className="block text-[8px] font-mono tracking-[0.25em] text-[#9E7B4C] mb-2 uppercase font-bold">
-              PUBLIC NOTICE // ARCHIVAL PROTOCOL
+              Archival Disclosure // Research Registry
             </span>
             <p className="text-[8px] font-mono tracking-[0.15em] uppercase opacity-45 leading-relaxed max-w-xl mx-auto px-4">
-              The contents of the SevenDescents digital database are compiled strictly for historical, academic, and psychological research. The archives document verified events, anomalous reports, and psychological phenomena. User discretion is advised.
+              SevenDescents functions as a curated digital registry documenting historical conspiracies, unresolved disappearances, and cognitive anomalies. All records are compiled from verifiable public domains, investigative logs, and historical research dispatches. This database is compiled strictly for educational and archival purposes.
             </p>
           </div>
           
@@ -899,7 +899,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               <span className="text-neutral-500">TEST ACCESS: ACTIVE</span>
             </div>
             <div className="flex items-center gap-2 opacity-95">
-              <span>SYS_OPERATOR // MR. LOTUS</span>
+              <span className="mr-lotus-premium transition-all duration-300">SYS_OPERATOR // MR. LOTUS</span>
             </div>
           </div>
         </footer>

@@ -72,7 +72,7 @@ export default function SiteFeedback() {
       <button
         id="site-feedback-trigger"
         onClick={() => setOpen(o => !o)}
-        aria-label="Give feedback about LORE"
+        aria-label="Give feedback about SevenDescents"
         className="fixed z-[200] select-none cursor-pointer group"
         style={{
           /* Pin to right edge, vertically centered */
@@ -126,17 +126,9 @@ export default function SiteFeedback() {
               gap: '10px',
             }}
           >
-            {/* Dot indicator */}
             <span
-              style={{
-                display: 'inline-block',
-                width: '5px',
-                height: '5px',
-                borderRadius: '50%',
-                background: '#9E7B4C',
-                flexShrink: 0,
-                opacity: 0.7,
-              }}
+              className="inline-block w-1.5 h-1.5 rounded-full bg-[#9E7B4C] animate-pulse"
+              style={{ flexShrink: 0 }}
             />
             Feedback
           </span>
@@ -191,7 +183,7 @@ export default function SiteFeedback() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-[9px] font-mono tracking-[0.28em] uppercase mb-1" style={{ color: '#9E7B4C' }}>
-                        LORE Feedback
+                        SevenDescents Feedback
                       </p>
                       <p className="font-serif italic text-lg leading-snug" style={{ color: '#EDE8DF' }}>
                         How is the experience?
