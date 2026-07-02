@@ -17,7 +17,8 @@
     "the_isdal_woman",
     "the_lead_mask_case",
     "operation_gladio",
-    "curse_of_tutankhamun"
+    "curse_of_tutankhamun",
+    "jfk_assassination_001"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -39,7 +40,8 @@
     "the_phoenix_program",
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "jfk_assassination_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -85,7 +87,8 @@
     "cia_mk_ultra_program",
     "operation_gladio",
     "the_phoenix_program",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "jfk_assassination_001"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -131,7 +134,8 @@
   ],
   "conspiracy_theories": [
     "malaysia_airlines_mh370",
-    "the_philadelphia_experiment"
+    "the_philadelphia_experiment",
+    "jfk_assassination_001"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -1110,7 +1114,8 @@
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "conficker_worm"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1149,5 +1154,29 @@
   ],
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
+  ],
+  "cyber_warfare": [
+    "conficker_worm"
+  ],
+  "botnet": [
+    "conficker_worm"
+  ],
+  "unknown_threat_actor": [
+    "conficker_worm"
+  ],
+  "digital_weaponry": [
+    "conficker_worm"
+  ],
+  "zero-day_exploits": [
+    "conficker_worm"
+  ],
+  "global_cyber_threat": [
+    "conficker_worm"
+  ],
+  "political_assassination": [
+    "jfk_assassination_001"
+  ],
+  "lone_gunman": [
+    "jfk_assassination_001"
   ]
 }
