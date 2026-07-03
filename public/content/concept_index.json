@@ -501,7 +501,8 @@
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "demonic_possession_exorcism_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -579,7 +580,8 @@
   "mass_hysteria": [
     "salem_witch_trials_001",
     "curse_of_tutankhamun",
-    "vampire_panic_eastern_europe"
+    "vampire_panic_eastern_europe",
+    "demonic_possession_exorcism_001"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -1265,5 +1267,17 @@
   ],
   "software_vulnerability": [
     "solarwinds_supply_chain_attack_001"
+  ],
+  "demonic_possession": [
+    "demonic_possession_exorcism_001"
+  ],
+  "exorcism": [
+    "demonic_possession_exorcism_001"
+  ],
+  "religious_rituals": [
+    "demonic_possession_exorcism_001"
+  ],
+  "mental_illness_misinterpretation": [
+    "demonic_possession_exorcism_001"
   ]
 }
