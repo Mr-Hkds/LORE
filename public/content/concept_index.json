@@ -501,8 +501,8 @@
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
-    "demonic_possession_exorcism_001",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "demonic_possession_exorcism_001"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -1140,55 +1140,23 @@
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
   ],
-  "cyber_warfare": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "state-sponsored_hacking": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "moonlight_maze_cyber_espionage",
-    "solarwinds_supply_chain_attack_001",
-    "ghostnet_global_cyber_espionage"
-  ],
-  "botnet": [
-    "conficker_worm"
-  ],
-  "unknown_threat_actor": [
-    "conficker_worm"
-  ],
-  "digital_weaponry": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
-  ],
-  "zero-day_exploits": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
-  ],
-  "global_cyber_threat": [
-    "conficker_worm"
-  ],
   "political_assassination": [
     "jfk_assassination_001"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
   ],
-  "creation_beyond_control": [
-    "the_golem_of_prague"
+  "cyber_security": [
+    "morris_worm_first_internet_attack"
   ],
-  "supernatural_power": [
-    "the_golem_of_prague"
+  "internet_history": [
+    "morris_worm_first_internet_attack"
   ],
-  "protection": [
-    "the_golem_of_prague"
+  "unintended_consequences": [
+    "morris_worm_first_internet_attack"
   ],
-  "jewish_mysticism": [
-    "the_golem_of_prague"
-  ],
-  "forbidden_knowledge": [
-    "the_golem_of_prague"
+  "computer_viruses": [
+    "morris_worm_first_internet_attack"
   ],
   "weather_manipulation": [
     "haarp_climate_control_conspiracy"
@@ -1220,6 +1188,12 @@
   "unexplained_evil": [
     "elizabeth_bathory_blood_countess"
   ],
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
+  ],
   "demonic_possession": [
     "demonic_possession_exorcism_001"
   ],
@@ -1236,6 +1210,13 @@
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage"
   ],
+  "state-sponsored_hacking": [
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
+    "ghostnet_global_cyber_espionage",
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage"
@@ -1250,6 +1231,11 @@
   "cultural_fear": [
     "wendigo_insatiable_hunger"
   ],
+  "cyber_warfare": [
+    "solarwinds_supply_chain_attack_001",
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
   ],
@@ -1262,22 +1248,36 @@
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
   ],
-  "cyber_security": [
-    "morris_worm_first_internet_attack"
+  "botnet": [
+    "conficker_worm"
   ],
-  "internet_history": [
-    "morris_worm_first_internet_attack"
+  "unknown_threat_actor": [
+    "conficker_worm"
   ],
-  "unintended_consequences": [
-    "morris_worm_first_internet_attack"
+  "digital_weaponry": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
   ],
-  "computer_viruses": [
-    "morris_worm_first_internet_attack"
+  "zero-day_exploits": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
   ],
-  "human_combustion": [
-    "spontaneous_human_combustion_shc"
+  "global_cyber_threat": [
+    "conficker_worm"
   ],
-  "forensic_mystery": [
-    "spontaneous_human_combustion_shc"
+  "creation_beyond_control": [
+    "the_golem_of_prague"
+  ],
+  "supernatural_power": [
+    "the_golem_of_prague"
+  ],
+  "protection": [
+    "the_golem_of_prague"
+  ],
+  "jewish_mysticism": [
+    "the_golem_of_prague"
+  ],
+  "forbidden_knowledge": [
+    "the_golem_of_prague"
   ]
 }
