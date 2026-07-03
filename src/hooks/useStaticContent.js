@@ -59,18 +59,20 @@ export function useStaticContent() {
 
   const loadStories = useCallback(async () => {
     try {
-      const res = await fetch(`/api/stories?t=${Date.now()}`);
-      if (!res.ok) throw new Error(`API failed`);
+      // 1. Fetch from static JSON file first (Edge CDN - extremely fast, no cold start)
+      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
+      if (!res.ok) throw new Error('CDN fetch failed');
       const data = await res.json();
-      setAllStories(Array.isArray(data) ? data : (data.stories || []));
+      setAllStories(data.stories || []);
       setLoading(false);
     } catch (err) {
-      // Fallback to static JSON file
+      console.warn('CDN fetch failed, falling back to database API:', err.message);
+      // 2. Fallback to live API if CDN is missing/stale
       try {
-        const res = await fetch(`/content/stories.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error(`Failed to load stories: ${res.status}`, { cause: err });
+        const res = await fetch(`/api/stories?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`API failed`, { cause: err });
         const data = await res.json();
-        setAllStories(data.stories || []);
+        setAllStories(Array.isArray(data) ? data : (data.stories || []));
         setLoading(false);
       } catch (err2) {
         console.error('Failed to load stories:', err2);
