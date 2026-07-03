@@ -6745,32 +6745,17 @@
     {
       "story_id": "vampire_panic_eastern_europe",
       "title": "The Blood Panic: Eastern Europe's Real Vampire Hunt",
-      "category": "mythology",
+      "hero_image": "https://foreignpolicy.com/wp-content/uploads/2026/04/1-Elizabeth-Bathory-Blood-Countess-3.jpg?quality=901",
+      "image_query": "",
       "hook": "In 18th-century Eastern Europe, a widespread terror of the dead returning to feast on the living led entire communities to exhume graves and mutilate corpses.",
+      "category": "mythology",
+      "severity": "chilling",
       "concepts": [
         "mass_hysteria",
         "folklore",
         "superstition",
         "post_mortem_changes",
         "public_panic"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/vampire_panic_eastern_europe.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 35,
-        "gripping": 38,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "salem_witch_trials_001",
-          "shared_concept": "mass_hysteria",
-          "transition_line": "Just as the 'vampire panic' revealed the destructive power of collective fear, the 'Salem Witch Trials' stand as another chilling testament to how mass hysteria can turn neighbors into accusers and fear into deadly injustice."
-        }
       ],
       "layers": [
         {
@@ -6816,8 +6801,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 35,
+        "gripping": 38,
+        "scared": 6,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6975,90 +6964,6 @@
           "layer": 7,
           "layer_name": "The Dark Corner - The Persistent Fear",
           "content": "The U.S. government and the scientists involved with HAARP have repeatedly dismissed all conspiracy theories, stating that the facility's power is too weak to cause large-scale weather changes or geological events. They emphasize its benign scientific purpose. However, the persistent public fear surrounding HAARP reveals a darker documented truth: a deep-seated distrust in government and military projects, fueled by past historical instances of secrecy and covert operations.\n\nProjects like HAARP, initially funded by the military and dealing with powerful, complex technology in remote locations, naturally become targets for suspicion. The legacy of Cold War-era secrecy, where many government experiments were hidden or revealed years later to be unethical, has created a fertile ground for such conspiracies. The public's need for transparency often clashes with national security interests, leading to persistent questions and a belief that 'the truth is being hidden.' This erosion of trust, more than any specific capability of HAARP, remains the chilling, documented reality behind the enduring conspiracy.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": false
-    },
-    {
-      "story_id": "elizabeth_bathory_blood_countess",
-      "title": "The Blood Countess: Elizabeth Báthory's Dark Legacy",
-      "category": "mythology",
-      "hook": "In the late 16th century, a Countess in Hungary became a terrifying whisper, a noblewoman whose beauty hid a darkness so profound it would become a legend soaked in blood.",
-      "concepts": [
-        "sadism",
-        "nobility_abuse_of_power",
-        "torture",
-        "historical_horror",
-        "blood_rituals",
-        "serial_killing",
-        "unexplained_evil"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 30,
-        "gripping": 13,
-        "scared": 4,
-        "mindblown": 6
-      },
-      "evidence_links": [
-        {
-          "label": "The Trial of Countess Elizabeth Báthory: Developing a Defense for Dame Dracula and Deconstructing Dominant Dames (Rachel Lawhead, 2019)",
-          "url": "http://hdl.handle.net/11299/208558"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_batavia_shipwreck_mutiny",
-          "shared_concept": "human_depravity",
-          "transition_line": "Just as Elizabeth Báthory's castle became a stage for unimaginable cruelty, the isolated island of the Batavia shipwreck also saw humanity descend into its darkest depths."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - Introducing the Mystery",
-          "content": "Deep in the heart of 16th-century Hungary, lived Countess Elizabeth Báthory, a woman of immense power, wealth, and a fearsome reputation. She came from one of the most respected and oldest noble families in the region. Her family had great influence in Transylvania, a land known for its dark tales and mysterious castles.\n\nFrom a young age, Elizabeth was known for her strong will and sharp mind. But soon, whispers began to spread among the common people and her castle staff. These were hushed tales of extreme cruelty shown towards her servants, particularly young peasant girls who worked in her castles.\n\nHer high status made her seem untouchable. People feared speaking out against someone so powerful. The idea that a noblewoman, especially one from such a grand family, could be capable of such terrible deeds was hard to believe for many. Yet, the whispers continued to grow, carrying a chilling hint of terror.",
-          "cliffhanger": "But these were just whispers in the wind; the true horror of Countess Báthory was yet to unfold."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - Early Signs of Cruelty",
-          "content": "Elizabeth grew up in an isolated, powerful world, often without her husband, Ferenc Nádasdy, who was a respected military commander. Her castles were like small kingdoms, where her word was law. It was within these walls, in the absence of outside eyes, that her cruel tendencies started to become a regular pattern.\n\nHer earliest acts of abuse were simple beatings. Young maids, often children, were punished severely for minor mistakes. A crooked stitch, a spilled drink, or a slow response could lead to painful lashings. These punishments were far beyond what was considered normal for the time, even for servants.\n\nWhat began as harsh discipline slowly changed into something more disturbing. The beatings grew more frequent and more brutal. There was a clear lack of mercy in her actions. This pattern showed a dark side of the Countess, suggesting a deep pleasure taken from the suffering of others. It was a clear warning sign of the terrible things to come.",
-          "cliffhanger": "The cruel acts grew more frequent and more severe, hinting at a darker impulse driving the Countess towards unspeakable deeds."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - Escalation of Torture",
-          "content": "As the years passed, Báthory's methods of punishment became more creative and sickening. Simple beatings were no longer enough to satisfy her dark desires. She began to involve her trusted loyal servants, her 'accomplices,' in these terrible acts. These servants helped her plan and carry out the tortures, often under threat themselves.\n\nSpecific reports described various forms of torture. Girls were pricked with needles under their fingernails, their bodies burned with hot irons, or bitten savagely. Some were doused with cold water and left outside to freeze to death in the harsh Hungarian winters. Others were smeared with honey and left for insects to torment.\n\nThese acts were not random; they were a deliberate and systematic effort to inflict extreme pain and suffering. The countess seemed to find a strange satisfaction in these cruel experiments. The sheer brutality of these incidents marked a horrifying escalation, turning her castles into places of unimaginable terror.",
-          "cliffhanger": "The widespread disappearance of young girls from local villages and her own castle began to attract unwanted attention, making it harder to ignore the Countess's dark reputation."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Reign of Terror at Čachtice Castle",
-          "content": "Čachtice Castle became the primary stage for Elizabeth Báthory's reign of terror. It was a massive fortress, isolated and foreboding. Within its thick walls, a chilling system of abuse and murder was put in place. Young girls, lured by the promise of work or education, entered the castle and rarely left.\n\nThe scale of disappearances became alarming. Hundreds of girls, mainly from poor peasant families, vanished without a trace. Their families, powerless against the mighty Countess, could do nothing but fear the worst. The local priests and village leaders heard the stories but were too terrified to openly accuse Báthory.\n\nEyewitness accounts later described torture chambers, hidden cells, and bloodied corridors. Báthory and her accomplices created a carefully controlled environment where their victims were completely at their mercy. The castle was not just her home; it was a factory of suffering, where innocent lives were ended in the most brutal ways imaginable. This systematic cruelty solidified her legend as the 'Blood Countess'.",
-          "cliffhanger": "The whispers of 'Blood Countess' grew louder as the evidence became impossible to ignore, finally forcing authorities to take action."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - Investigations and Accusations",
-          "content": "Despite Báthory's immense power, the sheer number of victims eventually caught the attention of King Matthias II of Hungary. He received numerous complaints and pleas from the affected families and concerned local nobles. The King could no longer ignore the escalating rumors.\n\nIn 1610, King Matthias II ordered György Thurzó, the Palatine of Hungary, to investigate the claims against Báthory. Thurzó, a respected nobleman and Báthory's cousin, began a discreet but thorough inquiry. His team gathered evidence and interviewed over 300 witnesses, carefully documenting every accusation.\n\nThe testimonies were horrifying. Servants who had managed to escape, villagers whose daughters had disappeared, and even members of Báthory's inner circle bravely spoke out. They described not just beatings, but mutilations, starvation, and murders. The investigation uncovered a scale of depravity that shocked even the hardened officials of the time.",
-          "cliffhanger": "What the investigators found was far more gruesome than anyone had imagined, solidifying her place in history's darkest pages."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Trial and Conviction",
-          "content": "On December 30, 1610, György Thurzó raided Čachtice Castle. What he found inside confirmed the most horrific rumors. Dead bodies of young women were discovered, some still showing signs of torture. Imprisoned and severely injured girls were also found alive, barely.\n\nThe evidence against Báthory and her four main accomplices — Dorota Semtész, Ilona Jó, Katarína Benecká, and János Újváry (nicknamed 'Ibis') — was overwhelming. The number of victims, based on witness statements and recovered evidence, was estimated to be in the hundreds, though the exact figure remains debated, with some sources claiming over 600.\n\nDue to her high noble status, Elizabeth Báthory was never formally tried in court. The King feared the political unrest and scandal that a public trial of such a powerful Countess would cause. However, her accomplices were put on trial, found guilty of murder and witchcraft, and brutally executed. Their confessions detailed the horrors they committed under Báthory's command.",
-          "cliffhanger": "While her helpers faced brutal justice, the Countess's own fate was sealed in a unique and chilling way, one designed to erase her from public life."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The End and Enduring Legend",
-          "content": "For Elizabeth Báthory, her punishment was imprisonment without trial. She was confined to her private chambers in Čachtice Castle. The windows and doors were walled up, leaving only small openings for food and air. She was effectively buried alive within her own home, guarded day and night.\n\nElizabeth Báthory lived for four more years in this terrible isolation, dying on August 21, 1614. Her death marked the end of her physical reign of terror, but the legend she created continued to grow. Her story has since merged with folklore, giving rise to tales of a 'Blood Countess' who bathed in the blood of virgins to maintain her youth, though this specific detail lacks concrete historical evidence.\n\nWhile the sensational claims of 'blood baths' are likely later additions, the core truth remains disturbing: Elizabeth Báthory was a serial killer who tortured and murdered hundreds of young women. Her documented cruelty, abuse of power, and the sheer number of her victims ensure her place as one of the darkest figures in human history. She remains a chilling reminder of how unchecked power can lead to unimaginable evil.",
           "cliffhanger": null
         }
       ],
@@ -8922,6 +8827,69 @@
           "layer": 7,
           "layer_name": "The Dark Corner - The Legend's Lasting Shadow",
           "content": "Hearing the screams, Rabbi Loew rushed to confront his rampaging creation. He managed to reach the Golem and, with great difficulty and prayer, removed the 'shem' from its mouth. The massive clay figure immediately collapsed, turning back into lifeless earth. The horror ceased, but the lesson was stark.\n\nRabbi Loew then had the Golem's remains carried to the attic of the Old New Synagogue, known as the genizah. He forbade anyone from entering the attic, warning that the Golem should never be awakened again unless the Jewish community faced an existential threat. To this day, the legend claims the Golem lies dormant there, a chilling reminder of power unleashed and the dangers of playing creator, a silent promise of protection, or a sleeping giant of destruction.",
+          "cliffhanger": null
+        }
+      ],
+      "reactions": {}
+    },
+    {
+      "story_id": "elizabeth_bathory_blood_countess",
+      "title": "The Blood Countess: Elizabeth Báthory's Dark Legacy",
+      "hero_image": "https://foreignpolicy.com/wp-content/uploads/2026/04/1-Elizabeth-Bathory-Blood-Countess-3.jpg?quality=90",
+      "image_query": "",
+      "hook": "In the late 16th century, a Countess in Hungary became a terrifying whisper, a noblewoman whose beauty hid a darkness so profound it would become a legend soaked in blood.",
+      "category": "mythology",
+      "severity": "chilling",
+      "concepts": [
+        "sadism",
+        "nobility_abuse_of_power",
+        "torture",
+        "historical_horror",
+        "blood_rituals",
+        "serial_killing",
+        "unexplained_evil"
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - Introducing the Mystery",
+          "content": "Deep in the heart of 16th-century Hungary, lived Countess Elizabeth Báthory, a woman of immense power, wealth, and a fearsome reputation. She came from one of the most respected and oldest noble families in the region. Her family had great influence in Transylvania, a land known for its dark tales and mysterious castles.\n\nFrom a young age, Elizabeth was known for her strong will and sharp mind. But soon, whispers began to spread among the common people and her castle staff. These were hushed tales of extreme cruelty shown towards her servants, particularly young peasant girls who worked in her castles.\n\nHer high status made her seem untouchable. People feared speaking out against someone so powerful. The idea that a noblewoman, especially one from such a grand family, could be capable of such terrible deeds was hard to believe for many. Yet, the whispers continued to grow, carrying a chilling hint of terror.",
+          "cliffhanger": "But these were just whispers in the wind; the true horror of Countess Báthory was yet to unfold."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - Early Signs of Cruelty",
+          "content": "Elizabeth grew up in an isolated, powerful world, often without her husband, Ferenc Nádasdy, who was a respected military commander. Her castles were like small kingdoms, where her word was law. It was within these walls, in the absence of outside eyes, that her cruel tendencies started to become a regular pattern.\n\nHer earliest acts of abuse were simple beatings. Young maids, often children, were punished severely for minor mistakes. A crooked stitch, a spilled drink, or a slow response could lead to painful lashings. These punishments were far beyond what was considered normal for the time, even for servants.\n\nWhat began as harsh discipline slowly changed into something more disturbing. The beatings grew more frequent and more brutal. There was a clear lack of mercy in her actions. This pattern showed a dark side of the Countess, suggesting a deep pleasure taken from the suffering of others. It was a clear warning sign of the terrible things to come.",
+          "cliffhanger": "The cruel acts grew more frequent and more severe, hinting at a darker impulse driving the Countess towards unspeakable deeds."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - Escalation of Torture",
+          "content": "As the years passed, Báthory's methods of punishment became more creative and sickening. Simple beatings were no longer enough to satisfy her dark desires. She began to involve her trusted loyal servants, her 'accomplices,' in these terrible acts. These servants helped her plan and carry out the tortures, often under threat themselves.\n\nSpecific reports described various forms of torture. Girls were pricked with needles under their fingernails, their bodies burned with hot irons, or bitten savagely. Some were doused with cold water and left outside to freeze to death in the harsh Hungarian winters. Others were smeared with honey and left for insects to torment.\n\nThese acts were not random; they were a deliberate and systematic effort to inflict extreme pain and suffering. The countess seemed to find a strange satisfaction in these cruel experiments. The sheer brutality of these incidents marked a horrifying escalation, turning her castles into places of unimaginable terror.",
+          "cliffhanger": "The widespread disappearance of young girls from local villages and her own castle began to attract unwanted attention, making it harder to ignore the Countess's dark reputation."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Reign of Terror at Čachtice Castle",
+          "content": "Čachtice Castle became the primary stage for Elizabeth Báthory's reign of terror. It was a massive fortress, isolated and foreboding. Within its thick walls, a chilling system of abuse and murder was put in place. Young girls, lured by the promise of work or education, entered the castle and rarely left.\n\nThe scale of disappearances became alarming. Hundreds of girls, mainly from poor peasant families, vanished without a trace. Their families, powerless against the mighty Countess, could do nothing but fear the worst. The local priests and village leaders heard the stories but were too terrified to openly accuse Báthory.\n\nEyewitness accounts later described torture chambers, hidden cells, and bloodied corridors. Báthory and her accomplices created a carefully controlled environment where their victims were completely at their mercy. The castle was not just her home; it was a factory of suffering, where innocent lives were ended in the most brutal ways imaginable. This systematic cruelty solidified her legend as the 'Blood Countess'.",
+          "cliffhanger": "The whispers of 'Blood Countess' grew louder as the evidence became impossible to ignore, finally forcing authorities to take action."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - Investigations and Accusations",
+          "content": "Despite Báthory's immense power, the sheer number of victims eventually caught the attention of King Matthias II of Hungary. He received numerous complaints and pleas from the affected families and concerned local nobles. The King could no longer ignore the escalating rumors.\n\nIn 1610, King Matthias II ordered György Thurzó, the Palatine of Hungary, to investigate the claims against Báthory. Thurzó, a respected nobleman and Báthory's cousin, began a discreet but thorough inquiry. His team gathered evidence and interviewed over 300 witnesses, carefully documenting every accusation.\n\nThe testimonies were horrifying. Servants who had managed to escape, villagers whose daughters had disappeared, and even members of Báthory's inner circle bravely spoke out. They described not just beatings, but mutilations, starvation, and murders. The investigation uncovered a scale of depravity that shocked even the hardened officials of the time.",
+          "cliffhanger": "What the investigators found was far more gruesome than anyone had imagined, solidifying her place in history's darkest pages."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Trial and Conviction",
+          "content": "On December 30, 1610, György Thurzó raided Čachtice Castle. What he found inside confirmed the most horrific rumors. Dead bodies of young women were discovered, some still showing signs of torture. Imprisoned and severely injured girls were also found alive, barely.\n\nThe evidence against Báthory and her four main accomplices — Dorota Semtész, Ilona Jó, Katarína Benecká, and János Újváry (nicknamed 'Ibis') — was overwhelming. The number of victims, based on witness statements and recovered evidence, was estimated to be in the hundreds, though the exact figure remains debated, with some sources claiming over 600.\n\nDue to her high noble status, Elizabeth Báthory was never formally tried in court. The King feared the political unrest and scandal that a public trial of such a powerful Countess would cause. However, her accomplices were put on trial, found guilty of murder and witchcraft, and brutally executed. Their confessions detailed the horrors they committed under Báthory's command.",
+          "cliffhanger": "While her helpers faced brutal justice, the Countess's own fate was sealed in a unique and chilling way, one designed to erase her from public life."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The End and Enduring Legend",
+          "content": "For Elizabeth Báthory, her punishment was imprisonment without trial. She was confined to her private chambers in Čachtice Castle. The windows and doors were walled up, leaving only small openings for food and air. She was effectively buried alive within her own home, guarded day and night.\n\nElizabeth Báthory lived for four more years in this terrible isolation, dying on August 21, 1614. Her death marked the end of her physical reign of terror, but the legend she created continued to grow. Her story has since merged with folklore, giving rise to tales of a 'Blood Countess' who bathed in the blood of virgins to maintain her youth, though this specific detail lacks concrete historical evidence.\n\nWhile the sensational claims of 'blood baths' are likely later additions, the core truth remains disturbing: Elizabeth Báthory was a serial killer who tortured and murdered hundreds of young women. Her documented cruelty, abuse of power, and the sheer number of her victims ensure her place as one of the darkest figures in human history. She remains a chilling reminder of how unchecked power can lead to unimaginable evil.",
           "cliffhanger": null
         }
       ]
