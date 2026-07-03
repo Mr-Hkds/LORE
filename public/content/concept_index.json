@@ -51,7 +51,8 @@
     "uwe_barschel",
     "the_numbers_stations",
     "the_taman_shud_case",
-    "the_isdal_woman"
+    "the_isdal_woman",
+    "october_surprise_1980_iran"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -76,7 +77,8 @@
     "operation_gladio"
   ],
   "government_conspiracy": [
-    "operation_northwoods_001"
+    "operation_northwoods_001",
+    "october_surprise_1980_iran"
   ],
   "national_security": [
     "operation_northwoods_001",
@@ -1200,7 +1202,8 @@
     "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1219,7 +1222,8 @@
   "cyber_warfare": [
     "solarwinds_supply_chain_attack_001",
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
@@ -1291,5 +1295,29 @@
   ],
   "royal_intervention": [
     "the_beast_of_gevaudan"
+  ],
+  "political_manipulation": [
+    "october_surprise_1980_iran"
+  ],
+  "international_relations": [
+    "october_surprise_1980_iran"
+  ],
+  "hostage_crisis": [
+    "october_surprise_1980_iran"
+  ],
+  "election_interference": [
+    "october_surprise_1980_iran"
+  ],
+  "critical_infrastructure_attack": [
+    "ukraine_power_grid_cyber_attack_2015_2016"
+  ],
+  "power_grid": [
+    "ukraine_power_grid_cyber_attack_2015_2016"
+  ],
+  "industrial_control_systems": [
+    "ukraine_power_grid_cyber_attack_2015_2016"
+  ],
+  "blackout": [
+    "ukraine_power_grid_cyber_attack_2015_2016"
   ]
 }
