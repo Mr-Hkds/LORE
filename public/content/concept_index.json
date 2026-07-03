@@ -501,8 +501,8 @@
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
-    "spontaneous_human_combustion_shc",
-    "demonic_possession_exorcism_001"
+    "demonic_possession_exorcism_001",
+    "spontaneous_human_combustion_shc"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -1146,18 +1146,6 @@
   "lone_gunman": [
     "jfk_assassination_001"
   ],
-  "cyber_security": [
-    "morris_worm_first_internet_attack"
-  ],
-  "internet_history": [
-    "morris_worm_first_internet_attack"
-  ],
-  "unintended_consequences": [
-    "morris_worm_first_internet_attack"
-  ],
-  "computer_viruses": [
-    "morris_worm_first_internet_attack"
-  ],
   "weather_manipulation": [
     "haarp_climate_control_conspiracy"
   ],
@@ -1187,12 +1175,6 @@
   ],
   "unexplained_evil": [
     "elizabeth_bathory_blood_countess"
-  ],
-  "human_combustion": [
-    "spontaneous_human_combustion_shc"
-  ],
-  "forensic_mystery": [
-    "spontaneous_human_combustion_shc"
   ],
   "demonic_possession": [
     "demonic_possession_exorcism_001"
@@ -1279,5 +1261,23 @@
   ],
   "forbidden_knowledge": [
     "the_golem_of_prague"
+  ],
+  "cyber_security": [
+    "morris_worm_first_internet_attack"
+  ],
+  "internet_history": [
+    "morris_worm_first_internet_attack"
+  ],
+  "unintended_consequences": [
+    "morris_worm_first_internet_attack"
+  ],
+  "computer_viruses": [
+    "morris_worm_first_internet_attack"
+  ],
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
   ]
 }
