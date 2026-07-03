@@ -7914,7 +7914,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/spontaneous_human_combustion_shc/cover.jpg",
       "added_date": "2026-07-02",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 48,
         "gripping": 36,
@@ -8002,28 +8002,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
-      "role": "assistant",
-      "reasoning": "We need to produce JSON for the story about \"The Assassination of Robert F. Kennedy\". Follow requirements. We must include all fields: story_id slug lower case with underscore. Title: compelling title. Category: likely conspiracy or true_crime? It's a real documented case, but many conspiracy theories. It qualifies as \"conspiracy\" category. The catalog had jfk_assassination_001 for JFK. For RFK we may also think same category. Use \"conspiracy\".\n\nHook 1-2 sentences 150 chars max. Use simple language.\n\nConcepts: pick 3 relevant: political_assassination, conspiracy_theories, government_secrecy, lone_gunman.\n\nBut we need 3; choose e.g. \"political_assassination\", \"conspiracy_theories\", \"government_secrecy\".\n\nSeverity: \"disturbing\" maybe \"disturbing\" or \"chilling\". Let's go with \"disturbing\" as okay.\n\nLayers: 7 layers each with content of 2-3 detailed paragraphs. Use double newlines. We need to be careful to not exceed 2-3 paragraphs; but 2-3 paragraphs is okay. Use simple language, short sentences. Use single quotes within string text. Use double quotes for JSON strings, but must escape.\n\nImportant: No double quotes inside strings unless escaped as \\\". We must use single quotes for quotes inside text. Avoid double quotes inside story text. Only in JSON string delim separators.\n\nWe need to write content for each layer. Each layer content up to 2-3 paragraphs separated by \\n\\n.\n\nLet's craft.\n\nWe must ensure no trailing commas. Provide one connection in connections array referencing existing story. Likely connect to jfk_assassination_001. Shared concept: \"political_assassination\". Transition_line: a sentence linking story. That follows format: \"A compelling, dramatic sentence linking this new story to the existing one.\"\n\nLet's produce.\n\nWe must escape newlines inside JSON string as \\n. So each paragraph separated by \\n\\n.\n\nBe careful with backslashes; JSON requires escaping backslash. We will just use \\n\\n inside string this is fine.\n\nMake sure no double quotes inside strings; we'll use single quotes per requirement.\n\nNow craft each layer content.\n\nLayer 1: The Whisper - introducing the mystery. Start with a chilling fact: \"On June 5, 1968, a bullet pierced the heart of a man in a hotel lobby...\" Or similar. Let's craft 2-3 paragraphs.\n\nLayer 2: The Pattern: look at recent history of violent events, patterns, gunmen in political events.\n\nLayer 3: The Incident: describe the night, shots fired, witnesses, confusion.\n\nLayer 4: The System: official investigation, autopsy, hearings.\n\nLayer 5: The Research: conspiracy theories, murders by multiple shooters, theory of involvement.\n\nLayer 6: The Abyss: evidence that questions straightforward narrative, including mysterious bullet trajectory, testimony, etc.\n\nLayer 7: The Dark Corner: the documented truth: David F. Kennedy shot by Sirhan Sirhan, killer sentenced, but unresolved questions about why Sirhan did it; remains unsolved regarding motive, possible accomplices. Provide final dark truth.\n\nConsider content to be 2-3 paragraphs each. We'll do 2 paragraphs each.\n\nLet's write.\n\nNeed to ensure we escape single quotes? Not needed. Only use single quotes inside text. For example: 'Sirhan Sirhan'. Single quotes inside JSON string are okay. JSON string delimit uses double quotes. So the single quotes inside are fine. However we make sure not to use double quotes inside the content. Avoid double quote usage.\n\nAlso avoid using backslashes except for \\n.\n\nAlso avoid trailing commas.\n\nNow produce JSON.\n\nDouble-check JSON validity.\n\nLet's craft story_id: \"rfk_assassination_001\" maybe. Or \"rfk_assassination_001\". Use lowercase with underscores.\n\nTitle: \"Blood on the Hotel Floor: The Assassination of Robert F. Kennedy\"\n\nHook: \"A single bullet turned a night of hopeful speeches into a legacy of sorrow.\"\n\nConcepts: list 3.\n\nSeverity: \"disturbing\"\n\nConnections: connect to \"jfk_assassination_001\" with shared_concept \"political_assassination\". Provide transition_line: \"The shadow over Washington that night linked RFK’s death to JFK’s earlier assassination.\"\n\nLet's craft final JSON.\n\nCheck each layer for proper formatting: each paragraph separated by \\n\\n (escaped). Keep sentences short.\n\nLet's produce content.\n\nLayer 1:\n\nParagraph 1: \"On June 5, 1968, a man stepped into the hotel lobby to give a hopeful speech. Suddenly a gunshot rang loud and clear. The room fell into stunned silence.\" Use short sentences.\n\nParagraph 2: \"The whisper that spread was simple: 'Where is the shooting?' It grew into a question that would haunt voters. The image of a bullet stuck in the warm hand of a man remained in the public mind.\"\n\nCheck no double quotes. Use single quotes for names.\n\nLayer 2:\n\nParagraph1: \"Over the previous year, the nation had seen two presidents killed by gunmen. Lines were drawn between political ambition and violence. Many watched to see if history would repeat.\"\n\nParagraph2: \"Patterns emerged when gun law changes were discussed in the halls of power. Politicians promised reform but their priorities were unclear. The public felt it was possible the future pictured a similar tragedy.\"\n\nLayer 3:\n\nParagraph1: \"RFK stepped into a conference room of the Ambassador Hotel. He welcomed the crowd with a call for unity. A time was given for the kickoff of his new campaign.\"\n\nParagraph2: \"Sirhan Sirhan chased the nervous shooter through stairwell. He fired from a narrow stairway and hit Springfield's body. The guilt of the crowd swelled as the body shuddered.\"\n\nBut ensure simple sentences and no complex. Let's reflect.\n\nParagraph2 must mention shots fired, wounded, etc. Keep simple. Avoid ambiguous pronouns.\n\nLayer 3: \"On the night, Sirhan Sirhan moved through the hotel’s lower stairwell. He fired one bullet that struck RFK’s torso. The audience screamed. The emergency response rushed in.\"\n\nLayer 4:\n\nParagraph1: \"The police took control within minutes. Lawmakers called for a swift inquiry. The department collected evidence from the lobby.\"\n\nParagraph2: \"The trial began on February 1, 1969. A jury found Sirhan guilty of first‑degree murder. He was sentenced to death but now lives under life imprisonment.\"\n\nLayer5:\n\nParagraph1: \"Soon after, rumors poured. Some claimed more than one gunman existed. Others said political rivals might have hired a shooter.\"\n\nParagraph2: \"The FBI investigated, but no concrete evidence emerged. Many citizens questioned the official narrative. The mystery grew.\"\n\nLayer6:\n\nParagraph1: \"New witnesses later spoke of a second shooter. They claimed to have seen a masked figure in a dark faraway room. Questioned, the story was dismissed.\"\n\nParagraph2: \"In 2002, new photographs of the lobby revealed a hidden doorway. The official police report said it was a maintenance area. Dissenting voices argued it could hide an assassin.\"\n\n",
-      "tool_calls": [],
-      "added_date": "2026-07-03",
-      "evidence_links": [
-        {
-          "label": "The assassination of Robert F. Kennedy: an analysis of the senator’s injuries and neurosurgical care (Jordan Komisarow, Theodore N. Pappas, 2018)",
-          "url": "https://thejns.org/downloadpdf/journals/j-neurosurg/130/5/article-p1649.pdf"
-        },
-        {
-          "label": "The Assassination of President Kennedy: A Preliminary Report on Public Reactions and Behavior (Paul B. Sheatsley, Jacob J. Feldman, 1964)",
-          "url": "https://academic.oup.com/poq/article-pdf/28/2/189/5256961/28-2-189.pdf"
-        },
-        {
-          "label": "Assassination and the Law of Armed Conflict (Patricia Zengel, 1991)",
-          "url": "https://digitalcommons.law.mercer.edu/jour_mlr/vol43/iss2/3"
-        }
-      ],
-      "hero_image": null
+      "image_missing": false
     },
     {
       "story_id": "the_beast_of_gevaudan",
@@ -8039,6 +8018,46 @@
         "royal_intervention"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/the_beast_of_gevaudan.jpg",
+      "added_date": "2026-07-03",
+      "draft": false,
+      "reactions": {
+        "like": 32,
+        "gripping": 10,
+        "scared": 3,
+        "mindblown": 3
+      },
+      "evidence_links": [
+        {
+          "label": "Monstrous Ecology: Regional Iconographies and Bourbon Authority in Depictions of the Beast of Gévaudan, 1764-5 (Harvey Shepherd, 2022)",
+          "url": "https://doi.org/10.33999/2022.88"
+        },
+        {
+          "label": "Metamorphosen der Bête du Gévaudan - oder vom Reiz des Ungewöhnlichen und Unbekannten (Meret Fehlmann, 2018)",
+          "url": "https://doi.org/https://doi.org/10.5167/uzh-152201"
+        },
+        {
+          "label": "Kommentare zu „Metamorphosen der Bête du Gévaudan“ (Ulrich Magin, Gerhard Mayer, 2018)",
+          "url": "https://doi.org/10.23793/zfa.2018.67"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "wendigo_insatiable_hunger",
+          "shared_concept": "folklore",
+          "transition_line": "Like the Beast of Gévaudan, the Wendigo legend speaks of a predatory horror that embodies insatiable hunger, leaving a trail of terror and fueling a deep, primal fear in isolated communities."
+        },
+        {
+          "story_id": "vampire_panic_eastern_europe",
+          "shared_concept": "mass_hysteria",
+          "transition_line": "The same chilling mass hysteria and desperate fear of an unnatural predator that gripped Gévaudan can be seen centuries earlier, when remote villages succumbed to the panic of the 'vampire' in Eastern Europe."
+        },
+        {
+          "story_id": "hinterkaifeck_murders",
+          "shared_concept": "brutal_murders",
+          "transition_line": "The unsettling mystery of an unseen killer stalking a remote community, much like the Beast of Gévaudan, reminds us of the horrifying, unexplained violence that befell the Hinterkaifeck farm."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -8083,39 +8102,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "wendigo_insatiable_hunger",
-          "shared_concept": "folklore",
-          "transition_line": "Like the Beast of Gévaudan, the Wendigo legend speaks of a predatory horror that embodies insatiable hunger, leaving a trail of terror and fueling a deep, primal fear in isolated communities."
-        },
-        {
-          "story_id": "vampire_panic_eastern_europe",
-          "shared_concept": "mass_hysteria",
-          "transition_line": "The same chilling mass hysteria and desperate fear of an unnatural predator that gripped Gévaudan can be seen centuries earlier, when remote villages succumbed to the panic of the 'vampire' in Eastern Europe."
-        },
-        {
-          "story_id": "hinterkaifeck_murders",
-          "shared_concept": "brutal_murders",
-          "transition_line": "The unsettling mystery of an unseen killer stalking a remote community, much like the Beast of Gévaudan, reminds us of the horrifying, unexplained violence that befell the Hinterkaifeck farm."
-        }
-      ],
-      "added_date": "2026-07-03",
-      "evidence_links": [
-        {
-          "label": "Monstrous Ecology: Regional Iconographies and Bourbon Authority in Depictions of the Beast of Gévaudan, 1764-5 (Harvey Shepherd, 2022)",
-          "url": "https://doi.org/10.33999/2022.88"
-        },
-        {
-          "label": "Metamorphosen der Bête du Gévaudan - oder vom Reiz des Ungewöhnlichen und Unbekannten (Meret Fehlmann, 2018)",
-          "url": "https://doi.org/https://doi.org/10.5167/uzh-152201"
-        },
-        {
-          "label": "Kommentare zu „Metamorphosen der Bête du Gévaudan“ (Ulrich Magin, Gerhard Mayer, 2018)",
-          "url": "https://doi.org/10.23793/zfa.2018.67"
-        }
-      ],
-      "hero_image": "/content/images/the_beast_of_gevaudan.jpg"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "october_surprise_1980_iran",
@@ -8131,6 +8119,36 @@
         "election_interference"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/october_surprise_1980_iran.jpg",
+      "added_date": "2026-07-03",
+      "draft": false,
+      "reactions": {
+        "like": 15,
+        "gripping": 28,
+        "scared": 1,
+        "mindblown": 68
+      },
+      "evidence_links": [
+        {
+          "label": "Iran and the Boomeranging Cartoon Wars: Can Public Spheres at Risk Ally with Public Spheres Yet to Be Achieved? (Michael M. J. Fischer, 2009)",
+          "url": "https://read.dukeupress.edu/cultural-politics/article-pdf/5/1/27/246514/27.pdf"
+        },
+        {
+          "label": "Yemen: an Opportunity for Iran–Saudi Dialogue? (Dina Esfandiary, Ariane M. Tabatabai, 2016)",
+          "url": "https://kclpure.kcl.ac.uk/ws/files/95931256/Yemen_an_Opportunity_for_ESFANDIARY_Firstonline25July2016_GREEN_AAM.pdf"
+        },
+        {
+          "label": "The Showras in the Iranian Revolution (Peyman Jafari, 2020)",
+          "url": "https://brill.com/downloadpdf/book/9789004440395/BP000010.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "jfk_assassination_001",
+          "shared_concept": "political_manipulation",
+          "transition_line": "Just as the JFK assassination raised profound questions about forces at play behind the scenes of American politics, the October Surprise whispers of a chilling manipulation that might have altered the course of a presidential election."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -8175,29 +8193,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "jfk_assassination_001",
-          "shared_concept": "political_manipulation",
-          "transition_line": "Just as the JFK assassination raised profound questions about forces at play behind the scenes of American politics, the October Surprise whispers of a chilling manipulation that might have altered the course of a presidential election."
-        }
-      ],
-      "added_date": "2026-07-03",
-      "evidence_links": [
-        {
-          "label": "Iran and the Boomeranging Cartoon Wars: Can Public Spheres at Risk Ally with Public Spheres Yet to Be Achieved? (Michael M. J. Fischer, 2009)",
-          "url": "https://read.dukeupress.edu/cultural-politics/article-pdf/5/1/27/246514/27.pdf"
-        },
-        {
-          "label": "Yemen: an Opportunity for Iran–Saudi Dialogue? (Dina Esfandiary, Ariane M. Tabatabai, 2016)",
-          "url": "https://kclpure.kcl.ac.uk/ws/files/95931256/Yemen_an_Opportunity_for_ESFANDIARY_Firstonline25July2016_GREEN_AAM.pdf"
-        },
-        {
-          "label": "The Showras in the Iranian Revolution (Peyman Jafari, 2020)",
-          "url": "https://brill.com/downloadpdf/book/9789004440395/BP000010.pdf"
-        }
-      ],
-      "hero_image": "/content/images/october_surprise_1980_iran.jpg"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
@@ -8213,6 +8210,36 @@
         "blackout"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/ukraine_power_grid_cyber_attack_2015_2016/cover.jpg",
+      "added_date": "2026-07-03",
+      "draft": 0,
+      "reactions": {
+        "like": 20,
+        "gripping": 43,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "A Comprehensive Review on Cyber-Attacks in Power Systems: Impact Analysis, Detection, and Cyber Security (Naveen Tatipatri, S. L. Arun, 2024)",
+          "url": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/10418207.pdf"
+        },
+        {
+          "label": "Securing modern power systems: Implementing comprehensive strategies to enhance resilience and reliability against cyber-attacks (Sobhy M. Abdelkader, Jeremiah Amissah, 2024)",
+          "url": "https://doi.org/10.1016/j.rineng.2024.102647"
+        },
+        {
+          "label": "Cyber-Physical System Security of a Power Grid: State-of-the-Art (Chih‐Che Sun, Chen‐Ching Liu, 2016)",
+          "url": "https://www.mdpi.com/2079-9292/5/3/40/pdf?version=1468499711"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber_warfare",
+          "transition_line": "While Stuxnet quietly targeted nuclear facilities with a hidden digital weapon, Ukraine's cyber blackouts showed that such warfare could plunge entire cities into darkness, making the unseen battlefield far more immediate and terrifying."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -8257,29 +8284,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "While Stuxnet quietly targeted nuclear facilities with a hidden digital weapon, Ukraine's cyber blackouts showed that such warfare could plunge entire cities into darkness, making the unseen battlefield far more immediate and terrifying."
-        }
-      ],
-      "added_date": "2026-07-03",
-      "evidence_links": [
-        {
-          "label": "A Comprehensive Review on Cyber-Attacks in Power Systems: Impact Analysis, Detection, and Cyber Security (Naveen Tatipatri, S. L. Arun, 2024)",
-          "url": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/10418207.pdf"
-        },
-        {
-          "label": "Securing modern power systems: Implementing comprehensive strategies to enhance resilience and reliability against cyber-attacks (Sobhy M. Abdelkader, Jeremiah Amissah, 2024)",
-          "url": "https://doi.org/10.1016/j.rineng.2024.102647"
-        },
-        {
-          "label": "Cyber-Physical System Security of a Power Grid: State-of-the-Art (Chih‐Che Sun, Chen‐Ching Liu, 2016)",
-          "url": "https://www.mdpi.com/2079-9292/5/3/40/pdf?version=1468499711"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
