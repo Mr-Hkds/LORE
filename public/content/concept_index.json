@@ -19,9 +19,9 @@
     "the_lead_mask_case",
     "operation_gladio",
     "curse_of_tutankhamun",
-    "jfk_assassination_001",
     "spontaneous_human_combustion_shc",
-    "the_beast_of_gevaudan"
+    "the_beast_of_gevaudan",
+    "jfk_assassination_001"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -44,13 +44,13 @@
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
     "project_artichoke_mind_control",
-    "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
     "the_shadow_brokers_nsa_leak",
     "cointelpro_fbi_covert_ops",
     "the_roswell_incident",
     "project_mk_ultra_001",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "jfk_assassination_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -100,9 +100,9 @@
     "operation_gladio",
     "the_phoenix_program",
     "project_artichoke_mind_control",
-    "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "jfk_assassination_001"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -149,9 +149,9 @@
   "conspiracy_theories": [
     "malaysia_airlines_mh370",
     "the_philadelphia_experiment",
-    "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
-    "the_roswell_incident"
+    "the_roswell_incident",
+    "jfk_assassination_001"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -1064,9 +1064,9 @@
   "folklore": [
     "the_children_of_woolpit",
     "vampire_panic_eastern_europe",
-    "the_golem_of_prague",
     "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend"
+    "spring_heeled_jack_legend",
+    "the_golem_of_prague"
   ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
@@ -1171,12 +1171,6 @@
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
   ],
-  "political_assassination": [
-    "jfk_assassination_001"
-  ],
-  "lone_gunman": [
-    "jfk_assassination_001"
-  ],
   "weather_manipulation": [
     "haarp_climate_control_conspiracy"
   ],
@@ -1219,6 +1213,29 @@
   "mental_illness_misinterpretation": [
     "demonic_possession_exorcism_001"
   ],
+  "cyber_espionage": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "state-sponsored_hacking": [
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
+    "ghostnet_global_cyber_espionage",
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "data_theft": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "unseen_warfare": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
+  ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
   ],
@@ -1234,34 +1251,11 @@
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
   ],
-  "state-sponsored_hacking": [
-    "solarwinds_supply_chain_attack_001",
-    "ghostnet_global_cyber_espionage",
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "ukraine_power_grid_cyber_attack_2015_2016",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001"
   ],
   "software_vulnerability": [
     "solarwinds_supply_chain_attack_001"
-  ],
-  "cyber_espionage": [
-    "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "data_theft": [
-    "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "unseen_warfare": [
-    "ghostnet_global_cyber_espionage",
-    "moonlight_maze_cyber_espionage"
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
@@ -1282,21 +1276,6 @@
   ],
   "global_cyber_threat": [
     "conficker_worm"
-  ],
-  "creation_beyond_control": [
-    "the_golem_of_prague"
-  ],
-  "supernatural_power": [
-    "the_golem_of_prague"
-  ],
-  "protection": [
-    "the_golem_of_prague"
-  ],
-  "jewish_mysticism": [
-    "the_golem_of_prague"
-  ],
-  "forbidden_knowledge": [
-    "the_golem_of_prague"
   ],
   "cyber_security": [
     "morris_worm_first_internet_attack",
@@ -1389,6 +1368,15 @@
   "drug_experimentation": [
     "project_mk_ultra_001"
   ],
+  "divine_punishment": [
+    "myth_of_atlantis_plato"
+  ],
+  "moral_dilemmas": [
+    "mahabharat_psychological_epic"
+  ],
+  "karma_and_consequence": [
+    "mahabharat_psychological_epic"
+  ],
   "religious_delusion": [
     "hanuman_psychological_phenomenon"
   ],
@@ -1401,13 +1389,25 @@
   "devotion_extremism": [
     "hanuman_psychological_phenomenon"
   ],
-  "moral_dilemmas": [
-    "mahabharat_psychological_epic"
+  "political_assassination": [
+    "jfk_assassination_001"
   ],
-  "karma_and_consequence": [
-    "mahabharat_psychological_epic"
+  "lone_gunman": [
+    "jfk_assassination_001"
   ],
-  "divine_punishment": [
-    "myth_of_atlantis_plato"
+  "creation_beyond_control": [
+    "the_golem_of_prague"
+  ],
+  "supernatural_power": [
+    "the_golem_of_prague"
+  ],
+  "protection": [
+    "the_golem_of_prague"
+  ],
+  "jewish_mysticism": [
+    "the_golem_of_prague"
+  ],
+  "forbidden_knowledge": [
+    "the_golem_of_prague"
   ]
 }
