@@ -1119,28 +1119,6 @@
   "archaeology": [
     "curse_of_tutankhamun"
   ],
-  "cyber_espionage": [
-    "ghostnet_global_cyber_espionage",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "state-sponsored_hacking": [
-    "ghostnet_global_cyber_espionage",
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "moonlight_maze_cyber_espionage",
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "data_theft": [
-    "ghostnet_global_cyber_espionage",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "unseen_warfare": [
-    "ghostnet_global_cyber_espionage",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "advanced_persistent_threat": [
-    "ghostnet_global_cyber_espionage"
-  ],
   "post_mortem_changes": [
     "vampire_panic_eastern_europe"
   ],
@@ -1166,6 +1144,13 @@
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "solarwinds_supply_chain_attack_001"
+  ],
+  "state-sponsored_hacking": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
+    "ghostnet_global_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm"
@@ -1265,6 +1250,18 @@
   "mental_illness_misinterpretation": [
     "demonic_possession_exorcism_001"
   ],
+  "cyber_espionage": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
+  ],
+  "data_theft": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
+  ],
+  "unseen_warfare": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
+  ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
   ],
@@ -1279,5 +1276,8 @@
   ],
   "software_vulnerability": [
     "solarwinds_supply_chain_attack_001"
+  ],
+  "advanced_persistent_threat": [
+    "ghostnet_global_cyber_espionage"
   ]
 }
