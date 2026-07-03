@@ -1124,6 +1124,47 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     setToast({ text: `Loaded topic "${topic}" into the AI Generator form.`, type: 'info' });
   };
 
+  const [resolvingAll, setResolvingAll] = useState(false);
+  const [resolveProgress, setResolveProgress] = useState('');
+
+  const handleResolveAllImages = async () => {
+    if (approvalStories.length === 0 || resolvingAll) return;
+    if (!confirm(`This will automatically search and resolve cover images for all ${approvalStories.length} missing stories. Proceed?`)) return;
+
+    setResolvingAll(true);
+    let successCount = 0;
+    
+    for (let i = 0; i < approvalStories.length; i++) {
+      const story = approvalStories[i];
+      setResolveProgress(`Resolving ${i + 1}/${approvalStories.length}: "${story.title}"...`);
+      
+      try {
+        const res = await fetch('/api/resolve-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic: story.title,
+            concepts: story.concepts,
+            category: story.category
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.image_url) {
+            await handleSaveImageSource(story.story_id, data.image_url);
+            successCount++;
+          }
+        }
+      } catch (err) {
+        console.error(`Batch resolution failed for ${story.story_id}:`, err);
+      }
+    }
+    
+    setResolvingAll(false);
+    setResolveProgress('');
+    setToast({ text: `Auto-resolution complete. Successfully resolved ${successCount} out of ${approvalStories.length} images.`, type: 'success' });
+  };
+
   const handleSaveImageSource = async (storyId, imageSource) => {
     try {
       const targetStory = adminStories.find(s => s.story_id === storyId);
@@ -2962,7 +3003,29 @@ ${aiPromptTopic}`;
                     All active dossiers missing a valid cover thumbnail image. Add a cover image or paste a URL to make them complete.
                   </p>
                 </div>
+                {approvalStories.length > 0 && (
+                  <button
+                    disabled={resolvingAll}
+                    onClick={handleResolveAllImages}
+                    className="flex items-center gap-1.5 px-4 py-2 border rounded-lg text-[10px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer bg-[#9E7B4C]/10 border-[#9E7B4C]/35 text-[#EDE8DF]"
+                  >
+                    ⚡ {resolvingAll ? 'Resolving...' : 'Auto-Resolve All'}
+                  </button>
+                )}
               </div>
+
+              {resolvingAll && (
+                <div className="p-4 rounded-xl border flex items-center justify-between text-xs font-mono" style={{ borderColor: 'rgba(158, 123, 76, 0.25)', backgroundColor: 'rgba(158, 123, 76, 0.03)' }}>
+                  <div className="flex items-center gap-3">
+                    <span className="relative flex h-3.5 w-3.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9E7B4C] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#9E7B4C]"></span>
+                    </span>
+                    <span className="text-[#EDE8DF]">{resolveProgress}</span>
+                  </div>
+                  <span className="text-[#9E7B4C] animate-pulse">SYS-AUTO-ACTIVE</span>
+                </div>
+              )}
 
               {approvalStories.length === 0 ? (
                 <div className="py-16 text-center border border-dashed rounded-xl bg-neutral-950/10 border-neutral-800 space-y-3">

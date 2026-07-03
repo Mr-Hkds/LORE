@@ -90,8 +90,12 @@ function downloadImage(url, destPath) {
   });
 }
 
-// Fetch from Wikipedia to save a story cover image, or return null if none exists
-async function generateAndSaveImage(storyId, topic, apiKey) {
+const { resolveStoryImage } = require('./lib/image-resolver.cjs');
+
+// Downloads a resolved image URL and saves it locally
+async function downloadAndSaveImage(storyId, imageResult) {
+  if (!imageResult || !imageResult.url) return null;
+
   const imagesDir = path.join(__dirname, 'public', 'content', 'images');
   if (!fs.existsSync(imagesDir)) {
     fs.mkdirSync(imagesDir, { recursive: true });
@@ -100,23 +104,14 @@ async function generateAndSaveImage(storyId, topic, apiKey) {
   const relativePath = `/content/images/${storyId}.jpg`;
 
   try {
-    console.log(`[IMAGE ENGINE] Searching Wikipedia for an iconic image for "${topic}"...`);
-    const imgRes = await fetchUrl(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=800&generator=search&gsrsearch=${encodeURIComponent(topic)}&gsrlimit=1&origin=*`);
-    const pages = imgRes.query?.pages;
-    if (pages) {
-      const firstPageId = Object.keys(pages)[0];
-      const imageUrl = pages[firstPageId]?.thumbnail?.source;
-      if (imageUrl) {
-        console.log(`[IMAGE ENGINE] Downloading Wikipedia image for "${topic}"...`);
-        await downloadImage(imageUrl, localPath);
-        return relativePath;
-      }
-    }
-    console.log(`[IMAGE ENGINE] No Wikipedia cover image found for "${topic}". Using typographic fallback.`);
-    return null;
+    console.log(`[IMAGE RESOLVER] Downloading ${imageResult.source} image to ${relativePath}...`);
+    await downloadImage(imageResult.url, localPath);
+    console.log(`[IMAGE RESOLVER] ✓ Saved to ${relativePath}`);
+    return relativePath;
   } catch (err) {
-    console.warn(`[IMAGE ENGINE] Wikipedia image search failed for "${topic}":`, err.message);
-    return null;
+    console.warn(`[IMAGE RESOLVER] Download failed: ${err.message}`);
+    // Return the remote URL as hero_image so the frontend can use it directly
+    return imageResult.url;
   }
 }
 
@@ -642,14 +637,22 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         console.warn('OpenAlex fetch failed:', err.message);
       }
 
-      // Fetch and generate cover image (Wikipedia with AI generation fallback)
-      console.log('Resolving cover image (Wikipedia with AI generation fallback)...');
+      // Resolve cover image via 4-tier cascade (Wikipedia → Commons → Pexels → null)
+      console.log('Resolving cover image via multi-tier cascade...');
       try {
-        const heroImg = await generateAndSaveImage(storyObj.story_id, item.topic, apiKey);
-        storyObj.hero_image = heroImg;
-        console.log('Cover image compiled and saved locally.');
+        const imageResult = await resolveStoryImage(storyObj.story_id, item.topic, storyObj.category || item.category);
+        if (imageResult) {
+          const heroImg = await downloadAndSaveImage(storyObj.story_id, imageResult);
+          storyObj.hero_image = heroImg;
+          storyObj.image_source = imageResult.source; // Track which tier provided the image
+          console.log(`Cover image resolved via ${imageResult.source}: ${heroImg}`);
+        } else {
+          storyObj.hero_image = null;
+          console.log('No cover image found — typographic fallback will be used.');
+        }
       } catch (imgErr) {
-        console.warn('Cover image generation failed:', imgErr.message);
+        console.warn('Cover image resolution failed:', imgErr.message);
+        storyObj.hero_image = null;
       }
 
       // Add to stories array

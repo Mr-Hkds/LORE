@@ -91,6 +91,29 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
     });
   };
 
+  const handleAutoFind = () => {
+    setLoadingMethod('autofind');
+    saveAndPreview(async () => {
+      const res = await fetch('/api/resolve-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: story.title,
+          concepts: story.concepts,
+          category: story.category
+        })
+      });
+      if (!res.ok) throw new Error('API resolution failed');
+      const data = await res.json();
+      if (data.success && data.image_url) {
+        await onSaveImage(story.story_id, data.image_url);
+        setPreviewUrl(data.image_url);
+      } else {
+        throw new Error(data.message || 'No suitable image resolved across all sources.');
+      }
+    });
+  };
+
 
 
   const handlePublish = async () => {
@@ -265,6 +288,41 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
             </div>
           )}
 
+
+
+          {/* ─── Option 1: Auto-Find Image (4-Tier Cascade) ─── */}
+          <div
+            className="rounded-xl p-4 space-y-3"
+            style={{
+              background: 'rgba(158,123,76,0.03)',
+              border: '1px solid rgba(158,123,76,0.15)',
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9E7B4C] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#9E7B4C]"></span>
+                </span>
+                <span className="text-[10px] font-semibold" style={{ color: '#EDE8DF' }}>Auto-Resolve Cover Image</span>
+              </div>
+              <span className="text-[8px] font-mono uppercase text-[#9E7B4C]/60 tracking-wider">
+                Wikipedia → Commons → Pexels
+              </span>
+            </div>
+            <button
+              disabled={loading}
+              onClick={handleAutoFind}
+              className="w-full py-2.5 rounded-lg text-[9px] font-mono font-bold uppercase tracking-widest transition-all active:scale-95 cursor-pointer disabled:opacity-40 flex items-center justify-center gap-1.5"
+              style={{
+                background: 'rgba(158,123,76,0.15)',
+                border: '1px solid rgba(158,123,76,0.3)',
+                color: '#EDE8DF',
+              }}
+            >
+              ⚡ {loading && loadingMethod === 'autofind' ? 'Searching Registry...' : 'Auto-Find Cover'}
+            </button>
+          </div>
 
           {/* ─── Option 2: File upload ─── */}
           <div
