@@ -21,7 +21,8 @@
     "curse_of_tutankhamun",
     "jfk_assassination_001",
     "spontaneous_human_combustion_shc",
-    "the_beast_of_gevaudan"
+    "the_beast_of_gevaudan",
+    "mlk_assassination_conspiracy"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -50,7 +51,8 @@
     "cointelpro_fbi_covert_ops",
     "the_roswell_incident",
     "project_mk_ultra_001",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "mlk_assassination_conspiracy"
   ],
   "espionage": [
     "uwe_barschel",
@@ -151,7 +153,8 @@
     "the_philadelphia_experiment",
     "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
-    "the_roswell_incident"
+    "the_roswell_incident",
+    "mlk_assassination_conspiracy"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -1165,7 +1168,8 @@
     "sapta_chiranjeevi_unseen_guardians"
   ],
   "political_assassination": [
-    "jfk_assassination_001"
+    "jfk_assassination_001",
+    "mlk_assassination_conspiracy"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
@@ -1396,5 +1400,8 @@
   ],
   "consciousness_after_death": [
     "children_past_lives_stevenson_research"
+  ],
+  "civil_rights_movement": [
+    "mlk_assassination_conspiracy"
   ]
 }
