@@ -1120,29 +1120,23 @@
     "curse_of_tutankhamun"
   ],
   "cyber_espionage": [
-    "moonlight_maze_cyber_espionage",
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "moonlight_maze_cyber_espionage"
   ],
   "state-sponsored_hacking": [
-    "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
-    "solarwinds_supply_chain_attack_001"
+    "solarwinds_supply_chain_attack_001",
+    "moonlight_maze_cyber_espionage"
   ],
   "data_theft": [
-    "moonlight_maze_cyber_espionage",
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "moonlight_maze_cyber_espionage"
   ],
   "unseen_warfare": [
-    "moonlight_maze_cyber_espionage",
-    "ghostnet_global_cyber_espionage"
-  ],
-  "wendigo_psychosis": [
-    "wendigo_insatiable_hunger"
-  ],
-  "cultural_fear": [
-    "wendigo_insatiable_hunger"
+    "ghostnet_global_cyber_espionage",
+    "moonlight_maze_cyber_espionage"
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
@@ -1279,5 +1273,11 @@
   ],
   "mental_illness_misinterpretation": [
     "demonic_possession_exorcism_001"
+  ],
+  "wendigo_psychosis": [
+    "wendigo_insatiable_hunger"
+  ],
+  "cultural_fear": [
+    "wendigo_insatiable_hunger"
   ]
 }

@@ -6743,165 +6743,6 @@
       "image_missing": false
     },
     {
-      "story_id": "moonlight_maze_cyber_espionage",
-      "title": "Moonlight Maze: The Silent War in the Wires",
-      "category": "cyber_mysteries",
-      "hook": "For years, an invisible enemy silently stole America's deepest military and scientific secrets, changing the very meaning of war.",
-      "concepts": [
-        "cyber_espionage",
-        "state-sponsored_hacking",
-        "data_theft",
-        "national_security",
-        "unseen_warfare",
-        "cold_war_legacy"
-      ],
-      "severity": "chilling",
-      "hero_image": null,
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 19,
-        "gripping": 12,
-        "scared": 5,
-        "mindblown": 5
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "echelon_global_surveillance",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Moonlight Maze showed the world that even critical government systems were not safe, much like how the Echelon program revealed the vast reach of global signals intelligence, collecting secrets from the very airwaves."
-        },
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber warfare",
-          "transition_line": "Years after the silent theft of Moonlight Maze, the world witnessed the destructive power of cyber warfare with Stuxnet, a weapon designed not just to steal data, but to cripple physical infrastructure."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: An Unseen Presence",
-          "content": "In the mid-1990s, a new kind of threat began to emerge. It was not seen in the physical world but deep within computer networks. Critical US government and military systems, thought to be secure, started to show strange activities. Like a ghost moving through digital walls, data was being accessed, copied, and then removed, all without leaving clear traces.\n\nThis was not the work of simple hackers looking for mischief. The intrusions were too organized and too focused. It felt like a deliberate, well-planned effort to spy on the United States. A new, silent kind of conflict was taking shape in the early days of the internet.\n\nAt first, these events were just whispers among security experts. They were small incidents, easily dismissed. But soon, a pattern began to form, revealing something much larger and more disturbing.",
-          "cliffhanger": "These subtle digital shadows were not isolated events; they were part of a growing, unseen network of espionage."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: Targets and Tools",
-          "content": "The attackers focused on specific, highly sensitive targets. These included military bases, government departments, and scientific research laboratories across the United States. They seemed especially interested in defense contractors and university research centers working on advanced technology.\n\nTheir method was sophisticated. They used hidden programs called 'rootkits' to take control of computers and stay secret for a long time. They would steal user names and passwords, then slowly move deeper into protected systems. They were not looking to crash systems or cause chaos; their goal was to steal information, carefully and quietly.\n\nThe type of information stolen was always high-value: research data, strategic plans, and technical specifications. This pattern clearly showed a goal beyond simple hacking. It was about gaining a strategic advantage, a silent harvest of secrets.",
-          "cliffhanger": "The scale of the data being taken was far beyond anything seen before, pointing to a state-level operation."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: Moonlight Maze Revealed",
-          "content": "By 1998, US investigators could no longer ignore the truth. The widespread, coordinated attacks were officially recognized and given a secret code name: 'Moonlight Maze'. This was not a single attack, but a long-term, continuous campaign of digital theft that had been happening for years.\n\nTeams from the FBI and the US Air Force's Office of Special Investigations (AFOSI) started a deep investigation. They found that thousands of files had been stolen. These files included sensitive military plans, detailed designs for advanced weapons, and crucial scientific data.\n\nThe discovery of Moonlight Maze sent a shockwave through the US intelligence community. It confirmed that the internet, once seen as a tool for open communication, was now a new battlefield. The question was, who was the enemy in this new kind of war?",
-          "cliffhanger": "The true identity of the attackers remained hidden, despite intense efforts to trace their digital steps."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: A Vast Digital Plunder",
-          "content": "The reach of Moonlight Maze was astonishing. The attackers had successfully breached systems at the Pentagon, NASA, the Department of Energy, and many leading universities. They stole maps showing military deployments, codes for controlling satellites, and blueprints for sensitive defense technologies.\n\nThis was not just about stealing random data. It was a focused effort to gain military, economic, and technological superiority. The intruders showed great patience and advanced skills. They operated silently for years, moving through various networks, gathering intelligence without being fully detected.\n\nThe sheer volume and importance of the stolen data were deeply concerning. It represented a major security breach and a massive intelligence loss for the United States. The operation proved that cyber espionage could be just as effective, if not more, than traditional spying methods.",
-          "cliffhanger": "The sophisticated methods and high-value targets suggested that a powerful, well-resourced nation-state was behind the attacks."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: Chasing Digital Ghosts",
-          "content": "Investigators faced a huge challenge: tracing attackers who deliberately hid their tracks. The 'Moonlight Maze' hackers routed their attacks through many different countries. They used computers in South Korea, the Netherlands, and other places as bounce points. This made it incredibly difficult to find their true origin.\n\nThey employed 'Trojan horse' programs. These were malicious software hidden inside legitimate files. Once activated, they gave the hackers full control over a compromised computer. This allowed them to turn innocent machines into launchpads for further attacks, covering their true location even more.\n\nThe investigation was a complex game of digital cat and mouse. Every digital fingerprint led to another false trail. The attackers were experts at digital disguise, making sure their true identity remained veiled.",
-          "cliffhanger": "Despite advanced tracking technology and countless hours of investigation, a direct, undeniable link to the source remained elusive."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: Suspects in the Shadows",
-          "content": "As investigators followed the digital trails, all evidence strongly pointed in one direction: Russia. The tactics used, the specific types of information targeted, and the overall goals of the operation matched known Russian intelligence interests. This was especially true for the post-Cold War era, when Russia was trying to rebuild its global influence.\n\nUS officials openly stated their belief that the attacks originated from Russia. General John Gordon, a senior US intelligence official, confirmed this. He mentioned the hackers' unique digital 'fingerprints' and the types of targets they chose. It was not about money; it was about global power, military advantage, and national security.\n\nThe implications were chilling. A new kind of silent war was already being fought online. Nations were now engaged in invisible battles, stealing secrets and gaining advantages without ever firing a single shot. Moonlight Maze revealed the dawning of an era of constant, unseen cyber conflict.",
-          "cliffhanger": "The dark truth was that this was just the beginning of a new, global cyber arms race, with no end in sight."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: A Lingering Legacy",
-          "content": "To this day, no one has ever been publicly arrested or charged in connection with Moonlight Maze. The stolen data likely provided the perpetrators with significant advantages, which may still be impacting global power dynamics. This case forcefully showed that the internet, once a symbol of open connection, could also be a potent weapon for silent espionage.\n\nMoonlight Maze served as a stark warning. It revealed that state-sponsored cyber-attacks were not a future threat but a present danger. It forced governments worldwide to rethink their cybersecurity strategies and understand the true cost of digital vulnerability.\n\nThe 'Moonlight Maze' campaign paved the way for future, even more destructive, cyber warfare strategies. It proved that digital infiltration could be as damaging as traditional spying. The full extent of the damage, and who ultimately benefited, remains a deeply guarded secret, a chilling reminder of the unseen war still fought in the digital shadows.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": true
-    },
-    {
-      "story_id": "wendigo_insatiable_hunger",
-      "title": "The Wendigo: The Spirit of Insatiable Hunger",
-      "category": "mythology",
-      "hook": "In the frozen wilderness, a terrifying hunger can twist a human soul, transforming them into a creature of ice and bone, driven by an endless craving for human flesh.",
-      "concepts": [
-        "wendigo_psychosis",
-        "cannibalism",
-        "cultural_fear",
-        "survival_horror"
-      ],
-      "severity": "chilling",
-      "hero_image": null,
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 17,
-        "gripping": 40,
-        "scared": 6,
-        "mindblown": 8
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "franklin_expedition_lost_ships",
-          "shared_concept": "cannibalism",
-          "transition_line": "The depths of human desperation are further revealed in another chilling historical account, where the thin line between survival and horror was crossed, echoing the ultimate taboo of the Wendigo."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - The Dreaded Name",
-          "content": "Deep in the North American forests, among the Algonquian Indigenous peoples, whispers tell of a terrifying entity: the Wendigo. This creature is described as a gaunt, skeletal being, its skin pulled tight over its bones, eyes sunken, and its lips chewed away. It is often linked to extreme winter cold and starvation. The Wendigo possesses an insatiable hunger, especially for human flesh, and is never full, no matter how much it eats.\n\nElders spoke of its heart of ice, a coldness that mirrors the harsh wilderness it roams. To even say its name was to invite its attention, a dangerous act that could summon the spirit of gluttony and destruction. The Wendigo was not just a monster in tales; it was a deeply rooted fear, a warning against selfishness and greed, particularly during times of scarcity. Its presence meant ultimate doom, for both the individual and the community.",
-          "cliffhanger": "But what if this creature is not just a myth, but a dark reflection of human desperation, born from the most brutal conditions?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - Warnings from the Elders",
-          "content": "For generations, the legend of the Wendigo served as a strong moral compass for Indigenous communities. It taught that in the face of extreme famine, giving in to cannibalism or excessive hoarding of food would lead to a spiritual transformation. A person would slowly turn into a Wendigo, losing their humanity and becoming a monstrous shell driven by an unquenchable craving for others.\n\nThis fear was so strong that it gave rise to a real, documented condition known as 'Wendigo psychosis.' This was a culturally specific mental illness where individuals would develop an intense craving for human flesh, a profound fear of becoming a Wendigo, and often experience nausea and aversion to normal food. The syndrome was a direct manifestation of the deep-seated cultural anxiety surrounding this forbidden act and the terrifying consequences it held.",
-          "cliffhanger": "This terror was not just in stories; it manifested in real, horrifying cases that left lasting scars on communities."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - The First Documented Horrors",
-          "content": "One of the most chilling and well-documented cases of Wendigo psychosis is that of Swift Runner, an Indigenous man from the Cree nation, in 1879. Swift Runner, a trapper, and his family were isolated during a severe winter near Fort Assiniboine, Alberta. When only Swift Runner emerged, his emaciated appearance and strange behavior raised suspicion.\n\nHe eventually confessed to the brutal murder and consumption of his entire family, including his wife and six children. He claimed he had been possessed by a Wendigo spirit and that the spirit forced him to commit these acts. The desperate conditions of extreme cold and starvation likely triggered this mental breakdown, pushing him to the ultimate taboo. Swift Runner was later tried, found guilty, and hanged for his crimes, a grim testament to the horrors born from the Wendigo legend.",
-          "cliffhanger": "Swift Runner's story, horrifying as it was, was not an isolated event in the chilling history of the Wendigo's grip on the human mind."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Psychology of Desperation",
-          "content": "Wendigo psychosis was not merely a belief but a profound, recognized illness within certain Indigenous societies. Symptoms often included a strong delusion that one was turning into a Wendigo, followed by a compulsive urge to eat human flesh. Victims would often become withdrawn, depressed, and sometimes violent. The communities understood this as a spiritual affliction, a corruption of the soul.\n\nTo prevent further tragedy, individuals showing clear signs of Wendigo psychosis were sometimes killed by their own communities, often by shamans or spiritual leaders. One such figure was Jack Fiddler, a respected Oji-Cree shaman, who claimed to have killed at least 14 people suffering from the condition over his lifetime. He believed he was saving them, and the community, from the full transformation into a Wendigo, preventing further harm. His actions highlight the desperate measures taken against this terrifying and complex condition.",
-          "cliffhanger": "As the Western world encountered these phenomena, they sought scientific explanations for a terror rooted deeply in cultural belief and extreme hardship."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - Western Interpretations",
-          "content": "In the 20th century, Western anthropologists and psychiatrists began to study Wendigo psychosis. They often categorized it as a 'culturally bound syndrome,' a mental disorder only found in specific cultures. Their theories suggested that extreme psychological stress from starvation, isolation, and the pervasive fear of the Wendigo legend itself could combine to create the symptoms.\n\nSome researchers viewed it purely as a psychological response to unimaginable conditions, where the mind, under extreme duress, latched onto a powerful cultural narrative. Others argued it was a way for communities to explain and process acts of cannibalism that occurred during desperate times. The debate continues whether it was a genuine, distinct mental illness or a desperate act of survival rationalized through folklore.",
-          "cliffhanger": "But as modern society encroached, did the Wendigo vanish, or did its chilling lessons simply take new, hidden forms that linger even today?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Echoes in the Modern World",
-          "content": "While overt cases of Wendigo psychosis are rare in modern times, the core message of the Wendigo legend remains powerful. Many Indigenous communities still view the Wendigo not just as a creature, but as a metaphor. It symbolizes insatiable greed, environmental destruction, and the dangers of extreme selfishness that can consume individuals and societies.\n\nThe 'insatiable hunger' of the Wendigo is now often linked to modern societal issues: unchecked consumerism, the destruction of natural resources, and the exploitation of others for personal gain. The legend continues to serve as a cautionary tale, urging balance, respect for nature, and community solidarity against the forces that can lead to spiritual and physical starvation.",
-          "cliffhanger": "The true horror of the Wendigo lies not just in its fabled form, but in the dark truths it reveals about human nature when pushed to its absolute limits."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The Enduring Warning",
-          "content": "The documented cases of Wendigo psychosis, like Swift Runner's horrifying confession and Jack Fiddler's desperate acts, confirm that the Wendigo was far more than just a campfire story. It was a real and terrifying cultural experience, a unique blend of psychology, environmental pressure, and spiritual belief that pushed individuals to the brink of the unthinkable.\n\nThe Wendigo stands as a chilling reminder of humanity's capacity for darkness, born from the deepest desperation and the breaking of the ultimate taboo. Its legend endures as a powerful symbol, teaching us about the fragility of the human mind under extreme stress, the importance of community, and the ever-present danger of an insatiable hunger, both literal and metaphorical. It is a lesson whispered from the frozen past, echoing into our present.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": true
-    },
-    {
       "story_id": "ghostnet_global_cyber_espionage",
       "title": "GhostNet: The Unseen Hands That Stole Global Secrets",
       "category": "cyber_mysteries",
@@ -7064,11 +6905,8 @@
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
       "title": "Sapta Chiranjeevi: India's Seven Unseen Immortals",
-      "hero_image": "/content/images/sapta_chiranjeevi_unseen_guardians/cover.jpg",
-      "image_query": "",
-      "hook": "For centuries, whispers in India speak of seven beings cursed or blessed to walk the earth forever, timeless witnesses to human history, their true forms hidden in plain sight.",
       "category": "mythology",
-      "severity": "chilling",
+      "hook": "For centuries, whispers in India speak of seven beings cursed or blessed to walk the earth forever, timeless witnesses to human history, their true forms hidden in plain sight.",
       "concepts": [
         "immortality",
         "ancient_legends",
@@ -7076,6 +6914,18 @@
         "spiritual_phenomena",
         "enduring_belief"
       ],
+      "severity": "chilling",
+      "hero_image": "/content/images/sapta_chiranjeevi_unseen_guardians/cover.jpg",
+      "added_date": "2026-06-24",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 36,
+        "scared": 4,
+        "mindblown": 4
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -7119,7 +6969,9 @@
           "content": "The darkest documented truth about the Sapta Chiranjeevi is not necessarily that they actively harm us, but that their silent, eternal watch is a constant, unyielding presence. Some interpretations suggest they are not just passive observers. They might subtly influence events, acting as guardians, silent judges, or even instigators, their ancient motives entirely unknown to us. \n\nThe chilling reality is that we live in a world where beings of immense age and power might operate beyond our perception. Their true intentions, their feelings about humanity, and their ultimate purpose remain shrouded in mystery. Their silence is often more unsettling than any loud pronouncement, implying a knowledge and control that we cannot comprehend. \n\nThe existence of the Sapta Chiranjeevi forces us to accept that there are forces at play far greater and more enduring than ourselves. They are the ultimate enigma, a stark reminder that our world, our history, and our future might be observed, and perhaps even steered, by unseen hands from a timeless past. This profound uncertainty leaves a truly chilling question about who truly holds the reins of destiny.",
           "cliffhanger": null
         }
-      ]
+      ],
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "conficker_worm",
@@ -7136,6 +6988,23 @@
         "global_cyber_threat"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 46,
+        "gripping": 34,
+        "scared": 2,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "state-sponsored_hacking",
+          "transition_line": "Like the Conficker worm, the GhostNet operation also demonstrated the unseen hands of state-sponsored actors quietly infiltrating global networks for their own hidden agendas."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7180,15 +7049,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "state-sponsored_hacking",
-          "transition_line": "Like the Conficker worm, the GhostNet operation also demonstrated the unseen hands of state-sponsored actors quietly infiltrating global networks for their own hidden agendas."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "jfk_assassination_001",
@@ -7204,6 +7066,33 @@
         "covert_operations"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/jfk_assassination_001.jpg",
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 36,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 54
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "operation_northwoods_001",
+          "shared_concept": "government_conspiracy",
+          "transition_line": "The chilling possibility of a government conspiracy behind JFK's assassination echoes other dark plans, like 'Operation Northwoods,' where US officials plotted fake attacks on their own citizens."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "covert_operations",
+          "transition_line": "The covert operations and hidden agendas suspected in JFK's death are disturbingly similar to the CIA's secret 'MK-Ultra' program, which experimented with mind control."
+        },
+        {
+          "story_id": "operation_gladio",
+          "shared_concept": "deep_state",
+          "transition_line": "The concept of a 'deep state' or unseen forces at play in JFK's assassination finds a parallel in 'Operation Gladio,' where secret paramilitary networks operated within European governments."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7248,25 +7137,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "operation_northwoods_001",
-          "shared_concept": "government_conspiracy",
-          "transition_line": "The chilling possibility of a government conspiracy behind JFK's assassination echoes other dark plans, like 'Operation Northwoods,' where US officials plotted fake attacks on their own citizens."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "covert_operations",
-          "transition_line": "The covert operations and hidden agendas suspected in JFK's death are disturbingly similar to the CIA's secret 'MK-Ultra' program, which experimented with mind control."
-        },
-        {
-          "story_id": "operation_gladio",
-          "shared_concept": "deep_state",
-          "transition_line": "The concept of a 'deep state' or unseen forces at play in JFK's assassination finds a parallel in 'Operation Gladio,' where secret paramilitary networks operated within European governments."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "hero_image": "/content/images/jfk_assassination_001.jpg"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "morris_worm_first_internet_attack",
@@ -7281,6 +7153,23 @@
         "computer_viruses"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 32,
+        "gripping": 35,
+        "scared": 6,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "conficker_worm",
+          "shared_concept": "digital_threats",
+          "transition_line": "If the Morris Worm was the first digital warning, stories like the Conficker Worm show how these digital threats evolved into silent, global armies, hiding in plain sight."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7325,15 +7214,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "conficker_worm",
-          "shared_concept": "digital_threats",
-          "transition_line": "If the Morris Worm was the first digital warning, stories like the Conficker Worm show how these digital threats evolved into silent, global armies, hiding in plain sight."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "the_golem_of_prague",
@@ -7349,6 +7231,23 @@
         "forbidden_knowledge"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 27,
+        "scared": 2,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "wendigo_insatiable_hunger",
+          "shared_concept": "unleashed_supernatural_power",
+          "transition_line": "Just as the Golem's immense power brought destruction when unchecked, other ancient legends speak of creatures whose supernatural might, once awakened, consume everything in their path, driven by an insatiable, terrifying hunger."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7393,15 +7292,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "wendigo_insatiable_hunger",
-          "shared_concept": "unleashed_supernatural_power",
-          "transition_line": "Just as the Golem's immense power brought destruction when unchecked, other ancient legends speak of creatures whose supernatural might, once awakened, consume everything in their path, driven by an insatiable, terrifying hunger."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -7417,6 +7309,36 @@
         "mind_control_claims"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/haarp_climate_control_conspiracy.jpg",
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 12,
+        "scared": 3,
+        "mindblown": 32
+      },
+      "evidence_links": [
+        {
+          "label": "Science vs Conspiracy: Collective Narratives in the Age of Misinformation (Alessandro Bessi, Mauro Coletto, 2015)",
+          "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0118093&type=printable"
+        },
+        {
+          "label": "Solar geoengineering and the chemtrails conspiracy on social media (Dustin Tingley, Gernot Wagner, 2017)",
+          "url": "https://www.nature.com/articles/s41599-017-0014-3.pdf"
+        },
+        {
+          "label": "Handbook of Conspiracy Theory and Contemporary Religion (Dyrendal, Asbjørn 1965-, Robertson, David G. 1975-, 2018)",
+          "url": "https://brill.com/downloadpdf/title/39101.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_philadelphia_experiment",
+          "shared_concept": "government_secrecy",
+          "transition_line": "Just as with the whispered tales of the 'Philadelphia Experiment' and its vanishing ship, HAARP's story highlights how government secrecy can fuel decades of chilling theories about unseen powers and technological capabilities."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7461,29 +7383,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "the_philadelphia_experiment",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Just as with the whispered tales of the 'Philadelphia Experiment' and its vanishing ship, HAARP's story highlights how government secrecy can fuel decades of chilling theories about unseen powers and technological capabilities."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "Science vs Conspiracy: Collective Narratives in the Age of Misinformation (Alessandro Bessi, Mauro Coletto, 2015)",
-          "url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0118093&type=printable"
-        },
-        {
-          "label": "Solar geoengineering and the chemtrails conspiracy on social media (Dustin Tingley, Gernot Wagner, 2017)",
-          "url": "https://www.nature.com/articles/s41599-017-0014-3.pdf"
-        },
-        {
-          "label": "Handbook of Conspiracy Theory and Contemporary Religion (Dyrendal, Asbjørn 1965-, Robertson, David G. 1975-, 2018)",
-          "url": "https://brill.com/downloadpdf/title/39101.pdf"
-        }
-      ],
-      "hero_image": "/content/images/haarp_climate_control_conspiracy.jpg"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -7498,6 +7399,36 @@
         "digital_weaponry"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 27,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Ransomware: Analysing the Impact on Windows Active Directory Domain Services (Grant McDonald, Pavlos Papadopoulos, 2022)",
+          "url": "https://www.mdpi.com/1424-8220/22/3/953/pdf?version=1643199228"
+        },
+        {
+          "label": "INFORMATION TECHNOLOGIES OF SEMANTIC DISTORTIONS IN CLICKBAIT HEADLINES (З. З. Чанышева, M Hilbert, 2016)",
+          "url": "https://doi.org/10.15593/2224-9389/2016.4.5"
+        },
+        {
+          "label": "Cyber-conflict between the United States of America and Russia (Marie Baezner, Patrice Robin, 2017)",
+          "url": "http://hdl.handle.net/20.500.11850/184547"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber_warfare",
+          "transition_line": "Just as Stuxnet showed the precision of unseen digital attacks, the Shadow Brokers leak revealed the terrifying scope of tools designed for a hidden global war, unleashing them upon the entire world."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7541,29 +7472,8 @@
           "content": "The Shadow Brokers leak fundamentally changed the landscape of cybersecurity forever. It demonstrated the perilous nature of state-sponsored cyber warfare. When nations hoard zero-day exploits and develop powerful digital tools in secret, they create a hidden global arsenal. If these weapons fall into the wrong hands, as they did, the entire world becomes vulnerable.\n\nThis event sparked a crucial debate: should governments disclose vulnerabilities they find, so software companies can fix them and protect everyone? Or should they keep these flaws secret, to use them as cyberweapons against adversaries? The Shadow Brokers provided a chilling answer: keeping them secret risks their exposure and weaponization by malicious actors, leading to widespread, uncontrollable damage.\n\nThe chilling truth is that the tools released by The Shadow Brokers continue to be used and adapted by hackers worldwide. They are now part of the public domain, making advanced cyberattacks accessible to a much broader range of criminals and state actors. The leak unveiled the dangerous game played in the shadows, where the weapons developed for national defense can easily become tools of global destruction, impacting millions of innocent lives and undermining the digital peace we all rely upon."
         }
       ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "Just as Stuxnet showed the precision of unseen digital attacks, the Shadow Brokers leak revealed the terrifying scope of tools designed for a hidden global war, unleashing them upon the entire world."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "Ransomware: Analysing the Impact on Windows Active Directory Domain Services (Grant McDonald, Pavlos Papadopoulos, 2022)",
-          "url": "https://www.mdpi.com/1424-8220/22/3/953/pdf?version=1643199228"
-        },
-        {
-          "label": "INFORMATION TECHNOLOGIES OF SEMANTIC DISTORTIONS IN CLICKBAIT HEADLINES (З. З. Чанышева, M Hilbert, 2016)",
-          "url": "https://doi.org/10.15593/2224-9389/2016.4.5"
-        },
-        {
-          "label": "Cyber-conflict between the United States of America and Russia (Marie Baezner, Patrice Robin, 2017)",
-          "url": "http://hdl.handle.net/20.500.11850/184547"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "elizabeth_bathory_blood_countess",
@@ -7580,6 +7490,28 @@
         "unexplained_evil"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 30,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "The Trial of Countess Elizabeth Báthory: Developing a Defense for Dame Dracula and Deconstructing Dominant Dames (Rachel Lawhead, 2019)",
+          "url": "http://hdl.handle.net/11299/208558"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_batavia_shipwreck_mutiny",
+          "shared_concept": "human_depravity",
+          "transition_line": "Just as Elizabeth Báthory's castle became a stage for unimaginable cruelty, the isolated island of the Batavia shipwreck also saw humanity descend into its darkest depths."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7624,21 +7556,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "the_batavia_shipwreck_mutiny",
-          "shared_concept": "human_depravity",
-          "transition_line": "Just as Elizabeth Báthory's castle became a stage for unimaginable cruelty, the isolated island of the Batavia shipwreck also saw humanity descend into its darkest depths."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "The Trial of Countess Elizabeth Báthory: Developing a Defense for Dame Dracula and Deconstructing Dominant Dames (Rachel Lawhead, 2019)",
-          "url": "http://hdl.handle.net/11299/208558"
-        }
-      ],
-      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "spontaneous_human_combustion_shc",
@@ -7653,6 +7572,51 @@
         "unexplained_phenomena"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 48,
+        "gripping": 36,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [
+        {
+          "label": "Selenium in the Environment, Metabolism and Involvement in Body Functions (Youcef Mehdi, Jean‐Luc Hornick, 2013)",
+          "url": "https://www.mdpi.com/1420-3049/18/3/3292/pdf?version=1403114617"
+        },
+        {
+          "label": "A Review On Brief Insight Into Spontaneous Human Combustion (Tulsi Patil, Arun Soni, 2021)",
+          "url": "https://ajprd.com/index.php/journal/article/download/935/803"
+        },
+        {
+          "label": "New aspects of p66Shc in ischaemia reperfusion injury and other cardiovascular diseases (Fabio Di Lisa, Marco Giorgio, 2016)",
+          "url": "https://bpspubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bph.13478"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Just as with the unexplained deaths on Dyatlov Pass, Spontaneous Human Combustion presents another terrifying puzzle where the victims meet a horrifying end without clear causes."
+        },
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "While Uwe Barschel's death was entangled in political intrigue, the mystery of SHC involves deaths equally unexplained, but with fire rather than shadows as the silent killer."
+        },
+        {
+          "story_id": "the_taman_shud_case",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Like the anonymous man in the Taman Shud case, victims of SHC often leave behind perplexing clues that challenge forensic science and defy easy answers."
+        },
+        {
+          "story_id": "the_isdal_woman",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "From the unidentified Isdal Woman to the cases of SHC, some deaths are so bizarre and lacking in clear evidence that they continue to haunt our collective understanding."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7697,65 +7661,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "the_dyatlov_pass_incident",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Just as with the unexplained deaths on Dyatlov Pass, Spontaneous Human Combustion presents another terrifying puzzle where the victims meet a horrifying end without clear causes."
-        },
-        {
-          "story_id": "uwe_barschel",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "While Uwe Barschel's death was entangled in political intrigue, the mystery of SHC involves deaths equally unexplained, but with fire rather than shadows as the silent killer."
-        },
-        {
-          "story_id": "the_taman_shud_case",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Like the anonymous man in the Taman Shud case, victims of SHC often leave behind perplexing clues that challenge forensic science and defy easy answers."
-        },
-        {
-          "story_id": "the_isdal_woman",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "From the unidentified Isdal Woman to the cases of SHC, some deaths are so bizarre and lacking in clear evidence that they continue to haunt our collective understanding."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "Selenium in the Environment, Metabolism and Involvement in Body Functions (Youcef Mehdi, Jean‐Luc Hornick, 2013)",
-          "url": "https://www.mdpi.com/1420-3049/18/3/3292/pdf?version=1403114617"
-        },
-        {
-          "label": "A Review On Brief Insight Into Spontaneous Human Combustion (Tulsi Patil, Arun Soni, 2021)",
-          "url": "https://ajprd.com/index.php/journal/article/download/935/803"
-        },
-        {
-          "label": "New aspects of p66Shc in ischaemia reperfusion injury and other cardiovascular diseases (Fabio Di Lisa, Marco Giorgio, 2016)",
-          "url": "https://bpspubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bph.13478"
-        }
-      ],
-      "hero_image": null
-    },
-    {
-      "role": "assistant",
-      "reasoning": "We need produce JSON with story_id \"rendlesham_forest_incident\". Title, category chosen: likely conspiracy (since UFO). severity: chilling or unsettling? call \"chilling\". Concepts: maybe [\"ufo\",\"government_secrecy\",\"riddle\"] or similar. Layer texts: 7 layers, each 2-3 paragraphs, double newlines between paragraphs. Use single quotes for quotes. Ensure no double quotes inside string values except escaped. We must write content with simple direct language. Hook: one or two sentences, max 150 chars. Provide cliffhanger. Layer numbering matches.\n\nMake sure no double quotes in values; we use single quotes inside narrative. Strings can contain single quotes (like 'incident'). Must escape double quotes? But we should avoid double quotes. Use single quotes in narrative. Ensure content has line breaks \\n\\n. JSON format with proper escaping of backslashes etc. In JSON, newline must be represented as \\n. So each content string needs \\n\\n inside to represent double line breaks. We also need to escape backslashes in JSON string. Also remove any unescaped double quotes inside. Use single quotes inside. Since JSON strings are double-quoted, we need to escape double quotes if any appear. But we use none. Good.\n\nLet's design content:\n\nLayer 1: The Whisper. Intro hook should start with specific fact. Eg: \"On the night of 25 December 1980, four men at RAF Woodbridge saw a bright light in the sky.\" That is a hook? Hook separate. For layer content: 2-3 paragraphs.\n\nWe need each layer content comprised of paragraphs separated by \\n\\n.\n\nParagraph 1: 2-3 sentences. Keep simple.\n\nParagraph 2: 2-3 sentences.\n\nParagraph 3 optional if 3 paragraphs. Use simple.\n\nBut must be 2-3 detailed paragraphs; we can do 3 paragraphs.\n\nNeed to keep sentences short. Good.\n\nWe also need cliffhanger sentence per layer.\n\nLet's draft.\n\nWe need to list concepts array: maybe [\"ufo\",\"government_secrecy\",\"unexplained_light\"].\n\nLet's draft each layer content.\n\nLayer1: Name \"The Whisper - introducing the mystery\" maybe use given formatting. content:\n\nParagraph 1: \"The first story comes from a flight crew at RAF Woodbridge. On 25 December 1980, they were watching a guard post at night. Suddenly a bright flash appeared in the sky.\" Sentences short.\n\nParagraph 2: \"The crew's radio log recorded the sighting. No aircraft could have made that light. They called for help.\" short.\n\nParagraph 3: \"The event sparked rumours of alien visitors. Yet the story stayed quiet for years.\" That is fine.\n\nCliffhanger: \"What did the crew see that night?\" but need to bridge to next layer.\n\nNext layer 2: \"The Pattern\". content 3 paragraphs.\n\nParagraph 1: \"Over the next weeks, other pilots reported odd lights near the woodland. Their reports were similar but oddly mismatched.\" etc.\n\nParagraph 2: \"A pattern emerged of sudden bright objects and strange sounds. No pilot explained what they were.\" short.\n\nParagraph 3: \"The pattern of reports suggested a coordinated incident, not a lone flare.\" short.\n\nCliffhanger: \"Soon, the aircraft would land right in the forest itself.\"\n\nLayer3: \"The Incident\". 3 paragraphs.\n\nParagraph 1: \"On 25 December, a de Havilland Victor called 70000 landed at Woodbridge. The crew contacted Woodbridge. They were told to investigate a strange light.\" etc.\n\nParagraph 2: \"The crew flew into the woods. They found a short metal object. It was on the ground.\" etc.\n\nParagraph 3: \"The object was unlike any aircraft. A trio of men from the base found it.\" etc.\n\nCliffhanger: \"But the men soon felt a chill that none could explain.\"\n\nLayer4: \"The System\". Hmm the earlier plan: layer 4 details the event? Wait the instruction: Layer 4 details the event. But we've already covered basic event. Maybe layer4 expands after the object, describing misbehavior of base security. We'll interpret accordingly.\n\nLayer4 content 3 paragraphs: describe investigation, afterimages, electronics failure.\n\nParagraph1: \"The base sent investigators inside the forest. Computers paused or malfunctioned.\" etc.\n\nParagraph2: \"Black boxes of the pilot's plane showed strange signals. The radar logs had gaps.\" etc.\n\nParagraph3: \"The crew reported seeing a faded satellite view.\" short.\n\nCliffhanger: \"Next, the evidence would be scrutinised by experts.\"\n\nLayer5: \"The Research\" 3 paragraphs. Discuss reports, flight data, test.\n\nParagraph1: \"Researchers checked the air traffic control data. They found a dead spike that matched the time of the flash.\" etc.\n\nParagraph2: \"Many scientists dismissed the event as a supernova or meteor. The UK’s UFO study group was skeptical.\" short.\n\nParagraph3: \"The remaining evidence points to a real anomaly. The trace of GNSS drift suggests interference.\" short.\n\nCliffhanger: \"Yet data gaps still haunt the story.\"\n\nLayer6: \"The Abyss\". 3 paragraphs. Discuss missing data, aftermath.\n\nParagraph1: \"The objectives and protocols of the investigation were not fully documented.\" etc.\n\nParagraph2: \"The base released a brief statement. It said: 'We have no record of an aircraft impact.'\" etc.\n\nParagraph3: \"The public question multiplied. Some demand a full inquiry, others suspect cover-up.\" short.\n\nCliffhanger: \"The final truth remains locked in the forest's shadow.\"\n\nLayer7: \"The Dark Corner\". 3 paragraphs. deliver darkest documented truth: maybe mention that UK Ministry of Defence did not investigate seriously, no flight recorder found, tree logs show no burn marks. Provide chilling truth that no phenomenon explained. \n\nParagraph1: \"When the UK Ministry of Defence opened the file, it was found short and vague.\" etc.\n\nParagraph2: \"No trace of a crash or debris remains. The forest show no scorch marks.\" etc.\n\nParagraph3: \"Two decades later, the incident is still reported in the media. The forest holds a secret no one can explain.\" \n\nNo cliffhanger.\n\nNow ensure no double quotes inside. Use single quotes. The JSON string will escape backslashes for newlines: we need to put \\n\\n sequences. Inside string we need to escape backslashes: e.g. \"First line.\\n\\nSecond line.\" In JSON, we write \"\\\\\" to produce one backslash. Actually we need to write \\n inside JSON string to indicate line break. So we write \\n \\n as line break. Need to escape double quotes. We'll keep inner content without double quotes.\n\nMake sure each content string does not contain double quotes.\n\nProvide the \"connections\" array: maybe connect to \"project_blue_book_ufo\" because related UFO? Hmm \"project_blue_book_ufo\" ID exists. Or \"the_bystander_effect\" etc. Choose \"project_blue_book_ufo\". Provide shared concept maybe \"ufo\". Provide transition line.\n\nLet's write connections: story_id: \"project_blue_book_ufo\", shared_concept: \"ufo\", transition_line: \"",
-      "tool_calls": [],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "Rural and Urban Poaching in Victorian England (Harvey Osborne, Michael Winstanley, 2006)",
-          "url": "https://eprints.lancs.ac.uk/id/eprint/4191/1/win1.pdf"
-        },
-        {
-          "label": "A Look Back at Georgina Bruni’s Book: You Can’t Tell the People: the Definitive Account of the Rendlesham Forest UFO Mystery (Carl Grove, 2024)",
-          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/3537/2221"
-        },
-        {
-          "label": "Time Travel: coexistence of past, present, and future? (Matheus Pereira Lobo, 2019)",
-          "url": "https://osf.io/7ruay/download"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "solarwinds_supply_chain_attack_001",
@@ -7770,6 +7677,36 @@
         "software_vulnerability"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 44,
+        "gripping": 37,
+        "scared": 6,
+        "mindblown": 10
+      },
+      "evidence_links": [
+        {
+          "label": "Software Supply Chain Attacks, a Threat to Global Cybersecurity: SolarWinds’ Case Study (Jeferson Martínez, Javier M. Durán, 2021)",
+          "url": "https://www.iieta.org/download/file/fid/62702"
+        },
+        {
+          "label": "From SolarWinds to Kaseya: The rise of supply chain attacks in a digital world (Hadi Ghanbari, Kari Koskinen, 2024)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/20438869241299823"
+        },
+        {
+          "label": "Artificial intelligence in logistics and supply chain management: A primer and roadmap for research (R. Glenn Richey, Soumyadeb Chowdhury, 2023)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/jbl.12364"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber warfare",
+          "transition_line": "Just as Stuxnet showed the world the destructive power of digital weapons, SolarWinds revealed the terrifying reach of unseen cyber espionage, proving that the digital battlefield is constantly evolving."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7814,29 +7751,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber warfare",
-          "transition_line": "Just as Stuxnet showed the world the destructive power of digital weapons, SolarWinds revealed the terrifying reach of unseen cyber espionage, proving that the digital battlefield is constantly evolving."
-        }
-      ],
-      "added_date": "2026-07-02",
-      "evidence_links": [
-        {
-          "label": "Software Supply Chain Attacks, a Threat to Global Cybersecurity: SolarWinds’ Case Study (Jeferson Martínez, Javier M. Durán, 2021)",
-          "url": "https://www.iieta.org/download/file/fid/62702"
-        },
-        {
-          "label": "From SolarWinds to Kaseya: The rise of supply chain attacks in a digital world (Hadi Ghanbari, Kari Koskinen, 2024)",
-          "url": "https://journals.sagepub.com/doi/pdf/10.1177/20438869241299823"
-        },
-        {
-          "label": "Artificial intelligence in logistics and supply chain management: A primer and roadmap for research (R. Glenn Richey, Soumyadeb Chowdhury, 2023)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/jbl.12364"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "demonic_possession_exorcism_001",
@@ -7852,6 +7768,36 @@
         "mass_hysteria"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/demonic_possession_exorcism_001.jpg",
+      "added_date": "2026-07-03",
+      "draft": false,
+      "reactions": {
+        "like": 45,
+        "gripping": 13,
+        "scared": 35,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "The Medical Diagnosis of Demonic Possession in an Early Modern English Community (Judith Bonzol, 2009)",
+          "url": "https://muse.jhu.edu/article/362860/pdf"
+        },
+        {
+          "label": "Modern Practice, Archaic Ritual: Catholic Exorcism in America (William S. Chavez, 2021)",
+          "url": "https://www.mdpi.com/2077-1444/12/10/811/pdf?version=1634790732"
+        },
+        {
+          "label": "Possession, exorcism and psychoanalysis (Nick Tosh, 2002)",
+          "url": "https://philpapers.org/archive/TOSPEA-2.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "salem_witch_trials_001",
+          "shared_concept": "mass_hysteria",
+          "transition_line": "Just as communities once faced accusations of witchcraft, the belief in demonic possession has driven intense fear and extreme responses throughout history."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -7896,29 +7842,167 @@
           "cliffhanger": null
         }
       ],
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
+      "story_id": "moonlight_maze_cyber_espionage",
+      "title": "Moonlight Maze: The Silent War in the Wires",
+      "category": "cyber_mysteries",
+      "hook": "For years, an invisible enemy silently stole America's deepest military and scientific secrets, changing the very meaning of war.",
+      "concepts": [
+        "cyber_espionage",
+        "state-sponsored_hacking",
+        "data_theft",
+        "national_security",
+        "unseen_warfare",
+        "cold_war_legacy"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/moonlight_maze_cyber_espionage/cover.jpg",
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 12,
+        "scared": 5,
+        "mindblown": 5
+      },
+      "evidence_links": [],
       "connections": [
         {
-          "story_id": "salem_witch_trials_001",
-          "shared_concept": "mass_hysteria",
-          "transition_line": "Just as communities once faced accusations of witchcraft, the belief in demonic possession has driven intense fear and extreme responses throughout history."
-        }
-      ],
-      "added_date": "2026-07-03",
-      "evidence_links": [
-        {
-          "label": "The Medical Diagnosis of Demonic Possession in an Early Modern English Community (Judith Bonzol, 2009)",
-          "url": "https://muse.jhu.edu/article/362860/pdf"
+          "story_id": "echelon_global_surveillance",
+          "shared_concept": "government_secrecy",
+          "transition_line": "Moonlight Maze showed the world that even critical government systems were not safe, much like how the Echelon program revealed the vast reach of global signals intelligence, collecting secrets from the very airwaves."
         },
         {
-          "label": "Modern Practice, Archaic Ritual: Catholic Exorcism in America (William S. Chavez, 2021)",
-          "url": "https://www.mdpi.com/2077-1444/12/10/811/pdf?version=1634790732"
-        },
-        {
-          "label": "Possession, exorcism and psychoanalysis (Nick Tosh, 2002)",
-          "url": "https://philpapers.org/archive/TOSPEA-2.pdf"
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber warfare",
+          "transition_line": "Years after the silent theft of Moonlight Maze, the world witnessed the destructive power of cyber warfare with Stuxnet, a weapon designed not just to steal data, but to cripple physical infrastructure."
         }
       ],
-      "hero_image": "/content/images/demonic_possession_exorcism_001.jpg"
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: An Unseen Presence",
+          "content": "In the mid-1990s, a new kind of threat began to emerge. It was not seen in the physical world but deep within computer networks. Critical US government and military systems, thought to be secure, started to show strange activities. Like a ghost moving through digital walls, data was being accessed, copied, and then removed, all without leaving clear traces.\n\nThis was not the work of simple hackers looking for mischief. The intrusions were too organized and too focused. It felt like a deliberate, well-planned effort to spy on the United States. A new, silent kind of conflict was taking shape in the early days of the internet.\n\nAt first, these events were just whispers among security experts. They were small incidents, easily dismissed. But soon, a pattern began to form, revealing something much larger and more disturbing.",
+          "cliffhanger": "These subtle digital shadows were not isolated events; they were part of a growing, unseen network of espionage."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: Targets and Tools",
+          "content": "The attackers focused on specific, highly sensitive targets. These included military bases, government departments, and scientific research laboratories across the United States. They seemed especially interested in defense contractors and university research centers working on advanced technology.\n\nTheir method was sophisticated. They used hidden programs called 'rootkits' to take control of computers and stay secret for a long time. They would steal user names and passwords, then slowly move deeper into protected systems. They were not looking to crash systems or cause chaos; their goal was to steal information, carefully and quietly.\n\nThe type of information stolen was always high-value: research data, strategic plans, and technical specifications. This pattern clearly showed a goal beyond simple hacking. It was about gaining a strategic advantage, a silent harvest of secrets.",
+          "cliffhanger": "The scale of the data being taken was far beyond anything seen before, pointing to a state-level operation."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: Moonlight Maze Revealed",
+          "content": "By 1998, US investigators could no longer ignore the truth. The widespread, coordinated attacks were officially recognized and given a secret code name: 'Moonlight Maze'. This was not a single attack, but a long-term, continuous campaign of digital theft that had been happening for years.\n\nTeams from the FBI and the US Air Force's Office of Special Investigations (AFOSI) started a deep investigation. They found that thousands of files had been stolen. These files included sensitive military plans, detailed designs for advanced weapons, and crucial scientific data.\n\nThe discovery of Moonlight Maze sent a shockwave through the US intelligence community. It confirmed that the internet, once seen as a tool for open communication, was now a new battlefield. The question was, who was the enemy in this new kind of war?",
+          "cliffhanger": "The true identity of the attackers remained hidden, despite intense efforts to trace their digital steps."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: A Vast Digital Plunder",
+          "content": "The reach of Moonlight Maze was astonishing. The attackers had successfully breached systems at the Pentagon, NASA, the Department of Energy, and many leading universities. They stole maps showing military deployments, codes for controlling satellites, and blueprints for sensitive defense technologies.\n\nThis was not just about stealing random data. It was a focused effort to gain military, economic, and technological superiority. The intruders showed great patience and advanced skills. They operated silently for years, moving through various networks, gathering intelligence without being fully detected.\n\nThe sheer volume and importance of the stolen data were deeply concerning. It represented a major security breach and a massive intelligence loss for the United States. The operation proved that cyber espionage could be just as effective, if not more, than traditional spying methods.",
+          "cliffhanger": "The sophisticated methods and high-value targets suggested that a powerful, well-resourced nation-state was behind the attacks."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: Chasing Digital Ghosts",
+          "content": "Investigators faced a huge challenge: tracing attackers who deliberately hid their tracks. The 'Moonlight Maze' hackers routed their attacks through many different countries. They used computers in South Korea, the Netherlands, and other places as bounce points. This made it incredibly difficult to find their true origin.\n\nThey employed 'Trojan horse' programs. These were malicious software hidden inside legitimate files. Once activated, they gave the hackers full control over a compromised computer. This allowed them to turn innocent machines into launchpads for further attacks, covering their true location even more.\n\nThe investigation was a complex game of digital cat and mouse. Every digital fingerprint led to another false trail. The attackers were experts at digital disguise, making sure their true identity remained veiled.",
+          "cliffhanger": "Despite advanced tracking technology and countless hours of investigation, a direct, undeniable link to the source remained elusive."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: Suspects in the Shadows",
+          "content": "As investigators followed the digital trails, all evidence strongly pointed in one direction: Russia. The tactics used, the specific types of information targeted, and the overall goals of the operation matched known Russian intelligence interests. This was especially true for the post-Cold War era, when Russia was trying to rebuild its global influence.\n\nUS officials openly stated their belief that the attacks originated from Russia. General John Gordon, a senior US intelligence official, confirmed this. He mentioned the hackers' unique digital 'fingerprints' and the types of targets they chose. It was not about money; it was about global power, military advantage, and national security.\n\nThe implications were chilling. A new kind of silent war was already being fought online. Nations were now engaged in invisible battles, stealing secrets and gaining advantages without ever firing a single shot. Moonlight Maze revealed the dawning of an era of constant, unseen cyber conflict.",
+          "cliffhanger": "The dark truth was that this was just the beginning of a new, global cyber arms race, with no end in sight."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: A Lingering Legacy",
+          "content": "To this day, no one has ever been publicly arrested or charged in connection with Moonlight Maze. The stolen data likely provided the perpetrators with significant advantages, which may still be impacting global power dynamics. This case forcefully showed that the internet, once a symbol of open connection, could also be a potent weapon for silent espionage.\n\nMoonlight Maze served as a stark warning. It revealed that state-sponsored cyber-attacks were not a future threat but a present danger. It forced governments worldwide to rethink their cybersecurity strategies and understand the true cost of digital vulnerability.\n\nThe 'Moonlight Maze' campaign paved the way for future, even more destructive, cyber warfare strategies. It proved that digital infiltration could be as damaging as traditional spying. The full extent of the damage, and who ultimately benefited, remains a deeply guarded secret, a chilling reminder of the unseen war still fought in the digital shadows.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
+      "story_id": "wendigo_insatiable_hunger",
+      "title": "The Wendigo: The Spirit of Insatiable Hunger",
+      "category": "mythology",
+      "hook": "In the frozen wilderness, a terrifying hunger can twist a human soul, transforming them into a creature of ice and bone, driven by an endless craving for human flesh.",
+      "concepts": [
+        "wendigo_psychosis",
+        "cannibalism",
+        "cultural_fear",
+        "survival_horror"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/wendigo_insatiable_hunger/cover.jpg",
+      "added_date": "2026-07-02",
+      "draft": 0,
+      "reactions": {
+        "like": 17,
+        "gripping": 40,
+        "scared": 6,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "franklin_expedition_lost_ships",
+          "shared_concept": "cannibalism",
+          "transition_line": "The depths of human desperation are further revealed in another chilling historical account, where the thin line between survival and horror was crossed, echoing the ultimate taboo of the Wendigo."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - The Dreaded Name",
+          "content": "Deep in the North American forests, among the Algonquian Indigenous peoples, whispers tell of a terrifying entity: the Wendigo. This creature is described as a gaunt, skeletal being, its skin pulled tight over its bones, eyes sunken, and its lips chewed away. It is often linked to extreme winter cold and starvation. The Wendigo possesses an insatiable hunger, especially for human flesh, and is never full, no matter how much it eats.\n\nElders spoke of its heart of ice, a coldness that mirrors the harsh wilderness it roams. To even say its name was to invite its attention, a dangerous act that could summon the spirit of gluttony and destruction. The Wendigo was not just a monster in tales; it was a deeply rooted fear, a warning against selfishness and greed, particularly during times of scarcity. Its presence meant ultimate doom, for both the individual and the community.",
+          "cliffhanger": "But what if this creature is not just a myth, but a dark reflection of human desperation, born from the most brutal conditions?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - Warnings from the Elders",
+          "content": "For generations, the legend of the Wendigo served as a strong moral compass for Indigenous communities. It taught that in the face of extreme famine, giving in to cannibalism or excessive hoarding of food would lead to a spiritual transformation. A person would slowly turn into a Wendigo, losing their humanity and becoming a monstrous shell driven by an unquenchable craving for others.\n\nThis fear was so strong that it gave rise to a real, documented condition known as 'Wendigo psychosis.' This was a culturally specific mental illness where individuals would develop an intense craving for human flesh, a profound fear of becoming a Wendigo, and often experience nausea and aversion to normal food. The syndrome was a direct manifestation of the deep-seated cultural anxiety surrounding this forbidden act and the terrifying consequences it held.",
+          "cliffhanger": "This terror was not just in stories; it manifested in real, horrifying cases that left lasting scars on communities."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The First Documented Horrors",
+          "content": "One of the most chilling and well-documented cases of Wendigo psychosis is that of Swift Runner, an Indigenous man from the Cree nation, in 1879. Swift Runner, a trapper, and his family were isolated during a severe winter near Fort Assiniboine, Alberta. When only Swift Runner emerged, his emaciated appearance and strange behavior raised suspicion.\n\nHe eventually confessed to the brutal murder and consumption of his entire family, including his wife and six children. He claimed he had been possessed by a Wendigo spirit and that the spirit forced him to commit these acts. The desperate conditions of extreme cold and starvation likely triggered this mental breakdown, pushing him to the ultimate taboo. Swift Runner was later tried, found guilty, and hanged for his crimes, a grim testament to the horrors born from the Wendigo legend.",
+          "cliffhanger": "Swift Runner's story, horrifying as it was, was not an isolated event in the chilling history of the Wendigo's grip on the human mind."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Psychology of Desperation",
+          "content": "Wendigo psychosis was not merely a belief but a profound, recognized illness within certain Indigenous societies. Symptoms often included a strong delusion that one was turning into a Wendigo, followed by a compulsive urge to eat human flesh. Victims would often become withdrawn, depressed, and sometimes violent. The communities understood this as a spiritual affliction, a corruption of the soul.\n\nTo prevent further tragedy, individuals showing clear signs of Wendigo psychosis were sometimes killed by their own communities, often by shamans or spiritual leaders. One such figure was Jack Fiddler, a respected Oji-Cree shaman, who claimed to have killed at least 14 people suffering from the condition over his lifetime. He believed he was saving them, and the community, from the full transformation into a Wendigo, preventing further harm. His actions highlight the desperate measures taken against this terrifying and complex condition.",
+          "cliffhanger": "As the Western world encountered these phenomena, they sought scientific explanations for a terror rooted deeply in cultural belief and extreme hardship."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - Western Interpretations",
+          "content": "In the 20th century, Western anthropologists and psychiatrists began to study Wendigo psychosis. They often categorized it as a 'culturally bound syndrome,' a mental disorder only found in specific cultures. Their theories suggested that extreme psychological stress from starvation, isolation, and the pervasive fear of the Wendigo legend itself could combine to create the symptoms.\n\nSome researchers viewed it purely as a psychological response to unimaginable conditions, where the mind, under extreme duress, latched onto a powerful cultural narrative. Others argued it was a way for communities to explain and process acts of cannibalism that occurred during desperate times. The debate continues whether it was a genuine, distinct mental illness or a desperate act of survival rationalized through folklore.",
+          "cliffhanger": "But as modern society encroached, did the Wendigo vanish, or did its chilling lessons simply take new, hidden forms that linger even today?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Echoes in the Modern World",
+          "content": "While overt cases of Wendigo psychosis are rare in modern times, the core message of the Wendigo legend remains powerful. Many Indigenous communities still view the Wendigo not just as a creature, but as a metaphor. It symbolizes insatiable greed, environmental destruction, and the dangers of extreme selfishness that can consume individuals and societies.\n\nThe 'insatiable hunger' of the Wendigo is now often linked to modern societal issues: unchecked consumerism, the destruction of natural resources, and the exploitation of others for personal gain. The legend continues to serve as a cautionary tale, urging balance, respect for nature, and community solidarity against the forces that can lead to spiritual and physical starvation.",
+          "cliffhanger": "The true horror of the Wendigo lies not just in its fabled form, but in the dark truths it reveals about human nature when pushed to its absolute limits."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The Enduring Warning",
+          "content": "The documented cases of Wendigo psychosis, like Swift Runner's horrifying confession and Jack Fiddler's desperate acts, confirm that the Wendigo was far more than just a campfire story. It was a real and terrifying cultural experience, a unique blend of psychology, environmental pressure, and spiritual belief that pushed individuals to the brink of the unthinkable.\n\nThe Wendigo stands as a chilling reminder of humanity's capacity for darkness, born from the deepest desperation and the breaking of the ultimate taboo. Its legend endures as a powerful symbol, teaching us about the fragility of the human mind under extreme stress, the importance of community, and the ever-present danger of an insatiable hunger, both literal and metaphorical. It is a lesson whispered from the frozen past, echoing into our present.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
