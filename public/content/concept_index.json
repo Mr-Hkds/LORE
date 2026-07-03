@@ -1140,23 +1140,40 @@
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
   ],
+  "cyber_warfare": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "state-sponsored_hacking": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
+    "ghostnet_global_cyber_espionage"
+  ],
+  "botnet": [
+    "conficker_worm"
+  ],
+  "unknown_threat_actor": [
+    "conficker_worm"
+  ],
+  "digital_weaponry": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
+  "zero-day_exploits": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
+  "global_cyber_threat": [
+    "conficker_worm"
+  ],
   "political_assassination": [
     "jfk_assassination_001"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
-  ],
-  "cyber_security": [
-    "morris_worm_first_internet_attack"
-  ],
-  "internet_history": [
-    "morris_worm_first_internet_attack"
-  ],
-  "unintended_consequences": [
-    "morris_worm_first_internet_attack"
-  ],
-  "computer_viruses": [
-    "morris_worm_first_internet_attack"
   ],
   "creation_beyond_control": [
     "the_golem_of_prague"
@@ -1184,26 +1201,6 @@
   ],
   "mind_control_claims": [
     "haarp_climate_control_conspiracy"
-  ],
-  "cyber_warfare": [
-    "the_shadow_brokers_nsa_leak",
-    "solarwinds_supply_chain_attack_001",
-    "conficker_worm"
-  ],
-  "state-sponsored_hacking": [
-    "the_shadow_brokers_nsa_leak",
-    "moonlight_maze_cyber_espionage",
-    "solarwinds_supply_chain_attack_001",
-    "ghostnet_global_cyber_espionage",
-    "conficker_worm"
-  ],
-  "zero-day_exploits": [
-    "the_shadow_brokers_nsa_leak",
-    "conficker_worm"
-  ],
-  "digital_weaponry": [
-    "the_shadow_brokers_nsa_leak",
-    "conficker_worm"
   ],
   "nobility_abuse_of_power": [
     "elizabeth_bathory_blood_countess"
@@ -1271,13 +1268,16 @@
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
   ],
-  "botnet": [
-    "conficker_worm"
+  "cyber_security": [
+    "morris_worm_first_internet_attack"
   ],
-  "unknown_threat_actor": [
-    "conficker_worm"
+  "internet_history": [
+    "morris_worm_first_internet_attack"
   ],
-  "global_cyber_threat": [
-    "conficker_worm"
+  "unintended_consequences": [
+    "morris_worm_first_internet_attack"
+  ],
+  "computer_viruses": [
+    "morris_worm_first_internet_attack"
   ]
 }
