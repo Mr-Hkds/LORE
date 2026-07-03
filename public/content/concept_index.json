@@ -19,7 +19,8 @@
     "operation_gladio",
     "curse_of_tutankhamun",
     "jfk_assassination_001",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "the_beast_of_gevaudan"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -581,7 +582,8 @@
     "salem_witch_trials_001",
     "curse_of_tutankhamun",
     "vampire_panic_eastern_europe",
-    "demonic_possession_exorcism_001"
+    "demonic_possession_exorcism_001",
+    "the_beast_of_gevaudan"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -1035,7 +1037,8 @@
   "folklore": [
     "the_children_of_woolpit",
     "vampire_panic_eastern_europe",
-    "the_golem_of_prague"
+    "the_golem_of_prague",
+    "the_beast_of_gevaudan"
   ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
@@ -1279,5 +1282,14 @@
   ],
   "forensic_mystery": [
     "spontaneous_human_combustion_shc"
+  ],
+  "cryptid": [
+    "the_beast_of_gevaudan"
+  ],
+  "predatory_animal": [
+    "the_beast_of_gevaudan"
+  ],
+  "royal_intervention": [
+    "the_beast_of_gevaudan"
   ]
 }
