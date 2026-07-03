@@ -1127,8 +1127,8 @@
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
-    "solarwinds_supply_chain_attack_001",
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001"
   ],
   "data_theft": [
     "ghostnet_global_cyber_espionage",
@@ -1253,15 +1253,6 @@
   "forensic_mystery": [
     "spontaneous_human_combustion_shc"
   ],
-  "supply_chain_attack": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
-  ],
   "demonic_possession": [
     "demonic_possession_exorcism_001"
   ],
@@ -1279,5 +1270,14 @@
   ],
   "cultural_fear": [
     "wendigo_insatiable_hunger"
+  ],
+  "supply_chain_attack": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
   ]
 }
