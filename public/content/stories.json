@@ -7400,111 +7400,6 @@
       "image_missing": false
     },
     {
-      "story_id": "spontaneous_human_combustion_shc",
-      "title": "The Unseen Fire: The Mystery of Spontaneous Human Combustion",
-      "category": "paranormal",
-      "hook": "Imagine a person suddenly catching fire, not from an outside source, but from within. Their body burns to ash, leaving only a few bones.",
-      "concepts": [
-        "unexplained_deaths",
-        "paranormal_activity",
-        "human_combustion",
-        "forensic_mystery",
-        "unexplained_phenomena"
-      ],
-      "severity": "chilling",
-      "hero_image": null,
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 48,
-        "gripping": 36,
-        "scared": 33,
-        "mindblown": 4
-      },
-      "evidence_links": [
-        {
-          "label": "Selenium in the Environment, Metabolism and Involvement in Body Functions (Youcef Mehdi, Jean‐Luc Hornick, 2013)",
-          "url": "https://www.mdpi.com/1420-3049/18/3/3292/pdf?version=1403114617"
-        },
-        {
-          "label": "A Review On Brief Insight Into Spontaneous Human Combustion (Tulsi Patil, Arun Soni, 2021)",
-          "url": "https://ajprd.com/index.php/journal/article/download/935/803"
-        },
-        {
-          "label": "New aspects of p66Shc in ischaemia reperfusion injury and other cardiovascular diseases (Fabio Di Lisa, Marco Giorgio, 2016)",
-          "url": "https://bpspubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bph.13478"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_dyatlov_pass_incident",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Just as with the unexplained deaths on Dyatlov Pass, Spontaneous Human Combustion presents another terrifying puzzle where the victims meet a horrifying end without clear causes."
-        },
-        {
-          "story_id": "uwe_barschel",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "While Uwe Barschel's death was entangled in political intrigue, the mystery of SHC involves deaths equally unexplained, but with fire rather than shadows as the silent killer."
-        },
-        {
-          "story_id": "the_taman_shud_case",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Like the anonymous man in the Taman Shud case, victims of SHC often leave behind perplexing clues that challenge forensic science and defy easy answers."
-        },
-        {
-          "story_id": "the_isdal_woman",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "From the unidentified Isdal Woman to the cases of SHC, some deaths are so bizarre and lacking in clear evidence that they continue to haunt our collective understanding."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: The Body That Burns Itself",
-          "content": "Deep in history, whispers tell of a horrifying event: a human body catching fire without any outside help. It is called 'Spontaneous Human Combustion' or SHC. The idea itself is terrifying. People believe that something inside a person can just ignite, turning them into ash.\n\nFor centuries, stories about SHC have appeared in books, old newspapers, and even medical reports. These are not just scary tales. Many accounts come from respected doctors, police, and witnesses. They describe scenes that defy common sense, leaving investigators puzzled and frightened.\n\nThese stories suggest a hidden fire, a flame that lives within the human form. It is a thought that chills us to the bone, making us question what forces might truly be at work within our own bodies.",
-          "cliffhanger": "But are these just isolated strange events, or do they share a frightening pattern that hints at something more?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: Unnatural Ashes and Untouched Rooms",
-          "content": "When investigators look at cases of SHC, certain details often repeat. The most striking thing is the victim's body. It is usually almost completely destroyed, burned to a fine ash. Only a few parts, like some bones or a foot, might remain. This level of burning normally needs extremely high temperatures for many hours, like in a cremation.\n\nBut here is the puzzling part: the fire often stays very local. The room around the body might have very little damage. A chair might be scorched, or the floor slightly burned, but nearby items like paper or curtains remain untouched. This is not how a normal fire behaves. A regular fire spreads and causes wide destruction.\n\nAnother common detail is that many victims are older, sometimes overweight, or have health problems. Some accounts also mention that the victims might have been heavy drinkers. These shared points suggest that certain conditions might make a person more open to this strange event, but they still do not explain the fire itself.",
-          "cliffhanger": "These patterns make the mystery deeper, but one famous case truly brought the horror of SHC into the modern world."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: Mary Reeser's Horrifying End",
-          "content": "On July 2, 1951, in St. Petersburg, Florida, a woman named Mary Reeser ended her day like many others. She was a 67-year-old widow who lived alone. She was a bit overweight and preferred to relax in her armchair, smoking cigarettes and wearing her nightgown.\n\nThat evening, after taking sleeping pills, Mary settled into her favorite armchair. Her landlady, Mrs. Carpenter, said goodnight to her at around 9 PM. Mrs. Carpenter knew Mary was tired and would likely fall asleep in the chair, as she often did. Mary had even mentioned smoking a last cigarette.\n\nNo one heard any shouts or screams throughout the night. No smoke alarms went off, and no neighbors reported anything unusual. The world outside Mary Reeser's apartment was quiet, completely unaware of the horrifying event unfolding inside her small home.",
-          "cliffhanger": "The next morning, Mrs. Carpenter would make a discovery that shocked the local police and baffled scientists worldwide."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: The Ashes of St. Petersburg",
-          "content": "The next morning, Mrs. Carpenter came to check on Mary Reeser. When she touched the metal doorknob, it felt unusually hot. A strange smell hung in the air. As she opened the door, a chilling sight met her eyes. Where Mary's armchair had been, there was now a small pile of ashes.\n\nAmong the ashes were a few startling items: a shrunken human skull, no larger than a teacup, a piece of her backbone, and a perfectly preserved left foot, still wearing a slipper. The metal springs of the armchair were visible, completely melted and twisted. The most shocking detail was that the rest of the apartment showed very little fire damage. A plastic clock on the wall had melted, and some newspaper nearby was slightly scorched, but the wooden floor under the chair was only slightly burned.\n\nPolice and fire investigators arrived quickly. They saw no signs of a forced entry or any struggle. There was no clear source of a fire that could have caused such extreme burning to Mary Reeser's body without destroying the entire apartment. The scene was unlike anything they had ever encountered.",
-          "cliffhanger": "This impossible scene forced investigators to look for scientific answers, leading to the development of a popular, yet incomplete, theory."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: The 'Wick Effect' Theory",
-          "content": "Faced with the mystery of Mary Reeser, scientists and fire experts began to search for an explanation. One leading theory that emerged was the 'wick effect.' This theory suggests that a human body, especially one with a good amount of fat, can act like an inside-out candle.\n\nHere's how it works: first, an outside flame, like a dropped cigarette, lights the victim's clothing. This clothing then acts like the wick of a candle. As the clothing burns, it slowly melts the body fat. This melted fat then soaks into the clothes, fueling the fire even more. The fire burns slowly and intensely, consuming the body from the inside out.\n\nThis 'wick effect' can explain why the body is almost completely destroyed while the surrounding area remains largely intact. The fire is fueled by the body itself, keeping it contained. This theory was presented by Dr. Wilton Krogman, a forensic anthropologist who studied the Reeser case. It offered a seemingly scientific way to understand a deeply unsettling phenomenon.",
-          "cliffhanger": "While the 'wick effect' seems plausible, many cases still challenge its full explanation, leaving deeper questions about SHC."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: Unanswered Questions",
-          "content": "Despite the 'wick effect' theory, many aspects of SHC remain unexplained. One major issue is the ignition source. While a dropped cigarette is often suggested, it's hard to imagine it causing such a massive, sustained burn, especially if the person is sleeping or unconscious.\n\nAnother challenge is the temperature. To reduce a body to ash, temperatures must be very high, often above 1500°C, and sustained for hours. While the 'wick effect' can provide heat, skeptics argue it might not be enough to explain the complete cremation seen in some SHC cases, or the shrinking of bones to such a small size.\n\nFurthermore, the lack of extensive smoke damage in many cases is puzzling. A slow, intense burn like the 'wick effect' would normally produce a lot of smoke. Yet, evidence of heavy smoke damage is often missing from SHC scenes. These gaps in understanding push the mystery back into the shadows, making simple explanations hard to accept.",
-          "cliffhanger": "The deepest truth about Spontaneous Human Combustion is not a simple scientific answer, but a chilling reminder of the unknown powers that might exist, even within us."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: The Unseen Force",
-          "content": "The documented cases of Spontaneous Human Combustion, from ancient times to modern days, continue to defy a full explanation. While theories like the 'wick effect' offer some logical steps, they do not account for every horrifying detail. The strange localization of the fire, the almost complete destruction of the body, and the often undisturbed surroundings still present a profound challenge to science.\n\nThe darkest truth is that we still do not fully understand what causes a human body to seemingly ignite from within. Is it a rare, extreme form of a known natural process? Or is it something truly unknown, a force that challenges our understanding of biology, chemistry, and even the laws of physics?\n\nThis lingering mystery leaves us with a chilling thought: that within the ordinary human body, or perhaps in rare circumstances surrounding it, there could be an unseen energy capable of such terrifying and destructive power. SHC remains a deeply unsettling phenomenon, a vivid reminder of the limits of our knowledge and the hidden horrors that might lie just beyond our grasp.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": true
-    },
-    {
       "story_id": "demonic_possession_exorcism_001",
       "title": "The Unseen Struggle: A Dark History of Demonic Possession and Exorcism",
       "category": "paranormal",
@@ -7942,7 +7837,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/morris_worm_first_internet_attack/cover.jpg",
       "added_date": "2026-07-02",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 32,
         "gripping": 35,
@@ -7998,6 +7893,111 @@
           "layer": 7,
           "layer_name": "The Enduring Shadow",
           "content": "The Morris Worm was a brutal wake-up call for the entire digital world. Before 1988, many believed the internet was too robust to be seriously harmed by a single program. The worm proved them wrong. It highlighted the urgent need for better security measures, stronger passwords, and vigilance against digital threats. In response to this attack, the Computer Emergency Response Team (CERT) was created at Carnegie Mellon University. This team's job was to help prevent and respond to future cyber incidents, a critical step towards modern cybersecurity.\n\nThe worm ripped away the internet's innocence, revealing its deep vulnerabilities. It was not a malicious attack with evil intent, but its impact was chilling. It taught us that even well-meaning actions in the digital world can have catastrophic unintended consequences. This event laid the groundwork for the constant cybersecurity battles we face today. It remains a stark reminder that as technology grows, so does the potential for widespread disruption and the need for constant vigilance. The Morris Worm was the first, but certainly not the last, digital threat to haunt our connected world.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
+      "story_id": "spontaneous_human_combustion_shc",
+      "title": "The Unseen Fire: The Mystery of Spontaneous Human Combustion",
+      "category": "paranormal",
+      "hook": "Imagine a person suddenly catching fire, not from an outside source, but from within. Their body burns to ash, leaving only a few bones.",
+      "concepts": [
+        "unexplained_deaths",
+        "paranormal_activity",
+        "human_combustion",
+        "forensic_mystery",
+        "unexplained_phenomena"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/spontaneous_human_combustion_shc/cover.jpg",
+      "added_date": "2026-07-02",
+      "draft": 0,
+      "reactions": {
+        "like": 48,
+        "gripping": 36,
+        "scared": 33,
+        "mindblown": 4
+      },
+      "evidence_links": [
+        {
+          "label": "Selenium in the Environment, Metabolism and Involvement in Body Functions (Youcef Mehdi, Jean‐Luc Hornick, 2013)",
+          "url": "https://www.mdpi.com/1420-3049/18/3/3292/pdf?version=1403114617"
+        },
+        {
+          "label": "A Review On Brief Insight Into Spontaneous Human Combustion (Tulsi Patil, Arun Soni, 2021)",
+          "url": "https://ajprd.com/index.php/journal/article/download/935/803"
+        },
+        {
+          "label": "New aspects of p66Shc in ischaemia reperfusion injury and other cardiovascular diseases (Fabio Di Lisa, Marco Giorgio, 2016)",
+          "url": "https://bpspubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/bph.13478"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Just as with the unexplained deaths on Dyatlov Pass, Spontaneous Human Combustion presents another terrifying puzzle where the victims meet a horrifying end without clear causes."
+        },
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "While Uwe Barschel's death was entangled in political intrigue, the mystery of SHC involves deaths equally unexplained, but with fire rather than shadows as the silent killer."
+        },
+        {
+          "story_id": "the_taman_shud_case",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Like the anonymous man in the Taman Shud case, victims of SHC often leave behind perplexing clues that challenge forensic science and defy easy answers."
+        },
+        {
+          "story_id": "the_isdal_woman",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "From the unidentified Isdal Woman to the cases of SHC, some deaths are so bizarre and lacking in clear evidence that they continue to haunt our collective understanding."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: The Body That Burns Itself",
+          "content": "Deep in history, whispers tell of a horrifying event: a human body catching fire without any outside help. It is called 'Spontaneous Human Combustion' or SHC. The idea itself is terrifying. People believe that something inside a person can just ignite, turning them into ash.\n\nFor centuries, stories about SHC have appeared in books, old newspapers, and even medical reports. These are not just scary tales. Many accounts come from respected doctors, police, and witnesses. They describe scenes that defy common sense, leaving investigators puzzled and frightened.\n\nThese stories suggest a hidden fire, a flame that lives within the human form. It is a thought that chills us to the bone, making us question what forces might truly be at work within our own bodies.",
+          "cliffhanger": "But are these just isolated strange events, or do they share a frightening pattern that hints at something more?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: Unnatural Ashes and Untouched Rooms",
+          "content": "When investigators look at cases of SHC, certain details often repeat. The most striking thing is the victim's body. It is usually almost completely destroyed, burned to a fine ash. Only a few parts, like some bones or a foot, might remain. This level of burning normally needs extremely high temperatures for many hours, like in a cremation.\n\nBut here is the puzzling part: the fire often stays very local. The room around the body might have very little damage. A chair might be scorched, or the floor slightly burned, but nearby items like paper or curtains remain untouched. This is not how a normal fire behaves. A regular fire spreads and causes wide destruction.\n\nAnother common detail is that many victims are older, sometimes overweight, or have health problems. Some accounts also mention that the victims might have been heavy drinkers. These shared points suggest that certain conditions might make a person more open to this strange event, but they still do not explain the fire itself.",
+          "cliffhanger": "These patterns make the mystery deeper, but one famous case truly brought the horror of SHC into the modern world."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: Mary Reeser's Horrifying End",
+          "content": "On July 2, 1951, in St. Petersburg, Florida, a woman named Mary Reeser ended her day like many others. She was a 67-year-old widow who lived alone. She was a bit overweight and preferred to relax in her armchair, smoking cigarettes and wearing her nightgown.\n\nThat evening, after taking sleeping pills, Mary settled into her favorite armchair. Her landlady, Mrs. Carpenter, said goodnight to her at around 9 PM. Mrs. Carpenter knew Mary was tired and would likely fall asleep in the chair, as she often did. Mary had even mentioned smoking a last cigarette.\n\nNo one heard any shouts or screams throughout the night. No smoke alarms went off, and no neighbors reported anything unusual. The world outside Mary Reeser's apartment was quiet, completely unaware of the horrifying event unfolding inside her small home.",
+          "cliffhanger": "The next morning, Mrs. Carpenter would make a discovery that shocked the local police and baffled scientists worldwide."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: The Ashes of St. Petersburg",
+          "content": "The next morning, Mrs. Carpenter came to check on Mary Reeser. When she touched the metal doorknob, it felt unusually hot. A strange smell hung in the air. As she opened the door, a chilling sight met her eyes. Where Mary's armchair had been, there was now a small pile of ashes.\n\nAmong the ashes were a few startling items: a shrunken human skull, no larger than a teacup, a piece of her backbone, and a perfectly preserved left foot, still wearing a slipper. The metal springs of the armchair were visible, completely melted and twisted. The most shocking detail was that the rest of the apartment showed very little fire damage. A plastic clock on the wall had melted, and some newspaper nearby was slightly scorched, but the wooden floor under the chair was only slightly burned.\n\nPolice and fire investigators arrived quickly. They saw no signs of a forced entry or any struggle. There was no clear source of a fire that could have caused such extreme burning to Mary Reeser's body without destroying the entire apartment. The scene was unlike anything they had ever encountered.",
+          "cliffhanger": "This impossible scene forced investigators to look for scientific answers, leading to the development of a popular, yet incomplete, theory."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: The 'Wick Effect' Theory",
+          "content": "Faced with the mystery of Mary Reeser, scientists and fire experts began to search for an explanation. One leading theory that emerged was the 'wick effect.' This theory suggests that a human body, especially one with a good amount of fat, can act like an inside-out candle.\n\nHere's how it works: first, an outside flame, like a dropped cigarette, lights the victim's clothing. This clothing then acts like the wick of a candle. As the clothing burns, it slowly melts the body fat. This melted fat then soaks into the clothes, fueling the fire even more. The fire burns slowly and intensely, consuming the body from the inside out.\n\nThis 'wick effect' can explain why the body is almost completely destroyed while the surrounding area remains largely intact. The fire is fueled by the body itself, keeping it contained. This theory was presented by Dr. Wilton Krogman, a forensic anthropologist who studied the Reeser case. It offered a seemingly scientific way to understand a deeply unsettling phenomenon.",
+          "cliffhanger": "While the 'wick effect' seems plausible, many cases still challenge its full explanation, leaving deeper questions about SHC."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: Unanswered Questions",
+          "content": "Despite the 'wick effect' theory, many aspects of SHC remain unexplained. One major issue is the ignition source. While a dropped cigarette is often suggested, it's hard to imagine it causing such a massive, sustained burn, especially if the person is sleeping or unconscious.\n\nAnother challenge is the temperature. To reduce a body to ash, temperatures must be very high, often above 1500°C, and sustained for hours. While the 'wick effect' can provide heat, skeptics argue it might not be enough to explain the complete cremation seen in some SHC cases, or the shrinking of bones to such a small size.\n\nFurthermore, the lack of extensive smoke damage in many cases is puzzling. A slow, intense burn like the 'wick effect' would normally produce a lot of smoke. Yet, evidence of heavy smoke damage is often missing from SHC scenes. These gaps in understanding push the mystery back into the shadows, making simple explanations hard to accept.",
+          "cliffhanger": "The deepest truth about Spontaneous Human Combustion is not a simple scientific answer, but a chilling reminder of the unknown powers that might exist, even within us."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: The Unseen Force",
+          "content": "The documented cases of Spontaneous Human Combustion, from ancient times to modern days, continue to defy a full explanation. While theories like the 'wick effect' offer some logical steps, they do not account for every horrifying detail. The strange localization of the fire, the almost complete destruction of the body, and the often undisturbed surroundings still present a profound challenge to science.\n\nThe darkest truth is that we still do not fully understand what causes a human body to seemingly ignite from within. Is it a rare, extreme form of a known natural process? Or is it something truly unknown, a force that challenges our understanding of biology, chemistry, and even the laws of physics?\n\nThis lingering mystery leaves us with a chilling thought: that within the ordinary human body, or perhaps in rare circumstances surrounding it, there could be an unseen energy capable of such terrifying and destructive power. SHC remains a deeply unsettling phenomenon, a vivid reminder of the limits of our knowledge and the hidden horrors that might lie just beyond our grasp.",
           "cliffhanger": null
         }
       ],

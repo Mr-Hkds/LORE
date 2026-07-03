@@ -501,8 +501,8 @@
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
-    "spontaneous_human_combustion_shc",
-    "demonic_possession_exorcism_001"
+    "demonic_possession_exorcism_001",
+    "spontaneous_human_combustion_shc"
   ],
   "haunted_house": [
     "winchester_mystery_house"
@@ -1220,12 +1220,6 @@
   "unexplained_evil": [
     "elizabeth_bathory_blood_countess"
   ],
-  "human_combustion": [
-    "spontaneous_human_combustion_shc"
-  ],
-  "forensic_mystery": [
-    "spontaneous_human_combustion_shc"
-  ],
   "demonic_possession": [
     "demonic_possession_exorcism_001"
   ],
@@ -1279,5 +1273,11 @@
   ],
   "computer_viruses": [
     "morris_worm_first_internet_attack"
+  ],
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
   ]
 }
