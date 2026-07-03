@@ -19,9 +19,9 @@
     "the_lead_mask_case",
     "operation_gladio",
     "curse_of_tutankhamun",
-    "jfk_assassination_001",
     "spontaneous_human_combustion_shc",
-    "the_beast_of_gevaudan"
+    "the_beast_of_gevaudan",
+    "jfk_assassination_001"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -44,13 +44,13 @@
     "the_russian_woodpecker_duga_3",
     "operation_paperclip_001",
     "project_artichoke_mind_control",
-    "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
     "the_shadow_brokers_nsa_leak",
     "cointelpro_fbi_covert_ops",
     "the_roswell_incident",
     "project_mk_ultra_001",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "jfk_assassination_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -100,9 +100,9 @@
     "operation_gladio",
     "the_phoenix_program",
     "project_artichoke_mind_control",
-    "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "jfk_assassination_001"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -149,9 +149,9 @@
   "conspiracy_theories": [
     "malaysia_airlines_mh370",
     "the_philadelphia_experiment",
-    "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
-    "the_roswell_incident"
+    "the_roswell_incident",
+    "jfk_assassination_001"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -1171,12 +1171,6 @@
   "enduring_belief": [
     "sapta_chiranjeevi_unseen_guardians"
   ],
-  "political_assassination": [
-    "jfk_assassination_001"
-  ],
-  "lone_gunman": [
-    "jfk_assassination_001"
-  ],
   "weather_manipulation": [
     "haarp_climate_control_conspiracy"
   ],
@@ -1389,6 +1383,15 @@
   "drug_experimentation": [
     "project_mk_ultra_001"
   ],
+  "divine_punishment": [
+    "myth_of_atlantis_plato"
+  ],
+  "moral_dilemmas": [
+    "mahabharat_psychological_epic"
+  ],
+  "karma_and_consequence": [
+    "mahabharat_psychological_epic"
+  ],
   "religious_delusion": [
     "hanuman_psychological_phenomenon"
   ],
@@ -1401,13 +1404,10 @@
   "devotion_extremism": [
     "hanuman_psychological_phenomenon"
   ],
-  "moral_dilemmas": [
-    "mahabharat_psychological_epic"
+  "political_assassination": [
+    "jfk_assassination_001"
   ],
-  "karma_and_consequence": [
-    "mahabharat_psychological_epic"
-  ],
-  "divine_punishment": [
-    "myth_of_atlantis_plato"
+  "lone_gunman": [
+    "jfk_assassination_001"
   ]
 }
