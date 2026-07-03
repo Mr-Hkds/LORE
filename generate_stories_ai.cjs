@@ -471,7 +471,7 @@ async function run() {
     topicsToGenerate = pendingRecs.slice(0, 2).map(r => ({
       topic: r.topic,
       recId: r.id,
-      category: 'psychology' // Default category, AI will re-classify
+      category: 'auto' // AI will determine the category
     }));
   } else {
     console.log('No pending recommendations. AI will search/invent new topics...');
@@ -498,6 +498,7 @@ async function run() {
 CRITICAL: You must choose well-documented, established historical, scientific, or psychological cases that have a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
 One topic MUST fit the category "${targetCat1}".
 The other topic MUST fit the category "${targetCat2}".
+CRITICAL RULE FOR MYTHOLOGY: If either category is "mythology", the chosen topic MUST be from the Indian context only (e.g. Hindu mythology, Vedic lore, epics like Ramayana/Mahabharata, regional folklore, local deities, ancient scriptures). Absolutely do not select Greek, Norse, or other non-Indian mythologies.
 They must NOT be similar to these existing archive stories:
 [${existingTitles}]
 
@@ -539,7 +540,7 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
       const storiesSummary = storiesData.stories.map(s => `- ID: "${s.story_id}", Title: "${s.title}", Category: "${s.category}", Concepts: ${JSON.stringify(s.concepts || [])}`).join('\n');
       
       const prompt = `Write a complete, highly-detailed 7-layer documentary story in clean, simple, and professional English about the famous, documented, real-world case or event: "${item.topic}".
-Suggested Category: ${item.category} (Use this as a suggestion, but you must auto-classify the topic into the single most appropriate category from the valid categories list below)
+Suggested Category: ${item.category === 'auto' ? 'Auto-classify dynamically based on content' : item.category} (If 'Auto-classify', choose the single best fit from the list below. If a specific category is suggested, prefer it unless the classification rules below override it.)
 Severity Level: unsettling, disturbing, or chilling
 
 CRITICAL FACTUAL AND PACING RULES:
@@ -558,7 +559,7 @@ Structure the story exactly in the following JSON format:
 {
   "story_id": "lowercase_slug_with_underscores",
   "title": "A compelling, title for the dossier",
-  "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
+  "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries. CRITICAL CLASSIFICATION RULE: If the topic relates to a deity, mythological figure, legendary creature, spiritual lore, or ancient scriptural epics (especially from the Indian context, e.g. Hanuman, Ramayana, Mahabharata, Shiva, Vedas, Puranas), you MUST classify it as 'mythology'. Do not classify mythology topics under psychology, paranormal, or any other category.",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
   "concepts": ["concept1", "concept2", "concept3"],
   "severity": "unsettling | disturbing | chilling",

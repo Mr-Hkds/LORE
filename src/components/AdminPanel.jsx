@@ -707,7 +707,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     {
       "story_id": "lowercase_slug_with_underscores",
       "title": "Compelling Title",
-      "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries (Choose the single best category match for this topic)",
+      "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries. CRITICAL CLASSIFICATION RULE: If the topic relates to a deity, mythological figure, legendary creature, spiritual lore, or ancient scriptural epics (especially from the Indian context, e.g. Hanuman, Ramayana, Mahabharata, Shiva, Vedas, Puranas), you MUST classify it as 'mythology'. Do not classify mythology topics under psychology, paranormal, or any other category.",
       "hook": "Teaser description of this case (max 150 chars) in clean, professional English.",
       "concepts": ["concept1", "concept2", "concept3"],
       "severity": "unsettling | disturbing | extreme (choose based on topic intensity)",
