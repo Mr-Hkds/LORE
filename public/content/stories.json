@@ -6745,32 +6745,17 @@
     {
       "story_id": "vampire_panic_eastern_europe",
       "title": "The Blood Panic: Eastern Europe's Real Vampire Hunt",
-      "category": "mythology",
+      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/1jjQxBtA_sdwH2Pq6K6GTkN18DM=/600x400/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e4/ad/e4ad2d20-0350-4bd1-bfbf-dec9b58b60af/gettyimages-593280150.jpg",
+      "image_query": "",
       "hook": "In 18th-century Eastern Europe, a widespread terror of the dead returning to feast on the living led entire communities to exhume graves and mutilate corpses.",
+      "category": "mythology",
+      "severity": "chilling",
       "concepts": [
         "mass_hysteria",
         "folklore",
         "superstition",
         "post_mortem_changes",
         "public_panic"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/vampire_panic_eastern_europe.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 35,
-        "gripping": 38,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "salem_witch_trials_001",
-          "shared_concept": "mass_hysteria",
-          "transition_line": "Just as the 'vampire panic' revealed the destructive power of collective fear, the 'Salem Witch Trials' stand as another chilling testament to how mass hysteria can turn neighbors into accusers and fear into deadly injustice."
-        }
       ],
       "layers": [
         {
@@ -6816,8 +6801,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 35,
+        "gripping": 38,
+        "scared": 6,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6893,8 +6882,11 @@
     {
       "story_id": "jfk_assassination_001",
       "title": "The Unsolved Bullet: The Assassination of John F. Kennedy",
-      "category": "conspiracy",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/JFK_Motorcade_GettyImages-517330536.jpg/330px-JFK_Motorcade_GettyImages-517330536.jpg",
+      "image_query": "Assassination of John F. Kennedy",
       "hook": "On November 22, 1963, a single rifle shot in Dallas, Texas, tore through more than just President John F. Kennedy; it shattered America's sense of security forever.",
+      "category": "conspiracy",
+      "severity": "chilling",
       "concepts": [
         "political_assassination",
         "conspiracy_theories",
@@ -6902,34 +6894,6 @@
         "unexplained_deaths",
         "lone_gunman",
         "covert_operations"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/jfk_assassination_001.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 36,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 54
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "operation_northwoods_001",
-          "shared_concept": "government_conspiracy",
-          "transition_line": "The chilling possibility of a government conspiracy behind JFK's assassination echoes other dark plans, like 'Operation Northwoods,' where US officials plotted fake attacks on their own citizens."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "covert_operations",
-          "transition_line": "The covert operations and hidden agendas suspected in JFK's death are disturbingly similar to the CIA's secret 'MK-Ultra' program, which experimented with mind control."
-        },
-        {
-          "story_id": "operation_gladio",
-          "shared_concept": "deep_state",
-          "transition_line": "The concept of a 'deep state' or unseen forces at play in JFK's assassination finds a parallel in 'Operation Gladio,' where secret paramilitary networks operated within European governments."
-        }
       ],
       "layers": [
         {
@@ -6975,8 +6939,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 36,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 54
+      }
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -7072,8 +7040,11 @@
     {
       "story_id": "elizabeth_bathory_blood_countess",
       "title": "The Blood Countess: Elizabeth Báthory's Dark Legacy",
-      "category": "mythology",
+      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
+      "image_query": "",
       "hook": "In the late 16th century, a Countess in Hungary became a terrifying whisper, a noblewoman whose beauty hid a darkness so profound it would become a legend soaked in blood.",
+      "category": "psychology",
+      "severity": "chilling",
       "concepts": [
         "sadism",
         "nobility_abuse_of_power",
@@ -7082,29 +7053,6 @@
         "blood_rituals",
         "serial_killing",
         "unexplained_evil"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 30,
-        "gripping": 13,
-        "scared": 4,
-        "mindblown": 6
-      },
-      "evidence_links": [
-        {
-          "label": "The Trial of Countess Elizabeth Báthory: Developing a Defense for Dame Dracula and Deconstructing Dominant Dames (Rachel Lawhead, 2019)",
-          "url": "http://hdl.handle.net/11299/208558"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "the_batavia_shipwreck_mutiny",
-          "shared_concept": "human_depravity",
-          "transition_line": "Just as Elizabeth Báthory's castle became a stage for unimaginable cruelty, the isolated island of the Batavia shipwreck also saw humanity descend into its darkest depths."
-        }
       ],
       "layers": [
         {
@@ -7150,8 +7098,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 30,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "demonic_possession_exorcism_001",
@@ -7247,8 +7199,11 @@
     {
       "story_id": "moonlight_maze_cyber_espionage",
       "title": "Moonlight Maze: The Silent War in the Wires",
-      "category": "cyber_mysteries",
+      "hero_image": "https://www.bleepstatic.com/images/news/u/986406/attacks/APTs/OldNewspaper.png",
+      "image_query": "",
       "hook": "For years, an invisible enemy silently stole America's deepest military and scientific secrets, changing the very meaning of war.",
+      "category": "cyber_mysteries",
+      "severity": "chilling",
       "concepts": [
         "cyber_espionage",
         "state-sponsored_hacking",
@@ -7256,29 +7211,6 @@
         "national_security",
         "unseen_warfare",
         "cold_war_legacy"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/moonlight_maze_cyber_espionage/cover.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 19,
-        "gripping": 12,
-        "scared": 5,
-        "mindblown": 5
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "echelon_global_surveillance",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Moonlight Maze showed the world that even critical government systems were not safe, much like how the Echelon program revealed the vast reach of global signals intelligence, collecting secrets from the very airwaves."
-        },
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber warfare",
-          "transition_line": "Years after the silent theft of Moonlight Maze, the world witnessed the destructive power of cyber warfare with Stuxnet, a weapon designed not just to steal data, but to cripple physical infrastructure."
-        }
       ],
       "layers": [
         {
@@ -7324,8 +7256,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 19,
+        "gripping": 12,
+        "scared": 5,
+        "mindblown": 5
+      }
     },
     {
       "story_id": "wendigo_insatiable_hunger",
@@ -7658,8 +7594,11 @@
     {
       "story_id": "the_golem_of_prague",
       "title": "The Golem of Prague: A Creation Beyond Control",
-      "category": "mythology",
+      "hero_image": "https://trips-tickets.com/wp-content/uploads/2022/10/rabbi-Loew-golem.webp",
+      "image_query": "",
       "hook": "In the heart of old Prague, a legend whispers of a silent, towering protector, not born of flesh and blood, but sculpted from the very earth itself.",
+      "category": "mythology",
+      "severity": "chilling",
       "concepts": [
         "creation_beyond_control",
         "supernatural_power",
@@ -7667,24 +7606,6 @@
         "protection",
         "jewish_mysticism",
         "forbidden_knowledge"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/the_golem_of_prague/cover.jpg",
-      "added_date": "2026-07-02",
-      "draft": false,
-      "reactions": {
-        "like": 19,
-        "gripping": 27,
-        "scared": 2,
-        "mindblown": 10
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "wendigo_insatiable_hunger",
-          "shared_concept": "unleashed_supernatural_power",
-          "transition_line": "Just as the Golem's immense power brought destruction when unchecked, other ancient legends speak of creatures whose supernatural might, once awakened, consume everything in their path, driven by an insatiable, terrifying hunger."
-        }
       ],
       "layers": [
         {
@@ -7730,8 +7651,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 19,
+        "gripping": 27,
+        "scared": 2,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -8199,8 +8124,11 @@
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
       "title": "The Digital Blackout: Ukraine's Cyber War",
-      "category": "cyber_mysteries",
+      "hero_image": "https://ismg-cdn.nyc3.cdn.digitaloceanspaces.com/articles/ukrainian-power-grid-attacks-lessons-learned-showcase_image-1-a-9604.jpg",
+      "image_query": "",
       "hook": "On a cold winter night in December 2015, the lights went out for hundreds of thousands in Ukraine, not due to a storm, but a silent, unseen digital attack.",
+      "category": "cyber_mysteries",
+      "severity": "chilling",
       "concepts": [
         "cyber_warfare",
         "state-sponsored_hacking",
@@ -8208,37 +8136,6 @@
         "power_grid",
         "industrial_control_systems",
         "blackout"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/ukraine_power_grid_cyber_attack_2015_2016/cover.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 20,
-        "gripping": 43,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "evidence_links": [
-        {
-          "label": "A Comprehensive Review on Cyber-Attacks in Power Systems: Impact Analysis, Detection, and Cyber Security (Naveen Tatipatri, S. L. Arun, 2024)",
-          "url": "https://ieeexplore.ieee.org/ielx7/6287639/6514899/10418207.pdf"
-        },
-        {
-          "label": "Securing modern power systems: Implementing comprehensive strategies to enhance resilience and reliability against cyber-attacks (Sobhy M. Abdelkader, Jeremiah Amissah, 2024)",
-          "url": "https://doi.org/10.1016/j.rineng.2024.102647"
-        },
-        {
-          "label": "Cyber-Physical System Security of a Power Grid: State-of-the-Art (Chih‐Che Sun, Chen‐Ching Liu, 2016)",
-          "url": "https://www.mdpi.com/2079-9292/5/3/40/pdf?version=1468499711"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "While Stuxnet quietly targeted nuclear facilities with a hidden digital weapon, Ukraine's cyber blackouts showed that such warfare could plunge entire cities into darkness, making the unseen battlefield far more immediate and terrifying."
-        }
       ],
       "layers": [
         {
@@ -8284,8 +8181,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 20,
+        "gripping": 43,
+        "scared": 6,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "cointelpro_fbi_covert_ops",
@@ -8381,50 +8282,17 @@
     {
       "story_id": "spring_heeled_jack_legend",
       "title": "Spring-Heeled Jack: Victorian England's Phantom Leaper",
-      "category": "mythology",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
+      "image_query": "",
       "hook": "Imagine a figure with glowing eyes, metal claws, and the power to leap over high walls, striking fear into the heart of Victorian England.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "urban_legend",
         "mass_hysteria",
         "unexplained_phenomena",
         "folklore",
         "victorian_era"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 14,
-        "gripping": 37,
-        "scared": 6,
-        "mindblown": 10
-      },
-      "evidence_links": [
-        {
-          "label": "The West Riding Lunatic Asylum and the making of the modern brain sciences in the nineteenth century (Michael A. Finn, 2012)",
-          "url": "http://etheses.whiterose.ac.uk/3412/1/Michael_Anthony_Finn%2C_eThesis.pdf"
-        },
-        {
-          "label": "Wolves in the Wolds: Late Capitalism, the English Eerie, and the Weird Case of ‘Old Stinker’ the Hull Werewolf (Sam George, 2019)",
-          "url": "https://uhra.herts.ac.uk/id/eprint/6018/1/Gothic_Studies_Wolves_in_the_Wolds_FINALDRAFT.pdf"
-        },
-        {
-          "label": "South African Great War poetry 1914-1918 : a literary-historiographical analysis (Gerhard Genis, 2014)",
-          "url": "http://hdl.handle.net/10500/13847"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "jack_the_ripper_001",
-          "shared_concept": "victorian_era",
-          "transition_line": "Just as Spring-Heeled Jack terrorized Victorian London from the shadows, another unseen killer, Jack the Ripper, would plunge the city into a far bloodier nightmare."
-        },
-        {
-          "story_id": "the_beast_of_gevaudan",
-          "shared_concept": "folklore",
-          "transition_line": "Like the Beast of Gévaudan, a terrifying creature that haunted rural France, Spring-Heeled Jack became a living legend, embodying the darkest fears and mysteries of his time."
-        }
       ],
       "layers": [
         {
@@ -8470,14 +8338,21 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 14,
+        "gripping": 37,
+        "scared": 6,
+        "mindblown": 10
+      }
     },
     {
       "story_id": "children_past_lives_stevenson_research",
       "title": "Echoes from Beyond: Children Who Remember Past Lives",
-      "category": "paranormal",
+      "hero_image": "https://media.licdn.com/dms/image/v2/C4E12AQHkReNV2wme1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520080815901?e=1784764800&v=beta&t=QfcZcpJ7-kHh0d293Q4h_eKnHxdezPgvoCgZTsftdj8",
+      "image_query": "",
       "hook": "Imagine a child, barely able to speak, describing a life that was not their own, a death they never lived. This is not a story, but a documented phenomenon.",
+      "category": "paranormal",
+      "severity": "chilling",
       "concepts": [
         "reincarnation",
         "past_life_memory",
@@ -8485,37 +8360,6 @@
         "birthmarks",
         "xenoglossy",
         "consciousness_after_death"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Notes_and_Queries_-_Series_10_-_Volume_11.djvu/page1-960px-Notes_and_Queries_-_Series_10_-_Volume_11.djvu.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 55,
-        "gripping": 28,
-        "scared": 35,
-        "mindblown": 6
-      },
-      "evidence_links": [
-        {
-          "label": "The Composition of Ian Stevenson’s Twenty Cases Suggestive of Reincarnation (James G. Matlock, 2024)",
-          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/3215/2177"
-        },
-        {
-          "label": "How *Not* to Do Survival Research: Reflections on the Bigelow Institute Essay Competition (Keith Augustine, 2022)",
-          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/2581/1661"
-        },
-        {
-          "label": "Scholarly Article (Paul A. Roth, 2021)",
-          "url": "https://library.oapen.org/handle/20.500.12657/49661"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "demonic_possession_exorcism_001",
-          "shared_concept": "unexplained_phenomena",
-          "transition_line": "Just as the concept of demonic possession grapples with unseen forces affecting human experience, the documented cases of children remembering past lives challenge our understanding of consciousness and what truly lies beyond our comprehension."
-        }
       ],
       "layers": [
         {
@@ -8561,8 +8405,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 55,
+        "gripping": 28,
+        "scared": 35,
+        "mindblown": 6
+      }
     },
     {
       "story_id": "the_roswell_incident",
@@ -8829,189 +8677,13 @@
       "image_missing": false
     },
     {
-      "story_id": "myth_of_atlantis_plato",
-      "title": "The Myth of Atlantis: Plato's Lost Utopia and its Downfall",
-      "category": "mythology",
-      "hook": "A powerful island empire, blessed by gods, rose to glory then vanished into the deep sea in a single, terrifying day and night.",
-      "concepts": [
-        "lost_civilizations",
-        "mythology",
-        "utopian_failure",
-        "divine_punishment",
-        "hubris"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 43,
-        "gripping": 21,
-        "scared": 5,
-        "mindblown": 9
-      },
-      "evidence_links": [
-        {
-          "label": "Traditional and Cosmic Gods in Later Plato and the Early Academy (Vilius Bartninkas, 2023)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/2CDE3AF3D06D8751762512F13AAD51C1/9781009322591AR.pdf/Traditional_and_Cosmic_Gods_in_Later_Plato_and_the_Early_Academy.pdf?event-type=FTLA"
-        },
-        {
-          "label": "Imagined Islands: A Caribbean Tidalectics (Carmen Beatriz Llenín-Figueroa, 2012)",
-          "url": "http://hdl.handle.net/10161/5420"
-        },
-        {
-          "label": "The Atlántida of Capitalism. The murals of Sert in the decorative programme of New York’s Rockefeller Center (Jorge Latorre Izquierdo, Marcos Jiménez González, 2021)",
-          "url": "https://revistas.unav.edu/index.php/communication-and-society/article/download/40832/35109"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "mystery_of_dwarka",
-          "shared_concept": "lost_civilizations",
-          "transition_line": "Just as Atlantis vanished beneath the waves, another ancient legend tells of a magnificent kingdom, Dwarka, also claimed by the sea, leaving behind only whispers of its glory and a persistent archaeological enigma."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper of a Vanished World",
-          "content": "Imagine a civilization far more advanced than our own, a paradise on Earth. This place, known as Atlantis, held unimaginable wealth and power, built by a race touched by gods. Its people lived in harmony, their cities shining with gold and precious stones, their knowledge far beyond their time.\n\nYet, this perfect world did not endure. The whisper of Atlantis is not just about its glory but its sudden, absolute end. It speaks of a great pride that angered the gods, leading to a catastrophic fall that erased it from the maps, leaving only a legend behind. What could bring such a mighty civilization to its knees?",
-          "cliffhanger": "This tale of a lost island was first told by one of history's greatest thinkers, giving it a weight that still puzzles us today."
-        },
-        {
-          "layer": 2,
-          "layer_name": "Plato's Account: The First Glimpse",
-          "content": "The story of Atlantis comes to us primarily from the ancient Greek philosopher Plato, who wrote about it in two of his dialogues, 'Timaeus' and 'Critias'. Plato described Atlantis not as a myth, but as a real historical event passed down through generations.\n\nAccording to Plato, the story originated from Egyptian priests who told it to the Greek statesman Solon, Plato's ancestor. Solon then shared it with his family, and it was eventually written down by Plato. This lineage gives the tale a sense of historical truth, as if it were a forgotten piece of ancient history, not merely a fable. But what did Plato truly describe?",
-          "cliffhanger": "The details Plato provided painted a picture of a magnificent, circular city, hinting at an empire that once dominated the ancient world."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Golden Age: A Divine Society",
-          "content": "Plato described Atlantis as a vast island located beyond the 'Pillars of Heracles' (which is now thought to be the Strait of Gibraltar). It was a powerful kingdom founded by Poseidon, the Greek god of the sea, who fathered five pairs of twin sons with a mortal woman. Atlas, the eldest son, became the first king, and the island was named after him.\n\nThe Atlanteans built a spectacular capital city with concentric rings of land and water, connected by bridges and tunnels. Their structures were adorned with gold, silver, and 'orichalcum'—a mythical metal said to be more valuable than gold. They possessed advanced technology, fertile lands, and a wise governance system, living in peace and prosperity for centuries, thanks to their divine heritage and adherence to virtue.",
-          "cliffhanger": "But even a society born of gods and built on wisdom could not resist the seductive pull of human ambition and power."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Corruption of the Mighty",
-          "content": "For a long time, the Atlanteans remained pure and virtuous, using their wealth and power for good. Their divine nature shone through their actions. However, as generations passed, their human side grew stronger, and their divine blood became diluted. They slowly lost their moral compass.\n\nPride, greed, and a thirst for conquest began to poison the Atlantean soul. They started to forget the gods and their original values. Instead of focusing on inner virtue, they turned their attention outwards, seeking to expand their empire and dominate other nations. This shift marked a critical turning point, leading them down a dark path.",
-          "cliffhanger": "This aggressive change led to a clash with the ancient world, provoking the very forces that would bring about their swift and terrible judgment."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Divine Judgment and Cataclysm",
-          "content": "The Atlanteans, in their corrupted state, launched a massive military campaign, attempting to conquer the Mediterranean world, including Athens. Plato describes ancient Athens as a righteous and courageous force that successfully resisted the Atlantean invasion, proving its moral superiority.\n\nAngered by the Atlanteans' hubris and their unjust wars, the supreme god Zeus called a meeting of the other gods. He decided to punish Atlantis for its moral decay and imperial ambitions. The exact details of the gods' judgment are not fully given by Plato, as the dialogue 'Critias' ends abruptly. However, the outcome is clear: a divine wrath was unleashed.",
-          "cliffhanger": "In a horrifying display of cosmic power, Atlantis faced its final, devastating reckoning, disappearing without a trace."
-        },
-        {
-          "layer": 6,
-          "layer_name": "Lost to the Depths: A World Submerged",
-          "content": "Plato states that the gods sent a terrible natural disaster to destroy Atlantis. In 'a single dreadful day and night', violent earthquakes and floods struck the island. The land sank into the ocean, and Atlantis, with all its magnificence, was swallowed by the sea.\n\nIts disappearance was total and sudden, leaving behind only impassable mud shoals in the ocean where it once stood. This dramatic ending has fueled centuries of fascination and desperate searching. From the Bermuda Triangle to the Aegean Sea, explorers and researchers have tried to find physical evidence of this lost continent, but always without definitive success. Why does this story hold such a powerful grip on our imagination?",
-          "cliffhanger": "The persistent search for Atlantis reveals a chilling truth: perhaps its power lies not in its physical existence, but in the profound lesson it was meant to teach."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: Plato's Moral Allegory",
-          "content": "The absolute darkest documented truth about Atlantis is that it was most likely an invention of Plato, a masterful philosophical allegory. While he presented it as a historical account, most modern scholars agree that Plato used Atlantis as a literary device to illustrate his political and moral theories. It was a 'myth' in the sense of a fictional story designed to convey a deep truth.\n\nAtlantis, in this view, represented the dangers of imperial ambition, moral decay, and unchecked power, contrasted with his ideal state, ancient Athens. Plato was using the story to warn his fellow Athenians about the corruption that can arise when a society abandons virtue for wealth and dominance. The 'downfall' of Atlantis was a chilling lesson: even the most powerful and divinely blessed civilization can be destroyed if it loses its ethical foundation.\n\nThe chilling impact of Atlantis, therefore, is not about a lost city we might discover, but about its enduring message. It reminds us that hubris and moral decline lead to ruin, a lesson as relevant today as it was in ancient Greece. The true 'lost utopia' might be the ideal society itself, constantly threatened by the darkness within human nature."
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": false
-    },
-    {
-      "story_id": "hanuman_psychological_phenomenon",
-      "title": "The Hanuman Phenomenon: When Devotion Morphs into Delusion",
-      "category": "psychology",
-      "hook": "In parts of rural India, whispers tell of individuals who shed their human identity, believing they embody the mighty Hanuman, driven by devotion that turns terrifyingly real.",
-      "concepts": [
-        "religious_delusion",
-        "cultural_psychosis",
-        "identity_dissociation",
-        "mass_psychogenic_illness",
-        "devotion_extremism"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/2/26/Hanuman_Statue_at_Sidhheshwar_Temple%2C_Chhindwara%2C_MP.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 36,
-        "gripping": 29,
-        "scared": 1,
-        "mindblown": 39
-      },
-      "evidence_links": [
-        {
-          "label": "Loss of oestrus, concealed ovulation and paternity confusion in free-ranging Hanuman langurs (Michael Hestermann, Thomas Ziegler, 2001)",
-          "url": "https://doi.org/10.1098/rspb.2001.1833"
-        },
-        {
-          "label": "Social organization of hanuman langurs. (Yukimaru Sugiyama, 1970)",
-          "url": "http://ci.nii.ac.jp/naid/110001881404/en/"
-        },
-        {
-          "label": "Hormonal correlates of reproductive seasonality in wild female Hanuman langurs (Presbytis entellus) (Thomas Ziegler, Keith Hodges, 2000)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/%28SICI%291098-2345%28200006%2951%3A2%3C119%3A%3AAID-AJP2%3E3.0.CO%3B2-O"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "clinical_lycanthropy",
-          "shared_concept": "altered_self_perception",
-          "transition_line": "Just as some individuals believe they are transforming into beasts, the Hanuman phenomenon showcases how deeply the human mind can lose itself in an altered, non-human identity."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whispers of Transformation",
-          "content": "For generations, in remote villages across India, tales have been quietly shared. These are not stories of mythical gods but of living people who, consumed by an intense spiritual fervor, begin to act in deeply unsettling ways. They speak in altered voices, their eyes take on a vacant, distant stare, and they sometimes show unusual physical agility, climbing trees or rooftops with ease.\n\nInitially, these incidents were often dismissed as divine possession or a temporary spiritual trance. Families would try traditional remedies or religious rituals. But as more stories circulated, a pattern began to emerge. These individuals were not just tranced; they claimed to be, or were believed to be, embodying the powerful Vanara deity, Hanuman, often after periods of intense prayer, fasting, or personal crisis.",
-          "cliffhanger": "What began as isolated incidents soon revealed a darker, more troubling thread, suggesting a shared experience far beyond simple spiritual devotion."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern Emerges: Echoes of the Divine Ape",
-          "content": "As more cases came to light, a disturbing consistency became clear. Affected individuals would often adopt a crouching posture, mimic monkey-like movements, and exhibit a peculiar strength. They would sometimes become mute, or communicate only through guttural sounds and gestures. Their diet would change, sometimes consuming only fruits and raw vegetables, or refusing food altogether for days.\n\nThis was not merely symbolic behavior; it was a profound shift in identity. Witnesses reported individuals leaping from heights, showing aggression when provoked, or staring fixedly into the distance as if searching for something unseen. The devotion to Hanuman, a symbol of immense strength and loyalty, seemed to twist into a complete absorption of his persona, blurring the lines between human and deity in a terrifying way.",
-          "cliffhanger": "The scattered accounts coalesced, forcing a recognition that these were not random acts, but a recurring phenomenon that demanded closer examination."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: Faith Takes Flight",
-          "content": "One particularly documented case, often discussed in hushed tones, involved a young man named Ramesh (name changed for privacy), who had been a devout follower of Hanuman. After a personal tragedy, his devotion escalated into an obsession. He began speaking only in verses related to Hanuman, refusing to acknowledge his family, and demanding offerings of a specific forest fruit.\n\nOne evening, during a village festival, Ramesh suddenly scaled a tall banyan tree with incredible speed, screeching loudly. From the highest branch, he began to throw down branches and leaves, believing himself to be on a divine mission. It took several strong men hours to bring him down, as he fought with unusual vigor, causing injury to himself and others, all while maintaining a disturbing, vacant expression. This incident was reported in local papers, highlighting the severe mental distress underlying such public displays.",
-          "cliffhanger": "This and similar incidents were no longer just local curiosities; they began to attract the attention of those far removed from village traditions, hinting at a deeper psychological unraveling."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: Cultural Reverberations on the Mind",
-          "content": "The widespread belief in the living presence and power of deities like Hanuman creates a fertile ground for such psychological phenomena. In a culture where spirituality is deeply interwoven with daily life, and the line between the tangible and the divine is often permeable, individuals experiencing severe stress or mental illness may find their delusions shaped by these powerful cultural narratives.\n\nHanuman, revered for his strength, loyalty, and ability to fly and change form, becomes an extreme psychological coping mechanism. The 'Hanuman persona' offers an escape from reality, a sense of invincibility, or a way to communicate deep distress when normal channels fail. This cultural context means that these delusions are not isolated but resonate within a shared symbolic language, sometimes even sparking a localized 'mass psychogenic illness' where others begin to mirror the behavior.",
-          "cliffhanger": "As the psychological community began to study these patterns, they grappled with a complex challenge: how to classify a condition so deeply rooted in cultural and religious belief."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: Delusion's Deep Roots",
-          "content": "Psychologists and anthropologists began to categorize these cases under the umbrella of 'culturally-bound syndromes' or 'religious psychosis.' They noted that while the specific manifestations were unique to the Indian subcontinent, the underlying psychological mechanisms were similar to conditions seen globally, such as delusional disorder or dissociative identity disorder.\n\nResearch highlighted the role of extreme identification, where an individual's sense of self becomes completely overwhelmed by the revered figure. The escape into the 'Hanuman' identity provided a perceived strength or purity that the individual felt lacking in their own life. Clinicians found that traditional treatments needed to be adapted to respect the cultural context, often involving a delicate balance between psychological intervention and traditional spiritual healing.",
-          "cliffhanger": "Yet, even with scientific labels, the core horror remained: the complete obliteration of a person's individual self, a terrifying transformation that was difficult to reverse."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss of Identity: Losing the Human Self",
-          "content": "The most chilling aspect of the Hanuman phenomenon is the profound loss of identity experienced by those affected. Individuals often cease to recognize their own families, their past lives, or even their own reflection. They are no longer a son, a daughter, a father, but a living embodiment of the deity, trapped in a singular, powerful delusion.\n\nFamilies describe the immense grief of watching a loved one disappear behind the mask of a god. The person they knew is gone, replaced by a stranger with familiar features but an alien mind. The behavior can escalate to self-harm, extreme asceticism, or violence if their perceived divine mission is challenged. This journey into another identity is often a one-way path, leaving behind a shattered human shell.",
-          "cliffhanger": "The cases force us to confront a terrifying question: what happens when the human mind, seeking solace or power, chooses to become something utterly inhuman?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: When Faith Breaks the Mind",
-          "content": "The Hanuman phenomenon stands as a chilling reminder of the mind's fragility and the extreme power of belief. It illustrates how profound cultural narratives, when intersected with psychological vulnerability, can lead to devastating transformations. It is a testament to the human capacity for devotion, but also to its potential for self-destruction.\n\nThe darkest truth lies in the understanding that for these individuals, their deep faith, intended to bring comfort and strength, ultimately became the very force that dismantled their sanity and identity. It is a real-world horror where the line between spiritual transcendence and psychological breakdown becomes frighteningly thin, leaving behind shattered lives and bewildered communities. The 'Hanuman' cases reveal a powerful, unsettling aspect of the human psyche: how far it can go in its search for meaning, even at the cost of itself.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": false
-    },
-    {
       "story_id": "mahabharat_psychological_epic",
       "title": "The Mahabharat: A Grand Study of Human Flaws and Cosmic Sorrow",
-      "category": "psychology",
+      "hero_image": "/content/images/mahabharat_psychological_epic.jpg",
+      "image_query": "",
       "hook": "Imagine a family feud so deep, so consumed by pride and desire, that it leads to the extermination of nearly an entire civilization.",
+      "category": "mythology",
+      "severity": "chilling",
       "concepts": [
         "family_systems",
         "power_dynamics",
@@ -9019,37 +8691,6 @@
         "self_destruction",
         "groupthink",
         "karma_and_consequence"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/mahabharat_psychological_epic.jpg",
-      "added_date": "2026-07-03",
-      "draft": false,
-      "reactions": {
-        "like": 16,
-        "gripping": 28,
-        "scared": 4,
-        "mindblown": 53
-      },
-      "evidence_links": [
-        {
-          "label": "The P-T-t-D evolution of the Mahabharat, east-central Nepal: The out-of-sequence development of the Himalaya (Kyle P. Larson, Sudip Shrestha, 2020)",
-          "url": "https://doi.org/10.1016/j.gsf.2020.08.001"
-        },
-        {
-          "label": "Environmental Awareness: An Advocacy of The Mahabharat (Narayan Bahadur Magar, 2020)",
-          "url": "https://www.nepjol.info/index.php/litstud/article/download/38059/29323"
-        },
-        {
-          "label": "A Voice from the Margins: An Appraisal of Ubaid-Allah Sindhi's Mahabharat Sarvrajia Party and its Constitution (Tanvir Anjum, 2013)",
-          "url": "http://pu.edu.pk/images/journal/pols/pdf-files/Tanveer%20Anjum_v20_1_2013.pdf"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "burari_deaths_001",
-          "shared_concept": "family_systems",
-          "transition_line": "Like the tale of Mahabharat, the Burari deaths reveal how deep-seated family dynamics, when unchecked, can lead to unfathomable destruction, blurring the lines between duty and delusion."
-        }
       ],
       "layers": [
         {
@@ -9095,8 +8736,12 @@
           "cliffhanger": null
         }
       ],
-      "custom_image_prompt": null,
-      "image_missing": false
+      "reactions": {
+        "like": 16,
+        "gripping": 28,
+        "scared": 4,
+        "mindblown": 53
+      }
     },
     {
       "story_id": "mlk_assassination_conspiracy",
@@ -9534,6 +9179,65 @@
       ],
       "custom_image_prompt": null,
       "image_missing": 0
+    },
+    {
+      "story_id": "myth_of_atlantis_plato",
+      "title": "The Myth of Atlantis: Plato's Lost Utopia and its Downfall",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
+      "image_query": "",
+      "hook": "A powerful island empire, blessed by gods, rose to glory then vanished into the deep sea in a single, terrifying day and night.",
+      "category": "conspiracy",
+      "severity": "chilling",
+      "concepts": [
+        "lost_civilizations",
+        "mythology",
+        "utopian_failure",
+        "divine_punishment",
+        "hubris"
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper of a Vanished World",
+          "content": "Imagine a civilization far more advanced than our own, a paradise on Earth. This place, known as Atlantis, held unimaginable wealth and power, built by a race touched by gods. Its people lived in harmony, their cities shining with gold and precious stones, their knowledge far beyond their time.\n\nYet, this perfect world did not endure. The whisper of Atlantis is not just about its glory but its sudden, absolute end. It speaks of a great pride that angered the gods, leading to a catastrophic fall that erased it from the maps, leaving only a legend behind. What could bring such a mighty civilization to its knees?",
+          "cliffhanger": "This tale of a lost island was first told by one of history's greatest thinkers, giving it a weight that still puzzles us today."
+        },
+        {
+          "layer": 2,
+          "layer_name": "Plato's Account: The First Glimpse",
+          "content": "The story of Atlantis comes to us primarily from the ancient Greek philosopher Plato, who wrote about it in two of his dialogues, 'Timaeus' and 'Critias'. Plato described Atlantis not as a myth, but as a real historical event passed down through generations.\n\nAccording to Plato, the story originated from Egyptian priests who told it to the Greek statesman Solon, Plato's ancestor. Solon then shared it with his family, and it was eventually written down by Plato. This lineage gives the tale a sense of historical truth, as if it were a forgotten piece of ancient history, not merely a fable. But what did Plato truly describe?",
+          "cliffhanger": "The details Plato provided painted a picture of a magnificent, circular city, hinting at an empire that once dominated the ancient world."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Golden Age: A Divine Society",
+          "content": "Plato described Atlantis as a vast island located beyond the 'Pillars of Heracles' (which is now thought to be the Strait of Gibraltar). It was a powerful kingdom founded by Poseidon, the Greek god of the sea, who fathered five pairs of twin sons with a mortal woman. Atlas, the eldest son, became the first king, and the island was named after him.\n\nThe Atlanteans built a spectacular capital city with concentric rings of land and water, connected by bridges and tunnels. Their structures were adorned with gold, silver, and 'orichalcum'—a mythical metal said to be more valuable than gold. They possessed advanced technology, fertile lands, and a wise governance system, living in peace and prosperity for centuries, thanks to their divine heritage and adherence to virtue.",
+          "cliffhanger": "But even a society born of gods and built on wisdom could not resist the seductive pull of human ambition and power."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Corruption of the Mighty",
+          "content": "For a long time, the Atlanteans remained pure and virtuous, using their wealth and power for good. Their divine nature shone through their actions. However, as generations passed, their human side grew stronger, and their divine blood became diluted. They slowly lost their moral compass.\n\nPride, greed, and a thirst for conquest began to poison the Atlantean soul. They started to forget the gods and their original values. Instead of focusing on inner virtue, they turned their attention outwards, seeking to expand their empire and dominate other nations. This shift marked a critical turning point, leading them down a dark path.",
+          "cliffhanger": "This aggressive change led to a clash with the ancient world, provoking the very forces that would bring about their swift and terrible judgment."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Divine Judgment and Cataclysm",
+          "content": "The Atlanteans, in their corrupted state, launched a massive military campaign, attempting to conquer the Mediterranean world, including Athens. Plato describes ancient Athens as a righteous and courageous force that successfully resisted the Atlantean invasion, proving its moral superiority.\n\nAngered by the Atlanteans' hubris and their unjust wars, the supreme god Zeus called a meeting of the other gods. He decided to punish Atlantis for its moral decay and imperial ambitions. The exact details of the gods' judgment are not fully given by Plato, as the dialogue 'Critias' ends abruptly. However, the outcome is clear: a divine wrath was unleashed.",
+          "cliffhanger": "In a horrifying display of cosmic power, Atlantis faced its final, devastating reckoning, disappearing without a trace."
+        },
+        {
+          "layer": 6,
+          "layer_name": "Lost to the Depths: A World Submerged",
+          "content": "Plato states that the gods sent a terrible natural disaster to destroy Atlantis. In 'a single dreadful day and night', violent earthquakes and floods struck the island. The land sank into the ocean, and Atlantis, with all its magnificence, was swallowed by the sea.\n\nIts disappearance was total and sudden, leaving behind only impassable mud shoals in the ocean where it once stood. This dramatic ending has fueled centuries of fascination and desperate searching. From the Bermuda Triangle to the Aegean Sea, explorers and researchers have tried to find physical evidence of this lost continent, but always without definitive success. Why does this story hold such a powerful grip on our imagination?",
+          "cliffhanger": "The persistent search for Atlantis reveals a chilling truth: perhaps its power lies not in its physical existence, but in the profound lesson it was meant to teach."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: Plato's Moral Allegory",
+          "content": "The absolute darkest documented truth about Atlantis is that it was most likely an invention of Plato, a masterful philosophical allegory. While he presented it as a historical account, most modern scholars agree that Plato used Atlantis as a literary device to illustrate his political and moral theories. It was a 'myth' in the sense of a fictional story designed to convey a deep truth.\n\nAtlantis, in this view, represented the dangers of imperial ambition, moral decay, and unchecked power, contrasted with his ideal state, ancient Athens. Plato was using the story to warn his fellow Athenians about the corruption that can arise when a society abandons virtue for wealth and dominance. The 'downfall' of Atlantis was a chilling lesson: even the most powerful and divinely blessed civilization can be destroyed if it loses its ethical foundation.\n\nThe chilling impact of Atlantis, therefore, is not about a lost city we might discover, but about its enduring message. It reminds us that hubris and moral decline lead to ruin, a lesson as relevant today as it was in ancient Greece. The true 'lost utopia' might be the ideal society itself, constantly threatened by the darkness within human nature."
+        }
+      ]
     }
   ]
 }
