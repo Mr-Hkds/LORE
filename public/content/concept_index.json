@@ -56,7 +56,8 @@
     "the_cuckoos_egg_kgb_hacker",
     "mlk_assassination_conspiracy",
     "project_raven_uae_cyber_mercenaries",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "project_bullrun_muscular"
   ],
   "espionage": [
     "uwe_barschel",
@@ -257,7 +258,8 @@
   ],
   "war_crimes": [
     "unit_731_experiments",
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "ashwatthama_curse_eternal_suffering"
   ],
   "impunity": [
     "unit_731_experiments"
@@ -957,16 +959,19 @@
   ],
   "global_surveillance": [
     "echelon_global_surveillance",
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "project_bullrun_muscular"
   ],
   "signals_intelligence": [
     "echelon_global_surveillance",
-    "the_russian_woodpecker_duga_3"
+    "the_russian_woodpecker_duga_3",
+    "project_bullrun_muscular"
   ],
   "privacy_invasion": [
     "echelon_global_surveillance",
     "project_shamrock",
-    "project_raven_uae_cyber_mercenaries"
+    "project_raven_uae_cyber_mercenaries",
+    "project_bullrun_muscular"
   ],
   "intelligence_sharing": [
     "echelon_global_surveillance"
@@ -1525,5 +1530,29 @@
   ],
   "prison_system_abuse": [
     "holmesburg_prison_experiments"
+  ],
+  "data_interception": [
+    "project_bullrun_muscular"
+  ],
+  "encryption_breaking": [
+    "project_bullrun_muscular"
+  ],
+  "internet_infrastructure": [
+    "project_bullrun_muscular"
+  ],
+  "eternal_curse": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "divine_justice": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "unending_suffering": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "mahabharata_epic": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "consequences_of_actions": [
+    "ashwatthama_curse_eternal_suffering"
   ]
 }
