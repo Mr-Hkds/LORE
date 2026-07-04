@@ -365,7 +365,8 @@
   "mass_psychogenic_illness": [
     "dancing_mania_1518_strasbourg",
     "tanganyika_laughter_epidemic",
-    "the_taos_hum"
+    "the_taos_hum",
+    "hanuman_psychological_phenomenon"
   ],
   "social_contagion": [
     "dancing_mania_1518_strasbourg",
@@ -604,10 +605,10 @@
   "mass_hysteria": [
     "salem_witch_trials_001",
     "curse_of_tutankhamun",
+    "vampire_panic_eastern_europe",
     "demonic_possession_exorcism_001",
     "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend",
-    "vampire_panic_eastern_europe"
+    "spring_heeled_jack_legend"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -1067,10 +1068,10 @@
   ],
   "folklore": [
     "the_children_of_woolpit",
+    "vampire_panic_eastern_europe",
     "the_golem_of_prague",
     "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend",
-    "vampire_panic_eastern_europe"
+    "spring_heeled_jack_legend"
   ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
@@ -1157,6 +1158,12 @@
   "archaeology": [
     "curse_of_tutankhamun"
   ],
+  "post_mortem_changes": [
+    "vampire_panic_eastern_europe"
+  ],
+  "public_panic": [
+    "vampire_panic_eastern_europe"
+  ],
   "immortality": [
     "sapta_chiranjeevi_unseen_guardians"
   ],
@@ -1221,6 +1228,29 @@
   "mental_illness_misinterpretation": [
     "demonic_possession_exorcism_001"
   ],
+  "cyber_espionage": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "state-sponsored_hacking": [
+    "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
+    "ghostnet_global_cyber_espionage",
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "data_theft": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage",
+    "the_cuckoos_egg_kgb_hacker"
+  ],
+  "unseen_warfare": [
+    "moonlight_maze_cyber_espionage",
+    "ghostnet_global_cyber_espionage"
+  ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
   ],
@@ -1236,34 +1266,11 @@
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
   ],
-  "state-sponsored_hacking": [
-    "solarwinds_supply_chain_attack_001",
-    "ghostnet_global_cyber_espionage",
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "ukraine_power_grid_cyber_attack_2015_2016",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001"
   ],
   "software_vulnerability": [
     "solarwinds_supply_chain_attack_001"
-  ],
-  "cyber_espionage": [
-    "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "data_theft": [
-    "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker",
-    "moonlight_maze_cyber_espionage"
-  ],
-  "unseen_warfare": [
-    "ghostnet_global_cyber_espionage",
-    "moonlight_maze_cyber_espionage"
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
@@ -1369,30 +1376,6 @@
   "urban_legend": [
     "spring_heeled_jack_legend"
   ],
-  "alien_encounter": [
-    "the_roswell_incident"
-  ],
-  "military_cover_up": [
-    "the_roswell_incident"
-  ],
-  "drug_experimentation": [
-    "project_mk_ultra_001"
-  ],
-  "moral_dilemmas": [
-    "mahabharat_psychological_epic"
-  ],
-  "karma_and_consequence": [
-    "mahabharat_psychological_epic"
-  ],
-  "divine_punishment": [
-    "myth_of_atlantis_plato"
-  ],
-  "post_mortem_changes": [
-    "vampire_panic_eastern_europe"
-  ],
-  "public_panic": [
-    "vampire_panic_eastern_europe"
-  ],
   "reincarnation": [
     "children_past_lives_stevenson_research"
   ],
@@ -1407,6 +1390,36 @@
   ],
   "consciousness_after_death": [
     "children_past_lives_stevenson_research"
+  ],
+  "alien_encounter": [
+    "the_roswell_incident"
+  ],
+  "military_cover_up": [
+    "the_roswell_incident"
+  ],
+  "drug_experimentation": [
+    "project_mk_ultra_001"
+  ],
+  "divine_punishment": [
+    "myth_of_atlantis_plato"
+  ],
+  "religious_delusion": [
+    "hanuman_psychological_phenomenon"
+  ],
+  "cultural_psychosis": [
+    "hanuman_psychological_phenomenon"
+  ],
+  "identity_dissociation": [
+    "hanuman_psychological_phenomenon"
+  ],
+  "devotion_extremism": [
+    "hanuman_psychological_phenomenon"
+  ],
+  "moral_dilemmas": [
+    "mahabharat_psychological_epic"
+  ],
+  "karma_and_consequence": [
+    "mahabharat_psychological_epic"
   ],
   "civil_rights_movement": [
     "mlk_assassination_conspiracy"
