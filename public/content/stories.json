@@ -9286,7 +9286,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/mirai_botnet_iot_attack/cover.jpg",
       "added_date": "2026-07-04",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 44,
         "gripping": 32,
@@ -9364,7 +9364,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "kala_bhairava_origin_time_punishment",
@@ -9379,6 +9379,33 @@
         "time_and_death"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/kala_bhairava_origin_time_punishment/cover.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 42,
+        "gripping": 25,
+        "scared": 4,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Scholarly Article (2026)",
+          "url": "https://doi.org/10.32447/2663-340x-2026-19"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "mahadev_and_sati_dossier",
+          "shared_concept": "grief_and_dissociation",
+          "transition_line": "Just as Shiva himself wrestled with immense grief after Sati's sacrifice, his fiercest form, Kala Bhairava, embodies a different kind of cosmic reckoning."
+        },
+        {
+          "story_id": "ravaan_character_study",
+          "shared_concept": "ego_inflation",
+          "transition_line": "The tale of Kala Bhairava serves as a stark warning against the same destructive pride and ego that ultimately led to the downfall of Ravana."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9423,26 +9450,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "mahadev_and_sati_dossier",
-          "shared_concept": "grief_and_dissociation",
-          "transition_line": "Just as Shiva himself wrestled with immense grief after Sati's sacrifice, his fiercest form, Kala Bhairava, embodies a different kind of cosmic reckoning."
-        },
-        {
-          "story_id": "ravaan_character_study",
-          "shared_concept": "ego_inflation",
-          "transition_line": "The tale of Kala Bhairava serves as a stark warning against the same destructive pride and ego that ultimately led to the downfall of Ravana."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Scholarly Article (2026)",
-          "url": "https://doi.org/10.32447/2663-340x-2026-19"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "hope_diamond_curse",
@@ -9457,6 +9466,28 @@
         "paranormal_phenomena"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/hope_diamond_curse/cover.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 32,
+        "gripping": 25,
+        "scared": 37,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Indian Diamonds in Victorian Fiction: Wilkie Collins’ The Moonstone, Anthony Trollope’s The Eustace Diamonds, R. L. Stevenson’s “The Rajah’s Diamond” and Arthur Conan Doyle’s The Sign of Four (Sabina Fazli, 2012)",
+          "url": "http://www.univerlag.uni-goettingen.de/bitstream/3/isbn-978-3-86395-033-0.3/1/03_GSEP6_Strangers_Migrants_Exiles_Fazli_103-191.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "curse_of_tutankhamun",
+          "shared_concept": "cursed_objects",
+          "transition_line": "Just as whispers of a curse followed the Hope Diamond, another ancient artifact stirred similar fears: the tomb of an Egyptian pharaoh, said to unleash vengeance upon those who disturbed its rest."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9501,21 +9532,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "curse_of_tutankhamun",
-          "shared_concept": "cursed_objects",
-          "transition_line": "Just as whispers of a curse followed the Hope Diamond, another ancient artifact stirred similar fears: the tomb of an Egyptian pharaoh, said to unleash vengeance upon those who disturbed its rest."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Indian Diamonds in Victorian Fiction: Wilkie Collins’ The Moonstone, Anthony Trollope’s The Eustace Diamonds, R. L. Stevenson’s “The Rajah’s Diamond” and Arthur Conan Doyle’s The Sign of Four (Sabina Fazli, 2012)",
-          "url": "http://www.univerlag.uni-goettingen.de/bitstream/3/isbn-978-3-86395-033-0.3/1/03_GSEP6_Strangers_Migrants_Exiles_Fazli_103-191.pdf"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
