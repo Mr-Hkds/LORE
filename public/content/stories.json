@@ -9995,6 +9995,49 @@
       "added_date": "2026-07-04",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vactican_as_a_World_Power.djvu/page1-960px-Vactican_as_a_World_Power.djvu.jpg",
       "image_source": "commons"
+    },
+    {
+      "story_id": "operation_shady_rat",
+      "title": "Shady RAT: A Decade of Digital Hoarding",
+      "category": "cyber_mysteries",
+      "hook": "A hidden worm fed on global secrets for ten years, stealing data from governments, banks and tech firms without a single hand seen.",
+      "concepts": [
+        "cyber_espionage",
+        "state_sponsored",
+        "persistent_threat"
+      ],
+      "severity": "disturbing",
+      "layers": [
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
+        }
+      ],
+      "added_date": "2026-07-04",
+      "evidence_links": [
+        {
+          "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23311886.2025.2499171?needAccess=true"
+        },
+        {
+          "label": "Regulating Cyber Space: An Examination of U.S.-China Relations (Adam K. Ghazi‐Tehrani, 2016)",
+          "url": "https://escholarship.org/uc/item/9jb873k7"
+        },
+        {
+          "label": "Coordinating uncertainty in the political economy of cyber threat intelligence (Rebecca Slayton, Lilly Pijnenburg Muller, 2025)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
+        }
+      ],
+      "hero_image": null
     }
   ]
 }

@@ -1259,7 +1259,8 @@
   "cyber_espionage": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "operation_shady_rat"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1574,5 +1575,11 @@
   ],
   "church_corruption": [
     "vatican_bank_scandal_calvi_p2"
+  ],
+  "state_sponsored": [
+    "operation_shady_rat"
+  ],
+  "persistent_threat": [
+    "operation_shady_rat"
   ]
 }
