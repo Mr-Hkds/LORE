@@ -22,7 +22,8 @@
     "jfk_assassination_001",
     "spontaneous_human_combustion_shc",
     "the_beast_of_gevaudan",
-    "mlk_assassination_conspiracy"
+    "mlk_assassination_conspiracy",
+    "hope_diamond_curse"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -1153,7 +1154,8 @@
   ],
   "superstition": [
     "curse_of_tutankhamun",
-    "vampire_panic_eastern_europe"
+    "vampire_panic_eastern_europe",
+    "hope_diamond_curse"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1401,7 +1403,8 @@
     "project_mk_ultra_001"
   ],
   "divine_punishment": [
-    "myth_of_atlantis_plato"
+    "myth_of_atlantis_plato",
+    "kala_bhairava_origin_time_punishment"
   ],
   "religious_delusion": [
     "hanuman_psychological_phenomenon"
@@ -1438,5 +1441,26 @@
   ],
   "unsecured_devices": [
     "mirai_botnet_iot_attack"
+  ],
+  "fierce_deity": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "ego_destruction": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "cosmic_justice": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "time_and_death": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "cursed_objects": [
+    "hope_diamond_curse"
+  ],
+  "historical_mysteries": [
+    "hope_diamond_curse"
+  ],
+  "paranormal_phenomena": [
+    "hope_diamond_curse"
   ]
 }
