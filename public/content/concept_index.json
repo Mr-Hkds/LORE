@@ -528,7 +528,8 @@
     "children_past_lives_stevenson_research"
   ],
   "haunted_house": [
-    "winchester_mystery_house"
+    "winchester_mystery_house",
+    "black_monk_pontefract_001"
   ],
   "missing_children": [
     "the_sodder_children_disappearance"
@@ -696,7 +697,8 @@
   ],
   "unexplained_events": [
     "eilean_mor_lighthouse_mystery",
-    "enfield_poltergeist_001"
+    "enfield_poltergeist_001",
+    "black_monk_pontefract_001"
   ],
   "medical_malpractice": [
     "harold_shipman_serial_killer"
@@ -1095,13 +1097,16 @@
     "guatemalan_syphilis_experiment"
   ],
   "poltergeist_phenomena": [
-    "enfield_poltergeist_001"
+    "enfield_poltergeist_001",
+    "black_monk_pontefract_001"
   ],
   "paranormal_investigation": [
-    "enfield_poltergeist_001"
+    "enfield_poltergeist_001",
+    "black_monk_pontefract_001"
   ],
   "family_trauma": [
-    "enfield_poltergeist_001"
+    "enfield_poltergeist_001",
+    "black_monk_pontefract_001"
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
@@ -1264,7 +1269,8 @@
     "ghostnet_global_cyber_espionage"
   ],
   "botnet": [
-    "conficker_worm"
+    "conficker_worm",
+    "mirai_botnet_iot_attack"
   ],
   "unknown_threat_actor": [
     "conficker_worm"
@@ -1297,7 +1303,8 @@
   ],
   "cyber_security": [
     "morris_worm_first_internet_attack",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "mirai_botnet_iot_attack"
   ],
   "internet_history": [
     "morris_worm_first_internet_attack"
@@ -1403,5 +1410,20 @@
   ],
   "civil_rights_movement": [
     "mlk_assassination_conspiracy"
+  ],
+  "demonic_possession_or_spirit_attachment": [
+    "black_monk_pontefract_001"
+  ],
+  "internet_of_things": [
+    "mirai_botnet_iot_attack"
+  ],
+  "cyber_attack": [
+    "mirai_botnet_iot_attack"
+  ],
+  "ddos_attack": [
+    "mirai_botnet_iot_attack"
+  ],
+  "unsecured_devices": [
+    "mirai_botnet_iot_attack"
   ]
 }
