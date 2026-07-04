@@ -25,7 +25,8 @@
     "mlk_assassination_conspiracy",
     "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "vatican_bank_scandal_calvi_p2"
+    "vatican_bank_scandal_calvi_p2",
+    "assassination_rfk_conspiracy"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -59,7 +60,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro",
     "project_bullrun_muscular",
     "vatican_bank_scandal_calvi_p2",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "assassination_rfk_conspiracy"
   ],
   "espionage": [
     "uwe_barschel",
@@ -164,7 +166,8 @@
     "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
     "the_roswell_incident",
-    "mlk_assassination_conspiracy"
+    "mlk_assassination_conspiracy",
+    "assassination_rfk_conspiracy"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -1214,7 +1217,8 @@
   ],
   "political_assassination": [
     "jfk_assassination_001",
-    "mlk_assassination_conspiracy"
+    "mlk_assassination_conspiracy",
+    "assassination_rfk_conspiracy"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
@@ -1606,5 +1610,8 @@
   ],
   "greed_and_consequence": [
     "legend_of_pretas_indian_mythology"
+  ],
+  "second_gunman": [
+    "assassination_rfk_conspiracy"
   ]
 }
