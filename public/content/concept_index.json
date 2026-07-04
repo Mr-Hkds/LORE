@@ -24,7 +24,8 @@
     "the_beast_of_gevaudan",
     "mlk_assassination_conspiracy",
     "hope_diamond_curse",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -57,7 +58,8 @@
     "mlk_assassination_conspiracy",
     "project_raven_uae_cyber_mercenaries",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "project_bullrun_muscular"
+    "project_bullrun_muscular",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "espionage": [
     "uwe_barschel",
@@ -186,7 +188,8 @@
     "stanford_prison_experiment_001"
   ],
   "financial_conspiracy": [
-    "barney_barnato"
+    "barney_barnato",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "lost_wealth": [
     "barney_barnato"
@@ -243,7 +246,8 @@
     "cicada_3301"
   ],
   "secret_societies": [
-    "cicada_3301"
+    "cicada_3301",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "biological_warfare": [
     "unit_731_experiments"
@@ -299,7 +303,8 @@
   "media_sensationalism": [
     "noida_double_murder_case_2008",
     "jack_the_ripper_001",
-    "black_dahlia_murder"
+    "black_dahlia_murder",
+    "amityville_horror_house_possessed"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
@@ -513,7 +518,8 @@
   "paranormal_activity": [
     "winchester_mystery_house",
     "edinburgh_vaults_001",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "amityville_horror_house_possessed"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -537,11 +543,13 @@
     "demonic_possession_exorcism_001",
     "spontaneous_human_combustion_shc",
     "spring_heeled_jack_legend",
-    "children_past_lives_stevenson_research"
+    "children_past_lives_stevenson_research",
+    "amityville_horror_house_possessed"
   ],
   "haunted_house": [
     "winchester_mystery_house",
-    "black_monk_pontefract_001"
+    "black_monk_pontefract_001",
+    "amityville_horror_house_possessed"
   ],
   "missing_children": [
     "the_sodder_children_disappearance"
@@ -619,7 +627,8 @@
     "vampire_panic_eastern_europe",
     "demonic_possession_exorcism_001",
     "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend"
+    "spring_heeled_jack_legend",
+    "amityville_horror_house_possessed"
   ],
   "judicial_injustice": [
     "salem_witch_trials_001"
@@ -1124,7 +1133,8 @@
   ],
   "family_trauma": [
     "enfield_poltergeist_001",
-    "black_monk_pontefract_001"
+    "black_monk_pontefract_001",
+    "amityville_horror_house_possessed"
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001"
@@ -1511,7 +1521,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "organized_crime": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "intelligence_agencies": [
     "the_octopus_murder_conspiracy_danny_casolaro"
@@ -1554,5 +1565,14 @@
   ],
   "consequences_of_actions": [
     "ashwatthama_curse_eternal_suffering"
+  ],
+  "true_crime": [
+    "amityville_horror_house_possessed"
+  ],
+  "hoax_claims": [
+    "amityville_horror_house_possessed"
+  ],
+  "church_corruption": [
+    "vatican_bank_scandal_calvi_p2"
   ]
 }
