@@ -1425,8 +1425,8 @@
   "cyber_security": [
     "the_cuckoos_egg_kgb_hacker",
     "internet_dark_matter_probes",
-    "morris_worm_first_internet_attack",
-    "mirai_botnet_iot_attack"
+    "mirai_botnet_iot_attack",
+    "morris_worm_first_internet_attack"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
@@ -1603,27 +1603,6 @@
   "mythological_eschatology": [
     "prophecies_of_kali_yuga"
   ],
-  "state_sponsored": [
-    "operation_shady_rat"
-  ],
-  "persistent_threat": [
-    "operation_shady_rat"
-  ],
-  "internet_history": [
-    "morris_worm_first_internet_attack"
-  ],
-  "unintended_consequences": [
-    "morris_worm_first_internet_attack"
-  ],
-  "computer_viruses": [
-    "morris_worm_first_internet_attack"
-  ],
-  "human_combustion": [
-    "spontaneous_human_combustion_shc"
-  ],
-  "forensic_mystery": [
-    "spontaneous_human_combustion_shc"
-  ],
   "pharmaceutical_industry": [
     "holmesburg_prison_experiments"
   ],
@@ -1641,5 +1620,26 @@
   ],
   "unsecured_devices": [
     "mirai_botnet_iot_attack"
+  ],
+  "internet_history": [
+    "morris_worm_first_internet_attack"
+  ],
+  "unintended_consequences": [
+    "morris_worm_first_internet_attack"
+  ],
+  "computer_viruses": [
+    "morris_worm_first_internet_attack"
+  ],
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
+  ],
+  "state_sponsored": [
+    "operation_shady_rat"
+  ],
+  "persistent_threat": [
+    "operation_shady_rat"
   ]
 }
