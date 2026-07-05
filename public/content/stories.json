@@ -286,7 +286,7 @@
         "social_pressure"
       ],
       "severity": "unsettling",
-      "hero_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0205aa1-559b-4a10-bb7a-a30c7b97f641_1600x900.jpeg",
+      "hero_image": "/content/images/the_asch_conformity_experiments.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -361,7 +361,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "operation_northwoods_001",
@@ -376,7 +376,7 @@
         "covert_operations"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Major-general-lansdale.jpg/250px-Major-general-lansdale.jpg",
+      "hero_image": "/content/images/operation_northwoods_001.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -426,7 +426,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "hidden_facts_shri_vishnu_ji",
@@ -441,7 +441,7 @@
         "preserver_destroyer_paradox"
       ],
       "severity": "unsettling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vishnu_from_Gita_Govinda.jpg/330px-Vishnu_from_Gita_Govinda.jpg",
+      "hero_image": "/content/images/hidden_facts_shri_vishnu_ji.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -496,7 +496,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "malaysia_airlines_mh370",
@@ -514,7 +514,7 @@
         "oceanic_search"
       ],
       "severity": "chilling",
-      "hero_image": "https://i.insider.com/5b6196b642e1cc32c5106a48?width=1200&format=jpeg",
+      "hero_image": "/content/images/malaysia_airlines_mh370.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -570,7 +570,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "stanford_prison_experiment_001",
@@ -583,7 +583,7 @@
         "dehumanization"
       ],
       "severity": "chilling",
-      "hero_image": "https://cdn.britannica.com/01/195501-050-8F76BB72/Guards-prisoner-Phillip-Zimbardo-Stanford-Prison-Experiment.jpg",
+      "hero_image": "/content/images/stanford_prison_experiment_001.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -639,7 +639,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "barney_barnato",
@@ -652,7 +652,7 @@
         "lost_wealth"
       ],
       "severity": "disturbing",
-      "hero_image": "https://alchetron.com/cdn/barney-barnato-65a2d3aa-960c-4428-b8fc-c208a995eb0-resize-750.jpg",
+      "hero_image": "/content/images/barney_barnato.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -707,7 +707,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "hinterkaifeck_murders",
@@ -723,7 +723,7 @@
         "cold_case"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Hinterkaifeck-Hof_%28cropped%29.jpg",
+      "hero_image": "/content/images/hinterkaifeck_murders.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -779,7 +779,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "sleep_paralysis_dossier",
@@ -792,7 +792,7 @@
         "sensed presence phenomenon"
       ],
       "severity": "disturbing",
-      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/sleepparalysisdemon.jpg?c=original&q=w_860,c_fill",
+      "hero_image": "/content/images/sleep_paralysis_dossier.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -848,7 +848,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "mahadev_and_sati_dossier",
@@ -861,7 +861,7 @@
         "sacred_geography"
       ],
       "severity": "unsettling",
-      "hero_image": "https://2.bp.blogspot.com/-GCQgmEXeySE/T4se1tVJYKI/AAAAAAAAVFQ/wj2wsuTVPWk/s1600/Goddess+Sati+and+God+Shiva.jpg",
+      "hero_image": "/content/images/mahadev_and_sati_dossier.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -917,7 +917,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "cicada_3301",
@@ -932,7 +932,7 @@
         "secret_societies"
       ],
       "severity": "unsettling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
+      "hero_image": "/content/images/cicada_3301.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -987,7 +987,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "unit_731_experiments",
@@ -1184,7 +1184,7 @@
         "emergency_response"
       ],
       "severity": "chilling",
-      "hero_image": "https://image.pollinations.ai/prompt/Dark%20atmospheric%20historical%20photograph%20of%20The%20Bystander%20Effect%3A%20When%20Humanity%20Fails%20to%20Act%2C%20black%20and%20white%2C%20archival%2C%20dramatic%2C%20cinematic%2C%20high%20detail?width=800&height=600&nologo=true&private=true&model=flux&seed=1782369811375",
+      "hero_image": "/content/images/the_bystander_effect.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1240,7 +1240,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "noida_double_murder_case_2008",
@@ -1255,7 +1255,7 @@
         "forensic_controversy"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Aarushi_Talwar%2C_Hemraj_Banjade.jpg/330px-Aarushi_Talwar%2C_Hemraj_Banjade.jpg",
+      "hero_image": "/content/images/noida_double_murder_case_2008.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1310,7 +1310,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "jack_the_ripper_001",
@@ -1325,7 +1325,7 @@
         "social_inequality"
       ],
       "severity": "chilling",
-      "hero_image": "https://i0.wp.com/wordsworth-editions.com/cms/wp-content/uploads/2022/03/1752_Rip2Web.jpg?fit=2000%2C1000&ssl=1",
+      "hero_image": "/content/images/jack_the_ripper_001.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1381,7 +1381,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "milgram_experiment_on_obedience_001",
@@ -1396,7 +1396,7 @@
         "social_psychology"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDPLekTxSH6_wXvcqNMT6uExUdYiEpvAWpHbOggCFEQiTRM9flVAwXqdw&s=10",
+      "hero_image": "/content/images/milgram_experiment_on_obedience_001.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1452,7 +1452,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "cia_mk_ultra_program",
@@ -1467,7 +1467,7 @@
         "psychological_warfare"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/DeclassifiedMKULTRA.jpg/330px-DeclassifiedMKULTRA.jpg",
+      "hero_image": "/content/images/cia_mk_ultra_program.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1523,7 +1523,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "jonestown_massacre_001",
@@ -1539,7 +1539,7 @@
         "obedience_to_authority"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
+      "hero_image": "/content/images/jonestown_massacre_001.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1595,7 +1595,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_numbers_stations",
@@ -1610,7 +1610,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "https://ychef.files.bbci.co.uk/1280x720/p05bbj96.jpg",
+      "hero_image": "/content/images/the_numbers_stations.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1665,7 +1665,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_zodiac_killer",
@@ -1679,7 +1679,7 @@
         "media_obsession"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7lOYhtPDEODnbKyeDgi6-4d9O7FMvIeiVEh9Uq5JOJYGfBSsEutVh2RBu&s=10",
+      "hero_image": "/content/images/the_zodiac_killer.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1735,7 +1735,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "dancing_mania_1518_strasbourg",
@@ -1750,7 +1750,7 @@
         "groupthink"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Dancingplague2_%28alt%29.jpg/330px-Dancingplague2_%28alt%29.jpg",
+      "hero_image": "/content/images/dancing_mania_1518_strasbourg.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1806,7 +1806,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "universe_25_calhouns_mouse_utopia",
@@ -1823,7 +1823,7 @@
         "social_pathology"
       ],
       "severity": "chilling",
-      "hero_image": "https://i.guim.co.uk/img/media/42dfe89b46da015880b52559a06afc5ede1855bf/408_0_1914_1148/master/1914.jpg?width=1200&quality=85&auto=format&fit=max&s=47d61c4005534fa603211457f3626b83",
+      "hero_image": "/content/images/universe_25_calhouns_mouse_utopia.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1879,7 +1879,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "tuskegee_syphilis_study",
@@ -1894,7 +1894,7 @@
         "public_health_failure"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tuskegee-syphilis-study_doctor-injecting-subject.jpg/330px-Tuskegee-syphilis-study_doctor-injecting-subject.jpg",
+      "hero_image": "/content/images/tuskegee_syphilis_study.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1950,7 +1950,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "capgras_delusion_001",
@@ -1965,7 +1965,7 @@
         "identity_perception"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsBAHHy2orJc7u8BAmGsyYA82NySLtguqIzUrnuN6YpoD8yMNQ64HszNKA&s=10",
+      "hero_image": "/content/images/capgras_delusion_001.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2021,7 +2021,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "folie_a_deux_shared_psychosis",
@@ -2036,7 +2036,7 @@
         "mental_health"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPtyOjjq41j-gcDJNjy4JwYXR0BRYqH_nqOlEl6oTQ6tT-Jn9CpBX13uc&s=10",
+      "hero_image": "/content/images/folie_a_deux_shared_psychosis.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2092,7 +2092,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "stuxnet_cyberweapon_nuclear_facilities",
@@ -2107,7 +2107,7 @@
         "nuclear proliferation"
       ],
       "severity": "chilling",
-      "hero_image": "https://content.kaspersky-labs.com/fm/press-releases/2d/2d1d7d2f3215dcb638ba13f12c5f0f55/processed/stuxnet-shutterstock1160509147-q93.jpg",
+      "hero_image": "/content/images/stuxnet_cyberweapon_nuclear_facilities.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2162,7 +2162,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_taman_shud_case",
@@ -2177,7 +2177,7 @@
         "unexplained_deaths"
       ],
       "severity": "harrowing",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz8tbDMGpFF8youIDGfIkRKoJU0y_lNhHW-S9hlMMdSFpj7DEKC632YIZ-&s=10",
+      "hero_image": "/content/images/the_taman_shud_case.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2233,7 +2233,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "franklin_expedition_lost_ships",
@@ -2249,7 +2249,7 @@
         "cannibalism"
       ],
       "severity": "chilling",
-      "hero_image": "https://pcweb2.azureedge.net/-/media/WET4/culture/franklin/history/expedition/expedition-870.jpg?modified=20180608192305",
+      "hero_image": "/content/images/franklin_expedition_lost_ships.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2305,7 +2305,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "winchester_mystery_house",
@@ -2321,7 +2321,7 @@
         "haunted_house"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
+      "hero_image": "/content/images/winchester_mystery_house.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2371,7 +2371,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2387,7 +2387,7 @@
         "flawed_investigation"
       ],
       "severity": "chilling",
-      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/CCQlipJYqfjNpmYKAGBlzsjtXDw=/fit-in/1072x0/filters:focal(1369x821:1370x822)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/ab/70/ab702fc9-67c1-4b3a-8931-37d328731717/beckley_post_herald_1953_09_11_page_11.jpg",
+      "hero_image": "/content/images/the_sodder_children_disappearance.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2443,7 +2443,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_cleveland_torso_murders",
@@ -2459,7 +2459,7 @@
         "political_pressure"
       ],
       "severity": "chilling",
-      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
+      "hero_image": "/content/images/the_cleveland_torso_murders.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2515,7 +2515,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_stargate_remote_viewing",
@@ -2533,7 +2533,7 @@
         "scientific_skepticism"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
+      "hero_image": "/content/images/project_stargate_remote_viewing.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2589,7 +2589,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "stockholm_syndrome_001",
@@ -2604,7 +2604,7 @@
         "captivity_syndrome"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
+      "hero_image": "/content/images/stockholm_syndrome_001.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2660,7 +2660,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
@@ -2673,7 +2673,7 @@
         "medical_ethics"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
+      "hero_image": "/content/images/project_sunshine_cadaver_collection.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2729,7 +2729,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "salem_witch_trials_001",
@@ -2744,7 +2744,7 @@
         "spectral_evidence"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
+      "hero_image": "/content/images/salem_witch_trials_001.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2800,7 +2800,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_rat_park_experiment_001",
@@ -2817,7 +2817,7 @@
         "social_pathology"
       ],
       "severity": "disturbing",
-      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
+      "hero_image": "/content/images/the_rat_park_experiment_001.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2873,7 +2873,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "phineas_gage_brain_injury",
@@ -2888,7 +2888,7 @@
         "self_identity"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
+      "hero_image": "/content/images/phineas_gage_brain_injury.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2944,7 +2944,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
@@ -2959,7 +2959,7 @@
         "coping_mechanisms"
       ],
       "severity": "chilling",
-      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
+      "hero_image": "/content/images/dissociative_identity_disorder_fragmented_self.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3015,7 +3015,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "black_dahlia_murder",
@@ -3031,7 +3031,7 @@
         "police_misconduct"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
+      "hero_image": "/content/images/black_dahlia_murder.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3087,7 +3087,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "clinical_lycanthropy",
@@ -3102,7 +3102,7 @@
         "mental_health"
       ],
       "severity": "chilling",
-      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
+      "hero_image": "/content/images/clinical_lycanthropy.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3158,7 +3158,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_isdal_woman",
@@ -3173,7 +3173,7 @@
         "cold_case"
       ],
       "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
+      "hero_image": "/content/images/the_isdal_woman.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3229,7 +3229,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_iceworm_secret_city",
@@ -3244,7 +3244,7 @@
         "military_infrastructure"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
+      "hero_image": "/content/images/project_iceworm_secret_city.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3300,7 +3300,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
@@ -3315,7 +3315,7 @@
         "unexplained_events"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
+      "hero_image": "/content/images/eilean_mor_lighthouse_mystery.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3371,7 +3371,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "harold_shipman_serial_killer",
@@ -3387,7 +3387,7 @@
         "power_dynamics"
       ],
       "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
+      "hero_image": "/content/images/harold_shipman_serial_killer.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3443,7 +3443,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_ganzfeld_experiment",
@@ -3461,7 +3461,7 @@
         "perception_biases"
       ],
       "severity": "unsettling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
+      "hero_image": "/content/images/the_ganzfeld_experiment.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3517,7 +3517,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "circleville_letters",
@@ -3532,7 +3532,7 @@
         "small_town_secrets"
       ],
       "severity": "chilling",
-      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
+      "hero_image": "/content/images/circleville_letters.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3588,7 +3588,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "mystery_of_dwarka",
@@ -3603,7 +3603,7 @@
         "catastrophic_events"
       ],
       "severity": "unsettling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
+      "hero_image": "/content/images/mystery_of_dwarka.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3653,7 +3653,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
@@ -3670,7 +3670,7 @@
         "radicalization"
       ],
       "severity": "chilling",
-      "hero_image": "https://c.files.bbci.co.uk/C00D/production/_130056194_gettyimages-1301274454.jpg",
+      "hero_image": "/content/images/the_unabomber_ted_kaczynski_campaign_of_terror.jpg",
       "added_date": "2026-01-02",
       "draft": false,
       "reactions": {
@@ -3726,7 +3726,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "alien_hand_syndrome",
@@ -3741,7 +3741,7 @@
         "body_image_disorder"
       ],
       "severity": "chilling",
-      "hero_image": "https://cdn.hswstatic.com/gif/alien-hand-1-1.jpg",
+      "hero_image": "/content/images/alien_hand_syndrome.jpg",
       "added_date": "2026-01-24",
       "draft": false,
       "reactions": {
@@ -3797,7 +3797,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "aokigahara_suicide_forest",
@@ -3814,7 +3814,7 @@
         "prevention_efforts"
       ],
       "severity": "chilling",
-      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/180102133840-01-suicide-forest-restricted.jpg?q=w_4300,h_2419,x_0,y_0,c_fill",
+      "hero_image": "/content/images/aokigahara_suicide_forest.jpg",
       "added_date": "2026-04-14",
       "draft": false,
       "reactions": {
@@ -3870,7 +3870,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_philip_experiment",
@@ -3886,7 +3886,7 @@
         "ideomotor_effect"
       ],
       "severity": "unsettling",
-      "hero_image": "https://i0.wp.com/www.llifs.com.au/site/assets/files/19765/tumblr_mr3h0tnfkj1qav174o1_500.webp?w=760&ssl=1",
+      "hero_image": "/content/images/the_philip_experiment.jpg",
       "added_date": "2026-03-28",
       "draft": false,
       "reactions": {
@@ -3942,7 +3942,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_mandela_effect",
@@ -3956,7 +3956,7 @@
         "reality_perception"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
+      "hero_image": "/content/images/the_mandela_effect.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -4031,7 +4031,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_third_wave_experiment",
@@ -4047,7 +4047,7 @@
         "power_dynamics"
       ],
       "severity": "chilling",
-      "hero_image": "https://kureansiklopedi.com/_next/image?url=https%3A%2F%2Fcdn.t3pedia.org%2Fmedia%2Fuploads%2F2025%2F12%2F13%2FDqefKxLYqCKCmMfGhj3ERbPBm3NkSd2J.png&w=1280&q=75",
+      "hero_image": "/content/images/the_third_wave_experiment.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4141,7 +4141,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "tanganyika_laughter_epidemic",
@@ -4156,7 +4156,7 @@
         "groupthink"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMWsUeJ6Ls-nHxBxjJCdOWabhnufiYHWj_-GYAiVFktprUlZSDBjgHULVw&s=10",
+      "hero_image": "/content/images/tanganyika_laughter_epidemic.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -4231,7 +4231,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_silent_twins_gibbons",
@@ -4246,7 +4246,7 @@
         "institutionalization"
       ],
       "severity": "chilling",
-      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/91EE/production/_132085373_j-jteens.jpg",
+      "hero_image": "/content/images/the_silent_twins_gibbons.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -4321,7 +4321,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "monster_study_1939",
@@ -4336,7 +4336,7 @@
         "eugenics_influence"
       ],
       "severity": "disturbing",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-AZUw-GI7nwPprbxhvhS5pXbC4EoRBRm0iCn_a8zVcqGbgc1wjNvk82K0&s=10",
+      "hero_image": "/content/images/monster_study_1939.jpg",
       "added_date": "2026-06-27",
       "draft": false,
       "reactions": {
@@ -4416,7 +4416,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "blue_whale_game_001",
@@ -4432,7 +4432,7 @@
         "psychological_exploitation"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/08/26/Pictures/print_229ba15a-8a8c-11e7-b7bc-fa1568cb40f1.jpg",
+      "hero_image": "/content/images/blue_whale_game_001.jpg",
       "added_date": "2026-06-30",
       "draft": false,
       "reactions": {
@@ -4488,7 +4488,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -4503,7 +4503,7 @@
         "insider_threat"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx-lIKYfZy_5P05GtKCKMXD740b-hjaeXfeiPGTPVLasUEiAKIrosx-8aj&s=10",
+      "hero_image": "/content/images/anthrax_attacks_2001_amerithrax.jpg",
       "added_date": "2026-06-30",
       "draft": false,
       "reactions": {
@@ -4578,7 +4578,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "cotard_delusion_001",
@@ -4593,7 +4593,7 @@
         "neurology"
       ],
       "severity": "chilling",
-      "hero_image": "https://allthatsinteresting.com/wordpress/wp-content/uploads/2018/03/Cotard-delusion-deathbed.jpg",
+      "hero_image": "/content/images/cotard_delusion_001.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -4668,7 +4668,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_batavia_shipwreck_mutiny",
@@ -4686,7 +4686,7 @@
         "authoritarianism"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyPcevTXXRYa_XcB2wFNRn5eAguNHq47FIAGBO3OZlfR5wYg3M_oiupGk&s=10",
+      "hero_image": "/content/images/the_batavia_shipwreck_mutiny.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4760,7 +4760,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "uss_cyclops_vanishing",
@@ -4775,7 +4775,7 @@
         "unsolved_mystery"
       ],
       "severity": "chilling",
-      "hero_image": "https://www.usni.org/sites/default/files/styles/hero_image/public/NH%20101063.jpg?itok=GujSbauM",
+      "hero_image": "/content/images/uss_cyclops_vanishing.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4837,7 +4837,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_taos_hum",
@@ -4853,7 +4853,7 @@
         "scientific_skepticism"
       ],
       "severity": "chilling",
-      "hero_image": "https://preview.redd.it/the-taos-hum-is-a-mysterious-low-frequency-humming-noise-v0-2vxmr4ucwb6a1.png?width=640&crop=smart&auto=webp&s=e7ad37fa786e70eccc0fbbe8b051eba6acbfc2c0",
+      "hero_image": "/content/images/the_taos_hum.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4928,7 +4928,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "tunguska_event_001",
@@ -4941,7 +4941,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "https://earthsci.org/space/space/tunguska/tungusta.jpg",
+      "hero_image": "/content/images/tunguska_event_001.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -5016,7 +5016,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "albert_fish_the_gray_man",
@@ -5031,7 +5031,7 @@
         "unsolved_cases"
       ],
       "severity": "chilling",
-      "hero_image": "https://resizing.flixster.com/26WpLmkD3U9cZ6LD-oMbSTVNBUw=/375x210/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p168101_i_h10_aa.jpg",
+      "hero_image": "/content/images/albert_fish_the_gray_man.jpg",
       "added_date": "2026-06-22",
       "draft": false,
       "reactions": {
@@ -5087,7 +5087,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "echelon_global_surveillance",
@@ -5104,7 +5104,7 @@
         "mass_interception"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsEcfXowun1kZ66HYyR_pRRMXms2AWcLJkpP_3lfWzj88Py1wqFsA3G5Q&s=10",
+      "hero_image": "/content/images/echelon_global_surveillance.jpg",
       "added_date": "2026-06-27",
       "draft": false,
       "reactions": {
@@ -5179,7 +5179,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "roanoke_colony_disappearance",
@@ -5195,7 +5195,7 @@
         "environmental_factors"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL0HrlCRTP54VoquS2gJYR-sSD8erJybdiJGTgCwkHiw&s",
+      "hero_image": "/content/images/roanoke_colony_disappearance.jpg",
       "added_date": "2026-03-23",
       "draft": false,
       "reactions": {
@@ -5251,7 +5251,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_blue_book_ufo",
@@ -5267,7 +5267,7 @@
         "public_perception"
       ],
       "severity": "chilling",
-      "hero_image": "https://static01.nyt.com/images/2019/01/17/arts/17bluebook1/merlin_149218185_0534eb01-c31e-4fcb-ad88-04159d80c76f-superJumbo.jpg",
+      "hero_image": "/content/images/project_blue_book_ufo.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5347,7 +5347,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_lead_mask_case",
@@ -5362,7 +5362,7 @@
         "cryptic_messages"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZY-FYbODDzt9r9QAf28aQpJryADhsCk4tVUUfu1b1Gg&s=10",
+      "hero_image": "/content/images/the_lead_mask_case.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5437,7 +5437,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "operation_gladio",
@@ -5455,7 +5455,7 @@
         "deep_state"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvU8z_QMt-c8XTVeFIjQiOFgWzir1KkNX3DWSCFmwmFKoa8747k4qCL8&s=10",
+      "hero_image": "/content/images/operation_gladio.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5530,7 +5530,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_shamrock",
@@ -5546,7 +5546,7 @@
         "cold_war_era"
       ],
       "severity": "chilling",
-      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_oyhPoAoQ_2RMsnecfS4yz8FGoB7e17e_hHeZCfhQ0xnqIL1GLNSad55A&s=10",
+      "hero_image": "/content/images/project_shamrock.jpg",
       "added_date": "2026-04-01",
       "draft": false,
       "reactions": {
@@ -5602,7 +5602,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_phoenix_program",
@@ -5619,7 +5619,7 @@
         "intelligence_gathering"
       ],
       "severity": "chilling",
-      "hero_image": "https://static01.nyt.com/images/2018/01/02/opinion/02Vietnam-miller/merlin_131703548_5b97001f-699a-43e6-801b-d9e26d139d8e-superJumbo.jpg",
+      "hero_image": "/content/images/the_phoenix_program.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -5694,7 +5694,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "ravaan_character_study",
@@ -5711,7 +5711,7 @@
         "obsession"
       ],
       "severity": "disturbing",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Ravana.jpg",
+      "hero_image": "/content/images/ravaan_character_study.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -5785,7 +5785,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_wow_signal",
@@ -5801,7 +5801,7 @@
         "existential_mystery"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
+      "hero_image": "/content/images/the_wow_signal.jpg",
       "added_date": "2026-02-28",
       "draft": false,
       "reactions": {
@@ -5856,7 +5856,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_children_of_woolpit",
@@ -5871,7 +5871,7 @@
         "folklore"
       ],
       "severity": "chilling",
-      "hero_image": "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*gEHPmdx1y36w-Lcw8Ua_uQ.jpeg",
+      "hero_image": "/content/images/the_children_of_woolpit.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -5946,7 +5946,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_bloop_unexplained_sound",
@@ -5961,7 +5961,7 @@
         "oceanographic_research"
       ],
       "severity": "chilling",
-      "hero_image": "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*sw2AcLo3Y_mJ9WrG",
+      "hero_image": "/content/images/the_bloop_unexplained_sound.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -6023,7 +6023,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -6039,7 +6039,7 @@
         "technological_failure"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/DUGA_Radar_Array_near_Chernobyl%2C_Ukraine_2014.jpg",
+      "hero_image": "/content/images/the_russian_woodpecker_duga_3.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6114,7 +6114,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -6130,7 +6130,7 @@
         "vulnerable_populations"
       ],
       "severity": "chilling",
-      "hero_image": "https://origins.osu.edu/sites/default/files/migrated_files/guatemala%20subjects.jpg",
+      "hero_image": "/content/images/guatemalan_syphilis_experiment.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6213,7 +6213,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -6228,7 +6228,7 @@
         "skepticism_vs_belief"
       ],
       "severity": "chilling",
-      "hero_image": "https://www.telegraph.co.uk/content/dam/films/2016/06/13/enfield3_3286300b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=350",
+      "hero_image": "/content/images/enfield_poltergeist_001.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6303,7 +6303,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "edinburgh_vaults_001",
@@ -6318,7 +6318,7 @@
         "haunted_location"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/edinburgh_vaults_001/cover.jpg",
+      "hero_image": "/content/images/edinburgh_vaults_001.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -6385,7 +6385,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_mary_celeste_mystery",
@@ -6400,7 +6400,7 @@
         "sea_legends"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_mary_celeste_mystery/cover.jpg",
+      "hero_image": "/content/images/the_mary_celeste_mystery.jpg",
       "added_date": "2026-06-27",
       "draft": false,
       "reactions": {
@@ -6475,7 +6475,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "operation_paperclip_001",
@@ -6492,7 +6492,7 @@
         "human_rights_violations"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/operation_paperclip_001/cover.jpg",
+      "hero_image": "/content/images/operation_paperclip_001.jpg",
       "added_date": "2026-06-30",
       "draft": false,
       "reactions": {
@@ -6572,7 +6572,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_artichoke_mind_control",
@@ -6589,7 +6589,7 @@
         "psychological_warfare"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_artichoke_mind_control/cover.jpg",
+      "hero_image": "/content/images/project_artichoke_mind_control.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -6663,7 +6663,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "curse_of_tutankhamun",
@@ -6678,7 +6678,7 @@
         "archaeology"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/curse_of_tutankhamun/cover.jpg",
+      "hero_image": "/content/images/curse_of_tutankhamun.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -6740,7 +6740,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "vampire_panic_eastern_europe",
@@ -6755,7 +6755,7 @@
         "public_panic"
       ],
       "severity": "chilling",
-      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/1jjQxBtA_sdwH2Pq6K6GTkN18DM=/600x400/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e4/ad/e4ad2d20-0350-4bd1-bfbf-dec9b58b60af/gettyimages-593280150.jpg",
+      "hero_image": "/content/images/vampire_panic_eastern_europe.jpg",
       "added_date": "2026-04-05",
       "draft": false,
       "reactions": {
@@ -6811,7 +6811,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6826,7 +6826,7 @@
         "enduring_belief"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/sapta_chiranjeevi_unseen_guardians/cover.jpg",
+      "hero_image": "/content/images/sapta_chiranjeevi_unseen_guardians.jpg",
       "added_date": "2026-06-24",
       "draft": false,
       "reactions": {
@@ -6882,7 +6882,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "jfk_assassination_001",
@@ -6898,7 +6898,7 @@
         "covert_operations"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/JFK_Motorcade_GettyImages-517330536.jpg/330px-JFK_Motorcade_GettyImages-517330536.jpg",
+      "hero_image": "/content/images/jfk_assassination_001.jpg",
       "added_date": "2026-03-20",
       "draft": false,
       "reactions": {
@@ -6954,7 +6954,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -7045,7 +7045,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "elizabeth_bathory_blood_countess",
@@ -7118,7 +7118,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "demonic_possession_exorcism_001",
@@ -7209,7 +7209,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "moonlight_maze_cyber_espionage",
@@ -7225,7 +7225,7 @@
         "cold_war_legacy"
       ],
       "severity": "chilling",
-      "hero_image": "https://www.bleepstatic.com/images/news/u/986406/attacks/APTs/OldNewspaper.png",
+      "hero_image": "/content/images/moonlight_maze_cyber_espionage.jpg",
       "added_date": "2026-04-30",
       "draft": false,
       "reactions": {
@@ -7281,7 +7281,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "wendigo_insatiable_hunger",
@@ -7295,7 +7295,7 @@
         "survival_horror"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/wendigo_insatiable_hunger/cover.jpg",
+      "hero_image": "/content/images/wendigo_insatiable_hunger.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7357,7 +7357,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "solarwinds_supply_chain_attack_001",
@@ -7372,7 +7372,7 @@
         "software_vulnerability"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/solarwinds_supply_chain_attack_001/cover.jpg",
+      "hero_image": "/content/images/solarwinds_supply_chain_attack_001.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7447,7 +7447,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "ghostnet_global_cyber_espionage",
@@ -7547,7 +7547,7 @@
         "global_cyber_threat"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/conficker_worm/cover.jpg",
+      "hero_image": "/content/images/conficker_worm.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7609,7 +7609,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_golem_of_prague",
@@ -7625,7 +7625,7 @@
         "forbidden_knowledge"
       ],
       "severity": "chilling",
-      "hero_image": "https://trips-tickets.com/wp-content/uploads/2022/10/rabbi-Loew-golem.webp",
+      "hero_image": "/content/images/the_golem_of_prague.jpg",
       "added_date": "2026-01-16",
       "draft": false,
       "reactions": {
@@ -7681,7 +7681,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -7696,7 +7696,7 @@
         "digital_weaponry"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_shadow_brokers_nsa_leak/cover.jpg",
+      "hero_image": "/content/images/the_shadow_brokers_nsa_leak.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7770,7 +7770,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "morris_worm_first_internet_attack",
@@ -7785,7 +7785,7 @@
         "computer_viruses"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/morris_worm_first_internet_attack/cover.jpg",
+      "hero_image": "/content/images/morris_worm_first_internet_attack.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7847,7 +7847,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "spontaneous_human_combustion_shc",
@@ -7862,7 +7862,7 @@
         "unexplained_phenomena"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/spontaneous_human_combustion_shc/cover.jpg",
+      "hero_image": "/content/images/spontaneous_human_combustion_shc.jpg",
       "added_date": "2026-07-02",
       "draft": false,
       "reactions": {
@@ -7952,7 +7952,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_beast_of_gevaudan",
@@ -8053,7 +8053,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "october_surprise_1980_iran",
@@ -8144,7 +8144,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
@@ -8160,7 +8160,7 @@
         "blackout"
       ],
       "severity": "chilling",
-      "hero_image": "https://ismg-cdn.nyc3.cdn.digitaloceanspaces.com/articles/ukrainian-power-grid-attacks-lessons-learned-showcase_image-1-a-9604.jpg",
+      "hero_image": "/content/images/ukraine_power_grid_cyber_attack_2015_2016.jpg",
       "added_date": "2026-03-28",
       "draft": false,
       "reactions": {
@@ -8216,7 +8216,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "cointelpro_fbi_covert_ops",
@@ -8322,7 +8322,7 @@
         "victorian_era"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
+      "hero_image": "/content/images/spring_heeled_jack_legend.jpg",
       "added_date": "2026-03-13",
       "draft": false,
       "reactions": {
@@ -8378,7 +8378,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "children_past_lives_stevenson_research",
@@ -8394,7 +8394,7 @@
         "consciousness_after_death"
       ],
       "severity": "chilling",
-      "hero_image": "https://media.licdn.com/dms/image/v2/C4E12AQHkReNV2wme1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520080815901?e=1784764800&v=beta&t=QfcZcpJ7-kHh0d293Q4h_eKnHxdezPgvoCgZTsftdj8",
+      "hero_image": "/content/images/children_past_lives_stevenson_research.jpg",
       "added_date": "2026-04-01",
       "draft": false,
       "reactions": {
@@ -8450,7 +8450,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_roswell_incident",
@@ -8556,7 +8556,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Cuculus_canorus_canorus_MHNT.ZOO.2010.11.150.21.jpg/960px-Cuculus_canorus_canorus_MHNT.ZOO.2010.11.150.21.jpg",
+      "hero_image": "/content/images/the_cuckoos_egg_kgb_hacker.jpg",
       "added_date": "2026-07-03",
       "draft": false,
       "reactions": {
@@ -8623,7 +8623,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "mahabharat_psychological_epic",
@@ -8710,7 +8710,7 @@
         "civil_rights_movement"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Martin_Luther_King_Jr._enters_motel_room_before_assassination.jpg/960px-Martin_Luther_King_Jr._enters_motel_room_before_assassination.jpg",
+      "hero_image": "/content/images/mlk_assassination_conspiracy.jpg",
       "added_date": "2026-07-03",
       "draft": false,
       "reactions": {
@@ -8790,7 +8790,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "black_monk_pontefract_001",
@@ -8883,7 +8883,7 @@
         "unsecured_devices"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/mirai_botnet_iot_attack/cover.jpg",
+      "hero_image": "/content/images/mirai_botnet_iot_attack.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -8963,7 +8963,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "kala_bhairava_origin_time_punishment",
@@ -8978,7 +8978,7 @@
         "time_and_death"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/kala_bhairava_origin_time_punishment/cover.jpg",
+      "hero_image": "/content/images/kala_bhairava_origin_time_punishment.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9050,7 +9050,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "hope_diamond_curse",
@@ -9065,7 +9065,7 @@
         "paranormal_phenomena"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/hope_diamond_curse/cover.jpg",
+      "hero_image": "/content/images/hope_diamond_curse.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9132,7 +9132,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "myth_of_atlantis_plato",
@@ -9147,7 +9147,7 @@
         "hubris"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
+      "hero_image": "/content/images/myth_of_atlantis_plato.jpg",
       "added_date": "2026-01-17",
       "draft": false,
       "reactions": {
@@ -9202,7 +9202,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_raven_uae_cyber_mercenaries",
@@ -9219,7 +9219,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg/960px-The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg",
+      "hero_image": "/content/images/project_raven_uae_cyber_mercenaries.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9294,7 +9294,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "vikram_vetala_tales",
@@ -9309,7 +9309,7 @@
         "sacred_oaths"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/RF_Burton_Vikram_and_the_Vampire_%281870%29_Illustrated_by_Ernest_Griset_page317.png",
+      "hero_image": "/content/images/vikram_vetala_tales.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9371,7 +9371,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
@@ -9388,7 +9388,7 @@
         "intelligence_agencies"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu/page1-960px-Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu.jpg",
+      "hero_image": "/content/images/the_octopus_murder_conspiracy_danny_casolaro.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9455,7 +9455,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "bhasmasura_mohini_deception",
@@ -9470,7 +9470,7 @@
         "illusion"
       ],
       "severity": "chilling",
-      "hero_image": null,
+      "hero_image": "/content/images/bhasmasura_mohini_deception.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9532,7 +9532,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "project_bullrun_muscular",
@@ -9549,7 +9549,7 @@
         "privacy_invasion"
       ],
       "severity": "chilling",
-      "hero_image": null,
+      "hero_image": "/content/images/project_bullrun_muscular.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9611,7 +9611,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "ashwatthama_curse_eternal_suffering",
@@ -9627,7 +9627,7 @@
         "consequences_of_actions"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg/960px-Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg",
+      "hero_image": "/content/images/ashwatthama_curse_eternal_suffering.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9694,7 +9694,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "amityville_horror_house_possessed",
@@ -9712,7 +9712,7 @@
         "media_sensationalism"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Horror_Amityville.png/960px-Horror_Amityville.png",
+      "hero_image": "/content/images/amityville_horror_house_possessed.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9784,7 +9784,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "vatican_bank_scandal_calvi_p2",
@@ -9800,7 +9800,7 @@
         "church_corruption"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vactican_as_a_World_Power.djvu/page1-960px-Vactican_as_a_World_Power.djvu.jpg",
+      "hero_image": "/content/images/vatican_bank_scandal_calvi_p2.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9862,7 +9862,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_mk_ultra_001",
@@ -9980,7 +9980,7 @@
         "greed_and_consequence"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Primitive_Culture_Vol_2.djvu/page1-960px-Primitive_Culture_Vol_2.djvu.jpg",
+      "hero_image": "/content/images/legend_of_pretas_indian_mythology.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -10055,7 +10055,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_bell_witch_haunting",
@@ -10176,7 +10176,7 @@
         "second_gunman"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg/960px-Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg",
+      "hero_image": "/content/images/assassination_rfk_conspiracy.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -10251,7 +10251,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "project_shad_covert_testing",
@@ -10268,7 +10268,7 @@
         "long_term_health_effects"
       ],
       "severity": "chilling",
-      "hero_image": null,
+      "hero_image": "/content/images/project_shad_covert_testing.jpg",
       "added_date": "2026-07-05",
       "draft": false,
       "reactions": {
@@ -10340,7 +10340,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "internet_dark_matter_probes",
@@ -10357,7 +10357,7 @@
         "botnets"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png/960px-Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png",
+      "hero_image": "/content/images/internet_dark_matter_probes.jpg",
       "added_date": "2026-07-05",
       "draft": false,
       "reactions": {
@@ -10434,7 +10434,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "prophecies_of_kali_yuga",
@@ -10449,7 +10449,7 @@
         "mythological_eschatology"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/prophecies_of_kali_yuga/cover.jpg",
+      "hero_image": "/content/images/prophecies_of_kali_yuga.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -10524,7 +10524,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "holmesburg_prison_experiments",
@@ -10541,7 +10541,7 @@
         "prison_system_abuse"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/holmesburg_prison_experiments/cover.jpg",
+      "hero_image": "/content/images/holmesburg_prison_experiments.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -10621,7 +10621,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "operation_shady_rat",
@@ -10634,7 +10634,7 @@
         "persistent_threat"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/operation_shady_rat/cover.jpg",
+      "hero_image": "/content/images/operation_shady_rat.jpg",
       "added_date": "2026-07-04",
       "draft": 0,
       "reactions": {
