@@ -635,15 +635,6 @@
   "captivity_syndrome": [
     "stockholm_syndrome_001"
   ],
-  "mass_hysteria": [
-    "curse_of_tutankhamun",
-    "vampire_panic_eastern_europe",
-    "demonic_possession_exorcism_001",
-    "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend",
-    "amityville_horror_house_possessed",
-    "salem_witch_trials_001"
-  ],
   "addiction": [
     "the_rat_park_experiment_001"
   ],
@@ -1198,6 +1189,15 @@
     "vampire_panic_eastern_europe",
     "hope_diamond_curse"
   ],
+  "mass_hysteria": [
+    "curse_of_tutankhamun",
+    "vampire_panic_eastern_europe",
+    "demonic_possession_exorcism_001",
+    "the_beast_of_gevaudan",
+    "spring_heeled_jack_legend",
+    "amityville_horror_house_possessed",
+    "salem_witch_trials_001"
+  ],
   "archaeology": [
     "curse_of_tutankhamun"
   ],
@@ -1538,25 +1538,6 @@
   "drug_experimentation": [
     "project_mk_ultra_001"
   ],
-  "restless_spirits": [
-    "legend_of_pretas_indian_mythology",
-    "pishachas_flesh_eating_spirits"
-  ],
-  "karma": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "afterlife": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "suffering": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "ancestral_rituals": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "greed_and_consequence": [
-    "legend_of_pretas_indian_mythology"
-  ],
   "second_gunman": [
     "assassination_rfk_conspiracy"
   ],
@@ -1662,6 +1643,10 @@
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
   ],
+  "restless_spirits": [
+    "pishachas_flesh_eating_spirits",
+    "legend_of_pretas_indian_mythology"
+  ],
   "ufo_sighting": [
     "phoenix_lights_event"
   ],
@@ -1685,5 +1670,20 @@
   ],
   "spectral_evidence": [
     "salem_witch_trials_001"
+  ],
+  "karma": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "afterlife": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "suffering": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "ancestral_rituals": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "greed_and_consequence": [
+    "legend_of_pretas_indian_mythology"
   ]
 }
