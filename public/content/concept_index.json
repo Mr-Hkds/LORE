@@ -47,7 +47,6 @@
     "operation_gladio",
     "the_phoenix_program",
     "the_russian_woodpecker_duga_3",
-    "operation_paperclip_001",
     "project_artichoke_mind_control",
     "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
@@ -62,7 +61,8 @@
     "vatican_bank_scandal_calvi_p2",
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "operation_paperclip_001"
   ],
   "espionage": [
     "uwe_barschel",
@@ -597,8 +597,8 @@
     "project_iceworm_secret_city",
     "project_blue_book_ufo",
     "project_shamrock",
-    "operation_paperclip_001",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "operation_paperclip_001"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -1169,21 +1169,6 @@
   "sea_legends": [
     "the_mary_celeste_mystery"
   ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
-  ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
-  ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
-  ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
-  ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
@@ -1641,5 +1626,20 @@
   ],
   "persistent_threat": [
     "operation_shady_rat"
+  ],
+  "unethical_recruitment": [
+    "operation_paperclip_001"
+  ],
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
+  ],
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
   ]
 }
