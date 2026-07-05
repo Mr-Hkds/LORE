@@ -193,7 +193,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_asch_conformity_experiments",
@@ -206,7 +206,7 @@
         "social_pressure"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/the_asch_conformity_experiments.jpg",
+      "hero_image": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0205aa1-559b-4a10-bb7a-a30c7b97f641_1600x900.jpeg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -281,7 +281,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "operation_northwoods_001",
@@ -296,7 +296,7 @@
         "covert_operations"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/operation_northwoods_001.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Major-general-lansdale.jpg/250px-Major-general-lansdale.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -346,7 +346,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "hidden_facts_shri_vishnu_ji",
@@ -361,7 +361,7 @@
         "preserver_destroyer_paradox"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/hidden_facts_shri_vishnu_ji.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Vishnu_from_Gita_Govinda.jpg/330px-Vishnu_from_Gita_Govinda.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -416,7 +416,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "malaysia_airlines_mh370",
@@ -434,7 +434,7 @@
         "oceanic_search"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/malaysia_airlines_mh370.jpg",
+      "hero_image": "https://i.insider.com/5b6196b642e1cc32c5106a48?width=1200&format=jpeg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -490,7 +490,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stanford_prison_experiment_001",
@@ -503,7 +503,7 @@
         "dehumanization"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/stanford_prison_experiment_001.jpg",
+      "hero_image": "https://cdn.britannica.com/01/195501-050-8F76BB72/Guards-prisoner-Phillip-Zimbardo-Stanford-Prison-Experiment.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -559,7 +559,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "barney_barnato",
@@ -572,7 +572,7 @@
         "lost_wealth"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/barney_barnato.jpg",
+      "hero_image": "https://alchetron.com/cdn/barney-barnato-65a2d3aa-960c-4428-b8fc-c208a995eb0-resize-750.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -627,7 +627,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "hinterkaifeck_murders",
@@ -643,7 +643,7 @@
         "cold_case"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/hinterkaifeck_murders.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Hinterkaifeck-Hof_%28cropped%29.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -699,7 +699,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "sleep_paralysis_dossier",
@@ -712,7 +712,7 @@
         "sensed presence phenomenon"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/sleep_paralysis_dossier.jpg",
+      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/sleepparalysisdemon.jpg?c=original&q=w_860,c_fill",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -768,7 +768,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mahadev_and_sati_dossier",
@@ -781,7 +781,7 @@
         "sacred_geography"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/mahadev_and_sati_dossier.jpg",
+      "hero_image": "https://2.bp.blogspot.com/-GCQgmEXeySE/T4se1tVJYKI/AAAAAAAAVFQ/wj2wsuTVPWk/s1600/Goddess+Sati+and+God+Shiva.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -837,7 +837,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cicada_3301",
@@ -852,7 +852,7 @@
         "secret_societies"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/cicada_3301.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7e/Cicada_3301_logo.jpg/330px-Cicada_3301_logo.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -907,7 +907,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "unit_731_experiments",
@@ -997,7 +997,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_philadelphia_experiment",
@@ -1088,7 +1088,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bystander_effect",
@@ -1104,7 +1104,7 @@
         "emergency_response"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_bystander_effect.jpg",
+      "hero_image": "https://image.pollinations.ai/prompt/Dark%20atmospheric%20historical%20photograph%20of%20The%20Bystander%20Effect%3A%20When%20Humanity%20Fails%20to%20Act%2C%20black%20and%20white%2C%20archival%2C%20dramatic%2C%20cinematic%2C%20high%20detail?width=800&height=600&nologo=true&private=true&model=flux&seed=1782369811375",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1160,7 +1160,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "noida_double_murder_case_2008",
@@ -1175,7 +1175,7 @@
         "forensic_controversy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/noida_double_murder_case_2008.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Aarushi_Talwar%2C_Hemraj_Banjade.jpg/330px-Aarushi_Talwar%2C_Hemraj_Banjade.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1230,7 +1230,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "jack_the_ripper_001",
@@ -1245,7 +1245,7 @@
         "social_inequality"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/jack_the_ripper_001.jpg",
+      "hero_image": "https://i0.wp.com/wordsworth-editions.com/cms/wp-content/uploads/2022/03/1752_Rip2Web.jpg?fit=2000%2C1000&ssl=1",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1301,7 +1301,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "milgram_experiment_on_obedience_001",
@@ -1316,7 +1316,7 @@
         "social_psychology"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/milgram_experiment_on_obedience_001.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDPLekTxSH6_wXvcqNMT6uExUdYiEpvAWpHbOggCFEQiTRM9flVAwXqdw&s=10",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1372,7 +1372,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cia_mk_ultra_program",
@@ -1387,7 +1387,7 @@
         "psychological_warfare"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/cia_mk_ultra_program.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/DeclassifiedMKULTRA.jpg/330px-DeclassifiedMKULTRA.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1443,7 +1443,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "jonestown_massacre_001",
@@ -1459,7 +1459,7 @@
         "obedience_to_authority"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/jonestown_massacre_001.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Jonestown_entrance.jpg/330px-Jonestown_entrance.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1515,7 +1515,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_numbers_stations",
@@ -1530,7 +1530,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_numbers_stations.jpg",
+      "hero_image": "https://ychef.files.bbci.co.uk/1280x720/p05bbj96.jpg",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1585,7 +1585,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_zodiac_killer",
@@ -1599,7 +1599,7 @@
         "media_obsession"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_zodiac_killer.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7lOYhtPDEODnbKyeDgi6-4d9O7FMvIeiVEh9Uq5JOJYGfBSsEutVh2RBu&s=10",
       "added_date": "2026-06-20",
       "draft": false,
       "reactions": {
@@ -1655,7 +1655,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "dancing_mania_1518_strasbourg",
@@ -1670,7 +1670,7 @@
         "groupthink"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/dancing_mania_1518_strasbourg.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Dancingplague2_%28alt%29.jpg/330px-Dancingplague2_%28alt%29.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1726,7 +1726,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "universe_25_calhouns_mouse_utopia",
@@ -1743,7 +1743,7 @@
         "social_pathology"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/universe_25_calhouns_mouse_utopia.jpg",
+      "hero_image": "https://i.guim.co.uk/img/media/42dfe89b46da015880b52559a06afc5ede1855bf/408_0_1914_1148/master/1914.jpg?width=1200&quality=85&auto=format&fit=max&s=47d61c4005534fa603211457f3626b83",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1799,7 +1799,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tuskegee_syphilis_study",
@@ -1814,7 +1814,7 @@
         "public_health_failure"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/tuskegee_syphilis_study.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Tuskegee-syphilis-study_doctor-injecting-subject.jpg/330px-Tuskegee-syphilis-study_doctor-injecting-subject.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1870,7 +1870,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "capgras_delusion_001",
@@ -1885,7 +1885,7 @@
         "identity_perception"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/capgras_delusion_001.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsBAHHy2orJc7u8BAmGsyYA82NySLtguqIzUrnuN6YpoD8yMNQ64HszNKA&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -1941,7 +1941,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "folie_a_deux_shared_psychosis",
@@ -1956,7 +1956,7 @@
         "mental_health"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/folie_a_deux_shared_psychosis.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPtyOjjq41j-gcDJNjy4JwYXR0BRYqH_nqOlEl6oTQ6tT-Jn9CpBX13uc&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2012,7 +2012,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stuxnet_cyberweapon_nuclear_facilities",
@@ -2027,7 +2027,7 @@
         "nuclear proliferation"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/stuxnet_cyberweapon_nuclear_facilities.jpg",
+      "hero_image": "https://content.kaspersky-labs.com/fm/press-releases/2d/2d1d7d2f3215dcb638ba13f12c5f0f55/processed/stuxnet-shutterstock1160509147-q93.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2082,7 +2082,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_taman_shud_case",
@@ -2097,7 +2097,7 @@
         "unexplained_deaths"
       ],
       "severity": "harrowing",
-      "hero_image": "/content/images/the_taman_shud_case.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz8tbDMGpFF8youIDGfIkRKoJU0y_lNhHW-S9hlMMdSFpj7DEKC632YIZ-&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2153,7 +2153,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "franklin_expedition_lost_ships",
@@ -2169,7 +2169,7 @@
         "cannibalism"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/franklin_expedition_lost_ships.jpg",
+      "hero_image": "https://pcweb2.azureedge.net/-/media/WET4/culture/franklin/history/expedition/expedition-870.jpg?modified=20180608192305",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2225,7 +2225,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "winchester_mystery_house",
@@ -2241,7 +2241,7 @@
         "haunted_house"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/winchester_mystery_house.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2WnIG0fImW5xjmY-6gWFromX_gD9ttG-fgt1oqzgeGy_nnM79U68GTIg&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2291,7 +2291,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2307,7 +2307,7 @@
         "flawed_investigation"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_sodder_children_disappearance.jpg",
+      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/CCQlipJYqfjNpmYKAGBlzsjtXDw=/fit-in/1072x0/filters:focal(1369x821:1370x822)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/ab/70/ab702fc9-67c1-4b3a-8931-37d328731717/beckley_post_herald_1953_09_11_page_11.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2363,7 +2363,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_cleveland_torso_murders",
@@ -2379,7 +2379,7 @@
         "political_pressure"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_cleveland_torso_murders.jpg",
+      "hero_image": "https://cpl.org/wp-content/uploads/SCL012914-Police-Departmentt-Crime-Torso-Murders_1934_recto-scaled.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2435,7 +2435,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_stargate_remote_viewing",
@@ -2453,7 +2453,7 @@
         "scientific_skepticism"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_stargate_remote_viewing.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdu187N_-a5RLa3E7esEK4WAMf68ecQW7nmgN88maSWl2SiR3ZC75W8o0b&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2509,7 +2509,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stockholm_syndrome_001",
@@ -2524,7 +2524,7 @@
         "captivity_syndrome"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/stockholm_syndrome_001.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg/330px-Former_Kreditbanken_Norrmalmstorg_Stockholm_Sweden.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2580,7 +2580,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
@@ -2593,7 +2593,7 @@
         "medical_ethics"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_sunshine_cadaver_collection.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4N1VwQu_C6q1qB4yD_d1z3eA3YFeftgw5UXdKXkVwT-tPnJ-_b3-wXak&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2649,7 +2649,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "salem_witch_trials_001",
@@ -2664,7 +2664,7 @@
         "spectral_evidence"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/salem_witch_trials_001.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/330px-Salem_witch2.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2720,7 +2720,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_rat_park_experiment_001",
@@ -2737,7 +2737,7 @@
         "social_pathology"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/the_rat_park_experiment_001.jpg",
+      "hero_image": "https://www.brucekalexander.com/images/stories/image015.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2793,7 +2793,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "phineas_gage_brain_injury",
@@ -2808,7 +2808,7 @@
         "self_identity"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/phineas_gage_brain_injury.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg/330px-Phineas_Gage_Cased_Daguerreotype_WilgusPhoto2008-12-19_EnhancedRetouched_Color.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2864,7 +2864,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
@@ -2879,7 +2879,7 @@
         "coping_mechanisms"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/dissociative_identity_disorder_fragmented_self.jpg",
+      "hero_image": "https://cos.northeastern.edu/wp-content/uploads/2024/08/DID.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -2935,7 +2935,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "black_dahlia_murder",
@@ -2951,7 +2951,7 @@
         "police_misconduct"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/black_dahlia_murder.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFoxrHilBidp0n2lEOj_TkNNnDfdsoauEcdqAqQ8bjy8lz6ElOD9LPKx5T&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3007,7 +3007,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "clinical_lycanthropy",
@@ -3022,7 +3022,7 @@
         "mental_health"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/clinical_lycanthropy.jpg",
+      "hero_image": "https://www.skgauthorservices.com/uploads/2/8/5/2/28529305/6085537_orig.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3078,7 +3078,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_isdal_woman",
@@ -3093,7 +3093,7 @@
         "cold_case"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_isdal_woman.jpg",
+      "hero_image": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/BB06/production/_95287874_isdalwomanoctobernewmouthandhairsmaller.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3149,7 +3149,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_iceworm_secret_city",
@@ -3164,7 +3164,7 @@
         "military_infrastructure"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_iceworm_secret_city.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAt4Tsheex4qviU1MN1Mu1r9W-kVWXOc5EMybb9aWxMxbNfgjqRhakdA&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3220,7 +3220,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
@@ -3235,7 +3235,7 @@
         "unexplained_events"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/eilean_mor_lighthouse_mystery.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEfL2Re010yFr-Me76UF5L2OcNNJTv92I6A6Vc45ypV8eQewfUbRJqCY&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3291,7 +3291,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "harold_shipman_serial_killer",
@@ -3307,7 +3307,7 @@
         "power_dynamics"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/harold_shipman_serial_killer.jpg",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/b2fa/live/6d7a2640-dfae-11ef-bd1b-d536627785f2.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3363,7 +3363,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_ganzfeld_experiment",
@@ -3381,7 +3381,7 @@
         "perception_biases"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/the_ganzfeld_experiment.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Ganzfeld.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3437,7 +3437,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "circleville_letters",
@@ -3452,7 +3452,7 @@
         "small_town_secrets"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/circleville_letters.jpg",
+      "hero_image": "https://assets2.cbsnewsstatic.com/hub/i/r/2021/08/24/b6847896-fb56-4009-b23f-b9a77df62ec7/thumbnail/640x360/07d2e0f5c9bd1ed0aa3edd93cfc46295/circleville-the-affair.jpg",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3508,7 +3508,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mystery_of_dwarka",
@@ -3523,7 +3523,7 @@
         "catastrophic_events"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/mystery_of_dwarka.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0oiesd5fBnVi0II3YhpHi1GWCNK3JPHCi_YQyHPDRLb2CNmWqlychfw&s=10",
       "added_date": "2026-01-01",
       "draft": false,
       "reactions": {
@@ -3573,7 +3573,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
@@ -3590,7 +3590,7 @@
         "radicalization"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_unabomber_ted_kaczynski_campaign_of_terror.jpg",
+      "hero_image": "https://c.files.bbci.co.uk/C00D/production/_130056194_gettyimages-1301274454.jpg",
       "added_date": "2026-01-02",
       "draft": false,
       "reactions": {
@@ -3646,7 +3646,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "alien_hand_syndrome",
@@ -3661,7 +3661,7 @@
         "body_image_disorder"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/alien_hand_syndrome.jpg",
+      "hero_image": "https://cdn.hswstatic.com/gif/alien-hand-1-1.jpg",
       "added_date": "2026-01-24",
       "draft": false,
       "reactions": {
@@ -3717,7 +3717,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "aokigahara_suicide_forest",
@@ -3734,7 +3734,7 @@
         "prevention_efforts"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/aokigahara_suicide_forest.jpg",
+      "hero_image": "https://media.cnn.com/api/v1/images/stellar/prod/180102133840-01-suicide-forest-restricted.jpg?q=w_4300,h_2419,x_0,y_0,c_fill",
       "added_date": "2026-04-14",
       "draft": false,
       "reactions": {
@@ -3790,7 +3790,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_philip_experiment",
@@ -3806,7 +3806,7 @@
         "ideomotor_effect"
       ],
       "severity": "unsettling",
-      "hero_image": "/content/images/the_philip_experiment.jpg",
+      "hero_image": "https://i0.wp.com/www.llifs.com.au/site/assets/files/19765/tumblr_mr3h0tnfkj1qav174o1_500.webp?w=760&ssl=1",
       "added_date": "2026-03-28",
       "draft": false,
       "reactions": {
@@ -3862,7 +3862,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_mandela_effect",
@@ -3876,7 +3876,7 @@
         "reality_perception"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_mandela_effect.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTto9o56LVBpNSjDdcCkDyUag4XHYqBRh6TZy3FoDvheMFs4aoDzOYDpyg&s=10",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -3951,7 +3951,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_third_wave_experiment",
@@ -3967,7 +3967,7 @@
         "power_dynamics"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_third_wave_experiment.jpg",
+      "hero_image": "https://kureansiklopedi.com/_next/image?url=https%3A%2F%2Fcdn.t3pedia.org%2Fmedia%2Fuploads%2F2025%2F12%2F13%2FDqefKxLYqCKCmMfGhj3ERbPBm3NkSd2J.png&w=1280&q=75",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4061,7 +4061,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tanganyika_laughter_epidemic",
@@ -4076,7 +4076,7 @@
         "groupthink"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/tanganyika_laughter_epidemic.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMWsUeJ6Ls-nHxBxjJCdOWabhnufiYHWj_-GYAiVFktprUlZSDBjgHULVw&s=10",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -4151,7 +4151,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_silent_twins_gibbons",
@@ -4166,7 +4166,7 @@
         "institutionalization"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_silent_twins_gibbons.jpg",
+      "hero_image": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/91EE/production/_132085373_j-jteens.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -4241,7 +4241,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "monster_study_1939",
@@ -4256,7 +4256,7 @@
         "eugenics_influence"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/monster_study_1939.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-AZUw-GI7nwPprbxhvhS5pXbC4EoRBRm0iCn_a8zVcqGbgc1wjNvk82K0&s=10",
       "added_date": "2026-06-27",
       "draft": false,
       "reactions": {
@@ -4336,7 +4336,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "blue_whale_game_001",
@@ -4352,7 +4352,7 @@
         "psychological_exploitation"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/blue_whale_game_001.jpg",
+      "hero_image": "https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2017/08/26/Pictures/print_229ba15a-8a8c-11e7-b7bc-fa1568cb40f1.jpg",
       "added_date": "2026-06-30",
       "draft": false,
       "reactions": {
@@ -4408,7 +4408,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -4423,7 +4423,7 @@
         "insider_threat"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/anthrax_attacks_2001_amerithrax.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx-lIKYfZy_5P05GtKCKMXD740b-hjaeXfeiPGTPVLasUEiAKIrosx-8aj&s=10",
       "added_date": "2026-06-30",
       "draft": false,
       "reactions": {
@@ -4498,7 +4498,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cotard_delusion_001",
@@ -4513,7 +4513,7 @@
         "neurology"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/cotard_delusion_001.jpg",
+      "hero_image": "https://allthatsinteresting.com/wordpress/wp-content/uploads/2018/03/Cotard-delusion-deathbed.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -4588,7 +4588,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_batavia_shipwreck_mutiny",
@@ -4606,7 +4606,7 @@
         "authoritarianism"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_batavia_shipwreck_mutiny.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyPcevTXXRYa_XcB2wFNRn5eAguNHq47FIAGBO3OZlfR5wYg3M_oiupGk&s=10",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4680,7 +4680,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "uss_cyclops_vanishing",
@@ -4695,7 +4695,7 @@
         "unsolved_mystery"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/uss_cyclops_vanishing.jpg",
+      "hero_image": "https://www.usni.org/sites/default/files/styles/hero_image/public/NH%20101063.jpg?itok=GujSbauM",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4757,7 +4757,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_taos_hum",
@@ -4773,7 +4773,7 @@
         "scientific_skepticism"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_taos_hum.jpg",
+      "hero_image": "https://preview.redd.it/the-taos-hum-is-a-mysterious-low-frequency-humming-noise-v0-2vxmr4ucwb6a1.png?width=640&crop=smart&auto=webp&s=e7ad37fa786e70eccc0fbbe8b051eba6acbfc2c0",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -4848,7 +4848,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tunguska_event_001",
@@ -4861,7 +4861,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/tunguska_event_001.jpg",
+      "hero_image": "https://earthsci.org/space/space/tunguska/tungusta.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -4936,7 +4936,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "albert_fish_the_gray_man",
@@ -4951,7 +4951,7 @@
         "unsolved_cases"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/albert_fish_the_gray_man.jpg",
+      "hero_image": "https://resizing.flixster.com/26WpLmkD3U9cZ6LD-oMbSTVNBUw=/375x210/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p168101_i_h10_aa.jpg",
       "added_date": "2026-06-22",
       "draft": false,
       "reactions": {
@@ -5007,7 +5007,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "echelon_global_surveillance",
@@ -5024,7 +5024,7 @@
         "mass_interception"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/echelon_global_surveillance.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsEcfXowun1kZ66HYyR_pRRMXms2AWcLJkpP_3lfWzj88Py1wqFsA3G5Q&s=10",
       "added_date": "2026-06-27",
       "draft": false,
       "reactions": {
@@ -5099,7 +5099,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "roanoke_colony_disappearance",
@@ -5115,7 +5115,7 @@
         "environmental_factors"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/roanoke_colony_disappearance.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL0HrlCRTP54VoquS2gJYR-sSD8erJybdiJGTgCwkHiw&s",
       "added_date": "2026-03-23",
       "draft": false,
       "reactions": {
@@ -5171,7 +5171,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_blue_book_ufo",
@@ -5187,7 +5187,7 @@
         "public_perception"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_blue_book_ufo.jpg",
+      "hero_image": "https://static01.nyt.com/images/2019/01/17/arts/17bluebook1/merlin_149218185_0534eb01-c31e-4fcb-ad88-04159d80c76f-superJumbo.jpg",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5267,7 +5267,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_lead_mask_case",
@@ -5282,7 +5282,7 @@
         "cryptic_messages"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_lead_mask_case.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZY-FYbODDzt9r9QAf28aQpJryADhsCk4tVUUfu1b1Gg&s=10",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5357,7 +5357,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "operation_gladio",
@@ -5375,7 +5375,7 @@
         "deep_state"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/operation_gladio.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvU8z_QMt-c8XTVeFIjQiOFgWzir1KkNX3DWSCFmwmFKoa8747k4qCL8&s=10",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5450,7 +5450,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_shamrock",
@@ -5466,7 +5466,7 @@
         "cold_war_era"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_shamrock.jpg",
+      "hero_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_oyhPoAoQ_2RMsnecfS4yz8FGoB7e17e_hHeZCfhQ0xnqIL1GLNSad55A&s=10",
       "added_date": "2026-04-01",
       "draft": false,
       "reactions": {
@@ -5522,7 +5522,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_phoenix_program",
@@ -5539,7 +5539,7 @@
         "intelligence_gathering"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_phoenix_program.jpg",
+      "hero_image": "https://static01.nyt.com/images/2018/01/02/opinion/02Vietnam-miller/merlin_131703548_5b97001f-699a-43e6-801b-d9e26d139d8e-superJumbo.jpg",
       "added_date": "2026-06-26",
       "draft": false,
       "reactions": {
@@ -5614,7 +5614,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "ravaan_character_study",
@@ -5631,7 +5631,7 @@
         "obsession"
       ],
       "severity": "disturbing",
-      "hero_image": "/content/images/ravaan_character_study.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Ravana.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -5705,7 +5705,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_wow_signal",
@@ -5721,7 +5721,7 @@
         "existential_mystery"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_wow_signal.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wow_signal.jpg/330px-Wow_signal.jpg",
       "added_date": "2026-02-28",
       "draft": false,
       "reactions": {
@@ -5776,7 +5776,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_children_of_woolpit",
@@ -5791,7 +5791,7 @@
         "folklore"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_children_of_woolpit.jpg",
+      "hero_image": "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*gEHPmdx1y36w-Lcw8Ua_uQ.jpeg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -5866,7 +5866,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bloop_unexplained_sound",
@@ -5881,7 +5881,7 @@
         "oceanographic_research"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_bloop_unexplained_sound.jpg",
+      "hero_image": "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*sw2AcLo3Y_mJ9WrG",
       "added_date": "2026-06-28",
       "draft": false,
       "reactions": {
@@ -5943,7 +5943,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -5959,7 +5959,7 @@
         "technological_failure"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_russian_woodpecker_duga_3.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/DUGA_Radar_Array_near_Chernobyl%2C_Ukraine_2014.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6034,7 +6034,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -6050,7 +6050,7 @@
         "vulnerable_populations"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/guatemalan_syphilis_experiment.jpg",
+      "hero_image": "https://origins.osu.edu/sites/default/files/migrated_files/guatemala%20subjects.jpg",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6133,7 +6133,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -6148,7 +6148,7 @@
         "skepticism_vs_belief"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/enfield_poltergeist_001.jpg",
+      "hero_image": "https://www.telegraph.co.uk/content/dam/films/2016/06/13/enfield3_3286300b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=350",
       "added_date": "2026-06-29",
       "draft": false,
       "reactions": {
@@ -6223,7 +6223,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "edinburgh_vaults_001",
@@ -6675,7 +6675,7 @@
         "public_panic"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/vampire_panic_eastern_europe.jpg",
+      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/1jjQxBtA_sdwH2Pq6K6GTkN18DM=/600x400/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e4/ad/e4ad2d20-0350-4bd1-bfbf-dec9b58b60af/gettyimages-593280150.jpg",
       "added_date": "2026-04-05",
       "draft": false,
       "reactions": {
@@ -6731,7 +6731,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6818,7 +6818,7 @@
         "covert_operations"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/jfk_assassination_001.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/JFK_Motorcade_GettyImages-517330536.jpg/330px-JFK_Motorcade_GettyImages-517330536.jpg",
       "added_date": "2026-03-20",
       "draft": false,
       "reactions": {
@@ -6874,7 +6874,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -6965,7 +6965,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "elizabeth_bathory_blood_countess",
@@ -7129,7 +7129,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "moonlight_maze_cyber_espionage",
@@ -7145,7 +7145,7 @@
         "cold_war_legacy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/moonlight_maze_cyber_espionage.jpg",
+      "hero_image": "https://www.bleepstatic.com/images/news/u/986406/attacks/APTs/OldNewspaper.png",
       "added_date": "2026-04-30",
       "draft": false,
       "reactions": {
@@ -7201,7 +7201,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "wendigo_insatiable_hunger",
@@ -7545,7 +7545,7 @@
         "forbidden_knowledge"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_golem_of_prague.jpg",
+      "hero_image": "https://trips-tickets.com/wp-content/uploads/2022/10/rabbi-Loew-golem.webp",
       "added_date": "2026-01-16",
       "draft": false,
       "reactions": {
@@ -7601,7 +7601,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -7791,7 +7791,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "october_surprise_1980_iran",
@@ -7882,7 +7882,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
@@ -7898,7 +7898,7 @@
         "blackout"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/ukraine_power_grid_cyber_attack_2015_2016.jpg",
+      "hero_image": "https://ismg-cdn.nyc3.cdn.digitaloceanspaces.com/articles/ukrainian-power-grid-attacks-lessons-learned-showcase_image-1-a-9604.jpg",
       "added_date": "2026-03-28",
       "draft": false,
       "reactions": {
@@ -7954,7 +7954,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cointelpro_fbi_covert_ops",
@@ -8045,7 +8045,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "spring_heeled_jack_legend",
@@ -8060,7 +8060,7 @@
         "victorian_era"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/spring_heeled_jack_legend.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
       "added_date": "2026-03-13",
       "draft": false,
       "reactions": {
@@ -8116,7 +8116,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "children_past_lives_stevenson_research",
@@ -8132,7 +8132,7 @@
         "consciousness_after_death"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/children_past_lives_stevenson_research.jpg",
+      "hero_image": "https://media.licdn.com/dms/image/v2/C4E12AQHkReNV2wme1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520080815901?e=1784764800&v=beta&t=QfcZcpJ7-kHh0d293Q4h_eKnHxdezPgvoCgZTsftdj8",
       "added_date": "2026-04-01",
       "draft": false,
       "reactions": {
@@ -8188,7 +8188,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_roswell_incident",
@@ -8278,7 +8278,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_cuckoos_egg_kgb_hacker",
@@ -8294,7 +8294,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_cuckoos_egg_kgb_hacker.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Cuculus_canorus_canorus_MHNT.ZOO.2010.11.150.21.jpg/960px-Cuculus_canorus_canorus_MHNT.ZOO.2010.11.150.21.jpg",
       "added_date": "2026-07-03",
       "draft": false,
       "reactions": {
@@ -8361,7 +8361,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mahabharat_psychological_epic",
@@ -8433,7 +8433,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mlk_assassination_conspiracy",
@@ -8448,7 +8448,7 @@
         "civil_rights_movement"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/mlk_assassination_conspiracy.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Martin_Luther_King_Jr._enters_motel_room_before_assassination.jpg/960px-Martin_Luther_King_Jr._enters_motel_room_before_assassination.jpg",
       "added_date": "2026-07-03",
       "draft": false,
       "reactions": {
@@ -8528,7 +8528,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "black_monk_pontefract_001",
@@ -8605,176 +8605,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
-      "story_id": "kala_bhairava_origin_time_punishment",
-      "title": "Kala Bhairava: The Terrifying Origin of Time and Punishment",
-      "category": "mythology",
-      "hook": "In ancient Indian texts, there exists a deity so fearsome, his very name means 'Black Terror of Time'.",
-      "concepts": [
-        "fierce_deity",
-        "divine_punishment",
-        "ego_destruction",
-        "cosmic_justice",
-        "time_and_death"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/kala_bhairava_origin_time_punishment.jpg",
-      "added_date": "2026-07-04",
-      "draft": 0,
-      "reactions": {
-        "like": 42,
-        "gripping": 25,
-        "scared": 4,
-        "mindblown": 8
-      },
-      "evidence_links": [
-        {
-          "label": "Scholarly Article (2026)",
-          "url": "https://doi.org/10.32447/2663-340x-2026-19"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "mahadev_and_sati_dossier",
-          "shared_concept": "grief_and_dissociation",
-          "transition_line": "Just as Shiva himself wrestled with immense grief after Sati's sacrifice, his fiercest form, Kala Bhairava, embodies a different kind of cosmic reckoning."
-        },
-        {
-          "story_id": "ravaan_character_study",
-          "shared_concept": "ego_inflation",
-          "transition_line": "The tale of Kala Bhairava serves as a stark warning against the same destructive pride and ego that ultimately led to the downfall of Ravana."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Cosmic Echo of Terror",
-          "content": "Deep within ancient Hindu scriptures, whispers tell of a manifestation of Lord Shiva so dark and powerful that his presence alone commands ultimate fear. He is known as Kala Bhairava, a name that combines 'Kala', meaning time or death, with 'Bhairava', which signifies terror or one who wards off fear.\n\nHis image is stark and unsettling: often depicted with dark skin, fiery eyes, and a terrifying frown, adorned with garlands of skulls and snakes. He holds a trishul (trident), a drum, and a severed head, symbolizing his fierce nature and his dominion over life and death. This is not the serene Shiva many imagine, but a primal, destructive force.\n\nThis fierce form of Shiva is not merely symbolic; he is an active agent of cosmic justice, associated directly with the flow of time and the inevitable punishment for grave sins. But what specific act of cosmic disobedience could have provoked the birth of such an absolutely terrifying deity?",
-          "cliffhanger": "To understand his origin, we must journey back to a time of celestial pride and a challenge to ultimate authority."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Eruption of Pride",
-          "content": "The ancient texts, particularly the 'Shiva Purana', describe a momentous gathering of divine beings. All the gods, including Vishnu and Brahma, had assembled, seeking to determine who among them was the supreme creator and ruler of the universe. It was a debate born of ego, a common human flaw that, even in the heavens, could lead to disaster.\n\nDuring this assembly, Lord Brahma, the creator, spoke with immense pride. He declared himself the supreme being, even boasting that he had five heads, one of which gazed upwards, eternally reciting the Vedas. He claimed superiority over Lord Shiva, viewing Shiva's wild appearance and ascetic lifestyle as lesser.\n\nThis act of extreme arrogance, a direct challenge to Shiva's ultimate divinity, created a deep disturbance in the cosmic order. The very fabric of reality trembled under the weight of Brahma's unbridled ego. This moment set the stage for a dramatic and terrifying divine intervention.",
-          "cliffhanger": "How would the usually calm, meditative Lord Shiva respond to such a direct insult and audacious claim of supremacy?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Head Severed",
-          "content": "As Brahma's words of pride echoed through the celestial assembly, Lord Shiva's serene composure shattered. His eyes, normally closed in deep meditation, opened with a blinding, terrifying intensity. From his third eye, usually a source of wisdom, a magnificent and fearsome being suddenly sprang forth.\n\nThis was Kala Bhairava, a dark, powerful, and utterly enraged manifestation of Shiva. He appeared with a thunderous roar, radiating an energy that struck fear into the hearts of all present, including Brahma himself. Kala Bhairava's purpose was singular and immediate: to punish the cosmic imbalance caused by Brahma's hubris.\n\nWithout hesitation, Kala Bhairava moved towards Brahma. With a swift, decisive blow, he tore off Brahma's fifth head, the one that had boasted of supremacy and insulted Shiva. The act was sudden, brutal, and shocking, leaving all the gods stunned into silence and terror. The cosmic order had been violently restored.",
-          "cliffhanger": "But the act of severing a creator god's head carried a heavy consequence, even for a deity born of Shiva's wrath."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Skull of Atonement",
-          "content": "After severing Brahma's head, Kala Bhairava found himself cursed. The severed skull miraculously stuck to his hand, becoming a begging bowl, and he was burdened with the sin of 'Brahmahatya' (the killing of a Brahmin, considered a heinous crime). He was compelled to wander the three worlds as a mendicant, begging for food, with Brahma's skull as his bowl.\n\nThis pilgrimage was a period of severe atonement, even for a divine being. Kala Bhairava, the fierce punisher, now became the one undergoing punishment. His journey led him through various realms, but the skull remained firmly attached, a constant reminder of his violent act.\n\nFinally, his wanderings brought him to the holy city of Kashi, modern-day Varanasi. As he stepped onto the sacred ground, the skull miraculously detached from his hand and fell to the earth, freeing him from the curse. This spot became known as 'Kapal Mochan' (liberation from the skull) and cemented his eternal connection to Kashi.",
-          "cliffhanger": "This powerful event did not diminish Kala Bhairava; instead, it established his enduring and terrifying role in the cosmic order, especially concerning time and retribution."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Lord of Time and Punishment",
-          "content": "Upon his liberation in Kashi, Kala Bhairava was not merely freed from his curse; he was elevated to a new, vital position. Shiva declared him the 'Kshetra Palaka', the guardian of the sacred city of Kashi. It is believed that no one can enter Kashi without his permission, and he oversees the spiritual journey of all who live or die there.\n\nHis name, 'Kala Bhairava', profoundly reflects his roles. 'Kala' refers to both time and death. He is the lord who controls time itself, reminding all beings of its relentless flow and the inevitability of death. He is the ultimate punisher of sins, especially those of arrogance, deceit, and disrespect towards spiritual authority.\n\nPilgrims visiting Kashi still offer prayers to Kala Bhairava, seeking his protection and his forgiveness for their sins. He ensures that cosmic laws are upheld and that karma, the balance of actions and consequences, is always maintained. His presence enforces a strict spiritual discipline.",
-          "cliffhanger": "Beyond his guardianship and role as punisher, Kala Bhairava embodies an even more profound and unsettling truth about existence itself."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Dark Sentinel",
-          "content": "Kala Bhairava is often depicted with a dog as his vehicle, a symbol of loyalty and vigilance, but also of the wild and untamed. He resides not in grand palaces but in cremation grounds, where the cycles of life and death are starkly visible. This placement highlights his connection to dissolution, the end of all material forms.\n\nHis dark iconography—the severed head, the weapons, the fierce expression—serves as a constant reminder that all material existence is temporary. He represents the ultimate destruction that leads to new creation, the terrifying void that all must face. He is the one who devours time, bringing an end to all things, both good and bad, ensuring cosmic renewal.\n\nHe is the dark sentinel standing at the edge of existence, guarding the ultimate secrets of life and death. He frightens away evil spirits and negative forces, but his gaze also forces mortals to confront their own impermanence and the consequences of their actions in this fleeting world.",
-          "cliffhanger": "Ultimately, Kala Bhairava teaches us a final, chilling lesson about power, ego, and the unforgiving nature of the universe."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Unforgiving Cycle",
-          "content": "The darkest documented truth about Kala Bhairava is that he embodies the absolute, unforgiving nature of cosmic law. He is the inescapable consequence of ego, pride, and transgression. His terrifying origin serves as a perpetual warning: no being, not even a creator god, is above the rules of universal balance and humility.\n\nHe is the personification of time as the ultimate judge and executioner, ensuring that every action, especially those driven by arrogance, meets its destined end. His fierce form reminds us that while Shiva is also the benevolent protector, he is equally the fearsome destroyer, a force that will tear down any illusion of permanence or self-importance.\n\nKala Bhairava is the chilling mirror reflecting our own mortality and the ultimate reckoning. He is the final reminder that time spares no one, and punishment for hubris is not just a myth, but a fundamental, terrifying truth woven into the fabric of existence, ensuring that what goes around, truly comes around.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
-      "story_id": "hope_diamond_curse",
-      "title": "The Hope Diamond: A History of Brilliance and Blood",
-      "category": "paranormal",
-      "hook": "A single blue diamond, shimmering with unparalleled beauty, has left a trail of death and disaster across centuries and continents. Is it mere coincidence, or a true curse?",
-      "concepts": [
-        "cursed_objects",
-        "unexplained_deaths",
-        "historical_mysteries",
-        "superstition",
-        "paranormal_phenomena"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/hope_diamond_curse.jpg",
-      "added_date": "2026-07-04",
-      "draft": 0,
-      "reactions": {
-        "like": 32,
-        "gripping": 25,
-        "scared": 37,
-        "mindblown": 8
-      },
-      "evidence_links": [
-        {
-          "label": "Indian Diamonds in Victorian Fiction: Wilkie Collins’ The Moonstone, Anthony Trollope’s The Eustace Diamonds, R. L. Stevenson’s “The Rajah’s Diamond” and Arthur Conan Doyle’s The Sign of Four (Sabina Fazli, 2012)",
-          "url": "http://www.univerlag.uni-goettingen.de/bitstream/3/isbn-978-3-86395-033-0.3/1/03_GSEP6_Strangers_Migrants_Exiles_Fazli_103-191.pdf"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "curse_of_tutankhamun",
-          "shared_concept": "cursed_objects",
-          "transition_line": "Just as whispers of a curse followed the Hope Diamond, another ancient artifact stirred similar fears: the tomb of an Egyptian pharaoh, said to unleash vengeance upon those who disturbed its rest."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: The Blue Legend Begins",
-          "content": "Deep within the Earth, a stone of extraordinary beauty was formed. It was a diamond, rare and magnificent, known for its deep blue color. This gem, later named the Hope Diamond, would become one of the most famous and feared objects in history.\n\nWhispers began to follow the diamond almost immediately. People said it carried a curse. They claimed that anyone who owned or even touched the diamond would face terrible misfortune, suffering, or even death.\n\nThis chilling rumor has persisted for centuries, connecting the diamond to a long list of tragic events. Its story is not just about a jewel, but about the dark fates of its owners. Who were its first victims, and how did this curse begin to show its power?",
-          "cliffhanger": "The diamond's early journey from India was marked by strange occurrences and tragic ends. What dark fate awaited its first known owner?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: Early Journeys of Misfortune",
-          "content": "The original gem, known as the Tavernier Blue, was brought from India in the 17th century by a French merchant named Jean-Baptiste Tavernier. Legend says that Tavernier stole the diamond from the eye of a statue of a Hindu goddess, which angered the deity and brought the curse upon the stone.\n\nAfter selling the diamond to King Louis XIV of France, Tavernier reportedly faced his own misfortunes. He lost his wealth and later died of a fever, some say even being torn apart by wild dogs in Russia, though historical records are less dramatic about his final days.\n\nKing Louis XIV ordered the diamond to be re-cut into a smaller, heart-shaped stone, known as the French Blue. Despite its new form, the alleged curse seemed to cling to the gem, foreshadowing greater calamities for its royal owners. What dark fate awaited those who possessed the stolen gem?",
-          "cliffhanger": "The diamond became part of the French crown jewels, a symbol of immense power. But soon, France itself would be plunged into chaos, and its rulers would face a terrifying end. Was the diamond truly a factor in this royal downfall?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: The French Revolution's Blood Price",
-          "content": "The French Blue remained in the hands of the French monarchy, passed down to King Louis XVI and his wife, Queen Marie Antoinette. They were known for their lavish lifestyle, a stark contrast to the suffering of their people. The diamond was a glittering part of their royal display.\n\nHowever, their reign ended in terror during the French Revolution. Both King Louis XVI and Marie Antoinette were arrested, put on trial, and then executed by guillotine in 1793. Many believed their horrific end was directly linked to their ownership of the cursed diamond.\n\nDuring the revolution, the French Blue was stolen. It disappeared for many years, only to re-emerge in a smaller, darker form in London in 1839. This new stone was the 45.52-carat Hope Diamond, named after its new owners, the wealthy Hope banking family. Did the curse follow the diamond even after it was cut?",
-          "cliffhanger": "The diamond entered a new era, moving from royal hands to rich collectors. But the pattern of tragedy continued, striking down a new line of owners in unexpected ways. Who was next to suffer its terrible influence?"
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: From Royals to Riches, A Trail of Ruin",
-          "content": "The Hope Diamond changed hands many times after the French Revolution, and with each new owner, stories of misfortune grew. Many members of the Hope family faced financial ruin or untimely deaths after acquiring the diamond.\n\nLater, a Greek merchant named Jacques Colet reportedly stole the diamond from the Hope family. Soon after, he committed suicide. Another alleged owner, Prince Ivan Kanitovsky, was supposedly murdered by Russian revolutionaries shortly after he acquired the gem.\n\nEven those who only borrowed or touched the diamond were said to suffer. A jeweler who briefly owned it went mad and killed himself. A French actress who wore it was murdered by her lover. The diamond seemed to leave a trail of broken lives in its wake. Who was the next grand owner, and what horrors awaited her?",
-          "cliffhanger": "In the early 20th century, the Hope Diamond found its way to a famous American socialite known for her wealth and her strong will. She believed she could defy the curse, but fate had other plans. What devastating tragedies would befall her and her family?"
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: The Grand Dame's Descent",
-          "content": "In 1911, the Hope Diamond was bought by Evalyn Walsh McLean, a Washington D.C. socialite. She often wore the diamond to parties and believed she was immune to its curse. She even let her dog wear it sometimes. But the curse, it seemed, was not to be outsmarted.\n\nSoon after acquiring the diamond, a series of heartbreaking tragedies struck McLean's family. Her nine-year-old son was killed in a car accident. Her daughter committed suicide. Her husband was later declared insane and died in a mental institution. Her granddaughter also died from a drug overdose.\n\nEvalyn McLean herself suffered greatly from these losses. She believed in the curse and tried various rituals to 'cleanse' the diamond, but nothing seemed to work. She died in 1947, a heartbroken woman. Was there anyone who could escape the diamond's chilling grip?",
-          "cliffhanger": "After McLean's death, the diamond was sold to a famous jeweler. He made a bold and unusual decision about its future, one that would change the diamond's fate forever. Would this act finally break the curse, or simply move its dark power to a new place?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: The Diamond's Final Journey",
-          "content": "After Evalyn McLean's death, the Hope Diamond was bought by Harry Winston, a renowned New York jeweler. Winston understood the diamond's dark reputation, but he saw it as an important historical artifact, not just a cursed jewel.\n\nIn a surprising move, Winston decided to donate the Hope Diamond to the Smithsonian National Museum of Natural History in Washington D.C. in 1958. He believed that by placing it in a public museum, the diamond would no longer be owned by an individual and might finally be free of its curse.\n\nHe mailed the priceless diamond in a simple brown paper package, using regular registered mail. This humble journey was a strange end to centuries of royal ownership, theft, and personal tragedies. Has the curse truly ended, or does it simply lie dormant in its new home?",
-          "cliffhanger": "Today, the Hope Diamond rests safely behind thick glass, viewed by millions. Its journey from a sacred Indian mine to a museum display is legendary. But what is the final, unsettling truth behind its dark reputation?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: The Unsettling Legacy",
-          "content": "The Hope Diamond now sits in the Smithsonian, one of the most visited exhibits in the world. Since its arrival, no further 'victims' have been publicly linked to the diamond. It seems that its life as a private possession, and the misfortunes that followed, have ended.\n\nHistorians and skeptics often point out that the tragedies linked to the diamond are coincidences. Wars, revolutions, diseases, and accidents were common throughout history, especially for the rich and powerful. The stories of the curse likely grew from a combination of bad luck and human tendency to connect dramatic events.\n\nHowever, the legend of the Hope Diamond's curse continues to fascinate. It reminds us how powerful a story can become, turning a beautiful object into a symbol of dark fate. Whether truly cursed or simply a magnet for dramatic narratives, the Hope Diamond remains a chilling reminder of the unknown forces that seem to shape our world.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "myth_of_atlantis_plato",
@@ -8789,7 +8620,7 @@
         "hubris"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/myth_of_atlantis_plato.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
       "added_date": "2026-01-17",
       "draft": false,
       "reactions": {
@@ -8844,7 +8675,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_raven_uae_cyber_mercenaries",
@@ -8861,7 +8692,7 @@
         "government_secrecy"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/project_raven_uae_cyber_mercenaries.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg/960px-The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -8936,7 +8767,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "vikram_vetala_tales",
@@ -8951,7 +8782,7 @@
         "sacred_oaths"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/vikram_vetala_tales.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/RF_Burton_Vikram_and_the_Vampire_%281870%29_Illustrated_by_Ernest_Griset_page317.png",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9013,7 +8844,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
@@ -9030,7 +8861,7 @@
         "intelligence_agencies"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/the_octopus_murder_conspiracy_danny_casolaro.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu/page1-960px-Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9097,7 +8928,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "bhasmasura_mohini_deception",
@@ -9269,7 +9100,7 @@
         "consequences_of_actions"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/ashwatthama_curse_eternal_suffering.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg/960px-Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9336,7 +9167,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "amityville_horror_house_possessed",
@@ -9354,7 +9185,7 @@
         "media_sensationalism"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/amityville_horror_house_possessed.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Horror_Amityville.png/960px-Horror_Amityville.png",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9426,7 +9257,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "vatican_bank_scandal_calvi_p2",
@@ -9442,7 +9273,7 @@
         "church_corruption"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/vatican_bank_scandal_calvi_p2.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vactican_as_a_World_Power.djvu/page1-960px-Vactican_as_a_World_Power.djvu.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9504,7 +9335,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_mk_ultra_001",
@@ -9605,7 +9436,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "legend_of_pretas_indian_mythology",
@@ -9622,7 +9453,7 @@
         "greed_and_consequence"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/legend_of_pretas_indian_mythology.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Primitive_Culture_Vol_2.djvu/page1-960px-Primitive_Culture_Vol_2.djvu.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9697,7 +9528,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bell_witch_haunting",
@@ -9803,7 +9634,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "assassination_rfk_conspiracy",
@@ -9818,7 +9649,7 @@
         "second_gunman"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/assassination_rfk_conspiracy.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg/960px-Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg",
       "added_date": "2026-07-04",
       "draft": false,
       "reactions": {
@@ -9893,7 +9724,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_shad_covert_testing",
@@ -9999,7 +9830,7 @@
         "botnets"
       ],
       "severity": "chilling",
-      "hero_image": "/content/images/internet_dark_matter_probes.jpg",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png/960px-Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png",
       "added_date": "2026-07-05",
       "draft": false,
       "reactions": {
@@ -10076,7 +9907,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "prophecies_of_kali_yuga",
@@ -10362,6 +10193,58 @@
       "image_missing": 0
     },
     {
+      "story_id": "operation_shady_rat",
+      "title": "Shady RAT: A Decade of Digital Hoarding",
+      "category": "cyber_mysteries",
+      "hook": "A hidden worm fed on global secrets for ten years, stealing data from governments, banks and tech firms without a single hand seen.",
+      "concepts": [
+        "cyber_espionage",
+        "state_sponsored",
+        "persistent_threat"
+      ],
+      "severity": "disturbing",
+      "hero_image": "/content/images/operation_shady_rat.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 45,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23311886.2025.2499171?needAccess=true"
+        },
+        {
+          "label": "Regulating Cyber Space: An Examination of U.S.-China Relations (Adam K. Ghazi‐Tehrani, 2016)",
+          "url": "https://escholarship.org/uc/item/9jb873k7"
+        },
+        {
+          "label": "Coordinating uncertainty in the political economy of cyber threat intelligence (Rebecca Slayton, Lilly Pijnenburg Muller, 2025)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
+    },
+    {
       "story_id": "morris_worm_first_internet_attack",
       "title": "The Morris Worm: When the Internet Lost its Innocence",
       "category": "cyber_mysteries",
@@ -10544,51 +10427,168 @@
       "image_missing": 0
     },
     {
-      "story_id": "operation_shady_rat",
-      "title": "Shady RAT: A Decade of Digital Hoarding",
-      "category": "cyber_mysteries",
-      "hook": "A hidden worm fed on global secrets for ten years, stealing data from governments, banks and tech firms without a single hand seen.",
+      "story_id": "kala_bhairava_origin_time_punishment",
+      "title": "Kala Bhairava: The Terrifying Origin of Time and Punishment",
+      "category": "mythology",
+      "hook": "In ancient Indian texts, there exists a deity so fearsome, his very name means 'Black Terror of Time'.",
       "concepts": [
-        "cyber_espionage",
-        "state_sponsored",
-        "persistent_threat"
+        "fierce_deity",
+        "divine_punishment",
+        "ego_destruction",
+        "cosmic_justice",
+        "time_and_death"
       ],
-      "severity": "disturbing",
-      "hero_image": "/content/images/operation_shady_rat.jpg",
+      "severity": "chilling",
+      "hero_image": "/content/images/kala_bhairava_origin_time_punishment.jpg",
       "added_date": "2026-07-04",
       "draft": 0,
       "reactions": {
-        "like": 45,
-        "gripping": 13,
+        "like": 42,
+        "gripping": 25,
         "scared": 4,
-        "mindblown": 6
+        "mindblown": 8
       },
       "evidence_links": [
         {
-          "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23311886.2025.2499171?needAccess=true"
-        },
-        {
-          "label": "Regulating Cyber Space: An Examination of U.S.-China Relations (Adam K. Ghazi‐Tehrani, 2016)",
-          "url": "https://escholarship.org/uc/item/9jb873k7"
-        },
-        {
-          "label": "Coordinating uncertainty in the political economy of cyber threat intelligence (Rebecca Slayton, Lilly Pijnenburg Muller, 2025)",
-          "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
+          "label": "Scholarly Article (2026)",
+          "url": "https://doi.org/10.32447/2663-340x-2026-19"
         }
       ],
       "connections": [
         {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
+          "story_id": "mahadev_and_sati_dossier",
+          "shared_concept": "grief_and_dissociation",
+          "transition_line": "Just as Shiva himself wrestled with immense grief after Sati's sacrifice, his fiercest form, Kala Bhairava, embodies a different kind of cosmic reckoning."
+        },
+        {
+          "story_id": "ravaan_character_study",
+          "shared_concept": "ego_inflation",
+          "transition_line": "The tale of Kala Bhairava serves as a stark warning against the same destructive pride and ego that ultimately led to the downfall of Ravana."
         }
       ],
       "layers": [
         {
+          "layer": 1,
+          "layer_name": "The Cosmic Echo of Terror",
+          "content": "Deep within ancient Hindu scriptures, whispers tell of a manifestation of Lord Shiva so dark and powerful that his presence alone commands ultimate fear. He is known as Kala Bhairava, a name that combines 'Kala', meaning time or death, with 'Bhairava', which signifies terror or one who wards off fear.\n\nHis image is stark and unsettling: often depicted with dark skin, fiery eyes, and a terrifying frown, adorned with garlands of skulls and snakes. He holds a trishul (trident), a drum, and a severed head, symbolizing his fierce nature and his dominion over life and death. This is not the serene Shiva many imagine, but a primal, destructive force.\n\nThis fierce form of Shiva is not merely symbolic; he is an active agent of cosmic justice, associated directly with the flow of time and the inevitable punishment for grave sins. But what specific act of cosmic disobedience could have provoked the birth of such an absolutely terrifying deity?",
+          "cliffhanger": "To understand his origin, we must journey back to a time of celestial pride and a challenge to ultimate authority."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Eruption of Pride",
+          "content": "The ancient texts, particularly the 'Shiva Purana', describe a momentous gathering of divine beings. All the gods, including Vishnu and Brahma, had assembled, seeking to determine who among them was the supreme creator and ruler of the universe. It was a debate born of ego, a common human flaw that, even in the heavens, could lead to disaster.\n\nDuring this assembly, Lord Brahma, the creator, spoke with immense pride. He declared himself the supreme being, even boasting that he had five heads, one of which gazed upwards, eternally reciting the Vedas. He claimed superiority over Lord Shiva, viewing Shiva's wild appearance and ascetic lifestyle as lesser.\n\nThis act of extreme arrogance, a direct challenge to Shiva's ultimate divinity, created a deep disturbance in the cosmic order. The very fabric of reality trembled under the weight of Brahma's unbridled ego. This moment set the stage for a dramatic and terrifying divine intervention.",
+          "cliffhanger": "How would the usually calm, meditative Lord Shiva respond to such a direct insult and audacious claim of supremacy?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Head Severed",
+          "content": "As Brahma's words of pride echoed through the celestial assembly, Lord Shiva's serene composure shattered. His eyes, normally closed in deep meditation, opened with a blinding, terrifying intensity. From his third eye, usually a source of wisdom, a magnificent and fearsome being suddenly sprang forth.\n\nThis was Kala Bhairava, a dark, powerful, and utterly enraged manifestation of Shiva. He appeared with a thunderous roar, radiating an energy that struck fear into the hearts of all present, including Brahma himself. Kala Bhairava's purpose was singular and immediate: to punish the cosmic imbalance caused by Brahma's hubris.\n\nWithout hesitation, Kala Bhairava moved towards Brahma. With a swift, decisive blow, he tore off Brahma's fifth head, the one that had boasted of supremacy and insulted Shiva. The act was sudden, brutal, and shocking, leaving all the gods stunned into silence and terror. The cosmic order had been violently restored.",
+          "cliffhanger": "But the act of severing a creator god's head carried a heavy consequence, even for a deity born of Shiva's wrath."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Skull of Atonement",
+          "content": "After severing Brahma's head, Kala Bhairava found himself cursed. The severed skull miraculously stuck to his hand, becoming a begging bowl, and he was burdened with the sin of 'Brahmahatya' (the killing of a Brahmin, considered a heinous crime). He was compelled to wander the three worlds as a mendicant, begging for food, with Brahma's skull as his bowl.\n\nThis pilgrimage was a period of severe atonement, even for a divine being. Kala Bhairava, the fierce punisher, now became the one undergoing punishment. His journey led him through various realms, but the skull remained firmly attached, a constant reminder of his violent act.\n\nFinally, his wanderings brought him to the holy city of Kashi, modern-day Varanasi. As he stepped onto the sacred ground, the skull miraculously detached from his hand and fell to the earth, freeing him from the curse. This spot became known as 'Kapal Mochan' (liberation from the skull) and cemented his eternal connection to Kashi.",
+          "cliffhanger": "This powerful event did not diminish Kala Bhairava; instead, it established his enduring and terrifying role in the cosmic order, especially concerning time and retribution."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Lord of Time and Punishment",
+          "content": "Upon his liberation in Kashi, Kala Bhairava was not merely freed from his curse; he was elevated to a new, vital position. Shiva declared him the 'Kshetra Palaka', the guardian of the sacred city of Kashi. It is believed that no one can enter Kashi without his permission, and he oversees the spiritual journey of all who live or die there.\n\nHis name, 'Kala Bhairava', profoundly reflects his roles. 'Kala' refers to both time and death. He is the lord who controls time itself, reminding all beings of its relentless flow and the inevitability of death. He is the ultimate punisher of sins, especially those of arrogance, deceit, and disrespect towards spiritual authority.\n\nPilgrims visiting Kashi still offer prayers to Kala Bhairava, seeking his protection and his forgiveness for their sins. He ensures that cosmic laws are upheld and that karma, the balance of actions and consequences, is always maintained. His presence enforces a strict spiritual discipline.",
+          "cliffhanger": "Beyond his guardianship and role as punisher, Kala Bhairava embodies an even more profound and unsettling truth about existence itself."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Dark Sentinel",
+          "content": "Kala Bhairava is often depicted with a dog as his vehicle, a symbol of loyalty and vigilance, but also of the wild and untamed. He resides not in grand palaces but in cremation grounds, where the cycles of life and death are starkly visible. This placement highlights his connection to dissolution, the end of all material forms.\n\nHis dark iconography—the severed head, the weapons, the fierce expression—serves as a constant reminder that all material existence is temporary. He represents the ultimate destruction that leads to new creation, the terrifying void that all must face. He is the one who devours time, bringing an end to all things, both good and bad, ensuring cosmic renewal.\n\nHe is the dark sentinel standing at the edge of existence, guarding the ultimate secrets of life and death. He frightens away evil spirits and negative forces, but his gaze also forces mortals to confront their own impermanence and the consequences of their actions in this fleeting world.",
+          "cliffhanger": "Ultimately, Kala Bhairava teaches us a final, chilling lesson about power, ego, and the unforgiving nature of the universe."
+        },
+        {
           "layer": 7,
-          "layer_name": "The Dark Corner",
-          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
+          "layer_name": "The Unforgiving Cycle",
+          "content": "The darkest documented truth about Kala Bhairava is that he embodies the absolute, unforgiving nature of cosmic law. He is the inescapable consequence of ego, pride, and transgression. His terrifying origin serves as a perpetual warning: no being, not even a creator god, is above the rules of universal balance and humility.\n\nHe is the personification of time as the ultimate judge and executioner, ensuring that every action, especially those driven by arrogance, meets its destined end. His fierce form reminds us that while Shiva is also the benevolent protector, he is equally the fearsome destroyer, a force that will tear down any illusion of permanence or self-importance.\n\nKala Bhairava is the chilling mirror reflecting our own mortality and the ultimate reckoning. He is the final reminder that time spares no one, and punishment for hubris is not just a myth, but a fundamental, terrifying truth woven into the fabric of existence, ensuring that what goes around, truly comes around.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
+    },
+    {
+      "story_id": "hope_diamond_curse",
+      "title": "The Hope Diamond: A History of Brilliance and Blood",
+      "category": "paranormal",
+      "hook": "A single blue diamond, shimmering with unparalleled beauty, has left a trail of death and disaster across centuries and continents. Is it mere coincidence, or a true curse?",
+      "concepts": [
+        "cursed_objects",
+        "unexplained_deaths",
+        "historical_mysteries",
+        "superstition",
+        "paranormal_phenomena"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/hope_diamond_curse.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 32,
+        "gripping": 25,
+        "scared": 37,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Indian Diamonds in Victorian Fiction: Wilkie Collins’ The Moonstone, Anthony Trollope’s The Eustace Diamonds, R. L. Stevenson’s “The Rajah’s Diamond” and Arthur Conan Doyle’s The Sign of Four (Sabina Fazli, 2012)",
+          "url": "http://www.univerlag.uni-goettingen.de/bitstream/3/isbn-978-3-86395-033-0.3/1/03_GSEP6_Strangers_Migrants_Exiles_Fazli_103-191.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "curse_of_tutankhamun",
+          "shared_concept": "cursed_objects",
+          "transition_line": "Just as whispers of a curse followed the Hope Diamond, another ancient artifact stirred similar fears: the tomb of an Egyptian pharaoh, said to unleash vengeance upon those who disturbed its rest."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: The Blue Legend Begins",
+          "content": "Deep within the Earth, a stone of extraordinary beauty was formed. It was a diamond, rare and magnificent, known for its deep blue color. This gem, later named the Hope Diamond, would become one of the most famous and feared objects in history.\n\nWhispers began to follow the diamond almost immediately. People said it carried a curse. They claimed that anyone who owned or even touched the diamond would face terrible misfortune, suffering, or even death.\n\nThis chilling rumor has persisted for centuries, connecting the diamond to a long list of tragic events. Its story is not just about a jewel, but about the dark fates of its owners. Who were its first victims, and how did this curse begin to show its power?",
+          "cliffhanger": "The diamond's early journey from India was marked by strange occurrences and tragic ends. What dark fate awaited its first known owner?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: Early Journeys of Misfortune",
+          "content": "The original gem, known as the Tavernier Blue, was brought from India in the 17th century by a French merchant named Jean-Baptiste Tavernier. Legend says that Tavernier stole the diamond from the eye of a statue of a Hindu goddess, which angered the deity and brought the curse upon the stone.\n\nAfter selling the diamond to King Louis XIV of France, Tavernier reportedly faced his own misfortunes. He lost his wealth and later died of a fever, some say even being torn apart by wild dogs in Russia, though historical records are less dramatic about his final days.\n\nKing Louis XIV ordered the diamond to be re-cut into a smaller, heart-shaped stone, known as the French Blue. Despite its new form, the alleged curse seemed to cling to the gem, foreshadowing greater calamities for its royal owners. What dark fate awaited those who possessed the stolen gem?",
+          "cliffhanger": "The diamond became part of the French crown jewels, a symbol of immense power. But soon, France itself would be plunged into chaos, and its rulers would face a terrifying end. Was the diamond truly a factor in this royal downfall?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: The French Revolution's Blood Price",
+          "content": "The French Blue remained in the hands of the French monarchy, passed down to King Louis XVI and his wife, Queen Marie Antoinette. They were known for their lavish lifestyle, a stark contrast to the suffering of their people. The diamond was a glittering part of their royal display.\n\nHowever, their reign ended in terror during the French Revolution. Both King Louis XVI and Marie Antoinette were arrested, put on trial, and then executed by guillotine in 1793. Many believed their horrific end was directly linked to their ownership of the cursed diamond.\n\nDuring the revolution, the French Blue was stolen. It disappeared for many years, only to re-emerge in a smaller, darker form in London in 1839. This new stone was the 45.52-carat Hope Diamond, named after its new owners, the wealthy Hope banking family. Did the curse follow the diamond even after it was cut?",
+          "cliffhanger": "The diamond entered a new era, moving from royal hands to rich collectors. But the pattern of tragedy continued, striking down a new line of owners in unexpected ways. Who was next to suffer its terrible influence?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: From Royals to Riches, A Trail of Ruin",
+          "content": "The Hope Diamond changed hands many times after the French Revolution, and with each new owner, stories of misfortune grew. Many members of the Hope family faced financial ruin or untimely deaths after acquiring the diamond.\n\nLater, a Greek merchant named Jacques Colet reportedly stole the diamond from the Hope family. Soon after, he committed suicide. Another alleged owner, Prince Ivan Kanitovsky, was supposedly murdered by Russian revolutionaries shortly after he acquired the gem.\n\nEven those who only borrowed or touched the diamond were said to suffer. A jeweler who briefly owned it went mad and killed himself. A French actress who wore it was murdered by her lover. The diamond seemed to leave a trail of broken lives in its wake. Who was the next grand owner, and what horrors awaited her?",
+          "cliffhanger": "In the early 20th century, the Hope Diamond found its way to a famous American socialite known for her wealth and her strong will. She believed she could defy the curse, but fate had other plans. What devastating tragedies would befall her and her family?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: The Grand Dame's Descent",
+          "content": "In 1911, the Hope Diamond was bought by Evalyn Walsh McLean, a Washington D.C. socialite. She often wore the diamond to parties and believed she was immune to its curse. She even let her dog wear it sometimes. But the curse, it seemed, was not to be outsmarted.\n\nSoon after acquiring the diamond, a series of heartbreaking tragedies struck McLean's family. Her nine-year-old son was killed in a car accident. Her daughter committed suicide. Her husband was later declared insane and died in a mental institution. Her granddaughter also died from a drug overdose.\n\nEvalyn McLean herself suffered greatly from these losses. She believed in the curse and tried various rituals to 'cleanse' the diamond, but nothing seemed to work. She died in 1947, a heartbroken woman. Was there anyone who could escape the diamond's chilling grip?",
+          "cliffhanger": "After McLean's death, the diamond was sold to a famous jeweler. He made a bold and unusual decision about its future, one that would change the diamond's fate forever. Would this act finally break the curse, or simply move its dark power to a new place?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: The Diamond's Final Journey",
+          "content": "After Evalyn McLean's death, the Hope Diamond was bought by Harry Winston, a renowned New York jeweler. Winston understood the diamond's dark reputation, but he saw it as an important historical artifact, not just a cursed jewel.\n\nIn a surprising move, Winston decided to donate the Hope Diamond to the Smithsonian National Museum of Natural History in Washington D.C. in 1958. He believed that by placing it in a public museum, the diamond would no longer be owned by an individual and might finally be free of its curse.\n\nHe mailed the priceless diamond in a simple brown paper package, using regular registered mail. This humble journey was a strange end to centuries of royal ownership, theft, and personal tragedies. Has the curse truly ended, or does it simply lie dormant in its new home?",
+          "cliffhanger": "Today, the Hope Diamond rests safely behind thick glass, viewed by millions. Its journey from a sacred Indian mine to a museum display is legendary. But what is the final, unsettling truth behind its dark reputation?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: The Unsettling Legacy",
+          "content": "The Hope Diamond now sits in the Smithsonian, one of the most visited exhibits in the world. Since its arrival, no further 'victims' have been publicly linked to the diamond. It seems that its life as a private possession, and the misfortunes that followed, have ended.\n\nHistorians and skeptics often point out that the tragedies linked to the diamond are coincidences. Wars, revolutions, diseases, and accidents were common throughout history, especially for the rich and powerful. The stories of the curse likely grew from a combination of bad luck and human tendency to connect dramatic events.\n\nHowever, the legend of the Hope Diamond's curse continues to fascinate. It reminds us how powerful a story can become, turning a beautiful object into a symbol of dark fate. Whether truly cursed or simply a magnet for dramatic narratives, the Hope Diamond remains a chilling reminder of the unknown forces that seem to shape our world.",
           "cliffhanger": null
         }
       ],
@@ -10598,15 +10598,36 @@
     {
       "story_id": "uwe_barschel",
       "title": "The Geneva Bathtub Mystery: Uwe Barschel",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/KAS-Barschel%2C_Uwe-Bild-7734-1_%28cropped%29.jpg/500px-KAS-Barschel%2C_Uwe-Bild-7734-1_%28cropped%29.jpg",
-      "image_query": "",
-      "hook": "In 1987, a powerful German politician was found dead in a hotel bathtub in Geneva. The official verdict was suicide, but the clues point to a labyrinth of international espionage and illegal arms deals.",
       "category": "conspiracy",
-      "severity": "disturbing",
+      "hook": "In 1987, a powerful German politician was found dead in a hotel bathtub in Geneva. The official verdict was suicide, but the clues point to a labyrinth of international espionage and illegal arms deals.",
       "concepts": [
         "government_secrecy",
         "espionage",
         "unexplained_deaths"
+      ],
+      "severity": "disturbing",
+      "hero_image": "/content/images/uwe_barschel.jpg",
+      "added_date": "2026-06-20",
+      "draft": 0,
+      "reactions": {
+        "like": 27,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 45
+      },
+      "evidence_links": [
+        {
+          "label": "Der Spiegel: The Barschel Case (German)",
+          "url": "https://www.spiegel.de/geschichte/uwe-barschel-tod-in-genf-a-947621.html"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "government_secrecy",
+          "category": "paranormal",
+          "transition_line": "When governments cover up deaths in remote mountains or luxury hotels, the truth is often buried under layers of classified files."
+        }
       ],
       "layers": [
         {
@@ -10650,7 +10671,9 @@
           "layer_name": "The Unquiet Grave",
           "content": "Uwe Barschel was buried in the cemetery of Mölln, but his case remains a bleeding wound in the history of the German Republic. The hotel room where he died, Room 317 of the Beau-Rivage, still exists, attracting conspiracy theorists and historians alike. The photograph of his body in the bathtub stands as a chilling symbol of the cold war's dark underbelly, where the line between political scandal and state-sanctioned murder is washed away in a quiet hotel bathroom.\n\nTo this day, German citizens and journalists debate what happened in Room 317, but the truth remains submerged, much like Barschel in that cold, silent bath."
         }
-      ]
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }

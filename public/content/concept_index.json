@@ -21,11 +21,11 @@
     "jfk_assassination_001",
     "the_beast_of_gevaudan",
     "mlk_assassination_conspiracy",
-    "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "vatican_bank_scandal_calvi_p2",
     "assassination_rfk_conspiracy",
     "spontaneous_human_combustion_shc",
+    "hope_diamond_curse",
     "uwe_barschel"
   ],
   "wilderness_horror": [
@@ -1442,31 +1442,9 @@
     "black_monk_pontefract_001",
     "the_bell_witch_haunting"
   ],
-  "fierce_deity": [
-    "kala_bhairava_origin_time_punishment"
-  ],
   "divine_punishment": [
-    "kala_bhairava_origin_time_punishment",
-    "myth_of_atlantis_plato"
-  ],
-  "ego_destruction": [
+    "myth_of_atlantis_plato",
     "kala_bhairava_origin_time_punishment"
-  ],
-  "cosmic_justice": [
-    "kala_bhairava_origin_time_punishment",
-    "bhasmasura_mohini_deception"
-  ],
-  "time_and_death": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "cursed_objects": [
-    "hope_diamond_curse"
-  ],
-  "historical_mysteries": [
-    "hope_diamond_curse"
-  ],
-  "paranormal_phenomena": [
-    "hope_diamond_curse"
   ],
   "surveillance": [
     "project_raven_uae_cyber_mercenaries"
@@ -1507,6 +1485,10 @@
   ],
   "unchecked_power": [
     "bhasmasura_mohini_deception"
+  ],
+  "cosmic_justice": [
+    "bhasmasura_mohini_deception",
+    "kala_bhairava_origin_time_punishment"
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
@@ -1621,6 +1603,12 @@
   "unsecured_devices": [
     "mirai_botnet_iot_attack"
   ],
+  "state_sponsored": [
+    "operation_shady_rat"
+  ],
+  "persistent_threat": [
+    "operation_shady_rat"
+  ],
   "internet_history": [
     "morris_worm_first_internet_attack"
   ],
@@ -1636,10 +1624,22 @@
   "forensic_mystery": [
     "spontaneous_human_combustion_shc"
   ],
-  "state_sponsored": [
-    "operation_shady_rat"
+  "fierce_deity": [
+    "kala_bhairava_origin_time_punishment"
   ],
-  "persistent_threat": [
-    "operation_shady_rat"
+  "ego_destruction": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "time_and_death": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "cursed_objects": [
+    "hope_diamond_curse"
+  ],
+  "historical_mysteries": [
+    "hope_diamond_curse"
+  ],
+  "paranormal_phenomena": [
+    "hope_diamond_curse"
   ]
 }
