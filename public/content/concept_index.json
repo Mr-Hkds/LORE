@@ -62,7 +62,8 @@
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
-    "uwe_barschel"
+    "uwe_barschel",
+    "us_human_radiation_experiments"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -257,7 +258,8 @@
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
     "project_shad_covert_testing",
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "us_human_radiation_experiments"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -427,7 +429,8 @@
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "us_human_radiation_experiments"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study"
@@ -598,7 +601,8 @@
     "project_blue_book_ufo",
     "project_shamrock",
     "operation_paperclip_001",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "us_human_radiation_experiments"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -886,7 +890,8 @@
   "unethical_research": [
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "us_human_radiation_experiments"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1641,5 +1646,26 @@
   ],
   "persistent_threat": [
     "operation_shady_rat"
+  ],
+  "radiation_exposure": [
+    "us_human_radiation_experiments"
+  ],
+  "infinite_replication": [
+    "raktabija_infinite_replication"
+  ],
+  "divine_intervention": [
+    "raktabija_infinite_replication"
+  ],
+  "unchecked_evil": [
+    "raktabija_infinite_replication"
+  ],
+  "cosmic_threat": [
+    "raktabija_infinite_replication"
+  ],
+  "goddess_power": [
+    "raktabija_infinite_replication"
+  ],
+  "blood_magic": [
+    "raktabija_infinite_replication"
   ]
 }
