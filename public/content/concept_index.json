@@ -1277,14 +1277,14 @@
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
-    "internet_dark_matter_probes",
-    "solarwinds_supply_chain_attack_001"
+    "internet_dark_matter_probes"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1301,15 +1301,24 @@
   "cultural_fear": [
     "wendigo_insatiable_hunger"
   ],
-  "advanced_persistent_threat": [
-    "ghostnet_global_cyber_espionage"
-  ],
   "cyber_warfare": [
+    "solarwinds_supply_chain_attack_001",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
-    "project_raven_uae_cyber_mercenaries",
+    "project_raven_uae_cyber_mercenaries"
+  ],
+  "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
+  ],
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "advanced_persistent_threat": [
+    "ghostnet_global_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm",
@@ -1460,23 +1469,6 @@
   "unsecured_devices": [
     "mirai_botnet_iot_attack"
   ],
-  "fierce_deity": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "divine_punishment": [
-    "kala_bhairava_origin_time_punishment",
-    "myth_of_atlantis_plato"
-  ],
-  "ego_destruction": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "cosmic_justice": [
-    "kala_bhairava_origin_time_punishment",
-    "bhasmasura_mohini_deception"
-  ],
-  "time_and_death": [
-    "kala_bhairava_origin_time_punishment"
-  ],
   "cursed_objects": [
     "hope_diamond_curse"
   ],
@@ -1485,6 +1477,10 @@
   ],
   "paranormal_phenomena": [
     "hope_diamond_curse"
+  ],
+  "divine_punishment": [
+    "myth_of_atlantis_plato",
+    "kala_bhairava_origin_time_punishment"
   ],
   "surveillance": [
     "project_raven_uae_cyber_mercenaries"
@@ -1525,6 +1521,10 @@
   ],
   "unchecked_power": [
     "bhasmasura_mohini_deception"
+  ],
+  "cosmic_justice": [
+    "bhasmasura_mohini_deception",
+    "kala_bhairava_origin_time_punishment"
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
@@ -1633,13 +1633,13 @@
   "persistent_threat": [
     "operation_shady_rat"
   ],
-  "supply_chain_attack": [
-    "solarwinds_supply_chain_attack_001"
+  "fierce_deity": [
+    "kala_bhairava_origin_time_punishment"
   ],
-  "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
+  "ego_destruction": [
+    "kala_bhairava_origin_time_punishment"
   ],
-  "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
+  "time_and_death": [
+    "kala_bhairava_origin_time_punishment"
   ]
 }
