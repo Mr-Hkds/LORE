@@ -47,6 +47,7 @@
     "operation_gladio",
     "the_phoenix_program",
     "the_russian_woodpecker_duga_3",
+    "operation_paperclip_001",
     "project_artichoke_mind_control",
     "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
@@ -61,8 +62,7 @@
     "vatican_bank_scandal_calvi_p2",
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
-    "project_shad_covert_testing",
-    "operation_paperclip_001"
+    "project_shad_covert_testing"
   ],
   "espionage": [
     "uwe_barschel",
@@ -597,8 +597,8 @@
     "project_iceworm_secret_city",
     "project_blue_book_ufo",
     "project_shamrock",
-    "project_artichoke_mind_control",
-    "operation_paperclip_001"
+    "operation_paperclip_001",
+    "project_artichoke_mind_control"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -1169,6 +1169,21 @@
   "sea_legends": [
     "the_mary_celeste_mystery"
   ],
+  "unethical_recruitment": [
+    "operation_paperclip_001"
+  ],
+  "war_crimes_immunity": [
+    "operation_paperclip_001"
+  ],
+  "scientific_advancement": [
+    "operation_paperclip_001"
+  ],
+  "moral_compromise": [
+    "operation_paperclip_001"
+  ],
+  "human_rights_violations": [
+    "operation_paperclip_001"
+  ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
   ],
@@ -1262,14 +1277,14 @@
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
-    "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
-    "internet_dark_matter_probes"
+    "internet_dark_matter_probes",
+    "solarwinds_supply_chain_attack_001"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1286,24 +1301,15 @@
   "cultural_fear": [
     "wendigo_insatiable_hunger"
   ],
+  "advanced_persistent_threat": [
+    "ghostnet_global_cyber_espionage"
+  ],
   "cyber_warfare": [
-    "solarwinds_supply_chain_attack_001",
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
-    "project_raven_uae_cyber_mercenaries"
-  ],
-  "supply_chain_attack": [
+    "project_raven_uae_cyber_mercenaries",
     "solarwinds_supply_chain_attack_001"
-  ],
-  "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "advanced_persistent_threat": [
-    "ghostnet_global_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm",
@@ -1627,19 +1633,13 @@
   "persistent_threat": [
     "operation_shady_rat"
   ],
-  "unethical_recruitment": [
-    "operation_paperclip_001"
+  "supply_chain_attack": [
+    "solarwinds_supply_chain_attack_001"
   ],
-  "war_crimes_immunity": [
-    "operation_paperclip_001"
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
   ],
-  "scientific_advancement": [
-    "operation_paperclip_001"
-  ],
-  "moral_compromise": [
-    "operation_paperclip_001"
-  ],
-  "human_rights_violations": [
-    "operation_paperclip_001"
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
   ]
 }
