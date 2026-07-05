@@ -25,8 +25,8 @@
     "assassination_rfk_conspiracy",
     "spontaneous_human_combustion_shc",
     "vatican_bank_scandal_calvi_p2",
-    "the_octopus_murder_conspiracy_danny_casolaro",
-    "uwe_barschel"
+    "uwe_barschel",
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -60,11 +60,11 @@
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
     "vatican_bank_scandal_calvi_p2",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "the_shadow_brokers_nsa_leak",
     "human_radiation_experiments_us",
-    "operation_chaos_cia_domestic_surveillance",
-    "uwe_barschel"
+    "uwe_barschel",
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "operation_chaos_cia_domestic_surveillance"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -1624,31 +1624,12 @@
   "sacred_oaths": [
     "vikram_vetala_tales"
   ],
-  "restless_spirits": [
-    "legend_of_pretas_indian_mythology",
-    "pishachas_flesh_eating_spirits"
-  ],
-  "karma": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "afterlife": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "suffering": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "ancestral_rituals": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "divine_justice": [
-    "legend_of_pretas_indian_mythology",
-    "ashwatthama_curse_eternal_suffering"
-  ],
-  "greed_and_consequence": [
-    "legend_of_pretas_indian_mythology"
-  ],
   "eternal_curse": [
     "ashwatthama_curse_eternal_suffering"
+  ],
+  "divine_justice": [
+    "ashwatthama_curse_eternal_suffering",
+    "legend_of_pretas_indian_mythology"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
@@ -1661,15 +1642,6 @@
   ],
   "international_collaboration": [
     "operation_condor_001"
-  ],
-  "conspiracy": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "journalism": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "intelligence_agencies": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "cybercrime": [
     "silk_road_dread_pirate_roberts"
@@ -1689,6 +1661,40 @@
   "government_investigation": [
     "silk_road_dread_pirate_roberts"
   ],
+  "true_crime": [
+    "amityville_horror_house_possessed"
+  ],
+  "hoax_claims": [
+    "amityville_horror_house_possessed"
+  ],
+  "conspiracy": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "journalism": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "intelligence_agencies": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "restless_spirits": [
+    "legend_of_pretas_indian_mythology",
+    "pishachas_flesh_eating_spirits"
+  ],
+  "karma": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "afterlife": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "suffering": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "ancestral_rituals": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "greed_and_consequence": [
+    "legend_of_pretas_indian_mythology"
+  ],
   "flesh_eating_spirits": [
     "pishachas_flesh_eating_spirits"
   ],
@@ -1703,11 +1709,5 @@
   ],
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
-  ],
-  "true_crime": [
-    "amityville_horror_house_possessed"
-  ],
-  "hoax_claims": [
-    "amityville_horror_house_possessed"
   ]
 }
