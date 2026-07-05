@@ -24,9 +24,9 @@
     "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "assassination_rfk_conspiracy",
-    "uwe_barschel",
     "spontaneous_human_combustion_shc",
-    "vatican_bank_scandal_calvi_p2"
+    "vatican_bank_scandal_calvi_p2",
+    "uwe_barschel"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -61,9 +61,9 @@
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
-    "uwe_barschel",
     "vatican_bank_scandal_calvi_p2",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "uwe_barschel"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -376,8 +376,8 @@
     "the_numbers_stations",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "uwe_barschel",
-    "october_surprise_1980_iran"
+    "october_surprise_1980_iran",
+    "uwe_barschel"
   ],
   "covert_communication": [
     "the_numbers_stations"
@@ -529,8 +529,8 @@
   "paranormal_activity": [
     "winchester_mystery_house",
     "edinburgh_vaults_001",
-    "amityville_horror_house_possessed",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "amityville_horror_house_possessed"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -554,9 +554,9 @@
     "demonic_possession_exorcism_001",
     "spring_heeled_jack_legend",
     "children_past_lives_stevenson_research",
-    "amityville_horror_house_possessed",
     "spontaneous_human_combustion_shc",
-    "phoenix_lights_event"
+    "phoenix_lights_event",
+    "amityville_horror_house_possessed"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1195,8 +1195,8 @@
     "demonic_possession_exorcism_001",
     "the_beast_of_gevaudan",
     "spring_heeled_jack_legend",
-    "amityville_horror_house_possessed",
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "amityville_horror_house_possessed"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1434,23 +1434,6 @@
     "black_monk_pontefract_001",
     "the_bell_witch_haunting"
   ],
-  "fierce_deity": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "divine_punishment": [
-    "kala_bhairava_origin_time_punishment",
-    "myth_of_atlantis_plato"
-  ],
-  "ego_destruction": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "cosmic_justice": [
-    "kala_bhairava_origin_time_punishment",
-    "bhasmasura_mohini_deception"
-  ],
-  "time_and_death": [
-    "kala_bhairava_origin_time_punishment"
-  ],
   "cursed_objects": [
     "hope_diamond_curse"
   ],
@@ -1460,6 +1443,10 @@
   "paranormal_phenomena": [
     "hope_diamond_curse"
   ],
+  "divine_punishment": [
+    "myth_of_atlantis_plato",
+    "kala_bhairava_origin_time_punishment"
+  ],
   "surveillance": [
     "project_raven_uae_cyber_mercenaries"
   ],
@@ -1468,18 +1455,6 @@
   ],
   "ethical_breaches": [
     "project_raven_uae_cyber_mercenaries"
-  ],
-  "undead_entity": [
-    "vikram_vetala_tales"
-  ],
-  "kingship_challenges": [
-    "vikram_vetala_tales"
-  ],
-  "riddles_and_wisdom": [
-    "vikram_vetala_tales"
-  ],
-  "sacred_oaths": [
-    "vikram_vetala_tales"
   ],
   "conspiracy": [
     "the_octopus_murder_conspiracy_danny_casolaro"
@@ -1500,6 +1475,10 @@
   "unchecked_power": [
     "bhasmasura_mohini_deception"
   ],
+  "cosmic_justice": [
+    "bhasmasura_mohini_deception",
+    "kala_bhairava_origin_time_punishment"
+  ],
   "illusion": [
     "bhasmasura_mohini_deception"
   ],
@@ -1512,28 +1491,6 @@
   "internet_infrastructure": [
     "project_bullrun_muscular",
     "internet_dark_matter_probes"
-  ],
-  "eternal_curse": [
-    "ashwatthama_curse_eternal_suffering"
-  ],
-  "divine_justice": [
-    "ashwatthama_curse_eternal_suffering",
-    "legend_of_pretas_indian_mythology"
-  ],
-  "unending_suffering": [
-    "ashwatthama_curse_eternal_suffering"
-  ],
-  "mahabharata_epic": [
-    "ashwatthama_curse_eternal_suffering"
-  ],
-  "consequences_of_actions": [
-    "ashwatthama_curse_eternal_suffering"
-  ],
-  "true_crime": [
-    "amityville_horror_house_possessed"
-  ],
-  "hoax_claims": [
-    "amityville_horror_house_possessed"
   ],
   "drug_experimentation": [
     "project_mk_ultra_001"
@@ -1628,6 +1585,36 @@
   "election_interference": [
     "october_surprise_1980_iran"
   ],
+  "ufo_sighting": [
+    "phoenix_lights_event"
+  ],
+  "mass_witness_event": [
+    "phoenix_lights_event"
+  ],
+  "military_flare_explanation": [
+    "phoenix_lights_event"
+  ],
+  "collective_perception": [
+    "phoenix_lights_event"
+  ],
+  "judicial_injustice": [
+    "salem_witch_trials_001"
+  ],
+  "religious_extremism": [
+    "salem_witch_trials_001"
+  ],
+  "spectral_evidence": [
+    "salem_witch_trials_001"
+  ],
+  "fierce_deity": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "ego_destruction": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "time_and_death": [
+    "kala_bhairava_origin_time_punishment"
+  ],
   "flesh_eating_spirits": [
     "pishachas_flesh_eating_spirits"
   ],
@@ -1647,29 +1634,17 @@
     "pishachas_flesh_eating_spirits",
     "legend_of_pretas_indian_mythology"
   ],
-  "ufo_sighting": [
-    "phoenix_lights_event"
+  "undead_entity": [
+    "vikram_vetala_tales"
   ],
-  "mass_witness_event": [
-    "phoenix_lights_event"
+  "kingship_challenges": [
+    "vikram_vetala_tales"
   ],
-  "military_flare_explanation": [
-    "phoenix_lights_event"
+  "riddles_and_wisdom": [
+    "vikram_vetala_tales"
   ],
-  "collective_perception": [
-    "phoenix_lights_event"
-  ],
-  "international_collaboration": [
-    "operation_condor_001"
-  ],
-  "judicial_injustice": [
-    "salem_witch_trials_001"
-  ],
-  "religious_extremism": [
-    "salem_witch_trials_001"
-  ],
-  "spectral_evidence": [
-    "salem_witch_trials_001"
+  "sacred_oaths": [
+    "vikram_vetala_tales"
   ],
   "karma": [
     "legend_of_pretas_indian_mythology"
@@ -1683,7 +1658,32 @@
   "ancestral_rituals": [
     "legend_of_pretas_indian_mythology"
   ],
+  "divine_justice": [
+    "legend_of_pretas_indian_mythology",
+    "ashwatthama_curse_eternal_suffering"
+  ],
   "greed_and_consequence": [
     "legend_of_pretas_indian_mythology"
+  ],
+  "eternal_curse": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "unending_suffering": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "mahabharata_epic": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "consequences_of_actions": [
+    "ashwatthama_curse_eternal_suffering"
+  ],
+  "true_crime": [
+    "amityville_horror_house_possessed"
+  ],
+  "hoax_claims": [
+    "amityville_horror_house_possessed"
+  ],
+  "international_collaboration": [
+    "operation_condor_001"
   ]
 }
