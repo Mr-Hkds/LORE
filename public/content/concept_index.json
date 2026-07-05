@@ -62,8 +62,7 @@
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
-    "uwe_barschel",
-    "us_human_radiation_experiments"
+    "uwe_barschel"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -258,8 +257,7 @@
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
     "project_shad_covert_testing",
-    "holmesburg_prison_experiments",
-    "us_human_radiation_experiments"
+    "holmesburg_prison_experiments"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -429,8 +427,7 @@
     "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments",
-    "us_human_radiation_experiments"
+    "holmesburg_prison_experiments"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study"
@@ -527,9 +524,9 @@
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
+    "edinburgh_vaults_001",
     "spontaneous_human_combustion_shc",
-    "amityville_horror_house_possessed",
-    "edinburgh_vaults_001"
+    "amityville_horror_house_possessed"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -549,12 +546,12 @@
     "the_wow_signal",
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
+    "edinburgh_vaults_001",
     "demonic_possession_exorcism_001",
     "spontaneous_human_combustion_shc",
     "spring_heeled_jack_legend",
     "children_past_lives_stevenson_research",
-    "amityville_horror_house_possessed",
-    "edinburgh_vaults_001"
+    "amityville_horror_house_possessed"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -601,8 +598,7 @@
     "project_blue_book_ufo",
     "project_shamrock",
     "operation_paperclip_001",
-    "project_artichoke_mind_control",
-    "us_human_radiation_experiments"
+    "project_artichoke_mind_control"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -890,8 +886,7 @@
   "unethical_research": [
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments",
-    "us_human_radiation_experiments"
+    "holmesburg_prison_experiments"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1156,6 +1151,15 @@
     "enfield_poltergeist_001",
     "the_bell_witch_haunting"
   ],
+  "urban_legends": [
+    "edinburgh_vaults_001"
+  ],
+  "historical_trauma": [
+    "edinburgh_vaults_001"
+  ],
+  "haunted_location": [
+    "edinburgh_vaults_001"
+  ],
   "ghost_ship": [
     "the_mary_celeste_mystery"
   ],
@@ -1273,14 +1277,14 @@
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
-    "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
-    "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
-    "internet_dark_matter_probes"
+    "internet_dark_matter_probes",
+    "solarwinds_supply_chain_attack_001",
+    "conficker_worm"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1291,48 +1295,8 @@
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage"
   ],
-  "wendigo_psychosis": [
-    "wendigo_insatiable_hunger"
-  ],
-  "cultural_fear": [
-    "wendigo_insatiable_hunger"
-  ],
-  "cyber_warfare": [
-    "solarwinds_supply_chain_attack_001",
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
-    "ukraine_power_grid_cyber_attack_2015_2016",
-    "project_raven_uae_cyber_mercenaries"
-  ],
-  "supply_chain_attack": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
-  ],
-  "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
-  ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
-  ],
-  "botnet": [
-    "conficker_worm",
-    "mirai_botnet_iot_attack"
-  ],
-  "unknown_threat_actor": [
-    "conficker_worm"
-  ],
-  "digital_weaponry": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
-  ],
-  "zero-day_exploits": [
-    "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
-  ],
-  "global_cyber_threat": [
-    "conficker_worm"
   ],
   "creation_beyond_control": [
     "the_golem_of_prague"
@@ -1348,6 +1312,21 @@
   ],
   "forbidden_knowledge": [
     "the_golem_of_prague"
+  ],
+  "cyber_warfare": [
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016",
+    "project_raven_uae_cyber_mercenaries",
+    "solarwinds_supply_chain_attack_001",
+    "conficker_worm"
+  ],
+  "zero-day_exploits": [
+    "the_shadow_brokers_nsa_leak",
+    "conficker_worm"
+  ],
+  "digital_weaponry": [
+    "the_shadow_brokers_nsa_leak",
+    "conficker_worm"
   ],
   "cyber_security": [
     "morris_worm_first_internet_attack",
@@ -1620,6 +1599,10 @@
   "prison_system_abuse": [
     "holmesburg_prison_experiments"
   ],
+  "botnet": [
+    "mirai_botnet_iot_attack",
+    "conficker_worm"
+  ],
   "internet_of_things": [
     "mirai_botnet_iot_attack"
   ],
@@ -1638,34 +1621,25 @@
   "persistent_threat": [
     "operation_shady_rat"
   ],
-  "radiation_exposure": [
-    "us_human_radiation_experiments"
+  "wendigo_psychosis": [
+    "wendigo_insatiable_hunger"
   ],
-  "infinite_replication": [
-    "raktabija_infinite_replication"
+  "cultural_fear": [
+    "wendigo_insatiable_hunger"
   ],
-  "divine_intervention": [
-    "raktabija_infinite_replication"
+  "supply_chain_attack": [
+    "solarwinds_supply_chain_attack_001"
   ],
-  "unchecked_evil": [
-    "raktabija_infinite_replication"
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
   ],
-  "cosmic_threat": [
-    "raktabija_infinite_replication"
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
   ],
-  "goddess_power": [
-    "raktabija_infinite_replication"
+  "unknown_threat_actor": [
+    "conficker_worm"
   ],
-  "blood_magic": [
-    "raktabija_infinite_replication"
-  ],
-  "urban_legends": [
-    "edinburgh_vaults_001"
-  ],
-  "historical_trauma": [
-    "edinburgh_vaults_001"
-  ],
-  "haunted_location": [
-    "edinburgh_vaults_001"
+  "global_cyber_threat": [
+    "conficker_worm"
   ]
 }
