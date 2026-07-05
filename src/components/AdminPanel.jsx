@@ -340,6 +340,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [ghSyncSuccess, setGhSyncSuccess] = useState(() => localStorage.getItem('lore:github:success') === 'true');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState('');
+  const [gitSyncOnCover, setGitSyncOnCover] = useState(() => {
+    const v = localStorage.getItem('lore:gitsync_on_cover');
+    return v !== null ? v === 'true' : false; // Default to false to avoid Vercel rebuild limits
+  });
 
   // Analytics Dashboard state
   const [analyticsData, setAnalyticsData] = useState({
@@ -1312,7 +1316,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       }
       
       // Commit to GitHub — this is the real source of truth
-      if (ghToken) {
+      if (ghToken && gitSyncOnCover) {
         // Map in-place to preserve original index/order of stories in the json registry
         const updatedStories = adminStoriesRef.current
           .map(s => s.story_id === storyId ? updatedStoryObj : s)
@@ -1914,7 +1918,7 @@ ${aiPromptTopic}`;
         }
 
         // Commit directly to GitHub if token is present
-        if (ghToken) {
+        if (ghToken && gitSyncOnCover) {
           addLog(`Uploading cover image directly to GitHub repository...`);
           const filesToCommit = [
             {
@@ -3984,6 +3988,26 @@ ${aiPromptTopic}`;
                     placeholder="AI content key VITE_GEMINI_API_KEY..."
                     className="px-3 py-2 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-colors font-mono"
                   />
+                </div>
+                
+                <div className="flex items-start gap-3 p-4 rounded-xl border bg-black/40 text-left my-4" style={{ borderColor: ru }}>
+                  <input
+                    type="checkbox"
+                    id="gitsync-on-cover-checkbox"
+                    checked={gitSyncOnCover}
+                    onChange={e => {
+                      setGitSyncOnCover(e.target.checked);
+                      localStorage.setItem('lore:gitsync_on_cover', e.target.checked ? 'true' : 'false');
+                    }}
+                    className="mt-1 cursor-pointer accent-[#9E7B4C]"
+                  />
+                  <label htmlFor="gitsync-on-cover-checkbox" className="flex flex-col cursor-pointer select-none">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-300">Auto-deploy on cover updates</span>
+                    <span className="text-[9px] text-[#6A6560] leading-relaxed mt-0.5">
+                      If enabled, saving or generating any cover image immediately commits to GitHub, triggering a Vercel rebuild.
+                      Disable this to save Vercel rebuild limits; updates will still be visible instantly on the website via real-time SWR background database queries.
+                    </span>
+                  </label>
                 </div>
 
                 <div className="pt-2 flex flex-col gap-3 text-left">

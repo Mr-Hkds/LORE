@@ -173,19 +173,21 @@ export default function SearchOverlay({ isOpen, onClose, stories, onSelectStory 
                     className="group flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-all duration-150"
                     style={{ '--hover-border': accent.color }}
                     onMouseEnter={e => {
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-                      e.currentTarget.style.borderLeft = `2px solid ${accent.color}`;
-                      e.currentTarget.style.paddingLeft = '14px';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.035)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.background = '';
-                      e.currentTarget.style.borderLeft = '';
-                      e.currentTarget.style.paddingLeft = '16px';
                     }}
                   >
                     <div className="flex-1 min-w-0 pr-4">
                       {/* Category tag + severity */}
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 mb-1 relative pl-3">
+                        <span
+                          className="absolute left-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300 text-[9px] font-mono font-bold select-none"
+                          style={{ color: accent.color }}
+                        >
+                          &gt;
+                        </span>
                         <span
                           className="text-[7.5px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
                           style={{
