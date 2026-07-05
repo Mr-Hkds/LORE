@@ -263,8 +263,8 @@
     "project_sunshine_cadaver_collection",
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments",
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "holmesburg_prison_experiments"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -1529,12 +1529,6 @@
   "intelligence_agencies": [
     "the_octopus_murder_conspiracy_danny_casolaro"
   ],
-  "pharmaceutical_industry": [
-    "holmesburg_prison_experiments"
-  ],
-  "prison_system_abuse": [
-    "holmesburg_prison_experiments"
-  ],
   "data_interception": [
     "project_bullrun_muscular"
   ],
@@ -1641,5 +1635,11 @@
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
+  ],
+  "pharmaceutical_industry": [
+    "holmesburg_prison_experiments"
+  ],
+  "prison_system_abuse": [
+    "holmesburg_prison_experiments"
   ]
 }
