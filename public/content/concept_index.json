@@ -90,7 +90,8 @@
   ],
   "government_conspiracy": [
     "operation_northwoods_001",
-    "october_surprise_1980_iran"
+    "october_surprise_1980_iran",
+    "operation_condor_001"
   ],
   "national_security": [
     "operation_northwoods_001",
@@ -110,7 +111,8 @@
     "cointelpro_fbi_covert_ops",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "project_mk_ultra_001",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "operation_condor_001"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -553,7 +555,8 @@
     "spring_heeled_jack_legend",
     "children_past_lives_stevenson_research",
     "amityville_horror_house_possessed",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "phoenix_lights_event"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -600,7 +603,8 @@
     "project_blue_book_ufo",
     "project_shamrock",
     "operation_paperclip_001",
-    "project_artichoke_mind_control"
+    "project_artichoke_mind_control",
+    "operation_condor_001"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -923,7 +927,8 @@
     "anthrax_attacks_2001_amerithrax"
   ],
   "government_response": [
-    "anthrax_attacks_2001_amerithrax"
+    "anthrax_attacks_2001_amerithrax",
+    "phoenix_lights_event"
   ],
   "public_health_crisis": [
     "anthrax_attacks_2001_amerithrax"
@@ -1040,7 +1045,8 @@
     "operation_gladio"
   ],
   "state_terrorism": [
-    "operation_gladio"
+    "operation_gladio",
+    "operation_condor_001"
   ],
   "deep_state": [
     "operation_gladio"
@@ -1059,7 +1065,8 @@
     "the_phoenix_program"
   ],
   "extrajudicial_killings": [
-    "the_phoenix_program"
+    "the_phoenix_program",
+    "operation_condor_001"
   ],
   "narcissism": [
     "ravaan_character_study"
@@ -1186,7 +1193,8 @@
     "operation_paperclip_001"
   ],
   "human_rights_violations": [
-    "operation_paperclip_001"
+    "operation_paperclip_001",
+    "operation_condor_001"
   ],
   "interrogation_techniques": [
     "project_artichoke_mind_control"
@@ -1662,5 +1670,20 @@
   ],
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
+  ],
+  "ufo_sighting": [
+    "phoenix_lights_event"
+  ],
+  "mass_witness_event": [
+    "phoenix_lights_event"
+  ],
+  "military_flare_explanation": [
+    "phoenix_lights_event"
+  ],
+  "collective_perception": [
+    "phoenix_lights_event"
+  ],
+  "international_collaboration": [
+    "operation_condor_001"
   ]
 }
