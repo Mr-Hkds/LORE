@@ -193,7 +193,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_asch_conformity_experiments",
@@ -281,7 +281,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "operation_northwoods_001",
@@ -346,7 +346,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "hidden_facts_shri_vishnu_ji",
@@ -416,7 +416,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "malaysia_airlines_mh370",
@@ -490,7 +490,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stanford_prison_experiment_001",
@@ -559,7 +559,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "barney_barnato",
@@ -627,7 +627,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "hinterkaifeck_murders",
@@ -699,7 +699,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "sleep_paralysis_dossier",
@@ -768,7 +768,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mahadev_and_sati_dossier",
@@ -837,7 +837,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cicada_3301",
@@ -907,7 +907,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "unit_731_experiments",
@@ -997,7 +997,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_philadelphia_experiment",
@@ -1088,7 +1088,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bystander_effect",
@@ -1160,7 +1160,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "noida_double_murder_case_2008",
@@ -1230,7 +1230,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "jack_the_ripper_001",
@@ -1301,7 +1301,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "milgram_experiment_on_obedience_001",
@@ -1372,7 +1372,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cia_mk_ultra_program",
@@ -1443,7 +1443,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "jonestown_massacre_001",
@@ -1515,7 +1515,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_numbers_stations",
@@ -1585,7 +1585,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_zodiac_killer",
@@ -1655,7 +1655,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "dancing_mania_1518_strasbourg",
@@ -1726,7 +1726,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "universe_25_calhouns_mouse_utopia",
@@ -1799,7 +1799,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tuskegee_syphilis_study",
@@ -1870,7 +1870,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "capgras_delusion_001",
@@ -1941,7 +1941,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "folie_a_deux_shared_psychosis",
@@ -2012,7 +2012,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stuxnet_cyberweapon_nuclear_facilities",
@@ -2082,7 +2082,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_taman_shud_case",
@@ -2153,7 +2153,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "franklin_expedition_lost_ships",
@@ -2225,7 +2225,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "winchester_mystery_house",
@@ -2291,7 +2291,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_sodder_children_disappearance",
@@ -2363,7 +2363,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_cleveland_torso_murders",
@@ -2435,7 +2435,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_stargate_remote_viewing",
@@ -2509,7 +2509,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "stockholm_syndrome_001",
@@ -2580,7 +2580,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_sunshine_cadaver_collection",
@@ -2649,7 +2649,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "salem_witch_trials_001",
@@ -2720,7 +2720,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_rat_park_experiment_001",
@@ -2793,7 +2793,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "phineas_gage_brain_injury",
@@ -2864,7 +2864,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "dissociative_identity_disorder_fragmented_self",
@@ -2935,7 +2935,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "black_dahlia_murder",
@@ -3007,7 +3007,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "clinical_lycanthropy",
@@ -3078,7 +3078,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_isdal_woman",
@@ -3149,7 +3149,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_iceworm_secret_city",
@@ -3220,7 +3220,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "eilean_mor_lighthouse_mystery",
@@ -3291,7 +3291,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "harold_shipman_serial_killer",
@@ -3363,7 +3363,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_ganzfeld_experiment",
@@ -3437,7 +3437,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "circleville_letters",
@@ -3508,7 +3508,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mystery_of_dwarka",
@@ -3573,7 +3573,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_unabomber_ted_kaczynski_campaign_of_terror",
@@ -3646,7 +3646,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "alien_hand_syndrome",
@@ -3717,7 +3717,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "aokigahara_suicide_forest",
@@ -3790,7 +3790,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_philip_experiment",
@@ -3862,7 +3862,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_mandela_effect",
@@ -3951,7 +3951,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_third_wave_experiment",
@@ -4061,7 +4061,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tanganyika_laughter_epidemic",
@@ -4151,7 +4151,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_silent_twins_gibbons",
@@ -4241,7 +4241,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "monster_study_1939",
@@ -4336,7 +4336,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "blue_whale_game_001",
@@ -4408,7 +4408,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "anthrax_attacks_2001_amerithrax",
@@ -4498,7 +4498,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cotard_delusion_001",
@@ -4588,7 +4588,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_batavia_shipwreck_mutiny",
@@ -4680,7 +4680,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "uss_cyclops_vanishing",
@@ -4757,7 +4757,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_taos_hum",
@@ -4848,7 +4848,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "tunguska_event_001",
@@ -4936,7 +4936,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "albert_fish_the_gray_man",
@@ -5007,7 +5007,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "echelon_global_surveillance",
@@ -5099,7 +5099,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "roanoke_colony_disappearance",
@@ -5171,7 +5171,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_blue_book_ufo",
@@ -5267,7 +5267,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_lead_mask_case",
@@ -5357,7 +5357,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "operation_gladio",
@@ -5450,7 +5450,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_shamrock",
@@ -5522,7 +5522,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_phoenix_program",
@@ -5614,7 +5614,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "ravaan_character_study",
@@ -5705,7 +5705,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_wow_signal",
@@ -5776,7 +5776,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_children_of_woolpit",
@@ -5866,7 +5866,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bloop_unexplained_sound",
@@ -5943,7 +5943,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_russian_woodpecker_duga_3",
@@ -6034,7 +6034,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "guatemalan_syphilis_experiment",
@@ -6133,7 +6133,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "enfield_poltergeist_001",
@@ -6223,7 +6223,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "edinburgh_vaults_001",
@@ -6731,7 +6731,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6874,7 +6874,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -6965,7 +6965,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "elizabeth_bathory_blood_countess",
@@ -7129,7 +7129,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "moonlight_maze_cyber_espionage",
@@ -7201,7 +7201,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "wendigo_insatiable_hunger",
@@ -7601,7 +7601,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -7791,7 +7791,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "october_surprise_1980_iran",
@@ -7882,7 +7882,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
@@ -7954,7 +7954,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "cointelpro_fbi_covert_ops",
@@ -8045,7 +8045,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "spring_heeled_jack_legend",
@@ -8116,7 +8116,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "children_past_lives_stevenson_research",
@@ -8188,7 +8188,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_roswell_incident",
@@ -8278,7 +8278,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_cuckoos_egg_kgb_hacker",
@@ -8361,7 +8361,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mahabharat_psychological_epic",
@@ -8433,7 +8433,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "mlk_assassination_conspiracy",
@@ -8528,7 +8528,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "black_monk_pontefract_001",
@@ -8605,7 +8605,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "kala_bhairava_origin_time_punishment",
@@ -8844,7 +8844,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_raven_uae_cyber_mercenaries",
@@ -8936,7 +8936,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "vikram_vetala_tales",
@@ -9013,7 +9013,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
@@ -9097,7 +9097,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "bhasmasura_mohini_deception",
@@ -9336,7 +9336,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "amityville_horror_house_possessed",
@@ -9426,7 +9426,85 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
+    },
+    {
+      "story_id": "vatican_bank_scandal_calvi_p2",
+      "title": "The Vatican's Darkest Secret: Calvi's Death and the P2 Lodge",
+      "category": "conspiracy",
+      "hook": "'God's Banker' found dead, hanging from a London bridge, pockets stuffed with bricks. This was no simple suicide, but a dark message from a hidden world of power, money, and secrets.",
+      "concepts": [
+        "financial_conspiracy",
+        "government_secrecy",
+        "unexplained_deaths",
+        "secret_societies",
+        "organized_crime",
+        "church_corruption"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/vatican_bank_scandal_calvi_p2.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 36,
+        "gripping": 39,
+        "scared": 1,
+        "mindblown": 44
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Just as the dark secrets of the Vatican Bank were tied to Roberto Calvi's mysterious end, another powerful figure, Uwe Barschel, would soon become entangled in a web of government intrigue and unexplained death."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper of the 'Banker of God'",
+          "content": "In June 1982, a shocking discovery was made under Blackfriars Bridge in London. The body of a powerful Italian banker, Roberto Calvi, was found hanging. His pockets were filled with bricks and foreign currency, a bizarre and chilling detail that immediately raised questions.\n\nCalvi was the chairman of Banco Ambrosiano, one of Italy's largest private banks. He was widely known by a startling nickname: 'God's Banker'. This name came from his unusually close and deep ties to the Vatican Bank, officially known as the Institute for the Works of Religion (IOR). This connection hinted at a world far more complex and dangerous than regular finance.",
+          "cliffhanger": "Who would want such a powerful man dead, and why was his connection to the church so important in this grim puzzle?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Network of Shadows: P2 Lodge",
+          "content": "To understand Calvi's fate, one must look into the shadows of Italy's secret societies. Roberto Calvi was a member of the Propaganda Due, or P2 Lodge. This was not a typical social club; P2 was an illegal, secret Masonic lodge that operated like a shadow government within Italy.\n\nLed by the mysterious Licio Gelli, P2 had infiltrated the highest levels of Italian society. Its members included powerful politicians, military generals, police chiefs, top journalists, and leading businessmen. Their goal was to influence and control Italy's political and economic future. Calvi's membership placed him at the heart of this hidden, powerful network.",
+          "cliffhanger": "How did this secret society gain such control, and what was its true purpose beyond mere political influence?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Unholy Alliance: Vatican Bank",
+          "content": "The bond between Banco Ambrosiano and the Vatican Bank (IOR) was a crucial piece of this dark puzzle. The Vatican Bank held significant, secret shares in Calvi's bank. It also channeled vast sums of money through a network of offshore companies, many of which were controlled by Calvi himself.\n\nThis arrangement allowed large amounts of money to move without being checked by normal financial rules. The Vatican's sovereign status meant its bank was not subject to the same oversight as other financial institutions. This lack of transparency created a perfect environment for hidden dealings and questionable financial maneuvers, raising serious concerns about corruption at the highest levels.",
+          "cliffhanger": "Why did the holiest institution on Earth need such secrecy, and what kind of dealings were truly hidden behind its sacred walls?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Collapse and the Escape",
+          "content": "In the early 1980s, the carefully constructed financial empire began to crumble. Banco Ambrosiano faced massive financial troubles. It was burdened by huge, secret debts, fraudulent loans, and hundreds of millions of dollars that simply vanished. Authorities began to investigate, and the spotlight turned on Roberto Calvi.\n\nCalvi was arrested in Italy in 1981 for currency violations. He was convicted and served a short prison term. After appealing his sentence, he fled Italy in a desperate attempt to avoid further prosecution and uncover the real culprits. He knew too much and was running from powerful forces. He sought refuge and, crucially, money from his hidden network of connections.",
+          "cliffhanger": "With his bank collapsing and powerful secrets about to spill, where did Calvi go, and who was he truly running from in his final days?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The London Bridge Death",
+          "content": "Roberto Calvi's desperate flight ended tragically on June 18, 1982. His body was discovered hanging under Blackfriars Bridge in London. The scene was shocking: his wrists were bound, and his clothes were weighted with bricks, stones, and over $15,000 in various currencies.\n\nThe London police initially ruled his death a suicide, suggesting he took his own life due to his financial and legal troubles. However, many found this explanation hard to believe given the strange circumstances. The choice of 'Blackfriars Bridge' also struck a dark chord with investigators, as members of the P2 Lodge sometimes referred to each other as 'frati neri' (black friars), hinting at a deliberate, chilling message.",
+          "cliffhanger": "Was this truly a suicide as first claimed, or a carefully staged murder designed to send a terrifying message to others involved?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Web of Debt and Deceit",
+          "content": "The collapse of Banco Ambrosiano revealed a staggering deficit, estimated at over $1.3 billion at the time. This massive sum pointed to widespread fraud and corruption. Investigations showed that many of the fraudulent loans and transfers benefited individuals connected to the P2 Lodge, powerful politicians, and even organized crime families.\n\nThe Vatican Bank initially denied responsibility for the missing funds but later agreed to pay a 'goodwill' sum of $250 million to the creditors of Banco Ambrosiano. This payment, while not an admission of guilt, highlighted the IOR's deep involvement. The scandal uncovered a complex web of deceit that stretched from Italian boardrooms to the highest levels of the Catholic Church and the criminal underworld.",
+          "cliffhanger": "Who were the real orchestrators of this monumental financial fraud, and how far did their power reach into the highest levels of society, even touching the sacred?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "After years of investigations, multiple legal proceedings, and renewed inquiries, British courts eventually changed the official cause of Roberto Calvi's death. It was re-classified from suicide to 'unlawful killing,' meaning he was murdered. This conclusion supported what many suspected: Calvi was silenced.\n\nThe darkest truth points to elements within organized crime (the Mafia) and the P2 Lodge as likely culprits. Calvi had lost huge sums of money for criminal groups, and his knowledge of their vast financial networks and illicit dealings was too dangerous. He knew where the money went and who benefited. Faced with exposure, those with the most to lose decided to make an example of 'God's Banker,' ensuring his silence with a gruesome, symbolic act under Blackfriars Bridge. His death became a chilling testament to the power of hidden conspiracies, where money, crime, and even religious institutions intertwined in a deadly embrace.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "project_mk_ultra_001",
@@ -9527,7 +9605,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "legend_of_pretas_indian_mythology",
@@ -9619,7 +9697,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "the_bell_witch_haunting",
@@ -9725,7 +9803,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "assassination_rfk_conspiracy",
@@ -9815,7 +9893,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "project_shad_covert_testing",
@@ -9998,7 +10076,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "prophecies_of_kali_yuga",
@@ -10286,15 +10364,36 @@
     {
       "story_id": "uwe_barschel",
       "title": "The Geneva Bathtub Mystery: Uwe Barschel",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/KAS-Barschel%2C_Uwe-Bild-7734-1_%28cropped%29.jpg/500px-KAS-Barschel%2C_Uwe-Bild-7734-1_%28cropped%29.jpg",
-      "image_query": "",
-      "hook": "In 1987, a powerful German politician was found dead in a hotel bathtub in Geneva. The official verdict was suicide, but the clues point to a labyrinth of international espionage and illegal arms deals.",
       "category": "conspiracy",
-      "severity": "disturbing",
+      "hook": "In 1987, a powerful German politician was found dead in a hotel bathtub in Geneva. The official verdict was suicide, but the clues point to a labyrinth of international espionage and illegal arms deals.",
       "concepts": [
         "government_secrecy",
         "espionage",
         "unexplained_deaths"
+      ],
+      "severity": "disturbing",
+      "hero_image": "/content/images/uwe_barschel.jpg",
+      "added_date": "2026-06-20",
+      "draft": 0,
+      "reactions": {
+        "like": 27,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 45
+      },
+      "evidence_links": [
+        {
+          "label": "Der Spiegel: The Barschel Case (German)",
+          "url": "https://www.spiegel.de/geschichte/uwe-barschel-tod-in-genf-a-947621.html"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_dyatlov_pass_incident",
+          "shared_concept": "government_secrecy",
+          "category": "paranormal",
+          "transition_line": "When governments cover up deaths in remote mountains or luxury hotels, the truth is often buried under layers of classified files."
+        }
       ],
       "layers": [
         {
@@ -10339,12 +10438,8 @@
           "content": "Uwe Barschel was buried in the cemetery of Mölln, but his case remains a bleeding wound in the history of the German Republic. The hotel room where he died, Room 317 of the Beau-Rivage, still exists, attracting conspiracy theorists and historians alike. The photograph of his body in the bathtub stands as a chilling symbol of the cold war's dark underbelly, where the line between political scandal and state-sanctioned murder is washed away in a quiet hotel bathroom.\n\nTo this day, German citizens and journalists debate what happened in Room 317, but the truth remains submerged, much like Barschel in that cold, silent bath."
         }
       ],
-      "reactions": {
-        "like": 27,
-        "gripping": 40,
-        "scared": 4,
-        "mindblown": 45
-      }
+      "custom_image_prompt": null,
+      "image_missing": 0
     },
     {
       "story_id": "morris_worm_first_internet_attack",
@@ -10579,67 +10674,6 @@
       ],
       "custom_image_prompt": null,
       "image_missing": 0
-    },
-    {
-      "story_id": "vatican_bank_scandal_calvi_p2",
-      "title": "The Vatican's Darkest Secret: Calvi's Death and the P2 Lodge",
-      "hero_image": "https://res.cloudinary.com/aenetworks/image/upload/c_fill,ar_2,w_1920,h_960,g_auto/dpr_auto/f_auto/q_auto:eco/v1/vatican_secret_archives_ap_1202220105431?_a=BAVMn6DY0",
-      "image_query": "",
-      "hook": "'God's Banker' found dead, hanging from a London bridge, pockets stuffed with bricks. This was no simple suicide, but a dark message from a hidden world of power, money, and secrets.",
-      "category": "conspiracy",
-      "severity": "chilling",
-      "concepts": [
-        "financial_conspiracy",
-        "government_secrecy",
-        "unexplained_deaths",
-        "secret_societies",
-        "organized_crime",
-        "church_corruption"
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper of the 'Banker of God'",
-          "content": "In June 1982, a shocking discovery was made under Blackfriars Bridge in London. The body of a powerful Italian banker, Roberto Calvi, was found hanging. His pockets were filled with bricks and foreign currency, a bizarre and chilling detail that immediately raised questions.\n\nCalvi was the chairman of Banco Ambrosiano, one of Italy's largest private banks. He was widely known by a startling nickname: 'God's Banker'. This name came from his unusually close and deep ties to the Vatican Bank, officially known as the Institute for the Works of Religion (IOR). This connection hinted at a world far more complex and dangerous than regular finance.",
-          "cliffhanger": "Who would want such a powerful man dead, and why was his connection to the church so important in this grim puzzle?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Network of Shadows: P2 Lodge",
-          "content": "To understand Calvi's fate, one must look into the shadows of Italy's secret societies. Roberto Calvi was a member of the Propaganda Due, or P2 Lodge. This was not a typical social club; P2 was an illegal, secret Masonic lodge that operated like a shadow government within Italy.\n\nLed by the mysterious Licio Gelli, P2 had infiltrated the highest levels of Italian society. Its members included powerful politicians, military generals, police chiefs, top journalists, and leading businessmen. Their goal was to influence and control Italy's political and economic future. Calvi's membership placed him at the heart of this hidden, powerful network.",
-          "cliffhanger": "How did this secret society gain such control, and what was its true purpose beyond mere political influence?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Unholy Alliance: Vatican Bank",
-          "content": "The bond between Banco Ambrosiano and the Vatican Bank (IOR) was a crucial piece of this dark puzzle. The Vatican Bank held significant, secret shares in Calvi's bank. It also channeled vast sums of money through a network of offshore companies, many of which were controlled by Calvi himself.\n\nThis arrangement allowed large amounts of money to move without being checked by normal financial rules. The Vatican's sovereign status meant its bank was not subject to the same oversight as other financial institutions. This lack of transparency created a perfect environment for hidden dealings and questionable financial maneuvers, raising serious concerns about corruption at the highest levels.",
-          "cliffhanger": "Why did the holiest institution on Earth need such secrecy, and what kind of dealings were truly hidden behind its sacred walls?"
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Collapse and the Escape",
-          "content": "In the early 1980s, the carefully constructed financial empire began to crumble. Banco Ambrosiano faced massive financial troubles. It was burdened by huge, secret debts, fraudulent loans, and hundreds of millions of dollars that simply vanished. Authorities began to investigate, and the spotlight turned on Roberto Calvi.\n\nCalvi was arrested in Italy in 1981 for currency violations. He was convicted and served a short prison term. After appealing his sentence, he fled Italy in a desperate attempt to avoid further prosecution and uncover the real culprits. He knew too much and was running from powerful forces. He sought refuge and, crucially, money from his hidden network of connections.",
-          "cliffhanger": "With his bank collapsing and powerful secrets about to spill, where did Calvi go, and who was he truly running from in his final days?"
-        },
-        {
-          "layer": 5,
-          "layer_name": "The London Bridge Death",
-          "content": "Roberto Calvi's desperate flight ended tragically on June 18, 1982. His body was discovered hanging under Blackfriars Bridge in London. The scene was shocking: his wrists were bound, and his clothes were weighted with bricks, stones, and over $15,000 in various currencies.\n\nThe London police initially ruled his death a suicide, suggesting he took his own life due to his financial and legal troubles. However, many found this explanation hard to believe given the strange circumstances. The choice of 'Blackfriars Bridge' also struck a dark chord with investigators, as members of the P2 Lodge sometimes referred to each other as 'frati neri' (black friars), hinting at a deliberate, chilling message.",
-          "cliffhanger": "Was this truly a suicide as first claimed, or a carefully staged murder designed to send a terrifying message to others involved?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Web of Debt and Deceit",
-          "content": "The collapse of Banco Ambrosiano revealed a staggering deficit, estimated at over $1.3 billion at the time. This massive sum pointed to widespread fraud and corruption. Investigations showed that many of the fraudulent loans and transfers benefited individuals connected to the P2 Lodge, powerful politicians, and even organized crime families.\n\nThe Vatican Bank initially denied responsibility for the missing funds but later agreed to pay a 'goodwill' sum of $250 million to the creditors of Banco Ambrosiano. This payment, while not an admission of guilt, highlighted the IOR's deep involvement. The scandal uncovered a complex web of deceit that stretched from Italian boardrooms to the highest levels of the Catholic Church and the criminal underworld.",
-          "cliffhanger": "Who were the real orchestrators of this monumental financial fraud, and how far did their power reach into the highest levels of society, even touching the sacred?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner",
-          "content": "After years of investigations, multiple legal proceedings, and renewed inquiries, British courts eventually changed the official cause of Roberto Calvi's death. It was re-classified from suicide to 'unlawful killing,' meaning he was murdered. This conclusion supported what many suspected: Calvi was silenced.\n\nThe darkest truth points to elements within organized crime (the Mafia) and the P2 Lodge as likely culprits. Calvi had lost huge sums of money for criminal groups, and his knowledge of their vast financial networks and illicit dealings was too dangerous. He knew where the money went and who benefited. Faced with exposure, those with the most to lose decided to make an example of 'God's Banker,' ensuring his silence with a gruesome, symbolic act under Blackfriars Bridge. His death became a chilling testament to the power of hidden conspiracies, where money, crime, and even religious institutions intertwined in a deadly embrace.",
-          "cliffhanger": null
-        }
-      ]
     }
   ]
 }

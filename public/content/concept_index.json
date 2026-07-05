@@ -23,10 +23,10 @@
     "mlk_assassination_conspiracy",
     "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
+    "vatican_bank_scandal_calvi_p2",
     "assassination_rfk_conspiracy",
     "uwe_barschel",
-    "spontaneous_human_combustion_shc",
-    "vatican_bank_scandal_calvi_p2"
+    "spontaneous_human_combustion_shc"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -58,11 +58,11 @@
     "project_raven_uae_cyber_mercenaries",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "project_bullrun_muscular",
+    "vatican_bank_scandal_calvi_p2",
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
-    "uwe_barschel",
-    "vatican_bank_scandal_calvi_p2"
+    "uwe_barschel"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -209,7 +209,7 @@
     "hinterkaifeck_murders",
     "the_isdal_woman"
   ],
-  "REM atonia": [
+  "rem atonia": [
     "sleep_paralysis_dossier"
   ],
   "hypnagogic hallucinations": [
@@ -744,7 +744,7 @@
   "parapsychology": [
     "the_ganzfeld_experiment"
   ],
-  "ESP": [
+  "esp": [
     "the_ganzfeld_experiment"
   ],
   "sensory_deprivation": [
@@ -1543,6 +1543,9 @@
   "hoax_claims": [
     "amityville_horror_house_possessed"
   ],
+  "church_corruption": [
+    "vatican_bank_scandal_calvi_p2"
+  ],
   "drug_experimentation": [
     "project_mk_ultra_001"
   ],
@@ -1638,8 +1641,5 @@
   ],
   "persistent_threat": [
     "operation_shady_rat"
-  ],
-  "church_corruption": [
-    "vatican_bank_scandal_calvi_p2"
   ]
 }
