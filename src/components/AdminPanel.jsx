@@ -2,6 +2,39 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import LoreMark from './LoreMark';
 import ApprovalCard from './ApprovalCard';
+import { Upload, Link as LinkIcon, Check, AlertCircle, Edit, Clipboard } from 'lucide-react';
+
+const appStorage = {
+  async get(key) {
+    try {
+      if (window.storage && typeof window.storage.get === 'function') {
+        const res = await window.storage.get(key);
+        if (res) {
+          const str = typeof res === 'object' && res.value !== undefined ? res.value : res;
+          return typeof str === 'string' ? JSON.parse(str) : str;
+        }
+        return null;
+      }
+      const val = localStorage.getItem(key);
+      return val ? JSON.parse(val) : null;
+    } catch (e) {
+      console.warn('Storage read error:', e);
+      return null;
+    }
+  },
+  async set(key, value) {
+    try {
+      const str = JSON.stringify(value);
+      if (window.storage && typeof window.storage.set === 'function') {
+        await window.storage.set(key, str);
+        return;
+      }
+      localStorage.setItem(key, str);
+    } catch (e) {
+      console.warn('Storage write error:', e);
+    }
+  }
+};
 
 // Helper to clean and parse JSON from AI model response
 function cleanAndParseJSON(text) {
@@ -277,8 +310,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-  // Tabs: 'catalog' (Dossier Catalog) | 'generator' (AI Generator) | 'feedback' (Reader Feedback) | 'github-sync' (Settings & Sync)
+  // Tabs: 'catalog' | 'approval' | 'covers' | 'recommendations' | 'generator' | 'feedback' | 'analytics' | 'database' | 'github-sync'
   const [activeTab, setActiveTab] = useState('catalog');
+  const [coverSearch, setCoverSearch] = useState('');
+  const [coverShowDrafts, setCoverShowDrafts] = useState(false);
 
   // GitHub Sync & Credentials Settings
   const [ghOwner, setGhOwner] = useState(() => {
@@ -1010,19 +1045,50 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     setAdminStoriesLoading(true);
     try {
       const res = await fetch('/api/stories?include_drafts=true');
+      let storiesList = [];
       if (res.ok) {
-        const data = await res.json();
-        setAdminStories(data);
+        storiesList = await res.json();
       } else {
         if (stories && stories.length > 0) {
-          setAdminStories(stories);
+          storiesList = stories;
         }
       }
+
+      // Merge overrides from storage
+      try {
+        const overrides = await appStorage.get('lore:story-overrides');
+        if (overrides) {
+          storiesList = storiesList.map(s => {
+            const over = overrides[s.story_id];
+            return over ? { ...s, ...over } : s;
+          });
+        }
+      } catch (storageErr) {
+        console.warn('Failed to merge storage overrides in admin load:', storageErr);
+      }
+
+      setAdminStories(storiesList);
     } catch (err) {
       console.warn('Failed to load admin stories from database, using static fallback:', err);
+      let storiesList = [];
       if (stories && stories.length > 0) {
-        setAdminStories(stories);
+        storiesList = stories;
       }
+
+      // Merge overrides from storage
+      try {
+        const overrides = await appStorage.get('lore:story-overrides');
+        if (overrides) {
+          storiesList = storiesList.map(s => {
+            const over = overrides[s.story_id];
+            return over ? { ...s, ...over } : s;
+          });
+        }
+      } catch (storageErr) {
+        console.warn('Failed to merge storage overrides in admin load fallback:', storageErr);
+      }
+
+      setAdminStories(storiesList);
     } finally {
       setAdminStoriesLoading(false);
     }
@@ -1219,6 +1285,20 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
       setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
       if (refetchStories) refetchStories();
+
+      // Write to storage overrides to prevent cache lag on reload
+      try {
+        const currentOverrides = (await appStorage.get('lore:story-overrides')) || {};
+        currentOverrides[storyId] = {
+          hero_image: newHeroImage,
+          image_missing: 0,
+          draft: 0,
+          added_date: updatedStoryObj.added_date
+        };
+        await appStorage.set('lore:story-overrides', currentOverrides);
+      } catch (e) {
+        console.warn('Failed to save to local overrides storage:', e);
+      }
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {
@@ -2441,6 +2521,17 @@ ${aiPromptTopic}`;
             )}
           </button>
           <button
+            onClick={() => setActiveTab('covers')}
+            className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer flex justify-between items-center ${
+              activeTab === 'covers' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+            }`}
+          >
+            <span>Cover Manager</span>
+            <span className="bg-neutral-800 text-neutral-400 text-[9px] px-1.5 py-0.5 rounded-md font-mono">
+              {adminStories.filter(s => !s.draft).length}
+            </span>
+          </button>
+          <button
             onClick={() => {
               setActiveTab('recommendations');
               loadRecommendations();
@@ -3094,6 +3185,88 @@ ${aiPromptTopic}`;
                     />
                   ))}
                 </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab: Cover Manager */}
+          {activeTab === 'covers' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3 text-left" style={{ borderColor: ru }}>
+                <div className="text-left">
+                  <h2 className="font-serif italic text-2xl">Cover Manager</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">
+                    Manage, search, resolve, upload, and update cover images for all dossiers
+                  </p>
+                </div>
+                
+                {/* Filters */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <input
+                    type="text"
+                    placeholder="Search by title..."
+                    value={coverSearch}
+                    onChange={(e) => setCoverSearch(e.target.value)}
+                    className="px-3 py-1.5 rounded-lg text-xs focus:outline-none font-mono"
+                    style={{
+                      background: 'rgba(0,0,0,0.3)',
+                      border: '1px solid rgba(237,232,223,0.08)',
+                      color: '#EDE8DF',
+                      caretColor: '#9E7B4C',
+                    }}
+                  />
+                  <label className="flex items-center gap-2 text-xs font-mono text-neutral-400 select-none cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={coverShowDrafts}
+                      onChange={(e) => setCoverShowDrafts(e.target.checked)}
+                      className="rounded border-neutral-800 text-amber-600 focus:ring-0 focus:ring-offset-0 bg-black/40 cursor-pointer"
+                    />
+                    <span>Show Drafts</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Cover manager grid */}
+              {adminStoriesLoading ? (
+                <div className="py-12 text-center text-neutral-500 italic text-sm animate-pulse">
+                  Loading stories for cover manager...
+                </div>
+              ) : (
+                (() => {
+                  const filtered = adminStories.filter(story => {
+                    const matchSearch = (story.title || '').toLowerCase().includes(coverSearch.toLowerCase()) || 
+                                        (story.category || '').toLowerCase().includes(coverSearch.toLowerCase());
+                    const matchDraft = coverShowDrafts ? true : !story.draft;
+                    return matchSearch && matchDraft;
+                  });
+
+                  if (filtered.length === 0) {
+                    return (
+                      <div className="py-16 text-center border border-dashed rounded-xl bg-neutral-950/10 border-neutral-800 space-y-2">
+                        <p className="font-serif italic text-[#EDE8DF]/75">No dossiers match search filters.</p>
+                        <p className="text-[10px] font-mono text-[#6A6560] uppercase tracking-wider">
+                          Adjust your query or check "Show Drafts" to display unpublished dossiers.
+                        </p>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filtered.map(story => (
+                        <CoverManagerCard 
+                          key={story.story_id} 
+                          story={story} 
+                          onSaveImage={handleSaveImageSource}
+                          onEdit={() => startEditing(story)}
+                          isLocal={isLocal}
+                          serverOffline={serverOffline}
+                        />
+                      ))}
+                    </div>
+                  );
+                })()
               )}
             </div>
           )}
@@ -4026,6 +4199,311 @@ ${aiPromptTopic}`;
       )}
 
 
+    </div>
+  );
+}
+
+function CoverManagerCard({ story, onSaveImage, onEdit }) {
+  const [loading, setLoading] = useState(false);
+  const [loadingMethod, setLoadingMethod] = useState(null); // 'url' | 'autofind' | 'upload'
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [remoteUrl, setRemoteUrl] = useState('');
+  const [previewUrl, setPreviewUrl] = useState(story.hero_image);
+  const [imageFailed, setImageFailed] = useState(false);
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    setPreviewUrl(story.hero_image);
+    setImageFailed(false);
+    setSuccess(false);
+    setError('');
+  }, [story.hero_image]);
+
+  const saveAndPreview = async (method, fn) => {
+    setError('');
+    setSuccess(false);
+    setLoading(true);
+    setLoadingMethod(method);
+    try {
+      const newImg = await fn();
+      if (newImg) {
+        setPreviewUrl(newImg);
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 3000);
+      }
+    } catch (e) {
+      setError(e.message || 'Action failed.');
+    } finally {
+      setLoading(false);
+      setLoadingMethod(null);
+    }
+  };
+
+  const handleSaveRemoteUrl = () => {
+    if (!remoteUrl.trim()) return;
+    saveAndPreview('url', async () => {
+      const newImg = await onSaveImage(story.story_id, remoteUrl.trim());
+      setRemoteUrl('');
+      return newImg;
+    });
+  };
+
+  const handleAutoFind = () => {
+    saveAndPreview('autofind', async () => {
+      const res = await fetch('/api/resolve-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: story.title,
+          concepts: story.concepts,
+          category: story.category
+        })
+      });
+      if (!res.ok) throw new Error('API resolution failed');
+      const data = await res.json();
+      if (data.success && data.image_url) {
+        return await onSaveImage(story.story_id, data.image_url);
+      } else {
+        throw new Error(data.message || 'No suitable image resolved.');
+      }
+    });
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    saveAndPreview('upload', () => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        try {
+          const newImg = await onSaveImage(story.story_id, reader.result);
+          resolve(newImg);
+        } catch { reject(new Error('Failed to save uploaded image.')); }
+      };
+      reader.onerror = () => reject(new Error('Failed to read image file.'));
+      reader.readAsDataURL(file);
+    }));
+  };
+
+  const handlePaste = async (e) => {
+    e.preventDefault();
+    let pastedText = e.clipboardData?.getData('text')?.trim() || '';
+    if (pastedText.startsWith('//')) {
+      pastedText = 'https:' + pastedText;
+    } else if (pastedText.startsWith('/') && !pastedText.startsWith('/content/')) {
+      pastedText = 'https://media.cnn.com' + pastedText;
+    }
+    
+    if (pastedText.startsWith('http') || pastedText.startsWith('data:image')) {
+      saveAndPreview('url', async () => {
+        return await onSaveImage(story.story_id, pastedText);
+      });
+      return;
+    }
+    
+    const items = e.clipboardData?.items;
+    if (items) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (item.type.indexOf('image') !== -1) {
+          const file = item.getAsFile();
+          if (file) {
+            saveAndPreview('upload', () => new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = async () => {
+                try {
+                  const newImg = await onSaveImage(story.story_id, reader.result);
+                  resolve(newImg);
+                } catch { reject(new Error('Failed to save pasted image file.')); }
+              };
+              reader.onerror = () => reject(new Error('Failed to read pasted image file.'));
+              reader.readAsDataURL(file);
+            }));
+            return;
+          }
+        }
+      }
+    }
+  };
+
+  const getHashGradient = (id) => {
+    const hash = (id || '').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const gradients = [
+      'radial-gradient(circle at center, #261E14 0%, #0F0B08 100%)',
+      'radial-gradient(circle at center, #221415 0%, #0F0808 100%)',
+      'radial-gradient(circle at center, #152219 0%, #080F0A 100%)',
+      'radial-gradient(circle at center, #141B26 0%, #080B0F 100%)',
+      'radial-gradient(circle at center, #1E1426 0%, #0B080F 100%)',
+      'radial-gradient(circle at center, #262414 0%, #0F0E08 100%)'
+    ];
+    return gradients[hash % gradients.length];
+  };
+
+  const cleanTitle = (story.title || '').split(/[:-]/)[0].trim();
+  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(cleanTitle + ' conceptual art')}`;
+
+  return (
+    <div className="bg-[#0D0B08] border border-neutral-800/40 rounded-xl overflow-hidden text-left flex flex-col justify-between transition-all duration-200 hover:border-neutral-700/60" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+      <div>
+        {/* Aspect Video Cover Preview */}
+        <div className="relative aspect-video w-full bg-black/40 overflow-hidden border-b border-neutral-900 flex items-center justify-center">
+          {previewUrl && !imageFailed ? (
+            <img 
+              src={previewUrl} 
+              alt={story.title} 
+              className="w-full h-full object-cover" 
+              onError={() => setImageFailed(true)} 
+            />
+          ) : (
+            <div 
+              className="w-full h-full flex flex-col justify-between p-3 select-none relative font-mono text-[9px] text-neutral-500"
+              style={{ background: getHashGradient(story.story_id) }}
+            >
+              <div className="absolute top-2 left-2 text-[6px] tracking-widest text-[#9E7B4C]/45 uppercase">
+                CL-4 // SECURE
+              </div>
+              <div className="absolute top-2 right-2 text-[6px] tracking-widest text-red-500/50 uppercase">
+                NO COVER FOUND
+              </div>
+              <div className="flex-1 flex flex-col items-center justify-center text-center px-2">
+                <span className="font-serif italic text-[#EDE8DF]/90 text-[10px] leading-snug line-clamp-1">{cleanTitle}</span>
+                <span className="text-[6px] text-red-500 mt-1 uppercase tracking-widest">Missing Cover Image</span>
+              </div>
+            </div>
+          )}
+
+          {/* Inline Loading / Success Overlay */}
+          {loading && (
+            <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-2">
+              <span className="animate-spin rounded-full h-4 w-4 border-2 border-amber-500 border-t-transparent" />
+              <span className="text-[8px] font-mono uppercase tracking-widest text-amber-500">
+                {loadingMethod === 'autofind' ? 'Auto-Finding Cover...' : 'Saving...'}
+              </span>
+            </div>
+          )}
+
+          {success && (
+            <div className="absolute inset-0 bg-emerald-950/90 flex flex-col items-center justify-center gap-1 font-mono text-[8px] text-emerald-400 uppercase tracking-widest">
+              <Check className="w-4 h-4 text-emerald-400" />
+              <span>Saved & Live</span>
+            </div>
+          )}
+        </div>
+
+        {/* Text Details */}
+        <div className="p-4 space-y-3">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <span className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-neutral-400 uppercase tracking-widest">
+              {story.category}
+            </span>
+            <div className="flex items-center gap-1">
+              {story.draft ? (
+                <span className="text-[7px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase tracking-widest">
+                  Draft
+                </span>
+              ) : (
+                <span className="text-[7px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 uppercase tracking-widest">
+                  Live
+                </span>
+              )}
+            </div>
+          </div>
+
+          <h4 className="font-serif italic text-xs leading-snug text-[#EDE8DF] line-clamp-2" title={story.title}>
+            {story.title}
+          </h4>
+
+          {/* Current Path */}
+          <div className="bg-neutral-950/40 border border-neutral-900 rounded p-1.5 font-mono text-[7px] text-neutral-500 flex items-center justify-between gap-1 overflow-hidden">
+            <span className="truncate">PATH: {story.hero_image || 'None'}</span>
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText(story.hero_image || '');
+                alert('Copied to clipboard!');
+              }}
+              className="text-[6.5px] uppercase tracking-wider text-[#9E7B4C] hover:text-amber-500 cursor-pointer border-0 bg-transparent flex items-center gap-0.5"
+            >
+              <Clipboard className="w-2.5 h-2.5" />
+              <span>Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Control Actions */}
+      <div className="p-4 pt-0 space-y-2 border-t border-neutral-900/50 mt-1">
+        {error && (
+          <p className="text-[8px] font-mono text-red-500 uppercase tracking-widest mt-1 bg-red-950/10 border border-red-950/20 p-1.5 rounded flex items-center gap-1.5">
+            <AlertCircle className="w-3 h-3 flex-shrink-0" />
+            <span>Error: {error}</span>
+          </p>
+        )}
+
+        {/* Input box for URL / Clipboard Paste */}
+        <div className="flex gap-1.5">
+          <div className="flex-1 relative flex items-center">
+            <LinkIcon className="absolute left-2.5 w-3 h-3 text-neutral-600" />
+            <input 
+              type="text" 
+              placeholder="Paste URL / Clipboard..." 
+              value={remoteUrl}
+              onChange={(e) => setRemoteUrl(e.target.value)}
+              onPaste={handlePaste}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSaveRemoteUrl(); }}
+              className="w-full pl-7 pr-2.5 py-1.5 rounded bg-neutral-950/50 border border-neutral-800 text-[9px] font-mono focus:outline-none focus:border-amber-500/50 text-[#EDE8DF]"
+            />
+          </div>
+          <button
+            onClick={handleSaveRemoteUrl}
+            disabled={loading || !remoteUrl.trim()}
+            className="px-2.5 py-1 bg-amber-800/10 border border-amber-800/30 text-amber-400 hover:bg-amber-800/20 disabled:opacity-40 text-[8px] font-mono font-bold uppercase rounded cursor-pointer transition-colors flex items-center gap-1"
+          >
+            <Check className="w-2.5 h-2.5" />
+            <span>Save</span>
+          </button>
+        </div>
+
+        {/* Action Buttons Row */}
+        <div className="grid grid-cols-2 gap-1.5">
+          <button
+            onClick={handleAutoFind}
+            disabled={loading}
+            className="w-full py-1.5 bg-amber-800/10 border border-amber-800/30 hover:bg-amber-800/20 text-amber-400 disabled:opacity-40 text-[8px] font-mono font-bold uppercase tracking-wider rounded cursor-pointer transition-colors"
+          >
+            ⚡ Auto-Resolve
+          </button>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={loading}
+            className="w-full py-1.5 bg-neutral-800/10 border border-neutral-800/45 hover:bg-neutral-800/20 text-neutral-400 disabled:opacity-40 text-[8px] font-mono font-bold uppercase tracking-wider rounded cursor-pointer transition-colors flex items-center justify-center gap-1"
+          >
+            <Upload className="w-3 h-3" />
+            <span>Upload File</span>
+          </button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            accept="image/*" 
+            onChange={handleFileUpload} 
+            className="hidden" 
+          />
+        </div>
+
+        {/* Extra Utility Search Links */}
+        <div className="flex items-center justify-between text-[7px] font-mono tracking-widest text-[#6A6560]">
+          <a href={searchGoogleUrl} target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 hover:underline">
+            🔍 Search Google
+          </a>
+          <button 
+            onClick={onEdit}
+            className="hover:text-[#EDE8DF] border-0 bg-transparent cursor-pointer uppercase text-[7px] font-mono tracking-widest flex items-center gap-0.5"
+          >
+            <Edit className="w-2.5 h-2.5" />
+            <span>Edit Story</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

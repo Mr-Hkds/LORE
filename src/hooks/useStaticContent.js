@@ -47,6 +47,38 @@ async function fetchWikipediaImage(query) {
   return null;
 }
 
+const appStorage = {
+  async get(key) {
+    try {
+      if (window.storage && typeof window.storage.get === 'function') {
+        const res = await window.storage.get(key);
+        if (res) {
+          const str = typeof res === 'object' && res.value !== undefined ? res.value : res;
+          return typeof str === 'string' ? JSON.parse(str) : str;
+        }
+        return null;
+      }
+      const val = localStorage.getItem(key);
+      return val ? JSON.parse(val) : null;
+    } catch (e) {
+      console.warn('Storage read error:', e);
+      return null;
+    }
+  },
+  async set(key, value) {
+    try {
+      const str = JSON.stringify(value);
+      if (window.storage && typeof window.storage.set === 'function') {
+        await window.storage.set(key, str);
+        return;
+      }
+      localStorage.setItem(key, str);
+    } catch (e) {
+      console.warn('Storage write error:', e);
+    }
+  }
+};
+
 /**
  * Hook that loads static story content from /content/stories.json.
  * No API calls to any AI service. Zero tokens consumed.
@@ -63,7 +95,22 @@ export function useStaticContent() {
       const res = await fetch(`/content/stories.json?t=${Date.now()}`);
       if (!res.ok) throw new Error('CDN fetch failed');
       const data = await res.json();
-      setAllStories(data.stories || []);
+      let storiesList = data.stories || [];
+
+      // Merge overrides from storage
+      try {
+        const overrides = await appStorage.get('lore:story-overrides');
+        if (overrides) {
+          storiesList = storiesList.map(s => {
+            const over = overrides[s.story_id];
+            return over ? { ...s, ...over } : s;
+          });
+        }
+      } catch (storageErr) {
+        console.warn('Failed to merge storage overrides:', storageErr);
+      }
+
+      setAllStories(storiesList);
       setLoading(false);
     } catch (err) {
       console.warn('CDN fetch failed, falling back to database API:', err.message);
@@ -72,7 +119,22 @@ export function useStaticContent() {
         const res = await fetch(`/api/stories?t=${Date.now()}`);
         if (!res.ok) throw new Error(`API failed`, { cause: err });
         const data = await res.json();
-        setAllStories(Array.isArray(data) ? data : (data.stories || []));
+        let storiesList = Array.isArray(data) ? data : (data.stories || []);
+
+        // Merge overrides from storage
+        try {
+          const overrides = await appStorage.get('lore:story-overrides');
+          if (overrides) {
+            storiesList = storiesList.map(s => {
+              const over = overrides[s.story_id];
+              return over ? { ...s, ...over } : s;
+            });
+          }
+        } catch (storageErr) {
+          console.warn('Failed to merge storage overrides:', storageErr);
+        }
+
+        setAllStories(storiesList);
         setLoading(false);
       } catch (err2) {
         console.error('Failed to load stories:', err2);
