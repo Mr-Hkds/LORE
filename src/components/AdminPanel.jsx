@@ -1269,9 +1269,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       const archiveResult = await archiveRemoteImage(storyId, imageSource);
       const newHeroImage = archiveResult.path;
       
+      const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
+      // If gitSync is off on production, save the original remote URL or base64 so the server can download/persist it directly in Turso DB
+      const overrideImage = (!isLocal && !isGiantBase64 && !gitSyncOnCover) ? imageSource : newHeroImage;
+      
       const updatedStoryObj = { 
         ...targetStory, 
-        hero_image: newHeroImage,
+        hero_image: overrideImage,
         image_missing: 0,
         draft: 0
       };
@@ -1290,9 +1294,6 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       } catch (dbErr) {
         console.warn('SQLite update skipped (expected on production):', dbErr.message);
       }
-
-      const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
-      const overrideImage = (!isLocal && !isGiantBase64) ? imageSource : newHeroImage;
 
       // Write to storage overrides first to prevent cache lag and race conditions on reload
       try {
