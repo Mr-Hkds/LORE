@@ -10169,102 +10169,6 @@
       "image_missing": 0
     },
     {
-      "story_id": "mirai_botnet_iot_attack",
-      "title": "The Mirai Botnet: When Everyday Devices Attacked the Internet",
-      "category": "cyber_mysteries",
-      "hook": "Imagine your innocent home devices, like cameras or baby monitors, secretly joining a digital army to bring down the internet. This unseen force was the Mirai botnet.",
-      "concepts": [
-        "botnet",
-        "internet_of_things",
-        "cyber_attack",
-        "ddos_attack",
-        "cyber_security",
-        "unsecured_devices"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/mirai_botnet_iot_attack/cover.jpg",
-      "added_date": "2026-07-04",
-      "draft": 0,
-      "reactions": {
-        "like": 44,
-        "gripping": 32,
-        "scared": 6,
-        "mindblown": 10
-      },
-      "evidence_links": [
-        {
-          "label": "CICIoT2023: A Real-Time Dataset and Benchmark for Large-Scale Attacks in IoT Environment (Euclides Carlos Pinto Neto, Sajjad Dadkhah, 2023)",
-          "url": "https://www.mdpi.com/1424-8220/23/13/5941/pdf?version=1687924880"
-        },
-        {
-          "label": "A Survey on IoT Security: Application Areas, Security Threats, and Solution Architectures (Vikas Hassija, Vinay Chamola, 2019)",
-          "url": "https://ieeexplore.ieee.org/ielx7/6287639/8600701/08742551.pdf"
-        },
-        {
-          "label": "A Survey on the Internet of Things (IoT) Forensics: Challenges, Approaches, and Open Issues (Maria Stoyanova, Yannis Nikoloudakis, 2020)",
-          "url": "https://ieeexplore.ieee.org/ielx7/9739/9102343/08950109.pdf"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "Just as Mirai revealed the destructive power of everyday devices, the Stuxnet worm showed how sophisticated cyberweapons can target and cripple critical industrial systems with surgical precision."
-        },
-        {
-          "story_id": "conficker_worm",
-          "shared_concept": "botnet",
-          "transition_line": "While Mirai turned IoT devices into a digital army, earlier threats like the Conficker worm silently built vast botnets from traditional computers, showing the persistent danger of hidden digital networks."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Unseen Tremor",
-          "content": "In September 2016, a strange tremor ran through the digital world. Internet users in various parts of the world started facing slow connections. Popular websites struggled to load, or sometimes did not load at all. These were not major outages at first, but small, puzzling interruptions that felt like tiny, invisible bumps on the information highway. People blamed their internet providers or their own routers, not understanding the true, hidden cause.\n\nThese small disruptions were like quiet whispers, hinting at a larger, darker force gathering strength in the shadows of the internet. It was as if unseen hands were testing the limits of the network, probing for weaknesses. The attacks were hard to trace, appearing to come from many different places at once. The digital world, which often feels so solid and reliable, was starting to show cracks from an unknown pressure.",
-          "cliffhanger": "But these whispers would soon grow into a terrifying roar, revealing a pattern no one could ignore."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Gathering Storm",
-          "content": "As days passed, the digital tremors became more frequent and stronger. Specific online services, like popular gaming platforms or website hosting companies, found themselves under attack. Their servers were overwhelmed with too much traffic, making them crash or become unreachable. Security experts started to notice a common thread: these attacks were not coming from a single source, but from a vast, distributed network of machines.\n\nThis kind of attack is called a 'Distributed Denial of Service' (DDoS). It's like thousands or millions of people trying to enter one small shop at the same time, blocking all normal customers and shutting it down. The puzzling part was the sheer scale and the variety of attacking machines. This suggested a powerful new tool was being used, one that could secretly control countless devices without their owners knowing. A storm was clearly brewing, and the target remained a mystery.",
-          "cliffhanger": "Then, on a single day, this unseen army launched an attack so massive it brought down a huge part of the global internet, revealing its true, chilling power."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Internet's Blackout",
-          "content": "On October 21, 2016, the digital world experienced a massive blackout. A company named Dyn, which acts like a phonebook for the internet, was hit by an unprecedented DDoS attack. When you type a website address like 'google.com', Dyn's servers translate that into a numerical IP address, guiding your computer to the correct server. If Dyn is down, websites cannot be found.\n\nThis single attack caused a cascading failure. Major websites and services like Twitter, Netflix, Amazon, PayPal, CNN, and Reddit became inaccessible for millions of users across the United States and Europe. It was a stark reminder of how fragile our digital infrastructure is, and how much we rely on a few key services. The attack on Dyn was not just a technical failure; it was a clear demonstration of a new, dangerous threat that could disrupt daily life on a global scale.",
-          "cliffhanger": "The world reeled, demanding to know: what unseen force commanded this digital army, and what was it truly made of?"
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Army of Things",
-          "content": "The attackers used a new type of digital weapon: the Mirai botnet. A 'botnet' is a network of hijacked computers or devices, secretly controlled by a single attacker. What made Mirai unique and terrifying was that its army was not made of traditional computers, but of 'Internet of Things' (IoT) devices. These are everyday objects connected to the internet, such as security cameras, digital video recorders (DVRs), home routers, and even smart thermostats and baby monitors.\n\nThese IoT devices often have weak security. Many come with default usernames and passwords (like 'admin' and '123456') that users rarely change. The Mirai malware scanned the internet for these vulnerable devices, tried common default passwords, and when successful, infected them. Once infected, the devices became 'bots', waiting for commands from the Mirai operators. They then launched huge amounts of meaningless data traffic towards Dyn's servers, causing the system to crash. It was an army of ordinary household items, turned into weapons.",
-          "cliffhanger": "The source of the attack was horrifying, but understanding how it was built revealed an even more unsettling truth about our interconnected world."
-        },
-        {
-          "layer": 5,
-          "layer_name": "Unmasking the Code",
-          "content": "Cybersecurity researchers quickly began to study the Mirai malware. They found that its code was surprisingly simple, yet incredibly effective. It worked by constantly scanning the internet for specific types of IoT devices. When it found an open port and guessed the correct default login details, it would install itself onto the device.\n\nOnce infected, the device became part of the botnet, ready to participate in future attacks. The Mirai source code was released publicly online by its creators shortly after the Dyn attack. This was a dangerous move, as it allowed other malicious actors to copy, modify, and create their own Mirai-like botnets, making the threat widespread and harder to control. The public release meant that the genie was out of the bottle, and anyone with basic coding skills could potentially build their own digital army.",
-          "cliffhanger": "The identity of the creators remained a mystery for a time, but their motivations and the ease with which they unleashed such chaos would soon be uncovered."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Unlikely Architects of Chaos",
-          "content": "The investigation eventually led to the unmasking of Mirai's creators. They were three young men: Paras Jha, Josiah White, and Dalton Norman. Their initial motivation was surprisingly petty: to gain an advantage in the online game 'Minecraft'. They wanted to launch DDoS attacks against rival Minecraft servers to knock them offline and gain a competitive edge or extort money from them.\n\nThey had no idea their creation would grow so large and powerful, affecting major internet services globally. Their scheme was to build the largest botnet possible, not fully understanding the far-reaching impact of releasing the source code. The FBI eventually tracked them down, and they faced legal consequences for their actions. It was a chilling example of how small-scale digital mischief could accidentally escalate into a global cyber crisis.",
-          "cliffhanger": "But the true, darkest lesson of Mirai was not just about these individuals, but about a vulnerability that still haunts the internet today, a silent threat waiting to strike again."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Enduring Shadow",
-          "content": "The darkest truth of the Mirai botnet is not only the massive disruption it caused, but the lasting vulnerability it exposed. Many IoT devices still ship with weak security, default passwords, and little to no updates. This means millions of devices around the world remain easy targets for new botnets or variations of Mirai.\n\nThe Mirai incident proved that everyday home devices can be weaponized with terrifying ease. It showed that a few individuals, driven by trivial motives, could inadvertently create a tool capable of shaking the foundations of the global internet. The shadow of Mirai still hangs over us, a stark reminder that the digital world we rely on is only as secure as its weakest link, and that next time, the attack could be even larger, more destructive, and targeted at even more critical systems. The 'Internet of Things' continues to grow, and with it, the potential for an even larger 'Army of Things' controlled by unseen hands.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
       "story_id": "operation_shady_rat",
       "title": "Shady RAT: A Decade of Digital Hoarding",
       "category": "cyber_mysteries",
@@ -10277,7 +10181,7 @@
       "severity": "disturbing",
       "hero_image": "/content/images/operation_shady_rat/cover.jpg",
       "added_date": "2026-07-04",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 45,
         "gripping": 13,
@@ -10314,7 +10218,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "uwe_barschel",
@@ -10669,6 +10573,102 @@
           "layer": 7,
           "layer_name": "The Dark Corner of Accountability",
           "content": "The full extent of the Holmesburg experiments and their human cost was slowly revealed through investigations and lawsuits in the years that followed. While Dr. Kligman always maintained that his work was ethical for its time, many saw it as a severe violation of human rights and medical ethics. He never faced significant professional consequences for his role, continuing a distinguished career.\n\nThe pharmaceutical companies and government agencies that funded the research largely escaped accountability. A class-action lawsuit filed by former inmates in 2000 sought justice, but the legal battle dragged on for years, with many plaintiffs passing away before any meaningful resolution. The case ultimately resulted in a small settlement for some victims, but many argue it was nowhere near enough to cover their suffering or provide true closure. The Holmesburg experiments remain a stark reminder of a time when the vulnerable were exploited in the name of science, leaving behind a legacy of pain and an unfinished quest for justice.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
+    },
+    {
+      "story_id": "mirai_botnet_iot_attack",
+      "title": "The Mirai Botnet: When Everyday Devices Attacked the Internet",
+      "category": "cyber_mysteries",
+      "hook": "Imagine your innocent home devices, like cameras or baby monitors, secretly joining a digital army to bring down the internet. This unseen force was the Mirai botnet.",
+      "concepts": [
+        "botnet",
+        "internet_of_things",
+        "cyber_attack",
+        "ddos_attack",
+        "cyber_security",
+        "unsecured_devices"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/mirai_botnet_iot_attack/cover.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 44,
+        "gripping": 32,
+        "scared": 6,
+        "mindblown": 10
+      },
+      "evidence_links": [
+        {
+          "label": "CICIoT2023: A Real-Time Dataset and Benchmark for Large-Scale Attacks in IoT Environment (Euclides Carlos Pinto Neto, Sajjad Dadkhah, 2023)",
+          "url": "https://www.mdpi.com/1424-8220/23/13/5941/pdf?version=1687924880"
+        },
+        {
+          "label": "A Survey on IoT Security: Application Areas, Security Threats, and Solution Architectures (Vikas Hassija, Vinay Chamola, 2019)",
+          "url": "https://ieeexplore.ieee.org/ielx7/6287639/8600701/08742551.pdf"
+        },
+        {
+          "label": "A Survey on the Internet of Things (IoT) Forensics: Challenges, Approaches, and Open Issues (Maria Stoyanova, Yannis Nikoloudakis, 2020)",
+          "url": "https://ieeexplore.ieee.org/ielx7/9739/9102343/08950109.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber_warfare",
+          "transition_line": "Just as Mirai revealed the destructive power of everyday devices, the Stuxnet worm showed how sophisticated cyberweapons can target and cripple critical industrial systems with surgical precision."
+        },
+        {
+          "story_id": "conficker_worm",
+          "shared_concept": "botnet",
+          "transition_line": "While Mirai turned IoT devices into a digital army, earlier threats like the Conficker worm silently built vast botnets from traditional computers, showing the persistent danger of hidden digital networks."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Unseen Tremor",
+          "content": "In September 2016, a strange tremor ran through the digital world. Internet users in various parts of the world started facing slow connections. Popular websites struggled to load, or sometimes did not load at all. These were not major outages at first, but small, puzzling interruptions that felt like tiny, invisible bumps on the information highway. People blamed their internet providers or their own routers, not understanding the true, hidden cause.\n\nThese small disruptions were like quiet whispers, hinting at a larger, darker force gathering strength in the shadows of the internet. It was as if unseen hands were testing the limits of the network, probing for weaknesses. The attacks were hard to trace, appearing to come from many different places at once. The digital world, which often feels so solid and reliable, was starting to show cracks from an unknown pressure.",
+          "cliffhanger": "But these whispers would soon grow into a terrifying roar, revealing a pattern no one could ignore."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Gathering Storm",
+          "content": "As days passed, the digital tremors became more frequent and stronger. Specific online services, like popular gaming platforms or website hosting companies, found themselves under attack. Their servers were overwhelmed with too much traffic, making them crash or become unreachable. Security experts started to notice a common thread: these attacks were not coming from a single source, but from a vast, distributed network of machines.\n\nThis kind of attack is called a 'Distributed Denial of Service' (DDoS). It's like thousands or millions of people trying to enter one small shop at the same time, blocking all normal customers and shutting it down. The puzzling part was the sheer scale and the variety of attacking machines. This suggested a powerful new tool was being used, one that could secretly control countless devices without their owners knowing. A storm was clearly brewing, and the target remained a mystery.",
+          "cliffhanger": "Then, on a single day, this unseen army launched an attack so massive it brought down a huge part of the global internet, revealing its true, chilling power."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Internet's Blackout",
+          "content": "On October 21, 2016, the digital world experienced a massive blackout. A company named Dyn, which acts like a phonebook for the internet, was hit by an unprecedented DDoS attack. When you type a website address like 'google.com', Dyn's servers translate that into a numerical IP address, guiding your computer to the correct server. If Dyn is down, websites cannot be found.\n\nThis single attack caused a cascading failure. Major websites and services like Twitter, Netflix, Amazon, PayPal, CNN, and Reddit became inaccessible for millions of users across the United States and Europe. It was a stark reminder of how fragile our digital infrastructure is, and how much we rely on a few key services. The attack on Dyn was not just a technical failure; it was a clear demonstration of a new, dangerous threat that could disrupt daily life on a global scale.",
+          "cliffhanger": "The world reeled, demanding to know: what unseen force commanded this digital army, and what was it truly made of?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Army of Things",
+          "content": "The attackers used a new type of digital weapon: the Mirai botnet. A 'botnet' is a network of hijacked computers or devices, secretly controlled by a single attacker. What made Mirai unique and terrifying was that its army was not made of traditional computers, but of 'Internet of Things' (IoT) devices. These are everyday objects connected to the internet, such as security cameras, digital video recorders (DVRs), home routers, and even smart thermostats and baby monitors.\n\nThese IoT devices often have weak security. Many come with default usernames and passwords (like 'admin' and '123456') that users rarely change. The Mirai malware scanned the internet for these vulnerable devices, tried common default passwords, and when successful, infected them. Once infected, the devices became 'bots', waiting for commands from the Mirai operators. They then launched huge amounts of meaningless data traffic towards Dyn's servers, causing the system to crash. It was an army of ordinary household items, turned into weapons.",
+          "cliffhanger": "The source of the attack was horrifying, but understanding how it was built revealed an even more unsettling truth about our interconnected world."
+        },
+        {
+          "layer": 5,
+          "layer_name": "Unmasking the Code",
+          "content": "Cybersecurity researchers quickly began to study the Mirai malware. They found that its code was surprisingly simple, yet incredibly effective. It worked by constantly scanning the internet for specific types of IoT devices. When it found an open port and guessed the correct default login details, it would install itself onto the device.\n\nOnce infected, the device became part of the botnet, ready to participate in future attacks. The Mirai source code was released publicly online by its creators shortly after the Dyn attack. This was a dangerous move, as it allowed other malicious actors to copy, modify, and create their own Mirai-like botnets, making the threat widespread and harder to control. The public release meant that the genie was out of the bottle, and anyone with basic coding skills could potentially build their own digital army.",
+          "cliffhanger": "The identity of the creators remained a mystery for a time, but their motivations and the ease with which they unleashed such chaos would soon be uncovered."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Unlikely Architects of Chaos",
+          "content": "The investigation eventually led to the unmasking of Mirai's creators. They were three young men: Paras Jha, Josiah White, and Dalton Norman. Their initial motivation was surprisingly petty: to gain an advantage in the online game 'Minecraft'. They wanted to launch DDoS attacks against rival Minecraft servers to knock them offline and gain a competitive edge or extort money from them.\n\nThey had no idea their creation would grow so large and powerful, affecting major internet services globally. Their scheme was to build the largest botnet possible, not fully understanding the far-reaching impact of releasing the source code. The FBI eventually tracked them down, and they faced legal consequences for their actions. It was a chilling example of how small-scale digital mischief could accidentally escalate into a global cyber crisis.",
+          "cliffhanger": "But the true, darkest lesson of Mirai was not just about these individuals, but about a vulnerability that still haunts the internet today, a silent threat waiting to strike again."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Enduring Shadow",
+          "content": "The darkest truth of the Mirai botnet is not only the massive disruption it caused, but the lasting vulnerability it exposed. Many IoT devices still ship with weak security, default passwords, and little to no updates. This means millions of devices around the world remain easy targets for new botnets or variations of Mirai.\n\nThe Mirai incident proved that everyday home devices can be weaponized with terrifying ease. It showed that a few individuals, driven by trivial motives, could inadvertently create a tool capable of shaking the foundations of the global internet. The shadow of Mirai still hangs over us, a stark reminder that the digital world we rely on is only as secure as its weakest link, and that next time, the attack could be even larger, more destructive, and targeted at even more critical systems. The 'Internet of Things' continues to grow, and with it, the potential for an even larger 'Army of Things' controlled by unseen hands.",
           "cliffhanger": null
         }
       ],

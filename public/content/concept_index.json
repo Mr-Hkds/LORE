@@ -1425,8 +1425,8 @@
   "cyber_security": [
     "the_cuckoos_egg_kgb_hacker",
     "internet_dark_matter_probes",
-    "mirai_botnet_iot_attack",
-    "morris_worm_first_internet_attack"
+    "morris_worm_first_internet_attack",
+    "mirai_botnet_iot_attack"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
@@ -1603,18 +1603,6 @@
   "mythological_eschatology": [
     "prophecies_of_kali_yuga"
   ],
-  "internet_of_things": [
-    "mirai_botnet_iot_attack"
-  ],
-  "cyber_attack": [
-    "mirai_botnet_iot_attack"
-  ],
-  "ddos_attack": [
-    "mirai_botnet_iot_attack"
-  ],
-  "unsecured_devices": [
-    "mirai_botnet_iot_attack"
-  ],
   "state_sponsored": [
     "operation_shady_rat"
   ],
@@ -1641,5 +1629,17 @@
   ],
   "prison_system_abuse": [
     "holmesburg_prison_experiments"
+  ],
+  "internet_of_things": [
+    "mirai_botnet_iot_attack"
+  ],
+  "cyber_attack": [
+    "mirai_botnet_iot_attack"
+  ],
+  "ddos_attack": [
+    "mirai_botnet_iot_attack"
+  ],
+  "unsecured_devices": [
+    "mirai_botnet_iot_attack"
   ]
 }
