@@ -345,7 +345,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [publishStatus, setPublishStatus] = useState('');
   const [gitSyncOnCover, setGitSyncOnCover] = useState(() => {
     const v = localStorage.getItem('lore:gitsync_on_cover');
-    return v !== null ? v === 'true' : false; // Default to false to avoid Vercel rebuild limits
+    return v !== null ? v === 'true' : true; // Default to true (commits use [skip ci] to bypass Vercel build limits while persisting data)
   });
 
   // Analytics Dashboard state

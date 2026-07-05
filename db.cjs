@@ -1,6 +1,7 @@
 const { createClient } = require('@libsql/client');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
 
 const isVercel = !!process.env.VERCEL;
 
@@ -507,6 +508,26 @@ async function exportStoriesToJSON() {
   }
 }
 
+function fetchGitHubStoriesJson() {
+  return new Promise((resolve, reject) => {
+    const url = 'https://raw.githubusercontent.com/Mr-Hkds/LORE/main/public/content/stories.json';
+    https.get(url, { headers: { 'User-Agent': 'SevenDescents/2.0' }, timeout: 5000 }, (res) => {
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode}`));
+      }
+      let body = '';
+      res.on('data', chunk => body += chunk);
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(body));
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }).on('error', reject);
+  });
+}
+
 async function seed() {
   await ensureInit();
   
@@ -515,11 +536,19 @@ async function seed() {
   const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 
   let data = null;
+  // Try fetching raw stories.json from GitHub first to incorporate skips immediately
   try {
-    data = require('./public/content/stories.json');
-  } catch (err) {
-    if (fs.existsSync(STORIES_FILE)) {
-      data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+    console.log('[DB SEED] Attempting to fetch seed data from GitHub raw URL...');
+    data = await fetchGitHubStoriesJson();
+    console.log('[DB SEED] Successfully fetched seed data from GitHub.');
+  } catch (ghErr) {
+    console.warn('[DB SEED] GitHub raw fetch failed, falling back to local file:', ghErr.message);
+    try {
+      data = require('./public/content/stories.json');
+    } catch (err) {
+      if (fs.existsSync(STORIES_FILE)) {
+        data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
+      }
     }
   }
   const resStoriesCount = await client.execute('SELECT COUNT(*) as count FROM stories');
