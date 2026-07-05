@@ -641,7 +641,7 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       // Resolve cover image via 4-tier cascade (Wikipedia → Commons → Pexels → null)
       console.log('Resolving cover image via multi-tier cascade...');
       try {
-        const imageResult = await resolveStoryImage(storyObj.story_id, item.topic, storyObj.category || item.category);
+        const imageResult = await resolveStoryImage(storyObj.story_id, item.topic, storyObj.category || item.category, process.env.PEXELS_API_KEY || '');
         if (imageResult) {
           const heroImg = await downloadAndSaveImage(storyObj.story_id, imageResult);
           storyObj.hero_image = heroImg;
@@ -704,6 +704,20 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
   // 3. Write back to files
   fs.writeFileSync(STORIES_FILE, JSON.stringify(storiesData, null, 2));
   fs.writeFileSync(CONCEPTS_FILE, JSON.stringify(conceptIndex, null, 2));
+
+  // 4. Write image manifest — lists every committed image filename so Vercel can validate /content/images/ paths
+  try {
+    const imagesDir = path.join(__dirname, 'public', 'content', 'images');
+    const manifestPath = path.join(__dirname, 'public', 'content', 'image_manifest.json');
+    let imageFiles = [];
+    if (fs.existsSync(imagesDir)) {
+      imageFiles = fs.readdirSync(imagesDir).filter(f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f));
+    }
+    fs.writeFileSync(manifestPath, JSON.stringify({ committed: imageFiles, generated_at: new Date().toISOString() }, null, 2));
+    console.log(`Image manifest written: ${imageFiles.length} image(s) catalogued.`);
+  } catch (manifestErr) {
+    console.warn('Failed to write image manifest:', manifestErr.message);
+  }
   await saveRecommendations(recommendations);
   
   // Write automation status JSON

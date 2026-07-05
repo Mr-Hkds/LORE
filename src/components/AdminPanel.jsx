@@ -465,7 +465,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   const isImageMissing = useCallback((story) => {
     if (!story) return true;
-    return !!story.image_missing;
+    if (story.image_missing) return true;
+    if (!story.hero_image) return true;
+    if (story.hero_image === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return true;
+    return false;
   }, []);
 
   // Generator form states
@@ -951,10 +954,11 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   }, [isLocal]);
 
   useEffect(() => {
+    if (activeTab !== 'generator') return;
     fetchAutomationData();
     const interval = setInterval(fetchAutomationData, 10000);
     return () => clearInterval(interval);
-  }, [fetchAutomationData]);
+  }, [fetchAutomationData, activeTab]);
 
   // Force trigger background auto-generation
   const handleTriggerAutomation = async () => {
@@ -993,6 +997,13 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   // Story catalog state loaded from server (includes drafts)
   const [adminStories, setAdminStories] = useState([]);
   const [adminStoriesLoading, setAdminStoriesLoading] = useState(false);
+
+  // Ref that always mirrors the latest adminStories — prevents stale closure in handleSaveImageSource
+  const adminStoriesRef = useRef([]);
+  useEffect(() => { adminStoriesRef.current = adminStories; }, [adminStories]);
+
+  // Ref for aborting the Auto-Resolve All batch
+  const resolveAbortRef = useRef(false);
 
   // Stories loader
   const loadAdminStories = useCallback(async () => {
@@ -1131,12 +1142,18 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     if (approvalStories.length === 0 || resolvingAll) return;
     if (!confirm(`This will automatically search and resolve cover images for all ${approvalStories.length} missing stories. Proceed?`)) return;
 
+    resolveAbortRef.current = false;
     setResolvingAll(true);
     let successCount = 0;
+    const totalToResolve = approvalStories.length;
     
     for (let i = 0; i < approvalStories.length; i++) {
+      if (resolveAbortRef.current) {
+        setResolveProgress('Cancelled.');
+        break;
+      }
       const story = approvalStories[i];
-      setResolveProgress(`Resolving ${i + 1}/${approvalStories.length}: "${story.title}"...`);
+      setResolveProgress(`Resolving ${i + 1}/${totalToResolve}: "${story.title}"...`);
       
       try {
         const res = await fetch('/api/resolve-image', {
@@ -1162,7 +1179,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     
     setResolvingAll(false);
     setResolveProgress('');
-    setToast({ text: `Auto-resolution complete. Successfully resolved ${successCount} out of ${approvalStories.length} images.`, type: 'success' });
+    setToast({ text: `Auto-resolution complete. Resolved ${successCount} of ${totalToResolve} images.`, type: 'success' });
+  };
+
+  const handleCancelResolve = () => {
+    resolveAbortRef.current = true;
+    setResolveProgress('Cancelling...');
   };
 
   const handleSaveImageSource = async (storyId, imageSource) => {
@@ -1200,7 +1222,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {
-        const updatedStories = adminStories
+        // Use adminStoriesRef.current (not adminStories closure) to get the live state
+        // This prevents stale data overwrites during batch Auto-Resolve All operations
+        const updatedStories = adminStoriesRef.current
           .filter(s => s.story_id !== storyId && !s.draft)
           .concat(updatedStoryObj);
         const newConceptIndex = rebuildConceptIndex(updatedStories);
@@ -2253,6 +2277,23 @@ ${aiPromptTopic}`;
     return adminStories.filter(s => isImageMissing(s));
   }, [adminStories, isImageMissing]);
 
+  // Memoize O(n²) computations so they don't run inside .map() on every render
+  const storyMetadata = useMemo(() => {
+    const meta = {};
+    for (const story of adminStories) {
+      meta[story.story_id] = {
+        qualityBadge: getQualityBadge(story),
+        duplicate: findPotentialDuplicate(story, adminStories),
+      };
+    }
+    return meta;
+  }, [adminStories]);
+
+  // Memoized counts for the stats bar
+  const liveStoriesCount = useMemo(() => adminStories.filter(s => !s.draft).length, [adminStories]);
+  const draftStoriesCount = useMemo(() => adminStories.filter(s => s.draft).length, [adminStories]);
+  const unaddressedFeedbackCount = useMemo(() => feedbackItems.filter(f => !f.addressed).length, [feedbackItems]);
+
   const avgRating = useMemo(() => {
     if (feedbackItems.length === 0) return 0;
     const sum = feedbackItems.reduce((acc, curr) => acc + curr.rating, 0);
@@ -2347,7 +2388,7 @@ ${aiPromptTopic}`;
             <span className="font-serif italic text-2xl">
               {adminStories.length}{' '}
               <span className="text-[10px] font-mono font-normal text-[#6A6560]">
-                ({adminStories.filter(s => !s.draft).length} live · {adminStories.filter(s => s.draft).length} draft)
+                ({liveStoriesCount} live · {draftStoriesCount} draft)
               </span>
             </span>
           </div>
@@ -2361,7 +2402,7 @@ ${aiPromptTopic}`;
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
               Unread Feedback
             </span>
-            <span className="font-serif italic text-2xl">{feedbackItems.filter(f => !f.addressed).length}</span>
+            <span className="font-serif italic text-2xl">{unaddressedFeedbackCount}</span>
           </div>
           <div>
             <span className="text-[9px] font-mono tracking-[0.16em] uppercase block mb-1 text-[#6A6560]">
@@ -2898,8 +2939,7 @@ ${aiPromptTopic}`;
                         </h3>
                         <div className="grid grid-cols-1 gap-3">
                           {list.map(story => {
-                            const qb = getQualityBadge(story);
-                            const dup = findPotentialDuplicate(story, stories);
+                            const { qualityBadge: qb, duplicate: dup } = storyMetadata[story.story_id] || {};
 
                             return (
                               <div
@@ -2950,7 +2990,6 @@ ${aiPromptTopic}`;
                                       </span>
                                     )}
                                   </div>
-                                  {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                                   {story.hook && <p className="text-xs text-[#6A6560] mt-1.5 line-clamp-1 italic">"{story.hook}"</p>}
                                 </div>
                               <div className="flex gap-2 flex-shrink-0">
@@ -3023,7 +3062,15 @@ ${aiPromptTopic}`;
                     </span>
                     <span className="text-[#EDE8DF]">{resolveProgress}</span>
                   </div>
-                  <span className="text-[#9E7B4C] animate-pulse">SYS-AUTO-ACTIVE</span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleCancelResolve}
+                      className="text-[9px] font-mono font-bold px-2.5 py-1 border border-red-950/40 text-red-400 rounded-lg hover:bg-red-950/10 cursor-pointer transition-colors active:scale-95"
+                    >
+                      ✕ Cancel
+                    </button>
+                    <span className="text-[#9E7B4C] animate-pulse">SYS-AUTO-ACTIVE</span>
+                  </div>
                 </div>
               )}
 
