@@ -522,13 +522,20 @@ async function seed() {
       data = JSON.parse(fs.readFileSync(STORIES_FILE, 'utf8'));
     }
   }
-  const localStoriesCount = (data && Array.isArray(data.stories)) ? data.stories.length : 0;
+  const resStoriesCount = await client.execute('SELECT COUNT(*) as count FROM stories');
+  const dbStoriesCount = resStoriesCount.rows[0]?.count || 0;
 
   if (data && Array.isArray(data.stories)) {
     try {
-      console.log(`Aligning database with ${data.stories.length} stories from stories.json...`);
+      const isInitialSeed = dbStoriesCount === 0;
+      if (isInitialSeed) {
+        console.log(`Database is empty. Initializing with ${data.stories.length} stories from stories.json...`);
+      } else {
+        console.log(`Database already has ${dbStoriesCount} stories. Running incremental check (INSERT OR IGNORE)...`);
+      }
+
       const batchStmts = data.stories.map(s => ({
-        sql: `INSERT OR REPLACE INTO stories (
+        sql: `${isInitialSeed ? 'INSERT OR REPLACE' : 'INSERT OR IGNORE'} INTO stories (
           story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         args: [
@@ -548,19 +555,21 @@ async function seed() {
         ]
       }));
 
-      // Delete any extra stories from database that are not present in stories.json
-      const idsInJson = data.stories.map(s => s.story_id);
-      if (idsInJson.length > 0) {
-        const placeholders = idsInJson.map(() => '?').join(',');
-        batchStmts.push({
-          sql: `DELETE FROM stories WHERE story_id NOT IN (${placeholders})`,
-          args: idsInJson
-        });
-      } else {
-        batchStmts.push({
-          sql: `DELETE FROM stories`,
-          args: []
-        });
+      // Delete any extra stories from database ONLY if this is the initial seed alignment
+      if (isInitialSeed) {
+        const idsInJson = data.stories.map(s => s.story_id);
+        if (idsInJson.length > 0) {
+          const placeholders = idsInJson.map(() => '?').join(',');
+          batchStmts.push({
+            sql: `DELETE FROM stories WHERE story_id NOT IN (${placeholders})`,
+            args: idsInJson
+          });
+        } else {
+          batchStmts.push({
+            sql: `DELETE FROM stories`,
+            args: []
+          });
+        }
       }
 
       await client.batch(batchStmts, "write");
