@@ -323,7 +323,7 @@ function hasProperThumbnail(story) {
   if (!story || !story.hero_image) return false;
   const img = story.hero_image;
   if (img === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return false;
-  return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:');
+  return img.startsWith('http') || img.startsWith('/') || img.startsWith('data:') || img === 'typography';
 }
 
 async function publishStory(story_id) {

@@ -507,6 +507,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   const isImageMissing = useCallback((story) => {
     if (!story) return true;
+    if (story.hero_image === 'typography') return false;
     if (story.image_missing) return true;
     if (!story.hero_image) return true;
     if (story.hero_image === 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800') return true;
@@ -4428,6 +4429,12 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
     });
   };
 
+  const handleResetToTypography = () => {
+    saveAndPreview('reset', async () => {
+      return await onSaveImage(story.story_id, 'typography');
+    });
+  };
+
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -4688,6 +4695,14 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
             className="hidden" 
           />
         </div>
+
+        <button
+          onClick={handleResetToTypography}
+          disabled={loading}
+          className="w-full py-1.5 bg-red-950/10 border border-red-900/30 hover:bg-red-900/20 text-red-400 disabled:opacity-40 text-[8px] font-mono font-bold uppercase tracking-wider rounded cursor-pointer transition-colors"
+        >
+          ❌ Reset to Typography HUD
+        </button>
 
         {/* Candidates Selection Grid */}
         {candidatesLoading && (
