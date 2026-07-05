@@ -82,7 +82,21 @@ export default function App() {
     try {
       const stored = localStorage.getItem('lore:custom_stories');
       if (stored) {
-        setLocalStories(JSON.parse(stored));
+        let parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          let hasMigration = false;
+          parsed = parsed.map(s => {
+            if (s.hero_image && s.hero_image.endsWith('/cover.jpg')) {
+              s.hero_image = `/content/images/${s.story_id}.jpg`;
+              hasMigration = true;
+            }
+            return s;
+          });
+          if (hasMigration) {
+            localStorage.setItem('lore:custom_stories', JSON.stringify(parsed));
+          }
+          setLocalStories(parsed);
+        }
       }
     } catch (e) {
       console.warn('Failed to load custom stories from localStorage', e);

@@ -661,9 +661,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       return { path: remoteUrl, base64Clean: null };
     }
 
-    const folderName = storyId || 'general';
-    const filename = 'cover.jpg';
-    const relativePath = `/content/images/${folderName}/${filename}`;
+    const filename = `${storyId || 'general'}.jpg`;
+    const relativePath = `/content/images/${filename}`;
 
     // 1. Fetch base64 content
     const imgData = await fetchRemoteImageBase64(remoteUrl);
@@ -679,8 +678,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            storyId: folderName,
-            filename,
+            storyId: storyId || 'general',
+            filename: filename,
             base64Data: imgData.base64Clean
           })
         });
@@ -1042,7 +1041,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
   // Stories loader
   const loadAdminStories = useCallback(async () => {
-    setAdminStoriesLoading(true);
+    if (adminStoriesRef.current.length === 0) {
+      setAdminStoriesLoading(true);
+    }
     try {
       const res = await fetch('/api/stories?include_drafts=true');
       let storiesList = [];
@@ -1234,7 +1235,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         if (res.ok) {
           const data = await res.json();
           if (data.success && data.image_url) {
-            await handleSaveImageSource(story.story_id, data.image_url);
+            await handleSaveImageSource(story.story_id, data.image_url, true);
             successCount++;
           }
         }
@@ -1253,7 +1254,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     setResolveProgress('Cancelling...');
   };
 
-  const handleSaveImageSource = async (storyId, imageSource) => {
+  const handleSaveImageSource = async (storyId, imageSource, silent = false) => {
     try {
       const targetStory = adminStories.find(s => s.story_id === storyId);
       if (!targetStory) return null;
@@ -1299,6 +1300,10 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
 
       setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
       if (refetchStories) refetchStories();
+      
+      if (!silent) {
+        setToast({ text: `Story cover image updated successfully!`, type: 'success' });
+      }
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {
@@ -3085,6 +3090,7 @@ ${aiPromptTopic}`;
                               <div className="flex gap-2 flex-shrink-0">
                                 {story.draft && (
                                   <button
+                                    // eslint-disable-next-line react-hooks/refs
                                     onClick={() => handlePublishStory(story.story_id)}
                                     disabled={isPublishing}
                                     className="text-[9px] font-mono font-bold tracking-wider px-2.5 py-1.5 bg-emerald-800/20 border border-emerald-800/40 text-emerald-400 rounded-lg hover:bg-emerald-800/30 cursor-pointer transition-colors active:scale-95 disabled:opacity-40"

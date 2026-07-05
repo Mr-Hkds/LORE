@@ -1252,18 +1252,19 @@ const server = http.createServer(async (req, res) => {
       }
 
       const folderName = storyId || 'general';
-      const storyImagesDir = path.join(__dirname, 'public', 'content', 'images', folderName);
-      if (!fs.existsSync(storyImagesDir)) {
-        fs.mkdirSync(storyImagesDir, { recursive: true });
+      const imagesDir = path.join(__dirname, 'public', 'content', 'images');
+      if (!fs.existsSync(imagesDir)) {
+        fs.mkdirSync(imagesDir, { recursive: true });
       }
 
       const base64Clean = base64Data.replace(/^data:image\/\w+;base64,/, '');
       const buffer = Buffer.from(base64Clean, 'base64');
       
-      const localPath = path.join(storyImagesDir, filename);
+      const finalFilename = filename === 'cover.jpg' ? `${folderName}.jpg` : filename;
+      const localPath = path.join(imagesDir, finalFilename);
       fs.writeFileSync(localPath, buffer);
 
-      const relativePath = `/content/images/${folderName}/${filename}`;
+      const relativePath = `/content/images/${finalFilename}`;
       console.log(`[UPLOAD] Image saved locally: ${relativePath}`);
 
       res.writeHead(200, { 'Content-Type': 'application/json' });

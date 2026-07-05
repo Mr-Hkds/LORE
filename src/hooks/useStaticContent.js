@@ -99,8 +99,21 @@ export function useStaticContent() {
 
       // Merge overrides from storage
       try {
-        const overrides = await appStorage.get('lore:story-overrides');
+        let overrides = await appStorage.get('lore:story-overrides');
         if (overrides) {
+          // Auto-migrate legacy nested directory cover paths to flat layout
+          let hasMigration = false;
+          for (const key of Object.keys(overrides)) {
+            const over = overrides[key];
+            if (over && over.hero_image && over.hero_image.endsWith('/cover.jpg')) {
+              over.hero_image = `/content/images/${key}.jpg`;
+              hasMigration = true;
+            }
+          }
+          if (hasMigration) {
+            await appStorage.set('lore:story-overrides', overrides);
+          }
+          
           storiesList = storiesList.map(s => {
             const over = overrides[s.story_id];
             return over ? { ...s, ...over } : s;
