@@ -4453,40 +4453,42 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
 
   const cleanTitle = (story.title || '').split(/[:\-–—]/)[0].trim();
 
-  // Build organic search query by extracting key noun terms and discarding noise/stop words
+  // Build organic search query by extracting key noun terms from the ENTIRE title and discarding noise/stop words
   const buildOrganicQuery = () => {
     const title = story.title || '';
-    let mainText = title.split(/[:\-–—]/)[0].trim();
+    let fullText = title.replace(/[:\-–—()]/g, " ");
     const stopWords = new Set([
       'the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from',
       'by', 'of', 'in', 'with', 'about', 'as', 'into', 'through', 'over', 'under',
-      'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against'
+      'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against',
+      'is', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does',
+      'did', 'that', 'this', 'these', 'those', 'who', 'whom', 'which', 'what'
     ]);
-    const words = mainText
-      .replace(/[.,/#!$%^&*;:{}=\-_~()?"'’]/g, "")
+    const words = fullText
+      .replace(/[.,/#!$%^&*;:_~"?''’]/g, "")
       .split(/\s+/)
       .filter(word => {
         const lower = word.toLowerCase();
         return lower.length > 1 && !stopWords.has(lower);
       });
-    const keyTerms = words.slice(0, 4).join(' ');
+    const keyTerms = words.slice(0, 5).join(' ');
     
     const cat = story.category || '';
     let aesthetics = 'vintage photograph';
     if (cat === 'psychology') {
-      aesthetics = 'retro psychological photography mind brain';
+      aesthetics = 'retro psychological photo brain mind';
     } else if (cat === 'mythology') {
       aesthetics = 'ancient stone statue classical sculpture artifact';
     } else if (cat === 'true_crime') {
-      aesthetics = 'evidence photo archival forensic dossier';
+      aesthetics = 'evidence photo forensic archive document';
     } else if (cat === 'gov_experiments') {
-      aesthetics = 'classified retro laboratory vintage test';
+      aesthetics = 'classified laboratory vintage document cold war test';
     } else if (cat === 'paranormal') {
-      aesthetics = 'eerie paranormal polaroid anomaly shadow';
+      aesthetics = 'eerie paranormal polaroid mystery shadow';
     } else if (cat === 'conspiracy') {
-      aesthetics = 'classified surveillance dossier vintage photo';
+      aesthetics = 'classified surveillance document photo dossier';
     } else if (cat === 'cyber_mysteries') {
-      aesthetics = 'vintage terminal mainframe CRT screen';
+      aesthetics = 'vintage terminal CRT mainframe screen';
     }
     return `${keyTerms} ${aesthetics}`.trim();
   };
