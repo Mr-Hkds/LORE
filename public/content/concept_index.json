@@ -74,11 +74,11 @@
     "the_bystander_effect",
     "jonestown_massacre_001",
     "dancing_mania_1518_strasbourg",
-    "salem_witch_trials_001",
     "the_third_wave_experiment",
     "tanganyika_laughter_epidemic",
     "the_batavia_shipwreck_mutiny",
-    "mahabharat_psychological_epic"
+    "mahabharat_psychological_epic",
+    "salem_witch_trials_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -636,21 +636,12 @@
     "stockholm_syndrome_001"
   ],
   "mass_hysteria": [
-    "salem_witch_trials_001",
     "curse_of_tutankhamun",
     "vampire_panic_eastern_europe",
     "demonic_possession_exorcism_001",
     "the_beast_of_gevaudan",
     "spring_heeled_jack_legend",
-    "amityville_horror_house_possessed"
-  ],
-  "judicial_injustice": [
-    "salem_witch_trials_001"
-  ],
-  "religious_extremism": [
-    "salem_witch_trials_001"
-  ],
-  "spectral_evidence": [
+    "amityville_horror_house_possessed",
     "salem_witch_trials_001"
   ],
   "addiction": [
@@ -1685,5 +1676,14 @@
   ],
   "international_collaboration": [
     "operation_condor_001"
+  ],
+  "judicial_injustice": [
+    "salem_witch_trials_001"
+  ],
+  "religious_extremism": [
+    "salem_witch_trials_001"
+  ],
+  "spectral_evidence": [
+    "salem_witch_trials_001"
   ]
 }
