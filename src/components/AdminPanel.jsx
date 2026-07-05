@@ -4356,7 +4356,24 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
   };
 
   const cleanTitle = (story.title || '').split(/[:-]/)[0].trim();
-  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(cleanTitle + ' conceptual art')}`;
+  const cat = story.category || '';
+  let suffix = 'vintage photograph'; // Safe fallback
+  if (cat === 'psychology') {
+    suffix = 'brain mind dark psychology retro photography';
+  } else if (cat === 'mythology') {
+    suffix = 'ancient statue classical sculpture engraving artifact';
+  } else if (cat === 'true_crime') {
+    suffix = 'crime scene evidence vintage photo forensic dossier';
+  } else if (cat === 'gov_experiments') {
+    suffix = 'classified document vintage laboratory cold war experiment';
+  } else if (cat === 'paranormal') {
+    suffix = 'eerie vintage photo paranormal mystery shadow polaroid';
+  } else if (cat === 'conspiracy') {
+    suffix = 'surveillance dossier classified document vintage photo';
+  } else if (cat === 'cyber_mysteries') {
+    suffix = 'vintage computer screen terminal hacking code mainframe';
+  }
+  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(cleanTitle + ' ' + suffix)}`;
 
   return (
     <div className="bg-[#0D0B08] border border-neutral-800/40 rounded-xl overflow-hidden text-left flex flex-col justify-between transition-all duration-200 hover:border-neutral-700/60" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>

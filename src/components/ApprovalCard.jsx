@@ -10,6 +10,31 @@ function isValidImage(url) {
   return url && url.trim() !== '' && url !== PLACEHOLDER_URL;
 }
 
+function getGoogleSearchUrl(title, category) {
+  const cleanTitle = (title || '').split(/[:-]/)[0].trim();
+  const cat = category || '';
+  
+  let suffix = 'vintage photograph'; // Safe fallback
+  if (cat === 'psychology') {
+    suffix = 'brain mind dark psychology retro photography';
+  } else if (cat === 'mythology') {
+    suffix = 'ancient statue classical sculpture engraving artifact';
+  } else if (cat === 'true_crime') {
+    suffix = 'crime scene evidence vintage photo forensic dossier';
+  } else if (cat === 'gov_experiments') {
+    suffix = 'classified document vintage laboratory cold war experiment';
+  } else if (cat === 'paranormal') {
+    suffix = 'eerie vintage photo paranormal mystery shadow polaroid';
+  } else if (cat === 'conspiracy') {
+    suffix = 'surveillance dossier classified document vintage photo';
+  } else if (cat === 'cyber_mysteries') {
+    suffix = 'vintage computer screen terminal hacking code mainframe';
+  }
+  
+  const query = `${cleanTitle} ${suffix}`;
+  return `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}`;
+}
+
 export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) {
   // Local preview tracks the image immediately after any save action
   const initialPreview = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
@@ -404,7 +429,7 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
                 <span className="text-[10px] font-semibold text-[#EDE8DF]">Instant Clipboard Paste</span>
               </div>
               <a
-                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent((story.title || '').split(/[:-]/)[0].trim() + ' conceptual art')}`}
+                href={getGoogleSearchUrl(story.title, story.category)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
