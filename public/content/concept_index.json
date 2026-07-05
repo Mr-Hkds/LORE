@@ -19,14 +19,14 @@
     "operation_gladio",
     "curse_of_tutankhamun",
     "jfk_assassination_001",
-    "spontaneous_human_combustion_shc",
     "the_beast_of_gevaudan",
     "mlk_assassination_conspiracy",
-    "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "vatican_bank_scandal_calvi_p2",
     "assassination_rfk_conspiracy",
-    "uwe_barschel"
+    "uwe_barschel",
+    "spontaneous_human_combustion_shc",
+    "hope_diamond_curse"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -525,8 +525,8 @@
   "paranormal_activity": [
     "winchester_mystery_house",
     "edinburgh_vaults_001",
-    "spontaneous_human_combustion_shc",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "spontaneous_human_combustion_shc"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -548,10 +548,10 @@
     "the_bloop_unexplained_sound",
     "edinburgh_vaults_001",
     "demonic_possession_exorcism_001",
-    "spontaneous_human_combustion_shc",
     "spring_heeled_jack_legend",
     "children_past_lives_stevenson_research",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "spontaneous_human_combustion_shc"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1277,14 +1277,14 @@
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
+    "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
+    "conficker_worm",
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
-    "internet_dark_matter_probes",
-    "solarwinds_supply_chain_attack_001",
-    "conficker_worm"
+    "internet_dark_matter_probes"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1295,8 +1295,48 @@
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage"
   ],
+  "wendigo_psychosis": [
+    "wendigo_insatiable_hunger"
+  ],
+  "cultural_fear": [
+    "wendigo_insatiable_hunger"
+  ],
+  "cyber_warfare": [
+    "solarwinds_supply_chain_attack_001",
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak",
+    "ukraine_power_grid_cyber_attack_2015_2016",
+    "project_raven_uae_cyber_mercenaries"
+  ],
+  "supply_chain_attack": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "government_espionage": [
+    "solarwinds_supply_chain_attack_001"
+  ],
+  "software_vulnerability": [
+    "solarwinds_supply_chain_attack_001"
+  ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
+  ],
+  "botnet": [
+    "conficker_worm",
+    "mirai_botnet_iot_attack"
+  ],
+  "unknown_threat_actor": [
+    "conficker_worm"
+  ],
+  "digital_weaponry": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
+  "zero-day_exploits": [
+    "conficker_worm",
+    "the_shadow_brokers_nsa_leak"
+  ],
+  "global_cyber_threat": [
+    "conficker_worm"
   ],
   "creation_beyond_control": [
     "the_golem_of_prague"
@@ -1312,42 +1352,6 @@
   ],
   "forbidden_knowledge": [
     "the_golem_of_prague"
-  ],
-  "cyber_warfare": [
-    "the_shadow_brokers_nsa_leak",
-    "ukraine_power_grid_cyber_attack_2015_2016",
-    "project_raven_uae_cyber_mercenaries",
-    "solarwinds_supply_chain_attack_001",
-    "conficker_worm"
-  ],
-  "zero-day_exploits": [
-    "the_shadow_brokers_nsa_leak",
-    "conficker_worm"
-  ],
-  "digital_weaponry": [
-    "the_shadow_brokers_nsa_leak",
-    "conficker_worm"
-  ],
-  "cyber_security": [
-    "morris_worm_first_internet_attack",
-    "the_cuckoos_egg_kgb_hacker",
-    "internet_dark_matter_probes",
-    "mirai_botnet_iot_attack"
-  ],
-  "internet_history": [
-    "morris_worm_first_internet_attack"
-  ],
-  "unintended_consequences": [
-    "morris_worm_first_internet_attack"
-  ],
-  "computer_viruses": [
-    "morris_worm_first_internet_attack"
-  ],
-  "human_combustion": [
-    "spontaneous_human_combustion_shc"
-  ],
-  "forensic_mystery": [
-    "spontaneous_human_combustion_shc"
   ],
   "cryptid": [
     "the_beast_of_gevaudan"
@@ -1418,6 +1422,12 @@
   "military_cover_up": [
     "the_roswell_incident"
   ],
+  "cyber_security": [
+    "the_cuckoos_egg_kgb_hacker",
+    "internet_dark_matter_probes",
+    "mirai_botnet_iot_attack",
+    "morris_worm_first_internet_attack"
+  ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
     "vikram_vetala_tales"
@@ -1432,31 +1442,9 @@
     "black_monk_pontefract_001",
     "the_bell_witch_haunting"
   ],
-  "fierce_deity": [
-    "kala_bhairava_origin_time_punishment"
-  ],
   "divine_punishment": [
-    "kala_bhairava_origin_time_punishment",
-    "myth_of_atlantis_plato"
-  ],
-  "ego_destruction": [
+    "myth_of_atlantis_plato",
     "kala_bhairava_origin_time_punishment"
-  ],
-  "cosmic_justice": [
-    "kala_bhairava_origin_time_punishment",
-    "bhasmasura_mohini_deception"
-  ],
-  "time_and_death": [
-    "kala_bhairava_origin_time_punishment"
-  ],
-  "cursed_objects": [
-    "hope_diamond_curse"
-  ],
-  "historical_mysteries": [
-    "hope_diamond_curse"
-  ],
-  "paranormal_phenomena": [
-    "hope_diamond_curse"
   ],
   "surveillance": [
     "project_raven_uae_cyber_mercenaries"
@@ -1497,6 +1485,10 @@
   ],
   "unchecked_power": [
     "bhasmasura_mohini_deception"
+  ],
+  "cosmic_justice": [
+    "bhasmasura_mohini_deception",
+    "kala_bhairava_origin_time_punishment"
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
@@ -1599,10 +1591,6 @@
   "prison_system_abuse": [
     "holmesburg_prison_experiments"
   ],
-  "botnet": [
-    "mirai_botnet_iot_attack",
-    "conficker_worm"
-  ],
   "internet_of_things": [
     "mirai_botnet_iot_attack"
   ],
@@ -1621,25 +1609,37 @@
   "persistent_threat": [
     "operation_shady_rat"
   ],
-  "wendigo_psychosis": [
-    "wendigo_insatiable_hunger"
+  "internet_history": [
+    "morris_worm_first_internet_attack"
   ],
-  "cultural_fear": [
-    "wendigo_insatiable_hunger"
+  "unintended_consequences": [
+    "morris_worm_first_internet_attack"
   ],
-  "supply_chain_attack": [
-    "solarwinds_supply_chain_attack_001"
+  "computer_viruses": [
+    "morris_worm_first_internet_attack"
   ],
-  "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
+  "human_combustion": [
+    "spontaneous_human_combustion_shc"
   ],
-  "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
+  "forensic_mystery": [
+    "spontaneous_human_combustion_shc"
   ],
-  "unknown_threat_actor": [
-    "conficker_worm"
+  "fierce_deity": [
+    "kala_bhairava_origin_time_punishment"
   ],
-  "global_cyber_threat": [
-    "conficker_worm"
+  "ego_destruction": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "time_and_death": [
+    "kala_bhairava_origin_time_punishment"
+  ],
+  "cursed_objects": [
+    "hope_diamond_curse"
+  ],
+  "historical_mysteries": [
+    "hope_diamond_curse"
+  ],
+  "paranormal_phenomena": [
+    "hope_diamond_curse"
   ]
 }
