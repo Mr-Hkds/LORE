@@ -51,12 +51,7 @@ const GRADIENTS = [
 
 export const getShortTitle = (title) => {
   if (!title) return '';
-  let clean = title.split(/[:\-–—]/)[0].trim();
-  const words = clean.split(/\s+/);
-  if (words.length > 4) {
-    clean = words.slice(0, 4).join(' ');
-  }
-  return clean;
+  return title.split(/[:\-–—(]/)[0].trim();
 };
 
 const getGradientIndex = (storyId) => {
@@ -131,23 +126,26 @@ function StoryCardImage({ story, alt, inView }) {
     
     return (
       <div 
-        className="w-full h-full flex flex-col justify-between p-4.5 relative select-none overflow-hidden border-b border-neutral-900/40"
+        className="w-full h-full flex flex-col justify-between p-5 relative select-none overflow-hidden border-b border-neutral-900/40"
         style={{ background: bgGradient }}
       >
         {/* Top telemetry detail */}
-        <div className="flex justify-between items-center opacity-35 text-[7px] font-mono tracking-widest text-[#EDE8DF]">
+        <div className="flex justify-between items-center opacity-65 text-[7.5px] font-mono tracking-widest text-[#EDE8DF] font-bold">
           <span>[ SEC-ARCHIVE.0{story.story_id ? story.story_id.slice(-2) : 'XX'} ]</span>
           <span>SIGNAL RES.90</span>
         </div>
 
         {/* Center Typography */}
-        <div className="my-auto text-center py-2 px-1">
+        <div className="my-auto text-center py-3 px-2 flex flex-col items-center justify-center gap-1.5">
+          <span className="text-[6px] tracking-[0.25em] font-mono text-[#9E7B4C]/80 uppercase font-bold mb-0.5">
+            Dossier: {story.category ? story.category.replace('_', ' ') : 'Classified'}
+          </span>
           <span 
-            className="block font-serif italic text-neutral-200/60 leading-relaxed uppercase"
+            className="block font-serif italic text-[#EDE8DF] leading-relaxed uppercase font-medium"
             style={{ 
-              fontSize: '11px',
-              letterSpacing: '0.18em',
-              textShadow: '0 2px 8px rgba(0,0,0,0.8)'
+              fontSize: '12px',
+              letterSpacing: '0.15em',
+              textShadow: '0 2px 10px rgba(0,0,0,0.95)'
             }}
           >
             {shortTitle}
@@ -155,7 +153,7 @@ function StoryCardImage({ story, alt, inView }) {
         </div>
 
         {/* Bottom telemetry detail */}
-        <div className="flex justify-between items-center opacity-40 text-[7px] font-mono tracking-widest text-[#9E7B4C]">
+        <div className="flex justify-between items-center opacity-70 text-[7.5px] font-mono tracking-widest text-[#9E7B4C] font-bold">
           <span>LEVEL-04</span>
           <span>{freq} MHz</span>
         </div>
