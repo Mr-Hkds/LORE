@@ -4451,25 +4451,47 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
     return gradients[hash % gradients.length];
   };
 
-  const cleanTitle = (story.title || '').split(/[:-]/)[0].trim();
-  const cat = story.category || '';
-  let suffix = 'vintage photograph'; // Safe fallback
-  if (cat === 'psychology') {
-    suffix = 'brain mind dark psychology retro photography';
-  } else if (cat === 'mythology') {
-    suffix = 'ancient statue classical sculpture engraving artifact';
-  } else if (cat === 'true_crime') {
-    suffix = 'crime scene evidence vintage photo forensic dossier';
-  } else if (cat === 'gov_experiments') {
-    suffix = 'classified document vintage laboratory cold war experiment';
-  } else if (cat === 'paranormal') {
-    suffix = 'eerie vintage photo paranormal mystery shadow polaroid';
-  } else if (cat === 'conspiracy') {
-    suffix = 'surveillance dossier classified document vintage photo';
-  } else if (cat === 'cyber_mysteries') {
-    suffix = 'vintage computer screen terminal hacking code mainframe';
-  }
-  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(cleanTitle + ' ' + suffix)}`;
+  const cleanTitle = (story.title || '').split(/[:\-–—]/)[0].trim();
+
+  // Build organic search query by extracting key noun terms and discarding noise/stop words
+  const buildOrganicQuery = () => {
+    const title = story.title || '';
+    let mainText = title.split(/[:\-–—]/)[0].trim();
+    const stopWords = new Set([
+      'the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from',
+      'by', 'of', 'in', 'with', 'about', 'as', 'into', 'through', 'over', 'under',
+      'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against'
+    ]);
+    const words = mainText
+      .replace(/[.,/#!$%^&*;:{}=\-_~()?"'’]/g, "")
+      .split(/\s+/)
+      .filter(word => {
+        const lower = word.toLowerCase();
+        return lower.length > 1 && !stopWords.has(lower);
+      });
+    const keyTerms = words.slice(0, 4).join(' ');
+    
+    const cat = story.category || '';
+    let aesthetics = 'vintage photograph';
+    if (cat === 'psychology') {
+      aesthetics = 'retro psychological photography mind brain';
+    } else if (cat === 'mythology') {
+      aesthetics = 'ancient stone statue classical sculpture artifact';
+    } else if (cat === 'true_crime') {
+      aesthetics = 'evidence photo archival forensic dossier';
+    } else if (cat === 'gov_experiments') {
+      aesthetics = 'classified retro laboratory vintage test';
+    } else if (cat === 'paranormal') {
+      aesthetics = 'eerie paranormal polaroid anomaly shadow';
+    } else if (cat === 'conspiracy') {
+      aesthetics = 'classified surveillance dossier vintage photo';
+    } else if (cat === 'cyber_mysteries') {
+      aesthetics = 'vintage terminal mainframe CRT screen';
+    }
+    return `${keyTerms} ${aesthetics}`.trim();
+  };
+
+  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(buildOrganicQuery())}`;
 
   return (
     <div className="bg-[#0D0B08] border border-neutral-800/40 rounded-xl overflow-hidden text-left flex flex-col justify-between transition-all duration-200 hover:border-neutral-700/60" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>

@@ -11,27 +11,40 @@ function isValidImage(url) {
 }
 
 function getGoogleSearchUrl(title, category) {
-  const cleanTitle = (title || '').split(/[:-]/)[0].trim();
+  if (!title) return '';
+  let mainText = title.split(/[:\-–—]/)[0].trim();
+  const stopWords = new Set([
+    'the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from',
+    'by', 'of', 'in', 'with', 'about', 'as', 'into', 'through', 'over', 'under',
+    'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against'
+  ]);
+  const words = mainText
+    .replace(/[.,/#!$%^&*;:{}=\-_~()?"'’]/g, "")
+    .split(/\s+/)
+    .filter(word => {
+      const lower = word.toLowerCase();
+      return lower.length > 1 && !stopWords.has(lower);
+    });
+  const keyTerms = words.slice(0, 4).join(' ');
+  
   const cat = category || '';
-  
-  let suffix = 'vintage photograph'; // Safe fallback
+  let aesthetics = 'vintage photograph';
   if (cat === 'psychology') {
-    suffix = 'brain mind dark psychology retro photography';
+    aesthetics = 'retro psychological photography mind brain';
   } else if (cat === 'mythology') {
-    suffix = 'ancient statue classical sculpture engraving artifact';
+    aesthetics = 'ancient stone statue classical sculpture artifact';
   } else if (cat === 'true_crime') {
-    suffix = 'crime scene evidence vintage photo forensic dossier';
+    aesthetics = 'evidence photo archival forensic dossier';
   } else if (cat === 'gov_experiments') {
-    suffix = 'classified document vintage laboratory cold war experiment';
+    aesthetics = 'classified retro laboratory vintage test';
   } else if (cat === 'paranormal') {
-    suffix = 'eerie vintage photo paranormal mystery shadow polaroid';
+    aesthetics = 'eerie paranormal polaroid anomaly shadow';
   } else if (cat === 'conspiracy') {
-    suffix = 'surveillance dossier classified document vintage photo';
+    aesthetics = 'classified surveillance dossier vintage photo';
   } else if (cat === 'cyber_mysteries') {
-    suffix = 'vintage computer screen terminal hacking code mainframe';
+    aesthetics = 'vintage terminal mainframe CRT screen';
   }
-  
-  const query = `${cleanTitle} ${suffix}`;
+  const query = `${keyTerms} ${aesthetics}`.trim();
   return `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}`;
 }
 
