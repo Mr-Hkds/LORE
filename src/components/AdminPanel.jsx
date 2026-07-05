@@ -314,6 +314,9 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
   const [activeTab, setActiveTab] = useState('catalog');
   const [coverSearch, setCoverSearch] = useState('');
   const [coverShowDrafts, setCoverShowDrafts] = useState(false);
+  const [coverCategory, setCoverCategory] = useState('all');
+  const [coverDateFilter, setCoverDateFilter] = useState('all'); // 'all' | 'today' | 'week'
+  const [coverSortOrder, setCoverSortOrder] = useState('newest'); // 'newest' | 'oldest'
 
   // GitHub Sync & Credentials Settings
   const [ghOwner, setGhOwner] = useState(() => {
@@ -3214,6 +3217,7 @@ ${aiPromptTopic}`;
                 
                 {/* Filters */}
                 <div className="flex items-center gap-3 flex-wrap">
+                  {/* Search input */}
                   <input
                     type="text"
                     placeholder="Search by title..."
@@ -3227,6 +3231,45 @@ ${aiPromptTopic}`;
                       caretColor: '#9E7B4C',
                     }}
                   />
+
+                  {/* Category Filter */}
+                  <select
+                    value={coverCategory}
+                    onChange={(e) => setCoverCategory(e.target.value)}
+                    className="px-3 py-1.5 rounded-lg text-xs focus:outline-none font-mono bg-[#161412] text-[#EDE8DF] border border-neutral-800 cursor-pointer hover:border-neutral-700/80 transition-colors"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="psychology">Psychology</option>
+                    <option value="true_crime">True Crime</option>
+                    <option value="paranormal">Paranormal</option>
+                    <option value="mythology">Mythology</option>
+                    <option value="gov_experiments">Gov Experiments</option>
+                    <option value="conspiracy">Conspiracies</option>
+                    <option value="cyber_mysteries">Digital Shadows</option>
+                  </select>
+
+                  {/* Date Filter */}
+                  <select
+                    value={coverDateFilter}
+                    onChange={(e) => setCoverDateFilter(e.target.value)}
+                    className="px-3 py-1.5 rounded-lg text-xs focus:outline-none font-mono bg-[#161412] text-[#EDE8DF] border border-neutral-800 cursor-pointer hover:border-neutral-700/80 transition-colors"
+                  >
+                    <option value="all">All Dates</option>
+                    <option value="today">Added Today</option>
+                    <option value="week">Added this Week</option>
+                  </select>
+
+                  {/* Sort Order */}
+                  <select
+                    value={coverSortOrder}
+                    onChange={(e) => setCoverSortOrder(e.target.value)}
+                    className="px-3 py-1.5 rounded-lg text-xs focus:outline-none font-mono bg-[#161412] text-[#EDE8DF] border border-neutral-800 cursor-pointer hover:border-neutral-700/80 transition-colors"
+                  >
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                  </select>
+
+                  {/* Show drafts */}
                   <label className="flex items-center gap-2 text-xs font-mono text-neutral-400 select-none cursor-pointer">
                     <input
                       type="checkbox"
@@ -3246,12 +3289,32 @@ ${aiPromptTopic}`;
                 </div>
               ) : (
                 (() => {
-                  const filtered = adminStories.filter(story => {
-                    const matchSearch = (story.title || '').toLowerCase().includes(coverSearch.toLowerCase()) || 
-                                        (story.category || '').toLowerCase().includes(coverSearch.toLowerCase());
-                    const matchDraft = coverShowDrafts ? true : !story.draft;
-                    return matchSearch && matchDraft;
-                  });
+                  const filtered = adminStories
+                    .filter(story => {
+                      const matchSearch = (story.title || '').toLowerCase().includes(coverSearch.toLowerCase()) || 
+                                          (story.category || '').toLowerCase().includes(coverSearch.toLowerCase());
+                      
+                      const matchDraft = coverShowDrafts ? true : !story.draft;
+                      
+                      const matchCategory = coverCategory === 'all' ? true : story.category === coverCategory;
+                      
+                      let matchDate = true;
+                      if (coverDateFilter === 'today') {
+                        const todayStr = new Date().toLocaleDateString('en-CA');
+                        matchDate = story.added_date === todayStr;
+                      } else if (coverDateFilter === 'week') {
+                        const addedTime = new Date(story.added_date || '2026-01-01').getTime();
+                        const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+                        matchDate = addedTime >= oneWeekAgo;
+                      }
+
+                      return matchSearch && matchDraft && matchCategory && matchDate;
+                    })
+                    .sort((a, b) => {
+                      const dateA = new Date(a.added_date || '2026-01-01').getTime();
+                      const dateB = new Date(b.added_date || '2026-01-01').getTime();
+                      return coverSortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                    });
 
                   if (filtered.length === 0) {
                     return (
