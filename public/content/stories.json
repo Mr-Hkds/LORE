@@ -10527,58 +10527,6 @@
       "image_missing": true
     },
     {
-      "story_id": "operation_shady_rat",
-      "title": "Shady RAT: A Decade of Digital Hoarding",
-      "category": "cyber_mysteries",
-      "hook": "A hidden worm fed on global secrets for ten years, stealing data from governments, banks and tech firms without a single hand seen.",
-      "concepts": [
-        "cyber_espionage",
-        "state_sponsored",
-        "persistent_threat"
-      ],
-      "severity": "disturbing",
-      "hero_image": "/content/images/operation_shady_rat/cover.jpg",
-      "added_date": "2026-07-04",
-      "draft": false,
-      "reactions": {
-        "like": 45,
-        "gripping": 13,
-        "scared": 4,
-        "mindblown": 6
-      },
-      "evidence_links": [
-        {
-          "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23311886.2025.2499171?needAccess=true"
-        },
-        {
-          "label": "Regulating Cyber Space: An Examination of U.S.-China Relations (Adam K. Ghazi‐Tehrani, 2016)",
-          "url": "https://escholarship.org/uc/item/9jb873k7"
-        },
-        {
-          "label": "Coordinating uncertainty in the political economy of cyber threat intelligence (Rebecca Slayton, Lilly Pijnenburg Muller, 2025)",
-          "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner",
-          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": true
-    },
-    {
       "story_id": "holmesburg_prison_experiments",
       "title": "The Unseen Scars: Holmesburg Prison's Dark Experiments",
       "category": "gov_experiments",
@@ -10595,7 +10543,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/holmesburg_prison_experiments/cover.jpg",
       "added_date": "2026-07-04",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 20,
         "gripping": 28,
@@ -10669,6 +10617,58 @@
           "layer": 7,
           "layer_name": "The Dark Corner of Accountability",
           "content": "The full extent of the Holmesburg experiments and their human cost was slowly revealed through investigations and lawsuits in the years that followed. While Dr. Kligman always maintained that his work was ethical for its time, many saw it as a severe violation of human rights and medical ethics. He never faced significant professional consequences for his role, continuing a distinguished career.\n\nThe pharmaceutical companies and government agencies that funded the research largely escaped accountability. A class-action lawsuit filed by former inmates in 2000 sought justice, but the legal battle dragged on for years, with many plaintiffs passing away before any meaningful resolution. The case ultimately resulted in a small settlement for some victims, but many argue it was nowhere near enough to cover their suffering or provide true closure. The Holmesburg experiments remain a stark reminder of a time when the vulnerable were exploited in the name of science, leaving behind a legacy of pain and an unfinished quest for justice.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": true
+    },
+    {
+      "story_id": "operation_shady_rat",
+      "title": "Shady RAT: A Decade of Digital Hoarding",
+      "category": "cyber_mysteries",
+      "hook": "A hidden worm fed on global secrets for ten years, stealing data from governments, banks and tech firms without a single hand seen.",
+      "concepts": [
+        "cyber_espionage",
+        "state_sponsored",
+        "persistent_threat"
+      ],
+      "severity": "disturbing",
+      "hero_image": "/content/images/operation_shady_rat/cover.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 45,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23311886.2025.2499171?needAccess=true"
+        },
+        {
+          "label": "Regulating Cyber Space: An Examination of U.S.-China Relations (Adam K. Ghazi‐Tehrani, 2016)",
+          "url": "https://escholarship.org/uc/item/9jb873k7"
+        },
+        {
+          "label": "Coordinating uncertainty in the political economy of cyber threat intelligence (Rebecca Slayton, Lilly Pijnenburg Muller, 2025)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
           "cliffhanger": null
         }
       ],
