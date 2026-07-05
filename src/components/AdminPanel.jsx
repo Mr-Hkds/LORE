@@ -1283,10 +1283,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         console.warn('SQLite update skipped (expected on production):', dbErr.message);
       }
 
-      setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
-      if (refetchStories) refetchStories();
-
-      // Write to storage overrides to prevent cache lag on reload
+      // Write to storage overrides first to prevent cache lag and race conditions on reload
       try {
         const currentOverrides = (await appStorage.get('lore:story-overrides')) || {};
         currentOverrides[storyId] = {
@@ -1299,14 +1296,16 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       } catch (e) {
         console.warn('Failed to save to local overrides storage:', e);
       }
+
+      setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
+      if (refetchStories) refetchStories();
       
       // Commit to GitHub — this is the real source of truth
       if (ghToken) {
-        // Use adminStoriesRef.current (not adminStories closure) to get the live state
-        // This prevents stale data overwrites during batch Auto-Resolve All operations
+        // Map in-place to preserve original index/order of stories in the json registry
         const updatedStories = adminStoriesRef.current
-          .filter(s => s.story_id !== storyId && !s.draft)
-          .concat(updatedStoryObj);
+          .map(s => s.story_id === storyId ? updatedStoryObj : s)
+          .filter(s => !s.draft);
         const newConceptIndex = rebuildConceptIndex(updatedStories);
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
@@ -4198,6 +4197,22 @@ ${aiPromptTopic}`;
         </div>
       )}
 
+      {/* Global Publishing Progress HUD */}
+      {isPublishing && (
+        <div className="fixed bottom-6 left-6 z-[9998] px-6 py-4 rounded-xl border backdrop-blur-md flex items-center gap-3 animate-pulse transition-all duration-300 max-w-sm shadow-xl"
+             style={{ backgroundColor: 'rgba(158, 123, 76, 0.15)', borderColor: '#9E7B4C' }}>
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9E7B4C] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#9E7B4C]"></span>
+          </span>
+          <div className="text-left font-mono">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#9E7B4C]">Sync in Progress</p>
+            <p className="text-[9px] text-[#EDE8DF]/90 mt-0.5 uppercase tracking-wide truncate max-w-[240px]" title={publishStatus}>
+              {publishStatus || 'Uploading changes...'}
+            </p>
+          </div>
+        </div>
+      )}
 
     </div>
   );
