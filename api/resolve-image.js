@@ -1,18 +1,26 @@
 // Serverless endpoint: POST /api/resolve-image
-// Runs the multi-tier image cascade for a single story
-// Body: { topic, concepts?, category?, pexels_key? }
-// Returns: { success, image_url, source, width?, height? }
+// Runs the multi-tier image cascade for a single story, or returns a list of candidate images
+// Body: { topic, concepts?, category?, pexels_key?, candidates? }
+// Returns: { success, image_url, source, width?, height? } or { success, candidates: [...] }
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  
+  // Support both GET (with query parameters) and POST
+  const method = req.method;
+  if (method !== 'POST' && method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
   try {
-    const { topic, concepts, category, pexels_key } = req.body || {};
+    const params = method === 'GET' ? req.query : (req.body || {});
+    const { topic, category } = params;
+    const candidatesMode = params.candidates === 'true' || params.candidates === true;
+
     if (!topic) {
       return res.status(400).json({ error: 'Missing required field: topic' });
     }
@@ -40,15 +48,121 @@ export default async function handler(req, res) {
     // Clean topic for search: split at colon/dash, use first part
     const cleanTopic = (topic || '').split(/[:\u2014\u2013-]/)[0].trim();
 
-    // ─── Tier 1: Wikipedia REST API ─────────────────────────────────────
+    // Enforce smart organic search terms
+    let fullText = topic.replace(/[:\-–—()]/g, " ");
+    const stopWords = new Set([
+      'the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from',
+      'by', 'of', 'in', 'with', 'about', 'as', 'into', 'through', 'over', 'under',
+      'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against'
+    ]);
+    const words = fullText
+      .replace(/[.,/#!$%^&*;:_~"?''’]/g, "")
+      .split(/\s+/)
+      .filter(word => {
+        const lower = word.toLowerCase();
+        return lower.length > 1 && !stopWords.has(lower);
+      });
+    const searchQuery = words.slice(0, 4).join(' ');
+
+    // ─── CANDIDATES MODE ────────────────────────────────────────────────
+    if (candidatesMode) {
+      console.log(`[RESOLVE-IMAGE] Candidate search mode triggered for "${searchQuery}"`);
+      const candidates = [];
+      const seenUrls = new Set();
+
+      const addCandidate = (url, source, width, height) => {
+        if (!url || seenUrls.has(url)) return;
+        seenUrls.add(url);
+        candidates.push({ url, source, width: width || 800, height: height || 600 });
+      };
+
+      // 1. Wikipedia Search API + Summary fetch for top 3 articles
+      try {
+        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQuery)}&srlimit=3&format=json&origin=*`;
+        const searchData = await fetchJSON(searchUrl);
+        const searchItems = searchData?.query?.search || [];
+
+        for (const item of searchItems) {
+          const pageTitle = item.title;
+          if (!pageTitle) continue;
+          try {
+            const summary = await fetchJSON(
+              `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`
+            );
+            const img = summary?.originalimage || summary?.thumbnail;
+            if (img?.source && (img.width || 0) >= 300) {
+              addCandidate(img.source, 'wikipedia', img.width, img.height);
+            }
+          } catch (sumErr) { /* ignore */ }
+
+          // Fetch other images on the Wikipedia article page
+          try {
+            const imagesListUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=images&imlimit=6&format=json&origin=*`;
+            const listData = await fetchJSON(imagesListUrl);
+            const pagesObj = listData?.query?.pages || {};
+            const pageId = Object.keys(pagesObj)[0];
+            const images = pagesObj[pageId]?.images || [];
+            
+            const fileNames = images
+              .map(img => img.title)
+              .filter(title => {
+                const lower = title.toLowerCase();
+                return lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png');
+              });
+
+            if (fileNames.length > 0) {
+              const titlesQuery = fileNames.map(name => encodeURIComponent(name)).join('|');
+              const detailsUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${titlesQuery}&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=800&format=json&origin=*`;
+              const detailsData = await fetchJSON(detailsUrl);
+              const detailPages = detailsData?.query?.pages || {};
+              for (const pid of Object.keys(detailPages)) {
+                const info = detailPages[pid]?.imageinfo?.[0];
+                if (info && info.url) {
+                  const imgUrl = info.thumburl || info.url;
+                  addCandidate(imgUrl, 'wikipedia_gallery', info.width, info.height);
+                }
+              }
+            }
+          } catch (galleryErr) { /* ignore */ }
+        }
+      } catch (wikiErr) {
+        console.warn('[RESOLVE-IMAGE] Wikipedia candidate resolution failed:', wikiErr.message);
+      }
+
+      // 2. Wikimedia Commons Search
+      try {
+        const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(searchQuery)}&gsrnamespace=6&gsrlimit=6&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=800&format=json&origin=*`;
+        const data = await fetchJSON(commonsUrl);
+        const pages = data?.query?.pages || {};
+        for (const p of Object.values(pages)) {
+          const info = p.imageinfo?.[0];
+          if (info && info.url) {
+            const mime = (info.mime || '').toLowerCase();
+            if (!mime.includes('svg') && mime.includes('image') && (info.width || 0) >= 300) {
+              const imgUrl = info.thumburl || info.url;
+              addCandidate(imgUrl, 'commons', info.width, info.height);
+            }
+          }
+        }
+      } catch (commonsErr) {
+        console.warn('[RESOLVE-IMAGE] Commons candidate resolution failed:', commonsErr.message);
+      }
+
+      return res.status(200).json({
+        success: true,
+        candidates: candidates.slice(0, 6) // Return top 6 high-quality candidate images
+      });
+    }
+
+    // ─── STANDARD CASCADE MODE (Fallback) ────────────────────────────────
+    // 1. Wikipedia Direct Lookup
     try {
-      console.log(`[RESOLVE-IMAGE] Tier 1 (Wikipedia): "${cleanTopic}"`);
+      console.log(`[RESOLVE-IMAGE] Tier 1 (Wikipedia Direct): "${cleanTopic}"`);
       const data = await fetchJSON(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanTopic)}`
       );
       const img = data?.originalimage || data?.thumbnail;
       if (img?.source && (img.width || 0) >= 300) {
-        console.log(`[RESOLVE-IMAGE] \u2713 Wikipedia hit: ${img.width}x${img.height}`);
         return res.status(200).json({
           success: true,
           image_url: img.source,
@@ -57,30 +171,37 @@ export default async function handler(req, res) {
           height: img.height,
         });
       }
-    } catch (err) {
-      console.log(`[RESOLVE-IMAGE] Tier 1 miss: ${err.message}`);
-    }
+    } catch (err) { /* continue */ }
 
-    // Also try the full topic if cleanTopic was different
-    if (cleanTopic !== topic.trim()) {
-      try {
-        const data = await fetchJSON(
-          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.trim())}`
-        );
-        const img = data?.originalimage || data?.thumbnail;
-        if (img?.source && (img.width || 0) >= 300) {
-          return res.status(200).json({
-            success: true, image_url: img.source, source: 'wikipedia',
-            width: img.width, height: img.height,
-          });
-        }
-      } catch (err) { /* continue */ }
-    }
-
-    // ─── Tier 2: Wikimedia Commons Search ───────────────────────────────
+    // 2. Wikipedia Search API + Summary Fallback
     try {
-      console.log(`[RESOLVE-IMAGE] Tier 2 (Commons): "${cleanTopic}"`);
-      const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(cleanTopic)}&gsrnamespace=6&gsrlimit=8&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=800&format=json&origin=*`;
+      const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQuery)}&srlimit=2&format=json&origin=*`;
+      const searchData = await fetchJSON(searchUrl);
+      const searchItems = searchData?.query?.search || [];
+      for (const item of searchItems) {
+        const pageTitle = item.title;
+        if (!pageTitle) continue;
+        try {
+          const summary = await fetchJSON(
+            `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`
+          );
+          const img = summary?.originalimage || summary?.thumbnail;
+          if (img?.source && (img.width || 0) >= 300) {
+            return res.status(200).json({
+              success: true,
+              image_url: img.source,
+              source: 'wikipedia',
+              width: img.width,
+              height: img.height
+            });
+          }
+        } catch (sumErr) { /* ignore */ }
+      }
+    } catch (searchErr) { /* continue */ }
+
+    // 3. Wikimedia Commons Search
+    try {
+      const commonsUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(searchQuery)}&gsrlimit=6&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=800&format=json&origin=*`;
       const data = await fetchJSON(commonsUrl);
       const pages = data?.query?.pages;
       if (pages) {
@@ -91,7 +212,7 @@ export default async function handler(req, res) {
             const mime = (info.mime || '').toLowerCase();
             if (mime.includes('svg')) return false;
             if (!mime.includes('image')) return false;
-            if ((info.width || 0) < 400) return false;
+            if ((info.width || 0) < 300) return false;
             return true;
           })
           .sort((a, b) => (b.imageinfo[0].width || 0) - (a.imageinfo[0].width || 0));
@@ -99,7 +220,6 @@ export default async function handler(req, res) {
         if (candidates.length > 0) {
           const best = candidates[0].imageinfo[0];
           const imgUrl = best.thumburl || best.url;
-          console.log(`[RESOLVE-IMAGE] \u2713 Commons hit: ${best.width}x${best.height}`);
           return res.status(200).json({
             success: true,
             image_url: imgUrl,
@@ -109,55 +229,9 @@ export default async function handler(req, res) {
           });
         }
       }
-    } catch (err) {
-      console.log(`[RESOLVE-IMAGE] Tier 2 miss: ${err.message}`);
-    }
+    } catch (err) { /* continue */ }
 
-    // ─── Tier 3: Pexels API ─────────────────────────────────────────────
-    const pexelsKey = pexels_key || process.env.PEXELS_API_KEY;
-    if (pexelsKey) {
-      try {
-        // Generate smart search query based on category
-        const categoryTerms = {
-          psychology: 'dark psychology mind experiment',
-          true_crime: 'crime investigation dark noir',
-          paranormal: 'mysterious dark fog abandoned',
-          mythology: 'ancient temple mythology ruins',
-          gov_experiments: 'classified laboratory government secret',
-          conspiracy: 'surveillance conspiracy dark shadows',
-          cyber_mysteries: 'cybersecurity hacker dark screen',
-        };
-        const catTerm = categoryTerms[category] || 'mysterious dark documentary';
-        const topicWords = cleanTopic.split(/\s+/).slice(0, 2).join(' ');
-        const searchQuery = `${topicWords} ${catTerm}`.trim();
-
-        console.log(`[RESOLVE-IMAGE] Tier 3 (Pexels): "${searchQuery}"`);
-        const data = await fetchJSON(
-          `https://api.pexels.com/v1/search?query=${encodeURIComponent(searchQuery)}&per_page=5&orientation=landscape`,
-          { Authorization: pexelsKey }
-        );
-
-        if (data?.photos?.length > 0) {
-          const photo = data.photos[0];
-          const imgUrl = photo.src?.landscape || photo.src?.large || photo.src?.original;
-          console.log(`[RESOLVE-IMAGE] \u2713 Pexels hit: ${photo.width}x${photo.height}`);
-          return res.status(200).json({
-            success: true,
-            image_url: imgUrl,
-            source: 'pexels',
-            width: photo.width,
-            height: photo.height,
-            photographer: photo.photographer,
-            pexels_url: photo.url,
-          });
-        }
-      } catch (err) {
-        console.log(`[RESOLVE-IMAGE] Tier 3 miss: ${err.message}`);
-      }
-    }
-
-    // ─── Tier 4: No image found ─────────────────────────────────────────
-    console.log(`[RESOLVE-IMAGE] All tiers exhausted for "${topic}". Returning null.`);
+    // Fallback
     return res.status(200).json({
       success: false,
       image_url: null,

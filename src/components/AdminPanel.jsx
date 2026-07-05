@@ -4323,14 +4323,42 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
   const [remoteUrl, setRemoteUrl] = useState('');
   const [previewUrl, setPreviewUrl] = useState(story.hero_image);
   const [imageFailed, setImageFailed] = useState(false);
+  const [candidates, setCandidates] = useState([]);
+  const [candidatesLoading, setCandidatesLoading] = useState(false);
   const fileInputRef = useRef(null);
+
+  const fetchCandidates = async () => {
+    if (!story?.title) return;
+    setCandidatesLoading(true);
+    try {
+      const res = await fetch(`/api/resolve-image?topic=${encodeURIComponent(story.title)}&candidates=true`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.candidates) {
+          setCandidates(data.candidates);
+        } else {
+          setCandidates([]);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch cover candidates:', err.message);
+    } finally {
+      setCandidatesLoading(false);
+    }
+  };
 
   useEffect(() => {
     setPreviewUrl(story.hero_image);
     setImageFailed(false);
     setSuccess(false);
     setError('');
-  }, [story.hero_image]);
+    setCandidates([]);
+    
+    // Auto-fetch candidates if cover is missing or failing
+    if (!story.hero_image || story.image_missing) {
+      fetchCandidates();
+    }
+  }, [story.story_id, story.hero_image]);
 
   const saveAndPreview = async (method, fn) => {
     setError('');
@@ -4363,21 +4391,39 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
 
   const handleAutoFind = () => {
     saveAndPreview('autofind', async () => {
-      const res = await fetch('/api/resolve-image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          topic: story.title,
-          concepts: story.concepts,
-          category: story.category
-        })
-      });
-      if (!res.ok) throw new Error('API resolution failed');
-      const data = await res.json();
-      if (data.success && data.image_url) {
-        return await onSaveImage(story.story_id, data.image_url);
+      // Try resolving candidates list first
+      let resolvedUrl = null;
+      try {
+        const res = await fetch(`/api/resolve-image?topic=${encodeURIComponent(story.title)}&candidates=true`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.candidates && data.candidates.length > 0) {
+            resolvedUrl = data.candidates[0].url;
+          }
+        }
+      } catch { /* ignore and fallback */ }
+
+      if (!resolvedUrl) {
+        const res = await fetch('/api/resolve-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic: story.title,
+            concepts: story.concepts,
+            category: story.category
+          })
+        });
+        if (!res.ok) throw new Error('API resolution failed');
+        const data = await res.json();
+        if (data.success && data.image_url) {
+          resolvedUrl = data.image_url;
+        }
+      }
+
+      if (resolvedUrl) {
+        return await onSaveImage(story.story_id, resolvedUrl);
       } else {
-        throw new Error(data.message || 'No suitable image resolved.');
+        throw new Error('No suitable image resolved.');
       }
     });
   };
@@ -4643,8 +4689,66 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
           />
         </div>
 
+        {/* Candidates Selection Grid */}
+        {candidatesLoading && (
+          <div className="flex items-center gap-1.5 py-2 px-1 text-[8px] font-mono text-amber-500/80 uppercase tracking-widest animate-pulse">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <span>Scanning wiki page for historical photos...</span>
+          </div>
+        )}
+
+        {!candidatesLoading && candidates.length > 0 && (
+          <div className="mt-2.5 border-t border-neutral-900/40 pt-2.5">
+            <div className="flex justify-between items-center text-[7.5px] font-mono text-[#9E7B4C] mb-2 uppercase tracking-widest font-bold">
+              <span>Classified Candidates Found:</span>
+              <button 
+                onClick={fetchCandidates}
+                className="hover:text-amber-500 text-[6.5px] font-mono border-0 bg-transparent cursor-pointer uppercase tracking-widest hover:underline"
+              >
+                Rescan
+              </button>
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {candidates.map((cand, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => saveAndPreview('autofind', () => onSaveImage(story.story_id, cand.url))}
+                  disabled={loading}
+                  className="group relative h-14 w-full rounded overflow-hidden border border-neutral-800/80 hover:border-amber-700/50 bg-[#0C0B0A] cursor-pointer focus:outline-none transition-colors"
+                  title={`Select cover image candidate from ${cand.source}`}
+                >
+                  <img
+                    src={cand.url}
+                    alt={`Candidate ${idx}`}
+                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-200"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-black/80 py-0.5 text-[5px] font-mono text-center text-[#EDE8DF]/80 uppercase tracking-wider truncate">
+                    {cand.source.replace('wikipedia_', '')}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!candidatesLoading && candidates.length === 0 && (!story.hero_image || story.image_missing) && (
+          <div className="mt-2 text-[7px] font-mono text-neutral-600 uppercase tracking-widest flex items-center justify-between">
+            <span>No candidates found on Wikipedia page.</span>
+            <button 
+              onClick={fetchCandidates}
+              className="hover:text-[#EDE8DF] hover:underline border-0 bg-transparent cursor-pointer uppercase text-[7px] font-mono tracking-widest"
+            >
+              🔍 Scan Matches
+            </button>
+          </div>
+        )}
+
         {/* Extra Utility Search Links */}
-        <div className="flex items-center justify-between text-[7px] font-mono tracking-widest text-[#6A6560]">
+        <div className="flex items-center justify-between text-[7px] font-mono tracking-widest text-[#6A6560] border-t border-neutral-900/30 pt-2.5 mt-2">
           <a href={searchGoogleUrl} target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 hover:underline">
             🔍 Search Google
           </a>
