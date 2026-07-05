@@ -25,8 +25,8 @@
     "assassination_rfk_conspiracy",
     "spontaneous_human_combustion_shc",
     "vatican_bank_scandal_calvi_p2",
-    "uwe_barschel",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "uwe_barschel"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -60,11 +60,11 @@
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
     "vatican_bank_scandal_calvi_p2",
-    "uwe_barschel",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "the_shadow_brokers_nsa_leak",
     "human_radiation_experiments_us",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "uwe_barschel"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -1143,8 +1143,8 @@
   "family_trauma": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
-    "amityville_horror_house_possessed",
-    "the_bell_witch_haunting"
+    "the_bell_witch_haunting",
+    "amityville_horror_house_possessed"
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001",
@@ -1659,12 +1659,6 @@
   "consequences_of_actions": [
     "ashwatthama_curse_eternal_suffering"
   ],
-  "true_crime": [
-    "amityville_horror_house_possessed"
-  ],
-  "hoax_claims": [
-    "amityville_horror_house_possessed"
-  ],
   "international_collaboration": [
     "operation_condor_001"
   ],
@@ -1709,5 +1703,11 @@
   ],
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
+  ],
+  "true_crime": [
+    "amityville_horror_house_possessed"
+  ],
+  "hoax_claims": [
+    "amityville_horror_house_possessed"
   ]
 }
