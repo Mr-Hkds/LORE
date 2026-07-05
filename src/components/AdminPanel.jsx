@@ -1288,15 +1288,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         console.warn('SQLite update skipped (expected on production):', dbErr.message);
       }
 
+      const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
+      const overrideImage = (!isLocal && !isGiantBase64) ? imageSource : newHeroImage;
+
       // Write to storage overrides first to prevent cache lag and race conditions on reload
       try {
         const currentOverrides = (await appStorage.get('lore:story-overrides')) || {};
-        
-        // Use the original image source (remote URL or base64) for instant display on production,
-        // unless it's a giant base64 string (> 500KB) to protect localStorage limits.
-        const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
-        const overrideImage = (!isLocal && !isGiantBase64) ? imageSource : newHeroImage;
-
         currentOverrides[storyId] = {
           hero_image: overrideImage,
           image_missing: 0,
@@ -1336,7 +1333,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
       }
       
-      return newHeroImage;
+      return overrideImage;
     } catch (err) {
       setToast({ text: `Failed to save cover image: ${err.message}`, type: 'error' });
       throw err;
