@@ -527,9 +527,9 @@
   ],
   "paranormal_activity": [
     "winchester_mystery_house",
-    "edinburgh_vaults_001",
     "spontaneous_human_combustion_shc",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "edinburgh_vaults_001"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -549,12 +549,12 @@
     "the_wow_signal",
     "the_children_of_woolpit",
     "the_bloop_unexplained_sound",
-    "edinburgh_vaults_001",
     "demonic_possession_exorcism_001",
     "spontaneous_human_combustion_shc",
     "spring_heeled_jack_legend",
     "children_past_lives_stevenson_research",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "edinburgh_vaults_001"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1156,15 +1156,6 @@
     "enfield_poltergeist_001",
     "the_bell_witch_haunting"
   ],
-  "urban_legends": [
-    "edinburgh_vaults_001"
-  ],
-  "historical_trauma": [
-    "edinburgh_vaults_001"
-  ],
-  "haunted_location": [
-    "edinburgh_vaults_001"
-  ],
   "ghost_ship": [
     "the_mary_celeste_mystery"
   ],
@@ -1667,5 +1658,14 @@
   ],
   "blood_magic": [
     "raktabija_infinite_replication"
+  ],
+  "urban_legends": [
+    "edinburgh_vaults_001"
+  ],
+  "historical_trauma": [
+    "edinburgh_vaults_001"
+  ],
+  "haunted_location": [
+    "edinburgh_vaults_001"
   ]
 }

@@ -6226,88 +6226,6 @@
       "image_missing": false
     },
     {
-      "story_id": "edinburgh_vaults_001",
-      "title": "The Edinburgh Vaults: Echoes from a Buried City",
-      "category": "paranormal",
-      "hook": "Beneath Edinburgh's bustling streets lies a sprawling, forgotten underworld—a labyrinth of stone vaults where desperation once bred disease, crime, and an enduring chill that whispers of the past.",
-      "concepts": [
-        "paranormal_activity",
-        "urban_legends",
-        "historical_trauma",
-        "unexplained_phenomena",
-        "haunted_location"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/edinburgh_vaults_001/cover.jpg",
-      "added_date": "2026-06-28",
-      "draft": false,
-      "reactions": {
-        "like": 31,
-        "gripping": 34,
-        "scared": 66,
-        "mindblown": 7
-      },
-      "evidence_links": [
-        {
-          "label": "Paranormal tourism in Edinburgh : storytelling, appropriating ghost culture and presenting an uncanny heritage (Elizabeth Holzhauser, 2015)",
-          "url": "http://hdl.handle.net/10023/6922"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "winchester_mystery_house",
-          "shared_concept": "paranormal_activity",
-          "transition_line": "Just as the Winchester Mystery House stands as a testament to a widow's haunted conscience, the Edinburgh Vaults reveal how a city's collective suffering can permeate its very foundations, creating a chilling echo of the past."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Buried City's Breath",
-          "content": "In the late 18th century, as Edinburgh flourished, a monumental engineering project unfolded: the construction of the South Bridge. Beneath its twenty arches, a series of vast, cavernous spaces were designed to house workshops, taverns, and storage facilities. These chambers, known as the Edinburgh Vaults or South Bridge Vaults, were initially a hub of commercial activity, bustling with tradesmen and merchants. The intention was to create a vibrant subterranean extension of the city's burgeoning economy, a testament to its ambition and growth.\n\nHowever, the grand vision for the vaults quickly soured. Poor construction, rampant dampness, and inadequate ventilation made them unsuitable for their intended purpose. Within a few decades, most legitimate businesses abandoned the subterranean spaces, unable to contend with the perpetually dark, waterlogged, and often disease-ridden conditions. The initial promise of prosperity gave way to a creeping neglect that would soon define their character.\n\nAs the legitimate commerce receded, a different kind of activity began to seep into the abandoned chambers, a shadow economy that thrived on the very isolation and darkness the vaults provided. This shift marked the true beginning of the vaults' dark legend.",
-          "cliffhanger": "What began as a commercial failure would rapidly transform into a haven for the city's most desperate and dangerous elements, sealing their fate as a true underbelly."
-        },
-        {
-          "layer": 2,
-          "layer_name": "A Descent into Despair",
-          "content": "By the early 19th century, the Edinburgh Vaults had become a notorious slum, a refuge for the city's poorest, most marginalized, and criminal populations. Families, often entire generations, crammed into the damp, windowless cells, living in squalor unimaginable even by the standards of the time. Without sanitation, fresh air, or natural light, disease spread unchecked, and life expectancy plummeted. The vaults became a literal pit of misery, a forgotten world just meters beneath the polite society above.\n\nConditions deteriorated to such an extent that the vaults were often waist-deep in raw sewage and refuse. The air was thick with the stench of decay, illness, and despair. Many residents, having nowhere else to go, were born, lived, and died within these suffocating confines, rarely if ever seeing the sky. This prolonged human suffering infused the very stones of the vaults with an indelible imprint of hardship and hopelessness.\n\nThe descent into despair was not merely physical; it was also moral. Surrounded by poverty, crime became not just prevalent but essential for survival. This harsh reality painted a bleak picture of human resilience and desperation within the forgotten tunnels.",
-          "cliffhanger": "Yet, beyond mere survival, these depths concealed activities far more sinister than petty theft, further staining the vaults with human depravity."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Unseen Inhabitants",
-          "content": "The anonymity and isolation of the vaults made them perfect breeding grounds for organized crime and illicit enterprises. Infamous figures like the serial killers Burke and Hare were known to frequent the vaults, allegedly using them to store bodies before selling them to anatomists. Illegal distilleries operated in secret, producing potent, unregulated spirits that fueled both escape and further violence among the destitute inhabitants. The darkness offered not just shelter, but a cloak for heinous deeds.\n\nBare-knuckle boxing matches, gambling dens, and prostitution rings flourished, shielded from the watchful eyes of the city authorities above. Robberies were common, and violence was an everyday occurrence. The lack of law enforcement presence allowed a brutal, self-governing hierarchy to emerge, where the strongest or most ruthless held sway. The vaults became a place where lives were cheap, and morality was a forgotten luxury.\n\nHistorians and chroniclers of the era documented the horrifying reality, describing the vaults as a 'veritable cesspool of human vice and degradation.' The air was thick not just with physical pollutants, but with the palpable weight of desperation and fear. These dark chapters etched themselves deeply into the fabric of the vaults, leaving behind a legacy that transcended mere memory.",
-          "cliffhanger": "With such a dark history of suffering and malevolence, it became inevitable that the vaults would not remain merely an historical curiosity, but a place where the past refused to die."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Abandonment and Rediscovery",
-          "content": "By the mid-19th century, the vaults had become so dangerous and unsanitary that city officials decided to seal them off. Entrances were bricked up, and the entire subterranean network was effectively buried and forgotten by mainstream Edinburgh. For nearly 170 years, the vaults lay entombed beneath the city, their dark secrets preserved in the damp, undisturbed air. They became a ghostly legend, a whispered tale of a city's dark past that few believed to be real.\n\nThe rediscovery began piecemeal, with fragments found during construction work, but it was not until the 1980s that a thorough exploration and partial excavation commenced. A local rugby player, Norrie Rowan, spearheaded efforts to uncover and clear sections of the vaults, revealing the extent of the hidden city beneath. What they found was a trove of artifacts: pottery shards, tools, buttons, and even human remains, all testifying to the lives and deaths of those who once inhabited these forgotten spaces.\n\nThe re-opening of the vaults brought their tragic history back into the light, transforming them from a forgotten grave into a chilling historical exhibit. But as people began to explore these newly accessible tunnels, they found that the echoes of the past were not merely historical; they seemed to be unnervingly present.",
-          "cliffhanger": "As the physical barriers came down, invisible ones seemed to emerge, as explorers and visitors began reporting strange, inexplicable encounters within the unearthed darkness."
-        },
-        {
-          "layer": 5,
-          "layer_name": "Modern Encounters and Allegations",
-          "content": "Since their rediscovery and the commencement of public tours, the Edinburgh Vaults have garnered a reputation as one of the most haunted locations in the world. Visitors and tour guides consistently report a wide range of inexplicable phenomena. These include sudden drops in temperature, often localized to specific areas, far beyond what the ambient dampness would suggest. Whispers and disembodied voices are frequently heard, sometimes responding to questions, other times speaking in an unknown tongue or uttering distressed sounds.\n\nPhysical sensations are also common. Many visitors describe feeling an unseen presence brush past them, or a cold hand touching their arm or neck. Some have reported being pushed, scratched, or having their clothes tugged by invisible forces. The feeling of being watched is almost universal, and electronic devices, particularly cameras and phones, are known to malfunction inexplicably within certain sections of the vaults, their batteries draining rapidly or their screens freezing.\n\nThese consistent accounts, spanning decades and involving countless independent witnesses, have cemented the vaults' status as a genuine site of alleged paranormal activity. The sheer volume and similarity of the experiences suggest something more than mere suggestion or overactive imaginations.",
-          "cliffhanger": "Among the myriad of reported phenomena, specific entities have emerged, developing their own distinct reputations for disturbing interactions with the living."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Darker Residents: Mr. Boots and The Watcher",
-          "content": "Among the myriad of spectral presences said to inhabit the Edinburgh Vaults, two figures stand out for their consistent and often terrifying interactions: 'Mr. Boots' and 'The Watcher'. Mr. Boots is believed to be the spirit of a cobbler or tradesman who once worked in the vaults. His presence is frequently associated with the distinct sound of heavy, old-fashioned boots stomping through the dark corridors, often preceding other phenomena or appearing when no living person is near.\n\nThe other, far more menacing entity is often referred to as 'The Watcher,' or simply 'The Dark Figure.' This is described as a distinctly malevolent presence, responsible for the more aggressive and physically intrusive encounters. Visitors and guides have reported feeling immense pressure on their chests, being pushed forcibly, or experiencing intense feelings of dread and anger emanating from specific areas. Some claim to have seen a shadowy figure at the periphery of their vision, particularly in the deep, unlit sections.\n\nThese entities, along with the alleged spirit of a young girl named 'Little Annie' and a group of poltergeist-like children, form a chilling tableau of the vault's resident ghosts. Tour guides, who spend countless hours within these chambers, often have their own personal harrowing tales of encounters, lending credence to the idea that these are not merely fleeting shadows, but persistent, interactive intelligences.",
-          "cliffhanger": "The question remains: are these merely residual echoes of a tragic past, or are they conscious entities, forever bound to the darkness and despair of their former existence?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Lingering Trauma",
-          "content": "The absolute darkest documented truth of the Edinburgh Vaults lies not just in the alleged hauntings, but in the undeniable, historical suffering that created the fertile ground for such phenomena. The vaults represent a concrete manifestation of Edinburgh's hidden history of poverty, disease, and crime, a tangible record of human despair. The thousands of lives lived and lost in such horrific conditions, the violence perpetrated, and the pure desperation endured by its inhabitants, are historical facts.\n\nParanormal theories often suggest that intense human emotion and traumatic events can leave an energetic imprint on a location, creating 'residual hauntings' that replay moments of the past. Others propose that these are 'intelligent hauntings,' where the spirits of the deceased remain tethered to the place of their greatest suffering, perhaps unaware of their passing or unwilling to move on. In the vaults, the sheer concentration of documented historical trauma, from starvation and illness to murder and exploitation, provides a compelling, if chilling, context for the alleged paranormal activity.\n\nThe enduring cold, the phantom whispers, and the unseen touches are, for many, the tangible echoes of this profound historical trauma. The Edinburgh Vaults serve as a stark reminder that some dark histories are not merely written in books, but are deeply imprinted into the very stones of our cities, whispering their tales for centuries, forever chilling those who dare to listen.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": true
-    },
-    {
       "story_id": "the_mary_celeste_mystery",
       "title": "The Ghost Ship: The Unsolved Mystery of the Mary Celeste",
       "category": "paranormal",
@@ -6322,7 +6240,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/the_mary_celeste_mystery/cover.jpg",
       "added_date": "2026-06-27",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 16,
         "gripping": 34,
@@ -6395,7 +6313,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "operation_paperclip_001",
@@ -10689,6 +10607,41 @@
         "radiation_exposure"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg/960px-PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg",
+      "added_date": "2026-07-05",
+      "draft": false,
+      "reactions": {
+        "like": 35,
+        "gripping": 18,
+        "scared": 3,
+        "mindblown": 11
+      },
+      "evidence_links": [
+        {
+          "label": "Initial sequencing and analysis of the human genome (Eric S. Lander, Lauren Linton, 2001)",
+          "url": "https://www.nature.com/articles/35057062.pdf"
+        },
+        {
+          "label": "The Human Genome Browser at UCSC (W. James Kent, Charles W. Sugnet, 2002)",
+          "url": "https://genome.cshlp.org/content/12/6/996.full.pdf"
+        },
+        {
+          "label": "In silico prediction of protein-protein interactions in human macrophages (Oussema Souiai, Fatma Z. Guerfali, 2014)",
+          "url": "https://bmcresnotes.biomedcentral.com/track/pdf/10.1186/1756-0500-7-157"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Like the US Human Radiation Experiments, the Tuskegee Syphilis Study also stands as a dark monument to medical betrayal, where vulnerable populations were sacrificed for government-led research."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "government_secrecy",
+          "transition_line": "The chilling tactics of the US Human Radiation Experiments echo in the secretive world of the CIA's MK-Ultra program, where the government once again crossed ethical lines in its pursuit of control over the human mind."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10733,35 +10686,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Like the US Human Radiation Experiments, the Tuskegee Syphilis Study also stands as a dark monument to medical betrayal, where vulnerable populations were sacrificed for government-led research."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "government_secrecy",
-          "transition_line": "The chilling tactics of the US Human Radiation Experiments echo in the secretive world of the CIA's MK-Ultra program, where the government once again crossed ethical lines in its pursuit of control over the human mind."
-        }
-      ],
-      "added_date": "2026-07-05",
-      "evidence_links": [
-        {
-          "label": "Initial sequencing and analysis of the human genome (Eric S. Lander, Lauren Linton, 2001)",
-          "url": "https://www.nature.com/articles/35057062.pdf"
-        },
-        {
-          "label": "The Human Genome Browser at UCSC (W. James Kent, Charles W. Sugnet, 2002)",
-          "url": "https://genome.cshlp.org/content/12/6/996.full.pdf"
-        },
-        {
-          "label": "In silico prediction of protein-protein interactions in human macrophages (Oussema Souiai, Fatma Z. Guerfali, 2014)",
-          "url": "https://bmcresnotes.biomedcentral.com/track/pdf/10.1186/1756-0500-7-157"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg/960px-PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "raktabija_infinite_replication",
@@ -10777,6 +10703,23 @@
         "blood_magic"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Brooklyn_Museum_-_Durga_Slaying_the_Buffalo_Demon_Raktabij_and_Kali_Lapping_up_the_Demon%27s_Blood_Page_from_a_Markandeya_Purana_Series.jpg",
+      "added_date": "2026-07-05",
+      "draft": false,
+      "reactions": {
+        "like": 39,
+        "gripping": 37,
+        "scared": 1,
+        "mindblown": 5
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "divine_intervention",
+          "transition_line": "Just as Raktabija's cosmic threat required a direct divine intervention, the deeper truths of the universe in 'Bhagwan Vishnu Ke Ankahe Raaz' also hint at complex divine plans and illusions."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10820,16 +10763,90 @@
           "content": "Kali then began her dreadful task. As Durga struck the original Raktabija with her weapons, Kali opened her mouth wide. She caught every single drop of blood before it could touch the ground. She did not let even one drop fall, preventing any new demons from forming.\n\nWith an act of pure terror, Kali began to devour the newly appearing Raktabijas whole. She swallowed them instantly, stopping their replication cycle completely. With no new copies to regenerate from his blood, the original Raktabija became vulnerable. Durga then delivered the final, fatal blow, and the demon was finally destroyed, his endless replication halted by Kali's horrifying, but necessary, intervention. This was the grim, ultimate truth of how the demon of infinite replication was defeated, not by might alone, but by a complete, terrifying consumption of his very essence."
         }
       ],
-      "connections": [
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
+      "story_id": "edinburgh_vaults_001",
+      "title": "The Edinburgh Vaults: Echoes from a Buried City",
+      "category": "paranormal",
+      "hook": "Beneath Edinburgh's bustling streets lies a sprawling, forgotten underworld—a labyrinth of stone vaults where desperation once bred disease, crime, and an enduring chill that whispers of the past.",
+      "concepts": [
+        "paranormal_activity",
+        "urban_legends",
+        "historical_trauma",
+        "unexplained_phenomena",
+        "haunted_location"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/edinburgh_vaults_001/cover.jpg",
+      "added_date": "2026-06-28",
+      "draft": 0,
+      "reactions": {
+        "like": 31,
+        "gripping": 34,
+        "scared": 66,
+        "mindblown": 7
+      },
+      "evidence_links": [
         {
-          "story_id": "hidden_facts_shri_vishnu_ji",
-          "shared_concept": "divine_intervention",
-          "transition_line": "Just as Raktabija's cosmic threat required a direct divine intervention, the deeper truths of the universe in 'Bhagwan Vishnu Ke Ankahe Raaz' also hint at complex divine plans and illusions."
+          "label": "Paranormal tourism in Edinburgh : storytelling, appropriating ghost culture and presenting an uncanny heritage (Elizabeth Holzhauser, 2015)",
+          "url": "http://hdl.handle.net/10023/6922"
         }
       ],
-      "added_date": "2026-07-05",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Brooklyn_Museum_-_Durga_Slaying_the_Buffalo_Demon_Raktabij_and_Kali_Lapping_up_the_Demon%27s_Blood_Page_from_a_Markandeya_Purana_Series.jpg",
-      "image_source": "wikipedia"
+      "connections": [
+        {
+          "story_id": "winchester_mystery_house",
+          "shared_concept": "paranormal_activity",
+          "transition_line": "Just as the Winchester Mystery House stands as a testament to a widow's haunted conscience, the Edinburgh Vaults reveal how a city's collective suffering can permeate its very foundations, creating a chilling echo of the past."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Buried City's Breath",
+          "content": "In the late 18th century, as Edinburgh flourished, a monumental engineering project unfolded: the construction of the South Bridge. Beneath its twenty arches, a series of vast, cavernous spaces were designed to house workshops, taverns, and storage facilities. These chambers, known as the Edinburgh Vaults or South Bridge Vaults, were initially a hub of commercial activity, bustling with tradesmen and merchants. The intention was to create a vibrant subterranean extension of the city's burgeoning economy, a testament to its ambition and growth.\n\nHowever, the grand vision for the vaults quickly soured. Poor construction, rampant dampness, and inadequate ventilation made them unsuitable for their intended purpose. Within a few decades, most legitimate businesses abandoned the subterranean spaces, unable to contend with the perpetually dark, waterlogged, and often disease-ridden conditions. The initial promise of prosperity gave way to a creeping neglect that would soon define their character.\n\nAs the legitimate commerce receded, a different kind of activity began to seep into the abandoned chambers, a shadow economy that thrived on the very isolation and darkness the vaults provided. This shift marked the true beginning of the vaults' dark legend.",
+          "cliffhanger": "What began as a commercial failure would rapidly transform into a haven for the city's most desperate and dangerous elements, sealing their fate as a true underbelly."
+        },
+        {
+          "layer": 2,
+          "layer_name": "A Descent into Despair",
+          "content": "By the early 19th century, the Edinburgh Vaults had become a notorious slum, a refuge for the city's poorest, most marginalized, and criminal populations. Families, often entire generations, crammed into the damp, windowless cells, living in squalor unimaginable even by the standards of the time. Without sanitation, fresh air, or natural light, disease spread unchecked, and life expectancy plummeted. The vaults became a literal pit of misery, a forgotten world just meters beneath the polite society above.\n\nConditions deteriorated to such an extent that the vaults were often waist-deep in raw sewage and refuse. The air was thick with the stench of decay, illness, and despair. Many residents, having nowhere else to go, were born, lived, and died within these suffocating confines, rarely if ever seeing the sky. This prolonged human suffering infused the very stones of the vaults with an indelible imprint of hardship and hopelessness.\n\nThe descent into despair was not merely physical; it was also moral. Surrounded by poverty, crime became not just prevalent but essential for survival. This harsh reality painted a bleak picture of human resilience and desperation within the forgotten tunnels.",
+          "cliffhanger": "Yet, beyond mere survival, these depths concealed activities far more sinister than petty theft, further staining the vaults with human depravity."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Unseen Inhabitants",
+          "content": "The anonymity and isolation of the vaults made them perfect breeding grounds for organized crime and illicit enterprises. Infamous figures like the serial killers Burke and Hare were known to frequent the vaults, allegedly using them to store bodies before selling them to anatomists. Illegal distilleries operated in secret, producing potent, unregulated spirits that fueled both escape and further violence among the destitute inhabitants. The darkness offered not just shelter, but a cloak for heinous deeds.\n\nBare-knuckle boxing matches, gambling dens, and prostitution rings flourished, shielded from the watchful eyes of the city authorities above. Robberies were common, and violence was an everyday occurrence. The lack of law enforcement presence allowed a brutal, self-governing hierarchy to emerge, where the strongest or most ruthless held sway. The vaults became a place where lives were cheap, and morality was a forgotten luxury.\n\nHistorians and chroniclers of the era documented the horrifying reality, describing the vaults as a 'veritable cesspool of human vice and degradation.' The air was thick not just with physical pollutants, but with the palpable weight of desperation and fear. These dark chapters etched themselves deeply into the fabric of the vaults, leaving behind a legacy that transcended mere memory.",
+          "cliffhanger": "With such a dark history of suffering and malevolence, it became inevitable that the vaults would not remain merely an historical curiosity, but a place where the past refused to die."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Abandonment and Rediscovery",
+          "content": "By the mid-19th century, the vaults had become so dangerous and unsanitary that city officials decided to seal them off. Entrances were bricked up, and the entire subterranean network was effectively buried and forgotten by mainstream Edinburgh. For nearly 170 years, the vaults lay entombed beneath the city, their dark secrets preserved in the damp, undisturbed air. They became a ghostly legend, a whispered tale of a city's dark past that few believed to be real.\n\nThe rediscovery began piecemeal, with fragments found during construction work, but it was not until the 1980s that a thorough exploration and partial excavation commenced. A local rugby player, Norrie Rowan, spearheaded efforts to uncover and clear sections of the vaults, revealing the extent of the hidden city beneath. What they found was a trove of artifacts: pottery shards, tools, buttons, and even human remains, all testifying to the lives and deaths of those who once inhabited these forgotten spaces.\n\nThe re-opening of the vaults brought their tragic history back into the light, transforming them from a forgotten grave into a chilling historical exhibit. But as people began to explore these newly accessible tunnels, they found that the echoes of the past were not merely historical; they seemed to be unnervingly present.",
+          "cliffhanger": "As the physical barriers came down, invisible ones seemed to emerge, as explorers and visitors began reporting strange, inexplicable encounters within the unearthed darkness."
+        },
+        {
+          "layer": 5,
+          "layer_name": "Modern Encounters and Allegations",
+          "content": "Since their rediscovery and the commencement of public tours, the Edinburgh Vaults have garnered a reputation as one of the most haunted locations in the world. Visitors and tour guides consistently report a wide range of inexplicable phenomena. These include sudden drops in temperature, often localized to specific areas, far beyond what the ambient dampness would suggest. Whispers and disembodied voices are frequently heard, sometimes responding to questions, other times speaking in an unknown tongue or uttering distressed sounds.\n\nPhysical sensations are also common. Many visitors describe feeling an unseen presence brush past them, or a cold hand touching their arm or neck. Some have reported being pushed, scratched, or having their clothes tugged by invisible forces. The feeling of being watched is almost universal, and electronic devices, particularly cameras and phones, are known to malfunction inexplicably within certain sections of the vaults, their batteries draining rapidly or their screens freezing.\n\nThese consistent accounts, spanning decades and involving countless independent witnesses, have cemented the vaults' status as a genuine site of alleged paranormal activity. The sheer volume and similarity of the experiences suggest something more than mere suggestion or overactive imaginations.",
+          "cliffhanger": "Among the myriad of reported phenomena, specific entities have emerged, developing their own distinct reputations for disturbing interactions with the living."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Darker Residents: Mr. Boots and The Watcher",
+          "content": "Among the myriad of spectral presences said to inhabit the Edinburgh Vaults, two figures stand out for their consistent and often terrifying interactions: 'Mr. Boots' and 'The Watcher'. Mr. Boots is believed to be the spirit of a cobbler or tradesman who once worked in the vaults. His presence is frequently associated with the distinct sound of heavy, old-fashioned boots stomping through the dark corridors, often preceding other phenomena or appearing when no living person is near.\n\nThe other, far more menacing entity is often referred to as 'The Watcher,' or simply 'The Dark Figure.' This is described as a distinctly malevolent presence, responsible for the more aggressive and physically intrusive encounters. Visitors and guides have reported feeling immense pressure on their chests, being pushed forcibly, or experiencing intense feelings of dread and anger emanating from specific areas. Some claim to have seen a shadowy figure at the periphery of their vision, particularly in the deep, unlit sections.\n\nThese entities, along with the alleged spirit of a young girl named 'Little Annie' and a group of poltergeist-like children, form a chilling tableau of the vault's resident ghosts. Tour guides, who spend countless hours within these chambers, often have their own personal harrowing tales of encounters, lending credence to the idea that these are not merely fleeting shadows, but persistent, interactive intelligences.",
+          "cliffhanger": "The question remains: are these merely residual echoes of a tragic past, or are they conscious entities, forever bound to the darkness and despair of their former existence?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Lingering Trauma",
+          "content": "The absolute darkest documented truth of the Edinburgh Vaults lies not just in the alleged hauntings, but in the undeniable, historical suffering that created the fertile ground for such phenomena. The vaults represent a concrete manifestation of Edinburgh's hidden history of poverty, disease, and crime, a tangible record of human despair. The thousands of lives lived and lost in such horrific conditions, the violence perpetrated, and the pure desperation endured by its inhabitants, are historical facts.\n\nParanormal theories often suggest that intense human emotion and traumatic events can leave an energetic imprint on a location, creating 'residual hauntings' that replay moments of the past. Others propose that these are 'intelligent hauntings,' where the spirits of the deceased remain tethered to the place of their greatest suffering, perhaps unaware of their passing or unwilling to move on. In the vaults, the sheer concentration of documented historical trauma, from starvation and illness to murder and exploitation, provides a compelling, if chilling, context for the alleged paranormal activity.\n\nThe enduring cold, the phantom whispers, and the unseen touches are, for many, the tangible echoes of this profound historical trauma. The Edinburgh Vaults serve as a stark reminder that some dark histories are not merely written in books, but are deeply imprinted into the very stones of our cities, whispering their tales for centuries, forever chilling those who dare to listen.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
