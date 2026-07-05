@@ -23,10 +23,10 @@
     "mlk_assassination_conspiracy",
     "hope_diamond_curse",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "vatican_bank_scandal_calvi_p2",
     "assassination_rfk_conspiracy",
     "uwe_barschel",
-    "spontaneous_human_combustion_shc"
+    "spontaneous_human_combustion_shc",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -58,11 +58,11 @@
     "project_raven_uae_cyber_mercenaries",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "project_bullrun_muscular",
-    "vatican_bank_scandal_calvi_p2",
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
-    "uwe_barschel"
+    "uwe_barschel",
+    "vatican_bank_scandal_calvi_p2"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -372,8 +372,8 @@
     "the_numbers_stations",
     "the_taman_shud_case",
     "the_isdal_woman",
-    "october_surprise_1980_iran",
-    "uwe_barschel"
+    "uwe_barschel",
+    "october_surprise_1980_iran"
   ],
   "covert_communication": [
     "the_numbers_stations"
@@ -1362,18 +1362,6 @@
   "royal_intervention": [
     "the_beast_of_gevaudan"
   ],
-  "political_manipulation": [
-    "october_surprise_1980_iran"
-  ],
-  "international_relations": [
-    "october_surprise_1980_iran"
-  ],
-  "hostage_crisis": [
-    "october_surprise_1980_iran"
-  ],
-  "election_interference": [
-    "october_surprise_1980_iran"
-  ],
   "critical_infrastructure_attack": [
     "ukraine_power_grid_cyber_attack_2015_2016"
   ],
@@ -1543,9 +1531,6 @@
   "hoax_claims": [
     "amityville_horror_house_possessed"
   ],
-  "church_corruption": [
-    "vatican_bank_scandal_calvi_p2"
-  ],
   "drug_experimentation": [
     "project_mk_ultra_001"
   ],
@@ -1641,5 +1626,20 @@
   ],
   "persistent_threat": [
     "operation_shady_rat"
+  ],
+  "church_corruption": [
+    "vatican_bank_scandal_calvi_p2"
+  ],
+  "political_manipulation": [
+    "october_surprise_1980_iran"
+  ],
+  "international_relations": [
+    "october_surprise_1980_iran"
+  ],
+  "hostage_crisis": [
+    "october_surprise_1980_iran"
+  ],
+  "election_interference": [
+    "october_surprise_1980_iran"
   ]
 }
