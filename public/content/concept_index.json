@@ -61,7 +61,8 @@
     "project_bullrun_muscular",
     "vatican_bank_scandal_calvi_p2",
     "project_mk_ultra_001",
-    "assassination_rfk_conspiracy"
+    "assassination_rfk_conspiracy",
+    "project_shad_covert_testing"
   ],
   "espionage": [
     "uwe_barschel",
@@ -253,7 +254,8 @@
     "vatican_bank_scandal_calvi_p2"
   ],
   "biological_warfare": [
-    "unit_731_experiments"
+    "unit_731_experiments",
+    "project_shad_covert_testing"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -261,7 +263,8 @@
     "project_sunshine_cadaver_collection",
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "project_shad_covert_testing"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -348,7 +351,8 @@
     "cia_mk_ultra_program",
     "project_stargate_remote_viewing",
     "project_artichoke_mind_control",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "project_shad_covert_testing"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -1279,7 +1283,8 @@
     "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
-    "project_raven_uae_cyber_mercenaries"
+    "project_raven_uae_cyber_mercenaries",
+    "internet_dark_matter_probes"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1351,7 +1356,8 @@
   "cyber_security": [
     "morris_worm_first_internet_attack",
     "the_cuckoos_egg_kgb_hacker",
-    "mirai_botnet_iot_attack"
+    "mirai_botnet_iot_attack",
+    "internet_dark_matter_probes"
   ],
   "internet_history": [
     "morris_worm_first_internet_attack"
@@ -1557,7 +1563,8 @@
     "project_bullrun_muscular"
   ],
   "internet_infrastructure": [
-    "project_bullrun_muscular"
+    "project_bullrun_muscular",
+    "internet_dark_matter_probes"
   ],
   "eternal_curse": [
     "ashwatthama_curse_eternal_suffering"
@@ -1613,5 +1620,26 @@
   ],
   "second_gunman": [
     "assassination_rfk_conspiracy"
+  ],
+  "military_misconduct": [
+    "project_shad_covert_testing"
+  ],
+  "chemical_warfare": [
+    "project_shad_covert_testing"
+  ],
+  "long_term_health_effects": [
+    "project_shad_covert_testing"
+  ],
+  "unseen_threats": [
+    "internet_dark_matter_probes"
+  ],
+  "malicious_probes": [
+    "internet_dark_matter_probes"
+  ],
+  "darknet_traffic": [
+    "internet_dark_matter_probes"
+  ],
+  "botnets": [
+    "internet_dark_matter_probes"
   ]
 }
