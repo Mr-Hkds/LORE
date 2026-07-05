@@ -1287,8 +1287,14 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       // Write to storage overrides first to prevent cache lag and race conditions on reload
       try {
         const currentOverrides = (await appStorage.get('lore:story-overrides')) || {};
+        
+        // Use the original image source (remote URL or base64) for instant display on production,
+        // unless it's a giant base64 string (> 500KB) to protect localStorage limits.
+        const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
+        const overrideImage = (!isLocal && !isGiantBase64) ? imageSource : newHeroImage;
+
         currentOverrides[storyId] = {
-          hero_image: newHeroImage,
+          hero_image: overrideImage,
           image_missing: 0,
           draft: 0,
           added_date: updatedStoryObj.added_date

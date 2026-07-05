@@ -37,7 +37,7 @@ function getGoogleSearchUrl(title, category) {
 
 export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) {
   // Local preview tracks the image immediately after any save action
-  const initialPreview = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
+  const initialPreview = isValidImage(story.hero_image) ? story.hero_image : null;
   const [previewUrl, setPreviewUrl]   = useState(initialPreview);
   const [imageFailed, setImageFailed] = useState(false);
   const [remoteUrl, setRemoteUrl]     = useState('');
@@ -67,10 +67,10 @@ export default function ApprovalCard({ story, onSaveImage, onPublish, onEdit }) 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    const validImg = (isValidImage(story.hero_image) && !story.image_missing) ? story.hero_image : null;
+    const validImg = isValidImage(story.hero_image) ? story.hero_image : null;
     setPreviewUrl(validImg);
     setImageFailed(false);
-  }, [story.hero_image, story.image_missing]);
+  }, [story.hero_image]);
 
   // ── Helpers ──────────────────────────────────────────────────────────
   const saveAndPreview = async (fn) => {
