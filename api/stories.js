@@ -1,4 +1,45 @@
+import https from 'https';
+import http from 'http';
 import db from '../db.cjs';
+
+function downloadImageAsBase64(url) {
+  return new Promise((resolve, reject) => {
+    let cleanUrl = url;
+    if (cleanUrl.startsWith('//')) {
+      cleanUrl = 'https:' + cleanUrl;
+    }
+    const client = cleanUrl.startsWith('https') ? https : http;
+    
+    const req = client.get(cleanUrl, { timeout: 8000 }, (res) => {
+      if (res.statusCode === 301 || res.statusCode === 302) {
+        const loc = res.headers.location;
+        if (loc) {
+          return downloadImageAsBase64(loc).then(resolve).catch(reject);
+        }
+        return reject(new Error('Redirect without location'));
+      }
+      
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        return reject(new Error(`HTTP Error ${res.statusCode}`));
+      }
+      
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => {
+        const buffer = Buffer.concat(chunks);
+        const mime = res.headers['content-type'] || 'image/jpeg';
+        const base64 = buffer.toString('base64');
+        resolve(`data:${mime};base64,${base64}`);
+      });
+    });
+    
+    req.on('error', reject);
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Image download timed out'));
+    });
+  });
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -133,6 +174,19 @@ export default async function handler(req, res) {
       if (!story) {
         return res.status(404).json({ error: 'Story not found' });
       }
+
+      // Download remote cover image and convert to base64 for fast DB serving
+      if (updates.hero_image && (updates.hero_image.startsWith('http') || updates.hero_image.startsWith('//'))) {
+        try {
+          console.log(`[SERVER COVER DOWNLOAD] Downloading remote image: ${updates.hero_image}`);
+          const base64Img = await downloadImageAsBase64(updates.hero_image);
+          updates.hero_image = base64Img;
+          console.log(`[SERVER COVER DOWNLOAD] Successfully downloaded and converted to base64.`);
+        } catch (downloadErr) {
+          console.warn(`[SERVER COVER DOWNLOAD] Failed to download image:`, downloadErr.message);
+        }
+      }
+
       await db.updateStory(lastPart, updates);
       if (!story.draft) {
         await db.exportStoriesToJSON();

@@ -122,7 +122,8 @@ function StoryCardImage({ story, alt, inView }) {
   const isDirectUrl = story.image_query && (story.image_query.startsWith('http') || story.image_query.startsWith('/'));
   const displayUrl = (story.hero_image && !story.image_missing && !fallbackAttempted) ? story.hero_image : ((isDirectUrl && !fallbackAttempted) ? story.image_query : fetchedUrl);
 
-  if (!displayUrl || imgFailed) {
+  const FORCE_TYPOGRAPHIC_COVERS = true; // Set to true to temporarily bypass all cover images and show typographic HUD layout only
+  if (FORCE_TYPOGRAPHIC_COVERS || !displayUrl || imgFailed) {
     const shortTitle = getShortTitle(story.title);
     const gradIndex = getGradientIndex(story.story_id);
     const bgGradient = GRADIENTS[gradIndex];
