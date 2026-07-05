@@ -22,11 +22,11 @@
     "the_beast_of_gevaudan",
     "mlk_assassination_conspiracy",
     "hope_diamond_curse",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "assassination_rfk_conspiracy",
     "spontaneous_human_combustion_shc",
     "vatican_bank_scandal_calvi_p2",
-    "uwe_barschel"
+    "uwe_barschel",
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -50,21 +50,21 @@
     "project_artichoke_mind_control",
     "jfk_assassination_001",
     "haarp_climate_control_conspiracy",
-    "the_shadow_brokers_nsa_leak",
     "cointelpro_fbi_covert_ops",
     "the_roswell_incident",
     "the_cuckoos_egg_kgb_hacker",
     "mlk_assassination_conspiracy",
     "project_raven_uae_cyber_mercenaries",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "project_bullrun_muscular",
     "project_mk_ultra_001",
     "assassination_rfk_conspiracy",
     "project_shad_covert_testing",
     "vatican_bank_scandal_calvi_p2",
-    "operation_chaos_cia_domestic_surveillance",
     "uwe_barschel",
-    "human_radiation_experiments_us"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "the_shadow_brokers_nsa_leak",
+    "human_radiation_experiments_us",
+    "operation_chaos_cia_domestic_surveillance"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -110,10 +110,10 @@
     "project_artichoke_mind_control",
     "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "project_mk_ultra_001",
-    "operation_chaos_cia_domestic_surveillance",
-    "operation_condor_001"
+    "operation_condor_001",
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "operation_chaos_cia_domestic_surveillance"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -1289,11 +1289,11 @@
     "solarwinds_supply_chain_attack_001",
     "ghostnet_global_cyber_espionage",
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
-    "internet_dark_matter_probes"
+    "internet_dark_matter_probes",
+    "the_shadow_brokers_nsa_leak"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1313,9 +1313,9 @@
   "cyber_warfare": [
     "solarwinds_supply_chain_attack_001",
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak",
     "ukraine_power_grid_cyber_attack_2015_2016",
-    "project_raven_uae_cyber_mercenaries"
+    "project_raven_uae_cyber_mercenaries",
+    "the_shadow_brokers_nsa_leak"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001"
@@ -1449,10 +1449,6 @@
   "paranormal_phenomena": [
     "hope_diamond_curse"
   ],
-  "divine_punishment": [
-    "myth_of_atlantis_plato",
-    "kala_bhairava_origin_time_punishment"
-  ],
   "surveillance": [
     "project_raven_uae_cyber_mercenaries"
   ],
@@ -1461,19 +1457,6 @@
   ],
   "ethical_breaches": [
     "project_raven_uae_cyber_mercenaries"
-  ],
-  "conspiracy": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "journalism": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "organized_crime": [
-    "the_octopus_murder_conspiracy_danny_casolaro",
-    "vatican_bank_scandal_calvi_p2"
-  ],
-  "intelligence_agencies": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "divine_deception": [
     "bhasmasura_mohini_deception"
@@ -1576,6 +1559,10 @@
   "persistent_threat": [
     "operation_shady_rat"
   ],
+  "organized_crime": [
+    "vatican_bank_scandal_calvi_p2",
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
   "church_corruption": [
     "vatican_bank_scandal_calvi_p2"
   ],
@@ -1615,30 +1602,15 @@
   "fierce_deity": [
     "kala_bhairava_origin_time_punishment"
   ],
+  "divine_punishment": [
+    "kala_bhairava_origin_time_punishment",
+    "myth_of_atlantis_plato"
+  ],
   "ego_destruction": [
     "kala_bhairava_origin_time_punishment"
   ],
   "time_and_death": [
     "kala_bhairava_origin_time_punishment"
-  ],
-  "flesh_eating_spirits": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "indian_mythology": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "malevolent_entities": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "spiritual_torment": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "exorcism_rituals": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "restless_spirits": [
-    "pishachas_flesh_eating_spirits",
-    "legend_of_pretas_indian_mythology"
   ],
   "undead_entity": [
     "vikram_vetala_tales"
@@ -1651,6 +1623,10 @@
   ],
   "sacred_oaths": [
     "vikram_vetala_tales"
+  ],
+  "restless_spirits": [
+    "legend_of_pretas_indian_mythology",
+    "pishachas_flesh_eating_spirits"
   ],
   "karma": [
     "legend_of_pretas_indian_mythology"
@@ -1692,6 +1668,15 @@
   "international_collaboration": [
     "operation_condor_001"
   ],
+  "conspiracy": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "journalism": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "intelligence_agencies": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
   "cybercrime": [
     "silk_road_dread_pirate_roberts"
   ],
@@ -1709,5 +1694,20 @@
   ],
   "government_investigation": [
     "silk_road_dread_pirate_roberts"
+  ],
+  "flesh_eating_spirits": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "indian_mythology": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "malevolent_entities": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "spiritual_torment": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "exorcism_rituals": [
+    "pishachas_flesh_eating_spirits"
   ]
 }
