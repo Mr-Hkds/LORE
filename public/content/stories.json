@@ -6745,11 +6745,8 @@
     {
       "story_id": "vampire_panic_eastern_europe",
       "title": "The Blood Panic: Eastern Europe's Real Vampire Hunt",
-      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/1jjQxBtA_sdwH2Pq6K6GTkN18DM=/600x400/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e4/ad/e4ad2d20-0350-4bd1-bfbf-dec9b58b60af/gettyimages-593280150.jpg",
-      "image_query": "",
-      "hook": "In 18th-century Eastern Europe, a widespread terror of the dead returning to feast on the living led entire communities to exhume graves and mutilate corpses.",
       "category": "mythology",
-      "severity": "chilling",
+      "hook": "In 18th-century Eastern Europe, a widespread terror of the dead returning to feast on the living led entire communities to exhume graves and mutilate corpses.",
       "concepts": [
         "mass_hysteria",
         "folklore",
@@ -6757,6 +6754,18 @@
         "post_mortem_changes",
         "public_panic"
       ],
+      "severity": "chilling",
+      "hero_image": "https://th-thumbnailer.cdn-si-edu.com/1jjQxBtA_sdwH2Pq6K6GTkN18DM=/600x400/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/e4/ad/e4ad2d20-0350-4bd1-bfbf-dec9b58b60af/gettyimages-593280150.jpg",
+      "added_date": "2026-04-05",
+      "draft": false,
+      "reactions": {
+        "like": 35,
+        "gripping": 38,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -6801,12 +6810,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 35,
-        "gripping": 38,
-        "scared": 6,
-        "mindblown": 6
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "sapta_chiranjeevi_unseen_guardians",
@@ -6882,11 +6887,8 @@
     {
       "story_id": "jfk_assassination_001",
       "title": "The Unsolved Bullet: The Assassination of John F. Kennedy",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/JFK_Motorcade_GettyImages-517330536.jpg/330px-JFK_Motorcade_GettyImages-517330536.jpg",
-      "image_query": "Assassination of John F. Kennedy",
-      "hook": "On November 22, 1963, a single rifle shot in Dallas, Texas, tore through more than just President John F. Kennedy; it shattered America's sense of security forever.",
       "category": "conspiracy",
-      "severity": "chilling",
+      "hook": "On November 22, 1963, a single rifle shot in Dallas, Texas, tore through more than just President John F. Kennedy; it shattered America's sense of security forever.",
       "concepts": [
         "political_assassination",
         "conspiracy_theories",
@@ -6895,6 +6897,18 @@
         "lone_gunman",
         "covert_operations"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/JFK_Motorcade_GettyImages-517330536.jpg/330px-JFK_Motorcade_GettyImages-517330536.jpg",
+      "added_date": "2026-03-20",
+      "draft": false,
+      "reactions": {
+        "like": 36,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 54
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -6939,12 +6953,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 36,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 54
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "haarp_climate_control_conspiracy",
@@ -7040,11 +7050,8 @@
     {
       "story_id": "elizabeth_bathory_blood_countess",
       "title": "The Blood Countess: Elizabeth Báthory's Dark Legacy",
-      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
-      "image_query": "",
-      "hook": "In the late 16th century, a Countess in Hungary became a terrifying whisper, a noblewoman whose beauty hid a darkness so profound it would become a legend soaked in blood.",
       "category": "psychology",
-      "severity": "chilling",
+      "hook": "In the late 16th century, a Countess in Hungary became a terrifying whisper, a noblewoman whose beauty hid a darkness so profound it would become a legend soaked in blood.",
       "concepts": [
         "sadism",
         "nobility_abuse_of_power",
@@ -7054,6 +7061,18 @@
         "serial_killing",
         "unexplained_evil"
       ],
+      "severity": "chilling",
+      "hero_image": "/content/images/elizabeth_bathory_blood_countess.jpg",
+      "added_date": "2026-06-20",
+      "draft": false,
+      "reactions": {
+        "like": 30,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -7098,12 +7117,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 30,
-        "gripping": 13,
-        "scared": 4,
-        "mindblown": 6
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "demonic_possession_exorcism_001",
@@ -7199,11 +7214,8 @@
     {
       "story_id": "moonlight_maze_cyber_espionage",
       "title": "Moonlight Maze: The Silent War in the Wires",
-      "hero_image": "https://www.bleepstatic.com/images/news/u/986406/attacks/APTs/OldNewspaper.png",
-      "image_query": "",
-      "hook": "For years, an invisible enemy silently stole America's deepest military and scientific secrets, changing the very meaning of war.",
       "category": "cyber_mysteries",
-      "severity": "chilling",
+      "hook": "For years, an invisible enemy silently stole America's deepest military and scientific secrets, changing the very meaning of war.",
       "concepts": [
         "cyber_espionage",
         "state-sponsored_hacking",
@@ -7212,6 +7224,18 @@
         "unseen_warfare",
         "cold_war_legacy"
       ],
+      "severity": "chilling",
+      "hero_image": "https://www.bleepstatic.com/images/news/u/986406/attacks/APTs/OldNewspaper.png",
+      "added_date": "2026-04-30",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 12,
+        "scared": 5,
+        "mindblown": 5
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -7256,12 +7280,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 19,
-        "gripping": 12,
-        "scared": 5,
-        "mindblown": 5
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "wendigo_insatiable_hunger",
@@ -7594,11 +7614,8 @@
     {
       "story_id": "the_golem_of_prague",
       "title": "The Golem of Prague: A Creation Beyond Control",
-      "hero_image": "https://trips-tickets.com/wp-content/uploads/2022/10/rabbi-Loew-golem.webp",
-      "image_query": "",
-      "hook": "In the heart of old Prague, a legend whispers of a silent, towering protector, not born of flesh and blood, but sculpted from the very earth itself.",
       "category": "mythology",
-      "severity": "chilling",
+      "hook": "In the heart of old Prague, a legend whispers of a silent, towering protector, not born of flesh and blood, but sculpted from the very earth itself.",
       "concepts": [
         "creation_beyond_control",
         "supernatural_power",
@@ -7607,6 +7624,18 @@
         "jewish_mysticism",
         "forbidden_knowledge"
       ],
+      "severity": "chilling",
+      "hero_image": "https://trips-tickets.com/wp-content/uploads/2022/10/rabbi-Loew-golem.webp",
+      "added_date": "2026-01-16",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 27,
+        "scared": 2,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -7651,12 +7680,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 19,
-        "gripping": 27,
-        "scared": 2,
-        "mindblown": 10
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "the_shadow_brokers_nsa_leak",
@@ -8124,11 +8149,8 @@
     {
       "story_id": "ukraine_power_grid_cyber_attack_2015_2016",
       "title": "The Digital Blackout: Ukraine's Cyber War",
-      "hero_image": "https://ismg-cdn.nyc3.cdn.digitaloceanspaces.com/articles/ukrainian-power-grid-attacks-lessons-learned-showcase_image-1-a-9604.jpg",
-      "image_query": "",
-      "hook": "On a cold winter night in December 2015, the lights went out for hundreds of thousands in Ukraine, not due to a storm, but a silent, unseen digital attack.",
       "category": "cyber_mysteries",
-      "severity": "chilling",
+      "hook": "On a cold winter night in December 2015, the lights went out for hundreds of thousands in Ukraine, not due to a storm, but a silent, unseen digital attack.",
       "concepts": [
         "cyber_warfare",
         "state-sponsored_hacking",
@@ -8137,6 +8159,18 @@
         "industrial_control_systems",
         "blackout"
       ],
+      "severity": "chilling",
+      "hero_image": "https://ismg-cdn.nyc3.cdn.digitaloceanspaces.com/articles/ukrainian-power-grid-attacks-lessons-learned-showcase_image-1-a-9604.jpg",
+      "added_date": "2026-03-28",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 43,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -8181,12 +8215,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 20,
-        "gripping": 43,
-        "scared": 6,
-        "mindblown": 6
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "cointelpro_fbi_covert_ops",
@@ -8282,11 +8312,8 @@
     {
       "story_id": "spring_heeled_jack_legend",
       "title": "Spring-Heeled Jack: Victorian England's Phantom Leaper",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
-      "image_query": "",
-      "hook": "Imagine a figure with glowing eyes, metal claws, and the power to leap over high walls, striking fear into the heart of Victorian England.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "Imagine a figure with glowing eyes, metal claws, and the power to leap over high walls, striking fear into the heart of Victorian England.",
       "concepts": [
         "urban_legend",
         "mass_hysteria",
@@ -8294,6 +8321,18 @@
         "folklore",
         "victorian_era"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg/960px-The_legend_above_the_spring_-_geograph.org.uk_-_6572810.jpg",
+      "added_date": "2026-03-13",
+      "draft": false,
+      "reactions": {
+        "like": 14,
+        "gripping": 37,
+        "scared": 6,
+        "mindblown": 10
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -8338,21 +8377,14 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 14,
-        "gripping": 37,
-        "scared": 6,
-        "mindblown": 10
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "children_past_lives_stevenson_research",
       "title": "Echoes from Beyond: Children Who Remember Past Lives",
-      "hero_image": "https://media.licdn.com/dms/image/v2/C4E12AQHkReNV2wme1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520080815901?e=1784764800&v=beta&t=QfcZcpJ7-kHh0d293Q4h_eKnHxdezPgvoCgZTsftdj8",
-      "image_query": "",
-      "hook": "Imagine a child, barely able to speak, describing a life that was not their own, a death they never lived. This is not a story, but a documented phenomenon.",
       "category": "paranormal",
-      "severity": "chilling",
+      "hook": "Imagine a child, barely able to speak, describing a life that was not their own, a death they never lived. This is not a story, but a documented phenomenon.",
       "concepts": [
         "reincarnation",
         "past_life_memory",
@@ -8361,6 +8393,18 @@
         "xenoglossy",
         "consciousness_after_death"
       ],
+      "severity": "chilling",
+      "hero_image": "https://media.licdn.com/dms/image/v2/C4E12AQHkReNV2wme1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1520080815901?e=1784764800&v=beta&t=QfcZcpJ7-kHh0d293Q4h_eKnHxdezPgvoCgZTsftdj8",
+      "added_date": "2026-04-01",
+      "draft": false,
+      "reactions": {
+        "like": 55,
+        "gripping": 28,
+        "scared": 35,
+        "mindblown": 6
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -8405,12 +8449,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 55,
-        "gripping": 28,
-        "scared": 35,
-        "mindblown": 6
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "the_roswell_incident",
@@ -8588,11 +8628,8 @@
     {
       "story_id": "mahabharat_psychological_epic",
       "title": "The Mahabharat: A Grand Study of Human Flaws and Cosmic Sorrow",
-      "hero_image": "/content/images/mahabharat_psychological_epic.jpg",
-      "image_query": "",
-      "hook": "Imagine a family feud so deep, so consumed by pride and desire, that it leads to the extermination of nearly an entire civilization.",
       "category": "mythology",
-      "severity": "chilling",
+      "hook": "Imagine a family feud so deep, so consumed by pride and desire, that it leads to the extermination of nearly an entire civilization.",
       "concepts": [
         "family_systems",
         "power_dynamics",
@@ -8601,6 +8638,18 @@
         "groupthink",
         "karma_and_consequence"
       ],
+      "severity": "chilling",
+      "hero_image": "/content/images/mahabharat_psychological_epic.jpg",
+      "added_date": "2026-06-03",
+      "draft": false,
+      "reactions": {
+        "like": 16,
+        "gripping": 28,
+        "scared": 4,
+        "mindblown": 53
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -8645,12 +8694,8 @@
           "cliffhanger": null
         }
       ],
-      "reactions": {
-        "like": 16,
-        "gripping": 28,
-        "scared": 4,
-        "mindblown": 53
-      }
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "mlk_assassination_conspiracy",
@@ -9022,7 +9067,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/hope_diamond_curse/cover.jpg",
       "added_date": "2026-07-04",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 32,
         "gripping": 25,
@@ -9087,16 +9132,13 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "myth_of_atlantis_plato",
       "title": "The Myth of Atlantis: Plato's Lost Utopia and its Downfall",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
-      "image_query": "",
-      "hook": "A powerful island empire, blessed by gods, rose to glory then vanished into the deep sea in a single, terrifying day and night.",
       "category": "conspiracy",
-      "severity": "chilling",
+      "hook": "A powerful island empire, blessed by gods, rose to glory then vanished into the deep sea in a single, terrifying day and night.",
       "concepts": [
         "lost_civilizations",
         "mythology",
@@ -9104,6 +9146,18 @@
         "divine_punishment",
         "hubris"
       ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Myths_of_Mexico_and_Peru.djvu/page1-960px-Myths_of_Mexico_and_Peru.djvu.jpg",
+      "added_date": "2026-01-17",
+      "draft": false,
+      "reactions": {
+        "like": 43,
+        "gripping": 21,
+        "scared": 5,
+        "mindblown": 41
+      },
+      "evidence_links": [],
+      "connections": [],
       "layers": [
         {
           "layer": 1,
@@ -9146,88 +9200,9 @@
           "layer_name": "The Dark Corner: Plato's Moral Allegory",
           "content": "The absolute darkest documented truth about Atlantis is that it was most likely an invention of Plato, a masterful philosophical allegory. While he presented it as a historical account, most modern scholars agree that Plato used Atlantis as a literary device to illustrate his political and moral theories. It was a 'myth' in the sense of a fictional story designed to convey a deep truth.\n\nAtlantis, in this view, represented the dangers of imperial ambition, moral decay, and unchecked power, contrasted with his ideal state, ancient Athens. Plato was using the story to warn his fellow Athenians about the corruption that can arise when a society abandons virtue for wealth and dominance. The 'downfall' of Atlantis was a chilling lesson: even the most powerful and divinely blessed civilization can be destroyed if it loses its ethical foundation.\n\nThe chilling impact of Atlantis, therefore, is not about a lost city we might discover, but about its enduring message. It reminds us that hubris and moral decline lead to ruin, a lesson as relevant today as it was in ancient Greece. The true 'lost utopia' might be the ideal society itself, constantly threatened by the darkness within human nature."
         }
-      ]
-    },
-    {
-      "story_id": "prophecies_of_kali_yuga",
-      "title": "The Prophecies of Kali Yuga: Humanity's Dark Descent",
-      "category": "mythology",
-      "hook": "Ancient Hindu texts speak of a final age where truth collapses, rulers become thieves, and society spirals into deep darkness.",
-      "concepts": [
-        "cosmic_cycles",
-        "societal_decline",
-        "moral_decay",
-        "prophecy_fulfillment",
-        "mythological_eschatology"
       ],
-      "severity": "chilling",
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - The Fading Light",
-          "content": "Within the vast tapestry of ancient Hindu scriptures, a profound concept exists: the Yugas, or cosmic ages. These are not just time periods, but distinct phases in the universe's existence, each with its own characteristics and moral standards. There are four such Yugas, and the last, the Kali Yuga, is described as the darkest and most challenging period for humanity.\n\nIt is an age of great decline, where dharma, or righteousness, is said to diminish significantly. Truth, wisdom, and spiritual understanding are believed to fade, replaced by ignorance and materialism. The very essence of human virtue is said to be tested and eroded during this long, arduous cycle.\n\nThis final age is not merely a philosophical idea; it is a detailed prophecy, recorded thousands of years ago, describing a future that many believe is now unfolding around us. What exactly did these ancient seers predict for this age of darkness?",
-          "cliffhanger": "But what specific warnings did these prophecies hold about the future of human society?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - The Great Cycles of Time",
-          "content": "Hindu cosmology explains time as cyclical, moving through four Yugas: Satya Yuga (the Golden Age), Treta Yuga (the Silver Age), Dvapara Yuga (the Bronze Age), and Kali Yuga (the Iron Age). Each subsequent Yuga sees a gradual decrease in righteousness, virtue, and human lifespan. Satya Yuga is an era of perfect harmony and spiritual enlightenment, while Kali Yuga marks the lowest point of moral and physical existence.\n\nThe duration of each Yuga is vast, measured in divine years, with Kali Yuga being the shortest but most intense period of decline. In Satya Yuga, dharma stands on four legs, symbolizing complete righteousness. In Treta, it stands on three; in Dvapara, on two; and in Kali Yuga, dharma rests precariously on only one leg, indicating extreme moral degradation.\n\nThese cycles are believed to repeat endlessly, with each Kali Yuga eventually giving way to a new Satya Yuga, bringing renewal. However, the transition into and experience of Kali Yuga is described in chilling detail, laying out a future filled with specific challenges. What exact conditions would define life in this predicted dark age?",
-          "cliffhanger": "The ancient texts did not stop at general decline; they painted a detailed picture of the human experience in Kali Yuga. How would people live, and what would society look like?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - The Sage's Vision",
-          "content": "The primary sources for the Kali Yuga prophecies are the Puranas, particularly the Vishnu Purana, Bhagavata Purana (Srimad Bhagavatam), and Brahma Vaivarta Purana. These ancient scriptures are vast collections of myths, legends, and historical accounts, believed to be compiled by the sage Vyasa. Through profound meditation and spiritual insight, these sages were said to have foreseen the future, recording their visions for posterity.\n\nThese sacred texts describe a time when spiritual knowledge will be lost or forgotten by the majority. People will become overly attached to material possessions, and their lives will be driven by desires rather than spiritual wisdom. The pursuit of wealth and sensory pleasure will overshadow the quest for inner peace and truth, leading to widespread unhappiness and moral confusion.\n\nThese are not vague predictions, but rather sharp observations about the shift in human priorities. The sages foresaw a world where the very purpose of life would be misunderstood, leading to a profound emptiness despite outward progress. What specific transformations in governance and family life were expected?",
-          "cliffhanger": "The prophecies extend far beyond spiritual decline, detailing the fall of rulers, the breakdown of families, and even changes in the environment itself."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Signs of the Age",
-          "content": "The Puranas predict distinct societal changes during Kali Yuga. Rulers, or kings, are foretold to become 'thieves' or 'tyrants,' no longer protecting their subjects but instead exploiting them for personal gain. Justice will be based on power, not truth, and laws will be twisted to serve the corrupt. The powerful will oppress the weak, and honesty will be a rare quality in leadership.\n\nFamily structures are also prophesied to collapse. Disrespect for elders will become common, and the bond of marriage will be reduced to mere sexual gratification, losing its sacred and lifelong commitment. Children will not obey their parents, and relatives will harbor animosity towards each other. Trust and loyalty within families, once cornerstones of society, will erode.\n\nEven the environment is not spared. The prophecies suggest that land will yield less produce, trees will bear less fruit, and the earth itself will shrink in size. Droughts, famines, and extreme weather events will become more frequent, causing widespread suffering and scarcity. These environmental degradations are seen as reflections of humanity's growing imbalance with nature. What about the people themselves – what would they be like?",
-          "cliffhanger": "Beyond these external changes, the ancient texts delve into the very nature of human beings, predicting a chilling transformation in their character and lifespan."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - The Human Condition in Kali Yuga",
-          "content": "The prophecies paint a grim picture of human characteristics during Kali Yuga. People are predicted to have short lifespans, weak bodies, and fragile health, constantly suffering from diseases and hunger. The average age of humans will decrease significantly, and physical strength will decline compared to previous Yugas. Sustained physical or mental effort will become a challenge for many.\n\nSpiritually, people will lose their faith and devotion. Rituals and religious practices will be performed out of hypocrisy or for show, rather than with genuine belief. Many will mock those who are righteous or spiritual, seeing them as foolish. Giving up devotion and spirituality will be common, with few seeking true spiritual liberation.\n\nDeceit, hypocrisy, and violence are prophesied to become commonplace. People will cheat each other, speak lies, and engage in constant quarrels and conflicts. Kindness and compassion will diminish, replaced by selfishness and cruelty. In this age, the worst human tendencies will surface, becoming accepted norms. Yet, is there any glimmer of hope in this complete darkness?",
-          "cliffhanger": "As the Kali Yuga progresses, the prophecies describe an even deeper descent, into widespread famine, disease, and the breakdown of all social order."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Darkest Predictions",
-          "content": "As Kali Yuga nears its end, the prophecies foretell even more extreme suffering. Humanity will face widespread disease, devastating famines, and relentless droughts. Water sources will dry up, and the earth will refuse to nourish life. Trees will stop bearing flowers and fruits, and clouds will cease to rain, leading to widespread starvation and thirst.\n\nSociety will descend into complete chaos. The Puranas mention that people will abandon their homes, seeking refuge in mountains and forests, living like animals. They will be driven by hunger and fear, constantly fighting among themselves for survival. There will be no stable families, no communities, and no sense of order. People will become wild and desperate, losing their human dignity.\n\nThe world will be consumed by warfare, greed, and terror. There will be a constant struggle for power and resources, leading to widespread bloodshed. Eventually, all traces of dharma will vanish, and the world will be dominated by unrighteousness. Is there any way to escape this foreseen doom, or are we already experiencing its initial stages?",
-          "cliffhanger": "The chilling question remains: are these ancient prophecies merely allegories, or are they a profound insight into a cycle we are currently living through, leading us to an inevitable, foretold end?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The Shadow of Truth",
-          "content": "The Prophecies of Kali Yuga, detailed in texts like the Vishnu Purana and Bhagavata Purana, paint a truly unsettling picture. When one reads about rulers exploiting their people, the breakdown of family values, the rise of materialism, and environmental degradation, it is difficult not to see parallels with many modern global issues. The description of short lifespans, widespread disease, and constant anxiety resonates with contemporary concerns about health and mental well-being.\n\nWhile these are ancient mythological texts, not scientific predictions in the modern sense, the specificity of their forecasts is striking to many. The idea of 'dharma standing on one leg,' suggesting a world where righteousness is barely sustained, feels chillingly relevant to societal crises today. The emphasis on greed, hypocrisy, and conflict as dominant human traits often finds echoes in current events and social commentary.\n\nThese prophecies serve as a profound reflection on human nature and the cyclical nature of time in Hindu thought. They are not merely stories, but cautionary tales and a framework for understanding the ebb and flow of cosmic order. Whether seen as literal predictions or symbolic warnings, the Prophecies of Kali Yuga continue to provoke deep thought about humanity's past, present, and unsettling potential future, urging introspection on our collective path.",
-          "cliffhanger": null
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "hidden_facts_shri_vishnu_ji",
-          "shared_concept": "cosmic_cycles",
-          "transition_line": "Just as the 'Prophecies of Kali Yuga' chart a cosmic decline, the story of Bhagwan Vishnu reveals the vast, eternal forces that guide these very cosmic cycles, raising questions about ultimate control and illusion."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "The eschatological content of the images of Kalki and Buddha Maitreya: the comparative analysis (Anastasia Ivanova, 2017)",
-          "url": "https://doi.org/10.15382/sturi201772.89-102"
-        },
-        {
-          "label": "The Multilingual Local in World Literature (Francesca Orsini, 2015)",
-          "url": "https://read.dukeupress.edu/comparative-literature/article-pdf/67/4/345/399530/ddclj_67_4_01Orsini_Fpp.pdf"
-        },
-        {
-          "label": "THE DOCTRINE OF YUGAS IN INDIAN COSMOLOGY: A STRUCTURED AND ANALYTICAL STUDY (KIRAN KUMAR KAMANURU, 2026)",
-          "url": "https://doi.org/https://doi.org/10.5281/zenodo.18768876"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "project_raven_uae_cyber_mercenaries",
@@ -9244,6 +9219,36 @@
         "government_secrecy"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg/960px-The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 33,
+        "gripping": 31,
+        "scared": 4,
+        "mindblown": 4
+      },
+      "evidence_links": [
+        {
+          "label": "On the strategic consequences of digital espionage (Joe Devanny, Ciaran Martin, 2021)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23738871.2021.2000628?needAccess=true"
+        },
+        {
+          "label": "Socio-economic profiles of countries - cybercrime victims (Hanna Yarovenko, Agnieszka Łopatka, 2023)",
+          "url": "https://www.economics-sociology.eu/files/11I_1404_Yarovenko et al.pdf"
+        },
+        {
+          "label": "The COVID-19 temptation? (Thomas Demmelhuber, Julia Gurol, 2022)",
+          "url": "https://api.taylorfrancis.com/content/chapters/oa-edit/download?identifierName=doi&identifierValue=10.4324/9781003240044-3&type=chapterpdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as GhostNet silently infiltrated computer networks worldwide, Project Raven revealed how private cyber mercenaries could be used by nations to build their own unseen spying empires."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9288,30 +9293,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as GhostNet silently infiltrated computer networks worldwide, Project Raven revealed how private cyber mercenaries could be used by nations to build their own unseen spying empires."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "On the strategic consequences of digital espionage (Joe Devanny, Ciaran Martin, 2021)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23738871.2021.2000628?needAccess=true"
-        },
-        {
-          "label": "Socio-economic profiles of countries - cybercrime victims (Hanna Yarovenko, Agnieszka Łopatka, 2023)",
-          "url": "https://www.economics-sociology.eu/files/11I_1404_Yarovenko et al.pdf"
-        },
-        {
-          "label": "The COVID-19 temptation? (Thomas Demmelhuber, Julia Gurol, 2022)",
-          "url": "https://api.taylorfrancis.com/content/chapters/oa-edit/download?identifierName=doi&identifierValue=10.4324/9781003240044-3&type=chapterpdf"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg/960px-The_Raven_Inn%2C_Raven_Square_-_geograph.org.uk_-_2286520.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "vikram_vetala_tales",
@@ -9326,6 +9309,23 @@
         "sacred_oaths"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/RF_Burton_Vikram_and_the_Vampire_%281870%29_Illustrated_by_Ernest_Griset_page317.png",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 12,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "mahabharat_psychological_epic",
+          "shared_concept": "moral_dilemmas",
+          "transition_line": "Just as King Vikram faced impossible moral choices from the undead Vetala, the epic Mahabharata presents a grand tapestry of characters grappling with similar profound dilemmas, questioning the very essence of dharma and justice."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9370,16 +9370,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "mahabharat_psychological_epic",
-          "shared_concept": "moral_dilemmas",
-          "transition_line": "Just as King Vikram faced impossible moral choices from the undead Vetala, the epic Mahabharata presents a grand tapestry of characters grappling with similar profound dilemmas, questioning the very essence of dharma and justice."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/RF_Burton_Vikram_and_the_Vampire_%281870%29_Illustrated_by_Ernest_Griset_page317.png",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
@@ -9396,6 +9388,28 @@
         "intelligence_agencies"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu/page1-960px-Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 35,
+        "gripping": 43,
+        "scared": 3,
+        "mindblown": 63
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Like Uwe Barschel, Danny Casolaro was a public figure whose suspicious death in a hotel bathroom left behind a trail of unanswered questions and whispers of a larger conspiracy."
+        },
+        {
+          "story_id": "operation_gladio",
+          "shared_concept": "government_secrecy",
+          "transition_line": "The covert operations and hidden power structures that Danny Casolaro's 'Octopus' sought to expose share disturbing similarities with revelations about 'Operation Gladio', where secret armies were formed under government secrecy."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9440,21 +9454,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "uwe_barschel",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Like Uwe Barschel, Danny Casolaro was a public figure whose suspicious death in a hotel bathroom left behind a trail of unanswered questions and whispers of a larger conspiracy."
-        },
-        {
-          "story_id": "operation_gladio",
-          "shared_concept": "government_secrecy",
-          "transition_line": "The covert operations and hidden power structures that Danny Casolaro's 'Octopus' sought to expose share disturbing similarities with revelations about 'Operation Gladio', where secret armies were formed under government secrecy."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu/page1-960px-Ossendowski_-_The_Shadow_of_the_Gloomy_East.djvu.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "bhasmasura_mohini_deception",
@@ -9469,6 +9470,23 @@
         "illusion"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 51,
+        "gripping": 34,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "divine_play",
+          "transition_line": "Just as Mohini's deception was a divine play to restore balance, the cosmic workings of Lord Vishnu often involve layers of illusion and hidden truths that reshape destinies."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9513,15 +9531,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "hidden_facts_shri_vishnu_ji",
-          "shared_concept": "divine_play",
-          "transition_line": "Just as Mohini's deception was a divine play to restore balance, the cosmic workings of Lord Vishnu often involve layers of illusion and hidden truths that reshape destinies."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "holmesburg_prison_experiments",
@@ -9538,6 +9549,41 @@
         "prison_system_abuse"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 20,
+        "gripping": 28,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "Ethics of health research with prisoners in Canada (Diego S. Silva, Flora I. Matheson, 2017)",
+          "url": "https://bmcmedethics.biomedcentral.com/track/pdf/10.1186/s12910-017-0189-6"
+        },
+        {
+          "label": "Parallel experience: how art and art theory can inform ethics in human research (Lisa Schwartz, 2003)",
+          "url": "https://mh.bmj.com/content/medhum/29/2/59.full.pdf"
+        },
+        {
+          "label": "Skin theory: Visual culture and the postwar prison laboratory By CristinaMejia Visperas, New York, NY: NYU Press. 2022. 256 pp. (Nadja Eisenberg‐Guyot, 2024)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/maq.12859"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "tuskegee_syphilis_study",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Just as with the secret experiments at Holmesburg Prison, the infamous Tuskegee Syphilis Study stands as another dark chapter in history, revealing how trust was betrayed and lives were irrevocably harmed in the name of 'science'."
+        },
+        {
+          "story_id": "guatemalan_syphilis_experiment",
+          "shared_concept": "unethical_research",
+          "transition_line": "The chilling echo of unethical human experimentation also resonates in the Guatemala Syphilis Experiment, where marginalized groups were deliberately infected, mirroring the systemic exploitation seen at Holmesburg Prison."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9582,34 +9628,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "tuskegee_syphilis_study",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Just as with the secret experiments at Holmesburg Prison, the infamous Tuskegee Syphilis Study stands as another dark chapter in history, revealing how trust was betrayed and lives were irrevocably harmed in the name of 'science'."
-        },
-        {
-          "story_id": "guatemalan_syphilis_experiment",
-          "shared_concept": "unethical_research",
-          "transition_line": "The chilling echo of unethical human experimentation also resonates in the Guatemala Syphilis Experiment, where marginalized groups were deliberately infected, mirroring the systemic exploitation seen at Holmesburg Prison."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Ethics of health research with prisoners in Canada (Diego S. Silva, Flora I. Matheson, 2017)",
-          "url": "https://bmcmedethics.biomedcentral.com/track/pdf/10.1186/s12910-017-0189-6"
-        },
-        {
-          "label": "Parallel experience: how art and art theory can inform ethics in human research (Lisa Schwartz, 2003)",
-          "url": "https://mh.bmj.com/content/medhum/29/2/59.full.pdf"
-        },
-        {
-          "label": "Skin theory: Visual culture and the postwar prison laboratory By CristinaMejia Visperas, New York, NY: NYU Press. 2022. 256 pp. (Nadja Eisenberg‐Guyot, 2024)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/maq.12859"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "project_bullrun_muscular",
@@ -9626,6 +9646,23 @@
         "privacy_invasion"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 17,
+        "gripping": 25,
+        "scared": 6,
+        "mindblown": 8
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "echelon_global_surveillance",
+          "shared_concept": "global_surveillance",
+          "transition_line": "Just as Project Echelon listened to global communications decades ago, Project BULLRUN and MUSCULAR represent the next generation of global surveillance, adapting to the digital age to cast an even wider, more intrusive net over our online world."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9670,15 +9707,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "echelon_global_surveillance",
-          "shared_concept": "global_surveillance",
-          "transition_line": "Just as Project Echelon listened to global communications decades ago, Project BULLRUN and MUSCULAR represent the next generation of global surveillance, adapting to the digital age to cast an even wider, more intrusive net over our online world."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "ashwatthama_curse_eternal_suffering",
@@ -9694,6 +9724,28 @@
         "consequences_of_actions"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg/960px-Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 55,
+        "gripping": 33,
+        "scared": 2,
+        "mindblown": 6
+      },
+      "evidence_links": [
+        {
+          "label": "Beyond the Human Boundary: Reimagining Indian Mythology in Kalki 2898 AD through the lens of Posthumanism. (Rittick Dey, 2026)",
+          "url": "https://www.ijfmr.com/papers/2026/2/70804.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "mahabharat_psychological_epic",
+          "shared_concept": "mahabharata_epic",
+          "transition_line": "Ashwatthama's tragic fate is just one of the many profound lessons on human flaws and cosmic justice woven into the rich tapestry of the Mahabharata, an epic that continues to challenge our understanding of dharma and karma."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9738,22 +9790,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "mahabharat_psychological_epic",
-          "shared_concept": "mahabharata_epic",
-          "transition_line": "Ashwatthama's tragic fate is just one of the many profound lessons on human flaws and cosmic justice woven into the rich tapestry of the Mahabharata, an epic that continues to challenge our understanding of dharma and karma."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Beyond the Human Boundary: Reimagining Indian Mythology in Kalki 2898 AD through the lens of Posthumanism. (Rittick Dey, 2026)",
-          "url": "https://www.ijfmr.com/papers/2026/2/70804.pdf"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg/960px-Mural_depicting_Parashurama_confronting_Rama%2C_from_Achleshwar_Dham%2C_Acchal%2C_Batala%2C_Gurdaspur_district%2C_Punjab%2C_circa_19th_century.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "amityville_horror_house_possessed",
@@ -9771,6 +9809,33 @@
         "media_sensationalism"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Horror_Amityville.png/960px-Horror_Amityville.png",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 16,
+        "gripping": 24,
+        "scared": 51,
+        "mindblown": 12
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "enfield_poltergeist_001",
+          "shared_concept": "paranormal_activity",
+          "transition_line": "Just as the Amityville house claimed a demonic presence, another home across the Atlantic became the center of relentless, documented paranormal activity in 'The Enfield Poltergeist'."
+        },
+        {
+          "story_id": "demonic_possession_exorcism_001",
+          "shared_concept": "demonic_possession_or_spirit_attachment",
+          "transition_line": "The Amityville family believed their house was possessed by an evil entity; delve deeper into the long, dark history of such beliefs and the rituals used to combat them in 'The Unseen Struggle: A Dark History of Demonic Possession and Exorcism'."
+        },
+        {
+          "story_id": "hinterkaifeck_murders",
+          "shared_concept": "true_crime",
+          "transition_line": "The Amityville horror began with a heinous true crime; similarly, the 'Hinterkaifeck Murders' tells another chilling story of an unsolved family massacre that still haunts the imagination."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9815,26 +9880,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "enfield_poltergeist_001",
-          "shared_concept": "paranormal_activity",
-          "transition_line": "Just as the Amityville house claimed a demonic presence, another home across the Atlantic became the center of relentless, documented paranormal activity in 'The Enfield Poltergeist'."
-        },
-        {
-          "story_id": "demonic_possession_exorcism_001",
-          "shared_concept": "demonic_possession_or_spirit_attachment",
-          "transition_line": "The Amityville family believed their house was possessed by an evil entity; delve deeper into the long, dark history of such beliefs and the rituals used to combat them in 'The Unseen Struggle: A Dark History of Demonic Possession and Exorcism'."
-        },
-        {
-          "story_id": "hinterkaifeck_murders",
-          "shared_concept": "true_crime",
-          "transition_line": "The Amityville horror began with a heinous true crime; similarly, the 'Hinterkaifeck Murders' tells another chilling story of an unsolved family massacre that still haunts the imagination."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Horror_Amityville.png/960px-Horror_Amityville.png",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "vatican_bank_scandal_calvi_p2",
@@ -9850,6 +9897,23 @@
         "church_corruption"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vactican_as_a_World_Power.djvu/page1-960px-Vactican_as_a_World_Power.djvu.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 36,
+        "gripping": 39,
+        "scared": 1,
+        "mindblown": 44
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Just as the dark secrets of the Vatican Bank were tied to Roberto Calvi's mysterious end, another powerful figure, Uwe Barschel, would soon become entangled in a web of government intrigue and unexplained death."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -9894,16 +9958,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "uwe_barschel",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Just as the dark secrets of the Vatican Bank were tied to Roberto Calvi's mysterious end, another powerful figure, Uwe Barschel, would soon become entangled in a web of government intrigue and unexplained death."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vactican_as_a_World_Power.djvu/page1-960px-Vactican_as_a_World_Power.djvu.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "operation_shady_rat",
@@ -9916,22 +9972,15 @@
         "persistent_threat"
       ],
       "severity": "disturbing",
-      "layers": [
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner",
-          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
-          "cliffhanger": null
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
-        }
-      ],
+      "hero_image": null,
       "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 45,
+        "gripping": 13,
+        "scared": 4,
+        "mindblown": 6
+      },
       "evidence_links": [
         {
           "label": "Navigating the nexus: geopolitical, international relations and technical dimensions of US-China cyber strategic competition (Nistha Kumari Singh, Amrita Jash, 2025)",
@@ -9946,7 +9995,23 @@
           "url": "https://journals.sagepub.com/doi/pdf/10.1177/03063127241299132?download=true"
         }
       ],
-      "hero_image": null
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as the ghost that stole secrets in Shady RAT, GhostNet’s silent fingers slipped through the same veins of the global network."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "Security firms finally shut down the central server, but the worm’s code was released publicly.\n\nThe release sparked debates: while it brought the tool out, it also enabled new attacks.\n\nThe true origin remains a blank spot in history, reminding us that hidden digital weapons can run for a decade before they are seen.\n\nThe world grapples with a ghost that still sits in the cloud, unseen but ever present.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "project_mk_ultra_001",
@@ -9962,6 +10027,46 @@
         "drug_experimentation"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/project_mk_ultra_001.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 28,
+        "gripping": 16,
+        "scared": 5,
+        "mindblown": 9
+      },
+      "evidence_links": [
+        {
+          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
+          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
+        },
+        {
+          "label": "Postmortem: MKULTRA, An Experimental AI-Based Game (Ian Horswill, 2018)",
+          "url": "https://ojs.aaai.org/index.php/AIIDE/article/download/13027/12875"
+        },
+        {
+          "label": "The CIA MKULTRA Subproject 119 Was Their Initial Electromagnetic Program, Though Not Yielding Any Substantial Methodologies (Kenji Miyamoto, 2018)",
+          "url": "https://doi.org/10.2139/ssrn.3284813"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "project_artichoke_mind_control",
+          "shared_concept": "mind_control",
+          "transition_line": "Before MKUltra, the CIA had already begun its chilling journey into mind control with an earlier project, laying the groundwork for even darker experiments."
+        },
+        {
+          "story_id": "guatemalan_syphilis_experiment",
+          "shared_concept": "human_experimentation",
+          "transition_line": "The unethical human experimentation seen in MKUltra was not an isolated incident; other government-backed studies, like the Guatemala Syphilis Experiment, also betrayed public trust in horrifying ways."
+        },
+        {
+          "story_id": "unit_731_experiments",
+          "shared_concept": "human_experimentation",
+          "transition_line": "While MKUltra shocked the world with its psychological abuses, the atrocities of Unit 731 reveal an even more brutal history of government-sanctioned human experimentation, pushing the boundaries of scientific evil."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10006,40 +10111,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "project_artichoke_mind_control",
-          "shared_concept": "mind_control",
-          "transition_line": "Before MKUltra, the CIA had already begun its chilling journey into mind control with an earlier project, laying the groundwork for even darker experiments."
-        },
-        {
-          "story_id": "guatemalan_syphilis_experiment",
-          "shared_concept": "human_experimentation",
-          "transition_line": "The unethical human experimentation seen in MKUltra was not an isolated incident; other government-backed studies, like the Guatemala Syphilis Experiment, also betrayed public trust in horrifying ways."
-        },
-        {
-          "story_id": "unit_731_experiments",
-          "shared_concept": "human_experimentation",
-          "transition_line": "While MKUltra shocked the world with its psychological abuses, the atrocities of Unit 731 reveal an even more brutal history of government-sanctioned human experimentation, pushing the boundaries of scientific evil."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
-          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
-        },
-        {
-          "label": "Postmortem: MKULTRA, An Experimental AI-Based Game (Ian Horswill, 2018)",
-          "url": "https://ojs.aaai.org/index.php/AIIDE/article/download/13027/12875"
-        },
-        {
-          "label": "The CIA MKULTRA Subproject 119 Was Their Initial Electromagnetic Program, Though Not Yielding Any Substantial Methodologies (Kenji Miyamoto, 2018)",
-          "url": "https://doi.org/10.2139/ssrn.3284813"
-        }
-      ],
-      "hero_image": "/content/images/project_mk_ultra_001.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "legend_of_pretas_indian_mythology",
@@ -10056,6 +10129,36 @@
         "greed_and_consequence"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Primitive_Culture_Vol_2.djvu/page1-960px-Primitive_Culture_Vol_2.djvu.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 16,
+        "gripping": 39,
+        "scared": 2,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Black Mothers and Black Boats: Queer, Indigenous, and Afro-Brazilian Intersections in Ney Matogrosso's \"Mãe preta (Barco negro)\" (Daniel Silva, 2019)",
+          "url": "https://jls.apsa.us/index.php/jls/article/download/305/302"
+        },
+        {
+          "label": "The Topography of The Female Self in Indian Therapeutic Cults (Marine Carrin, 2013)",
+          "url": "http://www.erudit.org/fr/revues/ethno/2011-v33-n2-ethno0526/1015023ar.pdf"
+        },
+        {
+          "label": "Caring for the Dead Ritually in Cambodia (John Holt, 2012)",
+          "url": "https://www.jstage.jst.go.jp/article/seas/1/1/1_KJ00007821139/_pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ashwatthama_curse_eternal_suffering",
+          "shared_concept": "eternal_suffering",
+          "transition_line": "Just as Ashwatthama was cursed with eternal suffering for his heinous act, the legends of Pretas reveal another realm of unending torment, born from different, yet equally grave, transgressions of selfishness and greed."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10100,52 +10203,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "ashwatthama_curse_eternal_suffering",
-          "shared_concept": "eternal_suffering",
-          "transition_line": "Just as Ashwatthama was cursed with eternal suffering for his heinous act, the legends of Pretas reveal another realm of unending torment, born from different, yet equally grave, transgressions of selfishness and greed."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Black Mothers and Black Boats: Queer, Indigenous, and Afro-Brazilian Intersections in Ney Matogrosso's \"Mãe preta (Barco negro)\" (Daniel Silva, 2019)",
-          "url": "https://jls.apsa.us/index.php/jls/article/download/305/302"
-        },
-        {
-          "label": "The Topography of The Female Self in Indian Therapeutic Cults (Marine Carrin, 2013)",
-          "url": "http://www.erudit.org/fr/revues/ethno/2011-v33-n2-ethno0526/1015023ar.pdf"
-        },
-        {
-          "label": "Caring for the Dead Ritually in Cambodia (John Holt, 2012)",
-          "url": "https://www.jstage.jst.go.jp/article/seas/1/1/1_KJ00007821139/_pdf"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Primitive_Culture_Vol_2.djvu/page1-960px-Primitive_Culture_Vol_2.djvu.jpg",
-      "image_source": "commons"
-    },
-    {
-      "role": "assistant",
-      "reasoning": "We need to produce a JSON with the specifics.\n\nStory about Human Radiation Experiments (US). We should set category gov_experiments.\n\nNeed 7 layers. Hook must be 1-2 sentence teaser max 150 chars.\n\nConcepts: maybe [\"radiation_exposure\",\"government_censorship\",\"medical_ethics\"] or something.\n\nSeverity: unsettling, disturbing, or chilling. Likely unsettling or chilling.\n\nLayers content 2-3 paragraphs each, double newlines between paragraphs. We must write short, simple sentences. Use single quotes inside. Avoid double quotes. Must use double quotes for JSON values, but inside string we can use single quotes not escaped. But JSON requires double quotes for string delimiters, but quotes inside strings if single quotes is fine. Just ensure no unescaped double quotes inside string. So we use single quotes when needing quotes inside.\n\nWe need a connections array linking to an existing story. Maybe connect to \"tuskegee_syphilis_study\" or \"Holmesburg Prison Experiments\" etc. \"shared_concept\": maybe \"human_experimentation\". Or \"government_misconduct\". Use appropriate concept available in target story's concept list. For \"tuskegee_syphilis_study\" concepts: [\"medical_ethics\",\"human_experimentation\",\"racial_injustice\",\"government_misconduct\",\"public_health_failure\"]. So we can connect on \"human_experimentation\".\n\nTransition line: compelling sentence linking new story to that existing one. For example: \"While the Tuskegee study fell under public scrutiny, the human radiation experiments reveal a darker chapter of hidden American science.\"\n\nMake sure all JSON formatting is correct, no trailing commas.\n\nWe need to ensure each layer has cliffhanger strings. Last layer cliffhanger null.\n\nLet's craft.\n\nStory ID: \"human_radiation_experiments_001\"\n\nTitle: \"The Hidden Radiation Trials: America's Secret Experiments on Human Bodies\"\n\nhook: \"In 1940s America, doctors secretly exposed patients to radioactive substances without consent. The hidden truth remains buried.\"\n\nconcepts: maybe [\"radiation_exposure\",\"government_censorship\",\"medical_ethics\"]\n\nLet's write layers.\n\nLayer 1 (The Whisper - introducing the mystery)\n\nContent: 2-3 paragraphs.\n\nParagraph 1: A brief mention of the covert nature, secrecy, 1940s.\n\nParagraph 2: The implications.\n\nLet's draft:\n\n\"During the early 1940s, American researchers began a secret program that would put people in contact with radioactive materials without their knowledge. The program was announced almost thirty years later, hidden behind the word 'research'. In these first whispers, the public only heard rumors, not records. \"\n\nParagraph 2: mention the case of the first incident: 1942 at a hospital.\n\nWe need keep simple.\n\nLet's craft well.\n\nWe'll keep each paragraph separated by \\n\\n.\n\nBe careful about using double quotes in JSON, we cannot put double quotes in content. So we cannot use double quotes inside content. We'll use single quotes.\n\nAll layers similar.\n\nSpecifically, we need to produce valid JSON string values. In JSON, we use double quotes to mark start and end of each string. Inside those, we must not use unescaped double quotes. Use single quotes for any quotes. Ensure we escape newline characters as \\n\\n directly. But JSON will treat newlines as part of string. Should we escape them? If we embed actual newline inside string, JSON may complain, unless newline is escaped. We better use literal \\n\\n: two backslashes? Actually in JSON, newlines must be escaped as \\n. So we can use \\n\\n to indicate double newline: each line break is represented as \\n. But JSON expects \\n not actual newline, but \\n is a line feed. We can represent it as \\n. Two consecutive \\n represent two line breaks. So we can embed \\n\\n. That is fine.\n\nThus in string we can write \"Line1\\n\\nLine2\". So we need to ensure we close quotes properly.\n\nMake sure we don't use backslashes that cause escaping issues except those needed for newline and quote. Avoid double quotes inside string.\n\nAlso be careful with apostrophes within words: \"it's\" includes an apostrophe. Since we use single quotes for words like \"it's\", that would conflict with string delimiter? Wait we use double quotes as outer string, but inside string we can use apostrophes which are okay. No issue.\n\nBut inside we might use single quotes for quotes e.g., 'patient' etc. That is fine.\n\nNow structure each content string accordingly.\n\nLet's produce content for each layer.\n\nLayer1 content:\n\nParagraph 1: \"In the early 1940s, a small group of scientists started experiments that would expose civilians to radioactive materials without their consent. The work was hidden behind the label 'medical research'. Only a few officials and a few patients knew the truth. \"\n\nParagraph 2: \"The old files were classified under 'classified research' and not opened until the late 1970s. By then, families of victims began to question the secrecy. They demanded answers, but the government kept the papers tightly sealed.\"\n\nMake sure no double quotes.\n\nBetween paragraphs: \\n\\n\n\nCliphanger: \"The next layer reveals how the pattern began to shape a national policy of secrecy.\"\n\nLayer 2: The Pattern.\n\nWe need to describe the pattern of concealment across institutions.\n\nParagraph 1: This could mention how the program copied to various military and civilian sites: military hospitals, universities.\n\nParagraph 2: Example of a broader pattern with repeated similar incidents: 1940s to 1970s.\n\nCliffhanger: \"Layer 3 will uncover the first recorded incident.\"\n\nLayer3: The Incident.\n\nContent: first documented case maybe 1942 at the University of Michigan? Actually real event: 1942 at the Hospital in New Jersey? Let's recall real historical facts: The US had nuclear projects: Japan? The US had the Atomic Energy Commission; known human radiation experiments like the Ernest P. (?), maybe the \"Chandlers source.\" Actually known documented cases: The 1940s, the U.S. conducted Secret Human Radiation Experiments like at E-Research, at the University of Wisconsin, at INEL (Nevada), at the Atomic Energy Commission at the University of Iowa? Also the \"Madison (University of Wisconsin) exposures of pregnant women for fetal radiation exposure.\" The first documented case is in 1942 at the University of Washington? But to keep safe, I'll mention known public documented case like the 1946 experiment at the University of Wisconsin where pregnant women were exposed to radiation. We'll keep simple. Also mention the 1949 at the Cornell University.\n\nThe content: Paragraph 1: The first documented case involved a pregnant woman in 1945 at the University of Wisconsin. She was told she received a standard X‑ray, but actually she received a high dose of radiation from the new isotope. No informed consent.\n\nParagraph 2: The incident triggered internal reports, but the documents were sealed.\n\nCliffhanger: \"The next layer reveals how a system of secrecy was built around this experiment.\"\n\nLayer 4: The System\n\nParagraph 1: The US created policies to cover up radiation experiments, including the Atomic Energy Act and the",
-      "tool_calls": [],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Initial sequencing and analysis of the human genome (Eric S. Lander, Lauren Linton, 2001)",
-          "url": "https://www.nature.com/articles/35057062.pdf"
-        },
-        {
-          "label": "The Human Genome Browser at UCSC (W. James Kent, Charles W. Sugnet, 2002)",
-          "url": "https://genome.cshlp.org/content/12/6/996.full.pdf"
-        },
-        {
-          "label": "In silico prediction of protein-protein interactions in human macrophages (Oussema Souiai, Fatma Z. Guerfali, 2014)",
-          "url": "https://bmcresnotes.biomedcentral.com/track/pdf/10.1186/1756-0500-7-157"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg/960px-PIA03480_Estimated_Radiation_Dosage_on_Mars.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "the_bell_witch_haunting",
@@ -10161,6 +10220,51 @@
         "skepticism_vs_belief"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/the_bell_witch_haunting.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 37,
+        "gripping": 25,
+        "scared": 62,
+        "mindblown": 3
+      },
+      "evidence_links": [
+        {
+          "label": "Images of the witch in nineteenth-century culture (Susan Jennifer Elsley, 2024)",
+          "url": "http://hdl.handle.net/10034/253452"
+        },
+        {
+          "label": "Margaret Cavendish and Joseph Glanvill: science, religion, and witchcraft (Jacqueline Broad, 2007)",
+          "url": "https://philpapers.org/archive/BROMCA-5.pdf"
+        },
+        {
+          "label": "African feminisms for abolitionist futures: archival hauntings in a speculative geography (S.M. Rodriguez, 2022)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/10130950.2022.2182970?download=true"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "enfield_poltergeist_001",
+          "shared_concept": "poltergeist_phenomena",
+          "transition_line": "Just as the Bell family endured unseen physical attacks, another family in England faced a relentless barrage of objects and voices from the infamous Enfield Poltergeist."
+        },
+        {
+          "story_id": "winchester_mystery_house",
+          "shared_concept": "paranormal_activity",
+          "transition_line": "While the Bell Witch brought an unseen terror to a family, the Winchester Mystery House suggests that sometimes, the spirits of the dead can linger, shaping the very structure of a home with their restless energy."
+        },
+        {
+          "story_id": "amityville_horror_house_possessed",
+          "shared_concept": "haunted_house",
+          "transition_line": "Like the Bell Witch, which tormented a family within their home, the Amityville Horror house also became a site of extreme fear, where unseen entities drove a family to flee in terror."
+        },
+        {
+          "story_id": "demonic_possession_exorcism_001",
+          "shared_concept": "demonic_possession_or_spirit_attachment",
+          "transition_line": "The malevolent intelligence and personal hatred displayed by the Bell Witch raises questions about whether it was merely a poltergeist, or something far more sinister, echoing documented cases of demonic possession."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10205,45 +10309,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "enfield_poltergeist_001",
-          "shared_concept": "poltergeist_phenomena",
-          "transition_line": "Just as the Bell family endured unseen physical attacks, another family in England faced a relentless barrage of objects and voices from the infamous Enfield Poltergeist."
-        },
-        {
-          "story_id": "winchester_mystery_house",
-          "shared_concept": "paranormal_activity",
-          "transition_line": "While the Bell Witch brought an unseen terror to a family, the Winchester Mystery House suggests that sometimes, the spirits of the dead can linger, shaping the very structure of a home with their restless energy."
-        },
-        {
-          "story_id": "amityville_horror_house_possessed",
-          "shared_concept": "haunted_house",
-          "transition_line": "Like the Bell Witch, which tormented a family within their home, the Amityville Horror house also became a site of extreme fear, where unseen entities drove a family to flee in terror."
-        },
-        {
-          "story_id": "demonic_possession_exorcism_001",
-          "shared_concept": "demonic_possession_or_spirit_attachment",
-          "transition_line": "The malevolent intelligence and personal hatred displayed by the Bell Witch raises questions about whether it was merely a poltergeist, or something far more sinister, echoing documented cases of demonic possession."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Images of the witch in nineteenth-century culture (Susan Jennifer Elsley, 2024)",
-          "url": "http://hdl.handle.net/10034/253452"
-        },
-        {
-          "label": "Margaret Cavendish and Joseph Glanvill: science, religion, and witchcraft (Jacqueline Broad, 2007)",
-          "url": "https://philpapers.org/archive/BROMCA-5.pdf"
-        },
-        {
-          "label": "African feminisms for abolitionist futures: archival hauntings in a speculative geography (S.M. Rodriguez, 2022)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/10130950.2022.2182970?download=true"
-        }
-      ],
-      "hero_image": "/content/images/the_bell_witch_haunting.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "assassination_rfk_conspiracy",
@@ -10258,6 +10325,36 @@
         "second_gunman"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg/960px-Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg",
+      "added_date": "2026-07-04",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 17,
+        "scared": 5,
+        "mindblown": 42
+      },
+      "evidence_links": [
+        {
+          "label": "Frontlash: Race and the Development of Punitive Crime Policy (Vesla M. Weaver, 2007)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/9744286F944F1A250B94CD3AFB1A6021/S0898588X07000211a.pdf/div-class-title-frontlash-race-and-the-development-of-punitive-crime-policy-div.pdf"
+        },
+        {
+          "label": "John F. Kennedy History, Memory, Legacy: An Interdisciplinary Inquiry (Gregory S. Gordon, 2010)",
+          "url": "https://commons.und.edu/cgi/viewcontent.cgi?article=1002&context=oers"
+        },
+        {
+          "label": "Vultures in Eagles' Clothing: Conspiracy and Racial Fantasy in Populist Legal Thought (Angela P. Harris, 2005)",
+          "url": "https://repository.law.umich.edu/cgi/viewcontent.cgi?article=1147&context=mjrl"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "jfk_assassination_001",
+          "shared_concept": "political_assassination",
+          "transition_line": "The chilling echoes of political violence didn't end with President Kennedy; they returned to haunt his brother, sparking similar questions of unseen forces."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10302,30 +10399,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "jfk_assassination_001",
-          "shared_concept": "political_assassination",
-          "transition_line": "The chilling echoes of political violence didn't end with President Kennedy; they returned to haunt his brother, sparking similar questions of unseen forces."
-        }
-      ],
-      "added_date": "2026-07-04",
-      "evidence_links": [
-        {
-          "label": "Frontlash: Race and the Development of Punitive Crime Policy (Vesla M. Weaver, 2007)",
-          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/9744286F944F1A250B94CD3AFB1A6021/S0898588X07000211a.pdf/div-class-title-frontlash-race-and-the-development-of-punitive-crime-policy-div.pdf"
-        },
-        {
-          "label": "John F. Kennedy History, Memory, Legacy: An Interdisciplinary Inquiry (Gregory S. Gordon, 2010)",
-          "url": "https://commons.und.edu/cgi/viewcontent.cgi?article=1002&context=oers"
-        },
-        {
-          "label": "Vultures in Eagles' Clothing: Conspiracy and Racial Fantasy in Populist Legal Thought (Angela P. Harris, 2005)",
-          "url": "https://repository.law.umich.edu/cgi/viewcontent.cgi?article=1147&context=mjrl"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg/960px-Celebration_of_the_Life_of_Robert_F._Kennedy_on_the_50th_Anniversary_of_His_Assassination_%2827758228357%29.jpg",
-      "image_source": "commons"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "project_shad_covert_testing",
@@ -10342,6 +10417,33 @@
         "long_term_health_effects"
       ],
       "severity": "chilling",
+      "hero_image": null,
+      "added_date": "2026-07-05",
+      "draft": false,
+      "reactions": {
+        "like": 18,
+        "gripping": 26,
+        "scared": 1,
+        "mindblown": 9
+      },
+      "evidence_links": [
+        {
+          "label": "Open-Air Biowarfare Testing and the Evolution of Values (Leonard A. Cole, 2016)",
+          "url": "https://www.liebertpub.com/doi/pdf/10.1089/hs.2016.0040"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "unit_731_experiments",
+          "shared_concept": "human_experimentation",
+          "transition_line": "Like the atrocities committed by Unit 731, Project SHAD reveals another dark chapter where the lives of individuals were sacrificed in the name of military advancement."
+        },
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "government_secrecy",
+          "transition_line": "Just as the CIA's MK-Ultra program plunged into the shadows of mind control, Project SHAD shows another shocking instance of government secrecy leading to widespread harm against its own citizens."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10386,26 +10488,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "unit_731_experiments",
-          "shared_concept": "human_experimentation",
-          "transition_line": "Like the atrocities committed by Unit 731, Project SHAD reveals another dark chapter where the lives of individuals were sacrificed in the name of military advancement."
-        },
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "government_secrecy",
-          "transition_line": "Just as the CIA's MK-Ultra program plunged into the shadows of mind control, Project SHAD shows another shocking instance of government secrecy leading to widespread harm against its own citizens."
-        }
-      ],
-      "added_date": "2026-07-05",
-      "evidence_links": [
-        {
-          "label": "Open-Air Biowarfare Testing and the Evolution of Values (Leonard A. Cole, 2016)",
-          "url": "https://www.liebertpub.com/doi/pdf/10.1089/hs.2016.0040"
-        }
-      ],
-      "hero_image": null
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "internet_dark_matter_probes",
@@ -10422,6 +10506,38 @@
         "botnets"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png/960px-Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png",
+      "added_date": "2026-07-05",
+      "draft": false,
+      "reactions": {
+        "like": 28,
+        "gripping": 11,
+        "scared": 5,
+        "mindblown": 9
+      },
+      "evidence_links": [
+        {
+          "label": "Approaches and Techniques for Fingerprinting and Attributing Probing Activities by Observing Network Telescopes (Elias Bou‐Harb, 2015)",
+          "url": "https://spectrum.library.concordia.ca/980132/1/Bou-Harb_PhD_S2015.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as the internet's dark matter reveals a constant, unseen search for vulnerabilities, GhostNet showed the world how deeply and silently cyber espionage can penetrate global systems, turning the very fabric of the internet into a tool for covert operations."
+        },
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber_warfare",
+          "transition_line": "While the internet's dark matter exposes the continuous probing for weaknesses, Stuxnet proved the devastating real-world consequences of successful cyber warfare, showing how unseen digital attacks can cripple critical physical infrastructure and usher in a new era of global conflict."
+        },
+        {
+          "story_id": "mirai_botnet_iot_attack",
+          "shared_concept": "botnet",
+          "transition_line": "The constant malicious probes in the internet's dark matter are hunting for vulnerabilities, much like those exploited by the Mirai botnet, which hijacked countless everyday devices to launch massive cyber attacks, turning ordinary household items into weapons in the silent digital war."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -10466,32 +10582,98 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as the internet's dark matter reveals a constant, unseen search for vulnerabilities, GhostNet showed the world how deeply and silently cyber espionage can penetrate global systems, turning the very fabric of the internet into a tool for covert operations."
-        },
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "While the internet's dark matter exposes the continuous probing for weaknesses, Stuxnet proved the devastating real-world consequences of successful cyber warfare, showing how unseen digital attacks can cripple critical physical infrastructure and usher in a new era of global conflict."
-        },
-        {
-          "story_id": "mirai_botnet_iot_attack",
-          "shared_concept": "botnet",
-          "transition_line": "The constant malicious probes in the internet's dark matter are hunting for vulnerabilities, much like those exploited by the Mirai botnet, which hijacked countless everyday devices to launch massive cyber attacks, turning ordinary household items into weapons in the silent digital war."
-        }
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
+      "story_id": "prophecies_of_kali_yuga",
+      "title": "The Prophecies of Kali Yuga: Humanity's Dark Descent",
+      "category": "mythology",
+      "hook": "Ancient Hindu texts speak of a final age where truth collapses, rulers become thieves, and society spirals into deep darkness.",
+      "concepts": [
+        "cosmic_cycles",
+        "societal_decline",
+        "moral_decay",
+        "prophecy_fulfillment",
+        "mythological_eschatology"
       ],
-      "added_date": "2026-07-05",
+      "severity": "chilling",
+      "hero_image": "/content/images/prophecies_of_kali_yuga/cover.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 24,
+        "gripping": 22,
+        "scared": 4,
+        "mindblown": 10
+      },
       "evidence_links": [
         {
-          "label": "Approaches and Techniques for Fingerprinting and Attributing Probing Activities by Observing Network Telescopes (Elias Bou‐Harb, 2015)",
-          "url": "https://spectrum.library.concordia.ca/980132/1/Bou-Harb_PhD_S2015.pdf"
+          "label": "The eschatological content of the images of Kalki and Buddha Maitreya: the comparative analysis (Anastasia Ivanova, 2017)",
+          "url": "https://doi.org/10.15382/sturi201772.89-102"
+        },
+        {
+          "label": "The Multilingual Local in World Literature (Francesca Orsini, 2015)",
+          "url": "https://read.dukeupress.edu/comparative-literature/article-pdf/67/4/345/399530/ddclj_67_4_01Orsini_Fpp.pdf"
+        },
+        {
+          "label": "THE DOCTRINE OF YUGAS IN INDIAN COSMOLOGY: A STRUCTURED AND ANALYTICAL STUDY (KIRAN KUMAR KAMANURU, 2026)",
+          "url": "https://doi.org/https://doi.org/10.5281/zenodo.18768876"
         }
       ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png/960px-Deep_web%2C_dark_web%2C_and_darknet_as_segments_of_the_Internet.png",
-      "image_source": "commons"
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "cosmic_cycles",
+          "transition_line": "Just as the 'Prophecies of Kali Yuga' chart a cosmic decline, the story of Bhagwan Vishnu reveals the vast, eternal forces that guide these very cosmic cycles, raising questions about ultimate control and illusion."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - The Fading Light",
+          "content": "Within the vast tapestry of ancient Hindu scriptures, a profound concept exists: the Yugas, or cosmic ages. These are not just time periods, but distinct phases in the universe's existence, each with its own characteristics and moral standards. There are four such Yugas, and the last, the Kali Yuga, is described as the darkest and most challenging period for humanity.\n\nIt is an age of great decline, where dharma, or righteousness, is said to diminish significantly. Truth, wisdom, and spiritual understanding are believed to fade, replaced by ignorance and materialism. The very essence of human virtue is said to be tested and eroded during this long, arduous cycle.\n\nThis final age is not merely a philosophical idea; it is a detailed prophecy, recorded thousands of years ago, describing a future that many believe is now unfolding around us. What exactly did these ancient seers predict for this age of darkness?",
+          "cliffhanger": "But what specific warnings did these prophecies hold about the future of human society?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - The Great Cycles of Time",
+          "content": "Hindu cosmology explains time as cyclical, moving through four Yugas: Satya Yuga (the Golden Age), Treta Yuga (the Silver Age), Dvapara Yuga (the Bronze Age), and Kali Yuga (the Iron Age). Each subsequent Yuga sees a gradual decrease in righteousness, virtue, and human lifespan. Satya Yuga is an era of perfect harmony and spiritual enlightenment, while Kali Yuga marks the lowest point of moral and physical existence.\n\nThe duration of each Yuga is vast, measured in divine years, with Kali Yuga being the shortest but most intense period of decline. In Satya Yuga, dharma stands on four legs, symbolizing complete righteousness. In Treta, it stands on three; in Dvapara, on two; and in Kali Yuga, dharma rests precariously on only one leg, indicating extreme moral degradation.\n\nThese cycles are believed to repeat endlessly, with each Kali Yuga eventually giving way to a new Satya Yuga, bringing renewal. However, the transition into and experience of Kali Yuga is described in chilling detail, laying out a future filled with specific challenges. What exact conditions would define life in this predicted dark age?",
+          "cliffhanger": "The ancient texts did not stop at general decline; they painted a detailed picture of the human experience in Kali Yuga. How would people live, and what would society look like?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The Sage's Vision",
+          "content": "The primary sources for the Kali Yuga prophecies are the Puranas, particularly the Vishnu Purana, Bhagavata Purana (Srimad Bhagavatam), and Brahma Vaivarta Purana. These ancient scriptures are vast collections of myths, legends, and historical accounts, believed to be compiled by the sage Vyasa. Through profound meditation and spiritual insight, these sages were said to have foreseen the future, recording their visions for posterity.\n\nThese sacred texts describe a time when spiritual knowledge will be lost or forgotten by the majority. People will become overly attached to material possessions, and their lives will be driven by desires rather than spiritual wisdom. The pursuit of wealth and sensory pleasure will overshadow the quest for inner peace and truth, leading to widespread unhappiness and moral confusion.\n\nThese are not vague predictions, but rather sharp observations about the shift in human priorities. The sages foresaw a world where the very purpose of life would be misunderstood, leading to a profound emptiness despite outward progress. What specific transformations in governance and family life were expected?",
+          "cliffhanger": "The prophecies extend far beyond spiritual decline, detailing the fall of rulers, the breakdown of families, and even changes in the environment itself."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Signs of the Age",
+          "content": "The Puranas predict distinct societal changes during Kali Yuga. Rulers, or kings, are foretold to become 'thieves' or 'tyrants,' no longer protecting their subjects but instead exploiting them for personal gain. Justice will be based on power, not truth, and laws will be twisted to serve the corrupt. The powerful will oppress the weak, and honesty will be a rare quality in leadership.\n\nFamily structures are also prophesied to collapse. Disrespect for elders will become common, and the bond of marriage will be reduced to mere sexual gratification, losing its sacred and lifelong commitment. Children will not obey their parents, and relatives will harbor animosity towards each other. Trust and loyalty within families, once cornerstones of society, will erode.\n\nEven the environment is not spared. The prophecies suggest that land will yield less produce, trees will bear less fruit, and the earth itself will shrink in size. Droughts, famines, and extreme weather events will become more frequent, causing widespread suffering and scarcity. These environmental degradations are seen as reflections of humanity's growing imbalance with nature. What about the people themselves – what would they be like?",
+          "cliffhanger": "Beyond these external changes, the ancient texts delve into the very nature of human beings, predicting a chilling transformation in their character and lifespan."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - The Human Condition in Kali Yuga",
+          "content": "The prophecies paint a grim picture of human characteristics during Kali Yuga. People are predicted to have short lifespans, weak bodies, and fragile health, constantly suffering from diseases and hunger. The average age of humans will decrease significantly, and physical strength will decline compared to previous Yugas. Sustained physical or mental effort will become a challenge for many.\n\nSpiritually, people will lose their faith and devotion. Rituals and religious practices will be performed out of hypocrisy or for show, rather than with genuine belief. Many will mock those who are righteous or spiritual, seeing them as foolish. Giving up devotion and spirituality will be common, with few seeking true spiritual liberation.\n\nDeceit, hypocrisy, and violence are prophesied to become commonplace. People will cheat each other, speak lies, and engage in constant quarrels and conflicts. Kindness and compassion will diminish, replaced by selfishness and cruelty. In this age, the worst human tendencies will surface, becoming accepted norms. Yet, is there any glimmer of hope in this complete darkness?",
+          "cliffhanger": "As the Kali Yuga progresses, the prophecies describe an even deeper descent, into widespread famine, disease, and the breakdown of all social order."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Darkest Predictions",
+          "content": "As Kali Yuga nears its end, the prophecies foretell even more extreme suffering. Humanity will face widespread disease, devastating famines, and relentless droughts. Water sources will dry up, and the earth will refuse to nourish life. Trees will stop bearing flowers and fruits, and clouds will cease to rain, leading to widespread starvation and thirst.\n\nSociety will descend into complete chaos. The Puranas mention that people will abandon their homes, seeking refuge in mountains and forests, living like animals. They will be driven by hunger and fear, constantly fighting among themselves for survival. There will be no stable families, no communities, and no sense of order. People will become wild and desperate, losing their human dignity.\n\nThe world will be consumed by warfare, greed, and terror. There will be a constant struggle for power and resources, leading to widespread bloodshed. Eventually, all traces of dharma will vanish, and the world will be dominated by unrighteousness. Is there any way to escape this foreseen doom, or are we already experiencing its initial stages?",
+          "cliffhanger": "The chilling question remains: are these ancient prophecies merely allegories, or are they a profound insight into a cycle we are currently living through, leading us to an inevitable, foretold end?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The Shadow of Truth",
+          "content": "The Prophecies of Kali Yuga, detailed in texts like the Vishnu Purana and Bhagavata Purana, paint a truly unsettling picture. When one reads about rulers exploiting their people, the breakdown of family values, the rise of materialism, and environmental degradation, it is difficult not to see parallels with many modern global issues. The description of short lifespans, widespread disease, and constant anxiety resonates with contemporary concerns about health and mental well-being.\n\nWhile these are ancient mythological texts, not scientific predictions in the modern sense, the specificity of their forecasts is striking to many. The idea of 'dharma standing on one leg,' suggesting a world where righteousness is barely sustained, feels chillingly relevant to societal crises today. The emphasis on greed, hypocrisy, and conflict as dominant human traits often finds echoes in current events and social commentary.\n\nThese prophecies serve as a profound reflection on human nature and the cyclical nature of time in Hindu thought. They are not merely stories, but cautionary tales and a framework for understanding the ebb and flow of cosmic order. Whether seen as literal predictions or symbolic warnings, the Prophecies of Kali Yuga continue to provoke deep thought about humanity's past, present, and unsettling potential future, urging introspection on our collective path.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
