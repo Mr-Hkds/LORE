@@ -565,7 +565,8 @@
     "children_past_lives_stevenson_research",
     "spontaneous_human_combustion_shc",
     "phoenix_lights_event",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "mothman_silver_bridge_collapse"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1004,7 +1005,8 @@
     "echelon_global_surveillance"
   ],
   "colonial_history": [
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "goddess_kalis_darker_cults"
   ],
   "intercultural_relations": [
     "roanoke_colony_disappearance"
@@ -1211,7 +1213,8 @@
     "the_beast_of_gevaudan",
     "spring_heeled_jack_legend",
     "salem_witch_trials_001",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "mothman_silver_bridge_collapse"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1615,7 +1618,8 @@
     "salem_witch_trials_001"
   ],
   "fierce_deity": [
-    "kala_bhairava_origin_time_punishment"
+    "kala_bhairava_origin_time_punishment",
+    "goddess_kalis_darker_cults"
   ],
   "divine_punishment": [
     "kala_bhairava_origin_time_punishment",
@@ -1644,7 +1648,8 @@
   ],
   "divine_justice": [
     "ashwatthama_curse_eternal_suffering",
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "goddess_kalis_darker_cults"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
@@ -1769,5 +1774,29 @@
   ],
   "intellectual_property_theft": [
     "operation_aurora_cyber_espionage"
+  ],
+  "secret_cults": [
+    "goddess_kalis_darker_cults"
+  ],
+  "ritual_violence": [
+    "goddess_kalis_darker_cults"
+  ],
+  "mythological_misinterpretation": [
+    "goddess_kalis_darker_cults"
+  ],
+  "thuggee_cult": [
+    "goddess_kalis_darker_cults"
+  ],
+  "mothman_sightings": [
+    "mothman_silver_bridge_collapse"
+  ],
+  "silver_bridge_collapse": [
+    "mothman_silver_bridge_collapse"
+  ],
+  "paranormal_omen": [
+    "mothman_silver_bridge_collapse"
+  ],
+  "structural_failure": [
+    "mothman_silver_bridge_collapse"
   ]
 }
