@@ -64,7 +64,8 @@
     "human_radiation_experiments_us",
     "uwe_barschel",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "the_lavon_affair"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -87,7 +88,8 @@
   ],
   "false_flag": [
     "operation_northwoods_001",
-    "operation_gladio"
+    "operation_gladio",
+    "the_lavon_affair"
   ],
   "government_conspiracy": [
     "operation_northwoods_001",
@@ -113,7 +115,8 @@
     "project_mk_ultra_001",
     "operation_condor_001",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "the_lavon_affair"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -380,7 +383,8 @@
     "the_taman_shud_case",
     "the_isdal_woman",
     "october_surprise_1980_iran",
-    "uwe_barschel"
+    "uwe_barschel",
+    "the_lavon_affair"
   ],
   "covert_communication": [
     "the_numbers_stations"
@@ -1287,7 +1291,8 @@
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
     "the_cuckoos_egg_kgb_hacker",
-    "operation_shady_rat"
+    "operation_shady_rat",
+    "operation_aurora_cyber_espionage"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1298,12 +1303,14 @@
     "the_cuckoos_egg_kgb_hacker",
     "project_raven_uae_cyber_mercenaries",
     "internet_dark_matter_probes",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "operation_aurora_cyber_espionage"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
-    "the_cuckoos_egg_kgb_hacker"
+    "the_cuckoos_egg_kgb_hacker",
+    "operation_aurora_cyber_espionage"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
@@ -1323,7 +1330,8 @@
     "the_shadow_brokers_nsa_leak"
   ],
   "supply_chain_attack": [
-    "solarwinds_supply_chain_attack_001"
+    "solarwinds_supply_chain_attack_001",
+    "operation_aurora_cyber_espionage"
   ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001"
@@ -1576,7 +1584,8 @@
     "october_surprise_1980_iran"
   ],
   "international_relations": [
-    "october_surprise_1980_iran"
+    "october_surprise_1980_iran",
+    "the_lavon_affair"
   ],
   "hostage_crisis": [
     "october_surprise_1980_iran"
@@ -1751,5 +1760,14 @@
   ],
   "medical_ethics_violation": [
     "the_aversion_project_south_africa"
+  ],
+  "political_scandal": [
+    "the_lavon_affair"
+  ],
+  "deception": [
+    "the_lavon_affair"
+  ],
+  "intellectual_property_theft": [
+    "operation_aurora_cyber_espionage"
   ]
 }
