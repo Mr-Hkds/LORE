@@ -917,7 +917,8 @@
   ],
   "digital_threats": [
     "blue_whale_game_001",
-    "morris_worm_first_internet_attack"
+    "morris_worm_first_internet_attack",
+    "the_mydoom_worm_internet_fastest_malware"
   ],
   "psychological_exploitation": [
     "blue_whale_game_001"
@@ -1447,14 +1448,16 @@
     "the_cuckoos_egg_kgb_hacker",
     "internet_dark_matter_probes",
     "mirai_botnet_iot_attack",
-    "morris_worm_first_internet_attack"
+    "morris_worm_first_internet_attack",
+    "the_mydoom_worm_internet_fastest_malware"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
     "vikram_vetala_tales"
   ],
   "karma_and_consequence": [
-    "mahabharat_psychological_epic"
+    "mahabharat_psychological_epic",
+    "yama_lord_of_naraka"
   ],
   "civil_rights_movement": [
     "mlk_assassination_conspiracy"
@@ -1490,7 +1493,8 @@
   ],
   "cosmic_justice": [
     "bhasmasura_mohini_deception",
-    "kala_bhairava_origin_time_punishment"
+    "kala_bhairava_origin_time_punishment",
+    "yama_lord_of_naraka"
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
@@ -1563,13 +1567,15 @@
     "mirai_botnet_iot_attack"
   ],
   "internet_history": [
-    "morris_worm_first_internet_attack"
+    "morris_worm_first_internet_attack",
+    "the_mydoom_worm_internet_fastest_malware"
   ],
   "unintended_consequences": [
     "morris_worm_first_internet_attack"
   ],
   "computer_viruses": [
-    "morris_worm_first_internet_attack"
+    "morris_worm_first_internet_attack",
+    "the_mydoom_worm_internet_fastest_malware"
   ],
   "human_combustion": [
     "spontaneous_human_combustion_shc"
@@ -1711,10 +1717,12 @@
     "legend_of_pretas_indian_mythology"
   ],
   "afterlife": [
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "yama_lord_of_naraka"
   ],
   "suffering": [
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "yama_lord_of_naraka"
   ],
   "ancestral_rituals": [
     "legend_of_pretas_indian_mythology"
@@ -1817,5 +1825,26 @@
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
+  ],
+  "email_worm": [
+    "the_mydoom_worm_internet_fastest_malware"
+  ],
+  "denial_of_service_attack": [
+    "the_mydoom_worm_internet_fastest_malware"
+  ],
+  "unidentified_threat_actor": [
+    "the_mydoom_worm_internet_fastest_malware"
+  ],
+  "divine_judgment": [
+    "yama_lord_of_naraka"
+  ],
+  "underworld": [
+    "yama_lord_of_naraka"
+  ],
+  "moral_accountability": [
+    "yama_lord_of_naraka"
+  ],
+  "retribution": [
+    "yama_lord_of_naraka"
   ]
 }
