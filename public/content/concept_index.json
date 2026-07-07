@@ -99,7 +99,8 @@
     "operation_northwoods_001",
     "october_surprise_1980_iran",
     "operation_condor_001",
-    "reichstag_fire_conspiracy"
+    "reichstag_fire_conspiracy",
+    "iran_contra_affair"
   ],
   "national_security": [
     "operation_northwoods_001",
@@ -123,7 +124,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
-    "operation_mongoose_cuban_project"
+    "operation_mongoose_cuban_project",
+    "iran_contra_affair"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -551,7 +553,8 @@
     "edinburgh_vaults_001",
     "spontaneous_human_combustion_shc",
     "amityville_horror_house_possessed",
-    "the_sallie_house_haunting"
+    "the_sallie_house_haunting",
+    "screaming_skull_bettiscombe_manor"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -579,14 +582,16 @@
     "spontaneous_human_combustion_shc",
     "phoenix_lights_event",
     "amityville_horror_house_possessed",
-    "mothman_silver_bridge_collapse"
+    "mothman_silver_bridge_collapse",
+    "screaming_skull_bettiscombe_manor"
   ],
   "haunted_house": [
     "winchester_mystery_house",
     "black_monk_pontefract_001",
     "amityville_horror_house_possessed",
     "the_sallie_house_haunting",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "screaming_skull_bettiscombe_manor"
   ],
   "missing_children": [
     "the_sodder_children_disappearance"
@@ -1489,7 +1494,8 @@
     "the_sallie_house_haunting"
   ],
   "cursed_objects": [
-    "hope_diamond_curse"
+    "hope_diamond_curse",
+    "screaming_skull_bettiscombe_manor"
   ],
   "historical_mysteries": [
     "hope_diamond_curse"
@@ -1810,7 +1816,8 @@
     "the_aversion_project_south_africa"
   ],
   "political_scandal": [
-    "the_lavon_affair"
+    "the_lavon_affair",
+    "iran_contra_affair"
   ],
   "deception": [
     "the_lavon_affair"
@@ -1898,5 +1905,17 @@
   ],
   "cosmic_downfall": [
     "the_curse_of_gandhari"
+  ],
+  "arms_trafficking": [
+    "iran_contra_affair"
+  ],
+  "hostage_negotiation": [
+    "iran_contra_affair"
+  ],
+  "foreign_policy_violations": [
+    "iran_contra_affair"
+  ],
+  "drug_trafficking_allegations": [
+    "iran_contra_affair"
   ]
 }
