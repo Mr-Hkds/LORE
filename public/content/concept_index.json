@@ -67,7 +67,8 @@
     "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -268,7 +269,8 @@
   "biological_warfare": [
     "unit_731_experiments",
     "project_shad_covert_testing",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -280,15 +282,18 @@
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
     "the_aversion_project_south_africa",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "war_crimes": [
     "unit_731_experiments",
     "the_phoenix_program",
-    "ashwatthama_curse_eternal_suffering"
+    "ashwatthama_curse_eternal_suffering",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "impunity": [
-    "unit_731_experiments"
+    "unit_731_experiments",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "naval_experimentation": [
     "the_philadelphia_experiment"
@@ -369,7 +374,8 @@
     "project_artichoke_mind_control",
     "project_mk_ultra_001",
     "project_shad_covert_testing",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -637,7 +643,8 @@
     "operation_condor_001",
     "human_radiation_experiments_us",
     "project_112_covert_warfare_tests",
-    "undetected_backdoors_early_computing"
+    "undetected_backdoors_early_computing",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -1166,7 +1173,8 @@
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
-    "human_radiation_experiments_us"
+    "human_radiation_experiments_us",
+    "project_500_soviet_biowarfare_prisoners"
   ],
   "poltergeist_phenomena": [
     "enfield_poltergeist_001",
@@ -1337,7 +1345,8 @@
     "project_raven_uae_cyber_mercenaries",
     "internet_dark_matter_probes",
     "the_shadow_brokers_nsa_leak",
-    "operation_aurora_cyber_espionage"
+    "operation_aurora_cyber_espionage",
+    "estonian_cyberattacks_2007"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1360,7 +1369,8 @@
     "conficker_worm",
     "ukraine_power_grid_cyber_attack_2015_2016",
     "project_raven_uae_cyber_mercenaries",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "estonian_cyberattacks_2007"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
@@ -1386,7 +1396,8 @@
   ],
   "digital_weaponry": [
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "estonian_cyberattacks_2007"
   ],
   "zero-day_exploits": [
     "conficker_worm",
@@ -1420,7 +1431,8 @@
     "the_beast_of_gevaudan"
   ],
   "critical_infrastructure_attack": [
-    "ukraine_power_grid_cyber_attack_2015_2016"
+    "ukraine_power_grid_cyber_attack_2015_2016",
+    "estonian_cyberattacks_2007"
   ],
   "power_grid": [
     "ukraine_power_grid_cyber_attack_2015_2016"
@@ -1592,7 +1604,8 @@
     "mirai_botnet_iot_attack"
   ],
   "ddos_attack": [
-    "mirai_botnet_iot_attack"
+    "mirai_botnet_iot_attack",
+    "estonian_cyberattacks_2007"
   ],
   "unsecured_devices": [
     "mirai_botnet_iot_attack"
@@ -1917,5 +1930,11 @@
   ],
   "drug_trafficking_allegations": [
     "iran_contra_affair"
+  ],
+  "totalitarian_regime": [
+    "project_500_soviet_biowarfare_prisoners"
+  ],
+  "geopolitical_conflict": [
+    "estonian_cyberattacks_2007"
   ]
 }
