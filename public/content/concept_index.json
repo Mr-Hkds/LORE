@@ -589,7 +589,8 @@
     "phoenix_lights_event",
     "amityville_horror_house_possessed",
     "mothman_silver_bridge_collapse",
-    "screaming_skull_bettiscombe_manor"
+    "screaming_skull_bettiscombe_manor",
+    "betty_barney_hill_abduction"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1739,7 +1740,8 @@
     "silk_road_dread_pirate_roberts"
   ],
   "government_investigation": [
-    "silk_road_dread_pirate_roberts"
+    "silk_road_dread_pirate_roberts",
+    "betty_barney_hill_abduction"
   ],
   "true_crime": [
     "amityville_horror_house_possessed"
@@ -1936,5 +1938,38 @@
   ],
   "geopolitical_conflict": [
     "estonian_cyberattacks_2007"
+  ],
+  "asceticism": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "transcendence": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "death_rituals": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "non_duality": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "taboo_breaking": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "fierce_deity_worship": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "spiritual_liberation": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "cremation_ground_practices": [
+    "aghori_sadhus_ascetics_of_death"
+  ],
+  "alien_abduction": [
+    "betty_barney_hill_abduction"
+  ],
+  "hypnotic_regression": [
+    "betty_barney_hill_abduction"
+  ],
+  "repressed_memory": [
+    "betty_barney_hill_abduction"
   ]
 }
