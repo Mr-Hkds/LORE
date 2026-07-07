@@ -66,7 +66,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
-    "operation_mongoose_cuban_project"
+    "operation_mongoose_cuban_project",
+    "project_112_covert_warfare_tests"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -91,12 +92,14 @@
     "operation_northwoods_001",
     "operation_gladio",
     "the_lavon_affair",
-    "operation_mongoose_cuban_project"
+    "operation_mongoose_cuban_project",
+    "reichstag_fire_conspiracy"
   ],
   "government_conspiracy": [
     "operation_northwoods_001",
     "october_surprise_1980_iran",
-    "operation_condor_001"
+    "operation_condor_001",
+    "reichstag_fire_conspiracy"
   ],
   "national_security": [
     "operation_northwoods_001",
@@ -262,7 +265,8 @@
   ],
   "biological_warfare": [
     "unit_731_experiments",
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "project_112_covert_warfare_tests"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -273,7 +277,8 @@
     "project_shad_covert_testing",
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
-    "the_aversion_project_south_africa"
+    "the_aversion_project_south_africa",
+    "project_112_covert_warfare_tests"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -361,7 +366,8 @@
     "project_stargate_remote_viewing",
     "project_artichoke_mind_control",
     "project_mk_ultra_001",
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "project_112_covert_warfare_tests"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -624,7 +630,8 @@
     "operation_paperclip_001",
     "project_artichoke_mind_control",
     "operation_condor_001",
-    "human_radiation_experiments_us"
+    "human_radiation_experiments_us",
+    "project_112_covert_warfare_tests"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -744,7 +751,8 @@
     "harold_shipman_serial_killer"
   ],
   "betrayal_of_trust": [
-    "harold_shipman_serial_killer"
+    "harold_shipman_serial_killer",
+    "project_112_covert_warfare_tests"
   ],
   "elder_abuse": [
     "harold_shipman_serial_killer"
@@ -880,7 +888,8 @@
   ],
   "authoritarianism": [
     "the_third_wave_experiment",
-    "the_batavia_shipwreck_mutiny"
+    "the_batavia_shipwreck_mutiny",
+    "reichstag_fire_conspiracy"
   ],
   "shared_psychosis": [
     "the_silent_twins_gibbons"
@@ -1522,13 +1531,16 @@
     "assassination_rfk_conspiracy"
   ],
   "military_misconduct": [
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "project_112_covert_warfare_tests"
   ],
   "chemical_warfare": [
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "project_112_covert_warfare_tests"
   ],
   "long_term_health_effects": [
-    "project_shad_covert_testing"
+    "project_shad_covert_testing",
+    "project_112_covert_warfare_tests"
   ],
   "unseen_threats": [
     "internet_dark_matter_probes"
@@ -1603,7 +1615,8 @@
     "vatican_bank_scandal_calvi_p2"
   ],
   "political_manipulation": [
-    "october_surprise_1980_iran"
+    "october_surprise_1980_iran",
+    "reichstag_fire_conspiracy"
   ],
   "international_relations": [
     "october_surprise_1980_iran",
@@ -1852,5 +1865,14 @@
   ],
   "retribution": [
     "yama_lord_of_naraka"
+  ],
+  "propaganda": [
+    "reichstag_fire_conspiracy"
+  ],
+  "fear_mongering": [
+    "reichstag_fire_conspiracy"
+  ],
+  "seizure_of_power": [
+    "reichstag_fire_conspiracy"
   ]
 }
