@@ -68,7 +68,9 @@
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
     "project_112_covert_warfare_tests",
-    "project_500_soviet_biowarfare_prisoners"
+    "project_500_soviet_biowarfare_prisoners",
+    "operation_mockingbird_cia_media_manipulation",
+    "operation_big_burn_bio_tests"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -126,7 +128,8 @@
     "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
-    "iran_contra_affair"
+    "iran_contra_affair",
+    "operation_mockingbird_cia_media_manipulation"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -270,7 +273,8 @@
     "unit_731_experiments",
     "project_shad_covert_testing",
     "project_112_covert_warfare_tests",
-    "project_500_soviet_biowarfare_prisoners"
+    "project_500_soviet_biowarfare_prisoners",
+    "operation_big_burn_bio_tests"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -283,7 +287,8 @@
     "human_radiation_experiments_us",
     "the_aversion_project_south_africa",
     "project_112_covert_warfare_tests",
-    "project_500_soviet_biowarfare_prisoners"
+    "project_500_soviet_biowarfare_prisoners",
+    "operation_big_burn_bio_tests"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -381,7 +386,8 @@
     "cia_mk_ultra_program",
     "circleville_letters",
     "project_artichoke_mind_control",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "operation_mockingbird_cia_media_manipulation"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -1055,7 +1061,8 @@
     "project_blue_book_ufo"
   ],
   "public_perception": [
-    "project_blue_book_ufo"
+    "project_blue_book_ufo",
+    "operation_mockingbird_cia_media_manipulation"
   ],
   "occult_rituals": [
     "the_lead_mask_case"
@@ -1452,7 +1459,8 @@
     "operation_chaos_cia_domestic_surveillance"
   ],
   "disinformation": [
-    "cointelpro_fbi_covert_ops"
+    "cointelpro_fbi_covert_ops",
+    "operation_mockingbird_cia_media_manipulation"
   ],
   "political_repression": [
     "cointelpro_fbi_covert_ops"
@@ -1756,7 +1764,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "intelligence_agencies": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "operation_mockingbird_cia_media_manipulation"
   ],
   "restless_spirits": [
     "legend_of_pretas_indian_mythology",
@@ -1971,5 +1980,17 @@
   ],
   "repressed_memory": [
     "betty_barney_hill_abduction"
+  ],
+  "media_manipulation": [
+    "operation_mockingbird_cia_media_manipulation"
+  ],
+  "urban_testing": [
+    "operation_big_burn_bio_tests"
+  ],
+  "military_ethics": [
+    "operation_big_burn_bio_tests"
+  ],
+  "public_health_risk": [
+    "operation_big_burn_bio_tests"
   ]
 }
