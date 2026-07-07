@@ -631,7 +631,8 @@
     "project_artichoke_mind_control",
     "operation_condor_001",
     "human_radiation_experiments_us",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "undetected_backdoors_early_computing"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -1100,7 +1101,8 @@
   ],
   "self_destruction": [
     "ravaan_character_study",
-    "mahabharat_psychological_epic"
+    "mahabharat_psychological_epic",
+    "the_curse_of_gandhari"
   ],
   "obsession": [
     "ravaan_character_study"
@@ -1360,10 +1362,12 @@
     "operation_aurora_cyber_espionage"
   ],
   "government_espionage": [
-    "solarwinds_supply_chain_attack_001"
+    "solarwinds_supply_chain_attack_001",
+    "undetected_backdoors_early_computing"
   ],
   "software_vulnerability": [
-    "solarwinds_supply_chain_attack_001"
+    "solarwinds_supply_chain_attack_001",
+    "undetected_backdoors_early_computing"
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage"
@@ -1464,7 +1468,8 @@
     "internet_dark_matter_probes",
     "mirai_botnet_iot_attack",
     "morris_worm_first_internet_attack",
-    "the_mydoom_worm_internet_fastest_malware"
+    "the_mydoom_worm_internet_fastest_malware",
+    "undetected_backdoors_early_computing"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
@@ -1472,7 +1477,8 @@
   ],
   "karma_and_consequence": [
     "mahabharat_psychological_epic",
-    "yama_lord_of_naraka"
+    "yama_lord_of_naraka",
+    "the_curse_of_gandhari"
   ],
   "civil_rights_movement": [
     "mlk_assassination_conspiracy"
@@ -1543,7 +1549,8 @@
     "project_112_covert_warfare_tests"
   ],
   "unseen_threats": [
-    "internet_dark_matter_probes"
+    "internet_dark_matter_probes",
+    "undetected_backdoors_early_computing"
   ],
   "malicious_probes": [
     "internet_dark_matter_probes"
@@ -1681,13 +1688,15 @@
   "divine_justice": [
     "ashwatthama_curse_eternal_suffering",
     "legend_of_pretas_indian_mythology",
-    "goddess_kalis_darker_cults"
+    "goddess_kalis_darker_cults",
+    "the_curse_of_gandhari"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
   ],
   "mahabharata_epic": [
-    "ashwatthama_curse_eternal_suffering"
+    "ashwatthama_curse_eternal_suffering",
+    "the_curse_of_gandhari"
   ],
   "consequences_of_actions": [
     "ashwatthama_curse_eternal_suffering"
@@ -1874,5 +1883,20 @@
   ],
   "seizure_of_power": [
     "reichstag_fire_conspiracy"
+  ],
+  "trusting_trust": [
+    "undetected_backdoors_early_computing"
+  ],
+  "compiler_backdoor": [
+    "undetected_backdoors_early_computing"
+  ],
+  "divine_curse": [
+    "the_curse_of_gandhari"
+  ],
+  "mother's_vengeance": [
+    "the_curse_of_gandhari"
+  ],
+  "cosmic_downfall": [
+    "the_curse_of_gandhari"
   ]
 }
