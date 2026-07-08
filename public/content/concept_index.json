@@ -71,7 +71,9 @@
     "project_500_soviet_biowarfare_prisoners",
     "operation_mockingbird_cia_media_manipulation",
     "operation_big_burn_bio_tests",
-    "the_equation_group_cyber_espionage"
+    "the_equation_group_cyber_espionage",
+    "amelia_earhart_disappearance",
+    "project_mknaomi_cia_biowarfare"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -131,7 +133,8 @@
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
     "iran_contra_affair",
-    "operation_mockingbird_cia_media_manipulation"
+    "operation_mockingbird_cia_media_manipulation",
+    "project_mknaomi_cia_biowarfare"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -164,7 +167,8 @@
     "circleville_letters",
     "uss_cyclops_vanishing",
     "roanoke_colony_disappearance",
-    "the_lead_mask_case"
+    "the_lead_mask_case",
+    "amelia_earhart_disappearance"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -185,7 +189,8 @@
     "the_roswell_incident",
     "mlk_assassination_conspiracy",
     "assassination_rfk_conspiracy",
-    "the_new_world_order_conspiracy"
+    "the_new_world_order_conspiracy",
+    "amelia_earhart_disappearance"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -276,7 +281,8 @@
     "project_shad_covert_testing",
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
-    "operation_big_burn_bio_tests"
+    "operation_big_burn_bio_tests",
+    "project_mknaomi_cia_biowarfare"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -382,7 +388,8 @@
     "project_mk_ultra_001",
     "project_shad_covert_testing",
     "project_112_covert_warfare_tests",
-    "project_500_soviet_biowarfare_prisoners"
+    "project_500_soviet_biowarfare_prisoners",
+    "project_mknaomi_cia_biowarfare"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -553,7 +560,8 @@
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
     "uss_cyclops_vanishing",
-    "the_mary_celeste_mystery"
+    "the_mary_celeste_mystery",
+    "amelia_earhart_disappearance"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -653,7 +661,8 @@
     "human_radiation_experiments_us",
     "project_112_covert_warfare_tests",
     "undetected_backdoors_early_computing",
-    "project_500_soviet_biowarfare_prisoners"
+    "project_500_soviet_biowarfare_prisoners",
+    "project_mknaomi_cia_biowarfare"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -2026,5 +2035,11 @@
   ],
   "archaeological_mystery": [
     "hexham_heads_poltergeist_werewolf"
+  ],
+  "aviation_mystery": [
+    "amelia_earhart_disappearance"
+  ],
+  "toxins": [
+    "project_mknaomi_cia_biowarfare"
   ]
 }
