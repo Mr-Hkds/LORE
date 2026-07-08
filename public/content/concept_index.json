@@ -70,7 +70,8 @@
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
     "operation_mockingbird_cia_media_manipulation",
-    "operation_big_burn_bio_tests"
+    "operation_big_burn_bio_tests",
+    "the_equation_group_cyber_espionage"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -107,7 +108,8 @@
   ],
   "national_security": [
     "operation_northwoods_001",
-    "moonlight_maze_cyber_espionage"
+    "moonlight_maze_cyber_espionage",
+    "the_equation_group_cyber_espionage"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -765,7 +767,8 @@
     "black_monk_pontefract_001",
     "the_bell_witch_haunting",
     "the_sallie_house_haunting",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "hexham_heads_poltergeist_werewolf"
   ],
   "medical_malpractice": [
     "harold_shipman_serial_killer"
@@ -1189,7 +1192,8 @@
     "black_monk_pontefract_001",
     "the_bell_witch_haunting",
     "the_sallie_house_haunting",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "hexham_heads_poltergeist_werewolf"
   ],
   "paranormal_investigation": [
     "enfield_poltergeist_001",
@@ -1341,7 +1345,8 @@
     "ghostnet_global_cyber_espionage",
     "the_cuckoos_egg_kgb_hacker",
     "operation_shady_rat",
-    "operation_aurora_cyber_espionage"
+    "operation_aurora_cyber_espionage",
+    "the_equation_group_cyber_espionage"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1354,7 +1359,8 @@
     "internet_dark_matter_probes",
     "the_shadow_brokers_nsa_leak",
     "operation_aurora_cyber_espionage",
-    "estonian_cyberattacks_2007"
+    "estonian_cyberattacks_2007",
+    "the_equation_group_cyber_espionage"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1393,7 +1399,8 @@
     "undetected_backdoors_early_computing"
   ],
   "advanced_persistent_threat": [
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "the_equation_group_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm",
@@ -1405,11 +1412,13 @@
   "digital_weaponry": [
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
-    "estonian_cyberattacks_2007"
+    "estonian_cyberattacks_2007",
+    "the_equation_group_cyber_espionage"
   ],
   "zero-day_exploits": [
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "the_equation_group_cyber_espionage"
   ],
   "global_cyber_threat": [
     "conficker_worm"
@@ -1516,7 +1525,8 @@
   ],
   "cursed_objects": [
     "hope_diamond_curse",
-    "screaming_skull_bettiscombe_manor"
+    "screaming_skull_bettiscombe_manor",
+    "hexham_heads_poltergeist_werewolf"
   ],
   "historical_mysteries": [
     "hope_diamond_curse"
@@ -2007,5 +2017,14 @@
   ],
   "goddess_power": [
     "raktabija_blood_demon"
+  ],
+  "firmware_malware": [
+    "the_equation_group_cyber_espionage"
+  ],
+  "werewolf_mystery": [
+    "hexham_heads_poltergeist_werewolf"
+  ],
+  "archaeological_mystery": [
+    "hexham_heads_poltergeist_werewolf"
   ]
 }
