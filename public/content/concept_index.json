@@ -114,7 +114,8 @@
   "national_security": [
     "operation_northwoods_001",
     "moonlight_maze_cyber_espionage",
-    "the_equation_group_cyber_espionage"
+    "the_equation_group_cyber_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -746,7 +747,8 @@
     "dissociative_identity_disorder_fragmented_self"
   ],
   "coping_mechanisms": [
-    "dissociative_identity_disorder_fragmented_self"
+    "dissociative_identity_disorder_fragmented_self",
+    "learned_helplessness_psychology_giving_up"
   ],
   "brutal_murder": [
     "black_dahlia_murder"
@@ -1372,7 +1374,8 @@
     "operation_shady_rat",
     "operation_aurora_cyber_espionage",
     "the_equation_group_cyber_espionage",
-    "crypto_ag_scandal_global_espionage"
+    "crypto_ag_scandal_global_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1386,17 +1389,20 @@
     "the_shadow_brokers_nsa_leak",
     "operation_aurora_cyber_espionage",
     "estonian_cyberattacks_2007",
-    "the_equation_group_cyber_espionage"
+    "the_equation_group_cyber_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
     "the_cuckoos_egg_kgb_hacker",
-    "operation_aurora_cyber_espionage"
+    "operation_aurora_cyber_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
-    "ghostnet_global_cyber_espionage"
+    "ghostnet_global_cyber_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
@@ -1426,7 +1432,8 @@
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage",
-    "the_equation_group_cyber_espionage"
+    "the_equation_group_cyber_espionage",
+    "flame_malware_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm",
@@ -2110,5 +2117,20 @@
   ],
   "environmental_modification": [
     "project_popeye_weather_warfare"
+  ],
+  "malware": [
+    "flame_malware_cyber_espionage"
+  ],
+  "learned_helplessness": [
+    "learned_helplessness_psychology_giving_up"
+  ],
+  "psychological_conditioning": [
+    "learned_helplessness_psychology_giving_up"
+  ],
+  "animal_experimentation": [
+    "learned_helplessness_psychology_giving_up"
+  ],
+  "depression": [
+    "learned_helplessness_psychology_giving_up"
   ]
 }
