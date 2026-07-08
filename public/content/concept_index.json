@@ -170,7 +170,8 @@
     "uss_cyclops_vanishing",
     "roanoke_colony_disappearance",
     "the_lead_mask_case",
-    "amelia_earhart_disappearance"
+    "amelia_earhart_disappearance",
+    "bloody_benders_001"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -178,7 +179,8 @@
   "disappearance": [
     "malaysia_airlines_mh370",
     "eilean_mor_lighthouse_mystery",
-    "roanoke_colony_disappearance"
+    "roanoke_colony_disappearance",
+    "bloody_benders_001"
   ],
   "black_box": [
     "malaysia_airlines_mh370"
@@ -1343,10 +1345,12 @@
     "elizabeth_bathory_blood_countess"
   ],
   "demonic_possession": [
-    "demonic_possession_exorcism_001"
+    "demonic_possession_exorcism_001",
+    "anneliese_michel_exorcism"
   ],
   "exorcism": [
-    "demonic_possession_exorcism_001"
+    "demonic_possession_exorcism_001",
+    "anneliese_michel_exorcism"
   ],
   "religious_rituals": [
     "demonic_possession_exorcism_001"
@@ -2066,5 +2070,23 @@
   ],
   "sacred_feminine": [
     "dakinis_demonic_skywalkers"
+  ],
+  "serial_killer_family": [
+    "bloody_benders_001"
+  ],
+  "frontier_crime": [
+    "bloody_benders_001"
+  ],
+  "mass_murder": [
+    "bloody_benders_001"
+  ],
+  "mental_illness": [
+    "anneliese_michel_exorcism"
+  ],
+  "religious_faith": [
+    "anneliese_michel_exorcism"
+  ],
+  "legal_tragedy": [
+    "anneliese_michel_exorcism"
   ]
 }
