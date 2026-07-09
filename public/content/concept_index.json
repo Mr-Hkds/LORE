@@ -594,9 +594,9 @@
     "winchester_mystery_house",
     "edinburgh_vaults_001",
     "spontaneous_human_combustion_shc",
-    "amityville_horror_house_possessed",
     "the_sallie_house_haunting",
-    "screaming_skull_bettiscombe_manor"
+    "screaming_skull_bettiscombe_manor",
+    "amityville_horror_house_possessed"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -623,19 +623,19 @@
     "children_past_lives_stevenson_research",
     "spontaneous_human_combustion_shc",
     "phoenix_lights_event",
-    "amityville_horror_house_possessed",
     "mothman_silver_bridge_collapse",
     "screaming_skull_bettiscombe_manor",
     "betty_barney_hill_abduction",
-    "rendlesham_forest_incident"
+    "rendlesham_forest_incident",
+    "amityville_horror_house_possessed"
   ],
   "haunted_house": [
     "winchester_mystery_house",
     "black_monk_pontefract_001",
-    "amityville_horror_house_possessed",
     "the_sallie_house_haunting",
     "borley_rectory_haunting",
-    "screaming_skull_bettiscombe_manor"
+    "screaming_skull_bettiscombe_manor",
+    "amityville_horror_house_possessed"
   ],
   "missing_children": [
     "the_sodder_children_disappearance"
@@ -797,10 +797,10 @@
     "eilean_mor_lighthouse_mystery",
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
-    "the_bell_witch_haunting",
     "the_sallie_house_haunting",
     "borley_rectory_haunting",
-    "hexham_heads_poltergeist_werewolf"
+    "hexham_heads_poltergeist_werewolf",
+    "the_bell_witch_haunting"
   ],
   "medical_malpractice": [
     "harold_shipman_serial_killer"
@@ -1227,10 +1227,10 @@
   "poltergeist_phenomena": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
-    "the_bell_witch_haunting",
     "the_sallie_house_haunting",
     "borley_rectory_haunting",
-    "hexham_heads_poltergeist_werewolf"
+    "hexham_heads_poltergeist_werewolf",
+    "the_bell_witch_haunting"
   ],
   "paranormal_investigation": [
     "enfield_poltergeist_001",
@@ -1240,13 +1240,13 @@
   "family_trauma": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
-    "the_bell_witch_haunting",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "the_bell_witch_haunting"
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001",
-    "the_bell_witch_haunting",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "the_bell_witch_haunting"
   ],
   "urban_legends": [
     "edinburgh_vaults_001"
@@ -1301,8 +1301,8 @@
     "the_beast_of_gevaudan",
     "spring_heeled_jack_legend",
     "salem_witch_trials_001",
-    "amityville_horror_house_possessed",
-    "mothman_silver_bridge_collapse"
+    "mothman_silver_bridge_collapse",
+    "amityville_horror_house_possessed"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1571,8 +1571,8 @@
   ],
   "demonic_possession_or_spirit_attachment": [
     "black_monk_pontefract_001",
-    "the_bell_witch_haunting",
-    "the_sallie_house_haunting"
+    "the_sallie_house_haunting",
+    "the_bell_witch_haunting"
   ],
   "cursed_objects": [
     "hope_diamond_curse",
@@ -1810,12 +1810,6 @@
   "government_investigation": [
     "silk_road_dread_pirate_roberts",
     "betty_barney_hill_abduction"
-  ],
-  "true_crime": [
-    "amityville_horror_house_possessed"
-  ],
-  "hoax_claims": [
-    "amityville_horror_house_possessed"
   ],
   "flesh_eating_spirits": [
     "pishachas_flesh_eating_spirits",
@@ -2202,5 +2196,11 @@
   ],
   "journalism": [
     "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "true_crime": [
+    "amityville_horror_house_possessed"
+  ],
+  "hoax_claims": [
+    "amityville_horror_house_possessed"
   ]
 }
