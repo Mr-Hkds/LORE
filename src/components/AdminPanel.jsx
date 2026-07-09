@@ -4521,49 +4521,32 @@ function CoverManagerCard({ story, onSaveImage, onEdit }) {
     return gradients[hash % gradients.length];
   };
 
-  const cleanTitle = (story.title || '').split(/[:\-–—]/)[0].trim();
+  const cleanTitle = (story.title || '').split(/[:\-–—|]/)[0].trim();
 
-  // Build organic search query by extracting key noun terms from the ENTIRE title and discarding noise/stop words
-  const buildOrganicQuery = () => {
+  const buildSearchQuery = () => {
     const title = story.title || '';
-    let fullText = title.replace(/[:\-–—()]/g, " ");
-    const stopWords = new Set([
-      'the', 'a', 'an', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from',
-      'by', 'of', 'in', 'with', 'about', 'as', 'into', 'through', 'over', 'under',
-      'between', 'behind', 'underneath', 'upon', 'within', 'without', 'against',
-      'is', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does',
-      'did', 'that', 'this', 'these', 'those', 'who', 'whom', 'which', 'what'
-    ]);
-    const words = fullText
-      .replace(/[.,/#!$%^&*;:_~"?''’]/g, "")
-      .split(/\s+/)
-      .filter(word => {
-        const lower = word.toLowerCase();
-        return lower.length > 1 && !stopWords.has(lower);
-      });
-    const keyTerms = words.slice(0, 5).join(' ');
+    let core = title.split(/[:\-–—|]/)[0].trim();
+    if (core.split(/\s+/).length < 3) {
+      const parts = title.split(/[:\-–—|]/);
+      core = parts.slice(0, 2).join(' ').trim();
+    }
+    core = core.replace(/["""''()[\]{}]/g, '').trim();
     
     const cat = story.category || '';
-    let aesthetics = 'vintage photograph';
-    if (cat === 'psychology') {
-      aesthetics = 'retro psychological photo brain mind';
-    } else if (cat === 'mythology') {
-      aesthetics = 'ancient stone statue classical sculpture artifact';
-    } else if (cat === 'true_crime') {
-      aesthetics = 'evidence photo forensic archive document';
-    } else if (cat === 'gov_experiments') {
-      aesthetics = 'classified laboratory vintage document cold war test';
-    } else if (cat === 'paranormal') {
-      aesthetics = 'eerie paranormal polaroid mystery shadow';
-    } else if (cat === 'conspiracy') {
-      aesthetics = 'classified surveillance document photo dossier';
-    } else if (cat === 'cyber_mysteries') {
-      aesthetics = 'vintage terminal CRT mainframe screen';
-    }
-    return `${keyTerms} ${aesthetics}`.trim();
+    const contextMap = {
+      'psychology': 'experiment',
+      'mythology': 'ancient',
+      'true_crime': 'case',
+      'gov_experiments': 'declassified',
+      'paranormal': 'incident',
+      'conspiracy': 'document',
+      'cyber_mysteries': 'digital'
+    };
+    const context = contextMap[cat] || '';
+    return `${core} ${context} historical photo`.trim();
   };
 
-  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(buildOrganicQuery())}`;
+  const searchGoogleUrl = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(buildSearchQuery())}`;
 
   return (
     <div className="bg-[#0D0B08] border border-neutral-800/40 rounded-xl overflow-hidden text-left flex flex-col justify-between transition-all duration-200 hover:border-neutral-700/60" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
