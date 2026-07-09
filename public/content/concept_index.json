@@ -62,7 +62,6 @@
     "vatican_bank_scandal_calvi_p2",
     "human_radiation_experiments_us",
     "uwe_barschel",
-    "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
     "project_112_covert_warfare_tests",
@@ -78,7 +77,8 @@
     "rendlesham_forest_incident",
     "men_in_black_phenomenon",
     "project_popeye_weather_warfare",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "operation_chaos_cia_domestic_surveillance"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -135,7 +135,6 @@
     "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
     "project_mk_ultra_001",
-    "operation_chaos_cia_domestic_surveillance",
     "operation_condor_001",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
@@ -145,7 +144,8 @@
     "crypto_ag_scandal_global_espionage",
     "zersetzung_stasi_disintegration",
     "project_popeye_weather_warfare",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "operation_chaos_cia_domestic_surveillance"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -1811,26 +1811,6 @@
     "silk_road_dread_pirate_roberts",
     "betty_barney_hill_abduction"
   ],
-  "flesh_eating_spirits": [
-    "pishachas_flesh_eating_spirits",
-    "dakinis_demonic_skywalkers"
-  ],
-  "indian_mythology": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "malevolent_entities": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "spiritual_torment": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "exorcism_rituals": [
-    "pishachas_flesh_eating_spirits"
-  ],
-  "restless_spirits": [
-    "pishachas_flesh_eating_spirits",
-    "legend_of_pretas_indian_mythology"
-  ],
   "international_collaboration": [
     "operation_condor_001"
   ],
@@ -2152,6 +2132,10 @@
   "reality_distortion": [
     "gaslighting_psychological_warfare"
   ],
+  "flesh_eating_spirits": [
+    "dakinis_demonic_skywalkers",
+    "pishachas_flesh_eating_spirits"
+  ],
   "sky_walkers": [
     "dakinis_demonic_skywalkers"
   ],
@@ -2182,6 +2166,10 @@
   "thuggee_cult": [
     "goddess_kalis_darker_cults"
   ],
+  "restless_spirits": [
+    "legend_of_pretas_indian_mythology",
+    "pishachas_flesh_eating_spirits"
+  ],
   "karma": [
     "legend_of_pretas_indian_mythology"
   ],
@@ -2202,5 +2190,17 @@
   ],
   "hoax_claims": [
     "amityville_horror_house_possessed"
+  ],
+  "indian_mythology": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "malevolent_entities": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "spiritual_torment": [
+    "pishachas_flesh_eating_spirits"
+  ],
+  "exorcism_rituals": [
+    "pishachas_flesh_eating_spirits"
   ]
 }
