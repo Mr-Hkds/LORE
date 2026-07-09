@@ -681,10 +681,10 @@
     "human_radiation_experiments_us",
     "operation_condor_001",
     "project_112_covert_warfare_tests",
-    "undetected_backdoors_early_computing",
     "project_500_soviet_biowarfare_prisoners",
     "project_mknaomi_cia_biowarfare",
-    "crypto_ag_scandal_global_espionage"
+    "crypto_ag_scandal_global_espionage",
+    "undetected_backdoors_early_computing"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -1923,12 +1923,6 @@
   "seizure_of_power": [
     "reichstag_fire_conspiracy"
   ],
-  "trusting_trust": [
-    "undetected_backdoors_early_computing"
-  ],
-  "compiler_backdoor": [
-    "undetected_backdoors_early_computing"
-  ],
   "arms_trafficking": [
     "iran_contra_affair"
   ],
@@ -2202,5 +2196,11 @@
   ],
   "cosmic_downfall": [
     "the_curse_of_gandhari"
+  ],
+  "trusting_trust": [
+    "undetected_backdoors_early_computing"
+  ],
+  "compiler_backdoor": [
+    "undetected_backdoors_early_computing"
   ]
 }
