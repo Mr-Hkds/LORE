@@ -10285,95 +10285,6 @@
       "image_missing": false
     },
     {
-      "story_id": "the_shadow_brokers_nsa_leak",
-      "title": "The Shadow Brokers: When Top-Secret Cyberweapons Went Public",
-      "category": "cyber_mysteries",
-      "hook": "Imagine a hidden vault holding the world's most dangerous digital weapons. Now, imagine someone breaks in and sells those secrets to the highest bidder.",
-      "concepts": [
-        "cyber_warfare",
-        "state-sponsored_hacking",
-        "government_secrecy",
-        "zero-day_exploits",
-        "digital_weaponry"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/the_shadow_brokers_nsa_leak.jpg",
-      "added_date": "2026-07-02",
-      "draft": 0,
-      "reactions": {
-        "like": 27,
-        "gripping": 40,
-        "scared": 4,
-        "mindblown": 8
-      },
-      "evidence_links": [
-        {
-          "label": "Ransomware: Analysing the Impact on Windows Active Directory Domain Services (Grant McDonald, Pavlos Papadopoulos, 2022)",
-          "url": "https://www.mdpi.com/1424-8220/22/3/953/pdf?version=1643199228"
-        },
-        {
-          "label": "INFORMATION TECHNOLOGIES OF SEMANTIC DISTORTIONS IN CLICKBAIT HEADLINES (З. З. Чанышева, M Hilbert, 2016)",
-          "url": "https://doi.org/10.15593/2224-9389/2016.4.5"
-        },
-        {
-          "label": "Cyber-conflict between the United States of America and Russia (Marie Baezner, Patrice Robin, 2017)",
-          "url": "http://hdl.handle.net/20.500.11850/184547"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
-          "shared_concept": "cyber_warfare",
-          "transition_line": "Just as Stuxnet showed the precision of unseen digital attacks, the Shadow Brokers leak revealed the terrifying scope of tools designed for a hidden global war, unleashing them upon the entire world."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - The Mysterious Arrival",
-          "content": "In August 2016, a new, unknown group called 'The Shadow Brokers' suddenly appeared online. They posted a strange message, claiming they had stolen powerful cyber tools from a very secret and elite hacking unit. Many believed this unit belonged to the United States' National Security Agency (NSA). At first, most cybersecurity experts were unsure. Was this a trick? A joke? Or was something truly alarming about to happen?\n\nThe Shadow Brokers said they would sell these stolen tools to the highest bidder. To prove their claim, they released a small sample of files. These files contained names and descriptions of cyber weapons that looked surprisingly real and dangerous. The cybersecurity world watched closely, filled with a mix of doubt and fear. The idea that such powerful secrets could be stolen was unsettling, but the identity of the thieves and their target remained a dark mystery.\n\nThe group's method was unusual. They created an 'auction' where people could bid with digital currency for the full cache of tools. This unique approach made their claims even more puzzling. It was clear that whoever they were, they meant business, and they were ready to shake the foundations of digital security.",
-          "cliffhanger": "Who were these anonymous hackers, and what exactly did they possess that could be so dangerous?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - A Digital Showcase",
-          "content": "As the auction continued, The Shadow Brokers started to release more samples. These small data drops were like breadcrumbs leading to a larger, more terrifying truth. Experts began to analyze these samples closely. They found code names like 'Equation Group' repeatedly mentioned in the files. This name was already known within intelligence circles as a highly advanced and secretive hacking entity, widely believed to be linked to the NSA.\n\nThe leaked samples included small programs and scripts. While not the full arsenal, they gave enough hints to show that these were professional, government-level tools. They were not simple malware from small-time hackers. The quality and complexity of the code suggested a state-sponsored origin, built with vast resources and deep knowledge of global computer networks.\n\nThis digital showcase slowly started to convince the skeptical. The tools seemed designed for specific tasks: breaking into firewalls, gaining access to Windows systems, and hiding their presence on compromised machines. The question was no longer 'if' these tools were real, but 'what' their full capabilities were, and what would happen if they truly fell into the wrong hands.",
-          "cliffhanger": "As the world watched, the Shadow Brokers continued to release their proof, confirming the unimaginable: a trove of digital weapons had truly been stolen."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - The First Drop",
-          "content": "In April 2017, after months of teasing and small releases, The Shadow Brokers made their biggest move. They dumped a large collection of highly potent hacking tools onto the internet, making them freely available to everyone. This wasn't just a leak; it was an open broadcast of top-secret cyberweapons.\n\nAmong the leaked files were several powerful exploits designed to target Microsoft Windows operating systems. One of these, known as 'EternalBlue', was particularly devastating. It allowed hackers to gain complete control over many Windows computers without needing a password or any user interaction. This was a 'zero-day exploit' – a flaw unknown to Microsoft, meaning there was no defense against it until it was publicly revealed.\n\nCybersecurity professionals immediately recognized the profound danger. These were not theoretical weapons; they were highly effective, ready-to-use tools for widespread digital attacks. The full weight of the Shadow Brokers' claims hit the world, confirming that the powerful 'Equation Group's' secrets were now exposed for all to see.",
-          "cliffhanger": "The leaked tools were real, and they pointed to a chilling truth about who built them and the sheer power they possessed."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - Unmasking Equation Group",
-          "content": "The public release of these tools confirmed what many experts had suspected: 'Equation Group' was indeed the code name for the NSA's 'Tailored Access Operations' (TAO) unit. This was America's most elite and secretive team of government hackers, responsible for digital espionage and cyber warfare operations around the globe. Their mission was to penetrate foreign computer systems to gather intelligence or sabotage enemy infrastructure.\n\nThe tools revealed were astonishingly sophisticated. They were designed not just to hack into systems, but to persist there, silently collecting information or waiting for further commands. The arsenal included exploits for various hardware firewalls, network devices, and, most critically, widespread vulnerabilities in Windows operating systems that had been kept secret for years.\n\nThese were not random hacks; they were highly engineered digital keys that could unlock critical infrastructure, government networks, and personal computers worldwide. The exposure of these tools meant that the very defenses countries and companies relied upon could now be bypassed by anyone who understood how to use the leaked code. It was a complete game-changer in the world of cyber security, stripping powerful nations of their digital advantage.",
-          "cliffhanger": "The full extent of these cyberweapons was revealed, and it held terrifying power that would soon unleash global chaos."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - The WannaCry and NotPetya Fallout",
-          "content": "The true impact of the Shadow Brokers' leak became terrifyingly clear in May 2017. Just weeks after the tools were dumped, a massive ransomware attack called 'WannaCry' swept across the globe. WannaCry used the 'EternalBlue' exploit, one of the NSA tools released by The Shadow Brokers, to spread rapidly across computer networks.\n\nThis attack encrypted files on affected computers and demanded a ransom payment in cryptocurrency. It crippled hospitals in the UK, disrupted major businesses, and infected hundreds of thousands of computers in over 150 countries. The world witnessed firsthand how a cyberweapon, initially designed by a state for intelligence purposes, could become a tool of global destruction in the hands of criminals.\n\nLater that year, in June 2017, another devastating attack, 'NotPetya', emerged. Also leveraging 'EternalBlue', NotPetya was disguised as ransomware but was far more destructive, designed to permanently wipe data rather than just encrypt it. It caused billions of dollars in damage, particularly to businesses and infrastructure in Ukraine, and its impact spread globally, further demonstrating the catastrophic consequences of these leaked digital weapons.",
-          "cliffhanger": "The genie was truly out of the bottle, and its destructive force was now impacting millions worldwide with no easy way to put it back."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Unanswered Questions",
-          "content": "Even years later, the identity of 'The Shadow Brokers' remains one of the greatest cyber mysteries. Was it an insider, a disgruntled employee from the NSA or a contractor, seeking revenge or profit? Or was it a rival nation-state, like Russia, that managed to infiltrate the NSA's networks and steal their most valuable secrets? Many experts point fingers at Russia, given the timing and the political tensions between the US and Russia at the time.\n\nThe leak raised profound questions about national security. How could such a sensitive arsenal of cyberweapons be stolen? It suggested a deep-seated vulnerability within the very organizations tasked with protecting a nation's digital infrastructure. The incident exposed a harsh reality: even the most secure agencies could be compromised.\n\nBeyond the direct attacks, the leak eroded trust in governments' ability to protect digital secrets and, by extension, their citizens. It showed that the development of powerful cyberweapons, even for defense, carries immense risk. Once these weapons are stolen, they cannot be 'recalled' and can be used by anyone, anywhere, causing unpredictable global damage.",
-          "cliffhanger": "The core mystery of the breach remained, revealing deeper vulnerabilities not just in technology, but in the very foundations of state security and global trust."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The True Cost of Cyber-Warfare",
-          "content": "The Shadow Brokers leak fundamentally changed the landscape of cybersecurity forever. It demonstrated the perilous nature of state-sponsored cyber warfare. When nations hoard zero-day exploits and develop powerful digital tools in secret, they create a hidden global arsenal. If these weapons fall into the wrong hands, as they did, the entire world becomes vulnerable.\n\nThis event sparked a crucial debate: should governments disclose vulnerabilities they find, so software companies can fix them and protect everyone? Or should they keep these flaws secret, to use them as cyberweapons against adversaries? The Shadow Brokers provided a chilling answer: keeping them secret risks their exposure and weaponization by malicious actors, leading to widespread, uncontrollable damage.\n\nThe chilling truth is that the tools released by The Shadow Brokers continue to be used and adapted by hackers worldwide. They are now part of the public domain, making advanced cyberattacks accessible to a much broader range of criminals and state actors. The leak unveiled the dangerous game played in the shadows, where the weapons developed for national defense can easily become tools of global destruction, impacting millions of innocent lives and undermining the digital peace we all rely upon."
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
       "story_id": "human_radiation_experiments_us",
       "title": "The Unseen Scars: America's Secret Radiation Experiments",
       "category": "gov_experiments",
@@ -14779,6 +14690,95 @@
       "image_missing": false
     },
     {
+      "story_id": "the_shadow_brokers_nsa_leak",
+      "title": "The Shadow Brokers: When Top-Secret Cyberweapons Went Public",
+      "category": "cyber_mysteries",
+      "hook": "Imagine a hidden vault holding the world's most dangerous digital weapons. Now, imagine someone breaks in and sells those secrets to the highest bidder.",
+      "concepts": [
+        "cyber_warfare",
+        "state-sponsored_hacking",
+        "government_secrecy",
+        "zero-day_exploits",
+        "digital_weaponry"
+      ],
+      "severity": "chilling",
+      "hero_image": "/content/images/the_shadow_brokers_nsa_leak.jpg",
+      "added_date": "2026-07-02",
+      "draft": false,
+      "reactions": {
+        "like": 27,
+        "gripping": 40,
+        "scared": 4,
+        "mindblown": 8
+      },
+      "evidence_links": [
+        {
+          "label": "Ransomware: Analysing the Impact on Windows Active Directory Domain Services (Grant McDonald, Pavlos Papadopoulos, 2022)",
+          "url": "https://www.mdpi.com/1424-8220/22/3/953/pdf?version=1643199228"
+        },
+        {
+          "label": "INFORMATION TECHNOLOGIES OF SEMANTIC DISTORTIONS IN CLICKBAIT HEADLINES (З. З. Чанышева, M Hilbert, 2016)",
+          "url": "https://doi.org/10.15593/2224-9389/2016.4.5"
+        },
+        {
+          "label": "Cyber-conflict between the United States of America and Russia (Marie Baezner, Patrice Robin, 2017)",
+          "url": "http://hdl.handle.net/20.500.11850/184547"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "stuxnet_cyberweapon_nuclear_facilities",
+          "shared_concept": "cyber_warfare",
+          "transition_line": "Just as Stuxnet showed the precision of unseen digital attacks, the Shadow Brokers leak revealed the terrifying scope of tools designed for a hidden global war, unleashing them upon the entire world."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - The Mysterious Arrival",
+          "content": "In August 2016, a new, unknown group called 'The Shadow Brokers' suddenly appeared online. They posted a strange message, claiming they had stolen powerful cyber tools from a very secret and elite hacking unit. Many believed this unit belonged to the United States' National Security Agency (NSA). At first, most cybersecurity experts were unsure. Was this a trick? A joke? Or was something truly alarming about to happen?\n\nThe Shadow Brokers said they would sell these stolen tools to the highest bidder. To prove their claim, they released a small sample of files. These files contained names and descriptions of cyber weapons that looked surprisingly real and dangerous. The cybersecurity world watched closely, filled with a mix of doubt and fear. The idea that such powerful secrets could be stolen was unsettling, but the identity of the thieves and their target remained a dark mystery.\n\nThe group's method was unusual. They created an 'auction' where people could bid with digital currency for the full cache of tools. This unique approach made their claims even more puzzling. It was clear that whoever they were, they meant business, and they were ready to shake the foundations of digital security.",
+          "cliffhanger": "Who were these anonymous hackers, and what exactly did they possess that could be so dangerous?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - A Digital Showcase",
+          "content": "As the auction continued, The Shadow Brokers started to release more samples. These small data drops were like breadcrumbs leading to a larger, more terrifying truth. Experts began to analyze these samples closely. They found code names like 'Equation Group' repeatedly mentioned in the files. This name was already known within intelligence circles as a highly advanced and secretive hacking entity, widely believed to be linked to the NSA.\n\nThe leaked samples included small programs and scripts. While not the full arsenal, they gave enough hints to show that these were professional, government-level tools. They were not simple malware from small-time hackers. The quality and complexity of the code suggested a state-sponsored origin, built with vast resources and deep knowledge of global computer networks.\n\nThis digital showcase slowly started to convince the skeptical. The tools seemed designed for specific tasks: breaking into firewalls, gaining access to Windows systems, and hiding their presence on compromised machines. The question was no longer 'if' these tools were real, but 'what' their full capabilities were, and what would happen if they truly fell into the wrong hands.",
+          "cliffhanger": "As the world watched, the Shadow Brokers continued to release their proof, confirming the unimaginable: a trove of digital weapons had truly been stolen."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The First Drop",
+          "content": "In April 2017, after months of teasing and small releases, The Shadow Brokers made their biggest move. They dumped a large collection of highly potent hacking tools onto the internet, making them freely available to everyone. This wasn't just a leak; it was an open broadcast of top-secret cyberweapons.\n\nAmong the leaked files were several powerful exploits designed to target Microsoft Windows operating systems. One of these, known as 'EternalBlue', was particularly devastating. It allowed hackers to gain complete control over many Windows computers without needing a password or any user interaction. This was a 'zero-day exploit' – a flaw unknown to Microsoft, meaning there was no defense against it until it was publicly revealed.\n\nCybersecurity professionals immediately recognized the profound danger. These were not theoretical weapons; they were highly effective, ready-to-use tools for widespread digital attacks. The full weight of the Shadow Brokers' claims hit the world, confirming that the powerful 'Equation Group's' secrets were now exposed for all to see.",
+          "cliffhanger": "The leaked tools were real, and they pointed to a chilling truth about who built them and the sheer power they possessed."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - Unmasking Equation Group",
+          "content": "The public release of these tools confirmed what many experts had suspected: 'Equation Group' was indeed the code name for the NSA's 'Tailored Access Operations' (TAO) unit. This was America's most elite and secretive team of government hackers, responsible for digital espionage and cyber warfare operations around the globe. Their mission was to penetrate foreign computer systems to gather intelligence or sabotage enemy infrastructure.\n\nThe tools revealed were astonishingly sophisticated. They were designed not just to hack into systems, but to persist there, silently collecting information or waiting for further commands. The arsenal included exploits for various hardware firewalls, network devices, and, most critically, widespread vulnerabilities in Windows operating systems that had been kept secret for years.\n\nThese were not random hacks; they were highly engineered digital keys that could unlock critical infrastructure, government networks, and personal computers worldwide. The exposure of these tools meant that the very defenses countries and companies relied upon could now be bypassed by anyone who understood how to use the leaked code. It was a complete game-changer in the world of cyber security, stripping powerful nations of their digital advantage.",
+          "cliffhanger": "The full extent of these cyberweapons was revealed, and it held terrifying power that would soon unleash global chaos."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - The WannaCry and NotPetya Fallout",
+          "content": "The true impact of the Shadow Brokers' leak became terrifyingly clear in May 2017. Just weeks after the tools were dumped, a massive ransomware attack called 'WannaCry' swept across the globe. WannaCry used the 'EternalBlue' exploit, one of the NSA tools released by The Shadow Brokers, to spread rapidly across computer networks.\n\nThis attack encrypted files on affected computers and demanded a ransom payment in cryptocurrency. It crippled hospitals in the UK, disrupted major businesses, and infected hundreds of thousands of computers in over 150 countries. The world witnessed firsthand how a cyberweapon, initially designed by a state for intelligence purposes, could become a tool of global destruction in the hands of criminals.\n\nLater that year, in June 2017, another devastating attack, 'NotPetya', emerged. Also leveraging 'EternalBlue', NotPetya was disguised as ransomware but was far more destructive, designed to permanently wipe data rather than just encrypt it. It caused billions of dollars in damage, particularly to businesses and infrastructure in Ukraine, and its impact spread globally, further demonstrating the catastrophic consequences of these leaked digital weapons.",
+          "cliffhanger": "The genie was truly out of the bottle, and its destructive force was now impacting millions worldwide with no easy way to put it back."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Unanswered Questions",
+          "content": "Even years later, the identity of 'The Shadow Brokers' remains one of the greatest cyber mysteries. Was it an insider, a disgruntled employee from the NSA or a contractor, seeking revenge or profit? Or was it a rival nation-state, like Russia, that managed to infiltrate the NSA's networks and steal their most valuable secrets? Many experts point fingers at Russia, given the timing and the political tensions between the US and Russia at the time.\n\nThe leak raised profound questions about national security. How could such a sensitive arsenal of cyberweapons be stolen? It suggested a deep-seated vulnerability within the very organizations tasked with protecting a nation's digital infrastructure. The incident exposed a harsh reality: even the most secure agencies could be compromised.\n\nBeyond the direct attacks, the leak eroded trust in governments' ability to protect digital secrets and, by extension, their citizens. It showed that the development of powerful cyberweapons, even for defense, carries immense risk. Once these weapons are stolen, they cannot be 'recalled' and can be used by anyone, anywhere, causing unpredictable global damage.",
+          "cliffhanger": "The core mystery of the breach remained, revealing deeper vulnerabilities not just in technology, but in the very foundations of state security and global trust."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The True Cost of Cyber-Warfare",
+          "content": "The Shadow Brokers leak fundamentally changed the landscape of cybersecurity forever. It demonstrated the perilous nature of state-sponsored cyber warfare. When nations hoard zero-day exploits and develop powerful digital tools in secret, they create a hidden global arsenal. If these weapons fall into the wrong hands, as they did, the entire world becomes vulnerable.\n\nThis event sparked a crucial debate: should governments disclose vulnerabilities they find, so software companies can fix them and protect everyone? Or should they keep these flaws secret, to use them as cyberweapons against adversaries? The Shadow Brokers provided a chilling answer: keeping them secret risks their exposure and weaponization by malicious actors, leading to widespread, uncontrollable damage.\n\nThe chilling truth is that the tools released by The Shadow Brokers continue to be used and adapted by hackers worldwide. They are now part of the public domain, making advanced cyberattacks accessible to a much broader range of criminals and state actors. The leak unveiled the dangerous game played in the shadows, where the weapons developed for national defense can easily become tools of global destruction, impacting millions of innocent lives and undermining the digital peace we all rely upon."
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": false
+    },
+    {
       "story_id": "rendlesham_forest_incident",
       "title": "Rendlesham Forest: Britain's Unseen Encounter",
       "category": "paranormal",
@@ -14792,6 +14792,41 @@
         "radiation"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/RAF_Woodbridge_East_Gate.jpg",
+      "added_date": "2026-07-09",
+      "draft": false,
+      "reactions": {
+        "like": 39,
+        "gripping": 42,
+        "scared": 24,
+        "mindblown": 5
+      },
+      "evidence_links": [
+        {
+          "label": "Rural and Urban Poaching in Victorian England (Harvey Osborne, Michael Winstanley, 2006)",
+          "url": "https://eprints.lancs.ac.uk/id/eprint/4191/1/win1.pdf"
+        },
+        {
+          "label": "A Look Back at Georgina Bruni’s Book: You Can’t Tell the People: the Definitive Account of the Rendlesham Forest UFO Mystery (Carl Grove, 2024)",
+          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/3537/2221"
+        },
+        {
+          "label": "Time Travel: coexistence of past, present, and future? (Matheus Pereira Lobo, 2019)",
+          "url": "https://osf.io/7ruay/download"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "the_roswell_incident",
+          "shared_concept": "ufo",
+          "transition_line": "Just like the desert expanse of Roswell, Rendlesham Forest holds a chilling secret of an unexplained aerial craft and the enduring silence of authorities."
+        },
+        {
+          "story_id": "project_blue_book_ufo",
+          "shared_concept": "government_secrecy",
+          "transition_line": "From Project Blue Book's classified investigations to Rendlesham's hidden files, the pattern of government secrecy surrounding unexplained aerial phenomena remains unsettlingly consistent."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -14836,35 +14871,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "the_roswell_incident",
-          "shared_concept": "ufo",
-          "transition_line": "Just like the desert expanse of Roswell, Rendlesham Forest holds a chilling secret of an unexplained aerial craft and the enduring silence of authorities."
-        },
-        {
-          "story_id": "project_blue_book_ufo",
-          "shared_concept": "government_secrecy",
-          "transition_line": "From Project Blue Book's classified investigations to Rendlesham's hidden files, the pattern of government secrecy surrounding unexplained aerial phenomena remains unsettlingly consistent."
-        }
-      ],
-      "added_date": "2026-07-09",
-      "evidence_links": [
-        {
-          "label": "Rural and Urban Poaching in Victorian England (Harvey Osborne, Michael Winstanley, 2006)",
-          "url": "https://eprints.lancs.ac.uk/id/eprint/4191/1/win1.pdf"
-        },
-        {
-          "label": "A Look Back at Georgina Bruni’s Book: You Can’t Tell the People: the Definitive Account of the Rendlesham Forest UFO Mystery (Carl Grove, 2024)",
-          "url": "https://journalofscientificexploration.org/index.php/jse/article/download/3537/2221"
-        },
-        {
-          "label": "Time Travel: coexistence of past, present, and future? (Matheus Pereira Lobo, 2019)",
-          "url": "https://osf.io/7ruay/download"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/RAF_Woodbridge_East_Gate.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "zersetzung_stasi_disintegration",
@@ -14880,6 +14888,28 @@
         "social_disintegration"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/zersetzung_stasi_disintegration.jpg",
+      "added_date": "2026-07-09",
+      "draft": false,
+      "reactions": {
+        "like": 24,
+        "gripping": 27,
+        "scared": 1,
+        "mindblown": 5
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "cia_mk_ultra_program",
+          "shared_concept": "psychological_warfare",
+          "transition_line": "While the Stasi used silent psychological attacks to control its citizens, other nations explored more direct, chemical means to control the mind, as seen in the CIA's MK-Ultra program."
+        },
+        {
+          "story_id": "cointelpro_fbi_covert_ops",
+          "shared_concept": "covert_operations",
+          "transition_line": "Across the Iron Curtain, even democracies engaged in their own shadowy campaigns against citizens, though with different tools and objectives, much like the FBI's COINTELPRO program."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -14924,21 +14954,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "cia_mk_ultra_program",
-          "shared_concept": "psychological_warfare",
-          "transition_line": "While the Stasi used silent psychological attacks to control its citizens, other nations explored more direct, chemical means to control the mind, as seen in the CIA's MK-Ultra program."
-        },
-        {
-          "story_id": "cointelpro_fbi_covert_ops",
-          "shared_concept": "covert_operations",
-          "transition_line": "Across the Iron Curtain, even democracies engaged in their own shadowy campaigns against citizens, though with different tools and objectives, much like the FBI's COINTELPRO program."
-        }
-      ],
-      "added_date": "2026-07-09",
-      "hero_image": "/content/images/zersetzung_stasi_disintegration.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": true
     },
     {
       "story_id": "titan_rain_silent_infiltration_us_networks",
@@ -14953,6 +14970,46 @@
         "unseen_warfare"
       ],
       "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lockheed_Martin_Aeronautics_Discussion.jpg",
+      "added_date": "2026-07-09",
+      "draft": false,
+      "reactions": {
+        "like": 19,
+        "gripping": 32,
+        "scared": 2,
+        "mindblown": 10
+      },
+      "evidence_links": [
+        {
+          "label": "Tracking GhostNet: investigating a cyber espionage network (RJ Deibert, Rafal Rohozinski, 2009)",
+          "url": "https://ora.ox.ac.uk/objects/uuid:6d1260fd-b8ee-4a11-8a5f-e7708d543651"
+        },
+        {
+          "label": "END-PERMIAN BURNOUT: THE ROLE OF PERMIAN–TRIASSIC WILDFIRES IN EXTINCTION, CARBON CYCLING, AND ENVIRONMENTAL CHANGE IN EASTERN GONDWANA (Chris Mays, Stephen McLoughlin, 2022)",
+          "url": "https://pubs.geoscienceworld.org/sepm/palaios/article-pdf/37/6/292/5641614/i1938-5323-37-6-292.pdf"
+        },
+        {
+          "label": "Getting to Yes with China in Cyberspace (Scott W. Harold, Martin C. Libicki, 2016)",
+          "url": "https://www.rand.org/content/dam/rand/pubs/research_reports/RR1300/RR1335/RAND_RR1335.pdf"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "moonlight_maze_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Just as 'Titan Rain' exposed the silent digital theft from US networks, the earlier 'Moonlight Maze' campaign revealed how another foreign power secretly plundered American military secrets for years."
+        },
+        {
+          "story_id": "ghostnet_global_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "Much like 'Titan Rain', the later 'GhostNet' operation showed a similar pattern of widespread cyber-espionage, targeting governments and private organizations globally, highlighting the pervasive nature of unseen digital threats."
+        },
+        {
+          "story_id": "operation_aurora_cyber_espionage",
+          "shared_concept": "cyber_espionage",
+          "transition_line": "The aggressive tactics seen in 'Titan Rain' were echoed years later in 'Operation Aurora', where the same suspected state actor targeted Google and other tech giants, proving the continuous, evolving threat of state-sponsored digital theft."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -14997,40 +15054,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "moonlight_maze_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Just as 'Titan Rain' exposed the silent digital theft from US networks, the earlier 'Moonlight Maze' campaign revealed how another foreign power secretly plundered American military secrets for years."
-        },
-        {
-          "story_id": "ghostnet_global_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "Much like 'Titan Rain', the later 'GhostNet' operation showed a similar pattern of widespread cyber-espionage, targeting governments and private organizations globally, highlighting the pervasive nature of unseen digital threats."
-        },
-        {
-          "story_id": "operation_aurora_cyber_espionage",
-          "shared_concept": "cyber_espionage",
-          "transition_line": "The aggressive tactics seen in 'Titan Rain' were echoed years later in 'Operation Aurora', where the same suspected state actor targeted Google and other tech giants, proving the continuous, evolving threat of state-sponsored digital theft."
-        }
-      ],
-      "added_date": "2026-07-09",
-      "evidence_links": [
-        {
-          "label": "Tracking GhostNet: investigating a cyber espionage network (RJ Deibert, Rafal Rohozinski, 2009)",
-          "url": "https://ora.ox.ac.uk/objects/uuid:6d1260fd-b8ee-4a11-8a5f-e7708d543651"
-        },
-        {
-          "label": "END-PERMIAN BURNOUT: THE ROLE OF PERMIAN–TRIASSIC WILDFIRES IN EXTINCTION, CARBON CYCLING, AND ENVIRONMENTAL CHANGE IN EASTERN GONDWANA (Chris Mays, Stephen McLoughlin, 2022)",
-          "url": "https://pubs.geoscienceworld.org/sepm/palaios/article-pdf/37/6/292/5641614/i1938-5323-37-6-292.pdf"
-        },
-        {
-          "label": "Getting to Yes with China in Cyberspace (Scott W. Harold, Martin C. Libicki, 2016)",
-          "url": "https://www.rand.org/content/dam/rand/pubs/research_reports/RR1300/RR1335/RAND_RR1335.pdf"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lockheed_Martin_Aeronautics_Discussion.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": false
     },
     {
       "story_id": "gaslighting_psychological_warfare",
@@ -15045,6 +15070,36 @@
         "reality_distortion"
       ],
       "severity": "chilling",
+      "hero_image": "/content/images/gaslighting_psychological_warfare.jpg",
+      "added_date": "2026-07-09",
+      "draft": 0,
+      "reactions": {
+        "like": 39,
+        "gripping": 12,
+        "scared": 4,
+        "mindblown": 67
+      },
+      "evidence_links": [
+        {
+          "label": "Gaslighting queerness: schooling as a place of violent assemblages (Boni Wozolek, 2018)",
+          "url": "https://scholarsphere.psu.edu/resources/dcda9bbb-2710-419a-8403-14069c0c9881/downloads/15664"
+        },
+        {
+          "label": "Navigating the twisted path of gaslighting: A manifestation of epistemic injustice for Palestinian women entrepreneurs (Wojdan Omran, Shumaila Yousafzai, 2023)",
+          "url": "https://journals.sagepub.com/doi/pdf/10.1177/00187267231203531"
+        },
+        {
+          "label": "Simulacra and fakes in the information warfare (Maryna Kolinko, Halyna Petryshyn, 2022)",
+          "url": "http://skhid.kubg.edu.ua/article/download/266049/262468"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "learned_helplessness_psychology_giving_up",
+          "shared_concept": "psychological_conditioning",
+          "transition_line": "Like the subjects in the 'Learned Helplessness' experiments, victims of gaslighting are psychologically conditioned to surrender their agency, convinced their struggles are futile and their own perceptions unreliable."
+        }
+      ],
       "layers": [
         {
           "layer": 1,
@@ -15089,30 +15144,8 @@
           "cliffhanger": null
         }
       ],
-      "connections": [
-        {
-          "story_id": "learned_helplessness_psychology_giving_up",
-          "shared_concept": "psychological_conditioning",
-          "transition_line": "Like the subjects in the 'Learned Helplessness' experiments, victims of gaslighting are psychologically conditioned to surrender their agency, convinced their struggles are futile and their own perceptions unreliable."
-        }
-      ],
-      "added_date": "2026-07-09",
-      "evidence_links": [
-        {
-          "label": "Gaslighting queerness: schooling as a place of violent assemblages (Boni Wozolek, 2018)",
-          "url": "https://scholarsphere.psu.edu/resources/dcda9bbb-2710-419a-8403-14069c0c9881/downloads/15664"
-        },
-        {
-          "label": "Navigating the twisted path of gaslighting: A manifestation of epistemic injustice for Palestinian women entrepreneurs (Wojdan Omran, Shumaila Yousafzai, 2023)",
-          "url": "https://journals.sagepub.com/doi/pdf/10.1177/00187267231203531"
-        },
-        {
-          "label": "Simulacra and fakes in the information warfare (Maryna Kolinko, Halyna Petryshyn, 2022)",
-          "url": "http://skhid.kubg.edu.ua/article/download/266049/262468"
-        }
-      ],
-      "hero_image": "/content/images/gaslighting_psychological_warfare.jpg",
-      "image_source": "wikipedia"
+      "custom_image_prompt": null,
+      "image_missing": 0
     }
   ]
 }
