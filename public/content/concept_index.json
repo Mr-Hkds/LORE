@@ -1778,9 +1778,9 @@
   ],
   "divine_justice": [
     "ashwatthama_curse_eternal_suffering",
-    "legend_of_pretas_indian_mythology",
     "the_curse_of_gandhari",
-    "goddess_kalis_darker_cults"
+    "goddess_kalis_darker_cults",
+    "legend_of_pretas_indian_mythology"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
@@ -1827,27 +1827,6 @@
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_mockingbird_cia_media_manipulation"
   ],
-  "restless_spirits": [
-    "legend_of_pretas_indian_mythology",
-    "pishachas_flesh_eating_spirits"
-  ],
-  "karma": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "afterlife": [
-    "legend_of_pretas_indian_mythology",
-    "yama_lord_of_naraka"
-  ],
-  "suffering": [
-    "legend_of_pretas_indian_mythology",
-    "yama_lord_of_naraka"
-  ],
-  "ancestral_rituals": [
-    "legend_of_pretas_indian_mythology"
-  ],
-  "greed_and_consequence": [
-    "legend_of_pretas_indian_mythology"
-  ],
   "flesh_eating_spirits": [
     "pishachas_flesh_eating_spirits",
     "dakinis_demonic_skywalkers"
@@ -1863,6 +1842,10 @@
   ],
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
+  ],
+  "restless_spirits": [
+    "pishachas_flesh_eating_spirits",
+    "legend_of_pretas_indian_mythology"
   ],
   "international_collaboration": [
     "operation_condor_001"
@@ -1946,6 +1929,14 @@
   ],
   "unidentified_threat_actor": [
     "the_mydoom_worm_internet_fastest_malware"
+  ],
+  "afterlife": [
+    "yama_lord_of_naraka",
+    "legend_of_pretas_indian_mythology"
+  ],
+  "suffering": [
+    "yama_lord_of_naraka",
+    "legend_of_pretas_indian_mythology"
   ],
   "divine_judgment": [
     "yama_lord_of_naraka"
@@ -2202,5 +2193,14 @@
   ],
   "thuggee_cult": [
     "goddess_kalis_darker_cults"
+  ],
+  "karma": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "ancestral_rituals": [
+    "legend_of_pretas_indian_mythology"
+  ],
+  "greed_and_consequence": [
+    "legend_of_pretas_indian_mythology"
   ]
 }
