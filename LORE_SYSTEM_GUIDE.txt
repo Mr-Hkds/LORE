@@ -1,0 +1,139 @@
+================================================================================
+                         LORE SYSTEM ARCHITECTURE & ONBOARDING GUIDE
+================================================================================
+This document outlines the entire system architecture, technical stack, API integrations,
+distributed state synchronization, and image cascades of the LORE-V2 workspace.
+It serves as the definitive reference guide for any AI engineering agent working on this codebase.
+
+--------------------------------------------------------------------------------
+1. TECHNICAL STACK OVERVIEW
+--------------------------------------------------------------------------------
+LORE is an atmospheric, digital forensics web archive cataloging historical mysteries.
+
+- Frontend Core: React (Vite-powered Single Page Application)
+  - Style System: Tailwind CSS & Custom CSS (Strictly HSL color scale, dark/retro HUD aesthetics)
+  - Navigation/State: React Context & custom Hooks (useStaticContent.js)
+  - Telemetries: Lucide Icons
+- Backend Layer: Dual-environment Server
+  - Local Dev Server: Node.js Express server ('server.cjs')
+  - Production Server: Vercel Serverless Functions (located in '/api/*.js')
+- Database Layer:
+  - Local: SQLite database ('lore.db') powered by 'better-sqlite3' via 'db.cjs'
+  - Production: Turso Remote Database (SQLite over HTTP)
+
+--------------------------------------------------------------------------------
+2. SYSTEM ARCHITECTURE & DATA FLOW
+--------------------------------------------------------------------------------
+
++------------------------------------------------------------------------------+
+|                                  CLIENT CLIENT                               |
+|   [React App / Browser]                                                      |
+|     |                                                                        |
+|     +-- 1. Initial Load: Fetches static `stories.json` (Edge CDN - fast)     |
+|     +-- 2. Background Revalidation (SWR): Queries `/api/stories` (Live DB)    |
+|     +-- 3. Saves cover link: Sends `PUT /api/stories/:id` (Remote URL)        |
++------------------------------------------------------------------------------+
+                                       |
+                                       v
++------------------------------------------------------------------------------+
+|                                  VERCEL API                                  |
+|   [/api/stories] Serverless Backend                                          |
+|     |                                                                        |
+|     +-- Natively downloads the remote image                                  |
+|     +-- Converts image bytes into compressed base64 data                     |
+|     +-- Updates SQLite database row with base64 data                         |
++------------------------------------------------------------------------------+
+                                       |
+                                       v
++------------------------------------------------------------------------------+
+|                                  TURSO DB                                    |
+|   [SQLite Cloud Database]                                                    |
+|     |                                                                        |
+|     +-- Persists the raw base64 string directly in the database row          |
+|     +-- Serves immediately on request, bypassing CORS/network 404s           |
++------------------------------------------------------------------------------+
+
+--------------------------------------------------------------------------------
+3. STATE PERSISTENCE & GITHUB SYNC
+--------------------------------------------------------------------------------
+Because Vercel Serverless containers are ephemeral and stateless, files saved in `/tmp`
+or local dev directories are lost on container restart. 
+
+To solve this, LORE implements the "GitHub Sync" state persistence mechanism:
+- Source of Truth files:
+  - `public/content/stories.json` (List of published dossiers)
+  - `public/content/concept_index.json` (Concept search mapping database)
+  - `public/content/image_manifest.json` (Ground truth image tracking)
+
+A. The Commit Phase:
+   When an admin saves a cover image or publishes a draft:
+   - The React frontend compiles the updated story list and posts it to the GitHub
+     API to update `stories.json` directly on the `main` branch.
+   - OPTIMIZATION: All automated commits use the `[skip ci]` commit suffix. This 
+     tells Vercel to bypass rebuilding and redeploying the site, preserving API
+     build limits, while successfully updating the repository files.
+
+B. The Startup Seeding Phase:
+   On Vercel container wake-up/module import, `seed()` in `db.cjs` is triggered:
+   - It fetches the latest `stories.json` file from GitHub's raw CDN URL
+     (`https://raw.githubusercontent.com/...`).
+   - It executes `INSERT OR IGNORE` transactions to align the SQLite database with 
+     the repository commits, ensuring ephemeral container starts never serve stale data.
+
+--------------------------------------------------------------------------------
+4. ROBUST IMAGE RESOLVER CASCADE
+--------------------------------------------------------------------------------
+LORE operates a 4-tier cascade resolver to find and archive cover photos:
+
+- Tier 1: Wikipedia Direct Summary REST API
+  - Endpoint: `https://en.wikipedia.org/api/rest_v1/page/summary/${topic}`
+  - Directly queries page lead image (must be >= 300px wide).
+
+- Tier 2: Wikipedia Search API Fallback (Handles Exact Match Errors)
+  - If direct lookup fails, it strips stop words and colons, extracts the top 4
+    noun terms (e.g. "Project Artichoke CIA Mind Control"), and queries Wikipedia Search.
+  - It fetches the summaries of the top 3 search results to find the first valid image.
+
+- Tier 3: Wikimedia Commons API Search
+  - Queries Commons repository for image matches. Filters out SVGs and UI icons.
+
+- Tier 4: Typographic HUD Fallback
+  - If no suitable image exists or is requested, it displays an atmospheric, 
+    themed forensic cover (featuring category-colored radial gradients, fictional
+    classification telemetries, and frequency MHz readings).
+
+--------------------------------------------------------------------------------
+5. MANUAL & CANDIDATES SELECTION SYSTEM
+--------------------------------------------------------------------------------
+In the Admin Console, developers have access to a visual selection grid:
+- Scan Matches: Invokes `/api/resolve-image?topic=...&candidates=true`.
+- The server scans the Wikipedia article's internal media galleries and retrieves up to
+  6 historical photograph links.
+- Admin Panel renders these in a layout grid where the admin can manually select the
+  ideal image.
+- Once selected, the server downloads the remote URL, encodes it as base64, and commits it.
+
+--------------------------------------------------------------------------------
+6. DIRECT TYPOGRAPHY RESET SYSTEM
+--------------------------------------------------------------------------------
+If you need to quickly clear a story's cover and enforce the HUD typography layout:
+- Click the "Reset to Typography HUD" button in the Cover Manager.
+- This sets the `hero_image` value to the exact string `"typography"`.
+- The seeder treats `"typography"` as a valid completed cover state, allowing it
+  to remain published without throwing missing image errors.
+- The catalog detects `"typography"` and forces the HUD layout instantly.
+
+--------------------------------------------------------------------------------
+7. CONTENT GENERATION ENGINE (AI Dossier Script)
+--------------------------------------------------------------------------------
+File: `generate_stories_ai.cjs`
+- Driven by a Node automation pipeline that hooks into LLMs (e.g., Gemini API).
+- Prompts generate an immersive, classified dossier format with structured JSON outputs:
+  - hook (intro teaser)
+  - severity (low, medium, high, critical)
+  - layers (7 distinct layers of deep evidence, starting from Layer 1 public data
+    to Layer 7 highly redacted secret/paranormal elements).
+  - connections (links to other historical nodes)
+  - timeline (historical checkpoints)
+  - sources (real bibliography/research links)
+================================================================================
