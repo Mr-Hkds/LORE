@@ -14082,7 +14082,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/men_in_black_phenomenon.jpg",
       "added_date": "2026-07-08",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 16,
         "gripping": 34,
@@ -14165,7 +14165,7 @@
         }
       ],
       "custom_image_prompt": null,
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "project_popeye_weather_warfare",
