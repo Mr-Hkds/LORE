@@ -78,7 +78,8 @@
     "men_in_black_phenomenon",
     "project_popeye_weather_warfare",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "project_chatter_mind_control"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -145,7 +146,8 @@
     "zersetzung_stasi_disintegration",
     "project_popeye_weather_warfare",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "operation_chaos_cia_domestic_surveillance"
+    "operation_chaos_cia_domestic_surveillance",
+    "project_chatter_mind_control"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -403,7 +405,8 @@
   "mind_control": [
     "cia_mk_ultra_program",
     "project_artichoke_mind_control",
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "project_chatter_mind_control"
   ],
   "unethical_experimentation": [
     "cia_mk_ultra_program",
@@ -413,7 +416,8 @@
     "project_shad_covert_testing",
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
-    "project_mknaomi_cia_biowarfare"
+    "project_mknaomi_cia_biowarfare",
+    "project_chatter_mind_control"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -422,7 +426,8 @@
     "project_mk_ultra_001",
     "operation_mockingbird_cia_media_manipulation",
     "the_axeman_of_new_orleans",
-    "zersetzung_stasi_disintegration"
+    "zersetzung_stasi_disintegration",
+    "project_chatter_mind_control"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -690,7 +695,8 @@
     "project_500_soviet_biowarfare_prisoners",
     "project_mknaomi_cia_biowarfare",
     "crypto_ag_scandal_global_espionage",
-    "undetected_backdoors_early_computing"
+    "undetected_backdoors_early_computing",
+    "project_chatter_mind_control"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -992,7 +998,8 @@
   "digital_threats": [
     "blue_whale_game_001",
     "morris_worm_first_internet_attack",
-    "the_mydoom_worm_internet_fastest_malware"
+    "the_mydoom_worm_internet_fastest_malware",
+    "iloveyou_virus_001"
   ],
   "psychological_exploitation": [
     "blue_whale_game_001"
@@ -1691,14 +1698,16 @@
   ],
   "internet_history": [
     "morris_worm_first_internet_attack",
-    "the_mydoom_worm_internet_fastest_malware"
+    "the_mydoom_worm_internet_fastest_malware",
+    "iloveyou_virus_001"
   ],
   "unintended_consequences": [
     "morris_worm_first_internet_attack"
   ],
   "computer_viruses": [
     "morris_worm_first_internet_attack",
-    "the_mydoom_worm_internet_fastest_malware"
+    "the_mydoom_worm_internet_fastest_malware",
+    "iloveyou_virus_001"
   ],
   "human_combustion": [
     "spontaneous_human_combustion_shc"
@@ -1801,7 +1810,8 @@
     "ashwatthama_curse_eternal_suffering"
   ],
   "cybercrime": [
-    "silk_road_dread_pirate_roberts"
+    "silk_road_dread_pirate_roberts",
+    "iloveyou_virus_001"
   ],
   "dark_web": [
     "silk_road_dread_pirate_roberts"
@@ -1890,7 +1900,8 @@
     "bilderberg_group_secret_meetings"
   ],
   "social_engineering": [
-    "the_new_world_order_conspiracy"
+    "the_new_world_order_conspiracy",
+    "iloveyou_virus_001"
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
@@ -2248,5 +2259,11 @@
   ],
   "unaccountable_power": [
     "bilderberg_group_secret_meetings"
+  ],
+  "truth_serum": [
+    "project_chatter_mind_control"
+  ],
+  "global_cyber_attack": [
+    "iloveyou_virus_001"
   ]
 }
