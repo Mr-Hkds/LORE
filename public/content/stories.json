@@ -10487,7 +10487,7 @@
         "media_sensationalism"
       ],
       "severity": "chilling",
-      "hero_image": "typography",
+      "hero_image": "/content/images/amityville_horror_house_possessed.jpg",
       "added_date": "2026-07-04",
       "draft": 0,
       "reactions": {
@@ -10694,90 +10694,6 @@
           "layer": 7,
           "layer_name": "The Unquiet Grave",
           "content": "Uwe Barschel was buried in the cemetery of Mölln, but his case remains a bleeding wound in the history of the German Republic. The hotel room where he died, Room 317 of the Beau-Rivage, still exists, attracting conspiracy theorists and historians alike. The photograph of his body in the bathtub stands as a chilling symbol of the cold war's dark underbelly, where the line between political scandal and state-sanctioned murder is washed away in a quiet hotel bathroom.\n\nTo this day, German citizens and journalists debate what happened in Room 317, but the truth remains submerged, much like Barschel in that cold, silent bath."
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
-    },
-    {
-      "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
-      "title": "The Octopus Murder Conspiracy: Danny Casolaro's Unsolved Pursuit of a Global Cabal",
-      "category": "conspiracy",
-      "hook": "In 1991, a journalist was found dead in a hotel bathtub, his wrists slashed multiple times. He was investigating 'The Octopus', a vast secret network.",
-      "concepts": [
-        "conspiracy",
-        "government_secrecy",
-        "unexplained_deaths",
-        "journalism",
-        "covert_operations",
-        "organized_crime",
-        "intelligence_agencies"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/the_octopus_murder_conspiracy_danny_casolaro.jpg",
-      "added_date": "2026-07-04",
-      "draft": 0,
-      "reactions": {
-        "like": 35,
-        "gripping": 43,
-        "scared": 3,
-        "mindblown": 63
-      },
-      "evidence_links": [],
-      "connections": [
-        {
-          "story_id": "uwe_barschel",
-          "shared_concept": "unexplained_deaths",
-          "transition_line": "Like Uwe Barschel, Danny Casolaro was a public figure whose suspicious death in a hotel bathroom left behind a trail of unanswered questions and whispers of a larger conspiracy."
-        },
-        {
-          "story_id": "operation_gladio",
-          "shared_concept": "government_secrecy",
-          "transition_line": "The covert operations and hidden power structures that Danny Casolaro's 'Octopus' sought to expose share disturbing similarities with revelations about 'Operation Gladio', where secret armies were formed under government secrecy."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - The Journalist's End",
-          "content": "On August 10, 1991, a news reporter named Danny Casolaro was found dead in a hotel room in Martinsburg, West Virginia. His body was in the bathtub. Both of his wrists were cut deeply, 10 to 12 times. The police quickly said it was a suicide.\n\nBut Casolaro was not known to be depressed. He had told friends and family he was close to uncovering a huge, dark story. He called this story 'The Octopus'. His death seemed very strange, especially because he had warned people that if anything happened to him, they should not believe it was an accident.\n\nHis research materials were also reportedly missing from his hotel room. The scene raised many questions. Could a man investigating a global web of secrets simply take his own life in such a brutal way?",
-          "cliffhanger": "What was this 'Octopus' that Casolaro was so dedicated to revealing, and why was he so afraid?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - INSLAW and PROMIS",
-          "content": "Casolaro's investigation began with a computer software company called INSLAW. This company developed a program called PROMIS, which helped track legal cases. INSLAW claimed that the US Department of Justice (DOJ) stole their software.\n\nEven worse, INSLAW said the DOJ gave this stolen software to other intelligence agencies around the world. These modified versions of PROMIS allegedly contained a 'backdoor'. This backdoor would allow secret agents to spy on anyone using the software, without them knowing.\n\nThis software, designed to manage information, became a tool for unseen surveillance. It was a starting point for Casolaro, but the trail led much further than just stolen code.",
-          "cliffhanger": "How did a dispute over software lead a journalist to believe he was uncovering a network far more sinister than just government theft?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - Connecting the Dots",
-          "content": "As Casolaro dug deeper into the INSLAW case, he began to see a wider pattern. He found links between the stolen PROMIS software, organized crime groups, and weapons deals. He uncovered connections that seemed to involve corrupt government officials and intelligence agents.\n\nHe believed that the PROMIS software was not just for tracking legal cases. He thought it was used by a powerful secret group for illegal money transfers, arms smuggling, and controlling information globally. This group, he came to believe, was responsible for many secret operations.\n\nCasolaro spent years tracing these connections. Each new piece of information painted a picture of a hidden organization operating in the shadows, controlling events for its own gain.",
-          "cliffhanger": "The more Casolaro learned, the more dangerous his investigation became, revealing powerful figures across different sectors, all connected by this 'Octopus'."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Octopus Revealed (Casolaro's View)",
-          "content": "Danny Casolaro described 'The Octopus' as a secret, global organization. He believed it was made up of powerful people from intelligence agencies like the CIA and NSA, combined with organized crime figures, corrupt politicians, and international arms dealers. It was a network with many 'arms,' reaching into different parts of society.\n\nAccording to Casolaro, this cabal's main goals were power, control, and huge profits. They allegedly achieved this through blackmail, bribery, and violence. He suspected they were involved in significant historical events, manipulating outcomes from behind the scenes.\n\nThis 'Octopus' was not just a theory to him; it was a real, living entity. He believed it had operated for decades, shaping policy and outcomes to benefit its members, often at the cost of innocent lives.",
-          "cliffhanger": "Casolaro gathered names, documents, and other evidence, convinced he was on the verge of exposing this immense truth. But who were these hidden figures, and how deep did their power truly run?"
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - Warnings and Fears",
-          "content": "In the weeks leading up to his death, Casolaro was increasingly nervous. He told several people that he was meeting a source who would give him the final proof he needed for his book about 'The Octopus'. He said this source was very important and would complete his story.\n\nHe warned friends that if something happened to him, it would not be an accident. He was afraid for his life, sensing the danger of his investigation. This fear was widely known among his close circle, making his later death even more suspicious.\n\nHe had nearly finished writing his manuscript, also titled 'The Octopus'. It was meant to expose the entire network to the world. He was so close to finishing his life's work, which makes the idea of him quitting, or taking his own life, difficult to believe for those who knew him.",
-          "cliffhanger": "His death was officially called a suicide, but his closest friends and family firmly believed he would never harm himself. What dark event truly happened in that hotel room?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Death and Its Doubts",
-          "content": "The details of Danny Casolaro's death in Martinsburg, West Virginia, were full of contradictions. The official report said he slashed his own wrists multiple times in a hotel bathtub. However, the nature of the wounds, deep and numerous, seemed unusually violent for self-harm. There was also no sign of struggle in the room, which seemed odd.\n\nInitially, no suicide note was found, leading to immediate suspicion. A note did appear later, but its authenticity was questioned. Furthermore, his extensive research notes and manuscript were reportedly missing from the room when police arrived, raising concerns about a cover-up.\n\nMany of Casolaro's loved ones and fellow journalists found it impossible to accept the suicide ruling. They pointed to his unwavering determination and his expressed fears as evidence that an external force was responsible.",
-          "cliffhanger": "Despite the official verdict, the unanswered questions continued to grow. What truly happened that night, and who benefited from Casolaro's silence?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The Unseen Hand",
-          "content": "Decades later, the death of Danny Casolaro remains a dark mystery. The official suicide ruling has never fully convinced many people. Journalists and independent investigators have continued to explore his 'Octopus' theory, finding further evidence that suggests he was indeed onto something significant.\n\nMany believe Casolaro was murdered to stop him from exposing the powerful figures he had connected. The case highlights a chilling idea: that certain powerful groups can operate outside the law, and silence anyone who gets too close to their secrets. It speaks to the vulnerability of those who challenge the hidden power structures of the world.\n\nDanny Casolaro's pursuit of 'The Octopus' ended in his death, leaving behind a legacy of fear and a chilling question: was he a conspiracy theorist, or a brave reporter who got too close to a truth too dangerous to tell?",
-          "cliffhanger": null
         }
       ],
       "custom_image_prompt": null,
@@ -15141,6 +15057,90 @@
           "layer": 7,
           "layer_name": "The Dark Corner: A Soul's Last Hope",
           "content": "The darkest truth about Pretas lies in the profound helplessness of their state. They cannot help themselves. Their suffering is a direct consequence of their karma, and they remain trapped until that karma is exhausted or, crucially, until their living descendants perform specific rituals.\n\nThis places a heavy burden and responsibility on the living. If the living forget their ancestors, or neglect the required rites, the Preta's torment can continue for unimaginable ages. It is a chilling reminder that spiritual well-being extends beyond an individual life, connecting generations through threads of action and consequence. The ultimate horror is the complete reliance on others for release, a stark image of complete spiritual bankruptcy and inescapable despair, echoing through the realms of existence.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
+    },
+    {
+      "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
+      "title": "The Octopus Murder Conspiracy: Danny Casolaro's Unsolved Pursuit of a Global Cabal",
+      "category": "conspiracy",
+      "hook": "In 1991, a journalist was found dead in a hotel bathtub, his wrists slashed multiple times. He was investigating 'The Octopus', a vast secret network.",
+      "concepts": [
+        "conspiracy",
+        "government_secrecy",
+        "unexplained_deaths",
+        "journalism",
+        "covert_operations",
+        "organized_crime",
+        "intelligence_agencies"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://sbadamsthetower.com/wp-content/uploads/2024/03/AAAABdwx-bhSKxvthzfZcWqtlro7inipwmXNhB9ZrxEl5xMRqt5WLaUsk8calVQSQdi4ZJ4MbpfOSenT8ejGGXtve-avqM4cNSWBAFPv.jpg",
+      "added_date": "2026-07-04",
+      "draft": 0,
+      "reactions": {
+        "like": 35,
+        "gripping": 43,
+        "scared": 3,
+        "mindblown": 63
+      },
+      "evidence_links": [],
+      "connections": [
+        {
+          "story_id": "uwe_barschel",
+          "shared_concept": "unexplained_deaths",
+          "transition_line": "Like Uwe Barschel, Danny Casolaro was a public figure whose suspicious death in a hotel bathroom left behind a trail of unanswered questions and whispers of a larger conspiracy."
+        },
+        {
+          "story_id": "operation_gladio",
+          "shared_concept": "government_secrecy",
+          "transition_line": "The covert operations and hidden power structures that Danny Casolaro's 'Octopus' sought to expose share disturbing similarities with revelations about 'Operation Gladio', where secret armies were formed under government secrecy."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - The Journalist's End",
+          "content": "On August 10, 1991, a news reporter named Danny Casolaro was found dead in a hotel room in Martinsburg, West Virginia. His body was in the bathtub. Both of his wrists were cut deeply, 10 to 12 times. The police quickly said it was a suicide.\n\nBut Casolaro was not known to be depressed. He had told friends and family he was close to uncovering a huge, dark story. He called this story 'The Octopus'. His death seemed very strange, especially because he had warned people that if anything happened to him, they should not believe it was an accident.\n\nHis research materials were also reportedly missing from his hotel room. The scene raised many questions. Could a man investigating a global web of secrets simply take his own life in such a brutal way?",
+          "cliffhanger": "What was this 'Octopus' that Casolaro was so dedicated to revealing, and why was he so afraid?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - INSLAW and PROMIS",
+          "content": "Casolaro's investigation began with a computer software company called INSLAW. This company developed a program called PROMIS, which helped track legal cases. INSLAW claimed that the US Department of Justice (DOJ) stole their software.\n\nEven worse, INSLAW said the DOJ gave this stolen software to other intelligence agencies around the world. These modified versions of PROMIS allegedly contained a 'backdoor'. This backdoor would allow secret agents to spy on anyone using the software, without them knowing.\n\nThis software, designed to manage information, became a tool for unseen surveillance. It was a starting point for Casolaro, but the trail led much further than just stolen code.",
+          "cliffhanger": "How did a dispute over software lead a journalist to believe he was uncovering a network far more sinister than just government theft?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - Connecting the Dots",
+          "content": "As Casolaro dug deeper into the INSLAW case, he began to see a wider pattern. He found links between the stolen PROMIS software, organized crime groups, and weapons deals. He uncovered connections that seemed to involve corrupt government officials and intelligence agents.\n\nHe believed that the PROMIS software was not just for tracking legal cases. He thought it was used by a powerful secret group for illegal money transfers, arms smuggling, and controlling information globally. This group, he came to believe, was responsible for many secret operations.\n\nCasolaro spent years tracing these connections. Each new piece of information painted a picture of a hidden organization operating in the shadows, controlling events for its own gain.",
+          "cliffhanger": "The more Casolaro learned, the more dangerous his investigation became, revealing powerful figures across different sectors, all connected by this 'Octopus'."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Octopus Revealed (Casolaro's View)",
+          "content": "Danny Casolaro described 'The Octopus' as a secret, global organization. He believed it was made up of powerful people from intelligence agencies like the CIA and NSA, combined with organized crime figures, corrupt politicians, and international arms dealers. It was a network with many 'arms,' reaching into different parts of society.\n\nAccording to Casolaro, this cabal's main goals were power, control, and huge profits. They allegedly achieved this through blackmail, bribery, and violence. He suspected they were involved in significant historical events, manipulating outcomes from behind the scenes.\n\nThis 'Octopus' was not just a theory to him; it was a real, living entity. He believed it had operated for decades, shaping policy and outcomes to benefit its members, often at the cost of innocent lives.",
+          "cliffhanger": "Casolaro gathered names, documents, and other evidence, convinced he was on the verge of exposing this immense truth. But who were these hidden figures, and how deep did their power truly run?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - Warnings and Fears",
+          "content": "In the weeks leading up to his death, Casolaro was increasingly nervous. He told several people that he was meeting a source who would give him the final proof he needed for his book about 'The Octopus'. He said this source was very important and would complete his story.\n\nHe warned friends that if something happened to him, it would not be an accident. He was afraid for his life, sensing the danger of his investigation. This fear was widely known among his close circle, making his later death even more suspicious.\n\nHe had nearly finished writing his manuscript, also titled 'The Octopus'. It was meant to expose the entire network to the world. He was so close to finishing his life's work, which makes the idea of him quitting, or taking his own life, difficult to believe for those who knew him.",
+          "cliffhanger": "His death was officially called a suicide, but his closest friends and family firmly believed he would never harm himself. What dark event truly happened in that hotel room?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Death and Its Doubts",
+          "content": "The details of Danny Casolaro's death in Martinsburg, West Virginia, were full of contradictions. The official report said he slashed his own wrists multiple times in a hotel bathtub. However, the nature of the wounds, deep and numerous, seemed unusually violent for self-harm. There was also no sign of struggle in the room, which seemed odd.\n\nInitially, no suicide note was found, leading to immediate suspicion. A note did appear later, but its authenticity was questioned. Furthermore, his extensive research notes and manuscript were reportedly missing from the room when police arrived, raising concerns about a cover-up.\n\nMany of Casolaro's loved ones and fellow journalists found it impossible to accept the suicide ruling. They pointed to his unwavering determination and his expressed fears as evidence that an external force was responsible.",
+          "cliffhanger": "Despite the official verdict, the unanswered questions continued to grow. What truly happened that night, and who benefited from Casolaro's silence?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The Unseen Hand",
+          "content": "Decades later, the death of Danny Casolaro remains a dark mystery. The official suicide ruling has never fully convinced many people. Journalists and independent investigators have continued to explore his 'Octopus' theory, finding further evidence that suggests he was indeed onto something significant.\n\nMany believe Casolaro was murdered to stop him from exposing the powerful figures he had connected. The case highlights a chilling idea: that certain powerful groups can operate outside the law, and silence anyone who gets too close to their secrets. It speaks to the vulnerability of those who challenge the hidden power structures of the world.\n\nDanny Casolaro's pursuit of 'The Octopus' ended in his death, leaving behind a legacy of fear and a chilling question: was he a conspiracy theorist, or a brave reporter who got too close to a truth too dangerous to tell?",
           "cliffhanger": null
         }
       ],

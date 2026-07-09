@@ -62,7 +62,6 @@
     "vatican_bank_scandal_calvi_p2",
     "human_radiation_experiments_us",
     "uwe_barschel",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
@@ -78,7 +77,8 @@
     "the_shadow_brokers_nsa_leak",
     "rendlesham_forest_incident",
     "men_in_black_phenomenon",
-    "project_popeye_weather_warfare"
+    "project_popeye_weather_warfare",
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -135,7 +135,6 @@
     "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
     "project_mk_ultra_001",
-    "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
     "operation_condor_001",
     "the_lavon_affair",
@@ -145,7 +144,8 @@
     "project_mknaomi_cia_biowarfare",
     "crypto_ag_scandal_global_espionage",
     "zersetzung_stasi_disintegration",
-    "project_popeye_weather_warfare"
+    "project_popeye_weather_warfare",
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -1706,8 +1706,8 @@
   ],
   "organized_crime": [
     "vatican_bank_scandal_calvi_p2",
-    "the_octopus_murder_conspiracy_danny_casolaro",
-    "the_axeman_of_new_orleans"
+    "the_axeman_of_new_orleans",
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "church_corruption": [
     "vatican_bank_scandal_calvi_p2"
@@ -1816,16 +1816,6 @@
   ],
   "hoax_claims": [
     "amityville_horror_house_possessed"
-  ],
-  "conspiracy": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "journalism": [
-    "the_octopus_murder_conspiracy_danny_casolaro"
-  ],
-  "intelligence_agencies": [
-    "the_octopus_murder_conspiracy_danny_casolaro",
-    "operation_mockingbird_cia_media_manipulation"
   ],
   "flesh_eating_spirits": [
     "pishachas_flesh_eating_spirits",
@@ -2029,6 +2019,10 @@
     "operation_mockingbird_cia_media_manipulation",
     "the_axeman_of_new_orleans"
   ],
+  "intelligence_agencies": [
+    "operation_mockingbird_cia_media_manipulation",
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
   "urban_testing": [
     "operation_big_burn_bio_tests"
   ],
@@ -2202,5 +2196,11 @@
   ],
   "greed_and_consequence": [
     "legend_of_pretas_indian_mythology"
+  ],
+  "conspiracy": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
+  ],
+  "journalism": [
+    "the_octopus_murder_conspiracy_danny_casolaro"
   ]
 }
