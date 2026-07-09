@@ -117,7 +117,8 @@
     "operation_northwoods_001",
     "moonlight_maze_cyber_espionage",
     "the_equation_group_cyber_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "titan_rain_silent_infiltration_us_networks"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -1388,7 +1389,8 @@
     "operation_aurora_cyber_espionage",
     "the_equation_group_cyber_espionage",
     "crypto_ag_scandal_global_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "titan_rain_silent_infiltration_us_networks"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1403,19 +1405,22 @@
     "operation_aurora_cyber_espionage",
     "estonian_cyberattacks_2007",
     "the_equation_group_cyber_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "titan_rain_silent_infiltration_us_networks"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
     "the_cuckoos_egg_kgb_hacker",
     "operation_aurora_cyber_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "titan_rain_silent_infiltration_us_networks"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
     "ghostnet_global_cyber_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "titan_rain_silent_infiltration_us_networks"
   ],
   "wendigo_psychosis": [
     "wendigo_insatiable_hunger"
@@ -2182,5 +2187,20 @@
   ],
   "social_disintegration": [
     "zersetzung_stasi_disintegration"
+  ],
+  "psychological_manipulation": [
+    "gaslighting_psychological_warfare"
+  ],
+  "self_doubt": [
+    "gaslighting_psychological_warfare"
+  ],
+  "coercive_control": [
+    "gaslighting_psychological_warfare"
+  ],
+  "emotional_abuse": [
+    "gaslighting_psychological_warfare"
+  ],
+  "reality_distortion": [
+    "gaslighting_psychological_warfare"
   ]
 }
