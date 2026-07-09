@@ -253,7 +253,8 @@
   ],
   "cold_case": [
     "hinterkaifeck_murders",
-    "the_isdal_woman"
+    "the_isdal_woman",
+    "golden_state_killer_dna_breakthrough"
   ],
   "rem atonia": [
     "sleep_paralysis_dossier"
@@ -268,10 +269,12 @@
     "mahadev_and_sati_dossier"
   ],
   "ritual_self_destruction": [
-    "mahadev_and_sati_dossier"
+    "mahadev_and_sati_dossier",
+    "the_scattered_relics_satis_corpse"
   ],
   "sacred_geography": [
-    "mahadev_and_sati_dossier"
+    "mahadev_and_sati_dossier",
+    "the_scattered_relics_satis_corpse"
   ],
   "cryptography": [
     "cicada_3301",
@@ -372,7 +375,8 @@
     "the_cleveland_torso_murders",
     "harold_shipman_serial_killer",
     "albert_fish_the_gray_man",
-    "the_axeman_of_new_orleans"
+    "the_axeman_of_new_orleans",
+    "golden_state_killer_dna_breakthrough"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -2202,5 +2206,26 @@
   ],
   "compiler_backdoor": [
     "undetected_backdoors_early_computing"
+  ],
+  "divine_grief": [
+    "the_scattered_relics_satis_corpse"
+  ],
+  "cosmic_power": [
+    "the_scattered_relics_satis_corpse"
+  ],
+  "divine_feminine": [
+    "the_scattered_relics_satis_corpse"
+  ],
+  "dna_forensics": [
+    "golden_state_killer_dna_breakthrough"
+  ],
+  "justice": [
+    "golden_state_killer_dna_breakthrough"
+  ],
+  "decades_long_search": [
+    "golden_state_killer_dna_breakthrough"
+  ],
+  "genealogical_database": [
+    "golden_state_killer_dna_breakthrough"
   ]
 }
