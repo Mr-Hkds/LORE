@@ -1268,15 +1268,26 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       if (!targetStory) return null;
 
       const archiveResult = await archiveRemoteImage(storyId, imageSource);
-      const newHeroImage = archiveResult.path;
+      const gitPath = archiveResult.path; // e.g. /content/images/storyid.jpg — for GitHub only
       
-      const isGiantBase64 = typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000;
-      // If gitSync is off on production, save the original remote URL or base64 so the server can download/persist it directly in Turso DB
-      const overrideImage = (!isLocal && !isGiantBase64 && !gitSyncOnCover) ? imageSource : newHeroImage;
+      // CRITICAL: Determine what to send to the server PUT endpoint.
+      // The server needs either a remote URL (to download + convert to base64) or a data: base64 string.
+      // It should NEVER receive a /content/images/ path because that path doesn't exist on Vercel CDN
+      // until a full rebuild happens (and we use [skip ci] to save build minutes).
+      let dbImage = imageSource; // Default: send original source for server-side download
+      if (imageSource === 'typography') {
+        dbImage = 'typography'; // Special flag, not an image
+      } else if (typeof imageSource === 'string' && imageSource.startsWith('data:') && imageSource.length > 500000) {
+        // Giant base64: send the local path to avoid massive PUT payload
+        dbImage = gitPath;
+      }
+      
+      // For the frontend state + Git commit, use the local path (will resolve after deploy)
+      const displayImage = gitPath || imageSource;
       
       const updatedStoryObj = { 
         ...targetStory, 
-        hero_image: overrideImage,
+        hero_image: displayImage,
         image_missing: 0,
         draft: 0
       };
@@ -1285,22 +1296,26 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         updatedStoryObj.added_date = new Date().toLocaleDateString('en-CA');
       }
       
-      // Update SQLite (best-effort on production — ephemeral containers)
+      // Update Turso DB via server — send the ORIGINAL source so server can download to base64
       try {
+        const dbPayload = {
+          ...updatedStoryObj,
+          hero_image: dbImage
+        };
         await fetch(`/api/stories/${storyId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedStoryObj)
+          body: JSON.stringify(dbPayload)
         });
       } catch (dbErr) {
-        console.warn('SQLite update skipped (expected on production):', dbErr.message);
+        console.warn('DB update skipped (expected on production):', dbErr.message);
       }
 
-      // Write to storage overrides first to prevent cache lag and race conditions on reload
+      // Write to storage overrides — use the DB image value so the frontend shows the real data
       try {
         const currentOverrides = (await appStorage.get('lore:story-overrides')) || {};
         currentOverrides[storyId] = {
-          hero_image: overrideImage,
+          hero_image: dbImage,
           image_missing: 0,
           draft: 0,
           added_date: updatedStoryObj.added_date
@@ -1310,16 +1325,17 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         console.warn('Failed to save to local overrides storage:', e);
       }
 
-      setAdminStories(prev => prev.map(s => s.story_id === storyId ? updatedStoryObj : s));
+      // Update admin panel state
+      const adminObj = { ...updatedStoryObj, hero_image: dbImage };
+      setAdminStories(prev => prev.map(s => s.story_id === storyId ? adminObj : s));
       if (refetchStories) refetchStories();
       
       if (!silent) {
         setToast({ text: `Story cover image updated successfully!`, type: 'success' });
       }
       
-      // Commit to GitHub — this is the real source of truth
+      // Commit to GitHub — use the /content/images/ path + binary file for future deploys
       if (ghToken && gitSyncOnCover) {
-        // Map in-place to preserve original index/order of stories in the json registry
         const updatedStories = adminStoriesRef.current
           .map(s => s.story_id === storyId ? updatedStoryObj : s)
           .filter(s => !s.draft);
@@ -1330,7 +1346,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         ];
         if (archiveResult.base64Clean) {
           filesToCommit.push({
-            path: `public${newHeroImage}`,
+            path: `public${gitPath}`,
             content: archiveResult.base64Clean,
             isBinary: true
           });
@@ -1338,7 +1354,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         await commitFilesToGitHub(filesToCommit, `admin: sync cover image for story ${storyId}`);
       }
       
-      return overrideImage;
+      return dbImage;
     } catch (err) {
       setToast({ text: `Failed to save cover image: ${err.message}`, type: 'error' });
       throw err;

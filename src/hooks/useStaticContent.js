@@ -89,85 +89,85 @@ export function useStaticContent() {
   const [error, setError] = useState(null);
   const imageCache = useRef({}); // In-memory image URL cache
 
-  const loadStories = useCallback(async () => {
-    let initialList = [];
+  // Helper: merge local storage overrides onto a story list
+  const mergeOverrides = async (list) => {
     try {
-      // 1. Fetch from static JSON file first (Edge CDN - extremely fast, no cold start)
-      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
-      if (!res.ok) throw new Error('CDN fetch failed');
-      const data = await res.json();
-      initialList = data.stories || [];
-
-      // Merge overrides from storage
-      try {
-        let overrides = await appStorage.get('lore:story-overrides');
-        if (overrides) {
-          // Auto-migrate legacy nested directory cover paths to flat layout
-          let hasMigration = false;
-          for (const key of Object.keys(overrides)) {
-            const over = overrides[key];
-            if (over && over.hero_image && over.hero_image.endsWith('/cover.jpg')) {
-              over.hero_image = `/content/images/${key}.jpg`;
-              hasMigration = true;
-            }
+      let overrides = await appStorage.get('lore:story-overrides');
+      if (overrides) {
+        // Auto-migrate legacy nested directory cover paths to flat layout
+        let hasMigration = false;
+        for (const key of Object.keys(overrides)) {
+          const over = overrides[key];
+          if (over && over.hero_image && over.hero_image.endsWith('/cover.jpg')) {
+            over.hero_image = `/content/images/${key}.jpg`;
+            hasMigration = true;
           }
-          if (hasMigration) {
-            await appStorage.set('lore:story-overrides', overrides);
-          }
-          
-          initialList = initialList.map(s => {
-            const over = overrides[s.story_id];
-            return over ? { ...s, ...over } : s;
-          });
         }
-      } catch (storageErr) {
-        console.warn('Failed to merge storage overrides:', storageErr);
-      }
+        if (hasMigration) {
+          await appStorage.set('lore:story-overrides', overrides);
+        }
 
-      setAllStories(initialList);
-      setLoading(false);
-    } catch (err) {
-      console.warn('CDN fetch failed, falling back to database API:', err.message);
+        return list.map(s => {
+          const over = overrides[s.story_id];
+          return over ? { ...s, ...over } : s;
+        });
+      }
+    } catch (storageErr) {
+      console.warn('Failed to merge storage overrides:', storageErr);
+    }
+    return list;
+  };
+
+  const loadStories = useCallback(async () => {
+    // STRATEGY: DB-first loading. The Turso database is the single source of truth for
+    // cover images and story data. The static CDN file (stories.json) is only used as a
+    // fast fallback if the live API is unavailable (e.g. cold start, network error).
+    // This eliminates the race condition where the stale CDN file would temporarily 
+    // overwrite freshly updated images from the database.
+
+    let dbLoaded = false;
+
+    // 1. Try to load from CDN first for instant display (will be overwritten by DB if successful)
+    try {
+      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
+      if (res.ok) {
+        const data = await res.json();
+        let cdnList = data.stories || [];
+        cdnList = await mergeOverrides(cdnList);
+        setAllStories(cdnList);
+        setLoading(false);
+      }
+    } catch {
+      // CDN fetch failed — not critical, DB will handle it
     }
 
-    // 2. Background Revalidation (Stale-While-Revalidate)
-    // Fetch live data from the database to merge any updates (covers, new stories) instantly without rebuilds
+    // 2. Always fetch from live database API — this is the AUTHORITATIVE source of truth.
+    // The DB has the most recent cover images, drafts, and reaction counts.
     try {
       const res = await fetch(`/api/stories?t=${Date.now()}`);
       if (res.ok) {
         const data = await res.json();
         let liveList = Array.isArray(data) ? data : (data.stories || []);
+        liveList = await mergeOverrides(liveList);
 
-        // Merge overrides
-        try {
-          const overrides = await appStorage.get('lore:story-overrides');
-          if (overrides) {
-            liveList = liveList.map(s => {
-              const over = overrides[s.story_id];
-              return over ? { ...s, ...over } : s;
-            });
-          }
-        } catch (storageErr) {
-          console.warn('Failed to merge storage overrides in background:', storageErr);
-        }
-
-        // Only update state if the live list is different (to prevent infinite renders/flicker)
-        setAllStories(prev => {
-          if (JSON.stringify(prev) !== JSON.stringify(liveList)) {
-            return liveList;
-          }
-          return prev;
-        });
+        setAllStories(liveList);
+        dbLoaded = true;
       }
-    } catch (bgErr) {
-      console.warn('Background database revalidation failed:', bgErr.message);
-      // If we didn't load initialList yet, throw error
-      if (initialList.length === 0) {
-        setError('Failed to load the archive. Please refresh.');
-      }
-    } finally {
-      setLoading(false);
+    } catch (dbErr) {
+      console.warn('Live database fetch failed:', dbErr.message);
     }
+
+    // 3. If DB failed and we have nothing, show error
+    if (!dbLoaded) {
+      setAllStories(prev => {
+        if (prev.length === 0) {
+          setError('Failed to load the archive. Please refresh.');
+        }
+        return prev;
+      });
+    }
+
+    setLoading(false);
   }, []);
 
   // Load stories on mount
