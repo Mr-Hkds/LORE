@@ -10798,7 +10798,7 @@
         "greed_and_consequence"
       ],
       "severity": "chilling",
-      "hero_image": "typography",
+      "hero_image": "/content/images/legend_of_pretas_indian_mythology.jpg",
       "added_date": "2026-07-04",
       "draft": 0,
       "reactions": {
@@ -11590,94 +11590,6 @@
       ],
       "custom_image_prompt": null,
       "image_missing": false
-    },
-    {
-      "story_id": "goddess_kalis_darker_cults",
-      "title": "Goddess Kali's Fiercest Manifestations and Darker Cults",
-      "category": "mythology",
-      "hook": "Blood-soaked, with a garland of skulls and a lolling tongue, she is the fiercest of goddesses, Kali. Whispers tell of devotees who took her fearsome power to unimaginable, terrifying extremes.",
-      "concepts": [
-        "fierce_deity",
-        "secret_cults",
-        "ritual_violence",
-        "divine_justice",
-        "mythological_misinterpretation",
-        "thuggee_cult",
-        "colonial_history"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/goddess_kalis_darker_cults.jpg",
-      "added_date": "2026-07-06",
-      "draft": 0,
-      "reactions": {
-        "like": 36,
-        "gripping": 29,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "Blood for the Goddess. Self-mutilation Rituals at Vajreshwari Mandir, Kangra (Alejandro Jiménez Cid, 2016)",
-          "url": "https://revistes.uab.cat/indialogs/article/download/v3-cid/pdf_17"
-        },
-        {
-          "label": "Black Brides: Examining the Eastern Threat to Victorian Womanhood in Fiction (Virginia L. Butler, 2011)",
-          "url": "https://scholarworks.wm.edu/honorstheses/430"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "jonestown_massacre_001",
-          "shared_concept": "cults",
-          "transition_line": "Just as ancient whispers speak of darker cults devoted to Kali, history holds other chilling tales where faith and fear twisted into deadly group actions, leading to tragic outcomes like the Jonestown massacre."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper of the Dark Mother",
-          "content": "In Hindu mythology, Goddess Kali stands as a powerful and fearsome figure. She is often shown with dark skin, a necklace of severed heads, and a tongue hanging out. She holds a sword and a freshly cut head. Kali is the goddess of time, change, destruction, and ultimate power. She destroys evil forces and grants liberation to her true devotees.\n\nHer appearance is meant to be shocking and awe-inspiring, not just terrifying. She represents the harsh truth of existence, that everything eventually ends and new beginnings emerge from destruction. However, her fearsome image also sparked whispers of devotion taken too far, suggesting that some followers might have focused only on her destructive side, leading to darker practices.",
-          "cliffhanger": "These whispers spoke of ancient, secret groups, hiding in the shadows, whose devotion was not just intense, but shockingly violent. What kind of devotion could lead to such dark acts?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern of Extreme Devotion",
-          "content": "Throughout history, religious devotion has sometimes led to extreme actions, often misinterpreted or taken to a literal, violent level. For Kali, whose nature includes fierce destruction to protect dharma, some interpretations led to rituals that involved blood offerings or sacrifices. While many forms of Kali worship are benevolent and symbolic, focusing on inner transformation, historical records suggest other patterns.\n\nCertain groups, motivated by fear, power, or a twisted sense of divine will, began to believe that only the most extreme acts could please such a formidable deity. This created a fertile ground for practices that moved far from mainstream Hinduism, pushing the boundaries of what was considered acceptable worship. These practices often became secret, hidden from public view and official religious teachings.",
-          "cliffhanger": "The details of these secret practices remained hidden for centuries, until a series of unsettling events forced them into the light, revealing a disturbing truth."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Emergence of a Shadowy Cult",
-          "content": "The 19th century saw British colonial administrators in India begin to document and investigate reports of a widespread criminal network. These reports described groups of professional robbers who specialized in highway murder, often strangling their victims. These groups were not just criminals; they were said to operate under a specific, dark religious devotion.\n\nTheir methods were highly organized, with specific rituals and beliefs guiding their actions. It was widely claimed that these secret societies believed their acts of murder were dedicated to a divine entity, often identified with Kali. This gave their brutal crimes a chilling religious justification in their own minds, transforming robbery and murder into a sacred duty. The British colonial power labelled them as 'Thugs'.",
-          "cliffhanger": "But who were these 'Thugs', and what was the true extent of their operations and their connection to the fierce goddess Kali? The scale of their documented crimes was about to shock the world."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Thuggee System and its Suppression",
-          "content": "The 'Thuggee' cult, as documented by the British, was a secret society operating across India for centuries. Its members were said to be hereditary, passing down their skills and beliefs through generations. They would join travelers, gain their trust, and then, at an opportune moment, strangle them using a handkerchief or scarf (a 'rumal'). Their victims were primarily merchants and wealthy individuals, and their bodies were often secretly buried.\n\nBritish efforts to suppress the Thuggee began in the 1830s under Captain William Henry Sleeman. Through extensive investigations, informants, and severe punishments, the British administration managed to dismantle the alleged cult. Thousands of suspected Thugs were arrested, tried, and either executed or imprisoned. This campaign was a major operation for the British in India, showcasing their determination to impose order and suppress what they saw as extreme indigenous practices.",
-          "cliffhanger": "However, the official British narrative of the Thuggee, while ending a reign of terror, also opened up a complex debate: Was the Thuggee truly a religious cult, or was it something else entirely?"
-        },
-        {
-          "layer": 5,
-          "layer_name": "Research and Reinterpretation of the Cult",
-          "content": "The British accounts of the Thuggee painted a picture of a vast, ancient, and highly religious cult devoted to Kali through ritual murder. Their extensive documentation, including confessions and reports, became the primary source of information. This narrative, however, has faced significant reinterpretation by modern historians.\n\nSome scholars now argue that the Thuggee, while certainly a criminal problem, may have been exaggerated in its religious and cultic aspects by the British for political reasons. The British sought to justify their rule and portray Indian society as needing their civilizing influence. It is suggested that 'Thuggee' might have been a broader term for various bandit groups, and their religious devotion, while present, was perhaps not the central organizing principle as portrayed. The focus on Kali as their patron goddess became a powerful, unsettling image used to demonize the cult.",
-          "cliffhanger": "This reinterpretation raises a chilling question: How much of what we 'know' about these darker cults is true, and how much is a constructed narrative that shapes our understanding of a powerful deity?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss of Historical Ambiguity",
-          "content": "The historical ambiguity surrounding the Thuggee and its connection to Kali creates a profound abyss of uncertainty. While there is no doubt that organized bands engaged in murder and robbery, the exact nature of their religious beliefs and the extent to which they were a unified, ancient 'cult' remain subjects of scholarly debate. What is clear is the devastating impact of these groups on travelers, creating widespread fear and insecurity across regions of India.\n\nThe story of the Thuggee also highlights the human capacity for extreme violence, whether driven by greed, survival, or a deeply twisted interpretation of faith. It forces us to confront how religious symbols, even those of a revered goddess like Kali, can be co-opted and distorted to justify horrifying acts. The line between devotion and fanaticism, between sacred duty and brutal crime, became terrifyingly blurred.",
-          "cliffhanger": "The darkest truth lies not just in the historical facts, but in the lasting legacy of these stories and their unsettling implications for our understanding of faith, power, and human nature."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner of Misunderstood Power",
-          "content": "The absolute darkest documented truth about Goddess Kali's fiercest manifestations and darker cults is complex. It involves the real historical existence of criminal groups like the Thuggee, who committed widespread murders. It also includes the undeniable fact that these groups, to varying degrees, invoked religious justifications for their acts, often linking their rituals to Kali's destructive power.\n\nHowever, the darkest corner also reveals how history itself can be shaped and how a powerful deity's image can be distorted. The British colonial narrative of the Thuggee, while contributing to their suppression, simultaneously amplified a specific, fearful image of Kali. This narrative often overshadowed the benevolent and liberating aspects of Kali worship, leaving a lasting impression of a goddess solely associated with dark rituals and extreme cults. The true darkness might be the enduring misunderstanding of divine power, where humanity's capacity for violence finds solace in twisted interpretations of the sacred.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "image_missing": 0
     },
     {
       "story_id": "mothman_silver_bridge_collapse",
@@ -15141,6 +15053,94 @@
           "layer": 7,
           "layer_name": "Layer 7: The Dark Corner of Legacy",
           "content": "The controversy surrounding Project Popeye led directly to international efforts to ban environmental warfare. In 1977, the United Nations adopted the Environmental Modification Convention (ENMOD). This treaty prohibits the hostile use of environmental modification techniques, including weather manipulation. The exposure of Project Popeye was a key factor pushing for this global agreement.\n\nThe legacy of Project Popeye is a chilling reminder of the lengths to which military powers might go in secret. It exposed a hidden ambition to control the very forces of nature and use them as instruments of war. While ENMOD was a step towards preventing such future conflicts, the fact that weather was once secretly weaponized remains a dark chapter, leaving questions about what other unseen battles might be fought, using tools beyond our imagination.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "image_missing": 0
+    },
+    {
+      "story_id": "goddess_kalis_darker_cults",
+      "title": "Goddess Kali's Fiercest Manifestations and Darker Cults",
+      "category": "mythology",
+      "hook": "Blood-soaked, with a garland of skulls and a lolling tongue, she is the fiercest of goddesses, Kali. Whispers tell of devotees who took her fearsome power to unimaginable, terrifying extremes.",
+      "concepts": [
+        "fierce_deity",
+        "secret_cults",
+        "ritual_violence",
+        "divine_justice",
+        "mythological_misinterpretation",
+        "thuggee_cult",
+        "colonial_history"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Kali_by_Raja_Ravi_Varma.jpg/500px-Kali_by_Raja_Ravi_Varma.jpg",
+      "added_date": "2026-07-06",
+      "draft": 0,
+      "reactions": {
+        "like": 36,
+        "gripping": 29,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Blood for the Goddess. Self-mutilation Rituals at Vajreshwari Mandir, Kangra (Alejandro Jiménez Cid, 2016)",
+          "url": "https://revistes.uab.cat/indialogs/article/download/v3-cid/pdf_17"
+        },
+        {
+          "label": "Black Brides: Examining the Eastern Threat to Victorian Womanhood in Fiction (Virginia L. Butler, 2011)",
+          "url": "https://scholarworks.wm.edu/honorstheses/430"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "jonestown_massacre_001",
+          "shared_concept": "cults",
+          "transition_line": "Just as ancient whispers speak of darker cults devoted to Kali, history holds other chilling tales where faith and fear twisted into deadly group actions, leading to tragic outcomes like the Jonestown massacre."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper of the Dark Mother",
+          "content": "In Hindu mythology, Goddess Kali stands as a powerful and fearsome figure. She is often shown with dark skin, a necklace of severed heads, and a tongue hanging out. She holds a sword and a freshly cut head. Kali is the goddess of time, change, destruction, and ultimate power. She destroys evil forces and grants liberation to her true devotees.\n\nHer appearance is meant to be shocking and awe-inspiring, not just terrifying. She represents the harsh truth of existence, that everything eventually ends and new beginnings emerge from destruction. However, her fearsome image also sparked whispers of devotion taken too far, suggesting that some followers might have focused only on her destructive side, leading to darker practices.",
+          "cliffhanger": "These whispers spoke of ancient, secret groups, hiding in the shadows, whose devotion was not just intense, but shockingly violent. What kind of devotion could lead to such dark acts?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern of Extreme Devotion",
+          "content": "Throughout history, religious devotion has sometimes led to extreme actions, often misinterpreted or taken to a literal, violent level. For Kali, whose nature includes fierce destruction to protect dharma, some interpretations led to rituals that involved blood offerings or sacrifices. While many forms of Kali worship are benevolent and symbolic, focusing on inner transformation, historical records suggest other patterns.\n\nCertain groups, motivated by fear, power, or a twisted sense of divine will, began to believe that only the most extreme acts could please such a formidable deity. This created a fertile ground for practices that moved far from mainstream Hinduism, pushing the boundaries of what was considered acceptable worship. These practices often became secret, hidden from public view and official religious teachings.",
+          "cliffhanger": "The details of these secret practices remained hidden for centuries, until a series of unsettling events forced them into the light, revealing a disturbing truth."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Emergence of a Shadowy Cult",
+          "content": "The 19th century saw British colonial administrators in India begin to document and investigate reports of a widespread criminal network. These reports described groups of professional robbers who specialized in highway murder, often strangling their victims. These groups were not just criminals; they were said to operate under a specific, dark religious devotion.\n\nTheir methods were highly organized, with specific rituals and beliefs guiding their actions. It was widely claimed that these secret societies believed their acts of murder were dedicated to a divine entity, often identified with Kali. This gave their brutal crimes a chilling religious justification in their own minds, transforming robbery and murder into a sacred duty. The British colonial power labelled them as 'Thugs'.",
+          "cliffhanger": "But who were these 'Thugs', and what was the true extent of their operations and their connection to the fierce goddess Kali? The scale of their documented crimes was about to shock the world."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Thuggee System and its Suppression",
+          "content": "The 'Thuggee' cult, as documented by the British, was a secret society operating across India for centuries. Its members were said to be hereditary, passing down their skills and beliefs through generations. They would join travelers, gain their trust, and then, at an opportune moment, strangle them using a handkerchief or scarf (a 'rumal'). Their victims were primarily merchants and wealthy individuals, and their bodies were often secretly buried.\n\nBritish efforts to suppress the Thuggee began in the 1830s under Captain William Henry Sleeman. Through extensive investigations, informants, and severe punishments, the British administration managed to dismantle the alleged cult. Thousands of suspected Thugs were arrested, tried, and either executed or imprisoned. This campaign was a major operation for the British in India, showcasing their determination to impose order and suppress what they saw as extreme indigenous practices.",
+          "cliffhanger": "However, the official British narrative of the Thuggee, while ending a reign of terror, also opened up a complex debate: Was the Thuggee truly a religious cult, or was it something else entirely?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "Research and Reinterpretation of the Cult",
+          "content": "The British accounts of the Thuggee painted a picture of a vast, ancient, and highly religious cult devoted to Kali through ritual murder. Their extensive documentation, including confessions and reports, became the primary source of information. This narrative, however, has faced significant reinterpretation by modern historians.\n\nSome scholars now argue that the Thuggee, while certainly a criminal problem, may have been exaggerated in its religious and cultic aspects by the British for political reasons. The British sought to justify their rule and portray Indian society as needing their civilizing influence. It is suggested that 'Thuggee' might have been a broader term for various bandit groups, and their religious devotion, while present, was perhaps not the central organizing principle as portrayed. The focus on Kali as their patron goddess became a powerful, unsettling image used to demonize the cult.",
+          "cliffhanger": "This reinterpretation raises a chilling question: How much of what we 'know' about these darker cults is true, and how much is a constructed narrative that shapes our understanding of a powerful deity?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss of Historical Ambiguity",
+          "content": "The historical ambiguity surrounding the Thuggee and its connection to Kali creates a profound abyss of uncertainty. While there is no doubt that organized bands engaged in murder and robbery, the exact nature of their religious beliefs and the extent to which they were a unified, ancient 'cult' remain subjects of scholarly debate. What is clear is the devastating impact of these groups on travelers, creating widespread fear and insecurity across regions of India.\n\nThe story of the Thuggee also highlights the human capacity for extreme violence, whether driven by greed, survival, or a deeply twisted interpretation of faith. It forces us to confront how religious symbols, even those of a revered goddess like Kali, can be co-opted and distorted to justify horrifying acts. The line between devotion and fanaticism, between sacred duty and brutal crime, became terrifyingly blurred.",
+          "cliffhanger": "The darkest truth lies not just in the historical facts, but in the lasting legacy of these stories and their unsettling implications for our understanding of faith, power, and human nature."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner of Misunderstood Power",
+          "content": "The absolute darkest documented truth about Goddess Kali's fiercest manifestations and darker cults is complex. It involves the real historical existence of criminal groups like the Thuggee, who committed widespread murders. It also includes the undeniable fact that these groups, to varying degrees, invoked religious justifications for their acts, often linking their rituals to Kali's destructive power.\n\nHowever, the darkest corner also reveals how history itself can be shaped and how a powerful deity's image can be distorted. The British colonial narrative of the Thuggee, while contributing to their suppression, simultaneously amplified a specific, fearful image of Kali. This narrative often overshadowed the benevolent and liberating aspects of Kali worship, leaving a lasting impression of a goddess solely associated with dark rituals and extreme cults. The true darkness might be the enduring misunderstanding of divine power, where humanity's capacity for violence finds solace in twisted interpretations of the sacred.",
           "cliffhanger": null
         }
       ],

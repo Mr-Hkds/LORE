@@ -1779,8 +1779,8 @@
   "divine_justice": [
     "ashwatthama_curse_eternal_suffering",
     "legend_of_pretas_indian_mythology",
-    "goddess_kalis_darker_cults",
-    "the_curse_of_gandhari"
+    "the_curse_of_gandhari",
+    "goddess_kalis_darker_cults"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
@@ -1912,18 +1912,6 @@
   ],
   "intellectual_property_theft": [
     "operation_aurora_cyber_espionage"
-  ],
-  "secret_cults": [
-    "goddess_kalis_darker_cults"
-  ],
-  "ritual_violence": [
-    "goddess_kalis_darker_cults"
-  ],
-  "mythological_misinterpretation": [
-    "goddess_kalis_darker_cults"
-  ],
-  "thuggee_cult": [
-    "goddess_kalis_darker_cults"
   ],
   "mothman_sightings": [
     "mothman_silver_bridge_collapse"
@@ -2202,5 +2190,17 @@
   ],
   "environmental_modification": [
     "project_popeye_weather_warfare"
+  ],
+  "secret_cults": [
+    "goddess_kalis_darker_cults"
+  ],
+  "ritual_violence": [
+    "goddess_kalis_darker_cults"
+  ],
+  "mythological_misinterpretation": [
+    "goddess_kalis_darker_cults"
+  ],
+  "thuggee_cult": [
+    "goddess_kalis_darker_cults"
   ]
 }
