@@ -133,9 +133,9 @@
     "jfk_assassination_001",
     "cointelpro_fbi_covert_ops",
     "project_mk_ultra_001",
-    "operation_condor_001",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
+    "operation_condor_001",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
     "iran_contra_affair",
@@ -673,8 +673,8 @@
     "project_shamrock",
     "operation_paperclip_001",
     "project_artichoke_mind_control",
-    "operation_condor_001",
     "human_radiation_experiments_us",
+    "operation_condor_001",
     "project_112_covert_warfare_tests",
     "undetected_backdoors_early_computing",
     "project_500_soviet_biowarfare_prisoners",
@@ -1780,9 +1780,6 @@
   "consequences_of_actions": [
     "ashwatthama_curse_eternal_suffering"
   ],
-  "international_collaboration": [
-    "operation_condor_001"
-  ],
   "cybercrime": [
     "silk_road_dread_pirate_roberts"
   ],
@@ -1854,6 +1851,9 @@
   ],
   "exorcism_rituals": [
     "pishachas_flesh_eating_spirits"
+  ],
+  "international_collaboration": [
+    "operation_condor_001"
   ],
   "vengeful_spirit": [
     "the_chudail_indian_folklore"
