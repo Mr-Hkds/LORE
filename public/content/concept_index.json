@@ -187,7 +187,8 @@
     "the_lead_mask_case",
     "amelia_earhart_disappearance",
     "bloody_benders_001",
-    "the_axeman_of_new_orleans"
+    "the_axeman_of_new_orleans",
+    "satoshi_nakamoto_enigma"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -530,7 +531,8 @@
     "capgras_delusion_001",
     "clinical_lycanthropy",
     "cotard_delusion_001",
-    "ravaan_character_study"
+    "ravaan_character_study",
+    "pseudocyesis_phantom_pregnancy"
   ],
   "altered_perception": [
     "capgras_delusion_001"
@@ -1837,7 +1839,8 @@
     "silk_road_dread_pirate_roberts"
   ],
   "cryptocurrency": [
-    "silk_road_dread_pirate_roberts"
+    "silk_road_dread_pirate_roberts",
+    "satoshi_nakamoto_enigma"
   ],
   "illicit_marketplace": [
     "silk_road_dread_pirate_roberts"
@@ -2325,5 +2328,26 @@
   ],
   "intelligence_failure": [
     "gulf_of_tonkin_incident_deception"
+  ],
+  "anonymity": [
+    "satoshi_nakamoto_enigma"
+  ],
+  "digital_identity": [
+    "satoshi_nakamoto_enigma"
+  ],
+  "blockchain": [
+    "satoshi_nakamoto_enigma"
+  ],
+  "phantom_pregnancy": [
+    "pseudocyesis_phantom_pregnancy"
+  ],
+  "psychosomatic_illness": [
+    "pseudocyesis_phantom_pregnancy"
+  ],
+  "hormonal_response": [
+    "pseudocyesis_phantom_pregnancy"
+  ],
+  "grief_and_loss": [
+    "pseudocyesis_phantom_pregnancy"
   ]
 }
