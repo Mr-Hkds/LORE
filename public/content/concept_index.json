@@ -188,7 +188,8 @@
     "amelia_earhart_disappearance",
     "bloody_benders_001",
     "the_axeman_of_new_orleans",
-    "satoshi_nakamoto_enigma"
+    "satoshi_nakamoto_enigma",
+    "villisca_axe_murders_001"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -245,7 +246,8 @@
     "barney_barnato"
   ],
   "brutal_murders": [
-    "hinterkaifeck_murders"
+    "hinterkaifeck_murders",
+    "villisca_axe_murders_001"
   ],
   "isolated_crime": [
     "hinterkaifeck_murders"
@@ -261,7 +263,8 @@
   "cold_case": [
     "hinterkaifeck_murders",
     "the_isdal_woman",
-    "golden_state_killer_dna_breakthrough"
+    "golden_state_killer_dna_breakthrough",
+    "villisca_axe_murders_001"
   ],
   "rem atonia": [
     "sleep_paralysis_dossier"
@@ -1635,7 +1638,8 @@
     "bhasmasura_mohini_deception",
     "kala_bhairava_origin_time_punishment",
     "yama_lord_of_naraka",
-    "putana_demoness_divine_child"
+    "putana_demoness_divine_child",
+    "hiranyakashipu_narasimha_legend"
   ],
   "illusion": [
     "bhasmasura_mohini_deception"
@@ -2349,5 +2353,29 @@
   ],
   "grief_and_loss": [
     "pseudocyesis_phantom_pregnancy"
+  ],
+  "divine_wrath": [
+    "hiranyakashipu_narasimha_legend"
+  ],
+  "tyranny": [
+    "hiranyakashipu_narasimha_legend"
+  ],
+  "devotion_and_faith": [
+    "hiranyakashipu_narasimha_legend"
+  ],
+  "unnatural_birth": [
+    "hiranyakashipu_narasimha_legend"
+  ],
+  "illusion_of_invincibility": [
+    "hiranyakashipu_narasimha_legend"
+  ],
+  "family_annihilation": [
+    "villisca_axe_murders_001"
+  ],
+  "small_town_horror": [
+    "villisca_axe_murders_001"
+  ],
+  "axeman": [
+    "villisca_axe_murders_001"
   ]
 }
