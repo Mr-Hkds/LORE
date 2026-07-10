@@ -380,7 +380,8 @@
     "harold_shipman_serial_killer",
     "albert_fish_the_gray_man",
     "the_axeman_of_new_orleans",
-    "golden_state_killer_dna_breakthrough"
+    "golden_state_killer_dna_breakthrough",
+    "hh_holmes_murder_castle"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -607,7 +608,8 @@
     "spontaneous_human_combustion_shc",
     "the_sallie_house_haunting",
     "screaming_skull_bettiscombe_manor",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "perron_family_haunting"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -646,7 +648,8 @@
     "the_sallie_house_haunting",
     "borley_rectory_haunting",
     "screaming_skull_bettiscombe_manor",
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "perron_family_haunting"
   ],
   "missing_children": [
     "the_sodder_children_disappearance"
@@ -1062,7 +1065,8 @@
     "elizabeth_bathory_blood_countess"
   ],
   "psychopathy": [
-    "albert_fish_the_gray_man"
+    "albert_fish_the_gray_man",
+    "hh_holmes_murder_castle"
   ],
   "unsolved_cases": [
     "albert_fish_the_gray_man"
@@ -1249,13 +1253,15 @@
   "paranormal_investigation": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "perron_family_haunting"
   ],
   "family_trauma": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
     "amityville_horror_house_possessed",
-    "the_bell_witch_haunting"
+    "the_bell_witch_haunting",
+    "perron_family_haunting"
   ],
   "skepticism_vs_belief": [
     "enfield_poltergeist_001",
@@ -1588,7 +1594,8 @@
   "demonic_possession_or_spirit_attachment": [
     "black_monk_pontefract_001",
     "the_sallie_house_haunting",
-    "the_bell_witch_haunting"
+    "the_bell_witch_haunting",
+    "perron_family_haunting"
   ],
   "cursed_objects": [
     "hope_diamond_curse",
@@ -1875,7 +1882,8 @@
     "iran_contra_affair"
   ],
   "deception": [
-    "the_lavon_affair"
+    "the_lavon_affair",
+    "hh_holmes_murder_castle"
   ],
   "intellectual_property_theft": [
     "operation_aurora_cyber_espionage"
@@ -2195,7 +2203,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "true_crime": [
-    "amityville_horror_house_possessed"
+    "amityville_horror_house_possessed",
+    "hh_holmes_murder_castle"
   ],
   "hoax_claims": [
     "amityville_horror_house_possessed"
@@ -2292,5 +2301,11 @@
   ],
   "mythological_deity": [
     "lord_shani_cosmic_taskmaster"
+  ],
+  "murder_castle": [
+    "hh_holmes_murder_castle"
+  ],
+  "world_fair": [
+    "hh_holmes_murder_castle"
   ]
 }
