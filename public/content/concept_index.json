@@ -79,7 +79,8 @@
     "project_popeye_weather_warfare",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
-    "project_chatter_mind_control"
+    "project_chatter_mind_control",
+    "project_coast_canada_experiments"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -105,7 +106,8 @@
     "operation_gladio",
     "the_lavon_affair",
     "operation_mongoose_cuban_project",
-    "reichstag_fire_conspiracy"
+    "reichstag_fire_conspiracy",
+    "gulf_of_tonkin_incident_deception"
   ],
   "government_conspiracy": [
     "operation_northwoods_001",
@@ -147,7 +149,8 @@
     "project_popeye_weather_warfare",
     "the_octopus_murder_conspiracy_danny_casolaro",
     "operation_chaos_cia_domestic_surveillance",
-    "project_chatter_mind_control"
+    "project_chatter_mind_control",
+    "gulf_of_tonkin_incident_deception"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -320,7 +323,8 @@
     "the_aversion_project_south_africa",
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
-    "operation_big_burn_bio_tests"
+    "operation_big_burn_bio_tests",
+    "project_coast_canada_experiments"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -407,7 +411,8 @@
     "cia_mk_ultra_program",
     "project_artichoke_mind_control",
     "project_mk_ultra_001",
-    "project_chatter_mind_control"
+    "project_chatter_mind_control",
+    "project_coast_canada_experiments"
   ],
   "unethical_experimentation": [
     "cia_mk_ultra_program",
@@ -418,7 +423,8 @@
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
     "project_mknaomi_cia_biowarfare",
-    "project_chatter_mind_control"
+    "project_chatter_mind_control",
+    "project_coast_canada_experiments"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -1643,7 +1649,8 @@
     "internet_dark_matter_probes"
   ],
   "drug_experimentation": [
-    "project_mk_ultra_001"
+    "project_mk_ultra_001",
+    "project_coast_canada_experiments"
   ],
   "second_gunman": [
     "assassination_rfk_conspiracy"
@@ -1689,7 +1696,8 @@
     "holmesburg_prison_experiments"
   ],
   "prison_system_abuse": [
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "project_coast_canada_experiments"
   ],
   "internet_of_things": [
     "mirai_botnet_iot_attack"
@@ -2007,7 +2015,8 @@
   ],
   "media_manipulation": [
     "operation_mockingbird_cia_media_manipulation",
-    "the_axeman_of_new_orleans"
+    "the_axeman_of_new_orleans",
+    "gulf_of_tonkin_incident_deception"
   ],
   "intelligence_agencies": [
     "operation_mockingbird_cia_media_manipulation",
@@ -2307,5 +2316,14 @@
   ],
   "world_fair": [
     "hh_holmes_murder_castle"
+  ],
+  "government_deception": [
+    "gulf_of_tonkin_incident_deception"
+  ],
+  "war_escalation": [
+    "gulf_of_tonkin_incident_deception"
+  ],
+  "intelligence_failure": [
+    "gulf_of_tonkin_incident_deception"
   ]
 }
