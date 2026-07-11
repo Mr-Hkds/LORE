@@ -133,7 +133,8 @@
     "operation_northwoods_001",
     "the_phoenix_program",
     "operation_mongoose_cuban_project",
-    "project_popeye_weather_warfare"
+    "project_popeye_weather_warfare",
+    "project_100000_mcnamaras_folly"
   ],
   "covert_operations": [
     "operation_northwoods_001",
@@ -344,7 +345,8 @@
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
     "operation_big_burn_bio_tests",
-    "project_coast_canada_experiments"
+    "project_coast_canada_experiments",
+    "project_100000_mcnamaras_folly"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -542,7 +544,8 @@
   "government_misconduct": [
     "tuskegee_syphilis_study",
     "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments"
+    "holmesburg_prison_experiments",
+    "project_100000_mcnamaras_folly"
   ],
   "public_health_failure": [
     "tuskegee_syphilis_study",
@@ -563,7 +566,8 @@
     "phineas_gage_brain_injury",
     "clinical_lycanthropy",
     "alien_hand_syndrome",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "phantom_limb_syndrome_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -949,7 +953,8 @@
   ],
   "body_image_disorder": [
     "alien_hand_syndrome",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "phantom_limb_syndrome_001"
   ],
   "suicide": [
     "aokigahara_suicide_forest"
@@ -1967,7 +1972,8 @@
     "the_new_world_order_conspiracy",
     "iloveyou_virus_001",
     "melissa_virus_first_global_epidemic",
-    "kevin_mitnick_ghost_in_the_wires"
+    "kevin_mitnick_ghost_in_the_wires",
+    "project_100000_mcnamaras_folly"
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
@@ -2600,5 +2606,20 @@
   ],
   "media_vulnerability": [
     "max_headroom_broadcast_intrusion"
+  ],
+  "vietnam_war": [
+    "project_100000_mcnamaras_folly"
+  ],
+  "statistical_manipulation": [
+    "project_100000_mcnamaras_folly"
+  ],
+  "phantom_sensation": [
+    "phantom_limb_syndrome_001"
+  ],
+  "neuropathic_pain": [
+    "phantom_limb_syndrome_001"
+  ],
+  "brain_plasticity": [
+    "phantom_limb_syndrome_001"
   ]
 }
