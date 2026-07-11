@@ -84,7 +84,9 @@
     "project_chatter_mind_control",
     "project_coast_canada_experiments",
     "death_of_marilyn_monroe",
-    "project_azorian_glomar_explorer"
+    "project_azorian_glomar_explorer",
+    "area_51_classified_secrets",
+    "plum_island_disease_center"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -155,7 +157,8 @@
     "operation_chaos_cia_domestic_surveillance",
     "project_chatter_mind_control",
     "gulf_of_tonkin_incident_deception",
-    "project_azorian_glomar_explorer"
+    "project_azorian_glomar_explorer",
+    "plum_island_disease_center"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -221,7 +224,8 @@
     "amelia_earhart_disappearance",
     "men_in_black_phenomenon",
     "bilderberg_group_secret_meetings",
-    "death_of_marilyn_monroe"
+    "death_of_marilyn_monroe",
+    "area_51_classified_secrets"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -321,7 +325,8 @@
     "project_112_covert_warfare_tests",
     "project_500_soviet_biowarfare_prisoners",
     "operation_big_burn_bio_tests",
-    "project_mknaomi_cia_biowarfare"
+    "project_mknaomi_cia_biowarfare",
+    "plum_island_disease_center"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -817,7 +822,8 @@
     "the_isdal_woman"
   ],
   "unethical_experiments": [
-    "project_iceworm_secret_city"
+    "project_iceworm_secret_city",
+    "plum_island_disease_center"
   ],
   "climate_change_impact": [
     "project_iceworm_secret_city"
@@ -1138,7 +1144,8 @@
     "project_blue_book_ufo",
     "the_roswell_incident",
     "rendlesham_forest_incident",
-    "men_in_black_phenomenon"
+    "men_in_black_phenomenon",
+    "area_51_classified_secrets"
   ],
   "military_investigations": [
     "project_blue_book_ufo"
@@ -2477,5 +2484,26 @@
   ],
   "optical_illusion": [
     "the_overtoun_bridge_dogs"
+  ],
+  "classified_research": [
+    "area_51_classified_secrets"
+  ],
+  "aerospace_technology": [
+    "area_51_classified_secrets"
+  ],
+  "military_base": [
+    "area_51_classified_secrets"
+  ],
+  "alien_technology": [
+    "area_51_classified_secrets"
+  ],
+  "animal_diseases": [
+    "plum_island_disease_center"
+  ],
+  "disease_outbreaks": [
+    "plum_island_disease_center"
+  ],
+  "biodefense_research": [
+    "plum_island_disease_center"
   ]
 }
