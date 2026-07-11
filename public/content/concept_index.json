@@ -754,7 +754,8 @@
     "stockholm_syndrome_001"
   ],
   "cognitive_dissonance": [
-    "stockholm_syndrome_001"
+    "stockholm_syndrome_001",
+    "cognitive_dissonance_001"
   ],
   "captivity_syndrome": [
     "stockholm_syndrome_001"
@@ -1861,7 +1862,8 @@
   "cybercrime": [
     "silk_road_dread_pirate_roberts",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic"
+    "melissa_virus_first_global_epidemic",
+    "kevin_mitnick_ghost_in_the_wires"
   ],
   "dark_web": [
     "silk_road_dread_pirate_roberts"
@@ -1955,7 +1957,8 @@
   "social_engineering": [
     "the_new_world_order_conspiracy",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic"
+    "melissa_virus_first_global_epidemic",
+    "kevin_mitnick_ghost_in_the_wires"
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
@@ -2372,7 +2375,8 @@
     "satoshi_nakamoto_enigma"
   ],
   "digital_identity": [
-    "satoshi_nakamoto_enigma"
+    "satoshi_nakamoto_enigma",
+    "kevin_mitnick_ghost_in_the_wires"
   ],
   "blockchain": [
     "satoshi_nakamoto_enigma"
@@ -2505,5 +2509,26 @@
   ],
   "biodefense_research": [
     "plum_island_disease_center"
+  ],
+  "hacking": [
+    "kevin_mitnick_ghost_in_the_wires"
+  ],
+  "fugitive": [
+    "kevin_mitnick_ghost_in_the_wires"
+  ],
+  "government_pursuit": [
+    "kevin_mitnick_ghost_in_the_wires"
+  ],
+  "self_justification": [
+    "cognitive_dissonance_001"
+  ],
+  "internal_conflict": [
+    "cognitive_dissonance_001"
+  ],
+  "belief_change": [
+    "cognitive_dissonance_001"
+  ],
+  "psychological_discomfort": [
+    "cognitive_dissonance_001"
   ]
 }
