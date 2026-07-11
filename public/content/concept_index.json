@@ -199,7 +199,8 @@
     "satoshi_nakamoto_enigma",
     "villisca_axe_murders_001",
     "frederick_valentich_disappearance",
-    "wineville_chicken_coop_murders"
+    "wineville_chicken_coop_murders",
+    "max_headroom_broadcast_intrusion"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -2584,5 +2585,20 @@
   ],
   "space_race": [
     "moon_landing_hoax_001"
+  ],
+  "signal_hijacking": [
+    "max_headroom_broadcast_intrusion"
+  ],
+  "broadcast_intrusion": [
+    "max_headroom_broadcast_intrusion"
+  ],
+  "cyber_crime": [
+    "max_headroom_broadcast_intrusion"
+  ],
+  "anonymous_perpetrators": [
+    "max_headroom_broadcast_intrusion"
+  ],
+  "media_vulnerability": [
+    "max_headroom_broadcast_intrusion"
   ]
 }
