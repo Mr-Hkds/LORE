@@ -647,7 +647,8 @@
   ],
   "spiritualism": [
     "winchester_mystery_house",
-    "borley_rectory_haunting"
+    "borley_rectory_haunting",
+    "evp_unseen_whispers"
   ],
   "unexplained_phenomena": [
     "winchester_mystery_house",
@@ -744,7 +745,8 @@
   "scientific_skepticism": [
     "project_stargate_remote_viewing",
     "the_ganzfeld_experiment",
-    "the_taos_hum"
+    "the_taos_hum",
+    "evp_unseen_whispers"
   ],
   "hostage_psychology": [
     "stockholm_syndrome_001"
@@ -2543,5 +2545,17 @@
   ],
   "institutional_abuse": [
     "wineville_chicken_coop_murders"
+  ],
+  "electronic_voice_phenomena": [
+    "evp_unseen_whispers"
+  ],
+  "paranormal_communication": [
+    "evp_unseen_whispers"
+  ],
+  "unexplained_audio": [
+    "evp_unseen_whispers"
+  ],
+  "instrumental_transcommunication": [
+    "evp_unseen_whispers"
   ]
 }
