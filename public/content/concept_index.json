@@ -89,7 +89,8 @@
     "area_51_classified_secrets",
     "plum_island_disease_center",
     "porton_down_experiments",
-    "dag_hammarskjold_death_conspiracy"
+    "dag_hammarskjold_death_conspiracy",
+    "operation_midnight_climax"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -164,7 +165,8 @@
     "gulf_of_tonkin_incident_deception",
     "project_azorian_glomar_explorer",
     "plum_island_disease_center",
-    "dag_hammarskjold_death_conspiracy"
+    "dag_hammarskjold_death_conspiracy",
+    "operation_midnight_climax"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -449,7 +451,8 @@
     "project_artichoke_mind_control",
     "project_mk_ultra_001",
     "project_chatter_mind_control",
-    "project_coast_canada_experiments"
+    "project_coast_canada_experiments",
+    "operation_midnight_climax"
   ],
   "unethical_experimentation": [
     "cia_mk_ultra_program",
@@ -461,7 +464,8 @@
     "project_500_soviet_biowarfare_prisoners",
     "project_mknaomi_cia_biowarfare",
     "project_chatter_mind_control",
-    "project_coast_canada_experiments"
+    "project_coast_canada_experiments",
+    "operation_midnight_climax"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -471,7 +475,8 @@
     "operation_mockingbird_cia_media_manipulation",
     "the_axeman_of_new_orleans",
     "zersetzung_stasi_disintegration",
-    "project_chatter_mind_control"
+    "project_chatter_mind_control",
+    "operation_midnight_climax"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -1504,7 +1509,8 @@
     "the_cuckoos_egg_kgb_hacker",
     "operation_aurora_cyber_espionage",
     "flame_malware_cyber_espionage",
-    "titan_rain_silent_infiltration_us_networks"
+    "titan_rain_silent_infiltration_us_networks",
+    "meltdown_spectre_vulnerabilities"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
@@ -1646,7 +1652,8 @@
     "mirai_botnet_iot_attack",
     "morris_worm_first_internet_attack",
     "the_mydoom_worm_internet_fastest_malware",
-    "undetected_backdoors_early_computing"
+    "undetected_backdoors_early_computing",
+    "meltdown_spectre_vulnerabilities"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
@@ -1716,7 +1723,8 @@
   ],
   "drug_experimentation": [
     "project_mk_ultra_001",
-    "project_coast_canada_experiments"
+    "project_coast_canada_experiments",
+    "operation_midnight_climax"
   ],
   "second_gunman": [
     "assassination_rfk_conspiracy"
@@ -2753,5 +2761,17 @@
   ],
   "natural_phenomena": [
     "the_bermuda_triangle_mystery"
+  ],
+  "hardware_vulnerability": [
+    "meltdown_spectre_vulnerabilities"
+  ],
+  "cpu_architecture": [
+    "meltdown_spectre_vulnerabilities"
+  ],
+  "side_channel_attack": [
+    "meltdown_spectre_vulnerabilities"
+  ],
+  "speculative_execution": [
+    "meltdown_spectre_vulnerabilities"
   ]
 }
