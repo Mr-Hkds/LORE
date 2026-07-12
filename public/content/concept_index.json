@@ -524,7 +524,8 @@
   ],
   "psychological_distress": [
     "dancing_mania_1518_strasbourg",
-    "tanganyika_laughter_epidemic"
+    "tanganyika_laughter_epidemic",
+    "body_integrity_identity_disorder_biid"
   ],
   "overpopulation": [
     "universe_25_calhouns_mouse_utopia"
@@ -586,7 +587,8 @@
     "clinical_lycanthropy",
     "alien_hand_syndrome",
     "cotard_delusion_001",
-    "phantom_limb_syndrome_001"
+    "phantom_limb_syndrome_001",
+    "body_integrity_identity_disorder_biid"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -820,7 +822,8 @@
     "phineas_gage_brain_injury"
   ],
   "self_identity": [
-    "phineas_gage_brain_injury"
+    "phineas_gage_brain_injury",
+    "body_integrity_identity_disorder_biid"
   ],
   "dissociation": [
     "dissociative_identity_disorder_fragmented_self"
@@ -977,7 +980,8 @@
   "body_image_disorder": [
     "alien_hand_syndrome",
     "cotard_delusion_001",
-    "phantom_limb_syndrome_001"
+    "phantom_limb_syndrome_001",
+    "body_integrity_identity_disorder_biid"
   ],
   "suicide": [
     "aokigahara_suicide_forest"
@@ -2792,5 +2796,11 @@
   ],
   "futility_of_desire": [
     "king_yayati_curse_of_desire"
+  ],
+  "amputation_desire": [
+    "body_integrity_identity_disorder_biid"
+  ],
+  "unwanted_limbs": [
+    "body_integrity_identity_disorder_biid"
   ]
 }
