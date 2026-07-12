@@ -204,7 +204,8 @@
     "frederick_valentich_disappearance",
     "wineville_chicken_coop_murders",
     "max_headroom_broadcast_intrusion",
-    "db_cooper_unsolved_mystery"
+    "db_cooper_unsolved_mystery",
+    "the_murder_of_eliza_jumel"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -234,7 +235,8 @@
     "death_of_marilyn_monroe",
     "area_51_classified_secrets",
     "moon_landing_hoax_001",
-    "protocols_of_zion_001"
+    "protocols_of_zion_001",
+    "the_bermuda_triangle_mystery"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -635,7 +637,8 @@
     "franklin_expedition_lost_ships",
     "uss_cyclops_vanishing",
     "the_mary_celeste_mystery",
-    "amelia_earhart_disappearance"
+    "amelia_earhart_disappearance",
+    "the_bermuda_triangle_mystery"
   ],
   "lead_poisoning": [
     "franklin_expedition_lost_ships"
@@ -652,7 +655,8 @@
     "screaming_skull_bettiscombe_manor",
     "amityville_horror_house_possessed",
     "perron_family_haunting",
-    "the_overtoun_bridge_dogs"
+    "the_overtoun_bridge_dogs",
+    "the_bermuda_triangle_mystery"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -855,7 +859,8 @@
   "maritime_mystery": [
     "eilean_mor_lighthouse_mystery",
     "uss_cyclops_vanishing",
-    "the_mary_celeste_mystery"
+    "the_mary_celeste_mystery",
+    "the_bermuda_triangle_mystery"
   ],
   "isolated_location": [
     "eilean_mor_lighthouse_mystery"
@@ -2135,7 +2140,8 @@
   ],
   "aviation_mystery": [
     "amelia_earhart_disappearance",
-    "frederick_valentich_disappearance"
+    "frederick_valentich_disappearance",
+    "the_bermuda_triangle_mystery"
   ],
   "toxins": [
     "project_mknaomi_cia_biowarfare"
@@ -2723,5 +2729,23 @@
   ],
   "restoration_of_honor": [
     "narakasura_demon_princesses"
+  ],
+  "wealth_dispute": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "poisoning": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "family_feud": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "legal_battle": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "navigational_anomalies": [
+    "the_bermuda_triangle_mystery"
+  ],
+  "natural_phenomena": [
+    "the_bermuda_triangle_mystery"
   ]
 }
