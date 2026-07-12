@@ -201,7 +201,8 @@
     "villisca_axe_murders_001",
     "frederick_valentich_disappearance",
     "wineville_chicken_coop_murders",
-    "max_headroom_broadcast_intrusion"
+    "max_headroom_broadcast_intrusion",
+    "db_cooper_unsolved_mystery"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -210,7 +211,8 @@
     "malaysia_airlines_mh370",
     "eilean_mor_lighthouse_mystery",
     "roanoke_colony_disappearance",
-    "bloody_benders_001"
+    "bloody_benders_001",
+    "db_cooper_unsolved_mystery"
   ],
   "black_box": [
     "malaysia_airlines_mh370"
@@ -280,7 +282,8 @@
     "hinterkaifeck_murders",
     "the_isdal_woman",
     "golden_state_killer_dna_breakthrough",
-    "villisca_axe_murders_001"
+    "villisca_axe_murders_001",
+    "db_cooper_unsolved_mystery"
   ],
   "rem atonia": [
     "sleep_paralysis_dossier"
@@ -2621,5 +2624,11 @@
   ],
   "brain_plasticity": [
     "phantom_limb_syndrome_001"
+  ],
+  "skyjacking": [
+    "db_cooper_unsolved_mystery"
+  ],
+  "aviation_crime": [
+    "db_cooper_unsolved_mystery"
   ]
 }
