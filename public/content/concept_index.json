@@ -1797,7 +1797,8 @@
   "organized_crime": [
     "vatican_bank_scandal_calvi_p2",
     "the_axeman_of_new_orleans",
-    "the_octopus_murder_conspiracy_danny_casolaro"
+    "the_octopus_murder_conspiracy_danny_casolaro",
+    "bulletproof_hosting_networks"
   ],
   "church_corruption": [
     "vatican_bank_scandal_calvi_p2"
@@ -1889,13 +1890,16 @@
     "silk_road_dread_pirate_roberts",
     "iloveyou_virus_001",
     "melissa_virus_first_global_epidemic",
-    "kevin_mitnick_ghost_in_the_wires"
+    "kevin_mitnick_ghost_in_the_wires",
+    "bulletproof_hosting_networks"
   ],
   "dark_web": [
-    "silk_road_dread_pirate_roberts"
+    "silk_road_dread_pirate_roberts",
+    "bulletproof_hosting_networks"
   ],
   "online_anonymity": [
-    "silk_road_dread_pirate_roberts"
+    "silk_road_dread_pirate_roberts",
+    "bulletproof_hosting_networks"
   ],
   "cryptocurrency": [
     "silk_road_dread_pirate_roberts",
@@ -2673,5 +2677,17 @@
   ],
   "hate_speech": [
     "protocols_of_zion_001"
+  ],
+  "digital_underground": [
+    "bulletproof_hosting_networks"
+  ],
+  "illicit_infrastructure": [
+    "bulletproof_hosting_networks"
+  ],
+  "state_sponsored_hacking": [
+    "bulletproof_hosting_networks"
+  ],
+  "cyber_security_threats": [
+    "bulletproof_hosting_networks"
   ]
 }
