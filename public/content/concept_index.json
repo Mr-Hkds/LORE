@@ -666,7 +666,8 @@
     "amityville_horror_house_possessed",
     "perron_family_haunting",
     "the_overtoun_bridge_dogs",
-    "the_bermuda_triangle_mystery"
+    "the_bermuda_triangle_mystery",
+    "the_haunting_of_bhangarh_fort"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -700,7 +701,8 @@
     "rendlesham_forest_incident",
     "amityville_horror_house_possessed",
     "frederick_valentich_disappearance",
-    "poveglia_island_haunting"
+    "poveglia_island_haunting",
+    "the_haunting_of_bhangarh_fort"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -2802,5 +2804,26 @@
   ],
   "unwanted_limbs": [
     "body_integrity_identity_disorder_biid"
+  ],
+  "gang_rivalry": [
+    "st_valentines_day_massacre"
+  ],
+  "mob_crime": [
+    "st_valentines_day_massacre"
+  ],
+  "organized_violence": [
+    "st_valentines_day_massacre"
+  ],
+  "haunted_fort": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "ancient_curse": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "local_legends": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "historical_tragedy": [
+    "the_haunting_of_bhangarh_fort"
   ]
 }
