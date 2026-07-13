@@ -586,11 +586,13 @@
     "cotard_delusion_001",
     "ravaan_character_study",
     "pseudocyesis_phantom_pregnancy",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "fregoli_delusion_imposter_faces"
   ],
   "altered_perception": [
     "capgras_delusion_001",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "fregoli_delusion_imposter_faces"
   ],
   "neurology": [
     "capgras_delusion_001",
@@ -600,13 +602,15 @@
     "cotard_delusion_001",
     "phantom_limb_syndrome_001",
     "body_integrity_identity_disorder_biid",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "fregoli_delusion_imposter_faces"
   ],
   "psychosis": [
     "capgras_delusion_001",
     "folie_a_deux_shared_psychosis",
     "clinical_lycanthropy",
-    "cotard_delusion_001"
+    "cotard_delusion_001",
+    "fregoli_delusion_imposter_faces"
   ],
   "identity_perception": [
     "capgras_delusion_001"
@@ -1266,7 +1270,8 @@
   ],
   "hubris": [
     "ravaan_character_study",
-    "myth_of_atlantis_plato"
+    "myth_of_atlantis_plato",
+    "king_trishanku_suspended_between_worlds"
   ],
   "power_corruption": [
     "ravaan_character_study"
@@ -2374,7 +2379,8 @@
   ],
   "divine_curse": [
     "the_curse_of_gandhari",
-    "king_yayati_curse_of_desire"
+    "king_yayati_curse_of_desire",
+    "king_trishanku_suspended_between_worlds"
   ],
   "mother's_vengeance": [
     "the_curse_of_gandhari"
@@ -2768,7 +2774,8 @@
   ],
   "divine_intervention": [
     "narakasura_demon_princesses",
-    "halahala_poison_shiva_sacrifice"
+    "halahala_poison_shiva_sacrifice",
+    "king_trishanku_suspended_between_worlds"
   ],
   "imprisonment": [
     "narakasura_demon_princesses"
@@ -2928,5 +2935,17 @@
   ],
   "unseen_cheaters": [
     "online_poker_superuser_scandal"
+  ],
+  "identity_misidentification": [
+    "fregoli_delusion_imposter_faces"
+  ],
+  "unfulfilled_desire": [
+    "king_trishanku_suspended_between_worlds"
+  ],
+  "cosmic_limbo": [
+    "king_trishanku_suspended_between_worlds"
+  ],
+  "celestial_ascension": [
+    "king_trishanku_suspended_between_worlds"
   ]
 }
