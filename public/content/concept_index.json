@@ -29,7 +29,8 @@
     "the_octopus_murder_conspiracy_danny_casolaro",
     "death_of_marilyn_monroe",
     "the_overtoun_bridge_dogs",
-    "dag_hammarskjold_death_conspiracy"
+    "dag_hammarskjold_death_conspiracy",
+    "the_greenbrier_ghost"
   ],
   "wilderness_horror": [
     "the_dyatlov_pass_incident",
@@ -119,14 +120,16 @@
     "operation_mongoose_cuban_project",
     "reichstag_fire_conspiracy",
     "gulf_of_tonkin_incident_deception",
-    "protocols_of_zion_001"
+    "protocols_of_zion_001",
+    "gleiwitz_incident_false_flag"
   ],
   "government_conspiracy": [
     "operation_northwoods_001",
     "october_surprise_1980_iran",
     "operation_condor_001",
     "reichstag_fire_conspiracy",
-    "iran_contra_affair"
+    "iran_contra_affair",
+    "gleiwitz_incident_false_flag"
   ],
   "national_security": [
     "operation_northwoods_001",
@@ -140,7 +143,8 @@
     "the_phoenix_program",
     "operation_mongoose_cuban_project",
     "project_popeye_weather_warfare",
-    "project_100000_mcnamaras_folly"
+    "project_100000_mcnamaras_folly",
+    "gleiwitz_incident_false_flag"
   ],
   "covert_operations": [
     "operation_northwoods_001",
@@ -673,7 +677,8 @@
     "perron_family_haunting",
     "the_overtoun_bridge_dogs",
     "the_bermuda_triangle_mystery",
-    "the_haunting_of_bhangarh_fort"
+    "the_haunting_of_bhangarh_fort",
+    "the_greenbrier_ghost"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -2074,7 +2079,8 @@
   ],
   "propaganda": [
     "reichstag_fire_conspiracy",
-    "protocols_of_zion_001"
+    "protocols_of_zion_001",
+    "gleiwitz_incident_false_flag"
   ],
   "fear_mongering": [
     "reichstag_fire_conspiracy"
@@ -2341,7 +2347,8 @@
   ],
   "true_crime": [
     "amityville_horror_house_possessed",
-    "hh_holmes_murder_castle"
+    "hh_holmes_murder_castle",
+    "the_greenbrier_ghost"
   ],
   "hoax_claims": [
     "amityville_horror_house_possessed"
@@ -2889,5 +2896,14 @@
   ],
   "divine_poison": [
     "halahala_poison_shiva_sacrifice"
+  ],
+  "judicial_precedent": [
+    "the_greenbrier_ghost"
+  ],
+  "spirit_communication": [
+    "the_greenbrier_ghost"
+  ],
+  "world_war_ii": [
+    "gleiwitz_incident_false_flag"
   ]
 }
