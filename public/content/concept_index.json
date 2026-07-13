@@ -579,10 +579,12 @@
     "clinical_lycanthropy",
     "cotard_delusion_001",
     "ravaan_character_study",
-    "pseudocyesis_phantom_pregnancy"
+    "pseudocyesis_phantom_pregnancy",
+    "reduplicative_paramnesia_001"
   ],
   "altered_perception": [
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "reduplicative_paramnesia_001"
   ],
   "neurology": [
     "capgras_delusion_001",
@@ -591,7 +593,8 @@
     "alien_hand_syndrome",
     "cotard_delusion_001",
     "phantom_limb_syndrome_001",
-    "body_integrity_identity_disorder_biid"
+    "body_integrity_identity_disorder_biid",
+    "reduplicative_paramnesia_001"
   ],
   "psychosis": [
     "capgras_delusion_001",
@@ -820,7 +823,8 @@
     "the_rat_park_experiment_001"
   ],
   "brain_injury": [
-    "phineas_gage_brain_injury"
+    "phineas_gage_brain_injury",
+    "reduplicative_paramnesia_001"
   ],
   "personality_change": [
     "phineas_gage_brain_injury"
@@ -2158,7 +2162,8 @@
     "raktabija_blood_demon"
   ],
   "cosmic_balance": [
-    "raktabija_blood_demon"
+    "raktabija_blood_demon",
+    "halahala_poison_shiva_sacrifice"
   ],
   "goddess_power": [
     "raktabija_blood_demon"
@@ -2278,7 +2283,8 @@
     "gaslighting_psychological_warfare"
   ],
   "reality_distortion": [
-    "gaslighting_psychological_warfare"
+    "gaslighting_psychological_warfare",
+    "reduplicative_paramnesia_001"
   ],
   "flesh_eating_spirits": [
     "dakinis_demonic_skywalkers",
@@ -2749,7 +2755,8 @@
     "narakasura_demon_princesses"
   ],
   "divine_intervention": [
-    "narakasura_demon_princesses"
+    "narakasura_demon_princesses",
+    "halahala_poison_shiva_sacrifice"
   ],
   "imprisonment": [
     "narakasura_demon_princesses"
@@ -2870,5 +2877,17 @@
   ],
   "computer_history": [
     "aids_trojan_ransomware_1989"
+  ],
+  "memory_confabulation": [
+    "reduplicative_paramnesia_001"
+  ],
+  "selfless_sacrifice": [
+    "halahala_poison_shiva_sacrifice"
+  ],
+  "creation_and_destruction": [
+    "halahala_poison_shiva_sacrifice"
+  ],
+  "divine_poison": [
+    "halahala_poison_shiva_sacrifice"
   ]
 }
