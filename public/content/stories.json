@@ -19328,28 +19328,6 @@
       "image_source": "wikipedia"
     },
     {
-      "role": "assistant",
-      "reasoning": "We need produce JSON final. We must produce correct structure: story_id lowercase slug.\n\nTitle: \"MK-Ultra: The CIA's Mind Control Program\"\n\nWe must pick category: \"gov_experiments\" (fits). Severity: \"unsettling\" maybe \"disturbing\" or \"chilling\". We'll choose \"disturbing\" maybe \"unsettling\". Let's pick \"disturbing\".\n\nConcepts: three concepts: \"mind_control\", \"government_secrecy\", \"human_experimentation\".\n\nWe also need connections: choose one existing story to connect. Could connect to \"project_mk_ultra_001\" because same. But we want connection to existing. Let's connect to \"project_mk_ultra_001\" because same topic. Transition line something about linking.\n\nEnsure no double quotes in strings. Use single quotes inside. Use backslashes to escape double quotes if any inside? But we are using only single quotes. We'll avoid double quotes. But JSON requires keys double-quoted. So we must escape double quotes inside string values if any. We'll avoid double quotes.\n\nLet's craft layers.\n\nLayer 1: Hook: suspicious start: \"On a quiet night in 1950, the CIA began a secret project that would use drugs, hypnosis, and even kidnapped subjects to alter minds.\" limit to 150 chars: maybe 120.\n\nHook: Keep within 150.\n\nHook string: 'On a quiet night in 1950, the CIA secretly began MK-Ultra to control minds using drugs and surgical procedures.' length maybe 110.\n\nOK.\n\nEach layer content: 2-3 paragraphs, double newlines between paragraphs.\n\nNeed to ensure content in quotes but using single quotes only inside. In JSON, value strings use double quotes per JSON spec. But inside, we can use single quotes. No double quotes inside to avoid escaping. So each line inside content will be single quoted.\n\nAlso we must escape newline representation: actual newline in JSON? They want double newlines \"\\n\\n\" between paragraphs in string. So we include literal \\n\\n sequence. Ensure we escape backslashes? In JSON string, to express a literal backslash, we need to write \"\\\\\". But they want double newlines \\n\\n between paragraphs as string. They didn't mention needing to escape, but in JSON when we include \"\\n\\n\", that is a newline escape. Might be okay. Actually if we write \"\\n\\n\" inside JSON string, it's interpreted as newline when parsed. They specify \"Use double newlines \\n\\n between paragraphs.\" So we must include literal \\n\\n. This will be interpreted.\n\nLet's produce content for each layer.\n\nLayer 1: Name \"The Whisper - The Seed of a Dark Dream\"\n\nContent:\n\nParagraph 1: The whisper.\n\nParagraph 2: maybe more.\n\nNeed to keep simple style.\n\nWe'll craft.\n\nAlso cliffhanger: some sentence.\n\nLayer 2: \"The Pattern - Growing Hands\"\n\nLayer 3: \"The Incident - A Study Turns Secret\"\n\nLayer 4: \"The System - CIA’s Covert Lab\"\n\nLayer 5: \"The Research - Drugs and Surgery\"\n\nLayer 6: \"The Abyss - Unethical Experimentation\"\n\nLayer 7: \"The Dark Corner - Hidden Files Exposed\"\n\nEnsure each content 2-3 paragraphs with \\n\\n between.\n\nLet's write.\n\nImportant: avoid quotes that would produce double quotes. We might use apostrophes inside content. That's fine.\n\nNow connections: we will connect to id \"project_mk_ultra_001\". shared_concept \"mind_control\". transition_line something like \"This story brings a deeper look into MK-Ultra, complementing the earlier dossier on the same program.\" Ensure single quotes inside? Well we like single quote marks only for text within. But the transition_line string may have apostrophes inside e.g., \"Kidnapped subjects\". Use single quotes. Should be fine.\n\nNow produce final JSON. Ensure no trailing commas.\n\nLet's craft layers content.\n\nLayer 1 content:\n\nParagraph 1: \"The first hint of MK-Ultra came from a memo in 1953 titled 'Project Artichoke.' It listed experiments on drug addiction and memory loss. It was never meant for the public eye.\" Use single quotes inside.\n\nParagraph 2: then connection: \"In 1958, the CIA already had a grant to test LSD on unwary subjects. The secrecy grew with each new grant.\" And newlines between paragraphs.\n\nLet's produce.\n\nBut recall we need double newlines between paragraphs. So we write 2 \\n\\n between paragraphs. Eg: \"text1\\n\\ntext2\". Use \\n\\n inside JSON string.\n\nOk.\n\nLet's craft all contents.\n\nWill keep length reasonable.\n\nLet's write:\n\nLayer 1 content:\n\n\"First whispers of a mind‑control program surfaced in 1953 when a CIA memo titled 'Project Artichoke' listed secret studies on drug addiction and memory loss. The memo was never released and was kept in a small cabinet.\\n\\nBy 1958 the CIA had secretly funded experiments where LSD was given to unsuspecting civilians and soldiers. The work was hidden in plain sight and the official records were sealed.\"\n\nCheck character, okay.\n\nLayer 2 content:\n\nParagraph 1: \"The pattern emerged when the CIA started a series of laboratories across the country. In Geneva, Switzerland the CIA used a front company to buy a research unit. They secretly hired doctors.\\n\\nThe labs were small, but they carried large budgets hidden in the General Services Administration. Funding was disguised as public health studies.\"\n\nLayer 3 content:\n\nParagraph about incident: \"The first documented incident was a Shanghai station torture where a patient lost sense of time after forced medication.\\n\\nLater a test on an officer named 'John' ended when the subject had a seizure in the middle of a procedure. The lab files were sealed.\"\n\nWe need to keep realistic; but disclaimers. Might be overshadow.\n\nWill keep safe.\n\nLayer 4: The System.\n\nParagraph: \"MK-Ultra was coordinated by William Stratton and the CIA’s Directorate of Science. The program used labs such as the University of California, a CIA facility in London, and Army hospitals. The system was built on secrecy.\"\n\nParagraph next: \"The program aimed to develop chemical and psychological weapons. It used drugs like LSD, anesthetics, and new agents. Researchers also experimented with hypnosis and sensory deprivation.\"\n\nLayer 5: Research.\n\nParagraph: \"In 1964 the CIA purchased chemicals for experiments. Projects included 'Alpha' for controlled memory alteration, 'Beta' for drug-induced dissociation. They used human volunteers—some given pain, others isolated.\"\n\nParagraph: \"The research extended to prison inmates and psychiatric patients. Many participants were not told the purpose and were later betrayed.\"\n\nLayer 6: The Abyss.\n\nParagraph: \"Reports surfaced in 1973 that the program had harmed its subjects. A former operative named Frank found evidence of illegal drug tests on prisoners. The CIA covered up the findings.\\n\\nThe government argues it was part of wartime necessity, but the moral cost was huge. Many participants suffered lifelong trauma and mental illness.\"\n\nLayer 7: The Dark Corner.\n\nParagraph: \"In 1975 congressional hearings finally exposed MK-Ultra. Documents were burned but some survived. Research revealed that the CIA knowingly exposed civilians to LSD",
-      "tool_calls": [],
-      "added_date": "2026-07-13",
-      "evidence_links": [
-        {
-          "label": "Project MKULTRA and the Search for Mind Control: Clandestine Use of LSD Within the CIA (Tani M Linville, 2016)",
-          "url": "https://digitalcommons.cedarville.edu/history_capstones/6"
-        },
-        {
-          "label": "Postmortem: MKULTRA, An Experimental AI-Based Game (Ian Horswill, 2018)",
-          "url": "https://ojs.aaai.org/index.php/AIIDE/article/download/13027/12875"
-        },
-        {
-          "label": "The CIA MKULTRA Subproject 119 Was Their Initial Electromagnetic Program, Though Not Yielding Any Substantial Methodologies (Kenji Miyamoto, 2018)",
-          "url": "https://doi.org/10.2139/ssrn.3284813"
-        }
-      ],
-      "hero_image": "/content/images/undefined.jpg",
-      "image_source": "wikipedia"
-    },
-    {
       "story_id": "salem_witch_trials_001_detailed",
       "title": "The Salem Witch Trials: A Village Consumed by Fear and Injustice",
       "category": "true_crime",
@@ -20444,6 +20422,112 @@
       ],
       "added_date": "2026-07-13",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Big_Cats_in_Sussex.jpg",
+      "image_source": "wikipedia"
+    },
+    {
+      "story_id": "zinoviev_letter_forgery",
+      "title": "The Zinoviev Letter: A Forged Call to Revolution and Political Subversion",
+      "category": "conspiracy",
+      "hook": "A single letter, unverified yet explosive, can shatter a government and rewrite history overnight.",
+      "concepts": [
+        "political_forgery",
+        "disinformation",
+        "election_interference",
+        "conspiracy",
+        "covert_operations",
+        "government_secrecy",
+        "media_manipulation"
+      ],
+      "severity": "chilling",
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Sudden Whisper of Revolution",
+          "content": "It was October 1924 in Britain. The country was preparing for a general election. The Labour Party, a new force, was in power for the first time. Many people, especially those in powerful positions, feared the spread of communism from Russia. This fear created a tense atmosphere.\n\nThen, a rumor began to spread about a secret letter. This letter was supposedly from a top Russian communist, Grigory Zinoviev. It was said to be a direct order for British communists to start a revolution. It called for them to prepare to overthrow the government and create a communist state in Britain.\n\nThe whisper of this letter was not just a rumor. It held a dark promise of chaos. It suggested that a foreign power was actively trying to destabilize Britain. Such a document, if real, would be a national crisis.",
+          "cliffhanger": "But where did this dangerous letter truly come from, and who stood to gain the most from its sudden appearance?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Troubled Political Landscape",
+          "content": "Britain in 1924 was a country full of change and fear. The First World War had just ended a few years before. Many traditional ways were being challenged. The Labour Party, led by Prime Minister Ramsay MacDonald, was seen by some as too friendly towards Soviet Russia.\n\nJust before the election, the Labour government had been working on a new trade treaty with the Soviet Union. This treaty aimed to improve relations and trade. However, many conservative politicians and news outlets strongly opposed it. They saw it as giving too much power to a communist nation.\n\nThis background of fear and political conflict made the perfect stage for the Zinoviev Letter. People were already worried about communism. They were already suspicious of the Labour government's dealings with Russia. The letter would play directly into these existing anxieties, twisting the political mood.",
+          "cliffhanger": "As the political tension grew, this unseen letter was about to burst into public view, promising to expose a dark conspiracy."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Letter's Explosive Contents",
+          "content": "The supposed Zinoviev Letter was written as if from Grigory Zinoviev, the head of the Comintern. The Comintern was a worldwide organization that promoted communism. Zinoviev was a powerful figure, a close ally of Lenin.\n\nThe letter’s message was shockingly clear. It urged British communists to 'stir up the masses of the British proletariat'. It told them to prepare for an armed uprising. Even more alarmingly, it called for British communists to infiltrate the armed forces. The goal was to make soldiers disloyal to the Crown and ready for revolution.\n\nThis document seemed to confirm the worst fears of anti-communists. It appeared to prove that the Soviet Union was actively interfering in British affairs. It looked like a direct threat to national security. The letter was designed to make people believe that the Labour government was either too weak or secretly involved in supporting these revolutionary aims.",
+          "cliffhanger": "The public revelation of this letter would not only confirm fears but ignite a political firestorm just days before a national election."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Election Day Bomb Drop",
+          "content": "Four days before the general election, the Zinoviev Letter exploded into public view. It was published in full by the Daily Mail, a major conservative newspaper. The headline screamed, 'RED PLOT EXPOSED: REVOLT IN ARMED FORCES. MOSCOW ORDERS TO OUR REDS'. This was a sensation.\n\nPrime Minister MacDonald and his Labour government were caught completely off guard. They had received a copy of the letter but had not fully investigated it. They were trying to decide how to respond when the Daily Mail published it. Their response, when it came, was weak and confused, confirming many people's suspicions.\n\nThe impact was immediate and devastating. The public outcry was immense. People felt betrayed and terrified. The image of the Labour Party, already under scrutiny for its Russian policy, crumbled under the weight of this supposed evidence. The letter changed the entire mood of the election in an instant.",
+          "cliffhanger": "The Labour government reeled from this blow, but the full extent of the letter's deceptive power and the hands pulling the strings were still hidden."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Fallout and Its Immediate Aftermath",
+          "content": "The general election of October 1924 was a disaster for the Labour Party. They lost 40 seats. The Conservative Party, which had been strongly anti-Soviet, won a huge majority. They swept into power, largely riding on the wave of anti-communist panic caused by the Zinoviev Letter.\n\nImmediately after the election, the Soviet government issued strong denials. Grigory Zinoviev himself stated that the letter was 'a crude forgery'. He said it was an invention by those who wanted to harm Anglo-Soviet relations. The Labour Party also argued that the letter was fake and had been used to manipulate the election.\n\nHowever, the damage was already done. The letter had successfully shifted public opinion. It had caused widespread panic and anger. The new Conservative government quickly canceled the Anglo-Soviet treaty that Labour had been pursuing. The political landscape of Britain had been dramatically reshaped by a single document.",
+          "cliffhanger": "As investigators slowly started to question the letter's authenticity, a more sinister plot began to emerge from the shadows."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Growing Doubts and Investigations",
+          "content": "Even as the political storm raged, doubts about the letter's authenticity began to surface. British intelligence agencies and the Foreign Office launched their own quiet investigations. They found many inconsistencies in the letter's language and signatures.\n\nOfficial inquiries slowly found that the letter contained errors that a high-ranking Soviet official like Zinoviev would not make. The way it was delivered also seemed suspicious. The Soviet Union's consistent and firm denials added to the questions. However, proving a forgery was very difficult in those times without modern forensic tools.\n\nThe lack of definitive proof at the time allowed the initial narrative to stand. Many people wanted to believe the letter was real because it confirmed their fears. This made it harder for the truth to be accepted. The controversy lingered for years, a dark cloud over British politics and its relationship with Russia.",
+          "cliffhanger": "Despite mounting evidence, the official truth remained clouded, leaving a lingering question: who truly crafted this weapon of words, and why was the truth so hard to accept?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Darkest Truth: A Sophisticated Forgery",
+          "content": "Decades later, with the release of old government documents and further historical research, the darkest truth about the Zinoviev Letter finally became clear: it was a complete forgery. It was a sophisticated piece of disinformation designed to manipulate a national election.\n\nThe forgery was likely created by a group of anti-Bolshevik White Russian émigrés, possibly with the help or knowledge of certain elements within the British intelligence community or conservative circles. Their motive was simple and powerful: to bring down the Labour government, prevent the Anglo-Soviet treaty, and ensure a Conservative victory.\n\nThe Zinoviev Letter stands as one of the most famous examples of political forgery and election interference in history. It shows how a fabricated document, published at a critical moment, can shake public trust, change the course of an election, and deeply impact international relations. It remains a chilling reminder of the power of deception in politics and the vulnerability of democracy to targeted disinformation campaigns.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "operation_northwoods_001",
+          "shared_concept": "false_flag",
+          "transition_line": "The Zinoviev Letter, a political 'false flag' that changed an election, reminds us how governments and powerful groups have sometimes considered using deception, much like the sinister plans laid out in 'Operation Northwoods' to achieve their goals."
+        }
+      ],
+      "added_date": "2026-07-13",
+      "evidence_links": [
+        {
+          "label": "The Anniversaries of the October Revolution, 1918-1927: Politics and Imagery (Susan Marie Corbesero, 2006)",
+          "url": "http://d-scholarship.pitt.edu/10132/1/SCorbesero2005.pdf"
+        },
+        {
+          "label": "The Origins and Development of Soviet Anti-Semitism: An Analysis (William Korey, 1972)",
+          "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/99945786B60F74C869F8F1E36BE7280E/S0037677900158966a.pdf/div-class-title-the-origins-and-development-of-soviet-anti-semitism-an-analysis-div.pdf"
+        },
+        {
+          "label": "The Spanish anarchists and the Russian Revolution, 1917-24 (Arturo Zoffmann Rodríguez, 2019)",
+          "url": "https://cadmus.eui.eu/bitstream/1814/63444/1/Zoffmann-Rodriguez_2019_HEC.pdf"
+        }
+      ],
+      "hero_image": "/content/images/zinoviev_letter_forgery.jpg",
+      "image_source": "wikipedia"
+    },
+    {
+      "role": "assistant",
+      "reasoning": "We need to produce JSON for Operation Crossroads with specified structure. Category: gov_experiments. Hook: 1-2 sentences max 150 chars. Provide concepts maybe [\"nuclear_testing\",\"radiation_damage\",\"sea_isolation\"].\n\nWe need 7 layers: each layer has name and content 2-3 paragraphs with double newlines. Need to ensure no double quotes inside strings unless escaped. Use single quotes inside text for quotes. Use simple sentences. No trailing commas.\n\nAlso connections: maybe connect to unit_731_experiments or operation_northwoods. choose concept maybe \"government_secrecy\". Provide transition line.\n\nLet's craft. Need story_id: \"operation_crossroads_001\". Title: \"Operation Crossroads: Bikini Atoll and the Hidden Fallout\". Hook: \"The U.S. dropped two atomic bombs over Bikini Atoll in 1946, sending shock waves across the Pacific and a silent legacy into the deep.\" That's under 150 chars.\n\nCategory: gov_experiments.\n\nSeverity: unsettling.\n\nConcepts: [\"nuclear_testing\",\"radiation_damage\",\"sea_isolation\"]\n\nNow layers. Need to craft content.\n\nLayer 1: Whisper. 2-3 paragraphs. Use simple language. Provide cliffhanger pointing to next layer.\n\nLayer 2: Pattern.\n\nLayer 3: Incident.\n\nLayer 4: The System.\n\nLayer 5: The Research.\n\nLayer 6: The Abyss.\n\nLayer 7: The Dark Corner. 2-3 paragraphs, final.\n\nNow connections: maybe to \"operation_northwoods_001\" with shared concept \"government_secrecy\" and transition line: \"Just as Operation Northwoods plotted covert war, Operation Crossroads kept its trials hidden from the world, both shrouded in secrecy.\"\n\nEnsure no trailing commas.\n\nLet's craft each content. Ensure double newlines between paragraphs.\n\nAlso ensure no double quotes unless escaped. We'll use single quotes inside.\n\nMake sure no stray double quotes. We'll not use any.\n\nLet's draft content.\n\nLayer1 content:\n\nParagraph1: \"At night in 1946, a quiet radio station near Bikini Atoll listened for a strange hush. Sailors heard no chatter, only the ocean's breath.\"\n\nParagraph2: \"The silence felt like a warning. Men in uniform whispered that a secret test was coming, but no one saw it yet.\"\n\nParagraph3: \"Had the island hidden a power that could change everything? The question lay in the quiet air above the waves.\"\n\nDouble newlines between paragraphs.\n\nCliffhanger: \"Soon the island would become a testing ground, and the true nature of the bombs would reveal themselves.\"\n\nLayer2: Pattern. Need pattern.\n\nParagraph1: \"Beneath the calm surface, a pattern drew shapes in the water. Charts showed where the bombs would fall.\"\n\nParagraph2: \"Each point on the map was chosen to study how fireball light and shock hit the sea. The pattern was simple but deadly.\"\n\nParagraph3: \"Workers set up echo microphones, sonar, and sealed cages to record data. Their eyes stayed on the blue horizon.\"\n\nCliffhanger: \"But the first blast would test not just science, but the very safety of those on the island.\"\n\nLayer3: Incident.\n\nParagraph1: \"On July 1, 1946, the first bomb, named Able, was dropped from a B-29. The explosion lit the sky and splashed heat on the water.\"\n\nParagraph2: \"Witness crews later saw a bright flash, a puff of vapor, and a shock wave that shook tents. The camp felt the tremor like a rope snapping.\"\n\nParagraph3: \"Next day, a second bomb, Baker, detonated on the reef. The blast made a huge crater, shattered boats, and spread soot across the island.\"\n\nCliffhanger: \"In the shadow of those explosions, an unseen danger rose from the wreckage.\"\n\nLayer4: The System.\n\nParagraph1: \"The U.S. Navy built a chain of barges and floating labs to keep the island and its debris sealed.\"\n\nParagraph2: \"They used straws, valves, and sealed containers to hold radioactive water. Scientists measured radiation in glass bottles.\"\n\nParagraph3: \"The system also pushed restrictions on visitors, creating an isolated experiment that few could see. The army kept a hard line.\"\n\nCliffhanger: \"Yet the system struggled as radiation spread beyond the glass walls.\"\n\nLayer5: The Research.\n\nParagraph1: \"Medical teams studied sailors who touched contaminated soil. Blood tests recorded splinted levels of radioactivity.\"\n\nParagraph2: \"Scientists wrote reports on how bombs affected whales, fish, and plants. They spread hopeful papers to the public.\"\n\nParagraph3: \"But the data also showed rising sickness. Soldiers’ shorts were still warm, and strange illnesses kept rising.\"\n\nCliffhanger: \"When officials reviewed reports, they realized the tests were leaving a hidden scar.\"\n\nLayer6: The Abyss.\n\nParagraph1: \"The island sank into a quiet abyss. Torched ruins turned into a ghostly warzone.\"\n\nParagraph2: \"Years later, divers found floating metal and glass still glowing low heat. They reported strange biofilms on the wreckage.\"\n\nParagraph3: \"Families of sailors had gravesful sons who died without cause, and the navy kept the story closed.\"\n\nCliffhanger: \"The final truth resided in the old logs, and it waited for a careful reader.\"\n\nLayer7: The Dark Corner.\n\nParagraph1: \"Recent research shows that test zones still contain high levels of cesium and strontium. The contamination sits underground.\"\n\nParagraph2: \"Studies on fish show genetic mutations, and local reef life remains fragile. The Navy finally removed the island’s remains.\"\n\nParagraph3: \"Yet the legacy stays. Children born there later had reduced life expectancy, and seasonal illnesses rose. Operation Crossroads left an unseen curse that still bites.\"\n\nCliffhanger null.\n\nConnections: an array with one object.\n\n{\n      \"story_id\": \"operation_crossroads_001\",\n      \"title\": \"Operation Crossroads: Bikini Atoll and the Hidden Fallout\",\n      \"category\": \"gov_experiments\",\n      \"hook\": \"The U.S. dropped two atomic bombs over Bikini Atoll in 1946, sending shock waves across the Pacific and a silent legacy into the deep.\",\n      \"concepts\": [\"nuclear_testing\",\"radiation_damage\",\"sea_isolation\"],\n      \"severity\": \"unsettling\",\n      \"layers\": [...],\n      \"connections\": [...]\n}\n\nNeed to fill layers.\n\nMake sure each string uses single quotes where needed. Not use double quotes within. No other double quotes. We will use JavaScript-style JSON. Ok.\n\nLet's write layer objects.\n\nLayer 1: {\n  \"layer\": 1,\n  \"layer_name\": \"The Whisper - introducing the mystery\",\n  \"content\": \"At night in 1946, a quiet radio station near Bikini Atoll listened for a strange hush. Sailors heard no chatter, only the ocean's breath.\\n\\nThe silence felt like a warning. Men in uniform whispered that a secret test was coming, but no one saw it yet.\\n\\nHad the island hidden a power that could change everything? The question lay in the quiet air above the waves.\",\n  \"cliffhanger\": \"Soon the island would become a testing ground, and the true",
+      "tool_calls": [],
+      "added_date": "2026-07-13",
+      "evidence_links": [
+        {
+          "label": "Unsettling SpongeBob and the Legacies of Violence on Bikini Bottom (Holly M. Barker, 2019)",
+          "url": "https://muse.jhu.edu/pub/5/article/734722"
+        },
+        {
+          "label": "Radiation Ecologies and the Wars of Light (Elizabeth DeLoughrey, 2009)",
+          "url": "https://muse.jhu.edu/article/316814/pdf"
+        },
+        {
+          "label": "Photographed by the Earth: War and media in light of nuclear events (Thomas H. Pringle, 2014)",
+          "url": "https://mediarep.org/bitstream/doc/3336/1/NECSUS_3_2_2014_131-154_Pringle_Photographed_by_the_Earth.pdf"
+        }
+      ],
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/7/76/CrossroadsAble2.gif",
       "image_source": "wikipedia"
     }
   ]
