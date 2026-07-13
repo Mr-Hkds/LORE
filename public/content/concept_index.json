@@ -105,7 +105,8 @@
     "tanganyika_laughter_epidemic",
     "the_batavia_shipwreck_mutiny",
     "mahabharat_psychological_epic",
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "salem_witch_trials_001_detailed"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -1401,7 +1402,8 @@
     "salem_witch_trials_001",
     "mothman_silver_bridge_collapse",
     "amityville_horror_house_possessed",
-    "loudun_possessions_001"
+    "loudun_possessions_001",
+    "salem_witch_trials_001_detailed"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1858,13 +1860,16 @@
     "phoenix_lights_event"
   ],
   "judicial_injustice": [
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "salem_witch_trials_001_detailed"
   ],
   "religious_extremism": [
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "salem_witch_trials_001_detailed"
   ],
   "spectral_evidence": [
-    "salem_witch_trials_001"
+    "salem_witch_trials_001",
+    "salem_witch_trials_001_detailed"
   ],
   "fierce_deity": [
     "kala_bhairava_origin_time_punishment",
@@ -2825,5 +2830,11 @@
   ],
   "historical_tragedy": [
     "the_haunting_of_bhangarh_fort"
+  ],
+  "false_accusations": [
+    "salem_witch_trials_001_detailed"
+  ],
+  "persecution": [
+    "salem_witch_trials_001_detailed"
   ]
 }
