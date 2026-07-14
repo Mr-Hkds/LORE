@@ -751,31 +751,41 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 key={topic.id}
                 id={`topic-${topic.id}`}
                 onClick={() => onSelect(topic)}
-                className="w-full text-left flex items-center gap-4 transition-all duration-200 hover:opacity-60 active:opacity-35"
+                className="w-full text-left flex items-center justify-between gap-4 transition-all duration-200 hover:opacity-60 active:opacity-35"
                 style={{
                   padding: '20px 0',
-                  minHeight: '64px',
+                  minHeight: '72px',
                   background: 'none',
                   border: 'none',
                   borderBottom: `1px solid ${ru}`,
                   cursor: 'pointer',
                 }}
               >
-                {/* Topic name */}
-                <span
-                  className="font-serif italic flex-1 leading-snug"
-                  style={{
-                    fontSize: 'clamp(1.4rem, 4.2vw, 2.0rem)',
-                    fontWeight: 400,
-                    color: fg,
-                    letterSpacing: '-0.02em',
-                    lineHeight: 1.15,
-                  }}
-                >
-                  {topic.label}
-                </span>
+                {/* Left side: Title + Mobile Subtitle */}
+                <div className="flex-1 flex flex-col justify-center pr-2">
+                  <span
+                    className="font-serif italic leading-none"
+                    style={{
+                      fontSize: 'clamp(1.4rem, 4vw, 2.0rem)',
+                      fontWeight: 400,
+                      color: fg,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {topic.label}
+                  </span>
+                  {/* Mobile-only brief underneath title */}
+                  {topic.hint && (
+                    <span 
+                      className="block md:hidden text-[9px] font-mono tracking-wider uppercase mt-1.5"
+                      style={{ color: mu, opacity: 0.6, lineHeight: 1.3 }}
+                    >
+                      {topic.hint}
+                    </span>
+                  )}
+                </div>
 
-                {/* Dossier count */}
+                {/* Center/Right: Dossier count */}
                 {count > 0 && (
                   <span
                     className="text-[7.5px] sm:text-[8px] font-mono tracking-[0.15em] uppercase px-2.5 py-1 rounded flex-shrink-0 select-none border"
@@ -786,6 +796,16 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                     }}
                   >
                     {count} {count === 1 ? 'DOSSIER' : 'DOSSIERS'}
+                  </span>
+                )}
+
+                {/* Desktop-only brief (matching screenshot layout) */}
+                {topic.hint && (
+                  <span 
+                    className="hidden md:block text-[8px] font-mono tracking-[0.14em] uppercase text-right max-w-[200px] flex-shrink-0 leading-normal ml-2"
+                    style={{ color: mu, opacity: 0.55 }}
+                  >
+                    {topic.hint}
                   </span>
                 )}
 
