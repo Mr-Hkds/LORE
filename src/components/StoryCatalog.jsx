@@ -830,8 +830,8 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
 
           {/* Title */}
           <div className="mb-3">
-            <h1 className="font-serif italic leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 600, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
+            <h1 className="font-slab font-semibold leading-none tracking-tight"
+              style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
               {categoryLabel}
             </h1>
           </div>

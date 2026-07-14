@@ -753,8 +753,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 onClick={() => onSelect(topic)}
                 className="w-full text-left flex items-center justify-between gap-4 transition-all duration-200 hover:opacity-60 active:opacity-35"
                 style={{
-                  padding: '20px 0',
-                  minHeight: '72px',
+                  padding: '28px 0',
+                  minHeight: '88px',
                   background: 'none',
                   border: 'none',
                   borderBottom: `1px solid ${ru}`,
@@ -764,10 +764,9 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {/* Left side: Title + Mobile Subtitle */}
                 <div className="flex-1 flex flex-col justify-center pr-2">
                   <span
-                    className="font-serif italic leading-none"
+                    className="font-slab font-semibold leading-none"
                     style={{
-                      fontSize: 'clamp(1.4rem, 4vw, 2.0rem)',
-                      fontWeight: 400,
+                      fontSize: 'clamp(1.45rem, 4.3vw, 2.05rem)',
                       color: fg,
                       letterSpacing: '-0.02em',
                     }}
