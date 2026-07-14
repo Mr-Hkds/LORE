@@ -328,6 +328,10 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
               </span>
               <span>·</span>
               <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
+              <span>·</span>
+              <span style={{ color: fg, opacity: 0.45 }}>{getStoryWordCount(story).toLocaleString()} WORDS</span>
+              <span>·</span>
+              <span style={{ color: fg, opacity: 0.45 }}>{Math.max(1, Math.round(getStoryWordCount(story) / 200))} MIN READ</span>
 
               {isNew && (
                 <>
@@ -465,6 +469,14 @@ function EngagementBar({ reactions }) {
 }
 
 
+function getStoryWordCount(story) {
+  if (!story?.layers || !Array.isArray(story.layers)) return 0;
+  return story.layers.reduce((sum, layer) => {
+    const words = (layer.content || '').trim().split(/\s+/).filter(Boolean).length;
+    return sum + words;
+  }, 0);
+}
+
 // ── Main catalog component ────────────────────────────────────────────────
 export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory, onOpenSearch }) {
   const bg = '#0D0B08';
@@ -479,6 +491,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
   const [tapCount, setTapCount] = useState(0);
   const [focusedIdx, setFocusedIdx] = useState(-1);
   const [selectedLevel, setSelectedLevel] = useState('all');
+  const [filterReadStatus, setFilterReadStatus] = useState('active'); // 'active' | 'archived' | 'all'
   const { getProgress }         = useReadingProgress();
 
   // Calculate relative thresholds for engagement and new status from all stories
@@ -586,9 +599,9 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
     });
   }, [stories, sortBy, getProgress]);
 
-  // Dynamic Level filtering: Surface, Deep, Abyss
+  // Dynamic Level & Read Status filtering: Surface, Deep, Abyss + Active, Archived, All
   const filteredStories = useMemo(() => {
-    return sortedStories.filter(story => {
+    const byLevel = sortedStories.filter(story => {
       if (selectedLevel === 'all') return true;
       if (selectedLevel === 'surface') {
         return ['curious', 'unsettling'].includes(story.severity || 'unsettling');
@@ -601,7 +614,15 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
       }
       return true;
     });
-  }, [sortedStories, selectedLevel]);
+
+    return byLevel.filter(story => {
+      const prog = getProgress(story.story_id);
+      const isCompleted = prog?.completed === true;
+      if (filterReadStatus === 'active') return !isCompleted;
+      if (filterReadStatus === 'archived') return isCompleted;
+      return true;
+    });
+  }, [sortedStories, selectedLevel, filterReadStatus, getProgress]);
 
   // J/K/Enter keyboard listener
   useEffect(() => {
@@ -740,6 +761,29 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
                 }}
               >
                 {level.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Read / Unread separation tabs */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-5 border-b border-neutral-900/40 scrollbar-none">
+            <span className="text-[8px] font-mono tracking-widest uppercase text-neutral-500 mr-2 flex-shrink-0">Dossier State:</span>
+            {[
+              { id: 'active',    label: 'Active Dossiers' },
+              { id: 'archived',  label: 'Archived Records' },
+              { id: 'all',       label: 'All Logs' },
+            ].map(status => (
+              <button
+                key={status.id}
+                onClick={() => { setFilterReadStatus(status.id); setFocusedIdx(-1); }}
+                className="text-[9px] font-mono tracking-[0.12em] uppercase px-3.5 py-1 rounded-full border transition-all duration-200 cursor-pointer active:scale-95 flex-shrink-0"
+                style={{
+                  borderColor: filterReadStatus === status.id ? '#9E7B4C' : 'rgba(237,232,223,0.06)',
+                  color:       filterReadStatus === status.id ? '#EDE8DF' : '#5A5550',
+                  backgroundColor: filterReadStatus === status.id ? 'rgba(158,123,76,0.15)' : 'transparent',
+                }}
+              >
+                {status.label}
               </button>
             ))}
           </div>

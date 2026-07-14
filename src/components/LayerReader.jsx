@@ -13,6 +13,7 @@ export default function LayerReader({
   onSelectConnectedStory,
   onReactionUpdate,
   onShare,
+  story,
 }) {
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
@@ -82,6 +83,20 @@ export default function LayerReader({
     const cleanOriginal = originalWord.replace(/[^a-zA-Z]/g, '');
     if (!cleanWord || cleanWord.length <= 1) return;
 
+    const storyVocabulary = story?.vocabulary || {};
+    if (storyVocabulary[cleanWord]) {
+      setLookup({
+        isOpen: true,
+        word: cleanOriginal,
+        definition: storyVocabulary[cleanWord],
+        loading: false,
+        x: clientX,
+        y: clientY,
+        isCustom: false
+      });
+      return;
+    }
+
     if (LOCAL_DICTIONARY[cleanWord]) {
       setLookup({
         isOpen: true,
@@ -144,8 +159,10 @@ export default function LayerReader({
   const formatTextWithLookup = (text) => {
     if (!text) return "";
     
-    // Sort keys descending by length
-    const keys = Object.keys(LOCAL_DICTIONARY).sort((a, b) => b.length - a.length);
+    // Merge LOCAL_DICTIONARY keys with current story-specific vocabulary keys
+    const storyVocab = story?.vocabulary || {};
+    const mergedKeys = [...new Set([...Object.keys(LOCAL_DICTIONARY), ...Object.keys(storyVocab)])];
+    const keys = mergedKeys.sort((a, b) => b.length - a.length);
     const escapedKeys = keys.map(k => k.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
     const pattern = new RegExp(`\\b(${escapedKeys.join('|')})\\b`, 'gi');
     
@@ -349,6 +366,14 @@ export default function LayerReader({
 
   if (!data) return null;
 
+  const wordCount = (() => {
+    if (!story?.layers || !Array.isArray(story.layers)) return 0;
+    return story.layers.reduce((sum, l) => {
+      const words = (l.content || '').trim().split(/\s+/).filter(Boolean).length;
+      return sum + words;
+    }, 0);
+  })();
+
   const CATEGORY_LABELS = {
     psychology: 'Psychology',
     true_crime: 'True Crime',
@@ -387,6 +412,35 @@ export default function LayerReader({
         )}
 
         <div className="w-full">
+          {/* Immersive Story KPI Metadata Header */}
+          {layerNum === 1 && (
+            <div 
+              className="w-full grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl border font-mono text-[9px] uppercase tracking-wider mb-6"
+              style={{
+                backgroundColor: 'rgba(15, 13, 10, 0.45)',
+                borderColor: cardBorder,
+                color: '#8F8A82'
+              }}
+            >
+              <div className="flex flex-col gap-1 border-r border-neutral-900/60 pr-2">
+                <span className="text-[7.5px] text-[#9E7B4C] font-bold tracking-[0.15em]">// DOSSIER ID</span>
+                <span className="text-[#EDE8DF] font-bold truncate">{story?.story_id ? story.story_id.toUpperCase() : (topic.id || 'N/A').toUpperCase()}</span>
+              </div>
+              <div className="flex flex-col gap-1 border-r border-neutral-900/60 pr-2">
+                <span className="text-[7.5px] text-[#9E7B4C] font-bold tracking-[0.15em]">// YEAR RECORDED</span>
+                <span className="text-[#EDE8DF] font-bold">{story?.year || 'N/A'}</span>
+              </div>
+              <div className="flex flex-col gap-1 border-r border-neutral-900/60 pr-2">
+                <span className="text-[7.5px] text-[#9E7B4C] font-bold tracking-[0.15em]">// SEVERITY CLASS</span>
+                <span className="text-[#EDE8DF] font-bold">{story?.severity || 'UNSETTLING'}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[7.5px] text-[#9E7B4C] font-bold tracking-[0.15em]">// TOTAL SIZE</span>
+                <span className="text-[#EDE8DF] font-bold">{wordCount ? wordCount.toLocaleString() : 'N/A'} WORDS</span>
+              </div>
+            </div>
+          )}
+
           {/* Narrative Dossier Card (Main Container) */}
           <div
             className="w-full p-4 sm:p-6 md:p-10 rounded-2xl relative transition-all duration-300"

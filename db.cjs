@@ -80,7 +80,9 @@ async function ensureInit() {
       evidence_links TEXT,
       connections TEXT,
       layers TEXT,
-      custom_image_prompt TEXT
+      custom_image_prompt TEXT,
+      vocabulary TEXT,
+      year TEXT
     );
 
     CREATE TABLE IF NOT EXISTS recommendations (
@@ -146,6 +148,8 @@ async function ensureInit() {
   try { await client.execute("ALTER TABLE pageviews ADD COLUMN country_code TEXT"); } catch(e){}
   try { await client.execute("ALTER TABLE pageviews ADD COLUMN org TEXT"); } catch(e){}
   try { await client.execute("ALTER TABLE stories ADD COLUMN custom_image_prompt TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE stories ADD COLUMN vocabulary TEXT"); } catch(e){}
+  try { await client.execute("ALTER TABLE stories ADD COLUMN year TEXT"); } catch(e){}
 
   isInitialized = true;
 }
@@ -209,6 +213,8 @@ async function getStories(includeDrafts = false) {
       evidence_links: JSON.parse(row.evidence_links || '[]'),
       connections: JSON.parse(row.connections || '[]'),
       layers: JSON.parse(row.layers || '[]'),
+      vocabulary: JSON.parse(row.vocabulary || '{}'),
+      year: row.year || 'N/A',
       image_missing: isImageMissingOnServer
     };
     s.reactions = await ensureStoryReactions(s);
@@ -253,6 +259,8 @@ async function getStory(story_id) {
     evidence_links: JSON.parse(row.evidence_links || '[]'),
     connections: JSON.parse(row.connections || '[]'),
     layers: JSON.parse(row.layers || '[]'),
+    vocabulary: JSON.parse(row.vocabulary || '{}'),
+    year: row.year || 'N/A',
     image_missing: isImageMissingOnServer
   };
   s.reactions = await ensureStoryReactions(s);
@@ -271,8 +279,8 @@ async function insertStory(story) {
   await ensureInit();
   await client.execute({
     sql: `INSERT OR REPLACE INTO stories (
-      story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, custom_image_prompt, vocabulary, year
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
       story.story_id,
       story.title,
@@ -287,7 +295,9 @@ async function insertStory(story) {
       JSON.stringify(story.evidence_links || []),
       JSON.stringify(story.connections || []),
       JSON.stringify(story.layers || []),
-      story.custom_image_prompt || null
+      story.custom_image_prompt || null,
+      JSON.stringify(story.vocabulary || {}),
+      story.year || 'N/A'
     ]
   });
   return await getStory(story.story_id);
@@ -565,8 +575,8 @@ async function seed() {
 
       const batchStmts = data.stories.map(s => ({
         sql: `${isInitialSeed ? 'INSERT OR REPLACE' : 'INSERT OR IGNORE'} INTO stories (
-          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, vocabulary, year
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         args: [
           s.story_id,
           s.title,
@@ -580,7 +590,9 @@ async function seed() {
           JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
           JSON.stringify(s.evidence_links || []),
           JSON.stringify(s.connections || []),
-          JSON.stringify(s.layers || [])
+          JSON.stringify(s.layers || []),
+          JSON.stringify(s.vocabulary || {}),
+          s.year || 'N/A'
         ]
       }));
 

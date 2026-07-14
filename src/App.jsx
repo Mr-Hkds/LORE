@@ -648,6 +648,7 @@ export default function App() {
             onSelectConnectedStory={handleSelectConnectedStory}
             onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
             onShare={() => setShareTarget({ story: currentStory, layerNum: layerData.layer })}
+            story={currentStory}
           />
         ))}
       </div>

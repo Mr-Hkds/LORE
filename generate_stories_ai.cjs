@@ -549,6 +549,8 @@ CRITICAL FACTUAL AND PACING RULES:
 3. The narrative must flow layer by layer: Layer 1 introduces the whisper, Layer 4 details the event, and Layer 7 delivers the absolute darkest documented truth. Layer 1 must start with a unique, gripping, and topic-specific hook to grab attention (avoid generic openings like 'Did you know' or 'Have you ever thought about' or any other generic question. Go straight into a chilling, specific fact).
 4. Each layer content must be 2-3 detailed paragraphs. Use double newlines \n\n between paragraphs.
 5. Place quotes inside text using single quotes ('). Do not use unescaped double quotes inside values.
+6. Provide a 'vocabulary' object containing 3 to 5 key, difficult, or domain-specific words/terms that are central to this story (e.g. specialized terms, historical names, cultural concepts) along with their clear, simple definitions. Crucially, these vocabulary words MUST be used directly in the text content of the layers.
+7. Provide a 'year' string representing the specific year or time period of the event (e.g., 1948, 2018, or 'Ancient' for ancient legends/mythology).
 
 CRITICAL JSON FORMATTING RULES:
 1. Do not use double quotes inside string fields unless they are escaped as \\". Prefer using single quotes (') for any quotes or titles inside the story text (e.g., 'Bermuda Triangle' instead of \"Bermuda Triangle\").
@@ -561,8 +563,12 @@ Structure the story exactly in the following JSON format:
   "title": "A compelling, title for the dossier",
   "category": "must be one of: psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries. CRITICAL CLASSIFICATION RULE: If the topic relates to a deity, mythological figure, legendary creature, spiritual lore, or ancient scriptural epics (especially from the Indian context, e.g. Hanuman, Ramayana, Mahabharata, Shiva, Vedas, Puranas), you MUST classify it as 'mythology'. Do not classify mythology topics under psychology, paranormal, or any other category.",
   "hook": "A 1-2 sentence teaser (max 150 chars) for the catalog",
+  "year": "1948",
   "concepts": ["concept1", "concept2", "concept3"],
   "severity": "unsettling | disturbing | chilling",
+  "vocabulary": {
+    "word_used_in_text": "A clear, 1-sentence contextual definition of the term."
+  },
   "layers": [
     {
       "layer": 1,
