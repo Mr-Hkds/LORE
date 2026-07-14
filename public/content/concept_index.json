@@ -1033,7 +1033,8 @@
     "alien_hand_syndrome",
     "cotard_delusion_001",
     "phantom_limb_syndrome_001",
-    "body_integrity_identity_disorder_biid"
+    "body_integrity_identity_disorder_biid",
+    "alice_in_wonderland_syndrome_001"
   ],
   "suicide": [
     "aokigahara_suicide_forest"
@@ -3067,5 +3068,17 @@
   ],
   "digital_security": [
     "creeper_program_first_self_replicating_entity"
+  ],
+  "perception_distortion": [
+    "alice_in_wonderland_syndrome_001"
+  ],
+  "neurological_disorder": [
+    "alice_in_wonderland_syndrome_001"
+  ],
+  "altered_reality": [
+    "alice_in_wonderland_syndrome_001"
+  ],
+  "migraine_aura": [
+    "alice_in_wonderland_syndrome_001"
   ]
 }
