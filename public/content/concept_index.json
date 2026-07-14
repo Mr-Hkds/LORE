@@ -93,7 +93,8 @@
     "porton_down_experiments",
     "dag_hammarskjold_death_conspiracy",
     "operation_midnight_climax",
-    "zinoviev_letter_forgery"
+    "zinoviev_letter_forgery",
+    "operation_acoustic_kitty"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -109,7 +110,8 @@
     "the_batavia_shipwreck_mutiny",
     "mahabharat_psychological_epic",
     "salem_witch_trials_001",
-    "salem_witch_trials_001_detailed"
+    "salem_witch_trials_001_detailed",
+    "banality_of_evil_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -174,7 +176,8 @@
     "plum_island_disease_center",
     "dag_hammarskjold_death_conspiracy",
     "operation_midnight_climax",
-    "zinoviev_letter_forgery"
+    "zinoviev_letter_forgery",
+    "operation_acoustic_kitty"
   ],
   "cosmic_illusion": [
     "hidden_facts_shri_vishnu_ji"
@@ -275,7 +278,8 @@
     "stanford_prison_experiment_001"
   ],
   "dehumanization": [
-    "stanford_prison_experiment_001"
+    "stanford_prison_experiment_001",
+    "banality_of_evil_001"
   ],
   "financial_conspiracy": [
     "barney_barnato",
@@ -483,7 +487,8 @@
     "project_chatter_mind_control",
     "project_coast_canada_experiments",
     "operation_midnight_climax",
-    "the_gay_bomb_project"
+    "the_gay_bomb_project",
+    "operation_acoustic_kitty"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -510,7 +515,8 @@
     "jonestown_massacre_001"
   ],
   "obedience_to_authority": [
-    "jonestown_massacre_001"
+    "jonestown_massacre_001",
+    "banality_of_evil_001"
   ],
   "espionage": [
     "the_numbers_stations",
@@ -774,7 +780,8 @@
   ],
   "government_experiments": [
     "project_stargate_remote_viewing",
-    "operation_chariot_alaska_nuclear_harbor"
+    "operation_chariot_alaska_nuclear_harbor",
+    "operation_acoustic_kitty"
   ],
   "psychic_espionage": [
     "project_stargate_remote_viewing"
@@ -805,7 +812,8 @@
     "project_shamrock",
     "the_phoenix_program",
     "operation_chaos_cia_domestic_surveillance",
-    "project_azorian_glomar_explorer"
+    "project_azorian_glomar_explorer",
+    "operation_acoustic_kitty"
   ],
   "scientific_skepticism": [
     "project_stargate_remote_viewing",
@@ -1253,7 +1261,8 @@
     "the_cuckoos_egg_kgb_hacker",
     "operation_mongoose_cuban_project",
     "moon_landing_hoax_001",
-    "dag_hammarskjold_death_conspiracy"
+    "dag_hammarskjold_death_conspiracy",
+    "operation_acoustic_kitty"
   ],
   "anti_communism": [
     "operation_gladio"
@@ -1354,7 +1363,8 @@
     "the_russian_woodpecker_duga_3"
   ],
   "technological_failure": [
-    "the_russian_woodpecker_duga_3"
+    "the_russian_woodpecker_duga_3",
+    "operation_acoustic_kitty"
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment",
@@ -2255,7 +2265,8 @@
     "learned_helplessness_psychology_giving_up"
   ],
   "animal_experimentation": [
-    "learned_helplessness_psychology_giving_up"
+    "learned_helplessness_psychology_giving_up",
+    "operation_acoustic_kitty"
   ],
   "depression": [
     "learned_helplessness_psychology_giving_up"
@@ -2983,5 +2994,11 @@
   ],
   "victim_recovery": [
     "the_moors_murders"
+  ],
+  "moral_responsibility": [
+    "banality_of_evil_001"
+  ],
+  "bureaucracy_of_evil": [
+    "banality_of_evil_001"
   ]
 }
