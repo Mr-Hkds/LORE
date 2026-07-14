@@ -118,18 +118,20 @@ export function useStaticContent() {
     return list;
   };
 
-  const loadStories = useCallback(async () => {
-    // STRATEGY: DB-first loading. The Turso database is the single source of truth for
+  const loadStories = useCallback(async (forceRefresh = false) => {
+    // STRATEGY: DB-first loading. The database is the single source of truth for
     // cover images and story data. The static CDN file (stories.json) is only used as a
     // fast fallback if the live API is unavailable (e.g. cold start, network error).
     // This eliminates the race condition where the stale CDN file would temporarily 
     // overwrite freshly updated images from the database.
+    // Cache is only bypassed (via forceRefresh) during Admin panel sync polling or explicit refetches.
 
     let dbLoaded = false;
+    const queryParam = forceRefresh ? `?t=${Date.now()}` : '';
 
     // 1. Try to load from CDN first for instant display (will be overwritten by DB if successful)
     try {
-      const res = await fetch(`/content/stories.json?t=${Date.now()}`);
+      const res = await fetch(`/content/stories.json${queryParam}`);
       if (res.ok) {
         const data = await res.json();
         let cdnList = data.stories || [];
@@ -144,7 +146,7 @@ export function useStaticContent() {
     // 2. Always fetch from live database API — this is the AUTHORITATIVE source of truth.
     // The DB has the most recent cover images, drafts, and reaction counts.
     try {
-      const res = await fetch(`/api/stories?t=${Date.now()}`);
+      const res = await fetch(`/api/stories${queryParam}`);
       if (res.ok) {
         const data = await res.json();
         let liveList = Array.isArray(data) ? data : (data.stories || []);
