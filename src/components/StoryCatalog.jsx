@@ -430,8 +430,8 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
 
           {/* Title */}
           <h2
-            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', color: fg, letterSpacing: '-0.02em' }}
+            className="font-serif italic leading-snug mb-2 text-hover-fill"
+            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', letterSpacing: '-0.02em' }}
           >
             {story.title}
           </h2>

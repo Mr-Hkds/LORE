@@ -497,7 +497,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                               </div>
 
                               {/* Title */}
-                              <h4 className="font-serif italic text-sm sm:text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
+                              <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill">
                                 {story.title}
                               </h4>
 
@@ -558,6 +558,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                           const rx = story.reactions || {};
                           const totalRx = (rx.like || rx.intriguing || 0) + (rx.gripping || 0) + (rx.scared || rx.chilling || 0) + (rx.mindblown || rx.mind_blowing || 0);
                           const isNew = relativeThresholds.newStoryIds.has(story.story_id);
+                          const isTopRated = totalRx >= relativeThresholds.highThreshold;
+                          const isTrending = totalRx >= relativeThresholds.midThreshold;
                           const SEVERITY_COLORS = { horrifying: '#C4644A', unsettling: '#9E7B4C', disturbing: '#A0522D', chilling: '#7B8FA1', intriguing: '#7A9E7E' };
                           const sevColor = SEVERITY_COLORS[story.severity] || '#9E7B4C';
                           return (
@@ -600,6 +602,30 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                                   <span className="text-[7.5px] font-mono uppercase" style={{ color: mu, opacity: 0.7 }}>
                                     {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
                                   </span>
+                                  {isTopRated && (
+                                    <>
+                                      <span style={{ color: mu, opacity: 0.3, fontSize: '8px' }}>·</span>
+                                      <span className="px-1.5 py-[1px] rounded-[2px] text-[5.5px] font-mono font-bold tracking-[0.14em] uppercase border flex-shrink-0" style={{ borderColor: 'rgba(158,123,76,0.3)', color: '#9E7B4C', backgroundColor: 'rgba(158,123,76,0.06)' }}>
+                                        TOP RATED
+                                      </span>
+                                    </>
+                                  )}
+                                  {isTrending && !isTopRated && (
+                                    <>
+                                      <span style={{ color: mu, opacity: 0.3, fontSize: '8px' }}>·</span>
+                                      <span className="px-1.5 py-[1px] rounded-[2px] text-[5.5px] font-mono font-bold tracking-[0.14em] uppercase border flex-shrink-0" style={{ borderColor: 'rgba(99,102,241,0.3)', color: '#818CF8', backgroundColor: 'rgba(99,102,241,0.06)' }}>
+                                        TRENDING
+                                      </span>
+                                    </>
+                                  )}
+                                  {isNew && (
+                                    <>
+                                      <span style={{ color: mu, opacity: 0.3, fontSize: '8px' }}>·</span>
+                                      <span className="px-1.5 py-[1px] rounded-[2px] text-[5.5px] font-mono font-bold tracking-[0.14em] uppercase border flex-shrink-0" style={{ borderColor: 'rgba(16,185,129,0.3)', color: '#34D399', backgroundColor: 'rgba(16,185,129,0.06)' }}>
+                                        NEW
+                                      </span>
+                                    </>
+                                  )}
                                   {totalRx > 0 && (
                                     <span className="ml-auto text-[7.5px] font-mono" style={{ color: mu, opacity: 0.4 }}>
                                       ↑ {totalRx}
@@ -607,8 +633,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                                   )}
                                 </div>
 
-                                {/* Title */}
-                                <h4 className="font-serif italic text-sm sm:text-base leading-snug group-hover:text-[#9E7B4C] transition-colors duration-200" style={{ color: fg }}>
+                                {/* Title — with text fill transition */}
+                                <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill">
                                   {story.title}
                                 </h4>
 

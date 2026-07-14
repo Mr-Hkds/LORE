@@ -425,3 +425,19 @@ select option {
 .card-enter {
   animation: cardFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Smooth left-to-right text fill wipe on hover */
+.text-hover-fill {
+  background-image: linear-gradient(to right, #9E7B4C 50%, #EDE8DF 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  display: inline-block;
+  width: 100%;
+}
+.group:hover .text-hover-fill {
+  background-position: 0 0;
+}
