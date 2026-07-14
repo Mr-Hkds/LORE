@@ -262,8 +262,15 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
   }, [story.layers, story.hook]);
 
   const storyYear = useMemo(() => {
-    if (story.year) return story.year;
-    if (story.added_date) return new Date(story.added_date).getFullYear();
+    const y = story.year;
+    // Only return a year if it's a real numeric-looking value (not 'N/A', not blank)
+    if (y && y !== 'N/A' && y !== 'n/a' && String(y).trim() !== '' && /\d{4}/.test(String(y))) {
+      return String(y).match(/\d{4}/)?.[0] || null;
+    }
+    if (story.added_date) {
+      const yr = new Date(story.added_date).getFullYear();
+      if (yr > 1900) return String(yr);
+    }
     return null;
   }, [story.year, story.added_date]);
 
@@ -317,54 +324,75 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         <div>
           {/* KPI strip — horizontal chips row at top */}
           <div className="flex items-center gap-1.5 flex-wrap mb-3 pr-8">
-            {/* Severity chip */}
+            {/* Severity pill — color-matched, refined */}
             <span
-              className="inline-flex items-center gap-1 px-2 py-[3px] rounded-sm text-[6.5px] font-mono font-bold tracking-[0.2em] uppercase flex-shrink-0"
+              className="inline-flex items-center gap-[5px] px-2.5 py-1 text-[6px] font-mono font-bold tracking-[0.22em] uppercase flex-shrink-0"
               style={{
                 color: sev.dot,
-                backgroundColor: `${sev.dot}14`,
-                border: `1px solid ${sev.dot}35`,
+                backgroundColor: `${sev.dot}18`,
+                border: `1px solid ${sev.dot}40`,
+                borderRadius: '3px',
               }}
             >
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4.5px] h-[4.5px] rounded-full flex-shrink-0" style={{ backgroundColor: sev.dot }} />
               {sev.label}
             </span>
 
-            {/* Divider */}
-            <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>
+            {/* Mid-dot separator */}
+            <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
 
-            {/* Category */}
-            <span className="text-[7px] font-mono tracking-[0.14em] uppercase" style={{ color: ac, opacity: 0.75 }}>
+            {/* Category tag */}
+            <span
+              className="inline-flex items-center px-2 py-0.5 text-[6.5px] font-mono tracking-[0.16em] uppercase flex-shrink-0"
+              style={{
+                color: ac,
+                opacity: 0.8,
+                border: '1px solid rgba(158,123,76,0.2)',
+                borderRadius: '2px',
+                backgroundColor: 'rgba(158,123,76,0.06)',
+              }}
+            >
               {SIGNAL_LABELS[story.category] || 'Archive'}
             </span>
 
-            {/* Divider */}
-            <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>
-
-            {/* Year */}
+            {/* Year — only if real */}
             {storyYear && (
-              <span className="text-[7px] font-mono tracking-[0.1em]" style={{ color: mu, opacity: 0.6 }}>{storyYear}</span>
+              <>
+                <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
+                <span
+                  className="text-[6.5px] font-mono tracking-[0.12em] flex-shrink-0"
+                  style={{ color: mu, opacity: 0.55 }}
+                >
+                  {storyYear}
+                </span>
+              </>
             )}
 
-            {/* Divider */}
-            {storyYear && <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>}
+            {/* Mid-dot separator */}
+            <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
 
             {/* Read time */}
-            <span className="text-[7px] font-mono tracking-[0.08em]" style={{ color: mu, opacity: 0.5 }}>
+            <span
+              className="text-[6.5px] font-mono tracking-[0.1em] flex-shrink-0"
+              style={{ color: mu, opacity: 0.45 }}
+            >
               {Math.max(1, Math.round(getStoryWordCount(story) / 200))} min
             </span>
 
-            {/* Reading progress — right-aligned */}
-            {prog && (
+            {/* Reading progress — right-aligned amber pill */}
+            {prog && (prog.completed || prog.lastLayer > 0) && (
               <span
-                className="ml-auto text-[7px] font-mono tracking-[0.1em] uppercase flex items-center gap-1 flex-shrink-0"
-                style={{ color: ac, opacity: prog.completed ? 0.7 : 0.85 }}
+                className="ml-auto inline-flex items-center gap-1 px-2 py-0.5 text-[6px] font-mono font-bold tracking-[0.18em] uppercase flex-shrink-0"
+                style={{
+                  color: ac,
+                  border: '1px solid rgba(158,123,76,0.3)',
+                  borderRadius: '2px',
+                  backgroundColor: 'rgba(158,123,76,0.08)',
+                }}
               >
                 {prog.completed
-                  ? <><span>&#10003;</span> Read</>  
-                  : prog.lastLayer > 0
-                  ? <><span className="w-1 h-1 rounded-full bg-current inline-block" /> Layer {prog.lastLayer}/7</>
-                  : null
+                  ? <><span>&#10003;</span> Read</>
+                  : <><span className="w-[3.5px] h-[3.5px] rounded-full bg-current inline-block" /> L{prog.lastLayer}/7</>
                 }
               </span>
             )}
