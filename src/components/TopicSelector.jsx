@@ -591,37 +591,18 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                               />
 
                               <div className="pl-2 space-y-2">
-                                {/* Eyebrow info */}
+                                {/* Eyebrow info — clean metadata */}
                                 <div className="flex items-center gap-1.5 flex-wrap">
-                                  <span className="w-1 h-1 rounded-full" style={{ backgroundColor: sevColor }} />
-                                  <span className="text-[8px] font-mono font-bold tracking-[0.12em] uppercase" style={{ color: ac, opacity: 0.85 }}>
+                                  <span className="text-[7.5px] font-mono font-bold tracking-[0.13em] uppercase" style={{ color: ac, opacity: 0.8 }}>
                                     {catLabel}
                                   </span>
-                                  <span style={{ color: mu, opacity: 0.35, fontSize: '8px' }}>·</span>
-                                  <span className="text-[8px] font-mono uppercase" style={{ color: mu }}>
+                                  <span style={{ color: mu, opacity: 0.3, fontSize: '8px' }}>·</span>
+                                  <span className="text-[7.5px] font-mono uppercase" style={{ color: mu, opacity: 0.7 }}>
                                     {isCompleted ? '✓ Read' : currentL > 0 ? `Layer ${currentL}/7` : 'Unread'}
                                   </span>
-                                  {/* Curated Tags */}
-                                  <span className="flex items-center gap-1.5 flex-wrap ml-1">
-                                    {isNew && (
-                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#7A9E7E]/10 text-[#8CB893] border border-[#7A9E7E]/25 px-1.5 py-0.5 rounded-md select-none">
-                                        New
-                                      </span>
-                                    )}
-                                    {totalRx >= relativeThresholds.highThreshold ? (
-                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#9E7B4C]/8 text-[#B89568] border border-[#9E7B4C]/25 px-1.5 py-0.5 rounded-md select-none">
-                                        Top Rated
-                                      </span>
-                                    ) : totalRx >= relativeThresholds.midThreshold ? (
-                                      <span className="text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#C4644A]/8 text-[#D97F68] border border-[#C4644A]/25 px-1.5 py-0.5 rounded-md select-none">
-                                        Trending
-                                      </span>
-                                    ) : null}
-                                  </span>
-
                                   {totalRx > 0 && (
-                                    <span className="ml-auto text-[8px] font-mono" style={{ color: mu, opacity: 0.55 }}>
-                                      {totalRx}
+                                    <span className="ml-auto text-[7.5px] font-mono" style={{ color: mu, opacity: 0.4 }}>
+                                      ↑ {totalRx}
                                     </span>
                                   )}
                                 </div>
@@ -770,9 +751,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 key={topic.id}
                 id={`topic-${topic.id}`}
                 onClick={() => onSelect(topic)}
-                className="w-full text-left flex items-baseline gap-5 transition-opacity duration-200 hover:opacity-55 active:opacity-35"
+                className="w-full text-left flex items-center gap-4 transition-all duration-200 hover:opacity-60 active:opacity-35"
                 style={{
-                  padding: '32px 0',
+                  padding: '20px 0',
+                  minHeight: '64px',
                   background: 'none',
                   border: 'none',
                   borderBottom: `1px solid ${ru}`,
@@ -783,7 +765,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 <span
                   className="font-serif italic flex-1 leading-snug"
                   style={{
-                    fontSize: 'clamp(1.5rem, 4.5vw, 2.2rem)',
+                    fontSize: 'clamp(1.4rem, 4.2vw, 2.0rem)',
                     fontWeight: 400,
                     color: fg,
                     letterSpacing: '-0.02em',
@@ -796,34 +778,19 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {/* Dossier count */}
                 {count > 0 && (
                   <span
-                    className="text-[10.5px] sm:text-xs font-mono tracking-[0.1em] flex-shrink-0"
-                    style={{ color: ac, opacity: 0.9 }}
+                    className="text-[9px] sm:text-[10px] font-mono tracking-[0.08em] flex-shrink-0"
+                    style={{ color: mu, opacity: 0.55 }}
                   >
-                    {count} {count === 1 ? 'dossier' : 'dossiers'}
+                    {count}
                   </span>
                 )}
 
-                {/* Hint */}
-                <span
-                  className="text-[10px] font-normal tracking-[0.1em] uppercase hidden sm:block flex-shrink-0"
-                  style={{
-                    color: mu,
-                    opacity: 0.8,
-                    maxWidth: '24ch',
-                    textAlign: 'right',
-                    flex: 1,
-                    paddingLeft: '8px',
-                  }}
-                >
-                  {topic.hint}
-                </span>
-
                 {/* Arrow */}
                 <span
-                  className="text-lg flex-shrink-0 transition-transform duration-300 group-hover:translate-y-1"
-                  style={{ color: mu, opacity: 0.35 }}
+                  className="text-base flex-shrink-0 transition-transform duration-300"
+                  style={{ color: mu, opacity: 0.3 }}
                 >
-                  ↓
+                  →
                 </span>
               </button>
               );

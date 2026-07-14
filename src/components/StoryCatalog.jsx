@@ -207,9 +207,9 @@ function StoryCardImage({ story, alt, inView }) {
         height="150"
         onLoad={() => setLoaded(true)}
         onError={handleImageError}
-        className={`w-full h-full object-cover transition-all duration-[1000ms] ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
+        className={`w-full h-full object-cover transition-all duration-[400ms] ease-out group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 ${
           loaded 
-            ? (inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[80%] opacity-65 brightness-[85%]') 
+            ? (inView ? 'grayscale-0 opacity-100 brightness-100' : 'grayscale-[60%] opacity-75 brightness-[90%]') 
             : 'opacity-0 scale-95 grayscale'
         }`}
         style={{ objectPosition: 'center 18%' }}
@@ -259,148 +259,131 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     return content.length > 120 ? content.slice(0, 120).trim() + '...' : content;
   }, [story.layers, story.hook]);
 
+  const storyYear = useMemo(() => {
+    if (story.year) return story.year;
+    if (story.added_date) return new Date(story.added_date).getFullYear();
+    return null;
+  }, [story.year, story.added_date]);
+
+  const fileNum = useMemo(() => {
+    if (!story.story_id) return null;
+    let hash = 0;
+    for (let i = 0; i < story.story_id.length; i++) {
+      hash = story.story_id.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return String((Math.abs(hash) % 900) + 100);
+  }, [story.story_id]);
+
   return (
     <article
       id={`story-card-${idx}`}
       ref={cardRef}
       onClick={() => onSelectStory(story)}
       onMouseEnter={onMouseEnter}
-      className={`group relative w-full grid grid-cols-1 sm:grid-cols-[180px_1fr] md:grid-cols-[200px_1fr] gap-0 rounded-2xl overflow-hidden border cursor-pointer transition-all duration-[350ms]`}
+      className={`group relative w-full grid grid-cols-1 sm:grid-cols-[160px_1fr] md:grid-cols-[190px_1fr] gap-0 rounded-xl overflow-hidden border cursor-pointer transition-all duration-[300ms]`}
       style={{
-        backgroundColor: focused ? 'rgba(15, 13, 10, 0.95)' : 'rgba(15, 13, 10, 0.7)',
-        borderColor: focused ? 'rgba(158,123,76,0.55)' : 'rgba(237,232,223,0.055)',
+        backgroundColor: focused ? 'rgba(15, 13, 10, 0.98)' : 'rgba(13, 11, 8, 0.72)',
+        borderColor: focused ? 'rgba(158,123,76,0.45)' : 'rgba(237,232,223,0.06)',
         boxShadow: focused
-          ? '0 16px 48px -12px rgba(0,0,0,0.95), 0 0 14px rgba(158,123,76,0.08), inset 0 0 0 1px rgba(158,123,76,0.1)'
-          : '0 8px 32px -12px rgba(0,0,0,0.8)',
+          ? '0 12px 40px -10px rgba(0,0,0,0.9), 0 0 10px rgba(158,123,76,0.07)'
+          : '0 4px 20px -8px rgba(0,0,0,0.7)',
         opacity: visible ? 1 : 0,
-        transform: visible ? (focused ? 'translateY(-2px)' : 'translateY(0)') : 'translateY(14px)',
+        transform: visible ? (focused ? 'translateY(-1px)' : 'translateY(0)') : 'translateY(10px)',
       }}
     >
-      {/* Floating Premium Share Button */}
+      {/* Share button — mobile-friendly 44×44 tap area */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           onShareStory?.(story);
         }}
-        className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-30 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-neutral-800/80 bg-[#0F0D0A]/85 backdrop-blur-md text-[#EDE8DF]/75 hover:text-[#9E7B4C] hover:border-[#9E7B4C]/45 hover:bg-[#151311] transition-all duration-300 active:scale-90 focus:outline-none cursor-pointer group/share"
+        className="absolute top-2 right-2 z-30 flex items-center justify-center w-10 h-10 rounded-full text-[#EDE8DF]/40 hover:text-[#9E7B4C] transition-colors duration-200 active:scale-90 focus:outline-none cursor-pointer"
         title="Share Dossier"
+        aria-label="Share dossier"
       >
-        <Share2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover/share:scale-110" />
+        <Share2 className="w-3.5 h-3.5" />
       </button>
 
       {/* Image panel */}
-      <div className="w-full h-44 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
+      <div className="w-full h-40 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
-        {/* Gradient overlay to soften top and bottom boundaries */}
+        {/* Edge gradient softener */}
         <div 
           className="absolute inset-0 pointer-events-none z-10"
           style={{
-            background: 'linear-gradient(to bottom, rgba(9, 8, 7, 0.95) 0%, rgba(9, 8, 7, 0.4) 18%, transparent 40%, transparent 70%, #090807 98%)'
+            background: 'linear-gradient(to right, transparent 60%, rgba(13,11,8,0.7) 100%), linear-gradient(to bottom, rgba(9,8,7,0.8) 0%, transparent 25%, transparent 70%, rgba(9,8,7,0.9) 100%)'
           }}
         />
-
-        {/* SOTA Archive Abstract HUD Slide-Up Overlay */}
-        <div className="absolute inset-0 z-20 p-4 bg-[#090807]/95 border-t border-[#9E7B4C]/12 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between pointer-events-none select-none">
-          <div>
-            <span className="text-[7.5px] font-mono tracking-[0.2em] text-[#9E7B4C] uppercase mb-2 block font-bold">
-              // Archive Abstract
-            </span>
-            <p className="text-[10px] sm:text-[10.5px] text-[#EDE8DF]/80 leading-relaxed italic font-serif">
-              "{redactText(previewSnippet)}"
-            </p>
-          </div>
-          <div className="flex justify-between items-center opacity-30 text-[6.5px] font-mono tracking-widest text-[#EDE8DF] mt-2">
-            <span>DPT.0{story.layers?.length || 7} // SECURED</span>
-            <span>SIGNAL STRENGTH 98%</span>
-          </div>
+        {/* Preview snippet on hover — slim bottom strip */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 px-3 py-2 bg-gradient-to-t from-[#090807] to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-[300ms] ease-out pointer-events-none select-none">
+          <p className="text-[9.5px] text-[#EDE8DF]/60 leading-relaxed italic font-serif line-clamp-2">
+            {redactText(previewSnippet)}
+          </p>
         </div>
       </div>
 
       {/* Content panel */}
-      <div className="w-full flex flex-col justify-between p-4 sm:p-5 md:p-6 min-h-[140px]">
+      <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 min-h-[130px]">
         <div>
-          {/* Top row: Badges & Reacts */}
-          <div className="flex items-center justify-between mb-2.5 flex-wrap gap-x-2 gap-y-1 border-b border-neutral-900/60 pb-2 pr-8 sm:pr-10">
-            <div className="flex items-center gap-1.5 text-[7.5px] sm:text-[8px] font-mono tracking-[0.12em] sm:tracking-[0.15em] uppercase text-neutral-500 flex-wrap">
-              <span className="flex items-center gap-1 font-bold" style={{ color: sev.dot }}>
-                <span className="w-1 h-1 rounded-full bg-current flex-shrink-0 animate-pulse" />
-                {sev.label}
-              </span>
-              <span>·</span>
-              <span style={{ color: fg, opacity: 0.65 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
-              <span>·</span>
-              <span style={{ color: fg, opacity: 0.45 }}>{getStoryWordCount(story).toLocaleString()} WORDS</span>
-              <span>·</span>
-              <span style={{ color: fg, opacity: 0.45 }}>{Math.max(1, Math.round(getStoryWordCount(story) / 200))} MIN READ</span>
-
-              {isNew && (
+          {/* Metadata row — AnomalyDesk style: FILE · CATEGORY · YEAR */}
+          <div className="flex items-center justify-between mb-2 pr-8">
+            <div className="flex items-center gap-1.5 text-[7.5px] font-mono tracking-[0.14em] uppercase" style={{ color: mu }}>
+              {fileNum && <span style={{ color: ac, opacity: 0.7 }}>FILE {fileNum}</span>}
+              {fileNum && <span style={{ opacity: 0.3 }}>·</span>}
+              <span style={{ opacity: 0.75 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
+              {storyYear && (
                 <>
-                  <span>·</span>
-                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#7A9E7E]/10 text-[#8CB893] border border-[#7A9E7E]/25 px-1.5 py-0.5 rounded select-none">
-                    New
-                  </span>
+                  <span style={{ opacity: 0.3 }}>·</span>
+                  <span style={{ opacity: 0.55 }}>{storyYear}</span>
                 </>
               )}
-              {getTotalReactions(story) >= (relativeThresholds?.highThreshold || 8) && (
-                <>
-                  <span>·</span>
-                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#9E7B4C]/8 text-[#B89568] border border-[#9E7B4C]/25 px-1.5 py-0.5 rounded select-none">
-                    Top Rated
-                  </span>
-                </>
-              )}
-              {getTotalReactions(story) >= (relativeThresholds?.midThreshold || 3) && getTotalReactions(story) < (relativeThresholds?.highThreshold || 8) && (
-                <>
-                  <span>·</span>
-                  <span className="text-[7.5px] sm:text-[8px] font-mono font-medium tracking-[0.14em] uppercase bg-[#C4644A]/8 text-[#D97F68] border border-[#C4644A]/25 px-1.5 py-0.5 rounded select-none">
-                    Trending
-                  </span>
-                </>
-              )}
+              <span style={{ opacity: 0.3 }}>·</span>
+              <span style={{ opacity: 0.5 }}>{Math.max(1, Math.round(getStoryWordCount(story) / 200))} min</span>
             </div>
-            <div className="flex items-center gap-2">
-              <ReadPill progress={prog} accentColor={ac} />
-            </div>
+            {/* Reading progress pill — minimal */}
+            <ReadPill progress={prog} accentColor={ac} />
           </div>
 
           <h2
-            className="font-serif italic leading-snug mb-1.5 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(0.95rem, 2.2vw, 1.35rem)', color: fg, letterSpacing: '-0.02em' }}
+            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
+            style={{ fontSize: 'clamp(0.92rem, 2.1vw, 1.28rem)', color: fg, letterSpacing: '-0.02em' }}
           >
             {story.title}
           </h2>
-          <p className="font-sans leading-relaxed text-[11px] sm:text-[13px] line-clamp-2 sm:line-clamp-3" style={{ color: mu, opacity: 0.9 }}>
+          <p className="font-sans leading-relaxed text-[11px] sm:text-[12.5px] line-clamp-2 sm:line-clamp-3" style={{ color: mu, opacity: 0.85 }}>
             {redactText(story.hook)}
           </p>
-
-
         </div>
 
-        {/* Concepts + arrow */}
-        <div className="flex items-end justify-between mt-3 gap-2">
-          <div className="flex flex-wrap gap-x-3 gap-y-1 items-center">
+        {/* Footer: concepts + severity dot + arrow */}
+        <div className="flex items-center justify-between mt-3 gap-2">
+          <div className="flex items-center gap-2.5 flex-wrap">
             {(story.concepts || []).slice(0, 2).map(c => (
-              <span key={c} className="text-[8px] sm:text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1" style={{ color: mu }}>
-                <span style={{ color: ac, opacity: 0.5 }}>▪</span>{c}
+              <span key={c} className="text-[8px] font-mono tracking-[0.08em] uppercase" style={{ color: mu, opacity: 0.65 }}>
+                {c}
               </span>
             ))}
             {getTotalReactions(story) > 0 && (
-              <span className="text-[8px] sm:text-[9px] font-mono tracking-[0.08em] uppercase flex items-center gap-1">
-                <span style={{ color: ac, opacity: 0.5 }}>▪</span>
-                <EngagementBar reactions={story.reactions} />
+              <span className="text-[8px] font-mono tracking-[0.06em] flex items-center gap-1" style={{ color: mu, opacity: 0.45 }}>
+                ↑ {getTotalReactions(story)}
               </span>
             )}
           </div>
-          
-          <div className="flex items-center flex-shrink-0">
-            <span className="text-[#9E7B4C]/50 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-xs sm:text-sm">→</span>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Severity — quiet right-aligned dot */}
+            <span
+              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{ backgroundColor: sev.dot, opacity: 0.6 }}
+              title={sev.label}
+            />
+            <span className="text-[#9E7B4C]/40 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm">→</span>
           </div>
         </div>
       </div>
-      {/* Resume bar — appears if partially read */}
+      {/* Thin read-progress bar at bottom */}
       {prog && !prog.completed && prog.lastLayer > 0 && (
-        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] z-20"
-          style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.12) ${(prog.lastLayer / 7) * 100}%)` }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-20"
+          style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.10) ${(prog.lastLayer / 7) * 100}%)` }} />
       )}
     </article>
   );
@@ -741,75 +724,51 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             </h1>
           </div>
 
-          {/* Rational Descent Selector */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-5 border-b border-neutral-900/40 scrollbar-none">
-            <span className="text-[8px] font-mono tracking-widest uppercase text-neutral-500 mr-2 flex-shrink-0">Descent Level:</span>
-            {[
-              { id: 'all',       label: 'All Depths' },
-              { id: 'surface',   label: 'Level I: Surface' },
-              { id: 'deep',      label: 'Level II: Deep' },
-              { id: 'forbidden', label: 'Level III: The Abyss' },
-            ].map(level => (
-              <button
-                key={level.id}
-                onClick={() => { setSelectedLevel(level.id); setFocusedIdx(-1); }}
-                className="text-[9px] font-mono tracking-[0.12em] uppercase px-3.5 py-1 rounded-full border transition-all duration-200 cursor-pointer active:scale-95 flex-shrink-0"
-                style={{
-                  borderColor: selectedLevel === level.id ? '#9E7B4C' : 'rgba(237,232,223,0.06)',
-                  color:       selectedLevel === level.id ? '#9E7B4C' : '#5A5550',
-                  backgroundColor: selectedLevel === level.id ? 'rgba(158,123,76,0.1)' : 'transparent',
-                }}
-              >
-                {level.label}
-              </button>
-            ))}
-          </div>
+          {/* ── Single unified control bar (mobile-first) ── */}
+          <div className="flex items-center gap-2 sm:gap-3 mb-7 pb-4 border-b" style={{ borderBottomColor: 'rgba(237,232,223,0.07)' }}>
+            {/* Read state selector — 3 understated pill buttons */}
+            <div className="flex items-center gap-1 flex-1 overflow-x-auto scrollbar-none">
+              {[
+                { id: 'active',   label: 'Active'   },
+                { id: 'archived', label: 'Archived' },
+                { id: 'all',      label: 'All'      },
+              ].map(status => (
+                <button
+                  key={status.id}
+                  onClick={() => { setFilterReadStatus(status.id); setFocusedIdx(-1); }}
+                  className="min-h-[36px] px-3.5 text-[8.5px] font-mono tracking-[0.14em] uppercase whitespace-nowrap flex-shrink-0 rounded-lg border transition-all duration-200 cursor-pointer active:scale-95"
+                  style={{
+                    borderColor: filterReadStatus === status.id ? 'rgba(158,123,76,0.5)' : 'rgba(237,232,223,0.07)',
+                    color: filterReadStatus === status.id ? '#EDE8DF' : '#5A5550',
+                    backgroundColor: filterReadStatus === status.id ? 'rgba(158,123,76,0.12)' : 'transparent',
+                  }}
+                >
+                  {status.label}
+                </button>
+              ))}
+            </div>
 
-          {/* Read / Unread separation tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-5 border-b border-neutral-900/40 scrollbar-none">
-            <span className="text-[8px] font-mono tracking-widest uppercase text-neutral-500 mr-2 flex-shrink-0">Dossier State:</span>
-            {[
-              { id: 'active',    label: 'Active Dossiers' },
-              { id: 'archived',  label: 'Archived Records' },
-              { id: 'all',       label: 'All Logs' },
-            ].map(status => (
-              <button
-                key={status.id}
-                onClick={() => { setFilterReadStatus(status.id); setFocusedIdx(-1); }}
-                className="text-[9px] font-mono tracking-[0.12em] uppercase px-3.5 py-1 rounded-full border transition-all duration-200 cursor-pointer active:scale-95 flex-shrink-0"
+            {/* Sort dropdown — right-aligned */}
+            <div className="flex-shrink-0 relative">
+              <select
+                value={sortBy}
+                onChange={e => { setSortBy(e.target.value); setFocusedIdx(-1); }}
+                className="appearance-none min-h-[36px] pl-3 pr-6 text-[8.5px] font-mono tracking-[0.13em] uppercase rounded-lg border cursor-pointer focus:outline-none transition-all duration-200 bg-transparent"
                 style={{
-                  borderColor: filterReadStatus === status.id ? '#9E7B4C' : 'rgba(237,232,223,0.06)',
-                  color:       filterReadStatus === status.id ? '#EDE8DF' : '#5A5550',
-                  backgroundColor: filterReadStatus === status.id ? 'rgba(158,123,76,0.15)' : 'transparent',
+                  borderColor: 'rgba(237,232,223,0.07)',
+                  color: '#8F8A82',
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235A5550' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right 8px center',
                 }}
+                aria-label="Sort stories by"
               >
-                {status.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Sort tab pills: Trending · Recent · Top Rated · Reading */}
-          <div className="flex items-center gap-0.5 mb-8 overflow-x-auto scrollbar-none -mx-4 sm:-mx-8 md:-mx-10 px-4 sm:px-8 md:px-10 border-b"
-            style={{ borderBottomColor: 'rgba(158,123,76,0.12)' }}>
-            {[
-              { value: 'popular', label: '❖ Trending' },
-              { value: 'newest',  label: '◉ Recent'   },
-              { value: 'engaged', label: '◎ Top Rated' },
-              { value: 'progress', label: '⊙ Reading' },
-            ].map(opt => (
-              <button
-                key={opt.value}
-                onClick={() => { setSortBy(opt.value); setFocusedIdx(-1); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.16em] uppercase whitespace-nowrap flex-shrink-0 cursor-pointer border-b-2 focus:outline-none transition-all duration-150"
-                style={{
-                  color: sortBy === opt.value ? fg : mu,
-                  borderBottomColor: sortBy === opt.value ? ac : 'transparent',
-                  background: 'none',
-                }}
-              >
-                {opt.label}
-              </button>
-            ))}
+                <option value="popular" style={{ background: '#0D0B08' }}>Trending</option>
+                <option value="newest"  style={{ background: '#0D0B08' }}>Recent</option>
+                <option value="engaged" style={{ background: '#0D0B08' }}>Top Rated</option>
+                <option value="progress" style={{ background: '#0D0B08' }}>Reading</option>
+              </select>
+            </div>
           </div>
 
           {/* ── Story Cards ── */}

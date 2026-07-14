@@ -301,7 +301,7 @@ body::after {
 /* Consistent Forensic Image Treatment */
 img {
   filter: contrast(1.12) brightness(0.9) sepia(0.1) saturate(0.88);
-  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 @media (hover: hover) {
@@ -393,3 +393,29 @@ img {
   }
 }
 
+/* Native select dark theme — for sort dropdown */
+select option {
+  background-color: #0D0B08;
+  color: #8F8A82;
+}
+
+/* Mobile: better active tap feedback */
+@media (max-width: 640px) {
+  button:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Scrollbar hide utility */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Card cross-fade animation on filter change */
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-enter {
+  animation: cardFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
