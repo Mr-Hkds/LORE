@@ -267,12 +267,8 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     if (y && y !== 'N/A' && y !== 'n/a' && String(y).trim() !== '' && /\d{4}/.test(String(y))) {
       return String(y).match(/\d{4}/)?.[0] || null;
     }
-    if (story.added_date) {
-      const yr = new Date(story.added_date).getFullYear();
-      if (yr > 1900) return String(yr);
-    }
     return null;
-  }, [story.year, story.added_date]);
+  }, [story.year]);
 
   const fileNum = useMemo(() => {
     if (!story.story_id) return null;
@@ -282,6 +278,35 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     }
     return String((Math.abs(hash) % 900) + 100);
   }, [story.story_id]);
+
+  // Premium classified forensic tags list
+  const kpis = useMemo(() => {
+    const items = [];
+    
+    // 1. Word count
+    const words = getStoryWordCount(story);
+    if (words > 0) {
+      items.push({ id: 'words', label: `${words.toLocaleString()} WORDS` });
+    }
+
+    // 2. Layers depth
+    const layers = story.layers?.length || 7;
+    items.push({ id: 'layers', label: `${layers} LAYERS` });
+
+    // 3. Evidence sources count
+    const sources = (story.evidence_links || []).length;
+    if (sources > 0) {
+      items.push({ id: 'sources', label: `${sources} ${sources === 1 ? 'SOURCE' : 'SOURCES'}` });
+    }
+
+    // 4. Vocabulary key terms count
+    const vocabs = Object.keys(story.vocabulary || {}).length;
+    if (vocabs > 0) {
+      items.push({ id: 'terms', label: `${vocabs} ${vocabs === 1 ? 'TERM' : 'TERMS'}` });
+    }
+
+    return items;
+  }, [story]);
 
   return (
     <article
@@ -368,16 +393,18 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
               </>
             )}
 
-            {/* Mid-dot separator */}
-            <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
-
-            {/* Read time */}
-            <span
-              className="text-[6.5px] font-mono tracking-[0.1em] flex-shrink-0"
-              style={{ color: mu, opacity: 0.45 }}
-            >
-              {Math.max(1, Math.round(getStoryWordCount(story) / 200))} min
-            </span>
+            {/* Remaining useful forensic KPIs */}
+            {kpis.map(kpi => (
+              <React.Fragment key={kpi.id}>
+                <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
+                <span
+                  className="text-[6.5px] font-mono tracking-[0.1em] flex-shrink-0"
+                  style={{ color: mu, opacity: 0.45 }}
+                >
+                  {kpi.label}
+                </span>
+              </React.Fragment>
+            ))}
 
             {/* Reading progress — right-aligned amber pill */}
             {prog && (prog.completed || prog.lastLayer > 0) && (

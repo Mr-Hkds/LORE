@@ -778,10 +778,14 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {/* Dossier count */}
                 {count > 0 && (
                   <span
-                    className="text-[9px] sm:text-[10px] font-mono tracking-[0.08em] flex-shrink-0"
-                    style={{ color: mu, opacity: 0.55 }}
+                    className="text-[7.5px] sm:text-[8px] font-mono tracking-[0.15em] uppercase px-2.5 py-1 rounded flex-shrink-0 select-none border"
+                    style={{
+                      borderColor: 'rgba(158,123,76,0.25)',
+                      color: '#9E7B4C',
+                      backgroundColor: 'rgba(158,123,76,0.06)',
+                    }}
                   >
-                    {count}
+                    {count} {count === 1 ? 'DOSSIER' : 'DOSSIERS'}
                   </span>
                 )}
 
