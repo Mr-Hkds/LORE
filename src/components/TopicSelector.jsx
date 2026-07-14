@@ -893,15 +893,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
         <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
           {/* Brand signature */}
-          <div className="flex flex-col items-center text-center gap-2 mb-2 select-none pointer-events-none">
-            <div className="flex items-center gap-2">
-              <LoreMark size={12} color="#9E7B4C" />
-              <span className="text-[10px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF]">
-                SEVENDESCENTS
-              </span>
-            </div>
-            <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60">
-              COMMISSIONED FOR ARCHIVISTS, INDEPENDENT RESEARCHERS, AND CURIOUS MINDS.
+          <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-none">
+            <span className="text-[9px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF]">
+              SEVENDESCENTS
+            </span>
+            <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60 max-w-xl leading-relaxed">
+              AN ARCHIVAL REGISTRY COMPILED FOR INDEPENDENT RESEARCHERS, FORENSIC HISTORIANS, AND MINDS OBSESSED WITH THE UNRESOLVED.
             </span>
           </div>
 
