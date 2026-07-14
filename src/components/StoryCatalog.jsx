@@ -170,6 +170,19 @@ function StoryCardImage({ story, alt, inView }) {
       }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
+      {/* SEVENDESCENTS brand — top-left, always subtle */}
+      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 pointer-events-none select-none" style={{ opacity: 0.22 }}>
+        <LoreMark size={8} color="#EDE8DF" />
+        <span
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '6px',
+            color: '#EDE8DF',
+            letterSpacing: '0.28em',
+            fontWeight: 700,
+          }}
+        >SEVENDESCENTS</span>
+      </div>
 
 
       {/* Retro telemetry decryption overlay while loading */}
@@ -486,7 +499,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
   const [tapCount, setTapCount] = useState(0);
   const [focusedIdx, setFocusedIdx] = useState(-1);
   const [selectedLevel, setSelectedLevel] = useState('all');
-  const [filterReadStatus, setFilterReadStatus] = useState('active'); // 'active' | 'archived' | 'all'
+  const [filterReadStatus, setFilterReadStatus] = useState('all'); // 'all' | 'active' | 'archived'
   const { getProgress }         = useReadingProgress();
 
   // Calculate relative thresholds for engagement and new status from all stories
@@ -741,9 +754,9 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             {/* Read state selector — 3 understated pill buttons */}
             <div className="flex items-center gap-1 flex-1 overflow-x-auto scrollbar-none">
               {[
+                { id: 'all',      label: 'All'      },
                 { id: 'active',   label: 'Active'   },
                 { id: 'archived', label: 'Archived' },
-                { id: 'all',      label: 'All'      },
               ].map(status => (
                 <button
                   key={status.id}
