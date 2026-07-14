@@ -439,14 +439,31 @@ select option {
   width: 100%;
 }
 
-/* Premium footer brand hover expansion & glow */
-.footer-brand-text {
-  transition: letter-spacing 0.5s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.5s ease, color 0.5s ease;
+/* Premium footer brand hover expansion & ambient breathing glow */
+@keyframes ambient-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 2px rgba(158, 123, 76, 0.1);
+    opacity: 0.65;
+    color: #EDE8DF;
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(158, 123, 76, 0.5), 0 0 2px rgba(158, 123, 76, 0.2);
+    opacity: 0.95;
+    color: #9E7B4C;
+  }
 }
+
+.footer-brand-text {
+  animation: ambient-glow-pulse 5s ease-in-out infinite;
+  transition: letter-spacing 0.5s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease, color 0.4s ease, opacity 0.4s ease;
+}
+
 .footer-brand-text:hover {
+  animation: none;
   letter-spacing: 0.48em !important;
-  text-shadow: 0 0 12px rgba(158, 123, 76, 0.7);
+  text-shadow: 0 0 12px rgba(158, 123, 76, 0.75);
   color: #9E7B4C !important;
+  opacity: 1;
 }
 .group:hover .text-hover-fill {
   background-position: 0 0;
