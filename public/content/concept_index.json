@@ -1533,7 +1533,8 @@
   ],
   "divine_justice": [
     "ashwatthama_curse_eternal_suffering",
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "naraka_hindu_hells"
   ],
   "unending_suffering": [
     "ashwatthama_curse_eternal_suffering"
@@ -1558,13 +1559,16 @@
     "pishachas_flesh_eating_spirits"
   ],
   "karma": [
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "naraka_hindu_hells"
   ],
   "afterlife": [
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "naraka_hindu_hells"
   ],
   "suffering": [
-    "legend_of_pretas_indian_mythology"
+    "legend_of_pretas_indian_mythology",
+    "naraka_hindu_hells"
   ],
   "ancestral_rituals": [
     "legend_of_pretas_indian_mythology"
@@ -1709,5 +1713,11 @@
   ],
   "government_investigation": [
     "silk_road_dread_pirate_roberts"
+  ],
+  "retribution": [
+    "naraka_hindu_hells"
+  ],
+  "moral_consequences": [
+    "naraka_hindu_hells"
   ]
 }
