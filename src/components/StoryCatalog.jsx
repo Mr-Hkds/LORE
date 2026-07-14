@@ -279,34 +279,10 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     return String((Math.abs(hash) % 900) + 100);
   }, [story.story_id]);
 
-  // Premium classified forensic tags list
-  const kpis = useMemo(() => {
-    const items = [];
-    
-    // 1. Word count
-    const words = getStoryWordCount(story);
-    if (words > 0) {
-      items.push({ id: 'words', label: `${words.toLocaleString()} WORDS` });
-    }
-
-    // 2. Layers depth
-    const layers = story.layers?.length || 7;
-    items.push({ id: 'layers', label: `${layers} LAYERS` });
-
-    // 3. Evidence sources count
-    const sources = (story.evidence_links || []).length;
-    if (sources > 0) {
-      items.push({ id: 'sources', label: `${sources} ${sources === 1 ? 'SOURCE' : 'SOURCES'}` });
-    }
-
-    // 4. Vocabulary key terms count
-    const vocabs = Object.keys(story.vocabulary || {}).length;
-    if (vocabs > 0) {
-      items.push({ id: 'terms', label: `${vocabs} ${vocabs === 1 ? 'TERM' : 'TERMS'}` });
-    }
-
-    return items;
-  }, [story]);
+  const codedRef = useMemo(() => {
+    const catCode = (story.category || 'arc').toUpperCase().slice(0, 3).replace('-', '');
+    return `REF-${catCode}.${fileNum || '000'}`;
+  }, [story.category, fileNum]);
 
   return (
     <article
@@ -393,18 +369,31 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
               </>
             )}
 
-            {/* Remaining useful forensic KPIs */}
-            {kpis.map(kpi => (
-              <React.Fragment key={kpi.id}>
+            {/* File Number tag */}
+            {fileNum && (
+              <>
                 <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
                 <span
                   className="text-[6.5px] font-mono tracking-[0.1em] flex-shrink-0"
-                  style={{ color: mu, opacity: 0.45 }}
+                  style={{ color: mu, opacity: 0.5 }}
                 >
-                  {kpi.label}
+                  FILE NO. {fileNum}
                 </span>
-              </React.Fragment>
-            ))}
+              </>
+            )}
+
+            {/* Coded reference tag */}
+            {codedRef && (
+              <>
+                <span className="text-[8px] flex-shrink-0" style={{ color: 'rgba(237,232,223,0.15)' }}>·</span>
+                <span
+                  className="text-[6.5px] font-mono tracking-[0.1em] flex-shrink-0"
+                  style={{ color: mu, opacity: 0.5 }}
+                >
+                  {codedRef}
+                </span>
+              </>
+            )}
 
             {/* Reading progress — right-aligned amber pill */}
             {prog && (prog.completed || prog.lastLayer > 0) && (
@@ -427,8 +416,8 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
 
           {/* Title */}
           <h2
-            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', color: fg, letterSpacing: '-0.02em' }}
+            className="font-sans font-semibold leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C] tracking-tight"
+            style={{ fontSize: 'clamp(0.95rem, 2.1vw, 1.2rem)', color: fg }}
           >
             {story.title}
           </h2>
@@ -439,15 +428,9 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           </p>
         </div>
 
-        {/* Footer: concepts + reactions + file num + arrow */}
+        {/* Footer: concepts + reactions + arrow */}
         <div className="flex items-center justify-between mt-3 gap-2">
           <div className="flex items-center gap-2 flex-wrap">
-            {/* File number — integrated cleanly in footer */}
-            {fileNum && (
-              <span className="text-[7px] font-mono tracking-[0.2em] uppercase" style={{ color: ac, opacity: 0.4 }}>
-                #{fileNum}
-              </span>
-            )}
             {(story.concepts || []).slice(0, 1).map(c => (
               <span key={c} className="text-[7px] font-mono tracking-[0.06em] uppercase" style={{ color: mu, opacity: 0.38 }}>{c}</span>
             ))}
@@ -460,6 +443,7 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           <span className="text-[#9E7B4C]/30 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm flex-shrink-0">&#8594;</span>
         </div>
       </div>
+
 
       {/* Layer progress bar */}
       {prog && !prog.completed && prog.lastLayer > 0 && (
