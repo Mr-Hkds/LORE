@@ -15,6 +15,20 @@ const CATEGORY_LABELS = {
   cyber_mysteries: 'Digital Shadows',
 };
 
+const getCategoryColor = (category) => {
+  const clean = (category || '').toLowerCase().replace('-', '_');
+  const colors = {
+    psychology: '#9E7B4C',       // Amber
+    mythology: '#B08E66',        // Gold Bronze
+    true_crime: '#C4644A',       // Crimson Orange
+    gov_experiments: '#A64B4B',  // Muted Blood Red
+    paranormal: '#7B8FA1',       // Steel Blue
+    conspiracy: '#6B9E6E',       // Sage Green
+    cyber_mysteries: '#9F7AEA',  // Purple
+  };
+  return colors[clean] || '#9E7B4C';
+};
+
 export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch, initialTab }) {
 
   const bg = '#0D0C0A'; // Darker, premium charcoal background
@@ -331,7 +345,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               marginBottom: '32px',
             }}
           >
-            Anomalous Records &<br />Documented Shadows
+            Classified Dossiers &<br />Anomalous Descents
           </h1>
 
           {/* Subtitle */}
@@ -497,7 +511,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                               </div>
 
                               {/* Title */}
-                              <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill">
+                              <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill" style={{ '--hover-color': getCategoryColor(story.category) }}>
                                 {story.title}
                               </h4>
 
@@ -634,7 +648,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                                 </div>
 
                                 {/* Title — with text fill transition */}
-                                <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill">
+                                <h4 className="font-serif italic text-sm sm:text-base leading-snug text-hover-fill" style={{ '--hover-color': getCategoryColor(story.category) }}>
                                   {story.title}
                                 </h4>
 
