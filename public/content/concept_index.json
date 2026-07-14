@@ -219,7 +219,8 @@
     "max_headroom_broadcast_intrusion",
     "db_cooper_unsolved_mystery",
     "the_murder_of_eliza_jumel",
-    "atlanta_child_murders"
+    "atlanta_child_murders",
+    "the_moors_murders"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -423,7 +424,8 @@
     "black_dahlia_murder",
     "amityville_horror_house_possessed",
     "lindbergh_kidnapping_001",
-    "atlanta_child_murders"
+    "atlanta_child_murders",
+    "the_moors_murders"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
@@ -438,7 +440,8 @@
     "golden_state_killer_dna_breakthrough",
     "hh_holmes_murder_castle",
     "wineville_chicken_coop_murders",
-    "atlanta_child_murders"
+    "atlanta_child_murders",
+    "the_moors_murders"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -740,7 +743,8 @@
     "perron_family_haunting"
   ],
   "missing_children": [
-    "the_sodder_children_disappearance"
+    "the_sodder_children_disappearance",
+    "the_moors_murders"
   ],
   "arson": [
     "the_sodder_children_disappearance"
@@ -759,7 +763,8 @@
   ],
   "forensic_challenge": [
     "the_cleveland_torso_murders",
-    "black_dahlia_murder"
+    "black_dahlia_murder",
+    "the_moors_murders"
   ],
   "political_pressure": [
     "the_cleveland_torso_murders"
@@ -1167,7 +1172,8 @@
     "tunguska_event_001"
   ],
   "child_predator": [
-    "albert_fish_the_gray_man"
+    "albert_fish_the_gray_man",
+    "the_moors_murders"
   ],
   "sadism": [
     "albert_fish_the_gray_man",
@@ -1175,7 +1181,8 @@
   ],
   "psychopathy": [
     "albert_fish_the_gray_man",
-    "hh_holmes_murder_castle"
+    "hh_holmes_murder_castle",
+    "the_moors_murders"
   ],
   "unsolved_cases": [
     "albert_fish_the_gray_man"
@@ -2967,5 +2974,14 @@
   ],
   "political_forgery": [
     "zinoviev_letter_forgery"
+  ],
+  "accomplice": [
+    "the_moors_murders"
+  ],
+  "evil_couple": [
+    "the_moors_murders"
+  ],
+  "victim_recovery": [
+    "the_moors_murders"
   ]
 }
