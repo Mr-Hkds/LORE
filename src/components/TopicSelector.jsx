@@ -906,6 +906,19 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         </div>
 
         <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
+          {/* Brand signature */}
+          <div className="flex flex-col items-center text-center gap-2 mb-2 select-none pointer-events-none">
+            <div className="flex items-center gap-2">
+              <LoreMark size={12} color="#9E7B4C" />
+              <span className="text-[10px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF]">
+                SEVENDESCENTS
+              </span>
+            </div>
+            <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60">
+              COMMISSIONED FOR ARCHIVISTS, INDEPENDENT RESEARCHERS, AND CURIOUS MINDS.
+            </span>
+          </div>
+
           {/* Disclaimer row */}
           <div className="w-full max-w-2xl mx-auto text-center border-t border-b border-dashed py-5 my-2" style={{ borderColor: 'rgba(158, 123, 76, 0.12)', backgroundColor: 'rgba(158, 123, 76, 0.01)' }}>
             <span className="block text-[8px] font-mono tracking-[0.25em] text-[#9E7B4C] mb-2 uppercase font-bold">
