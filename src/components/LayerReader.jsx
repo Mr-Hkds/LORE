@@ -412,95 +412,9 @@ export default function LayerReader({
         )}
 
         <div className="w-full">
-          {/* ── Classified Dossier Banner — shown only on Layer 1 ── */}
-          {layerNum === 1 && (
-            <div
-              className="w-full mb-6 overflow-hidden rounded-lg relative"
-              style={{
-                backgroundColor: 'rgba(9,8,7,0.9)',
-                border: '1px solid rgba(158,123,76,0.2)',
-                backgroundImage: 'linear-gradient(rgba(158,123,76,0.025) 1px, transparent 1px)',
-                backgroundSize: '100% 3px',
-              }}
-            >
-              {/* Top amber accent line */}
-              <div className="h-[1.5px] w-full" style={{ background: 'linear-gradient(to right, transparent, rgba(158,123,76,0.6) 30%, rgba(158,123,76,0.6) 70%, transparent)' }} />
-
-              <div className="flex items-stretch divide-x" style={{ divideColor: 'rgba(237,232,223,0.05)' }}>
-                {/* Classification stamp */}
-                <div className="flex flex-col items-center justify-center px-4 py-3 gap-1 flex-shrink-0" style={{ borderRight: '1px solid rgba(237,232,223,0.05)' }}>
-                  <span
-                    className="text-[7px] font-mono font-black tracking-[0.3em] uppercase px-2.5 py-0.5"
-                    style={{
-                      color: '#9E7B4C',
-                      border: '1px solid rgba(158,123,76,0.5)',
-                      letterSpacing: '0.3em',
-                    }}
-                  >
-                    CLASSIFIED
-                  </span>
-                  <span className="text-[5.5px] font-mono tracking-[0.25em] uppercase" style={{ color: 'rgba(158,123,76,0.45)' }}>
-                    LEVEL — {(story?.severity || 'unsettling').toUpperCase().slice(0, 4)}
-                  </span>
-                </div>
-
-                {/* KPI data cells */}
-                <div className="flex flex-1 flex-wrap sm:flex-nowrap">
-                  {/* Case ID */}
-                  <div className="flex flex-col justify-center px-4 py-2.5 gap-[3px] flex-1 min-w-[80px]" style={{ borderRight: '1px solid rgba(237,232,223,0.05)' }}>
-                    <span className="text-[5.5px] font-mono tracking-[0.28em] uppercase" style={{ color: 'rgba(158,123,76,0.55)' }}>Case ID</span>
-                    <span className="text-[8px] font-mono font-bold truncate" style={{ color: '#EDE8DF', opacity: 0.85 }}>
-                      {(story?.story_id || topic?.id || 'UNKNOWN').toUpperCase().slice(0, 20)}
-                    </span>
-                  </div>
-
-                  {/* Incident Year */}
-                  <div className="flex flex-col justify-center px-4 py-2.5 gap-[3px] flex-shrink-0" style={{ borderRight: '1px solid rgba(237,232,223,0.05)' }}>
-                    <span className="text-[5.5px] font-mono tracking-[0.28em] uppercase" style={{ color: 'rgba(158,123,76,0.55)' }}>Incident</span>
-                    <span className="text-[8px] font-mono font-bold" style={{ color: '#EDE8DF', opacity: 0.85 }}>
-                      {story?.year || '—'}
-                    </span>
-                  </div>
-
-                  {/* Severity */}
-                  <div className="flex flex-col justify-center px-4 py-2.5 gap-[3px] flex-shrink-0" style={{ borderRight: '1px solid rgba(237,232,223,0.05)' }}>
-                    <span className="text-[5.5px] font-mono tracking-[0.28em] uppercase" style={{ color: 'rgba(158,123,76,0.55)' }}>Threat Level</span>
-                    <span className="text-[8px] font-mono font-bold uppercase" style={{ color: '#EDE8DF', opacity: 0.85 }}>
-                      {story?.severity || 'Unsettling'}
-                    </span>
-                  </div>
-
-                  {/* Word count */}
-                  <div className="flex flex-col justify-center px-4 py-2.5 gap-[3px] flex-shrink-0">
-                    <span className="text-[5.5px] font-mono tracking-[0.28em] uppercase" style={{ color: 'rgba(158,123,76,0.55)' }}>Total Size</span>
-                    <span className="text-[8px] font-mono font-bold" style={{ color: '#EDE8DF', opacity: 0.85 }}>
-                      {wordCount ? wordCount.toLocaleString() : '—'} words
-                    </span>
-                  </div>
-                </div>
-
-                {/* Open indicator */}
-                <div className="flex flex-col items-center justify-center px-3 py-2 flex-shrink-0" style={{ borderLeft: '1px solid rgba(237,232,223,0.05)' }}>
-                  <span
-                    className="text-[6.5px] font-mono font-bold tracking-[0.2em] uppercase px-2 py-1"
-                    style={{
-                      color: '#9E7B4C',
-                      border: '1px solid rgba(158,123,76,0.35)',
-                      backgroundColor: 'rgba(158,123,76,0.08)',
-                    }}
-                  >
-                    OPEN
-                  </span>
-                </div>
-              </div>
-
-              {/* Bottom amber accent line */}
-              <div className="h-[1px] w-full" style={{ background: 'linear-gradient(to right, transparent, rgba(158,123,76,0.3) 50%, transparent)' }} />
-            </div>
-          )}
-
 
           {/* Narrative Dossier Card (Main Container) */}
+
           <div
             className="w-full p-4 sm:p-6 md:p-10 rounded-2xl relative transition-all duration-300"
             style={{

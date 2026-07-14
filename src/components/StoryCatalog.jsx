@@ -170,18 +170,7 @@ function StoryCardImage({ story, alt, inView }) {
       }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
-      <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-30 pointer-events-none select-none">
-        <LoreMark size={9} color="#EDE8DF" />
-        <span
-          style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: '7px',
-            color: '#EDE8DF',
-            letterSpacing: '0.22em',
-            fontWeight: 700,
-          }}
-        >CLASSIFIED</span>
-      </div>
+
 
       {/* Retro telemetry decryption overlay while loading */}
       {!loaded && (
@@ -308,20 +297,6 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           className="absolute inset-0 pointer-events-none z-10"
           style={{ background: 'linear-gradient(to right, transparent 50%, rgba(13,11,8,0.9) 100%), linear-gradient(to bottom, transparent 55%, rgba(9,8,7,0.98) 100%)' }}
         />
-        {/* Subtle category watermark inside image at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 px-3 pb-2 pt-4 flex items-end justify-between pointer-events-none select-none">
-          <span
-            className="text-[6px] font-mono font-bold tracking-[0.3em] uppercase"
-            style={{ color: 'rgba(158,123,76,0.55)' }}
-          >
-            {SIGNAL_LABELS[story.category] || 'ARCHIVE'}
-          </span>
-          {storyYear && (
-            <span className="text-[6px] font-mono tracking-[0.2em]" style={{ color: 'rgba(237,232,223,0.25)' }}>
-              {storyYear}
-            </span>
-          )}
-        </div>
       </div>
 
       {/* Content panel */}
