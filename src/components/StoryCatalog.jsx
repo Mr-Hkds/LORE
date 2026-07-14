@@ -5,7 +5,7 @@
  */
 /* eslint-disable react-refresh/only-export-components */
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Share2, Search } from 'lucide-react';
+import { Share2, Search, ArrowLeft } from 'lucide-react';
 import { useStaticContent } from '../hooks/useStaticContent';
 import { useReadingProgress } from '../hooks/useReadingProgress';
 import LoreMark from './LoreMark';
@@ -815,10 +815,21 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>
               {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
             </span>
-            <button onClick={onBack}
-              className="text-[9px] font-bold tracking-[0.15em] uppercase opacity-50 hover:opacity-80 active:opacity-30 cursor-pointer"
-              style={{ background: 'none', border: 'none', color: ac, fontFamily: "'Space Mono', monospace" }}>
-              ← Back
+            <button 
+              onClick={onBack}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all duration-200 active:scale-95 cursor-pointer bg-[#1A1815]/30 hover:bg-[#1A1815]/85 hover:border-neutral-500/30"
+              style={{
+                borderColor: 'rgba(158, 123, 76, 0.2)',
+                color: ac,
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '8px',
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+              }}
+            >
+              <ArrowLeft size={10} style={{ color: ac }} />
+              <span>Back</span>
             </button>
           </div>
         </div>

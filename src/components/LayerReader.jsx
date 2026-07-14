@@ -387,6 +387,7 @@ export default function LayerReader({
   return (
     <section
       ref={containerRef}
+      id={`layer-section-${layerNum}`}
       className="snap-child w-full fade-in relative"
     >
       <div className="w-full max-w-[1000px] mx-auto flex flex-col gap-6 px-0 sm:px-4 md:px-8 my-auto pb-12">
@@ -638,8 +639,8 @@ export default function LayerReader({
                     ))}
                   </div>
 
-                  {/* Transmit/Share Dossier Link */}
-                  <div className="mt-8 flex justify-center">
+                  {/* Action buttons (Transmit & Descend) */}
+                  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
                       onClick={onShare}
                       className="flex items-center gap-2 px-5 py-2.5 rounded-lg border text-[9px] font-mono tracking-widest uppercase transition-all duration-300 active:scale-95 hover:border-neutral-500/60 cursor-pointer select-none"
@@ -652,6 +653,36 @@ export default function LayerReader({
                       <Share2 className="w-3 h-3" />
                       Transmit Dossier Link
                     </button>
+
+                    {layerNum < 7 && (
+                      <button
+                        onClick={() => {
+                          const nextElem = document.getElementById(`layer-section-${layerNum + 1}`);
+                          if (nextElem) {
+                            nextElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }}
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-lg border text-[9px] font-mono tracking-widest uppercase transition-all duration-300 active:scale-95 cursor-pointer select-none"
+                        style={{
+                          color: layer.text,
+                          borderColor: 'rgba(237, 232, 223, 0.18)',
+                          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.5)';
+                          e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
+                          e.currentTarget.style.color = '#9E7B4C';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.borderColor = 'rgba(237, 232, 223, 0.18)';
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+                          e.currentTarget.style.color = layer.text;
+                        }}
+                      >
+                        <span>Descend to Layer {layerNum + 1}</span>
+                        <span>↓</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               )}

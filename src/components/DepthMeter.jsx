@@ -4,6 +4,7 @@
  * to prevent overlap and truncation on small screens.
  */
 import LoreMark from './LoreMark';
+import { ArrowLeft } from 'lucide-react';
 
 export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack }) {
   const accentColor = '#9E7B4C';
@@ -21,26 +22,22 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           gridTemplateColumns: '1fr auto 1fr',
         }}
       >
-        {/* Logo + wordmark */}
+        {/* Logo + Back button */}
         <button
           onClick={onBack}
-          className="flex items-center gap-[10px] justify-self-start transition-opacity hover:opacity-60 active:opacity-35"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200 active:scale-95 cursor-pointer bg-[#1A1815]/30 hover:bg-[#1A1815]/80 hover:border-neutral-500/40"
+          style={{ 
+            borderColor: border || 'rgba(158, 123, 76, 0.25)', 
+            color: text,
+            fontFamily: "'Space Mono', monospace",
+            fontSize: '8px',
+            fontWeight: 700,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+          }}
         >
-          <LoreMark size={17} color={text} />
-          <span
-            style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '9px',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              color: text,
-              opacity: 0.82,
-              textTransform: 'uppercase',
-            }}
-          >
-            SevenDescents
-          </span>
+          <ArrowLeft size={10} style={{ color: text }} />
+          <span>Catalog</span>
         </button>
 
         {/* Segmented depth track */}
@@ -53,11 +50,21 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           aria-valuemax={totalLayers}
         >
           {Array.from({ length: totalLayers }).map((_, i) => (
-            <div
+            <button
               key={i}
-              className="rounded-full transition-all duration-700"
+              onClick={() => {
+                const targetElem = document.getElementById(`layer-section-${i + 1}`);
+                if (targetElem) {
+                  targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              title={`Jump to Layer ${i + 1}`}
+              className="rounded-full transition-all duration-700 focus:outline-none cursor-pointer"
               style={{
-                height: '2px',
+                height: '4px',
+                padding: 0,
+                border: 'none',
+                background: 'none',
                 width: i + 1 === currentLayer ? '28px' : '20px',
                 backgroundColor:
                   i + 1 < currentLayer
@@ -67,10 +74,10 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
                     : muted,
                 opacity:
                   i + 1 < currentLayer
-                    ? 0.45
+                    ? 0.55
                     : i + 1 === currentLayer
-                    ? 0.8
-                    : 0.2,
+                    ? 0.95
+                    : 0.25,
               }}
             />
           ))}
@@ -100,23 +107,19 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
         <div className="flex justify-between items-center h-8">
           <button
             onClick={onBack}
-            className="flex items-center gap-[8px] transition-opacity hover:opacity-60 active:opacity-35"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            className="flex items-center gap-1.5 transition-all duration-200 active:scale-95 cursor-pointer border px-2 py-1 rounded-md bg-[#1A1815]/30 hover:bg-[#1A1815]/60"
+            style={{ 
+              borderColor: border || 'rgba(158, 123, 76, 0.25)', 
+              color: text,
+              fontFamily: "'Space Mono', monospace",
+              fontSize: '7.5px',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}
           >
-            <LoreMark size={14} color={text} />
-            <span
-              style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: '8px',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                color: text,
-                opacity: 0.82,
-                textTransform: 'uppercase',
-              }}
-            >
-              SevenDescents
-            </span>
+            <ArrowLeft size={9.5} style={{ color: text }} />
+            <span>Catalog</span>
           </button>
 
           {/* Layer label */}
@@ -144,11 +147,21 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           aria-valuemax={totalLayers}
         >
           {Array.from({ length: totalLayers }).map((_, i) => (
-            <div
+            <button
               key={i}
-              className="rounded-full transition-all duration-700"
+              onClick={() => {
+                const targetElem = document.getElementById(`layer-section-${i + 1}`);
+                if (targetElem) {
+                  targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              title={`Jump to Layer ${i + 1}`}
+              className="rounded-full transition-all duration-700 focus:outline-none cursor-pointer"
               style={{
-                height: '2px',
+                height: '4px',
+                padding: 0,
+                border: 'none',
+                background: 'none',
                 width: i + 1 === currentLayer ? '20px' : '14px',
                 backgroundColor:
                   i + 1 < currentLayer
@@ -158,10 +171,10 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
                     : muted,
                 opacity:
                   i + 1 < currentLayer
-                    ? 0.45
+                    ? 0.55
                     : i + 1 === currentLayer
-                    ? 0.8
-                    : 0.2,
+                    ? 0.95
+                    : 0.25,
               }}
             />
           ))}
