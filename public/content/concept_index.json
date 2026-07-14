@@ -223,11 +223,11 @@
     "wineville_chicken_coop_murders",
     "max_headroom_broadcast_intrusion",
     "db_cooper_unsolved_mystery",
-    "the_murder_of_eliza_jumel",
     "atlanta_child_murders",
     "the_moors_murders",
     "lizzie_borden_axe_murders",
-    "olof_palme_assassination_unsolved"
+    "olof_palme_assassination_unsolved",
+    "the_murder_of_eliza_jumel"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -2841,18 +2841,6 @@
   "restoration_of_honor": [
     "narakasura_demon_princesses"
   ],
-  "wealth_dispute": [
-    "the_murder_of_eliza_jumel"
-  ],
-  "poisoning": [
-    "the_murder_of_eliza_jumel"
-  ],
-  "family_feud": [
-    "the_murder_of_eliza_jumel"
-  ],
-  "legal_battle": [
-    "the_murder_of_eliza_jumel"
-  ],
   "navigational_anomalies": [
     "the_bermuda_triangle_mystery"
   ],
@@ -3041,5 +3029,17 @@
   ],
   "memory_confabulation": [
     "reduplicative_paramnesia_001"
+  ],
+  "wealth_dispute": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "poisoning": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "family_feud": [
+    "the_murder_of_eliza_jumel"
+  ],
+  "legal_battle": [
+    "the_murder_of_eliza_jumel"
   ]
 }

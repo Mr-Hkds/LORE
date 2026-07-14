@@ -19334,98 +19334,6 @@
       "image_missing": false
     },
     {
-      "story_id": "the_murder_of_eliza_jumel",
-      "title": "The Unseen Poison: The Mystery of Eliza Jumel's Death",
-      "category": "true_crime",
-      "hook": "In 1865, one of New York's richest women, Eliza Jumel, died under strange conditions, sparking a dark suspicion of murder.",
-      "concepts": [
-        "unsolved_mystery",
-        "wealth_dispute",
-        "poisoning",
-        "family_feud",
-        "legal_battle"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/the_murder_of_eliza_jumel.jpg",
-      "added_date": "2026-07-12",
-      "draft": 0,
-      "reactions": {
-        "like": 41,
-        "gripping": 14,
-        "scared": 71,
-        "mindblown": 12
-      },
-      "evidence_links": [
-        {
-          "label": "Jane McManus Storm Cazneau (1807-1878): A Biography (Linda Sybert Hudson, 1999)",
-          "url": "https://digital.library.unt.edu/ark:/67531/metadc278486/m2/1/high_res_d/1002658825-hudson.pdf"
-        },
-        {
-          "label": "Elizabeth Singer Rowe and the development of the English novel (Backscheider, Paula R. 1943-, 2013)",
-          "url": "https://muse.jhu.edu/pub/1/oa_monograph/book/21982/pdf"
-        },
-        {
-          "label": "The Early American Craftsmen (Dyer, Walter A.    (Walter Alden),    1878-1943., 1966)",
-          "url": "https://www.journals.uchicago.edu/doi/epdf/10.2307/3982765"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "hinterkaifeck_murders",
-          "shared_concept": "unsolved_mystery",
-          "transition_line": "Just like the unexplained violence at Hinterkaifeck, Eliza Jumel's final moments hide a truth that remains out of reach, shrouded in the silence of her grand, haunted estate."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper - A Fortune's Shadow",
-          "content": "Eliza Jumel was a woman of immense wealth and sharp business sense in 19th-century New York. Born into poverty, she climbed the social ladder through ambition and strategic marriages, eventually becoming one of the richest women in America. Her life was always surrounded by gossip and legal fights, often about her vast fortune.\n\nIn 1865, at the age of 90, Eliza Jumel died. Her death was sudden and unexpected, taking place in her grand mansion, which is now a famous historical landmark. Immediately, whispers started circulating, suggesting that her death was not natural but the result of something far more sinister.\n\nThese whispers quickly grew into open accusations, suggesting that foul play had a hand in her end. The suddenness of her death and the presence of people who stood to gain from her will made the situation even more suspicious. But what exactly was the secret behind her final moments?",
-          "cliffhanger": "The question remained: who among her household would benefit most from her sudden departure, and what lengths might they go to?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern - A Life of Scandal and Riches",
-          "content": "Eliza Jumel's journey to wealth began in 1804 when she married Stephen Jumel, a wealthy French merchant. Together, they built a massive fortune. After Stephen's death in 1826, which was also subject to some legal disputes, Eliza was left with control of his vast estate, including the famous Morris-Jumel Mansion.\n\nEliza was known for her independence and her ability to fight for her property, often in court. Her life was a series of battles to protect her assets and maintain her social standing. She had few true friends and many who envied her wealth and influence.\n\nHer most scandalous decision came in 1833 when she married Aaron Burr, the former Vice President of the United States. This marriage, however, was brief and filled with conflict, adding another layer of drama to her already complex life. What hidden dangers did these connections bring?",
-          "cliffhanger": "The marriage to Aaron Burr ended in a dramatic divorce filing, but it highlighted a pattern of wealth attracting both partners and predators."
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident - The Final Marriage and Betrayal",
-          "content": "Eliza's marriage to Aaron Burr was a union of two powerful, controversial figures. She was 78, he was 77. Burr, in financial trouble, clearly aimed to control Eliza's fortune. He quickly began to sell off parts of her property and spend her money.\n\nEliza, a shrewd businesswoman, soon realized Burr's intentions. She responded by filing for divorce, a bold move for a woman of her age in that era. The divorce case was a public spectacle, revealing the deep distrust and arguments between them.\n\nJust days after the divorce was finalized, Aaron Burr died. Eliza Jumel had protected her wealth, but the bitter legal battle had taken a toll. She became more isolated, living mainly in her mansion with her adopted grandson, William Powell, and a small staff. But was her home truly a safe haven?",
-          "cliffhanger": "As Eliza aged and her health declined, the fortress of her mansion became a place where loyalties were tested, and greed began to fester."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System - The Shifting Will and Close Circle",
-          "content": "In her final years, Eliza Jumel's health steadily worsened, and she often changed her will. This meant that the people around her, especially her adopted grandson William Powell and his mother, were constantly aware of who stood to gain her immense fortune. This created a tense atmosphere within the mansion.\n\nHer household staff and personal doctor were also part of this close, often watchful, circle. They were the ones who saw her daily decline, who administered her medicines, and who controlled access to her. They knew her habits and her weaknesses.\n\nThis small group held significant power over Eliza's last days. Each had their own reasons to stay close to the wealthy, aging woman. Some were truly caring, while others may have had darker motives, watching for the moment her will would be read.",
-          "cliffhanger": "When Eliza fell seriously ill in 1865, her doctor's explanations were vague, and the unusual speed of her decline raised immediate questions for her grandson."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research - A Grandson's Alarming Claim",
-          "content": "Eliza Jumel died on July 16, 1865. Almost immediately, her adopted grandson, William Powell, launched a shocking accusation: he claimed his grandmother had been murdered. He strongly believed she was poisoned.\n\nPowell pointed fingers at his own mother and Eliza's personal doctor, Dr. Townsend. He alleged that they had conspired to administer small doses of poison, possibly arsenic, over time. He presented what he believed was evidence of Eliza's symptoms, which included extreme thirst, vomiting, and a rapid physical decline, all consistent with poisoning.\n\nHe further claimed that his mother and Dr. Townsend had kept him away from his grandmother in her final hours and had acted suspiciously. The thought that such a crime could happen within her own home, by those closest to her, was truly unsettling.",
-          "cliffhanger": "The scandalous accusation of murder led to a public outcry, demanding an official investigation and a search for the truth in the halls of justice."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss - The Unproven Accusation",
-          "content": "Based on William Powell's persistent claims, the authorities could not ignore the situation. A grand jury was called to investigate the alleged murder of Eliza Jumel. Powell bravely presented his case, detailing his grandmother's symptoms and the suspicious actions of his mother and Dr. Townsend.\n\nHowever, proving poisoning in 1865, without a proper autopsy conducted immediately after death, was extremely difficult. Medical science at the time was not advanced enough to detect subtle toxins in a body that had been buried for some time. There was no direct, undeniable proof.\n\nAfter reviewing the evidence, the grand jury decided there was not enough concrete proof to bring murder charges. While suspicions lingered, the legal system could not move forward without hard facts. The dark cloud of doubt remained, but no one was held accountable.",
-          "cliffhanger": "Despite the lack of conviction, the cloud of suspicion never left the Jumel mansion, and the battle over her vast fortune continued in her death."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner - The Enduring Mystery",
-          "content": "With no charges filed for murder, the focus shifted to Eliza Jumel's will. The settlement of her estate became another long and bitter legal battle, extending for years after her death. The question of her true cause of death remained officially unanswered, a dark secret buried with her.\n\nTo this day, the murder of Eliza Jumel remains an unsolved mystery. Was she truly poisoned by those she trusted, or was her death simply a natural end to a long, dramatic life, made suspicious by her wealth and the greedy people around her? History offers no clear answer.\n\nThe Morris-Jumel Mansion, her former home, is now said to be haunted by Eliza's spirit. Many believe her ghost still wanders the halls, perhaps searching for the truth of her own demise, or perhaps still fighting for her legacy, a chilling reminder of a fortune that brought both power and a permanent shadow of doubt.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "vocabulary": {},
-      "year": "N/A",
-      "image_missing": 0
-    },
-    {
       "story_id": "the_bermuda_triangle_mystery",
       "title": "The Bermuda Triangle: Where Ships and Planes Vanish Without a Trace",
       "category": "paranormal",
@@ -20071,9 +19979,9 @@
         "historical_tragedy"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Gaurav_Tiwari.jpg",
+      "hero_image": "/content/images/the_haunting_of_bhangarh_fort.jpg",
       "added_date": "2026-07-12",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 50,
         "gripping": 38,
@@ -20153,7 +20061,7 @@
       "custom_image_prompt": null,
       "vocabulary": {},
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "bavarian_illuminati_secret_society",
@@ -22305,6 +22213,98 @@
           "layer": 7,
           "layer_name": "The Dark Corner",
           "content": "The darkest truth of Reduplicative Paramnesia is that for the person experiencing it, their duplicated reality is absolute truth. No amount of evidence, no logical argument, can shatter this internal conviction. It reveals how fragile our sense of reality truly is, depending on the delicate balance of our brain's functions.\n\nThis condition serves as a chilling reminder that our 'reality' is largely a construction of our own minds. When that intricate construction falters, the world can transform into a meticulously crafted lie, trapping the individual in a personal nightmare where everything is familiar, yet nothing is truly real. It underscores the profound mystery of consciousness and the terrifying power of the brain to shape our entire existence, even against all external evidence.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "vocabulary": {},
+      "year": "N/A",
+      "image_missing": 0
+    },
+    {
+      "story_id": "the_murder_of_eliza_jumel",
+      "title": "The Unseen Poison: The Mystery of Eliza Jumel's Death",
+      "category": "true_crime",
+      "hook": "In 1865, one of New York's richest women, Eliza Jumel, died under strange conditions, sparking a dark suspicion of murder.",
+      "concepts": [
+        "unsolved_mystery",
+        "wealth_dispute",
+        "poisoning",
+        "family_feud",
+        "legal_battle"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://smallstatebighistory.com/wp-content/uploads/2025/05/Screenshot-2025-05-24-at-9.44.00%E2%80%AFAM.png",
+      "added_date": "2026-07-12",
+      "draft": 0,
+      "reactions": {
+        "like": 41,
+        "gripping": 14,
+        "scared": 71,
+        "mindblown": 12
+      },
+      "evidence_links": [
+        {
+          "label": "Jane McManus Storm Cazneau (1807-1878): A Biography (Linda Sybert Hudson, 1999)",
+          "url": "https://digital.library.unt.edu/ark:/67531/metadc278486/m2/1/high_res_d/1002658825-hudson.pdf"
+        },
+        {
+          "label": "Elizabeth Singer Rowe and the development of the English novel (Backscheider, Paula R. 1943-, 2013)",
+          "url": "https://muse.jhu.edu/pub/1/oa_monograph/book/21982/pdf"
+        },
+        {
+          "label": "The Early American Craftsmen (Dyer, Walter A.    (Walter Alden),    1878-1943., 1966)",
+          "url": "https://www.journals.uchicago.edu/doi/epdf/10.2307/3982765"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "hinterkaifeck_murders",
+          "shared_concept": "unsolved_mystery",
+          "transition_line": "Just like the unexplained violence at Hinterkaifeck, Eliza Jumel's final moments hide a truth that remains out of reach, shrouded in the silence of her grand, haunted estate."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - A Fortune's Shadow",
+          "content": "Eliza Jumel was a woman of immense wealth and sharp business sense in 19th-century New York. Born into poverty, she climbed the social ladder through ambition and strategic marriages, eventually becoming one of the richest women in America. Her life was always surrounded by gossip and legal fights, often about her vast fortune.\n\nIn 1865, at the age of 90, Eliza Jumel died. Her death was sudden and unexpected, taking place in her grand mansion, which is now a famous historical landmark. Immediately, whispers started circulating, suggesting that her death was not natural but the result of something far more sinister.\n\nThese whispers quickly grew into open accusations, suggesting that foul play had a hand in her end. The suddenness of her death and the presence of people who stood to gain from her will made the situation even more suspicious. But what exactly was the secret behind her final moments?",
+          "cliffhanger": "The question remained: who among her household would benefit most from her sudden departure, and what lengths might they go to?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - A Life of Scandal and Riches",
+          "content": "Eliza Jumel's journey to wealth began in 1804 when she married Stephen Jumel, a wealthy French merchant. Together, they built a massive fortune. After Stephen's death in 1826, which was also subject to some legal disputes, Eliza was left with control of his vast estate, including the famous Morris-Jumel Mansion.\n\nEliza was known for her independence and her ability to fight for her property, often in court. Her life was a series of battles to protect her assets and maintain her social standing. She had few true friends and many who envied her wealth and influence.\n\nHer most scandalous decision came in 1833 when she married Aaron Burr, the former Vice President of the United States. This marriage, however, was brief and filled with conflict, adding another layer of drama to her already complex life. What hidden dangers did these connections bring?",
+          "cliffhanger": "The marriage to Aaron Burr ended in a dramatic divorce filing, but it highlighted a pattern of wealth attracting both partners and predators."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The Final Marriage and Betrayal",
+          "content": "Eliza's marriage to Aaron Burr was a union of two powerful, controversial figures. She was 78, he was 77. Burr, in financial trouble, clearly aimed to control Eliza's fortune. He quickly began to sell off parts of her property and spend her money.\n\nEliza, a shrewd businesswoman, soon realized Burr's intentions. She responded by filing for divorce, a bold move for a woman of her age in that era. The divorce case was a public spectacle, revealing the deep distrust and arguments between them.\n\nJust days after the divorce was finalized, Aaron Burr died. Eliza Jumel had protected her wealth, but the bitter legal battle had taken a toll. She became more isolated, living mainly in her mansion with her adopted grandson, William Powell, and a small staff. But was her home truly a safe haven?",
+          "cliffhanger": "As Eliza aged and her health declined, the fortress of her mansion became a place where loyalties were tested, and greed began to fester."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - The Shifting Will and Close Circle",
+          "content": "In her final years, Eliza Jumel's health steadily worsened, and she often changed her will. This meant that the people around her, especially her adopted grandson William Powell and his mother, were constantly aware of who stood to gain her immense fortune. This created a tense atmosphere within the mansion.\n\nHer household staff and personal doctor were also part of this close, often watchful, circle. They were the ones who saw her daily decline, who administered her medicines, and who controlled access to her. They knew her habits and her weaknesses.\n\nThis small group held significant power over Eliza's last days. Each had their own reasons to stay close to the wealthy, aging woman. Some were truly caring, while others may have had darker motives, watching for the moment her will would be read.",
+          "cliffhanger": "When Eliza fell seriously ill in 1865, her doctor's explanations were vague, and the unusual speed of her decline raised immediate questions for her grandson."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - A Grandson's Alarming Claim",
+          "content": "Eliza Jumel died on July 16, 1865. Almost immediately, her adopted grandson, William Powell, launched a shocking accusation: he claimed his grandmother had been murdered. He strongly believed she was poisoned.\n\nPowell pointed fingers at his own mother and Eliza's personal doctor, Dr. Townsend. He alleged that they had conspired to administer small doses of poison, possibly arsenic, over time. He presented what he believed was evidence of Eliza's symptoms, which included extreme thirst, vomiting, and a rapid physical decline, all consistent with poisoning.\n\nHe further claimed that his mother and Dr. Townsend had kept him away from his grandmother in her final hours and had acted suspiciously. The thought that such a crime could happen within her own home, by those closest to her, was truly unsettling.",
+          "cliffhanger": "The scandalous accusation of murder led to a public outcry, demanding an official investigation and a search for the truth in the halls of justice."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Unproven Accusation",
+          "content": "Based on William Powell's persistent claims, the authorities could not ignore the situation. A grand jury was called to investigate the alleged murder of Eliza Jumel. Powell bravely presented his case, detailing his grandmother's symptoms and the suspicious actions of his mother and Dr. Townsend.\n\nHowever, proving poisoning in 1865, without a proper autopsy conducted immediately after death, was extremely difficult. Medical science at the time was not advanced enough to detect subtle toxins in a body that had been buried for some time. There was no direct, undeniable proof.\n\nAfter reviewing the evidence, the grand jury decided there was not enough concrete proof to bring murder charges. While suspicions lingered, the legal system could not move forward without hard facts. The dark cloud of doubt remained, but no one was held accountable.",
+          "cliffhanger": "Despite the lack of conviction, the cloud of suspicion never left the Jumel mansion, and the battle over her vast fortune continued in her death."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The Enduring Mystery",
+          "content": "With no charges filed for murder, the focus shifted to Eliza Jumel's will. The settlement of her estate became another long and bitter legal battle, extending for years after her death. The question of her true cause of death remained officially unanswered, a dark secret buried with her.\n\nTo this day, the murder of Eliza Jumel remains an unsolved mystery. Was she truly poisoned by those she trusted, or was her death simply a natural end to a long, dramatic life, made suspicious by her wealth and the greedy people around her? History offers no clear answer.\n\nThe Morris-Jumel Mansion, her former home, is now said to be haunted by Eliza's spirit. Many believe her ghost still wanders the halls, perhaps searching for the truth of her own demise, or perhaps still fighting for her legacy, a chilling reminder of a fortune that brought both power and a permanent shadow of doubt.",
           "cliffhanger": null
         }
       ],
