@@ -318,6 +318,20 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           className="absolute inset-0 pointer-events-none z-10"
           style={{ background: 'linear-gradient(to right, transparent 50%, rgba(13,11,8,0.9) 100%), linear-gradient(to bottom, transparent 55%, rgba(9,8,7,0.98) 100%)' }}
         />
+        {/* File No. watermark — bottom-left, matching top-left brand watermark */}
+        {fileNum && (
+          <div className="absolute bottom-2.5 left-2.5 z-20 flex items-center pointer-events-none select-none" style={{ opacity: 0.22 }}>
+            <span
+              style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: '6px',
+                color: '#EDE8DF',
+                letterSpacing: '0.28em',
+                fontWeight: 700,
+              }}
+            >FILE NO. {fileNum}</span>
+          </div>
+        )}
       </div>
 
       {/* Content panel */}
@@ -414,10 +428,10 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
             )}
           </div>
 
-          {/* Title */}
+          {/* Title — written in Zilla Slab typography font */}
           <h2
-            className="font-sans font-semibold leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C] tracking-tight"
-            style={{ fontSize: 'clamp(0.95rem, 2.1vw, 1.2rem)', color: fg }}
+            className="font-slab font-semibold leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C] tracking-tight"
+            style={{ fontSize: 'clamp(1.05rem, 2.3vw, 1.34rem)', color: fg }}
           >
             {story.title}
           </h2>
@@ -431,11 +445,28 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         {/* Footer: concepts + reactions + arrow */}
         <div className="flex items-center justify-between mt-3 gap-2">
           <div className="flex items-center gap-2 flex-wrap">
-            {(story.concepts || []).slice(0, 1).map(c => (
-              <span key={c} className="text-[7px] font-mono tracking-[0.06em] uppercase" style={{ color: mu, opacity: 0.38 }}>{c}</span>
+            {(story.concepts || []).slice(0, 2).map(c => (
+              <span
+                key={c}
+                className="px-2 py-[2.5px] text-[6.5px] font-mono tracking-[0.16em] uppercase rounded-sm border select-none"
+                style={{
+                  borderColor: 'rgba(237,232,223,0.06)',
+                  color: 'rgba(237,232,223,0.4)',
+                  backgroundColor: 'rgba(237,232,223,0.02)'
+                }}
+              >
+                // {c}
+              </span>
             ))}
             {getTotalReactions(story) > 0 && (
-              <span className="text-[7px] font-mono flex items-center gap-0.5" style={{ color: mu, opacity: 0.3 }}>
+              <span
+                className="px-2 py-[2.5px] text-[6.5px] font-mono tracking-[0.16em] uppercase rounded-sm border select-none"
+                style={{
+                  borderColor: 'rgba(158,123,76,0.25)',
+                  color: '#9E7B4C',
+                  backgroundColor: 'rgba(158,123,76,0.04)'
+                }}
+              >
                 &#8593; {getTotalReactions(story)}
               </span>
             )}
@@ -662,13 +693,30 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
       return true;
     });
 
-    return byLevel.filter(story => {
+    const withReadStatus = byLevel.filter(story => {
       const prog = getProgress(story.story_id);
       const isCompleted = prog?.completed === true;
       if (filterReadStatus === 'active') return !isCompleted;
       if (filterReadStatus === 'archived') return isCompleted;
       return true;
     });
+
+    // In 'all' tab, move completed/read stories to the end of the list
+    if (filterReadStatus === 'all') {
+      const unread = [];
+      const read = [];
+      for (const story of withReadStatus) {
+        const prog = getProgress(story.story_id);
+        if (prog?.completed) {
+          read.push(story);
+        } else {
+          unread.push(story);
+        }
+      }
+      return [...unread, ...read];
+    }
+
+    return withReadStatus;
   }, [sortedStories, selectedLevel, filterReadStatus, getProgress]);
 
   // J/K/Enter keyboard listener
