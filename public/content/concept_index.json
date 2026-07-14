@@ -852,8 +852,8 @@
     "phantom_limb_syndrome_001",
     "body_integrity_identity_disorder_biid",
     "fregoli_delusion_imposter_faces",
-    "reduplicative_paramnesia_001",
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "reduplicative_paramnesia_001"
   ],
   "frontal_lobe": [
     "phineas_gage_brain_injury"
@@ -894,8 +894,8 @@
     "ravaan_character_study",
     "pseudocyesis_phantom_pregnancy",
     "fregoli_delusion_imposter_faces",
-    "reduplicative_paramnesia_001",
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "reduplicative_paramnesia_001"
   ],
   "altered_self_perception": [
     "clinical_lycanthropy"
@@ -2976,8 +2976,8 @@
   ],
   "altered_perception": [
     "fregoli_delusion_imposter_faces",
-    "reduplicative_paramnesia_001",
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "reduplicative_paramnesia_001"
   ],
   "identity_misidentification": [
     "fregoli_delusion_imposter_faces"
@@ -3012,9 +3012,6 @@
   "life_and_death_paradox": [
     "chinnamasta_self_decapitating_goddess"
   ],
-  "memory_confabulation": [
-    "reduplicative_paramnesia_001"
-  ],
   "identity_perception": [
     "capgras_delusion_001"
   ],
@@ -3041,5 +3038,8 @@
   ],
   "unseen_cheaters": [
     "online_poker_superuser_scandal"
+  ],
+  "memory_confabulation": [
+    "reduplicative_paramnesia_001"
   ]
 }

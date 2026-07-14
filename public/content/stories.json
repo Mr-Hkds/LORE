@@ -19348,7 +19348,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/the_murder_of_eliza_jumel.jpg",
       "added_date": "2026-07-12",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 41,
         "gripping": 14,
@@ -19423,7 +19423,7 @@
       "custom_image_prompt": null,
       "vocabulary": {},
       "year": "N/A",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "the_bermuda_triangle_mystery",
@@ -21696,99 +21696,6 @@
       "image_missing": true
     },
     {
-      "story_id": "reduplicative_paramnesia_001",
-      "title": "Reduplicative Paramnesia: When Reality Copies Itself",
-      "category": "psychology",
-      "hook": "Imagine waking up in your own home, seeing everything exactly as it should be, yet knowing deep in your mind that it is not your real home, but a perfect, hidden copy.",
-      "concepts": [
-        "delusion",
-        "altered_perception",
-        "neurology",
-        "brain_injury",
-        "reality_distortion",
-        "memory_confabulation"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/reduplicative_paramnesia_001.jpg",
-      "added_date": "2026-07-13",
-      "draft": 0,
-      "reactions": {
-        "like": 53,
-        "gripping": 30,
-        "scared": 5,
-        "mindblown": 65
-      },
-      "evidence_links": [
-        {
-          "label": "Reduplication of Visual Stimuli (Andrew W. Young, Deborah J. Hellawell, 1994)",
-          "url": "https://downloads.hindawi.com/journals/bn/1994/249590.pdf"
-        },
-        {
-          "label": "Poststroke psychosis: a systematic review (Helle Stangeland, Vasiliki Orgeta, 2018)",
-          "url": "https://jnnp.bmj.com/content/jnnp/89/8/879.full.pdf"
-        },
-        {
-          "label": "New insights into delusional misidentification syndromes (Mark Greener, 2017)",
-          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/pnp.469"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "capgras_delusion_001",
-          "shared_concept": "delusion",
-          "transition_line": "Just as Reduplicative Paramnesia forces a mind to believe in duplicated places, another chilling delusion known as Capgras syndrome makes people believe their loved ones have been replaced by imposters, twisting the very fabric of personal recognition."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Familiar Stranger",
-          "content": "A patient wakes up in a hospital bed. Everything looks normal: the white walls, the medical equipment, the nurses. But for this patient, a terrifying truth emerges: this is not the real hospital. This is a perfect, secret duplicate. Someone has built an exact replica of the hospital, or perhaps even moved their original hospital to a different, unknown place.\n\nThis is the unsettling whisper of Reduplicative Paramnesia, a rare brain disorder. People with this condition do not just feel confused; they hold an absolute, unwavering belief that a familiar place, object, or even a period of time, has been duplicated or secretly moved. Their mind constructs an elaborate, false reality that explains the duplication, making it very hard to convince them otherwise.",
-          "cliffhanger": "How can a mind hold such a clear, yet completely false, conviction about the world around them?"
-        },
-        {
-          "layer": 2,
-          "layer_name": "A Mind's Trick",
-          "content": "Reduplicative Paramnesia is a specific type of 'delusional misidentification syndrome'. It is different from simply seeing double or having poor memory. The person genuinely believes in two identical realities existing at once, or that one reality has been displaced.\n\nFor example, a person might insist that their home has been copied and that they are now living in the replica. They will point out every detail, arguing that it is identical but not 'the real one'. This is not a fleeting thought, but a deeply held belief that challenges the very nature of what we consider reality.",
-          "cliffhanger": "What kind of damage inside the brain could cause such a profound break with reality?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Brain's Broken Map",
-          "content": "This strange delusion is most often linked to specific types of brain damage. Doctors have found that injuries to the right hemisphere of the brain are frequently involved. These areas are vital for processing our surroundings, recognizing places, and creating a sense of 'familiarity'.\n\nWhen these parts of the brain are damaged, for instance by a stroke, head injury, or a tumor, the brain struggles to properly process incoming sensory information. It cannot connect what it sees with the feeling of 'this is my true, original home' or 'this is the real hospital'. Instead of simply failing to recognize, the brain's attempt to make sense of this mismatch leads it to create the false belief of a duplicate.",
-          "cliffhanger": "The brain struggles to connect what it sees with a feeling of 'this is real and familiar' – but why does it then invent a duplicate instead of just failing to recognize?"
-        },
-        {
-          "layer": 4,
-          "layer_name": "The Case of the Double Hospital",
-          "content": "One documented case involved an elderly woman who was recovering in a rehabilitation hospital after a stroke. She firmly believed that the hospital she was in was not the real one. She explained that the 'real' hospital was across town, and this one was a perfect duplicate. She thought it was built specifically for her, by doctors, perhaps to conduct secret tests.\n\nEven when her family visited and assured her it was the same hospital, she remained convinced. Her detailed descriptions of the 'real' hospital matched the one she was physically in, yet her mind refused to accept it as original. She would talk about her 'other' nurses and 'other' room, creating a complex, consistent, but entirely false narrative.",
-          "cliffhanger": "But the delusion doesn't stop at places; it can also affect time, making the mind believe it has somehow traveled backwards."
-        },
-        {
-          "layer": 5,
-          "layer_name": "Time and Space Distorted",
-          "content": "The delusion of Reduplicative Paramnesia can extend beyond physical places. Some patients also experience what is called 'temporal reduplication'. They might believe they are living in a duplicated moment in time, or that they have somehow been transported back to a past event, even if their physical surroundings clearly show they are in the present.\n\nImagine believing you are living in the year 2005, even though the calendar shows 2024 and everything around you points to the present day. This temporal distortion adds another layer of complexity to the delusion, proving how profoundly the brain's internal 'map' of reality can break down.",
-          "cliffhanger": "If your mind can trick you into believing places and times are duplicated, what about the very sense of self within those duplicated realities?"
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Uncanny Familiarity",
-          "content": "For those experiencing Reduplicative Paramnesia, the world becomes a deeply unsettling place. Every object, every room, every street corner appears familiar, yet it simultaneously feels wrong, like a stage set or a dream. This constant struggle between what their eyes see and what their brain believes is true creates immense emotional distress and isolation.\n\nThe patient's perception of themselves is also affected. If their home is a duplicate, then are they living a duplicated life? This profound disconnect from reality makes everyday life a challenging maze. The certainty of a 'real' world, shared by everyone else, simply vanishes for them.",
-          "cliffhanger": "This profound disconnect from reality forces us to ask a terrifying question: what if the foundation of our own perception is not as solid as we think?"
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner",
-          "content": "The darkest truth of Reduplicative Paramnesia is that for the person experiencing it, their duplicated reality is absolute truth. No amount of evidence, no logical argument, can shatter this internal conviction. It reveals how fragile our sense of reality truly is, depending on the delicate balance of our brain's functions.\n\nThis condition serves as a chilling reminder that our 'reality' is largely a construction of our own minds. When that intricate construction falters, the world can transform into a meticulously crafted lie, trapping the individual in a personal nightmare where everything is familiar, yet nothing is truly real. It underscores the profound mystery of consciousness and the terrifying power of the brain to shape our entire existence, even against all external evidence.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "vocabulary": {},
-      "year": "N/A",
-      "image_missing": 0
-    },
-    {
       "story_id": "capgras_delusion_001",
       "title": "Capgras Delusion: The Imposter Within the Familiar",
       "category": "psychology",
@@ -22305,6 +22212,99 @@
           "layer": 7,
           "layer_name": "The Unpunished Shadows",
           "content": "Despite clear evidence of massive fraud and the theft of tens of millions of dollars, many of the key figures responsible for the Absolute Poker and Ultimate Bet scandals largely escaped criminal justice. Regulatory bodies were slow to act, and international laws made prosecution difficult in some cases. The US Department of Justice, for instance, focused more on the illegality of online gambling itself, rather than the fraud within it.\n\nRuss Hamilton, for example, faced a lifetime ban from the poker community and his name was forever stained, but he was never federally prosecuted for the fraud he committed. Others involved also largely avoided criminal charges related to the superuser cheating. They disappeared from public view, likely enjoying their ill-gotten gains without true legal consequence.\n\nThe chilling truth is that while the victims suffered significant financial losses and emotional distress, the masterminds behind this systemic digital manipulation were rarely held fully accountable by the legal system for the core crime of theft and fraud. This leaves a lasting scar on the online gaming industry and serves as a dark warning about the unseen dangers that can lurk within trusted digital spaces.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "vocabulary": {},
+      "year": "N/A",
+      "image_missing": 0
+    },
+    {
+      "story_id": "reduplicative_paramnesia_001",
+      "title": "Reduplicative Paramnesia: When Reality Copies Itself",
+      "category": "psychology",
+      "hook": "Imagine waking up in your own home, seeing everything exactly as it should be, yet knowing deep in your mind that it is not your real home, but a perfect, hidden copy.",
+      "concepts": [
+        "delusion",
+        "altered_perception",
+        "neurology",
+        "brain_injury",
+        "reality_distortion",
+        "memory_confabulation"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://ars.els-cdn.com/content/image/1-s2.0-S0010945223001636-gr6.jpg",
+      "added_date": "2026-07-13",
+      "draft": 0,
+      "reactions": {
+        "like": 53,
+        "gripping": 30,
+        "scared": 5,
+        "mindblown": 65
+      },
+      "evidence_links": [
+        {
+          "label": "Reduplication of Visual Stimuli (Andrew W. Young, Deborah J. Hellawell, 1994)",
+          "url": "https://downloads.hindawi.com/journals/bn/1994/249590.pdf"
+        },
+        {
+          "label": "Poststroke psychosis: a systematic review (Helle Stangeland, Vasiliki Orgeta, 2018)",
+          "url": "https://jnnp.bmj.com/content/jnnp/89/8/879.full.pdf"
+        },
+        {
+          "label": "New insights into delusional misidentification syndromes (Mark Greener, 2017)",
+          "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/pnp.469"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "capgras_delusion_001",
+          "shared_concept": "delusion",
+          "transition_line": "Just as Reduplicative Paramnesia forces a mind to believe in duplicated places, another chilling delusion known as Capgras syndrome makes people believe their loved ones have been replaced by imposters, twisting the very fabric of personal recognition."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Familiar Stranger",
+          "content": "A patient wakes up in a hospital bed. Everything looks normal: the white walls, the medical equipment, the nurses. But for this patient, a terrifying truth emerges: this is not the real hospital. This is a perfect, secret duplicate. Someone has built an exact replica of the hospital, or perhaps even moved their original hospital to a different, unknown place.\n\nThis is the unsettling whisper of Reduplicative Paramnesia, a rare brain disorder. People with this condition do not just feel confused; they hold an absolute, unwavering belief that a familiar place, object, or even a period of time, has been duplicated or secretly moved. Their mind constructs an elaborate, false reality that explains the duplication, making it very hard to convince them otherwise.",
+          "cliffhanger": "How can a mind hold such a clear, yet completely false, conviction about the world around them?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "A Mind's Trick",
+          "content": "Reduplicative Paramnesia is a specific type of 'delusional misidentification syndrome'. It is different from simply seeing double or having poor memory. The person genuinely believes in two identical realities existing at once, or that one reality has been displaced.\n\nFor example, a person might insist that their home has been copied and that they are now living in the replica. They will point out every detail, arguing that it is identical but not 'the real one'. This is not a fleeting thought, but a deeply held belief that challenges the very nature of what we consider reality.",
+          "cliffhanger": "What kind of damage inside the brain could cause such a profound break with reality?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Brain's Broken Map",
+          "content": "This strange delusion is most often linked to specific types of brain damage. Doctors have found that injuries to the right hemisphere of the brain are frequently involved. These areas are vital for processing our surroundings, recognizing places, and creating a sense of 'familiarity'.\n\nWhen these parts of the brain are damaged, for instance by a stroke, head injury, or a tumor, the brain struggles to properly process incoming sensory information. It cannot connect what it sees with the feeling of 'this is my true, original home' or 'this is the real hospital'. Instead of simply failing to recognize, the brain's attempt to make sense of this mismatch leads it to create the false belief of a duplicate.",
+          "cliffhanger": "The brain struggles to connect what it sees with a feeling of 'this is real and familiar' – but why does it then invent a duplicate instead of just failing to recognize?"
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Case of the Double Hospital",
+          "content": "One documented case involved an elderly woman who was recovering in a rehabilitation hospital after a stroke. She firmly believed that the hospital she was in was not the real one. She explained that the 'real' hospital was across town, and this one was a perfect duplicate. She thought it was built specifically for her, by doctors, perhaps to conduct secret tests.\n\nEven when her family visited and assured her it was the same hospital, she remained convinced. Her detailed descriptions of the 'real' hospital matched the one she was physically in, yet her mind refused to accept it as original. She would talk about her 'other' nurses and 'other' room, creating a complex, consistent, but entirely false narrative.",
+          "cliffhanger": "But the delusion doesn't stop at places; it can also affect time, making the mind believe it has somehow traveled backwards."
+        },
+        {
+          "layer": 5,
+          "layer_name": "Time and Space Distorted",
+          "content": "The delusion of Reduplicative Paramnesia can extend beyond physical places. Some patients also experience what is called 'temporal reduplication'. They might believe they are living in a duplicated moment in time, or that they have somehow been transported back to a past event, even if their physical surroundings clearly show they are in the present.\n\nImagine believing you are living in the year 2005, even though the calendar shows 2024 and everything around you points to the present day. This temporal distortion adds another layer of complexity to the delusion, proving how profoundly the brain's internal 'map' of reality can break down.",
+          "cliffhanger": "If your mind can trick you into believing places and times are duplicated, what about the very sense of self within those duplicated realities?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Uncanny Familiarity",
+          "content": "For those experiencing Reduplicative Paramnesia, the world becomes a deeply unsettling place. Every object, every room, every street corner appears familiar, yet it simultaneously feels wrong, like a stage set or a dream. This constant struggle between what their eyes see and what their brain believes is true creates immense emotional distress and isolation.\n\nThe patient's perception of themselves is also affected. If their home is a duplicate, then are they living a duplicated life? This profound disconnect from reality makes everyday life a challenging maze. The certainty of a 'real' world, shared by everyone else, simply vanishes for them.",
+          "cliffhanger": "This profound disconnect from reality forces us to ask a terrifying question: what if the foundation of our own perception is not as solid as we think?"
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner",
+          "content": "The darkest truth of Reduplicative Paramnesia is that for the person experiencing it, their duplicated reality is absolute truth. No amount of evidence, no logical argument, can shatter this internal conviction. It reveals how fragile our sense of reality truly is, depending on the delicate balance of our brain's functions.\n\nThis condition serves as a chilling reminder that our 'reality' is largely a construction of our own minds. When that intricate construction falters, the world can transform into a meticulously crafted lie, trapping the individual in a personal nightmare where everything is familiar, yet nothing is truly real. It underscores the profound mystery of consciousness and the terrifying power of the brain to shape our entire existence, even against all external evidence.",
           "cliffhanger": null
         }
       ],
