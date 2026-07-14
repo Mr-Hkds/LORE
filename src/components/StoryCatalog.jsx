@@ -284,20 +284,6 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
     return `REF-${catCode}.${fileNum || '000'}`;
   }, [story.category, fileNum]);
 
-  const catColor = useMemo(() => {
-    const clean = (story.category || '').toLowerCase().replace('-', '_');
-    const colors = {
-      psychology: '#9E7B4C',       // Amber
-      mythology: '#B08E66',        // Gold Bronze
-      true_crime: '#C4644A',       // Crimson Orange
-      gov_experiments: '#A64B4B',  // Muted Blood Red
-      paranormal: '#7B8FA1',       // Steel Blue
-      conspiracy: '#6B9E6E',       // Sage Green
-      cyber_mysteries: '#9F7AEA',  // Purple
-    };
-    return colors[clean] || '#9E7B4C';
-  }, [story.category]);
-
   return (
     <article
       id={`story-card-${idx}`}
@@ -445,7 +431,7 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
           {/* Title */}
           <h2
             className="font-serif italic leading-snug mb-2 text-hover-fill"
-            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', letterSpacing: '-0.02em', '--hover-color': catColor }}
+            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', letterSpacing: '-0.02em' }}
           >
             {story.title}
           </h2>

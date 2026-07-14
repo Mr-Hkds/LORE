@@ -428,7 +428,7 @@ select option {
 
 /* Smooth left-to-right text fill wipe on hover */
 .text-hover-fill {
-  background-image: linear-gradient(to right, var(--hover-color, #9E7B4C) 50%, #EDE8DF 50%);
+  background-image: linear-gradient(to right, #9E7B4C 50%, #EDE8DF 50%);
   background-size: 200% 100%;
   background-position: 100% 0;
   background-clip: text;
