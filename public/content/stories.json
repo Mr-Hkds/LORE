@@ -20812,9 +20812,9 @@
         "betrayal_of_trust"
       ],
       "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/The_Altar_of_the_Dead%2C_The_Beast_in_the_Jungle%2C_The_Birthplace%2C_and_Other_Tales_%28London%2C_Macmillan%2C_1922%29.djvu/page1-960px-The_Altar_of_the_Dead%2C_The_Beast_in_the_Jungle%2C_The_Birthplace%2C_and_Other_Tales_%28London%2C_Macmillan%2C_1922%29.djvu.jpg",
+      "hero_image": "/content/images/online_poker_superuser_scandal.jpg",
       "added_date": "2026-07-13",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 28,
         "gripping": 26,
@@ -20881,7 +20881,7 @@
       "custom_image_prompt": null,
       "vocabulary": {},
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "fregoli_delusion_imposter_faces",
@@ -21602,98 +21602,6 @@
       "image_missing": false
     },
     {
-      "story_id": "banality_of_evil_001",
-      "title": "The Banality of Evil: When Ordinary Men Commit Extraordinary Crimes",
-      "category": "psychology",
-      "hook": "The most terrible acts in history were not always carried out by monsters, but by ordinary people simply following orders and performing their daily tasks.",
-      "concepts": [
-        "obedience_to_authority",
-        "moral_responsibility",
-        "dehumanization",
-        "bureaucracy_of_evil",
-        "groupthink"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/banality_of_evil_001.jpg",
-      "added_date": "2026-07-14",
-      "draft": 0,
-      "reactions": {
-        "like": 36,
-        "gripping": 14,
-        "scared": 1,
-        "mindblown": 44
-      },
-      "evidence_links": [
-        {
-          "label": "Beyond the Banality of Evil: Criminology and Genocide (Augustine Brannigan, 2013)",
-          "url": "http://search.ebscohost.com/login.aspx?direct=true&amp;scope=site&amp;db=nlebk&amp;db=nlabk&amp;AN=643211"
-        },
-        {
-          "label": "Accounting and the banality of evil (Valerio Antonelli, Raffaele D’Alessio, 2018)",
-          "url": "https://kar.kent.ac.uk/66716/1/Egeli%20paper%252c%20REVISED%20FINAL%20VERSION%20AFTER%20ACCEPTANCE%20BY%20AAAJ%20with%20Abstract%252c%2022%20March%202018%252cv2.pdf"
-        },
-        {
-          "label": "Carl Schmitt’s Confrontation with the Work of Hannah Arendt: A Debate on Totalitarianism, Power, and Banality of Evil (Ville Suuronen, 2022)",
-          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23801883.2022.2074866?needAccess=true"
-        }
-      ],
-      "connections": [
-        {
-          "story_id": "milgram_experiment_on_obedience_001",
-          "shared_concept": "obedience_to_authority",
-          "transition_line": "Just as Eichmann demonstrated the chilling power of bureaucratic obedience, the Milgram Experiment revealed how ordinary people can inflict harm when ordered by an authority figure."
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "The Whisper: The Man Who Was Not a Monster",
-          "content": "Imagine a world where the greatest evil does not wear a monstrous face. This is the unsettling truth discovered during the trial of Adolf Eichmann in Jerusalem in 1961. People expected to see a devil, a figure of pure hatred and cruelty, responsible for unimaginable suffering. Instead, they saw a rather ordinary, even dull, man.\n\nEichmann was an official in Nazi Germany, a key figure in the Holocaust, which saw the systematic murder of six million Jews. His polite, bureaucratic manner in court confused many. He often seemed more concerned with proving his efficiency as an administrator than with denying the horrific outcomes of his actions. This stark contrast between the monstrous crimes and the unexceptional man became a profound puzzle for the world.\n\nHis defense was simple: he was merely a 'small cog in the machine', following orders, doing his job. But how could a 'normal' man be responsible for such extraordinary evil?",
-          "cliffhanger": "This ordinary man, with his quiet voice and tidy appearance, held a terrifying secret about how mass murder could be organized, leading the world to question the true nature of evil itself."
-        },
-        {
-          "layer": 2,
-          "layer_name": "The Pattern: The Machine of Destruction",
-          "content": "Adolf Eichmann's role was not that of a soldier on the front lines, directly pulling a trigger or gassing victims. His power lay in logistics and administration. He was responsible for the efficient scheduling and transportation of millions of Jews from all over Europe to concentration and extermination camps. He managed train timetables, coordinated with various departments, and ensured that the 'Final Solution' ran smoothly.\n\nHe worked at a desk, surrounded by papers and maps, making phone calls, and attending meetings. His job was to solve logistical problems, ensuring that as many people as possible were moved quickly and effectively to their deaths. He did this with a cold, detached professionalism, often expressing pride in his organizational skills.\n\nThis administrative side of genocide revealed a horrifying pattern: that systematic evil could be carried out through bureaucratic processes, by individuals who did not see themselves as murderers, but as diligent public servants.",
-          "cliffhanger": "But how did a man like Eichmann, far from the battlefields, end up in a courtroom facing charges for crimes against humanity, decades after the war's end?"
-        },
-        {
-          "layer": 3,
-          "layer_name": "The Incident: Capture and Trial in Jerusalem",
-          "content": "After World War II, Adolf Eichmann managed to escape justice. He used false papers and lived quietly under a new name in Argentina for many years, blending into a community of other former Nazis. For over a decade, he remained hidden, believed by many to be dead or untraceable.\n\nHowever, a secret team of Israeli Mossad agents tracked him down. In May 1960, they captured him in a dramatic covert operation in Buenos Aires and smuggled him out of Argentina to Israel. This capture made headlines around the world, bringing a key architect of the Holocaust to justice.\n\nHis trial in Jerusalem began in April 1961. It was the first time an individual had been tried in Israel under its Nazi and Nazi Collaborators (Punishment) Law. The trial was broadcast globally, making it a pivotal moment in history, allowing survivors to testify and the world to hear the full horror of the Holocaust from the perspective of both victims and perpetrators.",
-          "cliffhanger": "As the world watched, listening to the testimonies and Eichmann's own words, a famous philosopher began to uncover a shocking truth not about a monstrous devil, but about something far more common and disturbing."
-        },
-        {
-          "layer": 4,
-          "layer_name": "The System: The Architect of Deportation",
-          "content": "During the trial, Eichmann admitted his role in the 'Final Solution'. He was not a fanatical ideologue filled with rage against Jews. Instead, he presented himself as a loyal civil servant, dedicated to his duties. His job, he argued, was simply to execute the policies given to him by his superiors.\n\nHe meticulously arranged the transport schedules, ensuring that trains ran on time and were filled to capacity. He handled budgets, coordinated with other Nazi offices, and drafted official memos—all for the purpose of moving people to their deaths. He once testified that he had 'never done anything out of my own initiative', merely following the orders of the state.\n\nThis devotion to procedure and obedience to authority allowed him to see his work as a complex administrative task, completely detached from the human suffering it caused. He dehumanized the victims, referring to them as 'pieces' or 'cargo', which helped him perform his grim tasks without apparent guilt.",
-          "cliffhanger": "His detailed, emotionless account of his work left many wondering how such ordinary conduct could result in such unspeakable evil, a question that deeply troubled one observer more than any other."
-        },
-        {
-          "layer": 5,
-          "layer_name": "The Research: Hannah Arendt's Shocking Insight",
-          "content": "Among the many journalists and thinkers present at the Eichmann trial was Hannah Arendt, a brilliant Jewish-German political philosopher who had escaped the Nazis. She covered the trial for The New Yorker magazine, expecting to find an embodiment of pure, deep-seated evil.\n\nWhat she observed, however, profoundly challenged her understanding of evil. She saw not a demonic figure, but a man who appeared strangely ordinary, almost boring. He was a 'nobody' rather than a 'monster'. He spoke in clichés, seemed unable to think critically, and showed no real signs of remorse or deep understanding of his crimes beyond their legal implications.\n\nArendt was shocked by the disconnect between the enormity of Eichmann's actions and the shallow, thoughtless nature of the man himself. This observation led her to coin a controversial phrase that would forever change how the world understood the roots of mass atrocities.",
-          "cliffhanger": "This powerful phrase, 'the banality of evil', pointed to a truth far more chilling than any monstrous villain, revealing a dark potential within us all."
-        },
-        {
-          "layer": 6,
-          "layer_name": "The Abyss: The Concept of 'Banality of Evil'",
-          "content": "Hannah Arendt's concept of 'the banality of evil' did not mean that Eichmann's deeds were trivial or excusable. It meant that the *perpetrator* of these terrible deeds was himself not extraordinary. Eichmann was not a sadist or a psychopath driven by extreme malice, but a conformist, a careerist, who simply did not think for himself.\n\nHis evil stemmed from a 'thoughtlessness' – an inability or unwillingness to imagine the consequences of his actions from the perspective of others. He was good at following rules and orders, dedicated to his job within a system that made horrific acts seem normal and necessary. He was trapped in a bureaucratic mindset, where paperwork and procedures replaced moral judgment.\n\nThis insight was deeply disturbing because it suggested that evil, on a grand scale, could be committed by ordinary people who simply accept the norms of a corrupt system, without questioning, without empathy, and without true personal malice.",
-          "cliffhanger": "The final, darkest truth of Eichmann's case is not about a unique monster, but about a terrifying lesson that reflects the potential for evil in any society where individual moral thinking is replaced by blind obedience and bureaucratic detachment."
-        },
-        {
-          "layer": 7,
-          "layer_name": "The Dark Corner: The Reflection in the Mirror",
-          "content": "The 'banality of evil' forces us to confront a chilling reality: that horrific acts can arise not from radical evil, but from thoughtlessness, lack of imagination, and unquestioning obedience to authority. Eichmann's trial showed that a person can be responsible for mass murder without ever feeling intense hatred or having a deeply evil character.\n\nThis concept warns us about the dangers of bureaucratic systems that allow individuals to detach themselves from the human consequences of their actions. It highlights the importance of individual moral responsibility, even when embedded within a larger group or following strict orders. The lesson is that we must always think critically, question authority, and refuse to participate in systems that dehumanize others.\n\nThe true horror is that the potential for such 'banal evil' exists not just in extraordinary historical events, but in everyday actions and in every society. It is a constant reminder that vigilance and active moral thought are essential to prevent the quiet, administrative pathways to human catastrophe.",
-          "cliffhanger": null
-        }
-      ],
-      "custom_image_prompt": null,
-      "vocabulary": {},
-      "year": "N/A",
-      "image_missing": 0
-    },
-    {
       "story_id": "chinnamasta_self_decapitating_goddess",
       "title": "Chinnamasta: The Self-Decapitating Goddess and the Cycle of Life and Death",
       "category": "mythology",
@@ -22312,6 +22220,98 @@
       },
       "year": "Ancient",
       "image_missing": true
+    },
+    {
+      "story_id": "banality_of_evil_001",
+      "title": "The Banality of Evil: When Ordinary Men Commit Extraordinary Crimes",
+      "category": "psychology",
+      "hook": "The most terrible acts in history were not always carried out by monsters, but by ordinary people simply following orders and performing their daily tasks.",
+      "concepts": [
+        "obedience_to_authority",
+        "moral_responsibility",
+        "dehumanization",
+        "bureaucracy_of_evil",
+        "groupthink"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://www.thebritishacademy.ac.uk/media/images/GettyImages-515306046.width-592.jpg",
+      "added_date": "2026-07-14",
+      "draft": 0,
+      "reactions": {
+        "like": 36,
+        "gripping": 14,
+        "scared": 1,
+        "mindblown": 44
+      },
+      "evidence_links": [
+        {
+          "label": "Beyond the Banality of Evil: Criminology and Genocide (Augustine Brannigan, 2013)",
+          "url": "http://search.ebscohost.com/login.aspx?direct=true&amp;scope=site&amp;db=nlebk&amp;db=nlabk&amp;AN=643211"
+        },
+        {
+          "label": "Accounting and the banality of evil (Valerio Antonelli, Raffaele D’Alessio, 2018)",
+          "url": "https://kar.kent.ac.uk/66716/1/Egeli%20paper%252c%20REVISED%20FINAL%20VERSION%20AFTER%20ACCEPTANCE%20BY%20AAAJ%20with%20Abstract%252c%2022%20March%202018%252cv2.pdf"
+        },
+        {
+          "label": "Carl Schmitt’s Confrontation with the Work of Hannah Arendt: A Debate on Totalitarianism, Power, and Banality of Evil (Ville Suuronen, 2022)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1080/23801883.2022.2074866?needAccess=true"
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "milgram_experiment_on_obedience_001",
+          "shared_concept": "obedience_to_authority",
+          "transition_line": "Just as Eichmann demonstrated the chilling power of bureaucratic obedience, the Milgram Experiment revealed how ordinary people can inflict harm when ordered by an authority figure."
+        }
+      ],
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: The Man Who Was Not a Monster",
+          "content": "Imagine a world where the greatest evil does not wear a monstrous face. This is the unsettling truth discovered during the trial of Adolf Eichmann in Jerusalem in 1961. People expected to see a devil, a figure of pure hatred and cruelty, responsible for unimaginable suffering. Instead, they saw a rather ordinary, even dull, man.\n\nEichmann was an official in Nazi Germany, a key figure in the Holocaust, which saw the systematic murder of six million Jews. His polite, bureaucratic manner in court confused many. He often seemed more concerned with proving his efficiency as an administrator than with denying the horrific outcomes of his actions. This stark contrast between the monstrous crimes and the unexceptional man became a profound puzzle for the world.\n\nHis defense was simple: he was merely a 'small cog in the machine', following orders, doing his job. But how could a 'normal' man be responsible for such extraordinary evil?",
+          "cliffhanger": "This ordinary man, with his quiet voice and tidy appearance, held a terrifying secret about how mass murder could be organized, leading the world to question the true nature of evil itself."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern: The Machine of Destruction",
+          "content": "Adolf Eichmann's role was not that of a soldier on the front lines, directly pulling a trigger or gassing victims. His power lay in logistics and administration. He was responsible for the efficient scheduling and transportation of millions of Jews from all over Europe to concentration and extermination camps. He managed train timetables, coordinated with various departments, and ensured that the 'Final Solution' ran smoothly.\n\nHe worked at a desk, surrounded by papers and maps, making phone calls, and attending meetings. His job was to solve logistical problems, ensuring that as many people as possible were moved quickly and effectively to their deaths. He did this with a cold, detached professionalism, often expressing pride in his organizational skills.\n\nThis administrative side of genocide revealed a horrifying pattern: that systematic evil could be carried out through bureaucratic processes, by individuals who did not see themselves as murderers, but as diligent public servants.",
+          "cliffhanger": "But how did a man like Eichmann, far from the battlefields, end up in a courtroom facing charges for crimes against humanity, decades after the war's end?"
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident: Capture and Trial in Jerusalem",
+          "content": "After World War II, Adolf Eichmann managed to escape justice. He used false papers and lived quietly under a new name in Argentina for many years, blending into a community of other former Nazis. For over a decade, he remained hidden, believed by many to be dead or untraceable.\n\nHowever, a secret team of Israeli Mossad agents tracked him down. In May 1960, they captured him in a dramatic covert operation in Buenos Aires and smuggled him out of Argentina to Israel. This capture made headlines around the world, bringing a key architect of the Holocaust to justice.\n\nHis trial in Jerusalem began in April 1961. It was the first time an individual had been tried in Israel under its Nazi and Nazi Collaborators (Punishment) Law. The trial was broadcast globally, making it a pivotal moment in history, allowing survivors to testify and the world to hear the full horror of the Holocaust from the perspective of both victims and perpetrators.",
+          "cliffhanger": "As the world watched, listening to the testimonies and Eichmann's own words, a famous philosopher began to uncover a shocking truth not about a monstrous devil, but about something far more common and disturbing."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System: The Architect of Deportation",
+          "content": "During the trial, Eichmann admitted his role in the 'Final Solution'. He was not a fanatical ideologue filled with rage against Jews. Instead, he presented himself as a loyal civil servant, dedicated to his duties. His job, he argued, was simply to execute the policies given to him by his superiors.\n\nHe meticulously arranged the transport schedules, ensuring that trains ran on time and were filled to capacity. He handled budgets, coordinated with other Nazi offices, and drafted official memos—all for the purpose of moving people to their deaths. He once testified that he had 'never done anything out of my own initiative', merely following the orders of the state.\n\nThis devotion to procedure and obedience to authority allowed him to see his work as a complex administrative task, completely detached from the human suffering it caused. He dehumanized the victims, referring to them as 'pieces' or 'cargo', which helped him perform his grim tasks without apparent guilt.",
+          "cliffhanger": "His detailed, emotionless account of his work left many wondering how such ordinary conduct could result in such unspeakable evil, a question that deeply troubled one observer more than any other."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research: Hannah Arendt's Shocking Insight",
+          "content": "Among the many journalists and thinkers present at the Eichmann trial was Hannah Arendt, a brilliant Jewish-German political philosopher who had escaped the Nazis. She covered the trial for The New Yorker magazine, expecting to find an embodiment of pure, deep-seated evil.\n\nWhat she observed, however, profoundly challenged her understanding of evil. She saw not a demonic figure, but a man who appeared strangely ordinary, almost boring. He was a 'nobody' rather than a 'monster'. He spoke in clichés, seemed unable to think critically, and showed no real signs of remorse or deep understanding of his crimes beyond their legal implications.\n\nArendt was shocked by the disconnect between the enormity of Eichmann's actions and the shallow, thoughtless nature of the man himself. This observation led her to coin a controversial phrase that would forever change how the world understood the roots of mass atrocities.",
+          "cliffhanger": "This powerful phrase, 'the banality of evil', pointed to a truth far more chilling than any monstrous villain, revealing a dark potential within us all."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss: The Concept of 'Banality of Evil'",
+          "content": "Hannah Arendt's concept of 'the banality of evil' did not mean that Eichmann's deeds were trivial or excusable. It meant that the *perpetrator* of these terrible deeds was himself not extraordinary. Eichmann was not a sadist or a psychopath driven by extreme malice, but a conformist, a careerist, who simply did not think for himself.\n\nHis evil stemmed from a 'thoughtlessness' – an inability or unwillingness to imagine the consequences of his actions from the perspective of others. He was good at following rules and orders, dedicated to his job within a system that made horrific acts seem normal and necessary. He was trapped in a bureaucratic mindset, where paperwork and procedures replaced moral judgment.\n\nThis insight was deeply disturbing because it suggested that evil, on a grand scale, could be committed by ordinary people who simply accept the norms of a corrupt system, without questioning, without empathy, and without true personal malice.",
+          "cliffhanger": "The final, darkest truth of Eichmann's case is not about a unique monster, but about a terrifying lesson that reflects the potential for evil in any society where individual moral thinking is replaced by blind obedience and bureaucratic detachment."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: The Reflection in the Mirror",
+          "content": "The 'banality of evil' forces us to confront a chilling reality: that horrific acts can arise not from radical evil, but from thoughtlessness, lack of imagination, and unquestioning obedience to authority. Eichmann's trial showed that a person can be responsible for mass murder without ever feeling intense hatred or having a deeply evil character.\n\nThis concept warns us about the dangers of bureaucratic systems that allow individuals to detach themselves from the human consequences of their actions. It highlights the importance of individual moral responsibility, even when embedded within a larger group or following strict orders. The lesson is that we must always think critically, question authority, and refuse to participate in systems that dehumanize others.\n\nThe true horror is that the potential for such 'banal evil' exists not just in extraordinary historical events, but in everyday actions and in every society. It is a constant reminder that vigilance and active moral thought are essential to prevent the quiet, administrative pathways to human catastrophe.",
+          "cliffhanger": null
+        }
+      ],
+      "custom_image_prompt": null,
+      "vocabulary": {},
+      "year": "N/A",
+      "image_missing": 0
     }
   ]
 }
