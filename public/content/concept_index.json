@@ -763,7 +763,8 @@
   "government_experiments": [
     "project_stargate_remote_viewing",
     "operation_chariot_alaska_nuclear_harbor",
-    "operation_acoustic_kitty"
+    "operation_acoustic_kitty",
+    "operation_crossroads_bikini_atoll"
   ],
   "psychic_espionage": [
     "project_stargate_remote_viewing"
@@ -784,7 +785,8 @@
     "undetected_backdoors_early_computing",
     "project_chatter_mind_control",
     "project_azorian_glomar_explorer",
-    "operation_chariot_alaska_nuclear_harbor"
+    "operation_chariot_alaska_nuclear_harbor",
+    "operation_crossroads_bikini_atoll"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing"
@@ -3041,5 +3043,29 @@
   ],
   "legal_battle": [
     "the_murder_of_eliza_jumel"
+  ],
+  "nuclear_testing": [
+    "operation_crossroads_bikini_atoll"
+  ],
+  "environmental_devastation": [
+    "operation_crossroads_bikini_atoll"
+  ],
+  "radiological_contamination": [
+    "operation_crossroads_bikini_atoll"
+  ],
+  "human_displacement": [
+    "operation_crossroads_bikini_atoll"
+  ],
+  "computer_virus_origin": [
+    "creeper_program_first_self_replicating_entity"
+  ],
+  "self_replication": [
+    "creeper_program_first_self_replicating_entity"
+  ],
+  "early_internet": [
+    "creeper_program_first_self_replicating_entity"
+  ],
+  "digital_security": [
+    "creeper_program_first_self_replicating_entity"
   ]
 }
