@@ -301,71 +301,120 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         <Share2 className="w-3.5 h-3.5" />
       </button>
 
-      {/* Image panel */}
+      {/* Image panel — clean, no overlays */}
       <div className="w-full h-40 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
-        <div className="absolute inset-0 pointer-events-none z-10" style={{ background: 'linear-gradient(to right, transparent 55%, rgba(13,11,8,0.8) 100%), linear-gradient(to bottom, rgba(9,8,7,0.5) 0%, transparent 28%, transparent 62%, rgba(9,8,7,0.95) 100%)' }} />
-
-        {/* FILE stamp — box border like AnomalyDesk */}
-        {fileNum && (
-          <div className="absolute top-2.5 left-2.5 z-20 px-2 py-[3px] select-none pointer-events-none" style={{ border: '1px solid rgba(158,123,76,0.55)', backgroundColor: 'rgba(9,8,7,0.8)' }}>
-            <span className="block text-[7px] font-mono font-bold tracking-[0.22em] uppercase" style={{ color: '#9E7B4C' }}>FILE {fileNum}</span>
-          </div>
-        )}
-
-        {/* Severity label at image bottom */}
-        <div className="absolute bottom-2.5 left-2.5 z-20 flex items-center gap-1.5 select-none pointer-events-none">
-          <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ backgroundColor: sev.dot }} />
-          <span className="text-[6.5px] font-mono font-bold tracking-[0.2em] uppercase" style={{ color: sev.dot, opacity: 0.8 }}>{sev.label}</span>
+        <div
+          className="absolute inset-0 pointer-events-none z-10"
+          style={{ background: 'linear-gradient(to right, transparent 50%, rgba(13,11,8,0.9) 100%), linear-gradient(to bottom, transparent 55%, rgba(9,8,7,0.98) 100%)' }}
+        />
+        {/* Subtle category watermark inside image at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 px-3 pb-2 pt-4 flex items-end justify-between pointer-events-none select-none">
+          <span
+            className="text-[6px] font-mono font-bold tracking-[0.3em] uppercase"
+            style={{ color: 'rgba(158,123,76,0.55)' }}
+          >
+            {SIGNAL_LABELS[story.category] || 'ARCHIVE'}
+          </span>
+          {storyYear && (
+            <span className="text-[6px] font-mono tracking-[0.2em]" style={{ color: 'rgba(237,232,223,0.25)' }}>
+              {storyYear}
+            </span>
+          )}
         </div>
       </div>
 
       {/* Content panel */}
       <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 min-h-[150px]">
         <div>
-          {/* Forensic 2x2 key-value metadata grid */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mb-3 pb-2.5 pr-8" style={{ borderBottom: '1px solid rgba(237,232,223,0.06)' }}>
-            <div className="flex flex-col gap-[3px]">
-              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Category</span>
-              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>{SIGNAL_LABELS[story.category] || 'Archive'}</span>
-            </div>
-            <div className="flex flex-col gap-[3px]">
-              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Period</span>
-              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>{storyYear || '—'}</span>
-            </div>
-            <div className="flex flex-col gap-[3px]">
-              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Status</span>
-              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>
-                {prog?.completed ? '\u2713 Read' : prog?.lastLayer > 0 ? `Layer ${prog.lastLayer}/7` : 'Unread'}
+          {/* KPI strip — horizontal chips row at top */}
+          <div className="flex items-center gap-1.5 flex-wrap mb-3 pr-8">
+            {/* Severity chip */}
+            <span
+              className="inline-flex items-center gap-1 px-2 py-[3px] rounded-sm text-[6.5px] font-mono font-bold tracking-[0.2em] uppercase flex-shrink-0"
+              style={{
+                color: sev.dot,
+                backgroundColor: `${sev.dot}14`,
+                border: `1px solid ${sev.dot}35`,
+              }}
+            >
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              {sev.label}
+            </span>
+
+            {/* Divider */}
+            <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>
+
+            {/* Category */}
+            <span className="text-[7px] font-mono tracking-[0.14em] uppercase" style={{ color: ac, opacity: 0.75 }}>
+              {SIGNAL_LABELS[story.category] || 'Archive'}
+            </span>
+
+            {/* Divider */}
+            <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>
+
+            {/* Year */}
+            {storyYear && (
+              <span className="text-[7px] font-mono tracking-[0.1em]" style={{ color: mu, opacity: 0.6 }}>{storyYear}</span>
+            )}
+
+            {/* Divider */}
+            {storyYear && <span style={{ color: 'rgba(237,232,223,0.12)', fontSize: '10px' }}>|</span>}
+
+            {/* Read time */}
+            <span className="text-[7px] font-mono tracking-[0.08em]" style={{ color: mu, opacity: 0.5 }}>
+              {Math.max(1, Math.round(getStoryWordCount(story) / 200))} min
+            </span>
+
+            {/* Reading progress — right-aligned */}
+            {prog && (
+              <span
+                className="ml-auto text-[7px] font-mono tracking-[0.1em] uppercase flex items-center gap-1 flex-shrink-0"
+                style={{ color: ac, opacity: prog.completed ? 0.7 : 0.85 }}
+              >
+                {prog.completed
+                  ? <><span>&#10003;</span> Read</>  
+                  : prog.lastLayer > 0
+                  ? <><span className="w-1 h-1 rounded-full bg-current inline-block" /> Layer {prog.lastLayer}/7</>
+                  : null
+                }
               </span>
-            </div>
-            <div className="flex flex-col gap-[3px]">
-              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Depth</span>
-              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>
-                {Math.max(1, Math.round(getStoryWordCount(story) / 200))} min &middot; {story.layers?.length || 7} layers
-              </span>
-            </div>
+            )}
           </div>
 
-          <h2 className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]" style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', color: fg, letterSpacing: '-0.02em' }}>
+          {/* Title */}
+          <h2
+            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
+            style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', color: fg, letterSpacing: '-0.02em' }}
+          >
             {story.title}
           </h2>
-          <p className="font-sans leading-relaxed text-[11px] sm:text-[12px] line-clamp-2" style={{ color: mu, opacity: 0.78 }}>
+
+          {/* Hook */}
+          <p className="font-sans leading-relaxed text-[11px] sm:text-[12px] line-clamp-2" style={{ color: mu, opacity: 0.75 }}>
             {redactText(story.hook)}
           </p>
         </div>
 
-        {/* Footer */}
+        {/* Footer: concepts + reactions + file num + arrow */}
         <div className="flex items-center justify-between mt-3 gap-2">
-          <div className="flex items-center gap-2.5 flex-wrap">
-            {(story.concepts || []).slice(0, 2).map(c => (
-              <span key={c} className="text-[7px] font-mono tracking-[0.08em] uppercase" style={{ color: mu, opacity: 0.45 }}>{c}</span>
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* File number — integrated cleanly in footer */}
+            {fileNum && (
+              <span className="text-[7px] font-mono tracking-[0.2em] uppercase" style={{ color: ac, opacity: 0.4 }}>
+                #{fileNum}
+              </span>
+            )}
+            {(story.concepts || []).slice(0, 1).map(c => (
+              <span key={c} className="text-[7px] font-mono tracking-[0.06em] uppercase" style={{ color: mu, opacity: 0.38 }}>{c}</span>
             ))}
             {getTotalReactions(story) > 0 && (
-              <span className="text-[7px] font-mono flex items-center gap-1" style={{ color: mu, opacity: 0.35 }}>↑ {getTotalReactions(story)}</span>
+              <span className="text-[7px] font-mono flex items-center gap-0.5" style={{ color: mu, opacity: 0.3 }}>
+                &#8593; {getTotalReactions(story)}
+              </span>
             )}
           </div>
-          <span className="text-[#9E7B4C]/35 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm flex-shrink-0">→</span>
+          <span className="text-[#9E7B4C]/30 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm flex-shrink-0">&#8594;</span>
         </div>
       </div>
 
