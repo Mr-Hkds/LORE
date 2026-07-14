@@ -924,9 +924,9 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           {/* Footer */}
           <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
             {/* Brand signature */}
-            <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-none">
-              <span className="text-[9px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF]">
-                SEVENDESCENTS
+            <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-auto">
+              <span className="text-[9px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
+                // SEVENDESCENTS //
               </span>
               <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60 max-w-xl leading-relaxed">
                 AN ARCHIVAL REGISTRY COMPILED FOR INDEPENDENT RESEARCHERS, FORENSIC HISTORIANS, AND MINDS OBSESSED WITH THE UNRESOLVED.
