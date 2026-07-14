@@ -684,7 +684,8 @@
     "the_bermuda_triangle_mystery",
     "the_haunting_of_bhangarh_fort",
     "the_greenbrier_ghost",
-    "ss_ourang_medan_mystery"
+    "ss_ourang_medan_mystery",
+    "skinwalker_ranch_phenomena"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -719,7 +720,8 @@
     "amityville_horror_house_possessed",
     "frederick_valentich_disappearance",
     "poveglia_island_haunting",
-    "the_haunting_of_bhangarh_fort"
+    "the_haunting_of_bhangarh_fort",
+    "skinwalker_ranch_phenomena"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -2011,7 +2013,8 @@
   "government_investigation": [
     "silk_road_dread_pirate_roberts",
     "betty_barney_hill_abduction",
-    "frederick_valentich_disappearance"
+    "frederick_valentich_disappearance",
+    "skinwalker_ranch_phenomena"
   ],
   "international_collaboration": [
     "operation_condor_001"
@@ -3080,5 +3083,11 @@
   ],
   "migraine_aura": [
     "alice_in_wonderland_syndrome_001"
+  ],
+  "high_strangeness": [
+    "skinwalker_ranch_phenomena"
+  ],
+  "cryptid_sightings": [
+    "skinwalker_ranch_phenomena"
   ]
 }
