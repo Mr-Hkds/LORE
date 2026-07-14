@@ -764,9 +764,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 {/* Left side: Title + Mobile Subtitle */}
                 <div className="flex-1 flex flex-col justify-center pr-2">
                   <span
-                    className="font-slab font-semibold leading-none"
+                    className="font-serif italic leading-none"
                     style={{
-                      fontSize: 'clamp(1.45rem, 4.3vw, 2.05rem)',
+                      fontSize: 'clamp(1.4rem, 4.2vw, 2.0rem)',
+                      fontWeight: 400,
                       color: fg,
                       letterSpacing: '-0.02em',
                     }}
