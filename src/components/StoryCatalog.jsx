@@ -291,13 +291,10 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
         transform: visible ? (focused ? 'translateY(-1px)' : 'translateY(0)') : 'translateY(10px)',
       }}
     >
-      {/* Share button — mobile-friendly 44×44 tap area */}
+      {/* Share button */}
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onShareStory?.(story);
-        }}
-        className="absolute top-2 right-2 z-30 flex items-center justify-center w-10 h-10 rounded-full text-[#EDE8DF]/40 hover:text-[#9E7B4C] transition-colors duration-200 active:scale-90 focus:outline-none cursor-pointer"
+        onClick={(e) => { e.stopPropagation(); onShareStory?.(story); }}
+        className="absolute top-2 right-2 z-30 flex items-center justify-center w-10 h-10 rounded-full text-[#EDE8DF]/30 hover:text-[#9E7B4C] transition-colors duration-200 active:scale-90 focus:outline-none cursor-pointer"
         title="Share Dossier"
         aria-label="Share dossier"
       >
@@ -307,83 +304,74 @@ function StoryCard({ story, onSelectStory, onShareStory, idx, visible, ac, fg, m
       {/* Image panel */}
       <div className="w-full h-40 sm:h-full flex-shrink-0 relative overflow-hidden bg-[#090807]">
         <StoryCardImage story={story} alt={story.title} inView={inView} />
-        {/* Edge gradient softener */}
-        <div 
-          className="absolute inset-0 pointer-events-none z-10"
-          style={{
-            background: 'linear-gradient(to right, transparent 60%, rgba(13,11,8,0.7) 100%), linear-gradient(to bottom, rgba(9,8,7,0.8) 0%, transparent 25%, transparent 70%, rgba(9,8,7,0.9) 100%)'
-          }}
-        />
-        {/* Preview snippet on hover — slim bottom strip */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 px-3 py-2 bg-gradient-to-t from-[#090807] to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-[300ms] ease-out pointer-events-none select-none">
-          <p className="text-[9.5px] text-[#EDE8DF]/60 leading-relaxed italic font-serif line-clamp-2">
-            {redactText(previewSnippet)}
-          </p>
+        <div className="absolute inset-0 pointer-events-none z-10" style={{ background: 'linear-gradient(to right, transparent 55%, rgba(13,11,8,0.8) 100%), linear-gradient(to bottom, rgba(9,8,7,0.5) 0%, transparent 28%, transparent 62%, rgba(9,8,7,0.95) 100%)' }} />
+
+        {/* FILE stamp — box border like AnomalyDesk */}
+        {fileNum && (
+          <div className="absolute top-2.5 left-2.5 z-20 px-2 py-[3px] select-none pointer-events-none" style={{ border: '1px solid rgba(158,123,76,0.55)', backgroundColor: 'rgba(9,8,7,0.8)' }}>
+            <span className="block text-[7px] font-mono font-bold tracking-[0.22em] uppercase" style={{ color: '#9E7B4C' }}>FILE {fileNum}</span>
+          </div>
+        )}
+
+        {/* Severity label at image bottom */}
+        <div className="absolute bottom-2.5 left-2.5 z-20 flex items-center gap-1.5 select-none pointer-events-none">
+          <span className="w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ backgroundColor: sev.dot }} />
+          <span className="text-[6.5px] font-mono font-bold tracking-[0.2em] uppercase" style={{ color: sev.dot, opacity: 0.8 }}>{sev.label}</span>
         </div>
       </div>
 
       {/* Content panel */}
-      <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 min-h-[130px]">
+      <div className="w-full flex flex-col justify-between p-3.5 sm:p-5 min-h-[150px]">
         <div>
-          {/* Metadata row — AnomalyDesk style: FILE · CATEGORY · YEAR */}
-          <div className="flex items-center justify-between mb-2 pr-8">
-            <div className="flex items-center gap-1.5 text-[7.5px] font-mono tracking-[0.14em] uppercase" style={{ color: mu }}>
-              {fileNum && <span style={{ color: ac, opacity: 0.7 }}>FILE {fileNum}</span>}
-              {fileNum && <span style={{ opacity: 0.3 }}>·</span>}
-              <span style={{ opacity: 0.75 }}>{SIGNAL_LABELS[story.category] || 'ARCHIVE'}</span>
-              {storyYear && (
-                <>
-                  <span style={{ opacity: 0.3 }}>·</span>
-                  <span style={{ opacity: 0.55 }}>{storyYear}</span>
-                </>
-              )}
-              <span style={{ opacity: 0.3 }}>·</span>
-              <span style={{ opacity: 0.5 }}>{Math.max(1, Math.round(getStoryWordCount(story) / 200))} min</span>
+          {/* Forensic 2x2 key-value metadata grid */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mb-3 pb-2.5 pr-8" style={{ borderBottom: '1px solid rgba(237,232,223,0.06)' }}>
+            <div className="flex flex-col gap-[3px]">
+              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Category</span>
+              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>{SIGNAL_LABELS[story.category] || 'Archive'}</span>
             </div>
-            {/* Reading progress pill — minimal */}
-            <ReadPill progress={prog} accentColor={ac} />
+            <div className="flex flex-col gap-[3px]">
+              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Period</span>
+              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>{storyYear || '—'}</span>
+            </div>
+            <div className="flex flex-col gap-[3px]">
+              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Status</span>
+              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>
+                {prog?.completed ? '\u2713 Read' : prog?.lastLayer > 0 ? `Layer ${prog.lastLayer}/7` : 'Unread'}
+              </span>
+            </div>
+            <div className="flex flex-col gap-[3px]">
+              <span className="text-[5.5px] font-mono font-bold tracking-[0.28em] uppercase" style={{ color: ac, opacity: 0.7 }}>Depth</span>
+              <span className="text-[8px] font-mono tracking-[0.06em] uppercase" style={{ color: fg, opacity: 0.7 }}>
+                {Math.max(1, Math.round(getStoryWordCount(story) / 200))} min &middot; {story.layers?.length || 7} layers
+              </span>
+            </div>
           </div>
 
-          <h2
-            className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]"
-            style={{ fontSize: 'clamp(0.92rem, 2.1vw, 1.28rem)', color: fg, letterSpacing: '-0.02em' }}
-          >
+          <h2 className="font-serif italic leading-snug mb-2 transition-colors duration-200 group-hover:text-[#9E7B4C]" style={{ fontSize: 'clamp(0.9rem, 2vw, 1.22rem)', color: fg, letterSpacing: '-0.02em' }}>
             {story.title}
           </h2>
-          <p className="font-sans leading-relaxed text-[11px] sm:text-[12.5px] line-clamp-2 sm:line-clamp-3" style={{ color: mu, opacity: 0.85 }}>
+          <p className="font-sans leading-relaxed text-[11px] sm:text-[12px] line-clamp-2" style={{ color: mu, opacity: 0.78 }}>
             {redactText(story.hook)}
           </p>
         </div>
 
-        {/* Footer: concepts + severity dot + arrow */}
+        {/* Footer */}
         <div className="flex items-center justify-between mt-3 gap-2">
           <div className="flex items-center gap-2.5 flex-wrap">
             {(story.concepts || []).slice(0, 2).map(c => (
-              <span key={c} className="text-[8px] font-mono tracking-[0.08em] uppercase" style={{ color: mu, opacity: 0.65 }}>
-                {c}
-              </span>
+              <span key={c} className="text-[7px] font-mono tracking-[0.08em] uppercase" style={{ color: mu, opacity: 0.45 }}>{c}</span>
             ))}
             {getTotalReactions(story) > 0 && (
-              <span className="text-[8px] font-mono tracking-[0.06em] flex items-center gap-1" style={{ color: mu, opacity: 0.45 }}>
-                ↑ {getTotalReactions(story)}
-              </span>
+              <span className="text-[7px] font-mono flex items-center gap-1" style={{ color: mu, opacity: 0.35 }}>↑ {getTotalReactions(story)}</span>
             )}
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Severity — quiet right-aligned dot */}
-            <span
-              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ backgroundColor: sev.dot, opacity: 0.6 }}
-              title={sev.label}
-            />
-            <span className="text-[#9E7B4C]/40 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm">→</span>
-          </div>
+          <span className="text-[#9E7B4C]/35 group-hover:text-[#9E7B4C] group-hover:translate-x-0.5 transition-all duration-300 text-sm flex-shrink-0">→</span>
         </div>
       </div>
-      {/* Thin read-progress bar at bottom */}
+
+      {/* Layer progress bar */}
       {prog && !prog.completed && prog.lastLayer > 0 && (
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-20"
-          style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.10) ${(prog.lastLayer / 7) * 100}%)` }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-20" style={{ background: `linear-gradient(to right, ${ac} ${(prog.lastLayer / 7) * 100}%, rgba(158,123,76,0.08) ${(prog.lastLayer / 7) * 100}%)` }} />
       )}
     </article>
   );
