@@ -630,7 +630,9 @@ export default function App() {
         text={activeLayerConfig.text}
         muted={activeLayerConfig.muted}
         border={activeLayerConfig.border}
-        onBack={handleBackToCatalog}
+        onBackToHome={handleBackToTopics}
+        onBackToCatalog={handleBackToCatalog}
+        categoryLabel={selectedCategory ? selectedCategory.label : null}
         onShare={() => setShareTarget({ story: currentStory, layerNum: activeLayer })}
       />
 

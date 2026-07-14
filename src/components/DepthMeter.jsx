@@ -6,7 +6,7 @@
 import LoreMark from './LoreMark';
 import { ArrowLeft } from 'lucide-react';
 
-export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBack }) {
+export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, text, muted, border, onBackToHome, onBackToCatalog, categoryLabel }) {
   const accentColor = '#9E7B4C';
 
   return (
@@ -22,23 +22,30 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           gridTemplateColumns: '1fr auto 1fr',
         }}
       >
-        {/* Logo + Back button */}
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-200 active:scale-95 cursor-pointer bg-[#1A1815]/30 hover:bg-[#1A1815]/80 hover:border-neutral-500/40"
-          style={{ 
-            borderColor: border || 'rgba(158, 123, 76, 0.25)', 
-            color: text,
-            fontFamily: "'Space Mono', monospace",
-            fontSize: '8px',
-            fontWeight: 700,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-          }}
-        >
-          <ArrowLeft size={10} style={{ color: text }} />
-          <span>Catalog</span>
-        </button>
+        {/* Breadcrumb Navigation segments */}
+        <div className="flex items-center gap-2 justify-self-start font-mono text-[9px] font-bold tracking-[0.14em] uppercase select-none">
+          <button
+            onClick={onBackToHome}
+            className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+            style={{ background: 'none', border: 'none', padding: 0, color: text }}
+          >
+            Index
+          </button>
+          
+          <span style={{ opacity: 0.3, color: text }}>/</span>
+          
+          {categoryLabel ? (
+            <button
+              onClick={onBackToCatalog}
+              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+              style={{ background: 'none', border: 'none', padding: 0, color: text }}
+            >
+              {categoryLabel}
+            </button>
+          ) : (
+            <span style={{ opacity: 0.5, color: text }}>Catalog</span>
+          )}
+        </div>
 
         {/* Segmented depth track */}
         <div
@@ -105,22 +112,28 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
       >
         {/* Row 1: Logo (left) and Layer Name (right) */}
         <div className="flex justify-between items-center h-8">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-1.5 transition-all duration-200 active:scale-95 cursor-pointer border px-2 py-1 rounded-md bg-[#1A1815]/30 hover:bg-[#1A1815]/60"
-            style={{ 
-              borderColor: border || 'rgba(158, 123, 76, 0.25)', 
-              color: text,
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '7.5px',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-            }}
-          >
-            <ArrowLeft size={9.5} style={{ color: text }} />
-            <span>Catalog</span>
-          </button>
+          {/* Breadcrumb Navigation segments */}
+          <div className="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-[0.1em] uppercase select-none">
+            <button
+              onClick={onBackToHome}
+              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+              style={{ background: 'none', border: 'none', padding: 0, color: text }}
+            >
+              Index
+            </button>
+            <span style={{ opacity: 0.3, color: text }}>/</span>
+            {categoryLabel ? (
+              <button
+                onClick={onBackToCatalog}
+                className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none truncate max-w-[75px]"
+                style={{ background: 'none', border: 'none', padding: 0, color: text }}
+              >
+                {categoryLabel}
+              </button>
+            ) : (
+              <span style={{ opacity: 0.5, color: text }}>Catalog</span>
+            )}
+          </div>
 
           {/* Layer label */}
           <div className="flex items-center">

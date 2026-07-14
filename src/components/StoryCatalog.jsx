@@ -761,25 +761,21 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
       {/* Header */}
       <header className="px-4 sm:px-8 md:px-10">
         <div className="mx-auto h-14 flex items-center justify-between" style={{ maxWidth: '780px' }}>
-          {/* Logo + wordmark */}
-          <div onClick={handleLogoTap} className="flex items-center gap-2.5 cursor-pointer select-none" title="Tap 5× for Admin">
-            <LoreMark size={17} color={fg} />
-            <span
-              style={{
-                fontFamily: "'Space Mono', monospace",
-                fontSize: '9px',
-                fontWeight: 700,
-                letterSpacing: '0.14em',
-                color: fg,
-                opacity: 0.82,
-                textTransform: 'uppercase',
-              }}
+          {/* Breadcrumb Navigation */}
+          <div className="flex items-center gap-2 font-mono text-[9px] font-bold tracking-[0.14em] uppercase select-none">
+            <button
+              onClick={onBack}
+              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+              style={{ background: 'none', border: 'none', padding: 0, color: fg }}
+              title="Return to Index"
             >
-              SevenDescents
-            </span>
+              Index
+            </button>
+            <span style={{ opacity: 0.3 }}>/</span>
+            <span style={{ color: ac }}>{categoryLabel}</span>
           </div>
 
-          {/* Right: Search, dossier count + back */}
+          {/* Right: Search + dossier count */}
           <div className="flex items-center gap-4">
             <button
               onClick={onOpenSearch}
@@ -815,22 +811,6 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             <span className="text-[9px] font-mono tracking-[0.12em] uppercase hidden sm:block" style={{ color: mu, opacity: 0.6 }}>
               {stories.length} {stories.length === 1 ? 'dossier' : 'dossiers'}
             </span>
-            <button 
-              onClick={onBack}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all duration-200 active:scale-95 cursor-pointer bg-[#1A1815]/30 hover:bg-[#1A1815]/85 hover:border-neutral-500/30"
-              style={{
-                borderColor: 'rgba(158, 123, 76, 0.2)',
-                color: ac,
-                fontFamily: "'Space Mono', monospace",
-                fontSize: '8px',
-                fontWeight: 700,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-              }}
-            >
-              <ArrowLeft size={10} style={{ color: ac }} />
-              <span>Back</span>
-            </button>
           </div>
         </div>
       </header>
