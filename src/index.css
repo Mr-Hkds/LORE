@@ -439,31 +439,32 @@ select option {
   width: 100%;
 }
 
-/* Premium footer brand hover expansion & ambient breathing glow */
-@keyframes ambient-glow-pulse {
-  0%, 100% {
-    text-shadow: 0 0 2px rgba(158, 123, 76, 0.1);
-    opacity: 0.65;
-    color: #EDE8DF;
+/* Premium footer brand golden shimmer text sweep effect */
+@keyframes golden-shimmer {
+  0% {
+    background-position: -200% 0;
   }
-  50% {
-    text-shadow: 0 0 8px rgba(158, 123, 76, 0.5), 0 0 2px rgba(158, 123, 76, 0.2);
-    opacity: 0.95;
-    color: #9E7B4C;
+  100% {
+    background-position: 200% 0;
   }
 }
 
 .footer-brand-text {
-  animation: ambient-glow-pulse 5s ease-in-out infinite;
-  transition: letter-spacing 0.5s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease, color 0.4s ease, opacity 0.4s ease;
-}
-
-.footer-brand-text:hover {
-  animation: none;
-  letter-spacing: 0.48em !important;
-  text-shadow: 0 0 12px rgba(158, 123, 76, 0.75);
-  color: #9E7B4C !important;
-  opacity: 1;
+  background: linear-gradient(
+    90deg,
+    #9E7B4C 0%,
+    #C4A47A 25%,
+    #EDE8DF 50%,
+    #C4A47A 75%,
+    #9E7B4C 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: golden-shimmer 5s linear infinite;
+  display: inline-block;
+  letter-spacing: 0.32em;
 }
 .group:hover .text-hover-fill {
   background-position: 0 0;

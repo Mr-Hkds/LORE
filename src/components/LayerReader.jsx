@@ -14,6 +14,7 @@ export default function LayerReader({
   onReactionUpdate,
   onShare,
   story,
+  onBack,
 }) {
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
@@ -755,17 +756,31 @@ export default function LayerReader({
 
             {/* End stamp for Layer 7 */}
             {isLastLayer && (
-              <div className="mt-10 opacity-30 text-center">
-                <div
-                  className="w-12 h-[1px] mx-auto mb-4"
-                  style={{ backgroundColor: layer.muted }}
-                />
+              <div className="mt-14 pt-8 border-t text-center flex flex-col items-center gap-4" style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}>
                 <p
-                  className="text-[10px] uppercase tracking-[0.2em] font-sans"
-                  style={{ color: layer.text }}
+                  className="text-[10px] uppercase tracking-[0.2em] font-mono text-[#8F8A82]/50"
                 >
                   Dossier Closed. You have reached the bottom.
                 </p>
+                <button
+                  onClick={onBack}
+                  className="px-8 py-3.5 border transition-all duration-300 active:scale-95 cursor-pointer text-[10px] font-mono tracking-[0.22em] uppercase rounded-lg"
+                  style={{
+                    borderColor: 'rgba(158, 123, 76, 0.35)',
+                    backgroundColor: 'rgba(158, 123, 76, 0.04)',
+                    color: '#9E7B4C'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.8)';
+                    e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.08)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.35)';
+                    e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
+                  }}
+                >
+                  ← Return to Dossier Index
+                </button>
               </div>
             )}
           </div>

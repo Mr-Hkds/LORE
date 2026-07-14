@@ -649,6 +649,7 @@ export default function App() {
             onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
             onShare={() => setShareTarget({ story: currentStory, layerNum: layerData.layer })}
             story={currentStory}
+            onBack={handleBackToCatalog}
           />
         ))}
       </div>
