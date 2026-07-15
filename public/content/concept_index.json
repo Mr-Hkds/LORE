@@ -234,7 +234,8 @@
     "the_moors_murders",
     "lizzie_borden_axe_murders",
     "olof_palme_assassination_unsolved",
-    "the_murder_of_eliza_jumel"
+    "the_murder_of_eliza_jumel",
+    "tylenol_murders_1982"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -738,7 +739,8 @@
     "frederick_valentich_disappearance",
     "poveglia_island_haunting",
     "the_haunting_of_bhangarh_fort",
-    "skinwalker_ranch_phenomena"
+    "skinwalker_ranch_phenomena",
+    "travis_walton_abduction"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1171,7 +1173,8 @@
     "phoenix_lights_event"
   ],
   "public_health_crisis": [
-    "anthrax_attacks_2001_amerithrax"
+    "anthrax_attacks_2001_amerithrax",
+    "tylenol_murders_1982"
   ],
   "insider_threat": [
     "anthrax_attacks_2001_amerithrax",
@@ -1434,7 +1437,8 @@
   "skepticism_vs_belief": [
     "enfield_poltergeist_001",
     "borley_rectory_haunting",
-    "the_bell_witch_haunting"
+    "the_bell_witch_haunting",
+    "travis_walton_abduction"
   ],
   "urban_legends": [
     "edinburgh_vaults_001"
@@ -1493,7 +1497,8 @@
     "mothman_silver_bridge_collapse",
     "amityville_horror_house_possessed",
     "loudun_possessions_001",
-    "salem_witch_trials_001_detailed"
+    "salem_witch_trials_001_detailed",
+    "tylenol_murders_1982"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -2047,7 +2052,8 @@
     "silk_road_dread_pirate_roberts",
     "betty_barney_hill_abduction",
     "frederick_valentich_disappearance",
-    "skinwalker_ranch_phenomena"
+    "skinwalker_ranch_phenomena",
+    "travis_walton_abduction"
   ],
   "international_collaboration": [
     "operation_condor_001"
@@ -2223,13 +2229,15 @@
     "aghori_sadhus_ascetics_of_death"
   ],
   "alien_abduction": [
-    "betty_barney_hill_abduction"
+    "betty_barney_hill_abduction",
+    "travis_walton_abduction"
   ],
   "hypnotic_regression": [
     "betty_barney_hill_abduction"
   ],
   "repressed_memory": [
-    "betty_barney_hill_abduction"
+    "betty_barney_hill_abduction",
+    "travis_walton_abduction"
   ],
   "media_manipulation": [
     "operation_mockingbird_cia_media_manipulation",
@@ -2345,7 +2353,8 @@
     "rendlesham_forest_incident"
   ],
   "witness_testimony": [
-    "rendlesham_forest_incident"
+    "rendlesham_forest_incident",
+    "travis_walton_abduction"
   ],
   "radiation": [
     "rendlesham_forest_incident"
@@ -3201,5 +3210,14 @@
   ],
   "cosmic_annihilation": [
     "pralaya_cosmic_annihilation"
+  ],
+  "product_tampering": [
+    "tylenol_murders_1982"
+  ],
+  "consumer_safety": [
+    "tylenol_murders_1982"
+  ],
+  "polygraph_test": [
+    "travis_walton_abduction"
   ]
 }
