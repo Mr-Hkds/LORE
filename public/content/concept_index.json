@@ -1207,7 +1207,8 @@
   "global_surveillance": [
     "echelon_global_surveillance",
     "ghostnet_global_cyber_espionage",
-    "project_bullrun_muscular"
+    "project_bullrun_muscular",
+    "the_great_firewall_of_china"
   ],
   "signals_intelligence": [
     "echelon_global_surveillance",
@@ -1573,7 +1574,8 @@
     "the_equation_group_cyber_espionage",
     "flame_malware_cyber_espionage",
     "the_shadow_brokers_nsa_leak",
-    "titan_rain_silent_infiltration_us_networks"
+    "titan_rain_silent_infiltration_us_networks",
+    "the_great_firewall_of_china"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1602,7 +1604,8 @@
     "ukraine_power_grid_cyber_attack_2015_2016",
     "project_raven_uae_cyber_mercenaries",
     "estonian_cyberattacks_2007",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "the_great_firewall_of_china"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
@@ -3109,5 +3112,17 @@
   ],
   "unexplained_attack": [
     "uss_liberty_incident_001"
+  ],
+  "internet_control": [
+    "the_great_firewall_of_china"
+  ],
+  "censorship": [
+    "the_great_firewall_of_china"
+  ],
+  "digital_authoritarianism": [
+    "the_great_firewall_of_china"
+  ],
+  "information_control": [
+    "the_great_firewall_of_china"
   ]
 }
