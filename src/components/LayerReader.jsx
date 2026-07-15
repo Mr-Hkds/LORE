@@ -310,9 +310,12 @@ export default function LayerReader({
   const formatTextWithLookup = (text) => {
     if (!text) return text;
 
+    // Strip raw markdown bold double asterisks to keep it clean and simple
+    const cleanText = text.replace(/\*\*/g, '');
+
     const storyVocab = story?.vocabulary || {};
     const mergedKeys = [...new Set([...Object.keys(LOCAL_DICTIONARY), ...Object.keys(storyVocab)])];
-    if (mergedKeys.length === 0) return text;
+    if (mergedKeys.length === 0) return cleanText;
 
     const keys = mergedKeys.sort((a, b) => b.length - a.length);
     const escapedKeys = keys.map(k => k.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
@@ -322,10 +325,10 @@ export default function LayerReader({
     let lastIndex = 0;
     let match;
 
-    while ((match = pattern.exec(text)) !== null) {
+    while ((match = pattern.exec(cleanText)) !== null) {
       const matchIndex = match.index;
       const matchText = match[0];
-      if (matchIndex > lastIndex) parts.push(text.substring(lastIndex, matchIndex));
+      if (matchIndex > lastIndex) parts.push(cleanText.substring(lastIndex, matchIndex));
 
       const lowerWord = matchText.toLowerCase();
       const alreadySeen = seenWords.has(lowerWord);
@@ -351,8 +354,8 @@ export default function LayerReader({
       lastIndex = pattern.lastIndex;
     }
 
-    if (lastIndex < text.length) parts.push(text.substring(lastIndex));
-    return parts.length > 0 ? parts : text;
+    if (lastIndex < cleanText.length) parts.push(cleanText.substring(lastIndex));
+    return parts.length > 0 ? parts : cleanText;
   };
 
   // Parse [[CALLOUT]] ... [[/CALLOUT]] blocks from a block of text
