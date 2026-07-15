@@ -459,7 +459,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     category: 'psychology',
     severity: 'unsettling',
     concepts: [],
-    layers: []
+    layers: [],
+    vocabulary: {}
   });
   const [editFormActiveLayer, setEditFormActiveLayer] = useState(1);
   const [aiJsonInput, setAiJsonInput] = useState('');
@@ -801,6 +802,12 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           "cliffhanger": null
         }
       ],
+      "vocabulary": {
+        "example_word": {
+          "generic": "Standard dictionary definition.",
+          "case": "How it connects to this specific story."
+        }
+      },
       "connections": [
         {
           "story_id": "id_of_existing_story_to_connect_to",
@@ -809,6 +816,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         }
       ]
     }
+    
+    CRITICAL VOCABULARY RULE: Identify any complex, obscure, psychiatric, scientific, or case-specific vocabulary words or uncommon terms generated in the text (e.g. 'cryptanalysis', 'folie à deux', 'somnambulism', 'dissociation'). For each of these words, provide a two-tier definition object: a 'generic' key (the standard meaning) and a 'case' key (how the word connects specifically to the events in this story). If there are no uncommon words, leave it as an empty object "vocabulary": {}.
     
     Available stories to connect to:
     ${storiesSummary}
@@ -1481,6 +1490,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       category: story.category || 'psychology',
       severity: story.severity || 'unsettling',
       concepts: story.concepts || [],
+      vocabulary: story.vocabulary || {},
       layers: story.layers ? JSON.parse(JSON.stringify(story.layers)) : Array.from({ length: 7 }).map((_, idx) => ({
         layer: idx + 1,
         layer_name: `Layer ${idx + 1}`,
@@ -1504,6 +1514,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
       category: 'psychology',
       severity: 'unsettling',
       concepts: [],
+      vocabulary: {},
       layers: Array.from({ length: 7 }).map((_, idx) => ({
         layer: idx + 1,
         layer_name: idx === 0 ? 'The Whisper' : idx === 3 ? 'The Incident' : idx === 6 ? 'The Dark Corner' : `Layer ${idx + 1}`,
@@ -1616,54 +1627,64 @@ ${tone}
   "severity": "curious | unsettling | disturbing | harrowing | forbidden",
   "image_query": "The exact Wikipedia article title for this topic (used to auto-fetch a cover image). Example: Project MKUltra",
   "concepts": ["concept_one", "concept_two", "concept_three"],
-  "layers": [
-    {
-      "layer": 1,
-      "layer_name": "The Public Surface — what everyone knows",
-      "content": "Layer 1 content — documented public facts.\\n\\nAdditional background detail.",
-      "cliffhanger": "A chilling hook pulling the reader deeper."
-    },
-    {
-      "layer": 2,
-      "layer_name": "The First Crack",
-      "content": "Layer 2 content — first inconsistencies appear.",
-      "cliffhanger": "Escalating tension hook."
-    },
-    {
-      "layer": 3,
-      "layer_name": "Hidden Patterns",
-      "content": "Layer 3 content — patterns emerge, evidence mounts.",
-      "cliffhanger": "The reader starts questioning everything."
-    },
-    {
-      "layer": 4,
-      "layer_name": "The Deeper Archive",
-      "content": "Layer 4 content — suppressed or overlooked records.",
-      "cliffhanger": "Something much darker is coming."
-    },
-    {
-      "layer": 5,
-      "layer_name": "The Shadow Network",
-      "content": "Layer 5 content — key players, hidden connections.",
-      "cliffhanger": "The trail leads somewhere few have gone."
-    },
-    {
-      "layer": 6,
-      "layer_name": "Entering the Abyss",
-      "content": "Layer 6 content — the darkest documented truths.",
-      "cliffhanger": "One final revelation remains."
-    },
-    {
-      "layer": 7,
-      "layer_name": "The Absolute Truth",
-      "content": "The final devastating, chilling conclusion. The full weight of the truth.",
-      "cliffhanger": null
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Public Surface — what everyone knows",
+          "content": "Layer 1 content — documented public facts.\\n\\nAdditional background detail.",
+          "cliffhanger": "A chilling hook pulling the reader deeper."
+        },
+        {
+          "layer": 2,
+          "layer_name": "The First Crack",
+          "content": "Layer 2 content — first inconsistencies appear.",
+          "cliffhanger": "Escalating tension hook."
+        },
+        {
+          "layer": 3,
+          "layer_name": "Hidden Patterns",
+          "content": "Layer 3 content — patterns emerge, evidence mounts.",
+          "cliffhanger": "The reader starts questioning everything."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The Deeper Archive",
+          "content": "Layer 4 content — suppressed or overlooked records.",
+          "cliffhanger": "Something much darker is coming."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Shadow Network",
+          "content": "Layer 5 content — key players, hidden connections.",
+          "cliffhanger": "The trail leads somewhere few have gone."
+        },
+        {
+          "layer": 6,
+          "layer_name": "Entering the Abyss",
+          "content": "Layer 6 content — the darkest documented truths.",
+          "cliffhanger": "One final revelation remains."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Absolute Truth",
+          "content": "The final devastating, chilling conclusion. The full weight of the truth.",
+          "cliffhanger": null
+        }
+      ],
+      "vocabulary": {
+        "uncommon_word": {
+          "generic": "Standard dictionary definition.",
+          "case": "How it connects specifically to this story."
+        }
+      }
     }
-  ]
-}
 
-## TOPIC
-${aiPromptTopic}`;
+    ## VOCABULARY DETECTION
+    Identify any complex, obscure, psychiatric, scientific, or case-specific vocabulary words or uncommon terms generated in the text (e.g. 'cryptanalysis', 'folie à deux', 'somnambulism', 'dissociation').
+    For each word, define a two-tier explanation: a 'generic' key (standard dictionary meaning) and a 'case' key (how it connects specifically to the events in this story). If there are no uncommon words, keep the vocabulary object empty: "vocabulary": {}
+
+    ## TOPIC
+    ${aiPromptTopic}`;
 
     navigator.clipboard.writeText(promptText)
       .then(() => {
@@ -2997,6 +3018,95 @@ ${aiPromptTopic}`;
                         </div>
                       );
                     })}
+                  </div>
+
+                  {/* ── Vocabulary / Glossary Editor ── */}
+                  <div className="p-4 bg-[#110F0D] border border-neutral-800 rounded-lg text-left space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[9.5px] font-mono tracking-wider uppercase text-[#9E7B4C] font-bold">
+                        Dossier Vocabulary
+                        <span className="ml-2 text-neutral-600 normal-case tracking-normal font-normal">
+                          — words highlighted gold in story text
+                        </span>
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newWord = prompt('Enter word or phrase to add to vocabulary:')?.trim().toLowerCase();
+                          if (!newWord) return;
+                          setEditForm(prev => ({
+                            ...prev,
+                            vocabulary: {
+                              ...(prev.vocabulary || {}),
+                              [newWord]: { generic: '', case: '' }
+                            }
+                          }));
+                        }}
+                        className="px-2.5 py-1 bg-neutral-900 border border-neutral-700 text-[9px] font-mono text-[#9E7B4C] rounded cursor-pointer hover:bg-neutral-800 tracking-wider uppercase"
+                      >
+                        + Add Word
+                      </button>
+                    </div>
+
+                    {Object.keys(editForm.vocabulary || {}).length === 0 ? (
+                      <p className="text-[10px] text-neutral-600 font-mono italic">
+                        No vocabulary terms yet. Click "+ Add Word" to define story-specific terms.
+                      </p>
+                    ) : (
+                      <div className="space-y-3 max-h-64 overflow-y-auto pr-1">
+                        {Object.entries(editForm.vocabulary || {}).map(([word, entry]) => {
+                          const isObj = typeof entry === 'object' && entry !== null;
+                          const generic = isObj ? (entry.generic || '') : (typeof entry === 'string' ? entry : '');
+                          const caseNote = isObj ? (entry.case || '') : '';
+                          return (
+                            <div key={word} className="p-3 bg-black/40 rounded border border-neutral-900 space-y-2">
+                              <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-mono font-bold text-[#9E7B4C] uppercase tracking-widest">{word}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setEditForm(prev => {
+                                      const v = { ...(prev.vocabulary || {}) };
+                                      delete v[word];
+                                      return { ...prev, vocabulary: v };
+                                    });
+                                  }}
+                                  className="text-[9px] font-mono text-red-500/60 hover:text-red-400 cursor-pointer bg-transparent border-none"
+                                >
+                                  ✕ Remove
+                                </button>
+                              </div>
+                              <input
+                                type="text"
+                                value={generic}
+                                onChange={(e) => setEditForm(prev => ({
+                                  ...prev,
+                                  vocabulary: {
+                                    ...(prev.vocabulary || {}),
+                                    [word]: { generic: e.target.value, case: caseNote }
+                                  }
+                                }))}
+                                placeholder="Generic definition (what this word means in plain English)..."
+                                className="w-full px-3 py-1.5 bg-black text-[#EDE8DF] text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none"
+                              />
+                              <input
+                                type="text"
+                                value={caseNote}
+                                onChange={(e) => setEditForm(prev => ({
+                                  ...prev,
+                                  vocabulary: {
+                                    ...(prev.vocabulary || {}),
+                                    [word]: { generic, case: e.target.value }
+                                  }
+                                }))}
+                                placeholder="Case context (what it means in this specific story — optional)..."
+                                className="w-full px-3 py-1.5 bg-black text-[#C8A96A]/80 text-xs rounded border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none italic"
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex gap-2 justify-end pt-4 border-t border-neutral-800">

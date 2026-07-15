@@ -1,0 +1,92 @@
+{
+  "story_id": "aids_trojan_ransomware_1989",
+  "title": "The AIDS Trojan: The World's First Ransomware Attack",
+  "category": "cyber_mysteries",
+  "hook": "In 1989, thousands received a mysterious diskette. It promised health information but delivered a chilling demand: pay money, or lose your computer files forever. This was the world's first true ransomware attack.",
+  "concepts": [
+    "ransomware",
+    "cybercrime",
+    "digital_threats",
+    "malware",
+    "computer_history",
+    "social_engineering"
+  ],
+  "severity": "chilling",
+  "hero_image": "/content/images/aids_trojan_ransomware_1989.jpg",
+  "added_date": "2026-07-13",
+  "draft": false,
+  "reactions": {
+    "like": 24,
+    "gripping": 37,
+    "scared": 4,
+    "mindblown": 10
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Ransomware behavioural analysis on windows platforms (Nikolai Hampton, Zubair Baig, 2018)",
+      "url": "https://ro.ecu.edu.au/ecuworkspost2013/4153"
+    },
+    {
+      "label": "Machine Learning Based File Entropy Analysis for Ransomware Detection in Backup Systems (Kyungroul Lee, Sun‐Young Lee, 2019)",
+      "url": "https://ieeexplore.ieee.org/ielx7/6287639/8600701/08772046.pdf"
+    },
+    {
+      "label": "A Survey on Situational Awareness of Ransomware Attacks—Detection and Prevention Parameters (Juan Silva, Lorena Isabel Barona López, 2019)",
+      "url": "https://www.mdpi.com/2072-4292/11/10/1168/pdf?version=1557983548"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "morris_worm_first_internet_attack",
+      "shared_concept": "digital_threats",
+      "transition_line": "Just as the Morris Worm showed the internet's early fragility, the AIDS Trojan revealed a sinister new way for digital threats to hold users hostage."
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The Whisper: A Mysterious Package",
+      "content": "In 1989, the world of personal computers was young. Most people were just starting to understand what a computer could do. But then, a strange package arrived in the mail for thousands of computer users around the globe. It looked official and important.\n\nInside these packages were floppy disks. These disks were labeled 'AIDS Information Introductory Diskette' and claimed to contain vital information about the AIDS virus. They were sent to attendees of a World Health Organization AIDS conference, mailing lists of PC magazine subscribers, and other health-related groups. People believed they were receiving important medical software, not a hidden danger.",
+      "cliffhanger": "Little did they know, this seemingly helpful software hid a dark secret that would soon attack their very own computers."
+    },
+    {
+      "layer": 2,
+      "layer_name": "The Pattern: A Deceptive Distribution",
+      "content": "The distribution method was a clever trick. The creator used physical mail, sending out more than 20,000 infected floppy disks to people in over 90 countries. This made the threat feel very real and direct, as it arrived right at their doorstep.\n\nThe diskette came with a license agreement that was very long and hard to understand. It mentioned terms like 'damages' and 'termination' in a way that most users would ignore. This agreement was the first sign of trouble, hinting at what the program might do.",
+      "cliffhanger": "After installing the 'AIDS Information Introductory Diskette,' users thought they were safe, but the software was quietly waiting to strike."
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Incident: The Digital Attack Begins",
+      "content": "The program worked silently at first. It installed itself on the user's computer and then waited. For a few days, or sometimes after the computer was rebooted 90 times, the malicious software would activate. It was like a hidden timer suddenly reaching zero.\n\nWhen it activated, the computer screen changed. A message appeared, stating that the 'license agreement' had been violated. It locked the user out of their own files. The message demanded money, telling the user to send $189 to a post office box in Panama. If they did not pay, the message warned that their files would be lost forever.",
+      "cliffhanger": "This was not a simple virus; it was a digital hostage situation, and users found their valuable data suddenly held for ransom."
+    },
+    {
+      "layer": 4,
+      "layer_name": "The System: How Files Were Taken Hostage",
+      "content": "The 'AIDS Trojan,' also known as 'PC Cyborg,' worked by encrypting the names of files on the user's hard drive. It changed these names into gibberish and then hid the files. To the user, it seemed as if their files were completely gone and inaccessible.\n\nThe program demanded an 'annual license fee' of $189. If not paid quickly, a second, larger fee of $378 was threatened. The money was to be sent to a company called 'PC Cyborg Corporation' at a post office box in Panama. This was a physical payment, unlike today's digital cryptocurrency demands.",
+      "cliffhanger": "But who was behind this unprecedented attack, and what was their true purpose in holding computers hostage for money?"
+    },
+    {
+      "layer": 5,
+      "layer_name": "The Research: The Mind Behind the Malware",
+      "content": "Investigators soon identified the person behind the AIDS Trojan: Dr. Joseph Popp, an evolutionary biologist from the United States. Popp claimed his intention was to fund AIDS research. He believed that the profit from this ransomware could help fight the global AIDS epidemic, showing a twisted sense of justice.\n\nHowever, Popp's code was poorly designed. The encryption method was very weak, and security experts quickly found a way to undo the damage without paying the ransom. Many tools were created to help victims recover their files, weakening the attack's overall impact.",
+      "cliffhanger": "Despite the technical flaws, Popp's actions had serious consequences, leading to a global chase and a groundbreaking legal battle."
+    },
+    {
+      "layer": 6,
+      "layer_name": "The Abyss: Arrest and Aftermath",
+      "content": "Joseph Popp was arrested in Amsterdam and later extradited to the United Kingdom to face charges of blackmail and computer damage. This was one of the very first international cases involving computer crime of this type.\n\nDuring his trial, Popp's behavior became increasingly erratic. He wore a condom on his nose, put curlers in his beard, and claimed to have eaten his socks. Doctors found him mentally unfit to stand trial. He was sent back to the U.S. for psychiatric treatment, and the legal case against him ended without conviction.",
+      "cliffhanger": "Though the case of the AIDS Trojan ended without a firm legal judgment, its impact on the digital world was only just beginning, casting a long shadow over the future of cybersecurity."
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Dark Corner: A Legacy of Digital Extortion",
+      "content": "The AIDS Trojan of 1989 marked a chilling turning point in computing history. It was the world's first widely documented ransomware attack. It showed that computers could not only be infected but also held hostage, making user data a target for extortion.\n\nWhile crude by today's standards, this attack opened the door to a new, dark form of cybercrime. It proved that digital threats could move beyond simply destroying data and directly demand money. The AIDS Trojan was a prophecy of the ransomware epidemic we face today, where sophisticated attackers lock down hospitals, businesses, and even governments, proving that the digital whisper of 1989 became a roaring nightmare for the modern world.",
+      "cliffhanger": null
+    }
+  ],
+  "vocabulary": {}
+}

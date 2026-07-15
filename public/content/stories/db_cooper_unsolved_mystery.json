@@ -1,0 +1,90 @@
+{
+  "story_id": "db_cooper_unsolved_mystery",
+  "title": "D.B. Cooper: The Skyjacker Who Vanished",
+  "category": "true_crime",
+  "hook": "On a cold November evening in 1971, a man jumped from a plane with $200,000 and was never seen again.",
+  "concepts": [
+    "unsolved_mystery",
+    "skyjacking",
+    "disappearance",
+    "cold_case",
+    "aviation_crime"
+  ],
+  "severity": "chilling",
+  "hero_image": "/content/images/db_cooper_unsolved_mystery.jpg",
+  "added_date": "2026-07-12",
+  "draft": false,
+  "reactions": {
+    "like": 22,
+    "gripping": 10,
+    "scared": 52,
+    "mindblown": 3
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Microfluidic Platforms to Unravel Mysteries of Alzheimer’s Disease: How Far Have We Come? (Pragya Prasanna, Shweta Rathee, 2021)",
+      "url": "https://www.preprints.org/manuscript/202106.0471/v2/download"
+    },
+    {
+      "label": "Dangerous liaisons at the virological synapse (Vincent Piguet, Quentin J. Sattentau, 2004)",
+      "url": "http://www.jci.org/articles/view/22812/files/pdf"
+    },
+    {
+      "label": "Bioinformatics and Drug Discovery (Xuhua Xia, 2017)",
+      "url": "http://www.eurekaselect.com/article/79752"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "malaysia_airlines_mh370",
+      "shared_concept": "disappearance",
+      "transition_line": "Like the phantom flight of MH370, some disappearances leave behind only questions, haunting us with their silent exits."
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The Whisper: The Ghost of Flight 305",
+      "content": "In 1971, a man known to the world as D.B. Cooper vanished after a daring act. He boarded a plane, demanded a large sum of money, and then parachuted into the night. His identity, his fate, and the money he took have remained a secret for decades. This case became one of the most famous unsolved mysteries in American history.",
+      "cliffhanger": "But who was this mysterious man, and how did he plan such a bold escape?"
+    },
+    {
+      "layer": 2,
+      "layer_name": "The Pattern: A Calm, Cold Plan",
+      "content": "His demands were clear: $200,000 in twenty-dollar bills and four parachutes. He did not yell or act violent. He simply stated his needs, showing the flight attendant a briefcase with what looked like wires and red sticks inside. The crew and passengers were unaware of the true danger unfolding.",
+      "cliffhanger": "Would the airline meet his unusual demands, or would this quiet flight turn into a disaster?"
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Incident: Money and a Second Flight",
+      "content": "Once Cooper had the money and parachutes, he released all 36 passengers and two flight attendants. He then ordered the plane to be refueled. With only the pilot, co-pilot, and one flight attendant left, Cooper gave new instructions for the plane to fly towards Mexico City, at a very low speed and altitude.",
+      "cliffhanger": "With the ransom in hand, what was his next, impossible step?"
+    },
+    {
+      "layer": 4,
+      "layer_name": "The System: A Leap into the Unknown",
+      "content": "Around 8:13 PM, somewhere over southwestern Washington, Cooper opened the rear exit door of the plane. The cold wind and rain rushed in. Without a word, D.B. Cooper jumped out of the plane, disappearing into the blackness below. He carried with him the ransom money and a mystery that would puzzle the world.",
+      "cliffhanger": "Did he survive the dangerous fall into the wilderness, or did the night claim its silent victim?"
+    },
+    {
+      "layer": 5,
+      "layer_name": "The Research: A Silent Search",
+      "content": "Nine years later, in 1980, a small boy playing near the Columbia River found three bundles of the ransom money. The money, amounting to $5,800, was badly damaged but confirmed to be part of the Cooper ransom. This discovery offered a small clue but raised even more questions about what happened to the rest of the money and to Cooper himself.",
+      "cliffhanger": "The money's discovery proved he existed, but it did not reveal his fate. Where did the rest of the money go?"
+    },
+    {
+      "layer": 6,
+      "layer_name": "The Abyss: Endless Theories, No Answers",
+      "content": "The FBI investigated hundreds of suspects over decades, some with strong connections to parachuting or similar crimes. However, none of the evidence ever fully matched any one person. Fingerprints found on the plane, the tie he left behind, and witness descriptions have never led to a definite identification. The case remained open for 45 years.",
+      "cliffhanger": "After decades of searching and countless theories, the final, chilling truth still hides in the shadows."
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Dark Corner: The Vanishing Man",
+      "content": "D.B. Cooper remains a ghost. His true name, his face, and his final end are unknown. He is a symbol of a perfect escape, a man who beat the system and disappeared into the wild. The mystery of the skyjacker who vanished continues to fascinate, reminding us that some secrets are meant to be kept forever, swallowed by the vast, cold night."
+    }
+  ],
+  "vocabulary": {}
+}

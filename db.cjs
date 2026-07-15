@@ -182,7 +182,7 @@ async function ensureStoryReactions(story) {
   return seeded;
 }
 
-async function getStories(includeDrafts = false) {
+async function getStories(includeDrafts = false, includeFullContent = false) {
   await ensureInit();
   const sql = includeDrafts 
     ? 'SELECT * FROM stories' 
@@ -206,17 +206,25 @@ async function getStories(includeDrafts = false) {
     // Note: remote https:// URLs are trusted as-is (frontend will handle 404 via onError)
 
     const s = {
-      ...row,
-      draft: !!row.draft,
+      story_id: row.story_id,
+      title: row.title,
+      category: row.category,
+      hook: row.hook,
       concepts: JSON.parse(row.concepts || '[]'),
+      severity: row.severity,
+      hero_image: row.hero_image,
+      added_date: row.added_date,
+      draft: !!row.draft,
       reactions: JSON.parse(row.reactions || '{}'),
-      evidence_links: JSON.parse(row.evidence_links || '[]'),
-      connections: JSON.parse(row.connections || '[]'),
-      layers: JSON.parse(row.layers || '[]'),
-      vocabulary: JSON.parse(row.vocabulary || '{}'),
       year: row.year || 'N/A',
       image_missing: isImageMissingOnServer
     };
+    if (includeFullContent) {
+      s.evidence_links = JSON.parse(row.evidence_links || '[]');
+      s.connections = JSON.parse(row.connections || '[]');
+      s.layers = JSON.parse(row.layers || '[]');
+      s.vocabulary = JSON.parse(row.vocabulary || '{}');
+    }
     s.reactions = await ensureStoryReactions(s);
     if (s.added_date) {
       s.added_date = s.added_date.substring(0, 10);
@@ -491,14 +499,28 @@ async function exportStoriesToJSON() {
   }
   const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
   const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
+  const STORIES_DIR = path.join(__dirname, 'public', 'content', 'stories');
   
-  const stories = await getStories(false);
+  if (!fs.existsSync(STORIES_DIR)) {
+    fs.mkdirSync(STORIES_DIR, { recursive: true });
+  }
+
+  // 1. Export metadata list (includeFullContent = false)
+  const metadataStories = await getStories(false, false);
   
+  // 2. Export full stories (includeFullContent = true) to individual files
+  const fullStoriesList = await getStories(false, true);
+
   try {
-    fs.writeFileSync(STORIES_FILE, JSON.stringify({ stories }, null, 2));
+    fs.writeFileSync(STORIES_FILE, JSON.stringify({ stories: metadataStories }, null, 2));
+    
+    for (const story of fullStoriesList) {
+      const storyFile = path.join(STORIES_DIR, `${story.story_id}.json`);
+      fs.writeFileSync(storyFile, JSON.stringify(story, null, 2));
+    }
     
     const conceptIndex = {};
-    stories.forEach(story => {
+    metadataStories.forEach(story => {
       if (story.concepts) {
         story.concepts.forEach(concept => {
           const c = concept.trim().toLowerCase();
@@ -512,7 +534,7 @@ async function exportStoriesToJSON() {
       }
     });
     fs.writeFileSync(CONCEPTS_FILE, JSON.stringify(conceptIndex, null, 2));
-    console.log(`[DB] Successfully exported ${stories.length} live stories to stories.json and rebuilt concept index.`);
+    console.log(`[DB] Successfully exported ${metadataStories.length} live story metadata entries and individual story JSONs.`);
   } catch (err) {
     console.error('[DB] Failed to export stories to static JSON files:', err.message);
   }
@@ -578,12 +600,12 @@ async function seed() {
           story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, vocabulary, year
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         args: [
-          s.story_id,
-          s.title,
-          s.category,
-          s.hook,
+          s.story_id || null,
+          s.title || null,
+          s.category || null,
+          s.hook || null,
           JSON.stringify(s.concepts || []),
-          s.severity,
+          s.severity || null,
           s.hero_image || null,
           s.added_date || null,
           s.draft ? 1 : 0,

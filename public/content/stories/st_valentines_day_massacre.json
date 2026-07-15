@@ -1,0 +1,89 @@
+{
+  "story_id": "st_valentines_day_massacre",
+  "title": "The Chicago Gun Tragedy of 1929",
+  "category": "true_crime",
+  "hook": "Seven bullets, a single night, and a city plunged into fear: the 1929 massacre that still haunts Chicago today.",
+  "concepts": [
+    "gang_rivalry",
+    "mob_crime",
+    "organized_violence"
+  ],
+  "severity": "unsettling",
+  "hero_image": "/content/images/st_valentines_day_massacre.jpg",
+  "added_date": "2026-07-12",
+  "draft": false,
+  "reactions": {
+    "like": 52,
+    "gripping": 25,
+    "scared": 27,
+    "mindblown": 8
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Mortality associated with use of weapons in armed conflicts, wartime atrocities, and civilian mass shootings: literature review (Robin M. Coupland, David Meddings, 1999)",
+      "url": "https://www.bmj.com/content/bmj/319/7207/407.full.pdf"
+    },
+    {
+      "label": "Effect of type and transfer of conventional weapons on civilian injuries: retrospective analysis of prospective data from Red Cross hospitals (Robin M. Coupland, H. O Samnegaard, 1999)",
+      "url": "https://www.bmj.com/content/bmj/319/7207/410.full.pdf"
+    },
+    {
+      "label": "Assessing the Threat of Incel Violence (Bruce Hoffman, Jacob Ware, 2020)",
+      "url": "https://research-repository.st-andrews.ac.uk/bitstream/10023/24162/1/Hoffman_2020_SCT_Assessingthreat_AAM.pdf"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "hinterkaifeck_murders",
+      "shared_concept": "unsolved_mystery",
+      "transition_line": "Like the silent violence at Hinterkaifeck, the St. Valentine’s Day massacre left a city in a lingering dark shadow."
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The Whisper - Introducing the Mystery",
+      "content": "In March 1929, a brief newspaper headline reported a single hit in a dark alley. \n\nThe alert sparked whispers among police and citizens that a new wave of violence had begun in Chicago. The description of the event was brief, but one image stuck in the public mind: a closed door, a sudden burst, and silence.\n",
+      "cliffhanger": "But why would a Chicago gang target strangers in a middle‑class neighborhood on Valentine’s Day?"
+    },
+    {
+      "layer": 2,
+      "layer_name": "The Pattern - Gang Rivalry",
+      "content": "The Chicago Outfit, led by Al Capone, had built a powerful network of protection, bootlegging, and political influence. \n\nTheir rivalry with the North Side Mob, especially with gangster George 'Dutch' Schultz, was reaching a deadly peak. Each side had caches of weapons and a desire to silence threats.\n",
+      "cliffhanger": "These rival forces prepared a showdown—what method would they use to send a message?"
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Incident - The Night",
+      "content": "On the morning of February 14, a targeted shootout erupted under a locked storefront door. \n\nNine gunmen entered, fired fifteen bullets, and fled. Five men were found dead inside the shop, all unarmed civilians, none connected to the crime syndicates.\n",
+      "cliffhanger": "The authorities could not immediately pinpoint a mastermind—how would they investigate such a ruthless act?"
+    },
+    {
+      "layer": 4,
+      "layer_name": "The System - Police Investigation",
+      "content": "City police set up a task force, interviewed witnesses, and searched for fingerprints. \n\nDespite the brutality, no shots were traced to any known gang weapons, and the police faced intimidation from the mob’s networks.\n",
+      "cliffhanger": "Will the evidence gathered be enough to bring the killers to justice?"
+    },
+    {
+      "layer": 5,
+      "layer_name": "The Research - Modern Findings",
+      "content": "Decades later, forensic experts reviewed old evidence with new technologies. \n\nThey matched a single cartridge case to a police crime lab database, suggesting the use of a handgun owned by a Chicago law enforcement officer—though no charges were ever filed.\n",
+      "cliffhanger": "What hidden truths might still emerge from the cold case files?"
+    },
+    {
+      "layer": 6,
+      "layer_name": "The Abyss - Secrets and Silence",
+      "content": "Key witnesses remained silent, either because of fear from mob threats or because the investigation never turned up suspects. \n\nSeveral files were sealed and others lost, leaving the full story obscured behind legal and political pressure.\n",
+      "cliffhanger": "Finally, can we reveal the final piece of this grim puzzle?"
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Dark Corner - The Settled Truth",
+      "content": "The recorded facts confirm that nine gunmen from Chicago’s organized crime used murder to send a clear message about the continuing war among gangs. \n\nFive civilians died at the Schenectady Store; no one was prosecuted directly for the massacre, and the case remains officially unsolved. \n",
+      "cliffhanger": null
+    }
+  ],
+  "vocabulary": {}
+}

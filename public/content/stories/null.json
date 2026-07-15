@@ -1,0 +1,28 @@
+{
+  "story_id": null,
+  "title": null,
+  "category": null,
+  "hook": null,
+  "concepts": [],
+  "severity": null,
+  "hero_image": "/content/images/undefined.jpg",
+  "added_date": "2026-07-15",
+  "draft": false,
+  "reactions": {
+    "like": 12,
+    "gripping": 10,
+    "scared": 1,
+    "mindblown": 3
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Rift Valley fever in animals and humans: Current perspectives (Cynthia M. McMillen, Amy L. Hartman, 2018)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10316118/pdf/nihms-1773812.pdf"
+    }
+  ],
+  "connections": [],
+  "layers": [],
+  "vocabulary": {}
+}

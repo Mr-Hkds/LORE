@@ -18,18 +18,19 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
       <div
         className="hidden sm:grid mx-auto h-14 items-center gap-6 px-8 md:px-10"
         style={{
-          maxWidth: '780px',
-          gridTemplateColumns: '1fr auto 1fr',
+          maxWidth: '860px', // slightly wider to allow more room for full titles
+          gridTemplateColumns: '1.2fr auto 1.2fr',
         }}
       >
         {/* Breadcrumb Navigation segments */}
-        <div className="flex items-center gap-2 justify-self-start font-mono text-[9px] font-bold tracking-[0.14em] uppercase select-none">
+        <div className="flex items-center gap-2.5 justify-self-start font-mono text-[9.5px] font-bold tracking-[0.18em] uppercase select-none">
           <button
             onClick={onBackToHome}
-            className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+            className="flex items-center gap-1.5 hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
             style={{ background: 'none', border: 'none', padding: 0, color: text }}
           >
-            Index
+            <LoreMark size={11} color="#9E7B4C" />
+            <span style={{ color: '#9E7B4C', fontFamily: "'Space Mono', monospace", fontWeight: 700, letterSpacing: '0.22em', fontSize: '9px' }}>SEVEN DESCENTS</span>
           </button>
           
           <span style={{ opacity: 0.3, color: text }}>/</span>
@@ -37,7 +38,7 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           {categoryLabel ? (
             <button
               onClick={onBackToCatalog}
-              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none max-w-[180px] truncate"
               style={{ background: 'none', border: 'none', padding: 0, color: text }}
             >
               {categoryLabel}
@@ -92,10 +93,10 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
 
         {/* Layer label */}
         <div className="justify-self-end flex items-center">
-          <div className="overflow-hidden h-[18px] flex items-center max-w-[100px] md:max-w-[155px] select-none">
+          <div className="overflow-hidden h-[18px] flex items-center max-w-[280px] md:max-w-[340px] select-none">
             <span
               key={layerName}
-              className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap block animate-roll-up truncate"
+              className="text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap block animate-roll-up"
               style={{ color: text }}
               title={layerName}
             >
@@ -116,16 +117,17 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           <div className="flex items-center gap-1.5 font-mono text-[8px] font-bold tracking-[0.1em] uppercase select-none">
             <button
               onClick={onBackToHome}
-              className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
+              className="flex items-center gap-1.5 hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none"
               style={{ background: 'none', border: 'none', padding: 0, color: text }}
             >
-              Index
+              <LoreMark size={9} color="#9E7B4C" />
+              <span style={{ color: '#9E7B4C', letterSpacing: '0.2em' }}>SEVEN DESCENTS</span>
             </button>
             <span style={{ opacity: 0.3, color: text }}>/</span>
             {categoryLabel ? (
               <button
                 onClick={onBackToCatalog}
-                className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none truncate max-w-[75px]"
+                className="hover:text-[#9E7B4C] transition-colors duration-200 cursor-pointer focus:outline-none truncate max-w-[90px]"
                 style={{ background: 'none', border: 'none', padding: 0, color: text }}
               >
                 {categoryLabel}
@@ -136,8 +138,8 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
           </div>
 
           {/* Layer label */}
-          <div className="flex items-center">
-            <div className="overflow-hidden h-[16px] flex items-center max-w-[85px] select-none">
+          <div className="flex items-center ml-auto">
+            <div className="overflow-hidden h-[16px] flex items-center select-none max-w-[150px] xs:max-w-[190px] sm:max-w-none">
               <span
                 key={layerName}
                 className="text-[9px] font-bold tracking-[0.12em] uppercase whitespace-nowrap block animate-roll-up truncate"

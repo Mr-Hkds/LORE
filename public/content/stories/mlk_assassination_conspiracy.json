@@ -1,0 +1,96 @@
+{
+  "story_id": "mlk_assassination_conspiracy",
+  "title": "The Unseen Hands: Martin Luther King Jr.'s Assassination and the Broader Conspiracy",
+  "category": "conspiracy",
+  "hook": "James Earl Ray confessed to killing Martin Luther King Jr., but even he quickly took back his confession, claiming he was set up.",
+  "concepts": [
+    "political_assassination",
+    "conspiracy_theories",
+    "government_secrecy",
+    "unexplained_deaths",
+    "civil_rights_movement"
+  ],
+  "severity": "chilling",
+  "hero_image": "/content/images/mlk_assassination_conspiracy.jpg",
+  "added_date": "2026-07-03",
+  "draft": false,
+  "reactions": {
+    "like": 36,
+    "gripping": 44,
+    "scared": 4,
+    "mindblown": 64
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Frontlash: Race and the Development of Punitive Crime Policy (Vesla M. Weaver, 2007)",
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/9744286F944F1A250B94CD3AFB1A6021/S0898588X07000211a.pdf/div-class-title-frontlash-race-and-the-development-of-punitive-crime-policy-div.pdf"
+    },
+    {
+      "label": "The Law as King and the King as Law: Is a President Immune from Criminal Prosecution Before Impeachment? (Eric Freedman, 1992)",
+      "url": "https://scholarlycommons.law.hofstra.edu/cgi/viewcontent.cgi?article=1426&context=faculty_scholarship"
+    },
+    {
+      "label": "Found-Footage Horror and the Frame’s Undoing (Cecília Sayad, 2016)",
+      "url": "https://muse.jhu.edu/pub/15/article/609118"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "jfk_assassination_001",
+      "shared_concept": "political_assassination",
+      "transition_line": "Just five years before Martin Luther King Jr.'s assassination, another American leader, John F. Kennedy, met a similarly controversial end, leaving behind a trail of unanswered questions about unseen forces and possible government involvement."
+    },
+    {
+      "story_id": "cointelpro_fbi_covert_ops",
+      "shared_concept": "government_secrecy",
+      "transition_line": "The intense surveillance and disruption Martin Luther King Jr. faced were part of a wider, darker program: the FBI's COINTELPRO, a secret war against American citizens and their civil rights, revealing a pattern of covert operations that touched many lives."
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The First Doubt",
+      "content": "On April 4, 1968, America lost a powerful voice for peace and equality. Martin Luther King Jr., a leader of the Civil Rights Movement, was shot dead in Memphis, Tennessee. Within days, James Earl Ray was identified as the killer. He was caught and confessed to the crime.\n\nHowever, almost immediately, Ray changed his story. He claimed he was not the lone killer but a pawn in a bigger game. He said he was set up. This quick retraction of his confession sparked the very first whispers of a larger conspiracy, casting a long shadow over the official story.",
+      "cliffhanger": "This initial doubt was just a tiny crack in what would become a much larger, darker picture, hinting at forces far beyond a single man's hatred."
+    },
+    {
+      "layer": 2,
+      "layer_name": "A Shadowed Watch",
+      "content": "Before his death, Martin Luther King Jr. was not just a public figure; he was a target. The FBI, under its director J. Edgar Hoover, conducted extensive surveillance on him. This was part of a secret program called COINTELPRO, designed to disrupt and discredit civil rights leaders.\n\nHoover saw King as a dangerous figure, even trying to pressure him to commit suicide. The FBI tapped King's phones, bugged his hotel rooms, and spread false stories about him. They used illegal methods to watch his every move. This created an atmosphere of deep distrust between King and powerful government agencies.",
+      "cliffhanger": "This intense and illegal scrutiny wasn't just about watching; it was about stopping him, and the pressure from these unseen hands would only build to a dangerous point."
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Fatal Shot",
+      "content": "In early April 1968, Martin Luther King Jr. was in Memphis, Tennessee. He was there to support striking sanitation workers, fighting for fair wages and better conditions. He stayed at the Lorraine Motel, a place often used by Black travelers.\n\nOn the evening of April 4, King stood on the motel's second-floor balcony. He was talking with friends, making plans for dinner. Suddenly, a single rifle shot rang out. The bullet hit King in the neck, and he collapsed. He was rushed to a hospital but died shortly after. The world was in shock, and grief swept across the nation.",
+      "cliffhanger": "As the world mourned a visionary leader, the search for his killer began, but the speed with which a single suspect was identified would soon raise eyebrows."
+    },
+    {
+      "layer": 4,
+      "layer_name": "The Lone Gunman Story",
+      "content": "A massive manhunt followed Martin Luther King Jr.'s assassination. Two months later, James Earl Ray was captured in London. The police and the FBI quickly presented him as the lone assassin. They said Ray, a known criminal with racist views, had acted entirely on his own.\n\nRay initially pleaded guilty to avoid the death penalty. He was sentenced to 99 years in prison. This guilty plea allowed the case to close quickly, solidifying the 'lone gunman' theory in the public's mind. However, Ray soon tried to withdraw his plea, saying he was innocent and was tricked.",
+      "cliffhanger": "Despite the official story closing the case, many people, including King's own family, felt that crucial questions about how Ray could have planned and executed the assassination alone remained unanswered."
+    },
+    {
+      "layer": 5,
+      "layer_name": "Unanswered Calls",
+      "content": "As time passed, more details emerged that seemed to challenge the simple 'lone gunman' story. Questions arose about how Ray, a small-time criminal, suddenly had money to travel internationally. There were also claims of other people seen near the crime scene, who were never fully investigated.\n\nWitness accounts sometimes conflicted, and the official handling of evidence was questioned. Some investigators found it hard to believe Ray, alone, could have carried out such a precise and high-stakes assassination without help. These inconsistencies fueled growing public suspicion and led many to believe there was more to the story than what the government presented.",
+      "cliffhanger": "As more people looked closer, the idea of a simple, lone assassin began to crumble under the weight of perplexing details and suspicious gaps in the official narrative."
+    },
+    {
+      "layer": 6,
+      "layer_name": "The King Family's Search for Truth",
+      "content": "The family of Martin Luther King Jr. never accepted the official explanation. They believed James Earl Ray was innocent and was a scapegoat in a larger plot. Coretta Scott King, his widow, and his children publicly supported Ray's requests for a trial, even meeting with him.\n\nIn 1999, the King family filed a civil lawsuit against a man named Loyd Jowers and 'other unknown conspirators.' The jury in that trial found that a broader conspiracy, including government agencies, was responsible for King's death. They concluded that Jowers, a Memphis cafe owner, was involved in the plot, along with other unknown people and government players.",
+      "cliffhanger": "A civil court had spoken, suggesting official involvement in the assassination, but would the deeper, darker truth ever be fully acknowledged by the state itself?"
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Dark Corner",
+      "content": "The House Select Committee on Assassinations (HSCA) investigated King's death in the late 1970s. Their report found a 'high probability' of a conspiracy in the assassination, stating that James Earl Ray was likely involved but not as a lone killer. They suggested that other people may have helped Ray, but could not identify them.\n\nCrucially, declassified government documents later revealed the extensive and malicious efforts of the FBI and other agencies to discredit, surveil, and neutralize Martin Luther King Jr. This documented history of deep animosity and illegal actions from powerful government entities makes the idea of a broader conspiracy chillingly plausible. While no single government smoking gun has been found, the evidence points to a dark pattern of state-sponsored actions against King, creating a fertile ground for such a plot to unfold.",
+      "cliffhanger": null
+    }
+  ],
+  "vocabulary": {}
+}

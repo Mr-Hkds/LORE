@@ -1,7 +1,33 @@
 import { useState, useEffect, useRef } from 'react';
-import { Fingerprint, Eye, Skull, HelpCircle, Share2 } from 'lucide-react';
+import { Fingerprint, Eye, Skull, HelpCircle, Share2, ChevronDown, ChevronUp, BookOpen, X } from 'lucide-react';
 import LoreMark from './LoreMark';
 import { LOCAL_DICTIONARY } from '../constants/dictionary';
+
+// ── localStorage helpers ───────────────────────────────────────────────────
+const SEEN_KEY = 'lore:seen_words';
+const DICT_CACHE_KEY_PREFIX = 'lore:dict:';
+
+function getSeenWords() {
+  try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function markWordSeen(word) {
+  try {
+    const seen = getSeenWords();
+    seen.add(word.toLowerCase());
+    localStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
+  } catch { /* ignore */ }
+}
+function getCachedDef(word) {
+  try {
+    const v = localStorage.getItem(DICT_CACHE_KEY_PREFIX + word);
+    return v ? JSON.parse(v) : null;
+  } catch { return null; }
+}
+function cacheDef(word, value) {
+  try { localStorage.setItem(DICT_CACHE_KEY_PREFIX + word, JSON.stringify(value)); }
+  catch { /* ignore */ }
+}
 
 export default function LayerReader({
   topic,
@@ -19,6 +45,14 @@ export default function LayerReader({
   const containerRef = useRef(null);
   const isLastLayer = layerNum === 7;
   const accentColor = '#9E7B4C';
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth < 640);
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
+  }, []);
 
   // Normalize DB keys (like/scared/mindblown) → UI keys (intriguing/chilling/mind_blowing)
   const normalizeReactions = (rx) => {
@@ -48,220 +82,346 @@ export default function LayerReader({
   const [imgFailed, setImgFailed] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
 
-  // Look-up dictionary state
+  // Slide-up drawer lookup state (no x/y needed)
   const [lookup, setLookup] = useState({
     isOpen: false,
     word: '',
-    definition: '',
+    generic: '',      // plain dictionary meaning
+    caseNote: '',     // story-specific context
     loading: false,
+    isLive: false,    // came from external API
     x: 0,
     y: 0,
-    isCustom: false
   });
 
-  const closeTimeoutRef = useRef(null);
+  // Seen-words set in state so underline re-renders reactively
+  const [seenWords, setSeenWords] = useState(() => getSeenWords());
+  // Glossary strip open state
+  const [glossaryOpen, setGlossaryOpen] = useState(false);
 
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-    };
-  }, []);
+  const closeLookup = () => setLookup(prev => ({ ...prev, isOpen: false }));
 
   // Auto-close lookup popup on clicking outside
   useEffect(() => {
     if (!lookup.isOpen) return;
-    const handleOutsideClick = () => {
-      setLookup(prev => ({ ...prev, isOpen: false }));
+    const handleOutsideClick = (e) => {
+      if (e.target.closest('[data-lookup-drawer]')) return;
+      closeLookup();
     };
-    window.addEventListener('click', handleOutsideClick);
-    return () => window.removeEventListener('click', handleOutsideClick);
+    const timer = setTimeout(() => {
+      window.addEventListener('click', handleOutsideClick);
+    }, 50);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('click', handleOutsideClick);
+    };
   }, [lookup.isOpen]);
 
-  const handleWordLookup = async (originalWord, lowerWord, clientX, clientY) => {
-    // Clean punctuation
-    const cleanWord = lowerWord.replace(/[^a-zA-Z]/g, '');
-    const cleanOriginal = originalWord.replace(/[^a-zA-Z]/g, '');
+  const handleWordLookup = async (originalWord, lowerWord, x = 0, y = 0) => {
+    const cleanWord = lowerWord.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, '').trim();
+    const cleanOriginal = originalWord.trim();
     if (!cleanWord || cleanWord.length <= 1) return;
 
+    // Mark word as seen immediately
+    markWordSeen(cleanWord);
+    setSeenWords(getSeenWords());
+
+    // 1. Story-specific vocabulary (supports {generic, case} or plain string)
     const storyVocabulary = story?.vocabulary || {};
-    if (storyVocabulary[cleanWord]) {
+    const storyEntry = storyVocabulary[cleanWord];
+    if (storyEntry) {
+      const isObj = typeof storyEntry === 'object';
       setLookup({
         isOpen: true,
         word: cleanOriginal,
-        definition: storyVocabulary[cleanWord],
+        generic: isObj ? (storyEntry.generic || '') : storyEntry,
+        caseNote: isObj ? (storyEntry.case || '') : '',
         loading: false,
-        x: clientX,
-        y: clientY,
-        isCustom: false
+        isLive: false,
+        x,
+        y,
       });
       return;
     }
 
+    // 2. Global LOCAL_DICTIONARY
     if (LOCAL_DICTIONARY[cleanWord]) {
       setLookup({
         isOpen: true,
         word: cleanOriginal,
-        definition: LOCAL_DICTIONARY[cleanWord],
+        generic: LOCAL_DICTIONARY[cleanWord],
+        caseNote: '',
         loading: false,
-        x: clientX,
-        y: clientY,
-        isCustom: false
+        isLive: false,
+        x,
+        y,
       });
       return;
     }
 
-    // Fallback to Live Dictionary API
-    setLookup({
-      isOpen: true,
-      word: cleanOriginal,
-      definition: '',
-      loading: true,
-      x: clientX,
-      y: clientY,
-      isCustom: true
-    });
+    // 3. localStorage API cache
+    const cached = getCachedDef(cleanWord);
+    if (cached) {
+      setLookup({
+        isOpen: true,
+        word: cleanOriginal,
+        generic: cached,
+        caseNote: '',
+        loading: false,
+        isLive: true,
+        x,
+        y,
+      });
+      return;
+    }
 
-    try {
-      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord)}`);
-      if (!res.ok) throw new Error("Word not found");
-      const data = await res.json();
-      const def = data?.[0]?.meanings?.[0]?.definitions?.[0]?.definition;
-      const partOfSpeech = data?.[0]?.meanings?.[0]?.partOfSpeech || 'noun';
-      
-      if (def) {
-        setLookup(prev => ({
-          ...prev,
-          definition: `(${partOfSpeech}) ${def}`,
-          loading: false
-        }));
+    // 4. Live dictionary API (external — no Vercel cost)
+    setLookup({ isOpen: true, word: cleanOriginal, generic: '', caseNote: '', loading: true, isLive: true, x, y });
+    
+    // Construct lookup candidates (e.g. plurals, conjugations)
+    const candidates = [cleanWord];
+    if (cleanWord.endsWith('s') && cleanWord.length > 2) {
+      if (cleanWord.endsWith('ies')) {
+        candidates.push(cleanWord.slice(0, -3) + 'y');
+      } else if (cleanWord.endsWith('es')) {
+        candidates.push(cleanWord.slice(0, -2));
+        candidates.push(cleanWord.slice(0, -1));
       } else {
-        throw new Error("No definition");
+        candidates.push(cleanWord.slice(0, -1));
       }
-    } catch {
-      setLookup(prev => ({
-        ...prev,
-        definition: `Could not find a simple definition for "${cleanOriginal}". Double-click to search or verify spelling.`,
-        loading: false
-      }));
+    } else if (cleanWord.endsWith('ed') && cleanWord.length > 3) {
+      candidates.push(cleanWord.slice(0, -2));
+      candidates.push(cleanWord.slice(0, -1));
+    } else if (cleanWord.endsWith('ing') && cleanWord.length > 4) {
+      candidates.push(cleanWord.slice(0, -3));
+      candidates.push(cleanWord.slice(0, -3) + 'e');
+    }
+
+    let success = false;
+    for (const candidate of candidates) {
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(candidate)}`);
+        if (!res.ok) continue;
+        const json = await res.json();
+        const meaning = json?.[0]?.meanings?.[0];
+        const def = meaning?.definitions?.[0]?.definition;
+        const pos = meaning?.partOfSpeech || '';
+        if (def) {
+          const result = pos ? `(${pos}) ${def}` : def;
+          cacheDef(cleanWord, result); // Cache original lookup with candidate result
+          setLookup(prev => ({ ...prev, generic: result, loading: false }));
+          success = true;
+          break;
+        }
+      } catch (err) {
+        // try next candidate
+      }
+    }
+
+    if (!success) {
+      setLookup(prev => ({ ...prev, generic: `No definition found for "${cleanOriginal}".`, loading: false }));
     }
   };
 
-  const handleContainerDoubleClick = (e) => {
+  // Clean selection text and compute bounding coordinates for lookup positioning
+  const handleSelectionLookup = (clientX, clientY) => {
     const selection = window.getSelection();
     if (!selection) return;
-    const selectedText = selection.toString().trim();
-    if (selectedText.length > 1 && selectedText.length < 30 && /^[a-zA-Z\s'-]+$/.test(selectedText)) {
-      handleWordLookup(selectedText, selectedText.toLowerCase(), e.clientX, e.clientY);
+    let selectedText = selection.toString().trim();
+    if (!selectedText) return;
+
+    // Strip leading/trailing punctuation and non-word characters
+    selectedText = selectedText.replace(/^[^a-zA-ZÀ-ÿ\s'-]+|[^a-zA-ZÀ-ÿ\s'-]+$/g, '').trim();
+
+    if (selectedText.length > 1 && selectedText.length < 40 && /^[a-zA-ZÀ-ÿ\s'-]+$/.test(selectedText)) {
+      let x = clientX;
+      let y = clientY;
+
+      // If coordinates aren't provided (like touchend), find the screen bounds of selection
+      if (!x || !y) {
+        try {
+          if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            const rect = range.getBoundingClientRect();
+            if (rect && rect.top > 0) {
+              x = rect.left + rect.width / 2;
+              y = rect.top + rect.height;
+            }
+          }
+        } catch (err) {
+          console.warn('Failed to calculate selection bounding box:', err);
+        }
+      }
+
+      handleWordLookup(selectedText, selectedText.toLowerCase(), x, y);
     }
   };
 
-  // Function to highlight difficult words in paragraph text
+  const handleContainerClick = (e) => {
+    if (e.target.closest('[data-lookup-drawer]')) return;
+    if (e.target.closest('button') || e.target.closest('a')) return;
+
+    let range;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(e.clientX, e.clientY);
+    } else if (document.caretPositionFromPoint) {
+      const pos = document.caretPositionFromPoint(e.clientX, e.clientY);
+      if (pos) {
+        range = document.createRange();
+        range.setStart(pos.offsetNode, pos.offset);
+        range.setEnd(pos.offsetNode, pos.offset);
+      }
+    }
+
+    if (range && range.startContainer && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const text = range.startContainer.data;
+      const offset = range.startOffset;
+
+      let start = offset;
+      while (start > 0 && /[a-zA-ZÀ-ÿ'-]/.test(text[start - 1])) {
+        start--;
+      }
+
+      let end = offset;
+      while (end < text.length && /[a-zA-ZÀ-ÿ'-]/.test(text[end])) {
+        end++;
+      }
+
+      const tappedWord = text.slice(start, end).trim();
+      const cleanWord = tappedWord.replace(/^[^a-zA-ZÀ-ÿ]+|[^a-zA-ZÀ-ÿ]+$/g, '').trim();
+
+      if (cleanWord.length > 1 && cleanWord.length < 40 && /^[a-zA-ZÀ-ÿ\s'-]+$/.test(cleanWord)) {
+        try {
+          window.getSelection()?.removeAllRanges();
+        } catch (_) {}
+        handleWordLookup(tappedWord, cleanWord.toLowerCase(), e.clientX, e.clientY);
+        return;
+      }
+    }
+  };
+
+  const handleContainerMouseUp = (e) => {
+    if (e.target.closest('[data-lookup-drawer]')) return;
+    // Fallback for highlighted text selection
+    handleSelectionLookup(e.clientX, e.clientY);
+  };
+
+  // Highlight pre-defined vocabulary words in text with dashed/solid underline
   const formatTextWithLookup = (text) => {
-    if (!text) return "";
-    
-    // Merge LOCAL_DICTIONARY keys with current story-specific vocabulary keys
+    if (!text) return text;
+
     const storyVocab = story?.vocabulary || {};
     const mergedKeys = [...new Set([...Object.keys(LOCAL_DICTIONARY), ...Object.keys(storyVocab)])];
+    if (mergedKeys.length === 0) return text;
+
     const keys = mergedKeys.sort((a, b) => b.length - a.length);
     const escapedKeys = keys.map(k => k.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
     const pattern = new RegExp(`\\b(${escapedKeys.join('|')})\\b`, 'gi');
-    
+
     const parts = [];
     let lastIndex = 0;
     let match;
-    
+
     while ((match = pattern.exec(text)) !== null) {
       const matchIndex = match.index;
       const matchText = match[0];
-      
-      if (matchIndex > lastIndex) {
-        parts.push(text.substring(lastIndex, matchIndex));
-      }
-      
+      if (matchIndex > lastIndex) parts.push(text.substring(lastIndex, matchIndex));
+
       const lowerWord = matchText.toLowerCase();
+      const alreadySeen = seenWords.has(lowerWord);
+
       parts.push(
         <span
           key={matchIndex}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (closeTimeoutRef.current) {
-              clearTimeout(closeTimeoutRef.current);
-              closeTimeoutRef.current = null;
-            }
-            handleWordLookup(matchText, lowerWord, e.clientX, e.clientY);
-          }}
-          onMouseEnter={(e) => {
-            if (closeTimeoutRef.current) {
-              clearTimeout(closeTimeoutRef.current);
-              closeTimeoutRef.current = null;
-            }
-            handleWordLookup(matchText, lowerWord, e.clientX, e.clientY);
-          }}
-          onMouseLeave={() => {
-            closeTimeoutRef.current = setTimeout(() => {
-              setLookup(prev => ({ ...prev, isOpen: false }));
-            }, 300);
-          }}
-          className="cursor-help font-medium border-b border-dashed transition-all hover:opacity-85 select-none"
+          onClick={(e) => { e.stopPropagation(); handleWordLookup(matchText, lowerWord, e.clientX, e.clientY); }}
+          className="cursor-pointer font-medium transition-all duration-200"
           style={{
-            borderColor: 'rgba(158, 123, 76, 0.75)',
-            color: '#9E7B4C',
+            borderBottom: alreadySeen
+              ? '1px solid rgba(158,123,76,0.35)'
+              : '1px dashed rgba(158,123,76,0.75)',
+            color: alreadySeen ? 'rgba(158,123,76,0.55)' : '#9E7B4C',
+            paddingBottom: '1px',
           }}
-          title={`Hover or click to view definition of "${matchText}"`}
+          title={`Tap to look up "${matchText}"`}
         >
           {matchText}
         </span>
       );
-      
+
       lastIndex = pattern.lastIndex;
     }
-    
-    if (lastIndex < text.length) {
-      parts.push(text.substring(lastIndex));
-    }
-    
+
+    if (lastIndex < text.length) parts.push(text.substring(lastIndex));
     return parts.length > 0 ? parts : text;
   };
 
-  // Parses [VERIFIED], [CLAIMED], [DISPUTED], [UNVERIFIED] tags from narrative
+  // Parse [[CALLOUT]] ... [[/CALLOUT]] blocks from a block of text
+  const parseCallouts = (text) => {
+    if (!text || !text.includes('[[CALLOUT]]')) return null; // fast path
+    const parts = text.split(/\[\[CALLOUT\]\](.*?)\[\[\/CALLOUT\]\]/gs);
+    return parts.map((part, i) => {
+      if (i % 2 === 1) {
+        // This is callout content
+        const lines = part.trim().split('\n').filter(Boolean);
+        const quoteText = lines[0] || '';
+        const attribution = lines[1] || '';
+        return (
+          <div
+            key={i}
+            className="my-6 px-5 py-4 border-l-2 text-left"
+            style={{
+              borderColor: '#9E7B4C',
+              backgroundColor: 'rgba(158,123,76,0.05)',
+            }}
+          >
+            <p
+              className="font-serif italic leading-relaxed"
+              style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: cardTextPrimary }}
+            >
+              {quoteText}
+            </p>
+            {attribution && (
+              <span
+                className="block mt-2 font-mono text-[10px] tracking-widest uppercase"
+                style={{ color: '#9E7B4C', opacity: 0.65 }}
+              >
+                {attribution}
+              </span>
+            )}
+          </div>
+        );
+      }
+      // Regular text — run through normal pipeline
+      return part ? <span key={i}>{parseConfidenceTags(part)}</span> : null;
+    });
+  };
+
+  // Parse [VERIFIED] / [CLAIMED] / [DISPUTED] / [UNVERIFIED] inline tags
   const parseConfidenceTags = (text) => {
-    if (!text) return "";
+    if (!text) return '';
     const tagRegex = /(\[VERIFIED\]|\[CLAIMED\]|\[DISPUTED\]|\[UNVERIFIED\])/gi;
     const tokens = text.split(tagRegex);
-    
     return tokens.map((token, idx) => {
-      const upperToken = token.toUpperCase();
-      if (upperToken === '[VERIFIED]') {
-        return (
-          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-emerald-500/40 text-emerald-400 rounded bg-emerald-950/20 select-none align-middle tracking-wider">
-            VERIFIED
-          </span>
-        );
-      }
-      if (upperToken === '[CLAIMED]') {
-        return (
-          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-neutral-500/40 text-neutral-400 rounded bg-neutral-950/20 select-none align-middle tracking-wider">
-            CLAIMED
-          </span>
-        );
-      }
-      if (upperToken === '[DISPUTED]') {
-        return (
-          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-amber-500/40 text-amber-400 rounded bg-amber-950/20 select-none align-middle tracking-wider">
-            DISPUTED
-          </span>
-        );
-      }
-      if (upperToken === '[UNVERIFIED]') {
-        return (
-          <span key={idx} className="inline-block px-1.5 py-0.5 mx-1.5 text-[8px] font-mono font-bold border border-red-500/40 text-red-400 rounded bg-red-950/25 select-none align-middle tracking-wider">
-            UNVERIFIED
-          </span>
-        );
-      }
-      return formatTextWithLookup(token);
+      const u = token.toUpperCase();
+      if (u === '[VERIFIED]')
+        return <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-1 text-[7.5px] font-mono font-bold border border-emerald-500/35 text-emerald-400 rounded-sm bg-emerald-950/20 select-none align-middle tracking-widest">● VERIFIED</span>;
+      if (u === '[CLAIMED]')
+        return <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-1 text-[7.5px] font-mono font-bold border border-amber-500/35 text-amber-400 rounded-sm bg-amber-950/20 select-none align-middle tracking-widest">◐ CLAIMED</span>;
+      if (u === '[DISPUTED]')
+        return <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-1 text-[7.5px] font-mono font-bold border border-red-500/35 text-red-400 rounded-sm bg-red-950/20 select-none align-middle tracking-widest">⚠ DISPUTED</span>;
+      if (u === '[UNVERIFIED]')
+        return <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-1 text-[7.5px] font-mono font-bold border border-neutral-500/30 text-neutral-400 rounded-sm bg-neutral-950/20 select-none align-middle tracking-widest">○ UNVERIFIED</span>;
+      return <span key={idx}>{formatTextWithLookup(token)}</span>;
     });
+  };
+
+  // Full paragraph renderer — handles [[CALLOUT]] blocks then confidence tags
+  const renderParagraph = (text) => {
+    if (!text) return null;
+    if (text.includes('[[CALLOUT]]')) {
+      return parseCallouts(text);
+    }
+    return parseConfidenceTags(text);
   };
 
 
@@ -427,7 +587,26 @@ export default function LayerReader({
             }}
           >
             {/* Single column layout for maximum reading focus */}
-            <div className="max-w-2xl mx-auto w-full" onDoubleClick={handleContainerDoubleClick}>
+            <div className="max-w-2xl mx-auto w-full select-text" onClick={handleContainerClick} onMouseUp={handleContainerMouseUp}>
+              {/* Tactical Dictionary Onboarding Tip (Only on Layer 1) */}
+              {layerNum === 1 && (
+                <div 
+                  className="mb-6 p-3.5 rounded-xl border flex items-center gap-3 text-left select-none"
+                  style={{
+                    backgroundColor: isLight ? 'rgba(158, 123, 76, 0.08)' : 'rgba(158, 123, 76, 0.04)',
+                    borderColor: isLight ? 'rgba(158, 123, 76, 0.3)' : 'rgba(158, 123, 76, 0.18)'
+                  }}
+                >
+                  <HelpCircle className="w-4 h-4 flex-shrink-0" style={{ color: '#9E7B4C' }} />
+                  <p 
+                    className="text-[10px] sm:text-xs font-mono leading-relaxed animate-pulse"
+                    style={{ color: cardTextSecondary }}
+                  >
+                    <span style={{ color: '#9E7B4C' }} className="font-bold">SYSTEM HINT:</span> Tap any underlined word or select any text to see its meaning.
+                  </p>
+                </div>
+              )}
+
               {/* SOTA Wikipedia Hero Image */}
               {data.imageUrl && (
                 <div className="mb-8 w-full h-[240px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden border flex flex-col relative bg-[#090807] dossier-image-container" style={{ borderColor: cardBorder }}>
@@ -492,7 +671,7 @@ export default function LayerReader({
                     fontWeight: '400',
                   }}
                 >
-                  {parseConfidenceTags(hookText)}
+                  {renderParagraph(hookText)}
                 </p>
               )}
 
@@ -516,7 +695,7 @@ export default function LayerReader({
                           fontWeight: '400',
                         }}
                       >
-                        {parseConfidenceTags(note.text)}
+                        {renderParagraph(note.text)}
                       </p>
                     </div>
                   ))}
@@ -542,7 +721,7 @@ export default function LayerReader({
                       color: cardTextPrimary,
                     }}
                   >
-                    {parseConfidenceTags(cliffhangerText)}
+                    {renderParagraph(cliffhangerText)}
                   </p>
                 </div>
               )}
@@ -568,6 +747,13 @@ export default function LayerReader({
                       0%   { transform: translate(-50%, 0) scale(0.5) rotate(0deg); opacity: 0; }
                       20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.3) rotate(15deg); }
                       100% { transform: translate(calc(-50% + 12px), -44px) scale(0.8) rotate(-15deg); opacity: 0; }
+                    }
+                    @keyframes slideUp {
+                      from { transform: translateY(100%); }
+                      to { transform: translateY(0); }
+                    }
+                    .animate-slide-up {
+                      animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
                     }
                   `}</style>
                   <div className="flex justify-center gap-3 flex-wrap">
@@ -754,30 +940,63 @@ export default function LayerReader({
               </div>
             )}
 
+            {/* Collapsible Glossary Strip at Layer 7 */}
+            {isLastLayer && (() => {
+              const storyVocab = story?.vocabulary || {};
+              const vocabEntries = Object.entries(storyVocab);
+              if (vocabEntries.length === 0) return null;
+              return (
+                <div className="mt-10 pt-6 border-t" style={{ borderColor: 'rgba(158,123,76,0.15)' }}>
+                  <button
+                    onClick={() => setGlossaryOpen(v => !v)}
+                    className="w-full flex items-center justify-between py-2 px-0 cursor-pointer select-none group"
+                    style={{ background: 'none', border: 'none' }}
+                  >
+                    <span className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-[0.2em] uppercase" style={{ color: '#9E7B4C' }}>
+                      <BookOpen className="w-3.5 h-3.5" />
+                      Dossier Vocabulary · {vocabEntries.length} terms
+                    </span>
+                    {glossaryOpen
+                      ? <ChevronUp className="w-4 h-4" style={{ color: '#9E7B4C', opacity: 0.6 }} />
+                      : <ChevronDown className="w-4 h-4" style={{ color: '#9E7B4C', opacity: 0.6 }} />
+                    }
+                  </button>
+                  {glossaryOpen && (
+                    <div className="mt-4 space-y-4">
+                      {vocabEntries.map(([word, entry]) => {
+                        const isObj = typeof entry === 'object';
+                        const generic = isObj ? entry.generic : entry;
+                        const caseNote = isObj ? entry.case : '';
+                        return (
+                          <div key={word} className="border-l pl-4" style={{ borderColor: 'rgba(158,123,76,0.2)' }}>
+                            <span className="block text-[10px] font-mono font-bold tracking-widest uppercase mb-1" style={{ color: '#9E7B4C' }}>{word}</span>
+                            {generic && <p className="text-[13px] font-sans leading-relaxed" style={{ color: cardTextSecondary }}>{generic}</p>}
+                            {caseNote && (
+                              <p className="mt-1 text-[12px] font-sans italic leading-relaxed" style={{ color: cardTextPrimary, opacity: 0.75 }}>
+                                ▸ In this case: {caseNote}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
             {/* End stamp for Layer 7 */}
             {isLastLayer && (
               <div className="mt-14 pt-8 border-t text-center flex flex-col items-center gap-4" style={{ borderColor: 'rgba(158, 123, 76, 0.15)' }}>
-                <p
-                  className="text-[10px] uppercase tracking-[0.2em] font-mono text-[#8F8A82]/50"
-                >
+                <p className="text-[10px] uppercase tracking-[0.2em] font-mono text-[#8F8A82]/50">
                   Dossier Closed. You have reached the bottom.
                 </p>
                 <button
                   onClick={onBack}
                   className="px-8 py-3.5 border transition-all duration-300 active:scale-95 cursor-pointer text-[10px] font-mono tracking-[0.22em] uppercase rounded-lg"
-                  style={{
-                    borderColor: 'rgba(158, 123, 76, 0.35)',
-                    backgroundColor: 'rgba(158, 123, 76, 0.04)',
-                    color: '#9E7B4C'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.8)';
-                    e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.08)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.35)';
-                    e.currentTarget.style.backgroundColor = 'rgba(158, 123, 76, 0.04)';
-                  }}
+                  style={{ borderColor: 'rgba(158,123,76,0.35)', backgroundColor: 'rgba(158,123,76,0.04)', color: '#9E7B4C' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(158,123,76,0.8)'; e.currentTarget.style.backgroundColor = 'rgba(158,123,76,0.08)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(158,123,76,0.35)'; e.currentTarget.style.backgroundColor = 'rgba(158,123,76,0.04)'; }}
                 >
                   ← Return to Dossier Index
                 </button>
@@ -823,59 +1042,67 @@ export default function LayerReader({
         </div>
       )}
 
+      {/* ── Sleek Floating Popup (Near Selected Word on both Mobile & Desktop) ── */}
       {lookup.isOpen && (
         <div
+          data-lookup-drawer="1"
           onClick={(e) => e.stopPropagation()}
-          onMouseEnter={() => {
-            if (closeTimeoutRef.current) {
-              clearTimeout(closeTimeoutRef.current);
-              closeTimeoutRef.current = null;
-            }
-          }}
-          onMouseLeave={() => {
-            closeTimeoutRef.current = setTimeout(() => {
-              setLookup(prev => ({ ...prev, isOpen: false }));
-            }, 200);
-          }}
-          className="fixed z-[999] w-72 p-4 rounded-xl border bg-[#0F0D0A]/95 backdrop-blur-md text-left transition-all duration-300 animate-scale-up"
+          className="fixed z-[999] w-[260px] sm:w-80 p-4 rounded-xl border bg-[#0D0B09]/96 backdrop-blur-md text-left transition-all duration-300 animate-scale-up"
           style={{
-            left: `${Math.min(window.innerWidth - 300, Math.max(16, lookup.x - 144))}px`,
-            top: `${Math.min(window.innerHeight - 200, Math.max(16, lookup.y - 120))}px`,
+            left: `${Math.min((typeof window !== 'undefined' ? window.innerWidth : 1000) - (isMobile ? 272 : 336), Math.max(12, lookup.x - (isMobile ? 130 : 160)))}px`,
+            top: `${Math.min((typeof window !== 'undefined' ? window.innerHeight : 1000) - 240, Math.max(12, lookup.y > 220 ? lookup.y - 190 : lookup.y + 20))}px`,
             borderColor: '#9E7B4C',
             boxShadow: '0 12px 36px rgba(0,0,0,0.85), inset 0 0 12px rgba(158,123,76,0.12)',
             color: '#EDE8DF',
           }}
         >
-          <div className="flex justify-between items-center border-b pb-2 mb-2" style={{ borderColor: 'rgba(158,123,76,0.2)' }}>
-            <div className="flex items-center gap-1.5 text-xs font-serif italic text-[#9E7B4C]">
+          {/* Header row */}
+          <div className="flex items-center justify-between border-b pb-2 mb-2" style={{ borderColor: 'rgba(158,123,76,0.2)' }}>
+            <div className="flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#9E7B4C] uppercase font-bold">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Dossier Look-Up</span>
             </div>
             <button
-              onClick={() => setLookup(prev => ({ ...prev, isOpen: false }))}
+              onClick={closeLookup}
               className="text-[9px] font-mono tracking-widest text-neutral-500 hover:text-white uppercase bg-transparent border-none cursor-pointer focus:outline-none"
             >
-              Close [X]
+              ✕ Close
             </button>
           </div>
-          
-          <h4 className="font-serif text-base font-bold text-white leading-tight capitalize mb-1">
+
+          {/* Word title */}
+          <h4 className="font-mono text-sm font-bold text-white uppercase tracking-wide mb-2">
             {lookup.word}
           </h4>
-          
+
           {lookup.loading ? (
             <div className="py-4 flex flex-col items-center justify-center gap-2">
-              <div className="w-4 h-4 rounded-full border border-[#9E7B4C]/20 border-t-[#9E7B4C] animate-spin" />
+              <div className="w-4 h-4 rounded-full border border-[#9E7B4C]/25 border-t-[#9E7B4C] animate-spin" />
               <span className="text-[8px] font-mono text-neutral-400 uppercase tracking-widest">Searching dictionary...</span>
             </div>
           ) : (
-            <div>
-              <p className="text-xs font-sans leading-relaxed text-[#EDE8DF]/90 font-light">
-                {lookup.definition}
-              </p>
-              {lookup.isCustom && (
-                <div className="mt-2 pt-2 border-t border-white/5 flex justify-between items-center">
-                  <span className="text-[7px] font-mono text-[#9E7B4C] uppercase tracking-wider">Live Web Definition</span>
+            <div className="space-y-3">
+              {/* Generic definition */}
+              {lookup.generic && (
+                <p className="text-xs font-sans leading-relaxed text-[#EDE8DF]/90 font-light">
+                  {lookup.generic}
+                </p>
+              )}
+              {/* Case-specific context */}
+              {lookup.caseNote && (
+                <div className="pt-2.5 border-t" style={{ borderColor: 'rgba(158,123,76,0.15)' }}>
+                  <span className="block text-[8px] font-mono tracking-wider uppercase mb-1 text-[#9E7B4C]">
+                    ▸ In this case
+                  </span>
+                  <p className="text-xs font-sans italic leading-relaxed text-[#EDE8DF]/80">
+                    {lookup.caseNote}
+                  </p>
+                </div>
+              )}
+              {/* Live indicator */}
+              {lookup.isLive && !lookup.caseNote && (
+                <div className="pt-1.5 border-t border-white/5 flex justify-between items-center">
+                  <span className="text-[7px] font-mono text-neutral-500 uppercase tracking-wider">via dictionary api</span>
                 </div>
               )}
             </div>

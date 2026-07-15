@@ -170,18 +170,18 @@ function StoryCardImage({ story, alt, inView }) {
       }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 30%, rgba(5, 4, 3, 0.85) 100%)' }} />
-      {/* SEVENDESCENTS brand — top-left, always subtle */}
-      <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5 pointer-events-none select-none" style={{ opacity: 0.22 }}>
-        <LoreMark size={8} color="#EDE8DF" />
+      {/* SEVEN DESCENTS brand — top-left, always subtle */}
+      <div className="absolute top-3.5 left-4 z-20 flex items-center gap-2.5 pointer-events-none select-none" style={{ opacity: 0.28 }}>
+        <LoreMark size={11} color="#9E7B4C" />
         <span
           style={{
             fontFamily: "'Space Mono', monospace",
-            fontSize: '6px',
+            fontSize: '9px',
             color: '#EDE8DF',
-            letterSpacing: '0.28em',
+            letterSpacing: '0.22em',
             fontWeight: 700,
           }}
-        >SEVENDESCENTS</span>
+        >SEVEN DESCENTS</span>
       </div>
 
 
@@ -905,8 +905,8 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
             {/* Brand signature */}
             <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-auto">
-              <span className="text-[9px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
-                SEVENDESCENTS
+              <span className="text-[10px] font-mono font-bold tracking-[0.52em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
+                SEVEN DESCENTS
               </span>
               <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60 max-w-xl leading-relaxed">
                 AN ARCHIVAL REGISTRY COMPILED FOR INDEPENDENT RESEARCHERS, FORENSIC HISTORIANS, AND MINDS OBSESSED WITH THE UNRESOLVED.
@@ -923,10 +923,12 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
               </p>
             </div>
             
+
+            
             {/* Bottom meta row */}
             <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
               <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-                <span className="opacity-60">© {new Date().getFullYear()} SEVENDESCENTS</span>
+                <span className="opacity-60">© {new Date().getFullYear()} SEVEN DESCENTS</span>
                 <span className="opacity-30">|</span>
                 <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
                   CONSOLE

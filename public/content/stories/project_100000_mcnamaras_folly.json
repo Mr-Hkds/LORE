@@ -1,0 +1,91 @@
+{
+  "story_id": "project_100000_mcnamaras_folly",
+  "title": "Project 100,000: The Unseen Costs of a ‘Perfect’ War",
+  "category": "gov_experiments",
+  "hook": "During the Vietnam War, the US military lowered its standards, recruiting 100,000 men deemed mentally or physically unfit. Many were sent to fight, often with tragic results.",
+  "concepts": [
+    "human_experimentation",
+    "government_misconduct",
+    "unethical_warfare",
+    "social_engineering",
+    "vietnam_war",
+    "statistical_manipulation"
+  ],
+  "severity": "chilling",
+  "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/F%C3%B6renade_Bil._BMW._P%C3%A5_v%C3%A4stkusten_-_Nordiska_museet_-_NMAx.0030335.tif/lossy-page1-960px-F%C3%B6renade_Bil._BMW._P%C3%A5_v%C3%A4stkusten_-_Nordiska_museet_-_NMAx.0030335.tif.jpg",
+  "added_date": "2026-07-11",
+  "draft": false,
+  "reactions": {
+    "like": 40,
+    "gripping": 23,
+    "scared": 2,
+    "mindblown": 6
+  },
+  "year": "N/A",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "Institutions and the African Farmer (Carl K. Eicher, Eicher, Carl K., 1999)",
+      "url": "http://ageconsearch.umn.edu/record/7660"
+    },
+    {
+      "label": "The Making of a Militarized War on Poverty: The Effort to Triangulate Military Service, Crime Prevention, and Social Citizenship through Project 100,000 and Project Transition (Emilie Cunning, 2026)",
+      "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/9EEC28B85E754E8E695A8E7227AA4D14/S2515045625100734a.pdf/div-class-title-the-making-of-a-militarized-war-on-poverty-the-effort-to-triangulate-military-service-crime-prevention-and-social-citizenship-through-project-100-000-and-project-transition-div.pdf"
+    },
+    {
+      "label": "Precaution against terrorism (Jessica Stern, Jonathan B. Wiener, 2008)",
+      "url": "https://scholarship.law.duke.edu/faculty_scholarship/1824"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "project_shad_covert_warfare_tests",
+      "shared_concept": "human_experimentation",
+      "transition_line": "Just as Project 100,000 exposed a dark chapter of exploiting vulnerable soldiers for military gain, the covert operations of Project SHAD similarly illustrate how governments can compromise the well-being of their own troops under the veil of national security."
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The Whisper of Desperation",
+      "content": "The late 1960s were a time of great struggle for the United States. The Vietnam War demanded more and more soldiers, but fewer qualified men were volunteering or being drafted. As the war grew unpopular, the government faced a serious problem: how to fill the ranks of its fighting forces without causing more public unrest.\n\nDeep within the Pentagon, a quiet discussion began. There was a secret push to find new ways to meet the military's growing need for troops. The idea was to look beyond the usual pools of eligible young men and tap into a different group, a group often overlooked or deemed unsuitable for military service.",
+      "cliffhanger": "This desperate need would soon lead to a plan so bold, and so controversial, it would forever mark a dark chapter in military history."
+    },
+    {
+      "layer": 2,
+      "layer_name": "The Numbers Game",
+      "content": "The US military had strict standards for its recruits. These standards involved both physical health and mental ability. Recruits had to pass certain tests to prove they could handle the demands of combat and training. But with the Vietnam War escalating, these standards were becoming a problem.\n\nEvery month, the military needed thousands of new soldiers. However, a significant number of young men failed the entry exams due to low education or poor physical condition. This left a gap in troop numbers, and the Defense Department was under immense pressure to find a solution, any solution, to keep the war effort going strong.",
+      "cliffhanger": "It was in this climate of urgency that a powerful figure would propose a radical idea, believing he could solve both a military and a social problem at once."
+    },
+    {
+      "layer": 3,
+      "layer_name": "McNamara's Vision",
+      "content": "Robert S. McNamara was the Secretary of Defense, a brilliant but controversial leader known for his love of statistics and efficiency. He believed that the war could be managed like a business, with numbers and analysis guiding every decision. He saw the large pool of men failing military entrance tests not as a problem, but as an opportunity.\n\nIn 1966, McNamara launched 'Project 100,000,' also known as 'McNamara's Folly' or 'New Standards Men.' His idea was simple: lower the entry standards for 100,000 men who would normally be rejected. These men, mostly from disadvantaged backgrounds, would be given a chance to serve their country and, in return, receive education and job training. It seemed like a win-win situation.",
+      "cliffhanger": "But the path to hell is often paved with good intentions, and the implementation of this project would expose its chilling true nature."
+    },
+    {
+      "layer": 4,
+      "layer_name": "The Unseen Recruits",
+      "content": "Under Project 100,000, the military specifically targeted men who scored very low on mental aptitude tests, falling into what was called 'Category IV.' Normally, these men would be turned away. The project also included men with minor physical disabilities that would usually disqualify them.\n\nThe official message was that this program would uplift these men, giving them a purpose and skills for life. However, the real and immediate goal was to quickly boost troop numbers for the Vietnam War. These 'New Standards Men' were often given minimal extra training before being sent to the front lines, expected to perform alongside highly qualified soldiers.",
+      "cliffhanger": "What happened next would reveal the harsh reality of forcing square pegs into round holes, with lives hanging in the balance."
+    },
+    {
+      "layer": 5,
+      "layer_name": "The Cost of Numbers",
+      "content": "From the very beginning, reports emerged of the severe difficulties faced by these 'New Standards Men.' Many struggled to understand complex orders, operate advanced equipment, or adapt to the intense demands of military life and combat. They were often placed in the most dangerous infantry roles, where their weaknesses were quickly exposed.\n\nStudies conducted after the war showed a grim picture. Men from Project 100,000 suffered significantly higher casualty rates—death and injury—compared to their more qualified peers. They were also more likely to be involved in accidents and to struggle with basic military tasks, becoming a burden rather than an asset to their units.",
+      "cliffhanger": "The human suffering caused by this 'efficiency' experiment stretched far beyond the battlefield, echoing into the lives of these men for decades."
+    },
+    {
+      "layer": 6,
+      "layer_name": "The Abyss of Betrayal",
+      "content": "The project, originally framed as a social initiative to help the disadvantaged, turned into a tragic lesson in unintended consequences. These men, already vulnerable, were put into extremely dangerous situations without adequate preparation or support. Many returned from the war with severe physical and mental trauma, including Post-Traumatic Stress Disorder (PTSD).\n\nTheir chances of finding good jobs or building stable lives after their service were significantly lower than other veterans. They carried the scars of a war they were ill-equipped to fight, and many felt betrayed by a system that promised them opportunity but delivered only peril. The project was not about helping them; it was about sacrificing them to meet troop quotas.",
+      "cliffhanger": "The deepest secret of Project 100,000 lies in understanding why such a flawed and damaging program was allowed to continue for so long."
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Dark Corner of Expediency",
+      "content": "Project 100,000 ultimately failed in both its stated goals. It did not significantly uplift the recruits, and it did not make the military more effective. Instead, it sent tens of thousands of vulnerable young men into harm's way, resulting in higher casualties and lifelong struggles for those who survived. The project was finally ended in 1971.\n\nThe darkest truth is that this program was a calculated move of political and military expediency. It was designed to maintain the appearance of a strong fighting force by any means necessary, even if it meant knowingly putting unqualified men in mortal danger. It highlighted a chilling disregard for human life and a willingness to use the most vulnerable citizens as disposable assets in a numbers game. Project 100,000 remains a stark reminder of the ethical lines that can be crossed when political pressure overshadows moral responsibility."
+    }
+  ],
+  "vocabulary": {}
+}

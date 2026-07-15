@@ -709,7 +709,7 @@ export default function TodayInShadows() {
 
       {/* ── Outer Shell ── */}
       <div
-        className="tis-card rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/40 group relative overflow-hidden min-h-[400px]"
+        className="tis-card rounded-xl border flex flex-col transition-all duration-300 hover:border-[#9E7B4C]/40 group relative overflow-hidden min-h-[320px] sm:min-h-[400px]"
         style={{
           backgroundColor: '#151311',
           borderColor: 'rgba(158, 123, 76, 0.18)',
@@ -721,7 +721,7 @@ export default function TodayInShadows() {
           <>
             {/* Cinematic Banner Image */}
             {wikiImgUrl && (
-              <div className="w-full h-60 sm:h-64 md:h-72 overflow-hidden bg-[#090807] flex flex-col border-b border-neutral-900/60 relative">
+              <div className="w-full h-40 sm:h-56 md:h-72 overflow-hidden bg-[#090807] flex flex-col border-b border-neutral-900/60 relative">
                 {imgFailed ? (
                   <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-900/60 text-[#9E7B4C]/70">
                     <LoreMark size={24} color="currentColor" />
@@ -730,12 +730,12 @@ export default function TodayInShadows() {
                 ) : (
                   <>
                     {/* Top Dossier Bar */}
-                    <div className="w-full h-9 z-20 flex-shrink-0 flex items-center justify-between px-3.5 bg-black/55 backdrop-blur-md border-b border-white/5 select-none">
-                      <div className="flex items-center gap-1.5">
-                        <Unlock className="w-3.5 h-3.5 text-[#9E7B4C]" />
-                        <span className="font-mono text-[7.5px] text-[#EDE8DF] tracking-[0.22em] font-bold">SIGNAL DECRYPTED</span>
+                    <div className="w-full h-8 sm:h-9 z-20 flex-shrink-0 flex items-center justify-between px-3 sm:px-3.5 bg-black/55 backdrop-blur-md border-b border-white/5 select-none">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <Unlock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#9E7B4C]" />
+                        <span className="font-mono text-[7px] sm:text-[7.5px] text-[#EDE8DF] tracking-[0.16em] sm:tracking-[0.22em] font-bold">SIGNAL DECRYPTED</span>
                       </div>
-                      <span className="font-mono text-[6.5px] text-neutral-500 tracking-wider">
+                      <span className="font-mono text-[6px] sm:text-[6.5px] text-neutral-500 tracking-wider">
                         SEC-DOSS.00{dossier.story_id ? dossier.story_id.slice(-2) : 'XX'}
                       </span>
                     </div>
@@ -762,36 +762,36 @@ export default function TodayInShadows() {
             )}
 
             {/* Content Block */}
-            <div className="p-5 sm:p-6 md:p-7 flex flex-col justify-between flex-1">
+            <div className="p-4 sm:p-6 flex flex-col justify-between flex-1">
               <div>
                 <div className="flex items-center gap-2 mb-3.5 flex-wrap">
-                  <span className="text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2.5 py-0.5 rounded-sm">
+                  <span className="text-[8.5px] sm:text-[9px] font-mono tracking-[0.24em] uppercase text-[#9E7B4C] bg-[#9E7B4C]/10 border border-[#9E7B4C]/25 px-2 py-0.5 rounded-sm">
                     INTELLIGENCE DISPATCH · {dossier.theme?.toUpperCase()}
                   </span>
                   {dossier.year && (
-                    <span className="text-[10px] font-mono text-[#8F8A82] tracking-widest uppercase">
+                    <span className="text-[9.5px] sm:text-[10px] font-mono text-[#8F8A82] tracking-widest uppercase">
                       YEAR: {dossier.year}
                     </span>
                   )}
                 </div>
-                <h4 className="font-serif italic text-xl sm:text-2xl text-[#EDE8DF] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
-                <p className="font-serif text-sm sm:text-base leading-relaxed text-[#D4CFC7] mb-6">
+                <h4 className="font-serif italic text-lg sm:text-2xl text-[#EDE8DF] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
+                <p className="font-serif text-xs sm:text-sm md:text-base leading-relaxed text-[#D4CFC7] mb-5">
                   {dossier.text}
                 </p>
 
                 {/* Theories List Section */}
-                <div className="space-y-4 mb-6 border-t border-neutral-900/60 pt-5">
-                  <div className="flex items-center gap-1.5 text-[9px] font-mono tracking-widest uppercase text-neutral-500 mb-2">
+                <div className="space-y-3.5 mb-5 border-t border-neutral-900/60 pt-4">
+                  <div className="flex items-center gap-1.5 text-[8.5px] sm:text-[9px] font-mono tracking-widest uppercase text-neutral-500 mb-1.5">
                     <Terminal className="w-3 h-3 text-[#9E7B4C]" />
                     <span>Investigative Hypotheses</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
                     {dossier.theories && dossier.theories.map((t, idx) => (
-                      <div key={idx} className="bg-neutral-900/20 border border-neutral-900/60 p-3 rounded-lg flex flex-col">
-                        <span className="text-[9px] font-mono text-[#9E7B4C] uppercase tracking-wider mb-1 font-bold">
+                      <div key={idx} className="bg-neutral-900/20 border border-neutral-900/60 p-2.5 sm:p-3 rounded-lg flex flex-col">
+                        <span className="text-[8.5px] font-mono text-[#9E7B4C] uppercase tracking-wider mb-1 font-bold">
                           0{idx + 1} · {t.name}
                         </span>
-                        <p className="text-[11px] leading-relaxed text-neutral-400 font-sans">
+                        <p className="text-[10px] sm:text-[11px] leading-relaxed text-neutral-400 font-sans">
                           {t.explanation}
                         </p>
                       </div>

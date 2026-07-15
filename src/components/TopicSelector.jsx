@@ -234,19 +234,18 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             onClick={handleLogoTap}
             title="Tap 5 times to open Admin Console"
           >
-            <LoreMark size={17} color={fg} />
+            <LoreMark size={15} color="#9E7B4C" />
             <span
               style={{
                 fontFamily: "'Space Mono', monospace",
-                fontSize: '9px',
+                fontSize: '9.5px',
                 fontWeight: 700,
-                letterSpacing: '0.14em',
-                color: fg,
-                opacity: 0.82,
+                letterSpacing: '0.24em',
+                color: '#EDE8DF',
                 textTransform: 'uppercase',
               }}
             >
-              SevenDescents
+              Seven Descents
             </span>
             <div className="w-[1px] h-3 bg-neutral-800" />
             <span className="font-mono text-[7.5px] tracking-[0.16em] text-[#EDE8DF] bg-[#9E7B4C]/12 border border-[#9E7B4C]/35 px-2.5 py-0.5 rounded-sm uppercase whitespace-nowrap">
@@ -894,8 +893,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         <footer className="mt-32 pt-12 pb-8 border-t flex flex-col gap-6" style={{ borderColor: ru, color: mu }}>
           {/* Brand signature */}
           <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-auto">
-            <span className="text-[9px] font-mono font-bold tracking-[0.32em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
-              SEVENDESCENTS
+            <span className="text-[10px] font-mono font-bold tracking-[0.52em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
+              SEVEN DESCENTS
             </span>
             <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60 max-w-xl leading-relaxed">
               AN ARCHIVAL REGISTRY COMPILED FOR INDEPENDENT RESEARCHERS, FORENSIC HISTORIANS, AND MINDS OBSESSED WITH THE UNRESOLVED.
@@ -912,10 +911,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
             </p>
           </div>
           
+
+          
           {/* Bottom meta row */}
           <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
             <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-              <span className="opacity-60">© {new Date().getFullYear()} SEVENDESCENTS</span>
+              <span className="opacity-60">© {new Date().getFullYear()} SEVEN DESCENTS</span>
               <span className="opacity-30">|</span>
               <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
                 CONSOLE

@@ -469,3 +469,15 @@ select option {
 .group:hover .text-hover-fill {
   background-position: 0 0;
 }
+
+/* ── Lookup Drawer slide-up animation ────────────────────────────── */
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.lookup-drawer {
+  animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* prevent content below from showing through on iOS */
+  -webkit-backdrop-filter: blur(0);
+}

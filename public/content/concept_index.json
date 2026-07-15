@@ -683,9 +683,9 @@
     "perron_family_haunting",
     "the_overtoun_bridge_dogs",
     "the_bermuda_triangle_mystery",
-    "the_haunting_of_bhangarh_fort",
     "the_greenbrier_ghost",
     "ss_ourang_medan_mystery",
+    "the_haunting_of_bhangarh_fort",
     "skinwalker_ranch_phenomena"
   ],
   "grief_and_madness": [
@@ -1132,8 +1132,8 @@
     "morris_worm_first_internet_attack",
     "the_mydoom_worm_internet_fastest_malware",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic",
-    "aids_trojan_ransomware_1989"
+    "aids_trojan_ransomware_1989",
+    "melissa_virus_first_global_epidemic"
   ],
   "psychological_exploitation": [
     "blue_whale_game_001"
@@ -1993,11 +1993,11 @@
   "cybercrime": [
     "silk_road_dread_pirate_roberts",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic",
     "kevin_mitnick_ghost_in_the_wires",
     "bulletproof_hosting_networks",
     "aids_trojan_ransomware_1989",
-    "online_poker_superuser_scandal"
+    "online_poker_superuser_scandal",
+    "melissa_virus_first_global_epidemic"
   ],
   "dark_web": [
     "silk_road_dread_pirate_roberts",
@@ -2097,11 +2097,11 @@
   "social_engineering": [
     "the_new_world_order_conspiracy",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic",
     "kevin_mitnick_ghost_in_the_wires",
     "project_100000_mcnamaras_folly",
     "bavarian_illuminati_secret_society",
-    "aids_trojan_ransomware_1989"
+    "aids_trojan_ransomware_1989",
+    "melissa_virus_first_global_epidemic"
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
@@ -2903,18 +2903,6 @@
   "organized_violence": [
     "st_valentines_day_massacre"
   ],
-  "haunted_fort": [
-    "the_haunting_of_bhangarh_fort"
-  ],
-  "ancient_curse": [
-    "the_haunting_of_bhangarh_fort"
-  ],
-  "local_legends": [
-    "the_haunting_of_bhangarh_fort"
-  ],
-  "historical_tragedy": [
-    "the_haunting_of_bhangarh_fort"
-  ],
   "enlightenment_ideals": [
     "bavarian_illuminati_secret_society"
   ],
@@ -3052,6 +3040,18 @@
   ],
   "legal_battle": [
     "the_murder_of_eliza_jumel"
+  ],
+  "haunted_fort": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "ancient_curse": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "local_legends": [
+    "the_haunting_of_bhangarh_fort"
+  ],
+  "historical_tragedy": [
+    "the_haunting_of_bhangarh_fort"
   ],
   "nuclear_testing": [
     "operation_crossroads_bikini_atoll"

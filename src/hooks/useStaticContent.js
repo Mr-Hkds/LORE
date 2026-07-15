@@ -199,8 +199,8 @@ export function useStaticContent() {
   }, [allStories]);
 
   // Get connected stories for a given story
-  const getConnectedStories = useCallback((storyId) => {
-    const story = allStories.find(s => s.story_id === storyId);
+  const getConnectedStories = useCallback((storyId, storyDetail = null) => {
+    const story = storyDetail || allStories.find(s => s.story_id === storyId);
     if (!story?.connections) return [];
 
     return story.connections.map(conn => {

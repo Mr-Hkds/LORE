@@ -55,12 +55,20 @@ export default async function handler(req, res) {
   const parts = urlPath.split('/').filter(Boolean);
   const lastPart = parts[parts.length - 1] || '';
 
-  // 1. GET /api/stories (Get all stories)
+  // 1. GET /api/stories (Get all stories metadata) or GET /api/stories/:id (Get single story details)
   if (req.method === 'GET') {
     try {
-      const includeDrafts = req.query.include_drafts === 'true' || req.query.all === 'true';
-      const list = await db.getStories(includeDrafts);
-      return res.status(200).json(list);
+      if (lastPart === 'stories') {
+        const includeDrafts = req.query.include_drafts === 'true' || req.query.all === 'true';
+        const list = await db.getStories(includeDrafts, false);
+        return res.status(200).json(list);
+      } else {
+        const story = await db.getStory(lastPart);
+        if (!story) {
+          return res.status(404).json({ error: 'Story not found' });
+        }
+        return res.status(200).json(story);
+      }
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -175,18 +183,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Story not found' });
       }
 
-      // Download remote cover image and convert to base64 for fast DB serving
-      if (updates.hero_image && (updates.hero_image.startsWith('http') || updates.hero_image.startsWith('//'))) {
-        try {
-          console.log(`[SERVER COVER DOWNLOAD] Downloading remote image: ${updates.hero_image}`);
-          const base64Img = await downloadImageAsBase64(updates.hero_image);
-          updates.hero_image = base64Img;
-          console.log(`[SERVER COVER DOWNLOAD] Successfully downloaded and converted to base64.`);
-        } catch (downloadErr) {
-          console.warn(`[SERVER COVER DOWNLOAD] Failed to download image:`, downloadErr.message);
-        }
-      }
-
+      // Keep original HTTP/HTTPS or relative cover image URL to prevent database bloat
       await db.updateStory(lastPart, updates);
       if (!story.draft) {
         await db.exportStoriesToJSON();

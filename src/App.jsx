@@ -44,6 +44,8 @@ export default function App() {
   const [shareTarget, setShareTarget] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectorTab] = useState('for-you');
+  const [fullStoryCache, setFullStoryCache] = useState({});
+  const [loadingStoryDetails, setLoadingStoryDetails] = useState(false);
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -341,8 +343,8 @@ export default function App() {
       const storyId = parts[0];
       const layerNum = parts[1] ? parseInt(parts[1], 10) : 1;
       
-      const story = stories.find(s => s.story_id === storyId);
-      if (story) {
+      const storyMeta = stories.find(s => s.story_id === storyId);
+      if (storyMeta) {
         const categoryMapInverse = {
           'psychology': 'psychology',
           'mythology': 'mythology',
@@ -352,20 +354,59 @@ export default function App() {
           'conspiracy': 'conspiracy',
           'cyber_mysteries': 'cyber-mysteries',
         };
-        const catId = categoryMapInverse[story.category] || story.category;
+        const catId = categoryMapInverse[storyMeta.category] || storyMeta.category;
         const matchedTopic = TOPICS.find(t => t.id === catId);
         
         setSelectedCategory(matchedTopic || { id: catId, label: catId });
-        setCurrentStory(story);
         setActiveLayer(layerNum);
-        setPhase('reading');
+
+        if (fullStoryCache[storyId]) {
+          setCurrentStory(fullStoryCache[storyId]);
+          setPhase('reading');
+        } else {
+          // Put placeholder metadata first so scaffolding and header load instantly
+          setCurrentStory({ ...storyMeta, layers: [] });
+          setPhase('reading');
+          setLoadingStoryDetails(true);
+
+          const fetchDetails = async () => {
+            let fullStory = null;
+            try {
+              const res = await fetch(`/api/stories/${storyId}?t=${Date.now()}`);
+              if (res.ok) {
+                fullStory = await res.json();
+              }
+            } catch (e) {
+              console.warn('[Stories Details API] Fetch failed, trying static fallback:', e);
+            }
+            if (!fullStory) {
+              try {
+                const res = await fetch(`/content/stories/${storyId}.json`);
+                if (res.ok) {
+                  fullStory = await res.json();
+                }
+              } catch (e) {
+                console.error('[Stories Details Static] Fetch failed:', e);
+              }
+            }
+            if (fullStory) {
+              setFullStoryCache(prev => ({ ...prev, [storyId]: fullStory }));
+              setCurrentStory(fullStory);
+            } else {
+              // Fallback to metadata if everything fails
+              setCurrentStory(storyMeta);
+            }
+            setLoadingStoryDetails(false);
+          };
+          fetchDetails();
+        }
       } else {
         if (stories.length > 0) {
           setPhase('select');
         }
       }
     }
-  }, [stories]);
+  }, [stories, fullStoryCache]);
 
   // Handle hash updates on mount and reload
   useEffect(() => {
@@ -570,7 +611,7 @@ export default function App() {
   if (!currentStory) return null;
 
   const layers = currentStory.layers || [];
-  const connections = getConnectedStories(currentStory.story_id).filter(
+  const connections = getConnectedStories(currentStory.story_id, currentStory).filter(
     conn => !deletedStories.includes(conn.story_id)
   );
 
@@ -638,22 +679,29 @@ export default function App() {
 
       {/* Content Scroll Container */}
       <div className="snap-container absolute inset-0 z-10">
-        {layers.map((layerData) => (
-          <LayerReader
-            key={layerData.layer}
-            topic={{ id: currentStory.category, label: currentStory.title }}
-            layerNum={layerData.layer}
-            data={getLayerData(layerData.layer)}
-            layer={getLayer(layerData.layer)}
-            onLayerActive={() => setActiveLayer(layerData.layer)}
-            connections={layerData.layer === TOTAL_LAYERS ? connections : []}
-            onSelectConnectedStory={handleSelectConnectedStory}
-            onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
-            onShare={() => setShareTarget({ story: currentStory, layerNum: layerData.layer })}
-            story={currentStory}
-            onBack={handleBackToCatalog}
-          />
-        ))}
+        {loadingStoryDetails ? (
+          <div className="w-full h-full flex flex-col items-center justify-center font-mono text-[9px] tracking-[0.24em] text-[#9E7B4C] uppercase gap-3.5 select-none animate-pulse">
+            <span className="w-4 h-4 rounded-full border border-[#9E7B4C]/25 border-t-[#9E7B4C] animate-spin" />
+            <span>Decrypting dossier data layers...</span>
+          </div>
+        ) : (
+          layers.map((layerData) => (
+            <LayerReader
+              key={layerData.layer}
+              topic={{ id: currentStory.category, label: currentStory.title }}
+              layerNum={layerData.layer}
+              data={getLayerData(layerData.layer)}
+              layer={getLayer(layerData.layer)}
+              onLayerActive={() => setActiveLayer(layerData.layer)}
+              connections={layerData.layer === TOTAL_LAYERS ? connections : []}
+              onSelectConnectedStory={handleSelectConnectedStory}
+              onReactionUpdate={(reactions) => handleReactionUpdate(currentStory.story_id, reactions)}
+              onShare={() => setShareTarget({ story: currentStory, layerNum: layerData.layer })}
+              story={currentStory}
+              onBack={handleBackToCatalog}
+            />
+          ))
+        )}
       </div>
 
       <ShareModal
