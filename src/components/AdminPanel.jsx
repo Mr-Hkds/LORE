@@ -372,6 +372,94 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
     }
   };
 
+  // ── Global Dictionary State & Helpers ─────────────────────────────────────
+  const [dictionary, setDictionary] = useState({});
+  const [dictionaryLoading, setDictionaryLoading] = useState(false);
+  const [dictionarySearch, setDictionarySearch] = useState('');
+  const [dictEditWord, setDictEditWord] = useState('');
+  const [dictEditDef, setDictEditDef] = useState('');
+  const [editingWordKey, setEditingWordKey] = useState(null); // tracking word being updated
+
+  const loadDictionary = async () => {
+    setDictionaryLoading(true);
+    try {
+      const res = await fetch('/api/dictionary');
+      if (res.ok) {
+        const data = await res.json();
+        setDictionary(data);
+      } else {
+        const resFallback = await fetch('/content/dictionary.json');
+        if (resFallback.ok) {
+          const data = await resFallback.json();
+          setDictionary(data);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load dictionary:', err);
+    } finally {
+      setDictionaryLoading(false);
+    }
+  };
+
+  // Load dictionary on first render
+  useEffect(() => {
+    loadDictionary();
+  }, []);
+
+  const handleSaveDictionary = async (updatedDict) => {
+    let serverSaved = false;
+    if (isLocal) {
+      try {
+        const res = await fetch('/api/dictionary', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedDict)
+        });
+        if (res.ok) {
+          serverSaved = true;
+        }
+      } catch (err) {
+        console.warn('Failed to save dictionary to local server:', err);
+      }
+    }
+
+    setDictionary(updatedDict);
+    localStorage.setItem('lore:custom_dictionary', JSON.stringify(updatedDict));
+    addLog(`Dictionary saved locally${serverSaved ? ' and updated on local server' : ''}.`);
+
+    if (ghToken) {
+      addLog('GitHub Sync: Committing dictionary updates to repository...');
+      const filesToCommit = [
+        { path: 'public/content/dictionary.json', content: JSON.stringify(updatedDict, null, 2) }
+      ];
+      try {
+        await commitFilesToGitHub(filesToCommit, 'admin: update global dictionary terms');
+        addLog('🚀 Successfully committed dictionary updates to GitHub!');
+      } catch (err) {
+        console.error('Failed to commit dictionary to GitHub:', err);
+        addLog(`❌ GitHub commit failed: ${err.message}`);
+      }
+    }
+  };
+
+  const handleAddDictWord = () => {
+    if (!dictEditWord.trim() || !dictEditDef.trim()) return;
+    const wordClean = dictEditWord.trim().toLowerCase();
+    
+    const updated = { ...dictionary, [wordClean]: dictEditDef.trim() };
+    handleSaveDictionary(updated);
+    setDictEditWord('');
+    setDictEditDef('');
+    setEditingWordKey(null);
+  };
+
+  const handleDeleteDictWord = (word) => {
+    if (!confirm(`Are you sure you want to remove "${word}" from the dictionary?`)) return;
+    const updated = { ...dictionary };
+    delete updated[word];
+    handleSaveDictionary(updated);
+  };
+
   // Write safe localStorage setter
   const setLocalVal = (key, val) => {
     if (val === undefined || val === null || val === 'undefined' || val === 'null' || val.trim() === '') {
@@ -2616,14 +2704,14 @@ ${tone}
           </button>
           <button
             onClick={() => {
-              setActiveTab('analytics');
-              loadAnalytics();
+              setActiveTab('dictionary');
+              loadDictionary();
             }}
             className={`w-full text-left px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer ${
-              activeTab === 'analytics' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
+              activeTab === 'dictionary' ? 'bg-[#9E7B4C] text-white font-bold' : 'hover:bg-neutral-800/40 text-[#8F8A82]'
             }`}
           >
-            Visitor Analytics
+            Global Dictionary
           </button>
           <button
             onClick={() => setActiveTab('database')}
@@ -4301,94 +4389,155 @@ ${tone}
             </div>
           )}
 
-          {/* Tab 8: Visitor Analytics */}
-          {activeTab === 'analytics' && (
+          {/* Tab 8: Global Dictionary */}
+          {activeTab === 'dictionary' && (
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b gap-3 text-left" style={{ borderColor: ru }}>
                 <div className="text-left">
-                  <h2 className="font-serif italic text-2xl">Visitor Analytics</h2>
-                  <p className="text-xs text-[#6A6560] mt-1">Lightweight self-hosted SQLite pageview tracker metrics</p>
+                  <h2 className="font-serif italic text-2xl">Global Dictionary</h2>
+                  <p className="text-xs text-[#6A6560] mt-1">Manage definitions for highlighted words across all dossiers</p>
                 </div>
                 <button
-                  onClick={loadAnalytics}
-                  disabled={analyticsLoading}
-                  className="px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 transition-all cursor-pointer font-bold"
+                  onClick={loadDictionary}
+                  disabled={dictionaryLoading}
+                  className="px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-[10px] font-mono font-bold uppercase rounded-lg active:scale-95 transition-all cursor-pointer"
                 >
-                  {analyticsLoading ? 'Refreshing...' : 'Refresh Stats'}
+                  {dictionaryLoading ? 'Refreshing...' : 'Refresh Dictionary'}
                 </button>
               </div>
 
-              {/* KPI Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
-                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Total Pageviews</span>
-                  <span className="font-serif italic text-2xl text-[#EDE8DF]">{analyticsData.totalPageviews}</span>
+              {/* Add / Edit Word Form */}
+              <div className="p-5 rounded-xl border bg-black/30 space-y-4 text-left" style={{ borderColor: ru }}>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-serif italic text-base text-neutral-300">
+                    {editingWordKey ? `Edit Term: "${editingWordKey}"` : 'Add New Dictionary Term'}
+                  </h3>
+                  {editingWordKey && (
+                    <button
+                      onClick={() => {
+                        setEditingWordKey(null);
+                        setDictEditWord('');
+                        setDictEditDef('');
+                      }}
+                      className="text-xs font-mono text-neutral-500 hover:text-neutral-300 cursor-pointer"
+                    >
+                      [Cancel Edit]
+                    </button>
+                  )}
                 </div>
-                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
-                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Unique Visitors</span>
-                  <span className="font-serif italic text-2xl text-[#9E7B4C]">{analyticsData.uniqueVisitors}</span>
-                </div>
-                <div className="p-4 rounded-xl border bg-black/30" style={{ borderColor: ru }}>
-                  <span className="text-[9px] font-mono tracking-wider uppercase block mb-1 text-[#6A6560]">Active Sessions (30m)</span>
-                  <span className="font-serif italic text-2xl text-[#10B981]">{analyticsData.activeSessions}</span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-mono text-[#8F8A82] uppercase tracking-wider block">Word or Phrase</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. espionage"
+                      disabled={!!editingWordKey}
+                      value={dictEditWord}
+                      onChange={(e) => setDictEditWord(e.target.value)}
+                      className="w-full bg-[#1A1816] text-[#EDE8DF] text-sm px-3 py-2.5 rounded-lg border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-all disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="md:col-span-2 space-y-1">
+                    <label className="text-[10px] font-mono text-[#8F8A82] uppercase tracking-wider block">Definition</label>
+                    <div className="flex gap-3">
+                      <input
+                        type="text"
+                        placeholder="Define the term in a premium, simple manner..."
+                        value={dictEditDef}
+                        onChange={(e) => setDictEditDef(e.target.value)}
+                        className="flex-1 bg-[#1A1816] text-[#EDE8DF] text-sm px-3 py-2.5 rounded-lg border border-neutral-800 focus:outline-none focus:border-[#9E7B4C] transition-all"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleAddDictWord();
+                        }}
+                      />
+                      <button
+                        onClick={handleAddDictWord}
+                        disabled={!dictEditWord.trim() || !dictEditDef.trim()}
+                        className="px-5 bg-[#9E7B4C] hover:bg-[#b08c5c] text-white text-xs font-mono font-bold uppercase rounded-lg active:scale-95 disabled:opacity-50 transition-all cursor-pointer whitespace-nowrap"
+                      >
+                        {editingWordKey ? 'Update' : 'Add Term'}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Pageviews Table */}
-              <div className="space-y-3 text-left">
-                <div className="border-b pb-2 flex items-center justify-between" style={{ borderColor: ru }}>
-                  <h3 className="font-serif italic text-lg text-neutral-300">Recent Logs (Last 50 Views)</h3>
-                  <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">REALTIME STREAM</span>
+              {/* Terms List and Search */}
+              <div className="space-y-4 text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2 gap-3" style={{ borderColor: ru }}>
+                  <h3 className="font-serif italic text-lg text-neutral-300">
+                    Dictionary Entries ({Object.keys(dictionary).length})
+                  </h3>
+                  <div className="relative w-full sm:w-64">
+                    <input
+                      type="text"
+                      placeholder="Search terms..."
+                      value={dictionarySearch}
+                      onChange={(e) => setDictionarySearch(e.target.value)}
+                      className="w-full bg-[#1A1816] text-[#EDE8DF] text-xs px-3 py-2 rounded-lg border border-neutral-850 focus:outline-none focus:border-[#9E7B4C] transition-all font-mono"
+                    />
+                  </div>
                 </div>
-                {analyticsData.recentPageviews.length === 0 ? (
-                  <div className="text-center py-12 text-[#6A6560]">
-                    <p className="font-serif italic text-base">No visitor traffic logged yet.</p>
-                    <p className="text-[9px] font-mono uppercase mt-1">Navigate pages on the main site to trigger logs.</p>
+
+                {dictionaryLoading ? (
+                  <div className="text-center py-12 text-[#6A6560] font-mono text-xs">
+                    Loading dictionary data...
                   </div>
                 ) : (
-                  <div className="overflow-x-auto rounded-lg border border-neutral-900 bg-neutral-950/40">
-                    <table className="w-full text-left border-collapse text-xs">
-                      <thead>
-                        <tr className="border-b border-neutral-900 bg-neutral-950 font-mono text-[9px] text-[#6A6560] uppercase tracking-wider">
-                          <th className="p-3">Timestamp</th>
-                          <th className="p-3">Path</th>
-                          <th className="p-3">Visitor ID</th>
-                          <th className="p-3">Session ID</th>
-                          <th className="p-3">Referrer</th>
-                          <th className="p-3">Device / User Agent</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-neutral-950 font-mono text-[10.5px]">
-                        {analyticsData.recentPageviews.map((pv) => {
-                          const dateObj = new Date(pv.timestamp);
-                          const formattedTime = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' ' + dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
-                          
-                          let uaShort = 'Desktop / Browser';
-                          if (pv.user_agent) {
-                            const ua = pv.user_agent;
-                            if (ua.includes('Mobi') || ua.includes('Android') || ua.includes('iPhone')) {
-                              uaShort = 'Mobile Device';
-                            }
-                            if (ua.includes('Chrome') && !ua.includes('Edg')) uaShort += ' (Chrome)';
-                            else if (ua.includes('Safari') && !ua.includes('Chrome')) uaShort += ' (Safari)';
-                            else if (ua.includes('Edg')) uaShort += ' (Edge)';
-                            else if (ua.includes('Firefox')) uaShort += ' (Firefox)';
-                          }
+                  (() => {
+                    const filtered = Object.entries(dictionary)
+                      .filter(([word]) => word.includes(dictionarySearch.toLowerCase().trim()))
+                      .sort(([a], [b]) => a.localeCompare(b));
 
-                          return (
-                            <tr key={pv.id} className="hover:bg-neutral-900/10 text-neutral-300">
-                              <td className="p-3 text-[#6A6560] whitespace-nowrap">{formattedTime}</td>
-                              <td className="p-3 text-[#9E7B4C] font-semibold">{pv.path}</td>
-                              <td className="p-3 select-all" title={pv.visitor_id}>{pv.visitor_id?.substring(2, 8)}...</td>
-                              <td className="p-3 select-all" title={pv.session_id}>{pv.session_id?.substring(2, 8)}...</td>
-                              <td className="p-3 truncate max-w-[120px]" title={pv.referrer}>{pv.referrer || 'direct'}</td>
-                              <td className="p-3 truncate max-w-[200px]" title={pv.user_agent}>{uaShort}</td>
+                    if (filtered.length === 0) {
+                      return (
+                        <div className="text-center py-12 text-[#6A6560]">
+                          <p className="font-serif italic text-base">No dictionary terms found.</p>
+                          {dictionarySearch && <p className="text-[9px] font-mono uppercase mt-1">Try resetting your search query.</p>}
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="overflow-hidden rounded-lg border border-neutral-900 bg-neutral-950/40">
+                        <table className="w-full text-left border-collapse text-xs">
+                          <thead>
+                            <tr className="border-b border-neutral-900 bg-neutral-950 font-mono text-[9px] text-[#6A6560] uppercase tracking-wider">
+                              <th className="p-3 w-1/4">Term</th>
+                              <th className="p-3 w-1/2">Definition</th>
+                              <th className="p-3 w-1/4 text-right">Actions</th>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                          </thead>
+                          <tbody className="divide-y divide-neutral-900/60 font-mono">
+                            {filtered.map(([word, def]) => (
+                              <tr key={word} className="hover:bg-neutral-900/10 text-neutral-300 group">
+                                <td className="p-3 text-[#9E7B4C] font-semibold text-sm select-all">{word}</td>
+                                <td className="p-3 text-neutral-300 font-sans text-xs">{def}</td>
+                                <td className="p-3 text-right space-x-2">
+                                  <button
+                                    onClick={() => {
+                                      setEditingWordKey(word);
+                                      setDictEditWord(word);
+                                      setDictEditDef(def);
+                                    }}
+                                    className="px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-[10px] uppercase font-bold rounded cursor-pointer transition-all inline-flex items-center gap-1"
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    onClick={() => handleDeleteDictWord(word)}
+                                    className="px-2.5 py-1 bg-red-950/40 hover:bg-red-900/40 text-red-400 text-[10px] uppercase font-bold rounded cursor-pointer transition-all inline-flex items-center gap-1"
+                                  >
+                                    Delete
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    );
+                  })()
                 )}
               </div>
             </div>

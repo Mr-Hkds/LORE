@@ -96,6 +96,20 @@ export default function LayerReader({
 
   // Seen-words set in state so underline re-renders reactively
   const [seenWords, setSeenWords] = useState(() => getSeenWords());
+  
+  // Dynamic Global Dictionary state loaded from public JSON file (synced with admin panel)
+  const [globalDict, setGlobalDict] = useState(() => LOCAL_DICTIONARY);
+  useEffect(() => {
+    fetch(`/content/dictionary.json?t=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && typeof data === 'object') {
+          setGlobalDict(data);
+        }
+      })
+      .catch(err => console.warn('Failed to load dynamic dictionary:', err));
+  }, []);
+
   // Glossary strip open state
   const [glossaryOpen, setGlossaryOpen] = useState(false);
 
@@ -144,12 +158,12 @@ export default function LayerReader({
       return;
     }
 
-    // 2. Global LOCAL_DICTIONARY
-    if (LOCAL_DICTIONARY[cleanWord]) {
+    // 2. Global globalDict
+    if (globalDict[cleanWord]) {
       setLookup({
         isOpen: true,
         word: cleanOriginal,
-        generic: LOCAL_DICTIONARY[cleanWord],
+        generic: globalDict[cleanWord],
         caseNote: '',
         loading: false,
         isLive: false,
@@ -314,7 +328,7 @@ export default function LayerReader({
     const cleanText = text.replace(/\*\*/g, '');
 
     const storyVocab = story?.vocabulary || {};
-    const mergedKeys = [...new Set([...Object.keys(LOCAL_DICTIONARY), ...Object.keys(storyVocab)])];
+    const mergedKeys = [...new Set([...Object.keys(globalDict), ...Object.keys(storyVocab)])];
     if (mergedKeys.length === 0) return cleanText;
 
     const keys = mergedKeys.sort((a, b) => b.length - a.length);

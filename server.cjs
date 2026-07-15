@@ -6,6 +6,7 @@ const db = require('./db.cjs');
 
 const PORT = 3001;
 const STORIES_FILE = path.join(__dirname, 'public', 'content', 'stories.json');
+const DICTIONARY_FILE = path.join(__dirname, 'public', 'content', 'dictionary.json');
 const CONCEPTS_FILE = path.join(__dirname, 'public', 'content', 'concept_index.json');
 const FEEDBACK_FILE = path.join(__dirname, 'public', 'content', 'feedback.json');
 const STATUS_FILE = path.join(__dirname, 'public', 'content', 'automation_status.json');
@@ -1092,6 +1093,43 @@ const server = http.createServer(async (req, res) => {
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, story: await db.getStory(storyId) }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: GET /api/dictionary
+  if (req.method === 'GET' && pathname === '/api/dictionary') {
+    try {
+      if (fs.existsSync(DICTIONARY_FILE)) {
+        const data = fs.readFileSync(DICTIONARY_FILE, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(data);
+      } else {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({}));
+      }
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // Route: PUT /api/dictionary
+  if (req.method === 'PUT' && pathname === '/api/dictionary') {
+    try {
+      const data = await getJsonBody(req);
+      if (!data || typeof data !== 'object') {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Invalid dictionary payload' }));
+        return;
+      }
+      fs.writeFileSync(DICTIONARY_FILE, JSON.stringify(data, null, 2));
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err.message }));
