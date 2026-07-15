@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const story = db.getStory(story_id);
+    const story = await db.getStory(story_id);
     if (!story) {
       return res.redirect('/');
     }
@@ -36,20 +36,20 @@ export default async function handler(req, res) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>${title} | SevenDescents</title>
+  <title>${title} | VII DESCENTS</title>
   <meta name="description" content="${description}">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="${title} | SevenDescents">
+  <meta property="og:title" content="${title} | VII DESCENTS">
   <meta property="og:description" content="${description}">
   <meta property="og:image" content="${imageUrl}">
   <meta property="og:url" content="${shareUrl}">
-  <meta property="og:site_name" content="SevenDescents">
+  <meta property="og:site_name" content="VII DESCENTS">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${title} | SevenDescents">
+  <meta name="twitter:title" content="${title} | VII DESCENTS">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${imageUrl}">
 
