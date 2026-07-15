@@ -17,9 +17,19 @@ export default async function handler(req, res) {
     const title = story.title || 'Classified Dossier';
     const description = story.hook || 'Explore this classified archive file on SevenDescents.';
     
-    // Use story hero_image if it exists, otherwise fallback to the default og-preview
-    const imageUrl = story.hero_image || 'https://sevendescents.vercel.app/og-preview.png';
-    const shareUrl = `https://sevendescents.vercel.app/api/share?story_id=${encodeURIComponent(story_id)}&layer=${layerNum}`;
+    // Resolve the absolute image URL and share URL dynamically using the request host
+    const host = req.headers.host || 'sevendescents.vercel.app';
+    const protocol = host.includes('localhost') ? 'http' : 'https';
+    
+    let imageUrl = `${protocol}://${host}/og-preview.png`;
+    if (story.hero_image) {
+      if (story.hero_image.startsWith('http://') || story.hero_image.startsWith('https://')) {
+        imageUrl = story.hero_image;
+      } else {
+        imageUrl = `${protocol}://${host}${story.hero_image.startsWith('/') ? '' : '/'}${story.hero_image}`;
+      }
+    }
+    const shareUrl = `${protocol}://${host}/api/share?story_id=${encodeURIComponent(story_id)}&layer=${layerNum}`;
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.status(200).send(`<!DOCTYPE html>
