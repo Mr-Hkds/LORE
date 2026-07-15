@@ -96,7 +96,9 @@
     "zinoviev_letter_forgery",
     "operation_acoustic_kitty",
     "olof_palme_assassination_unsolved",
-    "project_goldfish_chemical_lsd_tests"
+    "project_goldfish_chemical_lsd_tests",
+    "soviet_psychic_warfare_programs",
+    "unattributed_early_cold_war_cyber_espionage"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -489,7 +491,8 @@
     "project_mk_ultra_001",
     "project_chatter_mind_control",
     "project_coast_canada_experiments",
-    "operation_midnight_climax"
+    "operation_midnight_climax",
+    "soviet_psychic_warfare_programs"
   ],
   "unethical_experimentation": [
     "cia_mk_ultra_program",
@@ -505,7 +508,8 @@
     "operation_midnight_climax",
     "the_gay_bomb_project",
     "operation_acoustic_kitty",
-    "project_goldfish_chemical_lsd_tests"
+    "project_goldfish_chemical_lsd_tests",
+    "soviet_psychic_warfare_programs"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -518,7 +522,8 @@
     "project_chatter_mind_control",
     "operation_midnight_climax",
     "the_gay_bomb_project",
-    "project_goldfish_chemical_lsd_tests"
+    "project_goldfish_chemical_lsd_tests",
+    "soviet_psychic_warfare_programs"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -798,10 +803,12 @@
     "project_chatter_mind_control",
     "project_azorian_glomar_explorer",
     "operation_chariot_alaska_nuclear_harbor",
-    "operation_crossroads_bikini_atoll"
+    "operation_crossroads_bikini_atoll",
+    "soviet_psychic_warfare_programs"
   ],
   "paranormal_research": [
-    "project_stargate_remote_viewing"
+    "project_stargate_remote_viewing",
+    "soviet_psychic_warfare_programs"
   ],
   "intelligence_gathering": [
     "project_stargate_remote_viewing",
@@ -1227,7 +1234,8 @@
     "echelon_global_surveillance",
     "the_russian_woodpecker_duga_3",
     "project_bullrun_muscular",
-    "crypto_ag_scandal_global_espionage"
+    "crypto_ag_scandal_global_espionage",
+    "unattributed_early_cold_war_cyber_espionage"
   ],
   "privacy_invasion": [
     "echelon_global_surveillance",
@@ -1286,7 +1294,8 @@
     "moon_landing_hoax_001",
     "dag_hammarskjold_death_conspiracy",
     "operation_acoustic_kitty",
-    "olof_palme_assassination_unsolved"
+    "olof_palme_assassination_unsolved",
+    "unattributed_early_cold_war_cyber_espionage"
   ],
   "anti_communism": [
     "operation_gladio"
@@ -1572,7 +1581,8 @@
     "the_equation_group_cyber_espionage",
     "crypto_ag_scandal_global_espionage",
     "flame_malware_cyber_espionage",
-    "titan_rain_silent_infiltration_us_networks"
+    "titan_rain_silent_infiltration_us_networks",
+    "unattributed_early_cold_war_cyber_espionage"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -3167,5 +3177,8 @@
   ],
   "military_hero": [
     "business_plot_1933_coup_attempt"
+  ],
+  "unattributed_attacks": [
+    "unattributed_early_cold_war_cyber_espionage"
   ]
 }
