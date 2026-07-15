@@ -113,7 +113,8 @@
     "mahabharat_psychological_epic",
     "salem_witch_trials_001",
     "salem_witch_trials_001_detailed",
-    "banality_of_evil_001"
+    "banality_of_evil_001",
+    "west_memphis_three_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -442,7 +443,8 @@
     "lindbergh_kidnapping_001",
     "atlanta_child_murders",
     "the_moors_murders",
-    "lizzie_borden_axe_murders"
+    "lizzie_borden_axe_murders",
+    "west_memphis_three_001"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
@@ -2243,7 +2245,8 @@
   ],
   "cosmic_balance": [
     "raktabija_blood_demon",
-    "halahala_poison_shiva_sacrifice"
+    "halahala_poison_shiva_sacrifice",
+    "tyranny_of_mahishasura"
   ],
   "goddess_power": [
     "raktabija_blood_demon"
@@ -2469,7 +2472,8 @@
     "the_scattered_relics_satis_corpse"
   ],
   "divine_feminine": [
-    "the_scattered_relics_satis_corpse"
+    "the_scattered_relics_satis_corpse",
+    "tyranny_of_mahishasura"
   ],
   "dna_forensics": [
     "golden_state_killer_dna_breakthrough"
@@ -2831,7 +2835,8 @@
     "bulletproof_hosting_networks"
   ],
   "false_confession": [
-    "the_psychology_of_false_confessions"
+    "the_psychology_of_false_confessions",
+    "west_memphis_three_001"
   ],
   "coercive_interrogation": [
     "the_psychology_of_false_confessions"
@@ -2840,12 +2845,14 @@
     "the_psychology_of_false_confessions"
   ],
   "demonic_tyranny": [
-    "narakasura_demon_princesses"
+    "narakasura_demon_princesses",
+    "tyranny_of_mahishasura"
   ],
   "divine_intervention": [
     "narakasura_demon_princesses",
     "halahala_poison_shiva_sacrifice",
-    "king_trishanku_suspended_between_worlds"
+    "king_trishanku_suspended_between_worlds",
+    "tyranny_of_mahishasura"
   ],
   "imprisonment": [
     "narakasura_demon_princesses"
@@ -3136,5 +3143,14 @@
   ],
   "information_control": [
     "the_great_firewall_of_china"
+  ],
+  "unbeatable_evil": [
+    "tyranny_of_mahishasura"
+  ],
+  "satanic_panic": [
+    "west_memphis_three_001"
+  ],
+  "miscarriage_of_justice": [
+    "west_memphis_three_001"
   ]
 }
