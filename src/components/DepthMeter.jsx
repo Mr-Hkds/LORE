@@ -30,7 +30,7 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
             style={{ background: 'none', border: 'none', padding: 0, color: text }}
           >
             <LoreMark size={11} color="#9E7B4C" />
-            <span style={{ color: '#9E7B4C', fontFamily: "'Space Mono', monospace", fontWeight: 700, letterSpacing: '0.22em', fontSize: '9px' }}>SEVEN DESCENTS</span>
+            <span style={{ color: '#9E7B4C', fontFamily: "'Space Mono', monospace", fontWeight: 700, letterSpacing: '0.22em', fontSize: '9px' }}>VII DESCENTS</span>
           </button>
           
           <span style={{ opacity: 0.3, color: text }}>/</span>
@@ -121,7 +121,7 @@ export default function DepthMeter({ currentLayer, totalLayers, layerName, bg, t
               style={{ background: 'none', border: 'none', padding: 0, color: text }}
             >
               <LoreMark size={9} color="#9E7B4C" />
-              <span style={{ color: '#9E7B4C', letterSpacing: '0.2em' }}>SEVEN DESCENTS</span>
+              <span style={{ color: '#9E7B4C', letterSpacing: '0.2em' }}>VII DESCENTS</span>
             </button>
             <span style={{ opacity: 0.3, color: text }}>/</span>
             {categoryLabel ? (

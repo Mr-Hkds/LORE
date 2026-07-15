@@ -67,7 +67,7 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
   if (!isOpen) return null;
 
   // Social sharing links
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`[CLASSIFIED ENTRY] Decrypted: "${storyTitle}" on SevenDescents.`)}&url=${encodeURIComponent(shareUrl)}`;
+  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`[CLASSIFIED ENTRY] Decrypted: "${storyTitle}" on VII DESCENTS.`)}&url=${encodeURIComponent(shareUrl)}`;
   const redditShareUrl = `https://www.reddit.com/submit?title=${encodeURIComponent(`[CLASSIFIED] LORE Archive: "${storyTitle}"`)}&url=${encodeURIComponent(shareUrl)}`;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`Explore this classified dossier: "${storyTitle}" ${shareUrl}`)}`;
 
@@ -219,7 +219,7 @@ export default function ShareModal({ isOpen, onClose, storyTitle, storyId, layer
         {/* Footer */}
         <div className="mt-6 pt-4 border-t border-neutral-950 flex justify-center">
           <p className="text-[7.5px] font-mono tracking-wider text-neutral-600 uppercase text-center leading-relaxed">
-            SevenDescents Classified Material. Do not distribute to unauthorized channels.
+            VII DESCENTS Classified Material. Do not distribute to unauthorized channels.
           </p>
         </div>
       </div>

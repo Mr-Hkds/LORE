@@ -72,7 +72,7 @@ export default function SiteFeedback() {
       <button
         id="site-feedback-trigger"
         onClick={() => setOpen(o => !o)}
-        aria-label="Give feedback about SevenDescents"
+        aria-label="Give feedback about VII DESCENTS"
         className="fixed z-[200] select-none cursor-pointer group"
         style={{
           /* Pin to right edge, vertically centered */
@@ -183,7 +183,7 @@ export default function SiteFeedback() {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-[9px] font-mono tracking-[0.28em] uppercase mb-1" style={{ color: '#9E7B4C' }}>
-                        SevenDescents Feedback
+                        VII DESCENTS Feedback
                       </p>
                       <p className="font-serif italic text-lg leading-snug" style={{ color: '#EDE8DF' }}>
                         How is the experience?

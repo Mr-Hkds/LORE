@@ -245,7 +245,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 textTransform: 'uppercase',
               }}
             >
-              Seven Descents
+              VII DESCENTS
             </span>
             <div className="w-[1px] h-3 bg-neutral-800" />
             <span className="font-mono text-[7.5px] tracking-[0.16em] text-[#EDE8DF] bg-[#9E7B4C]/12 border border-[#9E7B4C]/35 px-2.5 py-0.5 rounded-sm uppercase whitespace-nowrap">
@@ -894,7 +894,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           {/* Brand signature */}
           <div className="flex flex-col items-center text-center gap-1.5 mb-2 select-none pointer-events-auto">
             <span className="text-[10px] font-mono font-bold tracking-[0.52em] uppercase text-[#EDE8DF] footer-brand-text cursor-default">
-              SEVEN DESCENTS
+              VII DESCENTS
             </span>
             <span className="text-[6.5px] font-mono tracking-[0.2em] uppercase text-[#8F8A82]/60 max-w-xl leading-relaxed">
               AN ARCHIVAL REGISTRY COMPILED FOR INDEPENDENT RESEARCHERS, FORENSIC HISTORIANS, AND MINDS OBSESSED WITH THE UNRESOLVED.
@@ -907,7 +907,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               Archival Disclosure // Research Registry
             </span>
             <p className="text-[8px] font-mono tracking-[0.15em] uppercase opacity-45 leading-relaxed max-w-xl mx-auto px-4">
-              SevenDescents functions as a curated digital registry documenting historical conspiracies, unresolved disappearances, and cognitive anomalies. All records are compiled from verifiable public domains, investigative logs, and historical research dispatches. This database is compiled strictly for educational and archival purposes.
+              VII DESCENTS functions as a curated digital registry documenting historical conspiracies, unresolved disappearances, and cognitive anomalies. All records are compiled from verifiable public domains, investigative logs, and historical research dispatches. This database is compiled strictly for educational and archival purposes.
             </p>
           </div>
           
@@ -916,7 +916,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           {/* Bottom meta row */}
           <div className="flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase gap-4">
             <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-              <span className="opacity-60">© {new Date().getFullYear()} SEVEN DESCENTS</span>
+              <span className="opacity-60">© {new Date().getFullYear()} VII DESCENTS</span>
               <span className="opacity-30">|</span>
               <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
                 CONSOLE
