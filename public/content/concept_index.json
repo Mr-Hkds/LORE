@@ -240,7 +240,8 @@
     "lizzie_borden_axe_murders",
     "olof_palme_assassination_unsolved",
     "the_murder_of_eliza_jumel",
-    "tylenol_murders_1982"
+    "tylenol_murders_1982",
+    "keddie_cabin_murders"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -311,10 +312,12 @@
   ],
   "brutal_murders": [
     "hinterkaifeck_murders",
-    "villisca_axe_murders_001"
+    "villisca_axe_murders_001",
+    "keddie_cabin_murders"
   ],
   "isolated_crime": [
-    "hinterkaifeck_murders"
+    "hinterkaifeck_murders",
+    "keddie_cabin_murders"
   ],
   "strange_events": [
     "hinterkaifeck_murders"
@@ -323,7 +326,8 @@
     "hinterkaifeck_murders",
     "noida_double_murder_case_2008",
     "the_sodder_children_disappearance",
-    "lizzie_borden_axe_murders"
+    "lizzie_borden_axe_murders",
+    "keddie_cabin_murders"
   ],
   "cold_case": [
     "hinterkaifeck_murders",
@@ -331,7 +335,8 @@
     "golden_state_killer_dna_breakthrough",
     "villisca_axe_murders_001",
     "db_cooper_unsolved_mystery",
-    "lizzie_borden_axe_murders"
+    "lizzie_borden_axe_murders",
+    "keddie_cabin_murders"
   ],
   "rem atonia": [
     "sleep_paralysis_dossier"
@@ -719,7 +724,8 @@
     "ss_ourang_medan_mystery",
     "the_haunting_of_bhangarh_fort",
     "skinwalker_ranch_phenomena",
-    "rosenheim_poltergeist_001"
+    "rosenheim_poltergeist_001",
+    "greyfriars_kirkyard_poltergeist"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -770,7 +776,8 @@
   ],
   "missing_children": [
     "the_sodder_children_disappearance",
-    "the_moors_murders"
+    "the_moors_murders",
+    "keddie_cabin_murders"
   ],
   "arson": [
     "the_sodder_children_disappearance"
@@ -779,7 +786,8 @@
     "the_sodder_children_disappearance"
   ],
   "flawed_investigation": [
-    "the_sodder_children_disappearance"
+    "the_sodder_children_disappearance",
+    "keddie_cabin_murders"
   ],
   "depression_era": [
     "the_cleveland_torso_murders"
@@ -979,7 +987,8 @@
     "hexham_heads_poltergeist_werewolf",
     "the_bell_witch_haunting",
     "gelderland_devil_poltergeist",
-    "rosenheim_poltergeist_001"
+    "rosenheim_poltergeist_001",
+    "greyfriars_kirkyard_poltergeist"
   ],
   "medical_malpractice": [
     "harold_shipman_serial_killer"
@@ -1444,7 +1453,8 @@
     "the_bell_witch_haunting",
     "gelderland_devil_poltergeist",
     "rosenheim_poltergeist_001",
-    "gef_talking_mongoose_dalby_spook"
+    "gef_talking_mongoose_dalby_spook",
+    "greyfriars_kirkyard_poltergeist"
   ],
   "paranormal_investigation": [
     "enfield_poltergeist_001",
@@ -1470,10 +1480,12 @@
     "edinburgh_vaults_001"
   ],
   "historical_trauma": [
-    "edinburgh_vaults_001"
+    "edinburgh_vaults_001",
+    "greyfriars_kirkyard_poltergeist"
   ],
   "haunted_location": [
-    "edinburgh_vaults_001"
+    "edinburgh_vaults_001",
+    "greyfriars_kirkyard_poltergeist"
   ],
   "ghost_ship": [
     "the_mary_celeste_mystery",
