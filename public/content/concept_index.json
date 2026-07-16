@@ -652,16 +652,19 @@
     "the_silent_twins_gibbons"
   ],
   "cyber warfare": [
-    "stuxnet_cyberweapon_nuclear_facilities"
+    "stuxnet_cyberweapon_nuclear_facilities",
+    "shadowy_market_zero_day_exploits"
   ],
   "state-sponsored hacking": [
-    "stuxnet_cyberweapon_nuclear_facilities"
+    "stuxnet_cyberweapon_nuclear_facilities",
+    "shadowy_market_zero_day_exploits"
   ],
   "industrial control systems": [
     "stuxnet_cyberweapon_nuclear_facilities"
   ],
   "zero-day exploits": [
-    "stuxnet_cyberweapon_nuclear_facilities"
+    "stuxnet_cyberweapon_nuclear_facilities",
+    "shadowy_market_zero_day_exploits"
   ],
   "nuclear proliferation": [
     "stuxnet_cyberweapon_nuclear_facilities"
@@ -1152,7 +1155,8 @@
     "monster_study_1939"
   ],
   "vulnerability": [
-    "blue_whale_game_001"
+    "blue_whale_game_001",
+    "shadowy_market_zero_day_exploits"
   ],
   "online_manipulation": [
     "blue_whale_game_001"
@@ -1699,7 +1703,8 @@
     "the_golem_of_prague"
   ],
   "forbidden_knowledge": [
-    "the_golem_of_prague"
+    "the_golem_of_prague",
+    "chausath_yoginis_cults"
   ],
   "cryptid": [
     "the_beast_of_gevaudan"
@@ -2421,7 +2426,8 @@
     "dakinis_demonic_skywalkers"
   ],
   "tantric_practices": [
-    "dakinis_demonic_skywalkers"
+    "dakinis_demonic_skywalkers",
+    "chausath_yoginis_cults"
   ],
   "sacred_feminine": [
     "dakinis_demonic_skywalkers"
@@ -2430,7 +2436,8 @@
     "project_popeye_weather_warfare"
   ],
   "secret_cults": [
-    "goddess_kalis_darker_cults"
+    "goddess_kalis_darker_cults",
+    "chausath_yoginis_cults"
   ],
   "ritual_violence": [
     "goddess_kalis_darker_cults"
@@ -2510,7 +2517,8 @@
   ],
   "divine_feminine": [
     "the_scattered_relics_satis_corpse",
-    "tyranny_of_mahishasura"
+    "tyranny_of_mahishasura",
+    "chausath_yoginis_cults"
   ],
   "dna_forensics": [
     "golden_state_killer_dna_breakthrough"
@@ -3239,5 +3247,11 @@
   ],
   "psychiatric_diagnosis": [
     "rosenhan_experiment_001"
+  ],
+  "digital black market": [
+    "shadowy_market_zero_day_exploits"
+  ],
+  "ritual_sacrifice": [
+    "chausath_yoginis_cults"
   ]
 }
