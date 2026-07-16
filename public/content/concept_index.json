@@ -295,7 +295,8 @@
   ],
   "dehumanization": [
     "stanford_prison_experiment_001",
-    "banality_of_evil_001"
+    "banality_of_evil_001",
+    "rosenhan_experiment_001"
   ],
   "financial_conspiracy": [
     "barney_barnato",
@@ -613,7 +614,8 @@
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
-    "porton_down_experiments"
+    "porton_down_experiments",
+    "rosenhan_experiment_001"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study",
@@ -1131,7 +1133,8 @@
     "the_silent_twins_gibbons"
   ],
   "institutionalization": [
-    "the_silent_twins_gibbons"
+    "the_silent_twins_gibbons",
+    "rosenhan_experiment_001"
   ],
   "unethical_research": [
     "monster_study_1939",
@@ -3230,5 +3233,11 @@
   ],
   "foreign_interference": [
     "operation_ajax"
+  ],
+  "diagnostic_bias": [
+    "rosenhan_experiment_001"
+  ],
+  "psychiatric_diagnosis": [
+    "rosenhan_experiment_001"
   ]
 }

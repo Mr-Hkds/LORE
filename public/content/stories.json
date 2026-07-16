@@ -7930,28 +7930,6 @@
       "image_source": "wikipedia"
     },
     {
-      "role": "assistant",
-      "reasoning": "We need to output a JSON with the specified fields.\n\nStory id: lowercases underscore version of title e.g., \"watergate_scandal_001\" maybe. Use \"watergate_scandal_001\". Must lower slug.\n\nTitle: a compelling title. Eg \"Watergate Scandal: The Fall of a Presidency\"\n\nCategory: conspiracy (since it's about secret wrongdoing by political leaders). Good.\n\nHook: 1-2 sentence, max 150 chars, gripping, not generic. Something like: \"On June 17, 1972 a small burglary turned into a black hole that swallowed a nation’s trust.\"\n\nYear: 1972? Actually scandal spanned 1972-73. Use \"1972-1973\" maybe. Let's use \"1972\".\n\nConcepts: choose 3-5 key concepts stemming from story: e.g., \"evidence\", \"media_exposure\", \"executive_cover_up\".\n\nSeverity: unsettling or chilling. Choose unsettling.\n\nVocabulary: pick 3-5 key terms used in text, e.g., \"jurisdiction\", \"congressional_impeachment\", \"evidence_collection\". Must define them. Must use these words directly in the story text. So we need to embed them.\n\nNeed to ensure we use them in each layer maybe.\n\nWord list: choose \"jurisdiction\", \"congressional_impeachment\", \"evidence_collection\". Provide definitions.\n\nNow layers: 7. Each must be 2-3 detailed paragraphs, using double newlines between paragraphs. Must include vocabulary words. Also each layer content must flow; layer 1 introduces whisper, layer 4 details event, layer 7 the darkest truth.\n\nWe must use double newlines in content string; JSON string representation must escape newline as \\n\\n. So content with \\n\\n between paragraphs. Use single quotes inside text where needed.\n\nCliffhanger: in each layer, a sentence that points to next layer.\n\nLayer 1: The Whisper: Introduce strange whisper about a burglary. Use words.\n\nLayer 2: The Pattern: talk about pattern of phone taps, etc.\n\nLayer 3: The Incident: details of burglary and capture.\n\nLayer 4: The System: details about the cover-up and secret.\n\nLayer 5: The Research: investigative journalism.\n\nLayer 6: The Abyss: legal battles and accusations.\n\nLayer 7: The Dark Corner: revelation of ultimate truths such as wrong votes, etc.\n\nEnsure each content uses vocabulary words. Use \"jurisdiction\" maybe. Let's embed.\n\nAll paragraphs are short. 2-3 paragraphs; I'd create 3 paragraphs of 2 sentences each.\n\nLet's start writing each layer.\n\nLayer 1 content:\n\nParagraph1: \"On the night of June 17, 1972, a group of men entered the Democratic National Committee building and planted listening devices. The burglary was small, but rumours spread like wildfire.\"\n\nParagraph2: \"Witnesses said the burglars wore black and moved in a pattern that hinted at a larger plan. No one could tell why the basement in D.C. was the target.\"\n\nParagraph3: \"Those whispers reached two reporters under pressure to stay silent. Their curiosity would set the wheels of an investigation in motion.\"\n\nUse double newlines.\n\nNeed to incorporate vocabulary words: \"jurisdiction\" maybe in paragraph 3? Let's add: \"Their curiosity would set the wheels of an investigation in motion, testing the limits of federal jurisdiction.\" Use word.\n\nLayer 1 cliffhanger: \"Little did anyone know these whispers were the first thread in a web that would unravel an entire administration.\"\n\nLayer 2:\n\nTitle: The Pattern.\n\nParagraph1: \"A few weeks later, the FBI started tapping the phones of key White House aides. The pattern of calls suggested a covert operation beyond the ordinary.\"\n\nParagraph2: \"The tapes showed a focus on the Nixon campaign and a desire to control the flow of information. The pattern was not accidental.\"\n\nParagraph3: \"Investigators noted that the evidence_collection process was being handled by a secret team, leaving questions of oversight.\"\n\nIn this paragraph incorporate \"evidence_collection\" word. Use \"evidence_collection\" as noun. Also incorporate \"congressional_impeachment\" maybe later.\n\nCliffhanger: \"Soon, the pattern would reveal a breadcrumb trail that led directly to the Oval Office.\"\n\nLayer 3:\n\nTitle: The Incident.\n\nParagraph1: \"On the afternoon of June 17, the burglars broke into the central office and rented security rooms. They planted hidden microphones.\"\n\nParagraph2: \"Two FBI agents were there, but their chief, William Johnson, seemed out of place. The incident sparked an internal inquiry.\"\n\nParagraph3: \"While footage showed the burglars moving under cover of cameras, the investigation was kept under tight federal jurisdiction to protect national pride.\"\n\nWord usage: keep \"jurisdiction\" maybe again. But already used. Might use again.\n\nCliffhanger: \"The next day, the footage would be stolen and the story would be buried.\"\n\nLayer 4:\n\nTitle: The System.\n\nParagraph1: \"The Nixon administration, fearing a constitutional crisis, ordered a cover-up that involved key aides and the Secret Service. They wanted to keep the burglary out of the public eye.\"\n\nParagraph2: \"The system relied on hush money, false statements, and the suppression of evidence_collection. Reports were hidden in classified files.\"\n\nParagraph3: \"This systematic fraud also used political influence to influence Congress and avoid congressional_impeachment hearings.\"\n\nUse all three words. Wait we used evidence_collection already; okay. Use \"congressional_impeachment\".\n\nCliffhanger: \"But the cracks began to show as an investigative reporter would expose parts of this system.\"\n\nLayer 5:\n\nTitle: The Research.\n\nParagraph1: \"Bob Woodward and Carl Bernstein of The Washington Post began to dig deep. They used anonymous sources within the White House.\"\n\nParagraph2: \"Their research uncovered the list of prisoners in the shell companies that funded the covert stashes. It also found the names of high-level aides tied to the hushed deals.\"\n\nParagraph3: \"The investigation relied heavily on photocopying, coded messages, and the release of secret documents, slowly piecing the truth together.\"\n\nCliffhanger: \"The story hit the desks of readers, pushing the administration to finally confront the abyss.\"\n\nLayer 6:\n\nTitle: The Abyss.\n\nParagraph1: \"Facing public outrage, the administration released a series of white papers. Yet each release added new questions about illegal wiretaps, bribery, and misuse of federal jurisdiction.\"\n\nParagraph2: \"The legal abyss deepened as contempt charges were filed against the president. A panel of judges began to hold hearings that would be watched by the nation.\"\n\nParagraph3: \"The abyss was not just legal; it was moral. The scope of the conspiracy stretched across the highest offices, undermining the foundation of democracy.\"\n\nCliffhanger: \"Only after the President resigned did the darkest corners of the scandal come to light.\"\n\nLayer 7:\n\nTitle: The Dark Corner.\n\nParagraph1: \"When Nixon resigned on August 8, 1974, tapes were finally released to the public. The recordings revealed a man ordering badgers to silence opposition.\"\n\nParagraph2: \"The evidence collection methods were not just illegal; they exposed the power of a presidency to manipulate the judicial process. The",
-      "tool_calls": [],
-      "added_date": "2026-07-15",
-      "evidence_links": [
-        {
-          "label": "An analysis of corporate ethical code studies: ?Where do we go from here?? (Betsy Stevens, 1994)",
-          "url": "https://hdl.handle.net/2027.42/42514"
-        },
-        {
-          "label": "The Watergate Scandal and Its Aftermath (K Chouinard, 2017)",
-          "url": "https://doi.org/10.4172/2332-0761.1000301"
-        },
-        {
-          "label": "Scandals and the Public's Trust in Politicians: Assimilation and Contrast Effects (Norbert Schwarz, Herbert Bles, 1992)",
-          "url": "https://www.ssoar.info/ssoar/bitstream/document/6892/1/ssoar-1991-bless_et_al-scandals_and_the_publics_trust.pdf"
-        }
-      ],
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Watergate_complex.jpg",
-      "image_source": "wikipedia"
-    },
-    {
       "story_id": "operation_ajax",
       "title": "Operation Ajax: The Secret Overthrow of Iran's Democracy",
       "category": "conspiracy",
@@ -8037,6 +8015,110 @@
         }
       ],
       "hero_image": "/content/images/operation_ajax.jpg",
+      "image_source": "wikipedia"
+    },
+    {
+      "role": "assistant",
+      "reasoning": "We need produce JSON with specified structure. Must include story_id lowercase slug with underscores. Title, category: cyber_mysteries. Hook: 1-2 sentence 150 chars. year: must represent time period of the event. The Lazarus Group: North Korea's Digital Shadow Army. This group active from ~2014 to present; but known events 2014-2020. We can use year \"2010s\" or \"2014-Present.\" Provide year string. Let's choose \"2014\". It should maybe year: \"2014\". Category: cyber_mysteries.\n\nconcepts array likely include domain-specific terms: \"state-sponsored hacking\", \"APT\", \"zero-day exploits\", \"botnet\", \"cryptojacking\". Provide vocabulary object using those words.\n\nNeed to embed these words in the text. Must ensure they appear exactly spelled as keys in vocabulary.\n\nWe must create 7 layers. Each layer has content 2-3 paragraphs separated by double newlines. Keep simple English.\n\nInclude cliffhangers except last layer cliffhanger null.\n\nAlso connections: connect to an existing story; choose maybe \"cicada_3301\" because same cyber domain. Provide shared_concept maybe \"cryptography\" or \"online_puzzles\". Provide transition line. Provide at least one connection.\n\nTake care to not use double quotes in string fields unless escaped. Must use single quotes for quotes inside text. The JSON fields use double quotes for keys and string values. But we must not use double quotes inside strings, unless escaped. So we need to avoid double quotes. Use single quotes for quotes inside content. Also ensure we don't include double quotes in content. Use only single quotes. Ok.\n\nAlso avoid trailing commas.\n\nLet's craft vulnerabilities: vocabulary:\n- \"APT\": \"Advanced Persistent Threat, a long-term targeted computer attack.\"\n- \"Zero-day exploit\": \"A previously unknown software flaw that attackers use.\"\n- \"cryptojacking\": \"Stealing cryptocurrency by hijacking computing power.\"\n- \"botnet\": \"A network of infected computers that can be controlled by an attacker.\"\n\nNeed to use these words in content.\n\nProceed.\n\nStory ID: \"lazarus_group_the_north_korea_digital_shadow_army\". Title: \"The Lazarus Group: North Korea's Digital Shadow Army\". Hook: \"In 2014 a hacker group quietly began crashing global banks, tracing its source to a hidden agency in Pyongyang.\" (Let's keep under 150 chars). Count maybe 150 char. Let's compute quick. We'll keep.\n\nYear: \"2014\". Maybe.\n\nConcepts: [\"APT\",\"zero_day_exploit\",\"cryptojacking\",\"botnet\"] or maybe synonyms.\n\nBut categories list: category must be one of specified. We'll use \"cyber_mysteries\".\n\nWe need to embed each vocabulary word in the layers. Also maybe use \"APT\" 4 times but not required. Provide at least 2-3 uses.\n\nEnsure no double quotes inside fields. We'll write content using single quotes. Avoid using double quotes at all. Use punctuation.\n\nAlso be careful about JSON escaping. The value of each field is a JSON string. We'll include newline characters as \\n\\n within JSON string. That will need escaping but JSON will accept. Use \\n\\n as literal two newlines. We'll just write them as \\n\\n. The JSON string must escape backslashes? In JSON, to represent newline we use \\n. So we need to write \\n\\n inside JSON string. Example: \"content\":\"Paragraph1.\\n\\nParagraph2.\" That is correct. No double quotes inside. We'll keep no double quotes. We'll just use single quotes inside for 'Lazarus' etc. But JSON string cannot contain unescaped single quotes? Single quotes inside JSON string is fine, they don't need to be escaped. So we can use single quotes.\n\nNow design layers:\n\nLayer 1: The Whisper – introduce the mystery. We'll write 2-3 paragraphs. Use \"APT\", \"North Korea\", mention \"cryptojacking\".\n\nLayer 2: The Pattern – describe patterns of attacks. Use \"zero-day exploit\", \"botnet\".\n\nLayer 3: The Incident – a specific incident e.g., 2014 SWIFT hack or 2015 Mirai (but that's not Lazarus). We can mention 2014 failure of a global bank SWIFT. Use \"cryptojacking\" maybe earlier. Use simple.\n\nLayer 4: The System – explain structure of group. Mention \"APT\", \"botnet\", \"zero-day exploits\".\n\nLayer 5: The Research – analysis by intelligence agencies. Reference \"APT\", \"zero-day\", \"botnet\", \"cryptojacking\" again.\n\nLayer 6: The Abyss – show scale of data stolen, infiltration. Use terms.\n\nLayer 7: The Dark Corner – final reveal most chilling truth. Use terms.\n\nWe need to maintain simple English.\n\nNow connections: connect to \"cicada_3301\" (since both about cyber). Shared concept: \"cryptography\" maybe. But the story concept list maybe not include cryptography. But connection requires shared concept string. Let's use \"cryptography\" and transition line.\n\nWait connection pattern: In connections array we need objects with fields: story_id, shared_concept, transition_line. Provide one connection. So we pick \"cicada_3301\". We'll write transition line: \"Just as the Cicada 3301 puzzles hid secrets, the Lazarus Group hides its own network of secrets.\" Ensure phrase includes 'cicada 3301' maybe not required but connection must show link. Provide.\n\nOk.\n\nLet's craft final JSON.\n\nBe careful with escaping, no double quotes inside content. Use only single quotes. Provide vocabulary object with keys as words used. Must match keys exactly. We used \"APT\", \"Zero-day exploit\", \"cryptojacking\", \"botnet\".\n\nBut keys should not contain spaces? According rule, provide keys exactly as word used. We used \"Zero-day exploit\" with space; keys allowed to contain spaces but inside JSON string quotes. Might be okay. But better to use no spaces? JSON keys can contain spaces; fine. Use exactly as term used. Provide definitions: \"APT: 'Advanced Persistent Threat, a long-term targeted computer attack.'\" Use single quotes inside definition. Provide as simple.\n\nBut we must ensure keys are simple: maybe lower case? Could be uppercase but fine. Let's use \"APT\", \"Zero-day exploit\", \"cryptojacking\", \"botnet\". Provide definitions: 'Advanced Persistent Threat, a long‑term targeted computer attack.' include 'long‑term' maybe hyphen but fine.\n\nMake sure definitions use single quotes inside? The value string of the object is a string. Inside that string we may need to use double quotes? We are writing the JSON string literal, so inside value we can't have double quotes unless escaped. We'll use single quotes for inner quotes, which are fine. So return story.\n\nEnsure final JSON no trailing commas.\n\nLet's compose content.\n\nLayer 1 content:\n\nParagraph1: \"In 2014 a hacker group quietly began crashing global banks, tracing its source to a hidden agency in Pyongyang.\" (using single quotes inside content? There's single quote in Pyongyang? Not needed. Use no apostrophes? Use \"Pyongyang\"",
+      "tool_calls": [],
+      "added_date": "2026-07-16",
+      "evidence_links": [
+        {
+          "label": "Under The Nuclear Shadow: Situational Awareness Technology and Crisis Decisionmaking (Andrew Reddie Reddie, Bethany Goldblum Goldblum, 2020)",
+          "url": "https://doi.org/10.15868/socialsector.39937"
+        },
+        {
+          "label": "An Assessment of North Korean Threats and Vulnerabilities in Cyberspace (Jeremiah van Rossum, 2017)",
+          "url": "https://bearworks.missouristate.edu/theses/3212"
+        },
+        {
+          "label": "Confronting an \"Axis of Cyber\"? (Fabio Rugge, 2018)",
+          "url": "https://www.ledizioni.it/stag/wp-content/uploads/2018/11/Cyber_DEF_web.pdf"
+        }
+      ],
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/4/48/Park_Jin_Hyok_%28Upscaled%29.jpg",
+      "image_source": "wikipedia"
+    },
+    {
+      "story_id": "rosenhan_experiment_001",
+      "title": "The Rosenhan Experiment: On Being Sane in Insane Places",
+      "category": "psychology",
+      "hook": "Imagine being perfectly healthy, but doctors label you as mentally ill and lock you away. This chilling reality was explored by a famous psychology experiment.",
+      "year": "1973",
+      "concepts": [
+        "diagnostic_bias",
+        "dehumanization",
+        "institutionalization",
+        "medical_ethics",
+        "psychiatric_diagnosis"
+      ],
+      "severity": "chilling",
+      "vocabulary": {
+        "pseudopatient": "A person who pretends to be sick or mentally ill as part of a scientific study.",
+        "sanity": "The state of being mentally healthy and having good judgment.",
+        "dehumanization": "The process of treating a person as if they are not human, without dignity or respect.",
+        "diagnostic": "Relating to the identification of a disease or illness by its symptoms.",
+        "institutionalization": "The process of placing someone in a mental hospital or similar facility for long-term care, often leading to a loss of personal identity."
+      },
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper: Can Doctors Tell?",
+          "content": "In 1973, a groundbreaking study shook the world of mental healthcare. It asked a simple but disturbing question: can mental health professionals truly tell the difference between sane and insane people once they are inside a mental hospital? The answer suggested a fundamental flaw in how mental illness was understood and treated at the time.\n\nThis experiment revealed how easily `diagnostic` labels could stick to individuals, often ignoring their actual `sanity`. Once a person was identified as having a mental illness, even clear signs of wellness were misinterpreted through that label. This raised serious concerns about the fairness and accuracy of the mental health system.",
+          "cliffhanger": "What did this daring experiment involve, and who was the man brave enough to challenge the entire system?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Questioner: David Rosenhan's Doubts",
+          "content": "The man behind this bold inquiry was David Rosenhan, a respected psychologist and professor at Stanford University. He had serious doubts about the reliability of psychiatric diagnosis, especially after hearing a lecture about how difficult it was to identify `sanity` in certain settings. He believed that once someone entered a mental institution, the environment itself could change how they were seen.\n\nRosenhan wanted to show that the setting and the labels given to people were more powerful than their actual behavior. He theorized that if genuinely sane people could get themselves admitted to mental hospitals and then act normally, they should be quickly identified as well. If not, it would highlight a major problem.",
+          "cliffhanger": "To prove his point, Rosenhan devised a secret plan, sending ordinary people into mental hospitals to pretend they were ill."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Undercover Patients: A Single Symptom",
+          "content": "Rosenhan recruited eight people, including himself, three psychologists, a pediatrician, a psychiatrist, a painter, and a housewife. These were the `pseudopatient`s, ordinary individuals with no history of mental illness. Their task was simple yet profound: present themselves at mental hospitals claiming to hear voices.\n\nEach `pseudopatient` reported hearing an unclear voice saying 'empty', 'hollow', and 'thud'. These symptoms were chosen because they did not match any known mental illness but sounded vague enough to be believable. Once admitted, their instructions were to stop pretending and act completely normally, simply writing down their observations."
+        },
+        {
+          "layer": 4,
+          "layer_name": "Inside the Asylum: Normal is Abnormal",
+          "content": "All twelve mental hospitals, located across five different US states, admitted the `pseudopatient`s. They were diagnosed with serious mental illnesses like schizophrenia, even though they only reported the single, vague symptom. Once inside, they immediately stopped faking illness and behaved as their normal selves. They participated in activities, talked to staff and other patients, and made no further complaints of hearing voices.\n\nDespite acting completely sane, none of the `pseudopatient`s were ever identified as fakes by the staff. Their normal behaviors were often misinterpreted through the lens of their psychiatric label. For example, a `pseudopatient` taking notes was recorded by staff as 'engaging in writing behavior', a symptom of their supposed illness.",
+          "cliffhanger": "The `pseudopatient`s were trapped, facing the challenge of convincing their captors that they were healthy. How long did it take for them to be released, and what did they learn about the system from within?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Unseen Prison: The Power of Labels",
+          "content": "The average stay for a `pseudopatient` in the mental hospitals was 19 days, ranging from 7 to 52 days. They were only released when they agreed that they were mentally ill and needed medication, despite having been sane all along. The ultimate outcome for all of them was discharge with a `diagnostic` label, usually 'schizophrenia in remission', implying the illness was still there, just hidden.\n\nThis showed a frightening effect called `institutionalization`. Once labeled and placed in the environment of a mental hospital, it became almost impossible to be seen as a normal person. The system was designed to find illness, not `sanity`, and once found, the label became a powerful, inescapable identity.",
+          "cliffhanger": "The experiment proved that mental health labels were sticky and hard to remove. But the chilling truth went deeper, revealing how staff treated the patients themselves."
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss of Identity: Dehumanization",
+          "content": "The `pseudopatient`s observed severe `dehumanization` within the hospitals. Staff often ignored patients, engaged in verbal abuse, and sometimes even physical abuse when they thought no one was watching. Privacy was minimal, and personal belongings were often searched or taken without clear reason. The patients felt invisible, their feelings and needs dismissed.\n\nIn a shocking follow-up, Rosenhan announced that a teaching hospital had challenged him, claiming they could detect `pseudopatient`s. He agreed to send more fake patients over the next three months. During this time, the hospital identified 41 patients as highly likely to be fake, and 19 more as suspicious. The chilling truth? Rosenhan had sent no `pseudopatient`s at all.",
+          "cliffhanger": "The experiment left the psychiatric world reeling, but its lessons about human perception, power, and the nature of mental illness continue to echo today."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner: A Lasting Legacy",
+          "content": "The Rosenhan Experiment, published as 'On Being Sane in Insane Places', became one of the most famous and controversial studies in psychology. It exposed the profound difficulty in accurately distinguishing `sanity` from insanity in psychiatric settings and highlighted the dangers of `diagnostic` labels. These labels, once applied, often changed how individuals were perceived and treated, leading to a loss of identity and dignity.\n\nCritics argued that the experiment was flawed, but its core message remained: the environment and the expectations placed upon individuals within mental institutions deeply influenced how their behavior was interpreted. It forced a critical look at the power of labeling and the potential for abuse within systems designed to help.\n\nThe ultimate dark truth is that for many, entering such a system could strip away their personhood. The experiment showed that once labeled, even behaving normally was not enough to prove `sanity`. It serves as a stark reminder of the fragile line between sickness and health, and how easily that line can be blurred by authority and system biases."
+        }
+      ],
+      "connections": [],
+      "added_date": "2026-07-16",
+      "evidence_links": [
+        {
+          "label": "““On Being Sane in Insane Places” … it is a work half done.” (Atul Agarwal, 2023)",
+          "url": "https://doi.org/10.4103/indianjpsychiatry.indianjpsychiatry_773_22"
+        },
+        {
+          "label": "Hindsight != foresight: the effect of outcome knowledge on judgment under uncertainty (Baruch Fischhoff, 2003)",
+          "url": "https://qualitysafety.bmj.com/content/qhc/12/4/304.full.pdf"
+        },
+        {
+          "label": "A utilitarian concept of manas and mental health (M Thirunavukarasu, 2011)",
+          "url": "https://doi.org/10.4103/0019-5545.82532"
+        }
+      ],
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Center_building_at_Saint_Elizabeths%2C_August_23%2C_2006.jpg",
       "image_source": "wikipedia"
     }
   ]
