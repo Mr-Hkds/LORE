@@ -751,7 +751,8 @@
     "poveglia_island_haunting",
     "the_haunting_of_bhangarh_fort",
     "skinwalker_ranch_phenomena",
-    "travis_walton_abduction"
+    "travis_walton_abduction",
+    "gef_talking_mongoose_dalby_spook"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1432,13 +1433,15 @@
     "hexham_heads_poltergeist_werewolf",
     "the_bell_witch_haunting",
     "gelderland_devil_poltergeist",
-    "rosenheim_poltergeist_001"
+    "rosenheim_poltergeist_001",
+    "gef_talking_mongoose_dalby_spook"
   ],
   "paranormal_investigation": [
     "enfield_poltergeist_001",
     "black_monk_pontefract_001",
     "borley_rectory_haunting",
-    "perron_family_haunting"
+    "perron_family_haunting",
+    "gef_talking_mongoose_dalby_spook"
   ],
   "family_trauma": [
     "enfield_poltergeist_001",
@@ -1511,7 +1514,8 @@
     "amityville_horror_house_possessed",
     "loudun_possessions_001",
     "salem_witch_trials_001_detailed",
-    "tylenol_murders_1982"
+    "tylenol_murders_1982",
+    "gef_talking_mongoose_dalby_spook"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -3253,5 +3257,8 @@
   ],
   "ritual_sacrifice": [
     "chausath_yoginis_cults"
+  ],
+  "psychological_explanation": [
+    "gef_talking_mongoose_dalby_spook"
   ]
 }
