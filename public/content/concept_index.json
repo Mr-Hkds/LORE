@@ -153,7 +153,8 @@
     "moonlight_maze_cyber_espionage",
     "the_equation_group_cyber_espionage",
     "flame_malware_cyber_espionage",
-    "titan_rain_silent_infiltration_us_networks"
+    "titan_rain_silent_infiltration_us_networks",
+    "opm_data_breach"
   ],
   "unethical_warfare": [
     "operation_northwoods_001",
@@ -1216,7 +1217,8 @@
   ],
   "insider_threat": [
     "anthrax_attacks_2001_amerithrax",
-    "online_poker_superuser_scandal"
+    "online_poker_superuser_scandal",
+    "opm_data_breach"
   ],
   "nihilism": [
     "cotard_delusion_001",
@@ -1637,7 +1639,8 @@
     "crypto_ag_scandal_global_espionage",
     "flame_malware_cyber_espionage",
     "titan_rain_silent_infiltration_us_networks",
-    "unattributed_early_cold_war_cyber_espionage"
+    "unattributed_early_cold_war_cyber_espionage",
+    "opm_data_breach"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1663,7 +1666,8 @@
     "operation_aurora_cyber_espionage",
     "flame_malware_cyber_espionage",
     "titan_rain_silent_infiltration_us_networks",
-    "meltdown_spectre_vulnerabilities"
+    "meltdown_spectre_vulnerabilities",
+    "opm_data_breach"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
@@ -3337,5 +3341,11 @@
   ],
   "underworld_entities": [
     "patala_loka_dark_realms"
+  ],
+  "government_vulnerability": [
+    "opm_data_breach"
+  ],
+  "background_checks": [
+    "opm_data_breach"
   ]
 }
