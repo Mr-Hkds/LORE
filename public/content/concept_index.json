@@ -640,7 +640,8 @@
     "clinical_lycanthropy",
     "cotard_delusion_001",
     "fregoli_delusion_imposter_faces",
-    "capgras_delusion_001"
+    "capgras_delusion_001",
+    "jerusalem_syndrome_001"
   ],
   "interdependence": [
     "folie_a_deux_shared_psychosis"
@@ -940,7 +941,8 @@
     "pseudocyesis_phantom_pregnancy",
     "fregoli_delusion_imposter_faces",
     "capgras_delusion_001",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "jerusalem_syndrome_001"
   ],
   "altered_self_perception": [
     "clinical_lycanthropy"
@@ -1085,7 +1087,8 @@
     "aokigahara_suicide_forest"
   ],
   "cultural_factors": [
-    "aokigahara_suicide_forest"
+    "aokigahara_suicide_forest",
+    "jerusalem_syndrome_001"
   ],
   "despair": [
     "aokigahara_suicide_forest"
@@ -3298,5 +3301,20 @@
   ],
   "motherboard_damage": [
     "chernobyl_virus_cih"
+  ],
+  "religious_ecstasy": [
+    "jerusalem_syndrome_001"
+  ],
+  "identity_transformation": [
+    "jerusalem_syndrome_001"
+  ],
+  "cosmology": [
+    "patala_loka_dark_realms"
+  ],
+  "mythological_realms": [
+    "patala_loka_dark_realms"
+  ],
+  "underworld_entities": [
+    "patala_loka_dark_realms"
   ]
 }
