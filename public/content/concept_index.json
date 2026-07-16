@@ -158,7 +158,8 @@
     "operation_mongoose_cuban_project",
     "project_popeye_weather_warfare",
     "project_100000_mcnamaras_folly",
-    "gleiwitz_incident_false_flag"
+    "gleiwitz_incident_false_flag",
+    "project_pluto_nuclear_ramjet"
   ],
   "covert_operations": [
     "operation_northwoods_001",
@@ -800,7 +801,8 @@
     "project_stargate_remote_viewing",
     "operation_chariot_alaska_nuclear_harbor",
     "operation_acoustic_kitty",
-    "operation_crossroads_bikini_atoll"
+    "operation_crossroads_bikini_atoll",
+    "project_pluto_nuclear_ramjet"
   ],
   "psychic_espionage": [
     "project_stargate_remote_viewing"
@@ -823,7 +825,8 @@
     "project_azorian_glomar_explorer",
     "operation_chariot_alaska_nuclear_harbor",
     "operation_crossroads_bikini_atoll",
-    "soviet_psychic_warfare_programs"
+    "soviet_psychic_warfare_programs",
+    "project_pluto_nuclear_ramjet"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing",
@@ -1933,7 +1936,8 @@
     "morris_worm_first_internet_attack",
     "the_mydoom_worm_internet_fastest_malware",
     "iloveyou_virus_001",
-    "melissa_virus_first_global_epidemic"
+    "melissa_virus_first_global_epidemic",
+    "chernobyl_virus_cih"
   ],
   "human_combustion": [
     "spontaneous_human_combustion_shc"
@@ -3132,7 +3136,8 @@
     "operation_crossroads_bikini_atoll"
   ],
   "environmental_devastation": [
-    "operation_crossroads_bikini_atoll"
+    "operation_crossroads_bikini_atoll",
+    "project_pluto_nuclear_ramjet"
   ],
   "radiological_contamination": [
     "operation_crossroads_bikini_atoll"
@@ -3275,5 +3280,23 @@
   ],
   "perfect_crime_fallacy": [
     "leopold_loeb_case"
+  ],
+  "nuclear_weapons": [
+    "project_pluto_nuclear_ramjet"
+  ],
+  "digital_destruction": [
+    "chernobyl_virus_cih"
+  ],
+  "firmware_attack": [
+    "chernobyl_virus_cih"
+  ],
+  "cyber_vandalism": [
+    "chernobyl_virus_cih"
+  ],
+  "flash_memory": [
+    "chernobyl_virus_cih"
+  ],
+  "motherboard_damage": [
+    "chernobyl_virus_cih"
   ]
 }
