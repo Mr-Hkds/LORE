@@ -104,7 +104,8 @@
     "operation_ajax",
     "skull_and_bones_secret_society",
     "us_military_chemical_experiments_soldiers",
-    "project_mkultra_cia_mind_control"
+    "project_mkultra_cia_mind_control",
+    "assassination_thomas_sankara"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -1587,7 +1588,8 @@
     "assassination_rfk_conspiracy",
     "dag_hammarskjold_death_conspiracy",
     "olof_palme_assassination_unsolved",
-    "malcolm_x_assassination_unanswered_questions"
+    "malcolm_x_assassination_unanswered_questions",
+    "assassination_thomas_sankara"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
@@ -1676,7 +1678,8 @@
     "flame_malware_cyber_espionage",
     "titan_rain_silent_infiltration_us_networks",
     "meltdown_spectre_vulnerabilities",
-    "opm_data_breach"
+    "opm_data_breach",
+    "target_data_breach"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
@@ -1701,7 +1704,8 @@
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
-    "operation_aurora_cyber_espionage"
+    "operation_aurora_cyber_espionage",
+    "target_data_breach"
   ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001",
@@ -2095,7 +2099,8 @@
     "bulletproof_hosting_networks",
     "aids_trojan_ransomware_1989",
     "online_poker_superuser_scandal",
-    "melissa_virus_first_global_epidemic"
+    "melissa_virus_first_global_epidemic",
+    "target_data_breach"
   ],
   "dark_web": [
     "silk_road_dread_pirate_roberts",
@@ -3386,5 +3391,20 @@
   ],
   "residual_haunting": [
     "the_stone_tape_theory"
+  ],
+  "neo-colonialism": [
+    "assassination_thomas_sankara"
+  ],
+  "military_coup": [
+    "assassination_thomas_sankara"
+  ],
+  "revolutionary_leader": [
+    "assassination_thomas_sankara"
+  ],
+  "payment_security": [
+    "target_data_breach"
+  ],
+  "corporate_negligence": [
+    "target_data_breach"
   ]
 }
