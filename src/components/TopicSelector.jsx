@@ -17,7 +17,7 @@ const CATEGORY_LABELS = {
 
 export default function TopicSelector({ onSelect, categoryCounts = {}, allStories = [], onOpenSearch, initialTab }) {
 
-  const bg = 'radial-gradient(circle at 50% 0%, rgba(197, 160, 110, 0.08) 0%, #0D0C0A 75%)'; // Ambient spotlight glow
+  const bg = '#0D0C0A'; // Smooth, solid dark background
   const fg = '#F5F2EB'; // Brighter, premium warm cream foreground
   const mu = '#A5A096'; // Brighter muted gray for readability
   const ac = '#C5A06E'; // Brighter premium bronze/gold accent
@@ -217,7 +217,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ background: bg, color: fg }}>
+    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: bg, color: fg }}>
 
       {/* Vignette */}
       <div className="vignette" aria-hidden="true" />
@@ -317,13 +317,10 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
           {/* Title */}
           <h1
-            className="font-serif italic leading-none tracking-tight"
+            className="font-serif italic leading-none tracking-tight text-white"
             style={{
               fontSize: 'clamp(2.2rem, 6.8vw, 4.2rem)',
               fontWeight: 400,
-              background: 'linear-gradient(to right, #F5F2EB 30%, #E6DFD3 70%, #C5A06E 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
               letterSpacing: '-0.04em',
               lineHeight: 1.0,
               marginBottom: '32px',
@@ -339,7 +336,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
               fontSize: 'clamp(1rem, 2vw, 1.15rem)',
               fontWeight: 400,
               lineHeight: 1.75,
-              color: 'rgba(245, 242, 235, 0.88)',
+              color: '#F5F2EB',
               marginBottom: '56px',
             }}
           >
