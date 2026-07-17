@@ -262,14 +262,6 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           {/* Right side — Search bar + Tagline */}
           <div className="flex items-center gap-4">
             <button
-              onClick={() => window.openFeedback?.()}
-              className="hidden sm:inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-[#9E7B4C]/18 hover:border-[#9E7B4C]/45 bg-black/20 hover:bg-[#9E7B4C]/5 text-[9.5px] font-mono tracking-[0.2em] uppercase text-[#A5A096] hover:text-[#C5A06E] active:scale-95 cursor-pointer transition-all duration-200"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A06E] animate-pulse" />
-              Feedback
-            </button>
-
-            <button
               onClick={onOpenSearch}
               aria-label="Search the archive"
               className="group flex items-center gap-2.5 cursor-pointer active:scale-95 select-none"
@@ -897,6 +889,73 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                 ⚠ We already have it in database.
               </div>
             )}
+          </div>
+
+          {/* ── Share Your Experience ── */}
+          <div
+            className="mt-10 rounded-2xl overflow-hidden"
+            style={{
+              border: '1px solid rgba(158, 123, 76, 0.18)',
+              background: 'linear-gradient(135deg, rgba(158,123,76,0.06) 0%, rgba(20,17,13,0) 100%)',
+            }}
+          >
+            {/* Top gold accent bar */}
+            <div style={{ height: '1px', background: 'linear-gradient(90deg, rgba(158,123,76,0.6), rgba(158,123,76,0.1), transparent)' }} />
+
+            <div className="px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A06E] animate-pulse flex-shrink-0" />
+                  <span
+                    style={{
+                      fontFamily: "'Space Mono', monospace",
+                      fontSize: '9px',
+                      fontWeight: 700,
+                      letterSpacing: '0.26em',
+                      color: '#C5A06E',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Operator Dispatch
+                  </span>
+                </div>
+                <p className="text-sm font-serif italic" style={{ color: fg, fontWeight: 400 }}>
+                  How is this archive serving you?
+                </p>
+                <p className="text-[11px] font-mono" style={{ color: mu, lineHeight: 1.6 }}>
+                  Rate your experience, flag inconsistencies, or suggest improvements. Every signal helps.
+                </p>
+              </div>
+
+              <button
+                onClick={() => window.openFeedback?.()}
+                className="flex-shrink-0 group flex items-center gap-2.5 px-5 py-2.5 rounded-xl cursor-pointer active:scale-95 transition-all duration-200 border"
+                style={{
+                  border: '1px solid rgba(158, 123, 76, 0.35)',
+                  background: 'rgba(158, 123, 76, 0.08)',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = 'rgba(158, 123, 76, 0.16)';
+                  e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.55)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = 'rgba(158, 123, 76, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(158, 123, 76, 0.35)';
+                }}
+              >
+                <span style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: '9px',
+                  fontWeight: 700,
+                  letterSpacing: '0.24em',
+                  color: '#C5A06E',
+                  textTransform: 'uppercase',
+                }}>
+                  Submit Report
+                </span>
+                <span className="text-[#C5A06E] text-xs transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+              </button>
+            </div>
           </div>
 
         </div>
