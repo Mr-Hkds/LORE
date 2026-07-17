@@ -3,7 +3,7 @@
  * Always visible at mid-screen regardless of scroll.
  * Opens a panel anchored to the right edge.
  */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X } from 'lucide-react';
 
 const TAGS = [
@@ -25,6 +25,13 @@ export default function SiteFeedback() {
   const [note, setNote]         = useState('');
   const [status, setStatus]     = useState(null);
   const panelRef = useRef(null);
+
+  useEffect(() => {
+    window.openFeedback = () => setOpen(true);
+    return () => {
+      delete window.openFeedback;
+    };
+  }, []);
 
   const toggleTag = (t) =>
     setTags(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
@@ -68,70 +75,7 @@ export default function SiteFeedback() {
 
   return (
     <>
-      {/* ── Right-side vertical tab ── */}
-      {!open && (
-        <button
-          id="site-feedback-trigger"
-          onClick={() => setOpen(true)}
-          aria-label="Give feedback about VII DESCENTS"
-          className="fixed z-[200] select-none cursor-pointer group"
-          style={{
-            /* Pin to right edge, vertically centered */
-            right: 0,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            /* Rotate so text reads bottom→top */
-            writingMode: 'vertical-rl',
-            textOrientation: 'mixed',
-            /* Tab shape: left side has rounded corners */
-            padding: '18px 10px',
-            borderRadius: '8px 0 0 8px',
-            background: '#0D0B08',
-            border: '1px solid rgba(158,123,76,0.3)',
-            borderRight: 'none',
-            boxShadow: '-4px 0 24px rgba(0,0,0,0.55)',
-            transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = '#14110D';
-            e.currentTarget.style.borderColor = 'rgba(158,123,76,0.6)';
-            e.currentTarget.style.boxShadow = '-6px 0 28px rgba(0,0,0,0.7), 0 0 16px rgba(158,123,76,0.08)';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = '#0D0B08';
-            e.currentTarget.style.borderColor = 'rgba(158,123,76,0.3)';
-            e.currentTarget.style.boxShadow = '-4px 0 24px rgba(0,0,0,0.55)';
-          }}
-        >
-          {/* Gold top accent line */}
-          <span
-            className="absolute top-0 left-0 right-0 h-px rounded-t-lg"
-            style={{ background: 'linear-gradient(to right, rgba(158,123,76,0.6), transparent)' }}
-            aria-hidden="true"
-          />
 
-          <span
-            style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: '9px',
-              fontWeight: 700,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: '#9E7B4C',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-full bg-[#9E7B4C] animate-pulse"
-              style={{ flexShrink: 0 }}
-            />
-            Feedback
-          </span>
-        </button>
-      )}
 
       {/* ── Center Dialog Overlay Modal ── */}
       {open && (

@@ -783,8 +783,16 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
             <span style={{ color: ac }}>{categoryLabel}</span>
           </div>
 
-          {/* Right: Search + dossier count */}
-          <div className="flex items-center gap-4">
+          {/* Right: Search + Feedback + dossier count */}
+          <div className="flex items-center gap-4 sm:gap-5">
+            <button
+              onClick={() => window.openFeedback?.()}
+              className="hidden sm:inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-[#9E7B4C]/18 hover:border-[#9E7B4C]/45 bg-black/20 hover:bg-[#9E7B4C]/5 text-[9.5px] font-mono tracking-[0.2em] uppercase text-[#A5A096] hover:text-[#C5A06E] active:scale-95 cursor-pointer transition-all duration-200"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A06E] animate-pulse" />
+              Feedback
+            </button>
+
             <button
               onClick={onOpenSearch}
               aria-label="Search the archive"
@@ -946,6 +954,14 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
                 <a href="#console" className="hover:text-[#EDE8DF] transition-colors duration-200" style={{ textDecoration: 'none', borderBottom: '1px dotted rgba(237,232,223,0.3)' }}>
                   CONSOLE
                 </a>
+                <span className="opacity-30">|</span>
+                <button 
+                  onClick={() => window.openFeedback?.()}
+                  className="hover:text-[#EDE8DF] text-inherit transition-colors duration-200 cursor-pointer font-mono text-[9px] uppercase tracking-[0.2em] bg-transparent border-none p-0"
+                  style={{ borderBottom: '1px dotted rgba(237,232,223,0.3)' }}
+                >
+                  FEEDBACK
+                </button>
                 <span className="opacity-30">|</span>
                 <span className="text-[#9E7B4C]/80">VERSION 2.4.1</span>
                 <span className="opacity-30">|</span>
