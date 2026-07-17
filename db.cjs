@@ -591,28 +591,42 @@ async function seed() {
       const validStories = data.stories.filter(s => s && s.story_id && s.story_id !== 'null' && s.story_id !== 'undefined');
       console.log(`[DB ALIGNMENT] Seeding/aligning ${validStories.length} stories from stories.json to database...`);
 
-      const batchStmts = validStories.map(s => ({
-        sql: `INSERT OR REPLACE INTO stories (
-          story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, vocabulary, year
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        args: [
-          s.story_id || null,
-          s.title || null,
-          s.category || null,
-          s.hook || null,
-          JSON.stringify(s.concepts || []),
-          s.severity || null,
-          s.hero_image || null,
-          s.added_date || null,
-          s.draft ? 1 : 0,
-          JSON.stringify(s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
-          JSON.stringify(s.evidence_links || []),
-          JSON.stringify(s.connections || []),
-          JSON.stringify(s.layers || []),
-          JSON.stringify(s.vocabulary || {}),
-          s.year || 'N/A'
-        ]
-      }));
+      const batchStmts = [];
+      for (const s of validStories) {
+        // Try reading the full story content from the local public/content/stories/story_id.json
+        let fullStory = s;
+        try {
+          const localFilePath = path.join(__dirname, 'public', 'content', 'stories', `${s.story_id}.json`);
+          if (fs.existsSync(localFilePath)) {
+            fullStory = JSON.parse(fs.readFileSync(localFilePath, 'utf8'));
+          }
+        } catch (e) {
+          console.warn(`[DB SEED] Could not read full story for ${s.story_id}:`, e.message);
+        }
+
+        batchStmts.push({
+          sql: `INSERT OR REPLACE INTO stories (
+            story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, vocabulary, year
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          args: [
+            fullStory.story_id || s.story_id || null,
+            fullStory.title || s.title || null,
+            fullStory.category || s.category || null,
+            fullStory.hook || s.hook || null,
+            JSON.stringify(fullStory.concepts || s.concepts || []),
+            fullStory.severity || s.severity || null,
+            fullStory.hero_image || s.hero_image || null,
+            fullStory.added_date || s.added_date || null,
+            fullStory.draft ? 1 : 0,
+            JSON.stringify(fullStory.reactions || s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),
+            JSON.stringify(fullStory.evidence_links || []),
+            JSON.stringify(fullStory.connections || []),
+            JSON.stringify(fullStory.layers || []),
+            JSON.stringify(fullStory.vocabulary || {}),
+            fullStory.year || s.year || 'N/A'
+          ]
+        });
+      }
 
       // Delete any extra stories from database to align perfectly with stories.json
       const idsInJson = validStories.map(s => s.story_id);

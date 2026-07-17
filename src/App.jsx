@@ -380,7 +380,7 @@ export default function App() {
             } catch (e) {
               console.warn('[Stories Details API] Fetch failed, trying static fallback:', e);
             }
-            if (!fullStory) {
+            if (!fullStory || !fullStory.layers || fullStory.layers.length === 0) {
               try {
                 const res = await fetch(`/content/stories/${storyId}.json`);
                 if (res.ok) {
