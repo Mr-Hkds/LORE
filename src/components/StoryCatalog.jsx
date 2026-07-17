@@ -557,7 +557,7 @@ function getStoryWordCount(story) {
 
 // ── Main catalog component ────────────────────────────────────────────────
 export default function StoryCatalog({ category, stories, allStories, onSelectStory, onBack, onShareStory, onOpenSearch }) {
-  const bg = '#0D0B08';
+  const bg = 'radial-gradient(circle at 50% 0%, rgba(197, 160, 110, 0.08) 0%, #0D0B08 75%)'; // Ambient spotlight glow
   const fg = '#F5F2EB'; // Brighter, premium warm cream foreground
   const mu = '#A5A096'; // Brighter muted gray for readability
   const ac = '#C5A06E'; // Brighter premium bronze/gold accent
@@ -755,7 +755,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: bg, color: fg }}>
+    <div className="min-h-screen flex flex-col relative" style={{ background: bg, color: fg }}>
       <div className="vignette" aria-hidden="true" />
 
       {/* Header */}
@@ -822,7 +822,15 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
           {/* Title */}
           <div className="mb-3">
             <h1 className="font-serif italic leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)', fontWeight: 600, color: fg, letterSpacing: '-0.04em', lineHeight: 0.95 }}>
+              style={{
+                fontSize: 'clamp(2.2rem, 7vw, 4rem)',
+                fontWeight: 600,
+                background: 'linear-gradient(to right, #F5F2EB 30%, #E6DFD3 70%, #C5A06E 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                letterSpacing: '-0.04em',
+                lineHeight: 0.95
+              }}>
               {categoryLabel}
             </h1>
           </div>

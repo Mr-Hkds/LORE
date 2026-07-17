@@ -775,7 +775,7 @@ export default function TodayInShadows() {
                   )}
                 </div>
                 <h4 className="font-serif italic text-lg sm:text-2xl text-[#F5F2EB] tracking-normal mb-3 font-semibold">{dossier.title}</h4>
-                <p className="font-serif text-xs sm:text-sm md:text-base leading-relaxed text-[#D4CFC7] mb-5">
+                <p className="font-serif text-xs sm:text-sm md:text-base leading-relaxed text-[#F5F2EB]/90 mb-5">
                   {dossier.text}
                 </p>
 

@@ -609,10 +609,10 @@ async function run() {
       category: 'auto' // AI will determine the category
     }));
   } else {
-    // Check if we have already reached the 500 stories limit
+    // Check if we have already reached the 350 stories limit
     const totalStoriesCount = storiesData.stories.length;
-    if (totalStoriesCount >= 500) {
-      console.log(`[Content Engine] Archive limit reached (${totalStoriesCount} >= 500 stories) and no pending recommendations. Auto-generation suspended. Exiting cleanly.`);
+    if (totalStoriesCount >= 350) {
+      console.log(`[Content Engine] Archive limit reached (${totalStoriesCount} >= 350 stories) and no pending recommendations. Auto-generation suspended. Exiting cleanly.`);
       
       // Update automation status JSON to show suspended state
       try {
@@ -624,7 +624,7 @@ async function run() {
           isRunning: false,
           enabled: true,
           status: 'success',
-          message: 'Archive limit reached (>= 500 stories). Auto-generation suspended. Waiting for new recommendations.',
+          message: 'Archive limit reached (>= 350 stories). Auto-generation suspended. Waiting for new recommendations.',
           error: null,
           mode: 'github-actions'
         };
