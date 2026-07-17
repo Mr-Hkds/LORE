@@ -474,6 +474,41 @@ async function run() {
       category: 'auto' // AI will determine the category
     }));
   } else {
+    // Check if we have already reached the 500 stories limit
+    const totalStoriesCount = storiesData.stories.length;
+    if (totalStoriesCount >= 500) {
+      console.log(`[Content Engine] Archive limit reached (${totalStoriesCount} >= 500 stories) and no pending recommendations. Auto-generation suspended. Exiting cleanly.`);
+      
+      // Update automation status JSON to show suspended state
+      try {
+        const statusFilePath = path.join(__dirname, 'public', 'content', 'automation_status.json');
+        const statusData = {
+          lastRunAt: Date.now(),
+          nextRunAt: Date.now() + 30 * 60 * 1000,
+          intervalMs: 30 * 60 * 1000,
+          isRunning: false,
+          enabled: true,
+          status: 'success',
+          message: 'Archive limit reached (>= 500 stories). Auto-generation suspended. Waiting for new recommendations.',
+          error: null,
+          mode: 'github-actions'
+        };
+        fs.writeFileSync(statusFilePath, JSON.stringify(statusData, null, 2));
+        console.log('Successfully wrote public/content/automation_status.json');
+      } catch (err) {
+        console.error('Failed to write automation status file:', err.message);
+      }
+      
+      // Close database client to allow process to exit cleanly
+      try {
+        if (db.client && typeof db.client.close === 'function') {
+          db.client.close();
+        }
+      } catch (err) {}
+      
+      process.exit(0);
+    }
+
     console.log('No pending recommendations. AI will search/invent new topics...');
     try {
       const existingTitles = storiesData.stories.map(s => s.title).join(', ');
