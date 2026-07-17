@@ -124,8 +124,9 @@ export function getQualityScore(story) {
   let score = 0;
   // 1. Cover Image (25 pts)
   const hasCover = story.hero_image && 
-                   story.hero_image.startsWith('http') && 
-                   !story.hero_image.includes('unsplash.com/photo-1509248961158-e54f6934749c');
+                   story.hero_image.trim() !== '' && 
+                   !story.hero_image.includes('unsplash.com/photo-1509248961158-e54f6934749c') &&
+                   !story.hero_image.includes('og-preview.png');
   if (hasCover) score += 25;
 
   // 2. Word Count (25 pts)
@@ -151,7 +152,7 @@ export function getQualityScore(story) {
 
   // 4. Hook Length (15 pts)
   const hookLen = story.hook ? story.hook.trim().length : 0;
-  if (hookLen >= 80 && hookLen <= 200) score += 15;
+  if (hookLen >= 50 && hookLen <= 250) score += 15;
   else if (hookLen > 0) score += 5;
 
   // 5. Concepts (10 pts)
