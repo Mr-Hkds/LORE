@@ -916,14 +916,14 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       textTransform: 'uppercase',
                     }}
                   >
-                    Archive Corrections
+                    Feedback
                   </span>
                 </div>
                 <p className="text-sm font-serif italic" style={{ color: fg, fontWeight: 400 }}>
-                  Help refine the record.
+                  What do you like? What can we improve?
                 </p>
                 <p className="text-[11px] font-mono" style={{ color: mu, lineHeight: 1.6 }}>
-                  Report interface anomalies, flag dossier errors, or submit technical feedback.
+                  Tell us what is working and what we can make better. Your feedback shapes the archive.
                 </p>
               </div>
 
@@ -951,7 +951,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                   color: '#C5A06E',
                   textTransform: 'uppercase',
                 }}>
-                  Submit Report
+                  Share Thoughts
                 </span>
                 <span className="text-[#C5A06E] text-xs transition-transform duration-200 group-hover:translate-x-0.5">→</span>
               </button>
