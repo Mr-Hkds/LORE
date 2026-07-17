@@ -106,7 +106,8 @@
     "skull_and_bones_secret_society",
     "us_military_chemical_experiments_soldiers",
     "project_mkultra_cia_mind_control",
-    "assassination_thomas_sankara"
+    "assassination_thomas_sankara",
+    "operation_sea_spray_bio_attack"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -400,7 +401,8 @@
     "project_mknaomi_cia_biowarfare",
     "plum_island_disease_center",
     "porton_down_experiments",
-    "operation_sea_spray_san_francisco"
+    "operation_sea_spray_san_francisco",
+    "operation_sea_spray_bio_attack"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -420,7 +422,8 @@
     "porton_down_experiments",
     "project_goldfish_chemical_lsd_tests",
     "operation_sea_spray_san_francisco",
-    "us_military_chemical_experiments_soldiers"
+    "us_military_chemical_experiments_soldiers",
+    "operation_sea_spray_bio_attack"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -641,7 +644,8 @@
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
     "porton_down_experiments",
-    "rosenhan_experiment_001"
+    "rosenhan_experiment_001",
+    "the_nocebo_effect_mind_manifests_harm"
   ],
   "racial_injustice": [
     "tuskegee_syphilis_study",
@@ -2326,10 +2330,12 @@
     "the_octopus_murder_conspiracy_danny_casolaro"
   ],
   "urban_testing": [
-    "operation_big_burn_bio_tests"
+    "operation_big_burn_bio_tests",
+    "operation_sea_spray_bio_attack"
   ],
   "military_ethics": [
-    "operation_big_burn_bio_tests"
+    "operation_big_burn_bio_tests",
+    "operation_sea_spray_bio_attack"
   ],
   "public_health_risk": [
     "operation_big_burn_bio_tests",
@@ -2674,7 +2680,8 @@
     "pseudocyesis_phantom_pregnancy"
   ],
   "psychosomatic_illness": [
-    "pseudocyesis_phantom_pregnancy"
+    "pseudocyesis_phantom_pregnancy",
+    "the_nocebo_effect_mind_manifests_harm"
   ],
   "hormonal_response": [
     "pseudocyesis_phantom_pregnancy"
@@ -3428,5 +3435,14 @@
   ],
   "forgotten_deities": [
     "jyestha_devi_dark_goddess"
+  ],
+  "nocebo_effect": [
+    "the_nocebo_effect_mind_manifests_harm"
+  ],
+  "mind_body_connection": [
+    "the_nocebo_effect_mind_manifests_harm"
+  ],
+  "negative_expectations": [
+    "the_nocebo_effect_mind_manifests_harm"
   ]
 }
