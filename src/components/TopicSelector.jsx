@@ -916,14 +916,14 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       textTransform: 'uppercase',
                     }}
                   >
-                    Analyst Feedback
+                    Archive Corrections
                   </span>
                 </div>
                 <p className="text-sm font-serif italic" style={{ color: fg, fontWeight: 400 }}>
-                  Your assessment matters.
+                  Help refine the record.
                 </p>
                 <p className="text-[11px] font-mono" style={{ color: mu, lineHeight: 1.6 }}>
-                  Found a gap? Spotted an error? Have a verdict? File it — every report strengthens the archive.
+                  Report interface anomalies, flag dossier errors, or submit technical feedback.
                 </p>
               </div>
 
