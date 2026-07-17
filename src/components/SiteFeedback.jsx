@@ -69,49 +69,47 @@ export default function SiteFeedback() {
   return (
     <>
       {/* ── Right-side vertical tab ── */}
-      <button
-        id="site-feedback-trigger"
-        onClick={() => setOpen(o => !o)}
-        aria-label="Give feedback about VII DESCENTS"
-        className="fixed z-[200] select-none cursor-pointer group"
-        style={{
-          /* Pin to right edge, vertically centered */
-          right: 0,
-          top: '50%',
-          transform: 'translateY(-50%)',
-          /* Rotate so text reads bottom→top */
-          writingMode: 'vertical-rl',
-          textOrientation: 'mixed',
-          /* Tab shape: left side has rounded corners */
-          padding: '18px 10px',
-          borderRadius: '8px 0 0 8px',
-          background: '#0D0B08',
-          border: '1px solid rgba(158,123,76,0.3)',
-          borderRight: 'none',
-          boxShadow: '-4px 0 24px rgba(0,0,0,0.55)',
-          transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.background = '#14110D';
-          e.currentTarget.style.borderColor = 'rgba(158,123,76,0.6)';
-          e.currentTarget.style.boxShadow = '-6px 0 28px rgba(0,0,0,0.7), 0 0 16px rgba(158,123,76,0.08)';
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = '#0D0B08';
-          e.currentTarget.style.borderColor = 'rgba(158,123,76,0.3)';
-          e.currentTarget.style.boxShadow = '-4px 0 24px rgba(0,0,0,0.55)';
-        }}
-      >
-        {/* Gold top accent line */}
-        <span
-          className="absolute top-0 left-0 right-0 h-px rounded-t-lg"
-          style={{ background: 'linear-gradient(to right, rgba(158,123,76,0.6), transparent)' }}
-          aria-hidden="true"
-        />
+      {!open && (
+        <button
+          id="site-feedback-trigger"
+          onClick={() => setOpen(true)}
+          aria-label="Give feedback about VII DESCENTS"
+          className="fixed z-[200] select-none cursor-pointer group"
+          style={{
+            /* Pin to right edge, vertically centered */
+            right: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            /* Rotate so text reads bottom→top */
+            writingMode: 'vertical-rl',
+            textOrientation: 'mixed',
+            /* Tab shape: left side has rounded corners */
+            padding: '18px 10px',
+            borderRadius: '8px 0 0 8px',
+            background: '#0D0B08',
+            border: '1px solid rgba(158,123,76,0.3)',
+            borderRight: 'none',
+            boxShadow: '-4px 0 24px rgba(0,0,0,0.55)',
+            transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = '#14110D';
+            e.currentTarget.style.borderColor = 'rgba(158,123,76,0.6)';
+            e.currentTarget.style.boxShadow = '-6px 0 28px rgba(0,0,0,0.7), 0 0 16px rgba(158,123,76,0.08)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = '#0D0B08';
+            e.currentTarget.style.borderColor = 'rgba(158,123,76,0.3)';
+            e.currentTarget.style.boxShadow = '-4px 0 24px rgba(0,0,0,0.55)';
+          }}
+        >
+          {/* Gold top accent line */}
+          <span
+            className="absolute top-0 left-0 right-0 h-px rounded-t-lg"
+            style={{ background: 'linear-gradient(to right, rgba(158,123,76,0.6), transparent)' }}
+            aria-hidden="true"
+          />
 
-        {open ? (
-          <X style={{ width: '13px', height: '13px', color: '#EDE8DF' }} />
-        ) : (
           <span
             style={{
               fontFamily: "'Space Mono', monospace",
@@ -132,8 +130,8 @@ export default function SiteFeedback() {
             />
             Feedback
           </span>
-        )}
-      </button>
+        </button>
+      )}
 
       {/* ── Slide-in panel from right ── */}
       {open && (
@@ -149,17 +147,17 @@ export default function SiteFeedback() {
           <div
             ref={panelRef}
             id="site-feedback-panel"
-            className="fixed right-0 z-[199] flex flex-col overflow-hidden animate-slide-in-right"
+            className="fixed z-[199] flex flex-col overflow-hidden animate-slide-in-right"
             style={{
+              right: 'clamp(12px, 3vw, 24px)', // Float away from right edge to avoid scrollbar overlap
               top: '50%',
               transform: 'translateY(-50%)',
               height: 'min(620px, 88vh)',
-              width: 'min(340px, 92vw)',
+              width: 'min(340px, 90vw)',
               backgroundColor: '#0F0D0A',
-              borderRadius: '14px 0 0 14px',
-              border: '1px solid rgba(158,123,76,0.2)',
-              borderRight: 'none',
-              boxShadow: '-24px 0 60px rgba(0,0,0,0.85)',
+              borderRadius: '14px',
+              border: '1px solid rgba(197, 160, 110, 0.25)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.85)',
             }}
           >
             {/* Gold top accent */}
