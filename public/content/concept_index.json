@@ -738,7 +738,8 @@
     "the_haunting_of_bhangarh_fort",
     "skinwalker_ranch_phenomena",
     "rosenheim_poltergeist_001",
-    "greyfriars_kirkyard_poltergeist"
+    "greyfriars_kirkyard_poltergeist",
+    "the_stone_tape_theory"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -930,10 +931,12 @@
     "body_integrity_dysphoria_bid_amputation_desire"
   ],
   "dissociation": [
-    "dissociative_identity_disorder_fragmented_self"
+    "dissociative_identity_disorder_fragmented_self",
+    "depersonalization_derealization_disorder"
   ],
   "trauma_response": [
-    "dissociative_identity_disorder_fragmented_self"
+    "dissociative_identity_disorder_fragmented_self",
+    "depersonalization_derealization_disorder"
   ],
   "identity_fragmentation": [
     "dissociative_identity_disorder_fragmented_self"
@@ -2459,7 +2462,8 @@
   ],
   "reality_distortion": [
     "gaslighting_psychological_warfare",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "depersonalization_derealization_disorder"
   ],
   "flesh_eating_spirits": [
     "dakinis_demonic_skywalkers",
@@ -3373,5 +3377,14 @@
   ],
   "black_widow_killer": [
     "belle_gunness_farm_of_horrors"
+  ],
+  "self_perception": [
+    "depersonalization_derealization_disorder"
+  ],
+  "psychical_imprint": [
+    "the_stone_tape_theory"
+  ],
+  "residual_haunting": [
+    "the_stone_tape_theory"
   ]
 }
