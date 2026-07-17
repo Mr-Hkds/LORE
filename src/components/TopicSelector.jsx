@@ -916,14 +916,14 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
                       textTransform: 'uppercase',
                     }}
                   >
-                    Operator Dispatch
+                    Analyst Feedback
                   </span>
                 </div>
                 <p className="text-sm font-serif italic" style={{ color: fg, fontWeight: 400 }}>
-                  How is this archive serving you?
+                  Your assessment matters.
                 </p>
                 <p className="text-[11px] font-mono" style={{ color: mu, lineHeight: 1.6 }}>
-                  Rate your experience, flag inconsistencies, or suggest improvements. Every signal helps.
+                  Found a gap? Spotted an error? Have a verdict? File it — every report strengthens the archive.
                 </p>
               </div>
 
