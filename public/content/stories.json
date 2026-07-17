@@ -6726,6 +6726,31 @@
       "image_missing": true
     },
     {
+      "story_id": "skinwalker_ranch_phenomena",
+      "title": "The Skinwalker Ranch Phenomena: A Nexus of Unexplained Activity",
+      "category": "paranormal",
+      "hook": "Cattle mutilations, strange lights, and invisible forces have plagued a remote corner of Utah for decades, defying all logical explanation.",
+      "concepts": [
+        "unexplained_phenomena",
+        "paranormal_activity",
+        "government_investigation",
+        "high_strangeness",
+        "cryptid_sightings"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Robbie_Williams_at_the_2024_Toronto_International_Film_Festival_%28cropped%29.jpg",
+      "added_date": "2026-07-14",
+      "draft": false,
+      "reactions": {
+        "like": 15,
+        "gripping": 28,
+        "scared": 70,
+        "mindblown": 11
+      },
+      "year": "1990s",
+      "image_missing": false
+    },
+    {
       "story_id": "mary_bell_child_murderer",
       "title": "Mary Bell: The Child Who Killed",
       "category": "true_crime",
@@ -7763,7 +7788,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/operation_sea_spray_bio_attack.jpg",
       "added_date": "2026-07-17",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 21,
         "gripping": 39,
@@ -7771,7 +7796,7 @@
         "mindblown": 12
       },
       "year": "1950",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "the_nocebo_effect_mind_manifests_harm",
@@ -7797,67 +7822,6 @@
       },
       "year": "1961",
       "image_missing": false
-    },
-    {
-      "story_id": "skinwalker_ranch_phenomena",
-      "title": "The Skinwalker Ranch Phenomena: A Nexus of Unexplained Activity",
-      "hero_image": "https://res.cloudinary.com/aenetworks/image/upload/c_fill,w_1080,h_705,g_auto/dpr_auto/f_auto/q_auto:eco/v1/skinwalker-ranch-map?_a=BAVMn6DY0",
-      "image_query": "",
-      "hook": "Cattle mutilations, strange lights, and invisible forces have plagued a remote corner of Utah for decades, defying all logical explanation.",
-      "category": "paranormal",
-      "severity": "chilling",
-      "concepts": [
-        "unexplained_phenomena",
-        "paranormal_activity",
-        "government_investigation",
-        "high_strangeness",
-        "cryptid_sightings"
-      ],
-      "vocabulary": {},
-      "layers": [
-        {
-          "layer": 1,
-          "layer_name": "Layer 1",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 2,
-          "layer_name": "Layer 2",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 3,
-          "layer_name": "Layer 3",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 4,
-          "layer_name": "Layer 4",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 5,
-          "layer_name": "Layer 5",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 6,
-          "layer_name": "Layer 6",
-          "content": "",
-          "cliffhanger": "Next layer hook..."
-        },
-        {
-          "layer": 7,
-          "layer_name": "Layer 7",
-          "content": "",
-          "cliffhanger": null
-        }
-      ]
     }
   ]
 }
