@@ -588,14 +588,15 @@ async function seed() {
 
   if (data && Array.isArray(data.stories)) {
     try {
+      const validStories = data.stories.filter(s => s && s.story_id && s.story_id !== 'null' && s.story_id !== 'undefined');
       const isInitialSeed = dbStoriesCount === 0;
       if (isInitialSeed) {
-        console.log(`Database is empty. Initializing with ${data.stories.length} stories from stories.json...`);
+        console.log(`Database is empty. Initializing with ${validStories.length} stories from stories.json...`);
       } else {
         console.log(`Database already has ${dbStoriesCount} stories. Running incremental check (INSERT OR IGNORE)...`);
       }
 
-      const batchStmts = data.stories.map(s => ({
+      const batchStmts = validStories.map(s => ({
         sql: `${isInitialSeed ? 'INSERT OR REPLACE' : 'INSERT OR IGNORE'} INTO stories (
           story_id, title, category, hook, concepts, severity, hero_image, added_date, draft, reactions, evidence_links, connections, layers, vocabulary, year
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -620,7 +621,7 @@ async function seed() {
 
       // Delete any extra stories from database ONLY if this is the initial seed alignment
       if (isInitialSeed) {
-        const idsInJson = data.stories.map(s => s.story_id);
+        const idsInJson = validStories.map(s => s.story_id);
         if (idsInJson.length > 0) {
           const placeholders = idsInJson.map(() => '?').join(',');
           batchStmts.push({

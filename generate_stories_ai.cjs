@@ -630,6 +630,10 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       const aiResponse = await callGemini(prompt);
       const storyObj = cleanAndParseJSON(aiResponse);
       
+      if (!storyObj || !storyObj.story_id || !storyObj.title || !storyObj.layers || storyObj.layers.length < 7) {
+        throw new Error('Failed to generate a valid 7-layer story from AI response (missing story_id, title, or layers)');
+      }
+      
       storyObj.added_date = new Date().toISOString().split('T')[0];
 
       // Fetch related scholarly research PDFs from OpenAlex
