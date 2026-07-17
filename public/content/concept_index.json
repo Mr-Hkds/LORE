@@ -488,7 +488,8 @@
     "hh_holmes_murder_castle",
     "wineville_chicken_coop_murders",
     "atlanta_child_murders",
-    "the_moors_murders"
+    "the_moors_murders",
+    "belle_gunness_farm_of_horrors"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -2162,7 +2163,8 @@
   ],
   "deception": [
     "the_lavon_affair",
-    "hh_holmes_murder_castle"
+    "hh_holmes_murder_castle",
+    "belle_gunness_farm_of_horrors"
   ],
   "intellectual_property_theft": [
     "operation_aurora_cyber_espionage"
@@ -3368,5 +3370,8 @@
   ],
   "ancient_power": [
     "jarasandha_the_king_born_from_two_halves_and_ha"
+  ],
+  "black_widow_killer": [
+    "belle_gunness_farm_of_horrors"
   ]
 }
