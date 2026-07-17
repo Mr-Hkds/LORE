@@ -3,6 +3,112 @@ const path = require('path');
 const https = require('https');
 const db = require('./db.cjs');
 
+const FALLBACK_TOPICS = {
+  psychology: [
+    'The Stanford Prison Experiment',
+    'The Bystander Effect of Kitty Genovese',
+    'The Third Wave experiment',
+    'The Monster Study on stuttering children',
+    'The Robbers Cave Experiment'
+  ],
+  mythology: [
+    'The Legend of Ashwatthama',
+    'The Mystical Weapon Brahmashira',
+    'The Curse of Gandhari',
+    'The Underworld kingdom of Patala Loka',
+    'The Death of Krishna',
+    'The Legend of Trishanku'
+  ],
+  true_crime: [
+    'The Burari Deaths',
+    'The Zodiac Killer cipher',
+    'The Jack the Ripper letters',
+    'The Black Dahlia Murder',
+    'The D.B. Cooper hijacking',
+    'The Jamison Family Disappearance'
+  ],
+  paranormal: [
+    'The Dyatlov Pass Incident',
+    'The Enfield Poltergeist',
+    'The Ourang Medan ghost ship',
+    'The Bell Witch haunting',
+    'The Mothman Sightings',
+    'The Skinwalker Ranch events'
+  ],
+  conspiracy: [
+    'The Lead Masks Case of Brazil',
+    'The Philadelphia Experiment',
+    'The Rendlesham Forest Incident',
+    'The Death of Elisa Lam at Cecil Hotel',
+    'The Roswell UFO Crash',
+    'The Tunguska Event'
+  ],
+  gov_experiments: [
+    'Project MKUltra',
+    'Project MKNAOMI',
+    'Project Star Gate remote viewing',
+    'Project Bluebird mind control',
+    'The Tuskegee Syphilis Study',
+    'Project SHAD covert testing',
+    'Project Sunshine nuclear tissue testing'
+  ],
+  cyber_mysteries: [
+    'Cicada 3301',
+    'The Mariana Web',
+    'The Max Headroom Signal Intrusion',
+    'The Lake City Quiet Pills mystery',
+    'The Heaven\'s Gate digital archive',
+    'The Sad Satan deep web game'
+  ]
+};
+
+function checkDuplicate(title, concepts, existingStories, currentStoryId) {
+  if (!existingStories || !Array.isArray(existingStories)) return null;
+
+  const currentTitleWords = (title || '').toLowerCase().split(/\s+/).filter(w => w.length > 2);
+  if (currentTitleWords.length === 0) return null;
+
+  const cleanTitle = (title || '').trim().toLowerCase();
+
+  for (const other of existingStories) {
+    if (other.story_id === currentStoryId) continue;
+
+    // Exact title match
+    const otherTitle = (other.title || '').trim().toLowerCase();
+    if (otherTitle === cleanTitle) {
+      return { story_id: other.story_id, title: other.title, reason: 'Exact title match' };
+    }
+
+    // Overlap match (title words)
+    const otherTitleWords = (other.title || '').toLowerCase().split(/\s+/).filter(w => w.length > 2);
+    if (otherTitleWords.length === 0) continue;
+
+    let overlap = 0;
+    currentTitleWords.forEach(w => {
+      if (otherTitleWords.includes(w)) overlap++;
+    });
+
+    const ratio = overlap / Math.max(currentTitleWords.length, otherTitleWords.length);
+    if (ratio >= 0.6) {
+      return { story_id: other.story_id, title: other.title, reason: `${Math.round(ratio * 100)}% title similarity` };
+    }
+
+    // Concept tags match
+    const otherConcepts = other.concepts || [];
+    const currentConcepts = concepts || [];
+    if (currentConcepts.length >= 3 && otherConcepts.length >= 3) {
+      let conceptOverlap = 0;
+      currentConcepts.forEach(c => {
+        if (otherConcepts.map(x => x.toLowerCase()).includes(c.toLowerCase())) conceptOverlap++;
+      });
+      if (conceptOverlap >= 3 && conceptOverlap === currentConcepts.length) {
+        return { story_id: other.story_id, title: other.title, reason: 'Identical concepts' };
+      }
+    }
+  }
+  return null;
+}
+
 // Helper to find API key
 function getApiKey() {
   if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY;
@@ -462,7 +568,36 @@ async function run() {
   let recommendations = await getRecommendations();
   
   // 1. Identify topics to run
-  const pendingRecs = recommendations.filter(r => r.status === 'pending');
+  let pendingRecs = recommendations.filter(r => r.status === 'pending');
+  
+  // Clean up and mark duplicate recommendations as generated immediately
+  for (const r of pendingRecs) {
+    const isDup = checkDuplicate(r.topic, [], storiesData.stories);
+    if (isDup) {
+      console.log(`[Content Engine] Recommendation "${r.topic}" is a duplicate of "${isDup.title}" (${isDup.reason}). Marking as resolved.`);
+      r.status = 'generated';
+      try {
+        await db.updateRecommendationStatus(r.id, 'generated');
+      } catch (dbErr) {
+        console.warn('[DB ENGINE] Failed to update recommendation status:', dbErr.message);
+      }
+      if (isGithubEnabled) {
+        console.log(`Closing duplicate GitHub Issue #${r.id}...`);
+        try {
+          await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/issues/${r.id}`, {
+            method: 'PATCH',
+            headers: ghHeaders,
+            body: JSON.stringify({ state: 'closed' })
+          });
+        } catch (err) {
+          console.error(`Failed to close duplicate issue #${r.id}:`, err.message);
+        }
+      }
+    }
+  }
+
+  // Recalculate pendingRecs after resolving duplicates
+  pendingRecs = recommendations.filter(r => r.status === 'pending');
   let topicsToGenerate = [];
 
   if (pendingRecs.length > 0) {
@@ -528,27 +663,49 @@ async function run() {
       
       console.log(`Least represented categories: "${targetCat1}" (${counts[targetCat1]} stories) and "${targetCat2}" (${counts[targetCat2]} stories).`);
       
-      const categoryOptions = 'psychology, true_crime, paranormal, mythology, gov_experiments, conspiracy, cyber_mysteries';
       const selectPrompt = `Select 2 distinct, highly engaging, creepy, or dark real-world topics (historical mysteries, psychology phenomena, digital shadows, or classified experiments).
-CRITICAL: You must choose well-documented, established historical, scientific, or psychological cases that have a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
-One topic MUST fit the category "${targetCat1}".
-The other topic MUST fit the category "${targetCat2}".
-CRITICAL RULE FOR MYTHOLOGY: If either category is "mythology", the chosen topic MUST be from the Indian context only (e.g. Hindu mythology, Vedic lore, epics like Ramayana/Mahabharata, regional folklore, local deities, ancient scriptures). Absolutely do not select Greek, Norse, or other non-Indian mythologies.
-They must NOT be similar to these existing archive stories:
-[${existingTitles}]
-
-Return a JSON array of objects, each with 'topic' (string) and 'category' (must be "${targetCat1}" for the first topic, and "${targetCat2}" for the second topic). Example:
-[
-  {"topic": "Project MKUltra", "category": "${targetCat1}"},
-  {"topic": "The Mariana Web", "category": "${targetCat2}"}
-]`;
+      CRITICAL: You must choose well-documented, established historical, scientific, or psychological cases that have a robust factual standing and high-integrity information. Absolutely avoid very recent or trending topics (which could be fake, unverified, or sensationalized news).
+      One topic MUST fit the category "${targetCat1}".
+      The other topic MUST fit the category "${targetCat2}".
+      CRITICAL RULE FOR MYTHOLOGY: If either category is "mythology", the chosen topic MUST be from the Indian context only (e.g. Hindu mythology, Vedic lore, epics like Ramayana/Mahabharata, regional folklore, local deities, ancient scriptures). Absolutely do not select Greek, Norse, or other non-Indian mythologies.
+      They must NOT be similar to these existing archive stories:
+      [${existingTitles}]
+      
+      Return a JSON array of objects, each with 'topic' (string) and 'category' (must be "${targetCat1}" for the first topic, and "${targetCat2}" for the second topic). Example:
+      [
+        {"topic": "Project MKUltra", "category": "${targetCat1}"},
+        {"topic": "The Mariana Web", "category": "${targetCat2}"}
+      ]`;
       const aiResponse = await callGemini(selectPrompt);
       const chosen = cleanAndParseJSON(aiResponse);
-      topicsToGenerate = chosen.map(c => ({
-        topic: c.topic,
-        category: c.category,
-        recId: null
-      }));
+      
+      const pickFallback = (category) => {
+        const list = FALLBACK_TOPICS[category] || ['Project MKUltra'];
+        for (const t of list) {
+          if (!checkDuplicate(t, [], storiesData.stories)) return t;
+        }
+        return list[0];
+      };
+
+      topicsToGenerate = [];
+      for (const c of chosen) {
+        if (!c.topic || !c.category) continue;
+        const isDup = checkDuplicate(c.topic, [], storiesData.stories);
+        if (isDup) {
+          console.warn(`[Content Engine] AI suggested duplicate topic "${c.topic}" (similar to "${isDup.title}"). Replacing with fallback.`);
+          topicsToGenerate.push({
+            topic: pickFallback(c.category),
+            category: c.category,
+            recId: null
+          });
+        } else {
+          topicsToGenerate.push({
+            topic: c.topic,
+            category: c.category,
+            recId: null
+          });
+        }
+      }
     } catch (e) {
       console.warn('Failed to choose topics automatically, falling back to defaults. Error:', e.message);
       // Fallback: pick the least represented categories directly
@@ -559,9 +716,18 @@ Return a JSON array of objects, each with 'topic' (string) and 'category' (must 
         if (counts[s.category] !== undefined) counts[s.category]++;
       });
       const sortedCategories = [...categories].sort((a, b) => counts[a] - counts[b]);
+      
+      const pickFallback = (category) => {
+        const list = FALLBACK_TOPICS[category] || ['Project MKUltra'];
+        for (const t of list) {
+          if (!checkDuplicate(t, [], storiesData.stories)) return t;
+        }
+        return list[0];
+      };
+
       topicsToGenerate = [
-        { topic: 'Project MKUltra', category: sortedCategories[0], recId: null },
-        { topic: 'The Salem Witch Trials', category: sortedCategories[1], recId: null }
+        { topic: pickFallback(sortedCategories[0]), category: sortedCategories[0], recId: null },
+        { topic: pickFallback(sortedCategories[1]), category: sortedCategories[1], recId: null }
       ];
     }
   }
@@ -669,6 +835,11 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
         throw new Error('Failed to generate a valid 7-layer story from AI response (missing story_id, title, or layers)');
       }
       
+      const isStoryDup = checkDuplicate(storyObj.title, storyObj.concepts || [], storiesData.stories, storyObj.story_id);
+      if (isStoryDup) {
+        throw new Error(`Generated story "${storyObj.title}" is a duplicate of "${isStoryDup.title}" (${isStoryDup.reason})`);
+      }
+      
       storyObj.added_date = new Date().toISOString().split('T')[0];
 
       // Fetch related scholarly research PDFs from OpenAlex
@@ -743,6 +914,15 @@ Ensure the output is strictly valid JSON only. Output raw JSON.`;
       }
     } catch (e) {
       console.error(`FAILED to generate story for: "${item.topic}". Error:`, e.message);
+      if (item.recId) {
+        console.log(`Clearing failed/duplicate recommendation ID: ${item.recId} to prevent looping.`);
+        recommendations = recommendations.map(r => r.id === item.recId ? { ...r, status: 'generated' } : r);
+        try {
+          await db.updateRecommendationStatus(item.recId, 'generated');
+        } catch (dbErr) {
+          console.warn('[DB ENGINE] Failed to update recommendation status:', dbErr.message);
+        }
+      }
     }
   }
 

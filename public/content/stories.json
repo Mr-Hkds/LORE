@@ -2753,32 +2753,6 @@
       "image_missing": false
     },
     {
-      "story_id": "project_mk_ultra_001",
-      "title": "MK-Ultra: The CIA's Dark Experiments on the Human Mind",
-      "category": "gov_experiments",
-      "hook": "Deep within the Cold War, a chilling question emerged: could a government agency control the human mind? The answer, hidden for decades, involved unthinkable experiments.",
-      "concepts": [
-        "mind_control",
-        "unethical_experimentation",
-        "government_secrecy",
-        "psychological_warfare",
-        "covert_operations",
-        "drug_experimentation"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/project_mk_ultra_001.jpg",
-      "added_date": "2026-07-04",
-      "draft": false,
-      "reactions": {
-        "like": 28,
-        "gripping": 16,
-        "scared": 5,
-        "mindblown": 9
-      },
-      "year": "N/A",
-      "image_missing": false
-    },
-    {
       "story_id": "assassination_rfk_conspiracy",
       "title": "The Assassination of Robert F. Kennedy: Lingering Questions and Alleged Conspiracies",
       "category": "conspiracy",
@@ -3871,34 +3845,6 @@
       "image_missing": false
     },
     {
-      "story_id": "the_equation_group_cyber_espionage",
-      "title": "The Equation Group: The Ghost in the Machine",
-      "category": "cyber_mysteries",
-      "hook": "For almost two decades, an unseen force worked deep inside computer networks worldwide, planting tools that no one could detect.",
-      "concepts": [
-        "cyber_espionage",
-        "state-sponsored_hacking",
-        "advanced_persistent_threat",
-        "zero-day_exploits",
-        "firmware_malware",
-        "national_security",
-        "government_secrecy",
-        "digital_weaponry"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lattice_of_the_hexadecachoric_group%2C_edges_t8%2C_a_after_%288%2C_0%29_equals_b.png/960px-Lattice_of_the_hexadecachoric_group%2C_edges_t8%2C_a_after_%288%2C_0%29_equals_b.png",
-      "added_date": "2026-07-08",
-      "draft": false,
-      "reactions": {
-        "like": 55,
-        "gripping": 23,
-        "scared": 2,
-        "mindblown": 6
-      },
-      "year": "N/A",
-      "image_missing": false
-    },
-    {
       "story_id": "hexham_heads_poltergeist_werewolf",
       "title": "The Hexham Heads: Stones That Howled with Untold Horrors",
       "category": "paranormal",
@@ -4255,31 +4201,6 @@
       },
       "year": "N/A",
       "image_missing": true
-    },
-    {
-      "story_id": "titan_rain_silent_infiltration_us_networks",
-      "title": "Titan Rain: The Silent Digital Invasion of US Networks",
-      "category": "cyber_mysteries",
-      "hook": "Imagine a secret war fought not with bombs, but with stolen data. For years, an invisible enemy silently copied America's most guarded military plans and research.",
-      "concepts": [
-        "cyber_espionage",
-        "state-sponsored_hacking",
-        "data_theft",
-        "national_security",
-        "unseen_warfare"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lockheed_Martin_Aeronautics_Discussion.jpg",
-      "added_date": "2026-07-09",
-      "draft": false,
-      "reactions": {
-        "like": 19,
-        "gripping": 32,
-        "scared": 2,
-        "mindblown": 10
-      },
-      "year": "N/A",
-      "image_missing": false
     },
     {
       "story_id": "men_in_black_phenomenon",
@@ -6055,31 +5976,6 @@
       "image_missing": true
     },
     {
-      "story_id": "gleiwitz_incident_false_flag",
-      "title": "The Gleiwitz Incident: The Lie That Ignited a World War",
-      "category": "conspiracy",
-      "hook": "A simple radio broadcast, seemingly a small border attack, was actually a carefully staged lie that plunged the world into its deadliest conflict.",
-      "concepts": [
-        "false_flag",
-        "government_conspiracy",
-        "world_war_ii",
-        "propaganda",
-        "unethical_warfare"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/4/49/Radiostacja_Gliwice_-_przemasban101.png",
-      "added_date": "2026-07-13",
-      "draft": false,
-      "reactions": {
-        "like": 26,
-        "gripping": 29,
-        "scared": 6,
-        "mindblown": 49
-      },
-      "year": "N/A",
-      "image_missing": false
-    },
-    {
       "story_id": "the_gay_bomb_project",
       "title": "The 'Gay Bomb' Project: Weaponizing Attraction",
       "category": "gov_experiments",
@@ -6231,32 +6127,6 @@
       },
       "year": "N/A",
       "image_missing": true
-    },
-    {
-      "story_id": "salem_witch_trials_001_detailed",
-      "title": "The Salem Witch Trials: A Village Consumed by Fear and Injustice",
-      "category": "cyber_mysteries",
-      "hook": "In 1692, a small village in colonial America faced a terror so profound, it led to the execution of innocent people for an invisible crime.",
-      "concepts": [
-        "mass_hysteria",
-        "groupthink",
-        "judicial_injustice",
-        "religious_extremism",
-        "spectral_evidence",
-        "false_accusation"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salem_witch2.jpg/3840px-Salem_witch2.jpg",
-      "added_date": "2026-07-14",
-      "draft": false,
-      "reactions": {
-        "like": 35,
-        "gripping": 18,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "year": "N/A",
-      "image_missing": false
     },
     {
       "story_id": "the_moors_murders",
@@ -6599,33 +6469,6 @@
       "image_missing": 0
     },
     {
-      "story_id": "melissa_virus_first_global_epidemic",
-      "title": "The Melissa Virus: The Digital Storm That Shook the Internet",
-      "category": "cyber_mysteries",
-      "hook": "A single email, bearing a simple, intriguing subject line, brought the internet to its knees in March 1999. It was a digital storm, spread by trust, that caught the world unaware.",
-      "concepts": [
-        "computer_viruses",
-        "cybercrime",
-        "social_engineering",
-        "internet_history",
-        "digital_threats",
-        "global_cyber_attack",
-        "email_worm"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/4/42/Melissa_2025-10-28_1230Z.jpg",
-      "added_date": "2026-07-11",
-      "draft": false,
-      "reactions": {
-        "like": 50,
-        "gripping": 44,
-        "scared": 3,
-        "mindblown": 11
-      },
-      "year": "N/A",
-      "image_missing": false
-    },
-    {
       "story_id": "operation_crossroads_bikini_atoll",
       "title": "Operation Crossroads: The Ocean's Atomic Scars",
       "category": "gov_experiments",
@@ -6799,32 +6642,6 @@
       },
       "year": "Early 2000s",
       "image_missing": true
-    },
-    {
-      "story_id": "body_integrity_dysphoria_bid_amputation_desire",
-      "title": "Body Integrity Dysphoria (BID): The Disturbing Desire for Amputation",
-      "category": "psychology",
-      "hook": "Imagine waking up every day, feeling as though one of your healthy limbs does not belong to you. Not a phantom pain, but a deep, persistent conviction that it must be removed.",
-      "concepts": [
-        "body_image_disorder",
-        "neurology",
-        "self_identity",
-        "psychological_distress",
-        "amputation_desire",
-        "unwanted_limbs"
-      ],
-      "severity": "disturbing",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Piper_PA.18-95_Super_Cub_G-BIID_%2816783422737%29.jpg/960px-Piper_PA.18-95_Super_Cub_G-BIID_%2816783422737%29.jpg",
-      "added_date": "2026-07-15",
-      "draft": false,
-      "reactions": {
-        "like": 38,
-        "gripping": 26,
-        "scared": 6,
-        "mindblown": 36
-      },
-      "year": "Late 20th Century",
-      "image_missing": false
     },
     {
       "story_id": "tyranny_of_mahishasura",
@@ -7428,29 +7245,6 @@
       "image_missing": false
     },
     {
-      "story_id": "us_military_chemical_experiments_soldiers",
-      "title": "America's Hidden Scars: Secret Chemical Experiments on Its Own Soldiers",
-      "category": "gov_experiments",
-      "hook": "For decades, the U.S. military secretly exposed its own soldiers to dangerous chemical agents, leaving many with invisible wounds and a profound sense of betrayal.",
-      "concepts": [
-        "human_experimentation",
-        "government_secrecy",
-        "unethical_experimentation"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Sulfur-mustard-3D-vdW.png",
-      "added_date": "2026-07-16",
-      "draft": false,
-      "reactions": {
-        "like": 15,
-        "gripping": 38,
-        "scared": 4,
-        "mindblown": 6
-      },
-      "year": "1940s-1970s",
-      "image_missing": false
-    },
-    {
       "story_id": "opm_data_breach",
       "title": "The OPM Data Breach: When a Nation's Trust was Stolen",
       "category": "cyber_mysteries",
@@ -7720,31 +7514,6 @@
         "mindblown": 34
       },
       "year": "1961",
-      "image_missing": false
-    },
-    {
-      "story_id": "operation_sea_spray_bio_attack",
-      "title": "Operation Sea-Spray: America's Secret Bio-Attack on Its Own City",
-      "category": "gov_experiments",
-      "hook": "In the autumn of 1950, a silent, invisible cloud drifted over San Francisco, but it wasn't natural fog. It was a secret attack, unleashed by the US Navy on its own people.",
-      "concepts": [
-        "biological_warfare",
-        "human_experimentation",
-        "government_secrecy",
-        "urban_testing",
-        "military_ethics"
-      ],
-      "severity": "chilling",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/SF_From_Marin_Highlands3.jpg/960px-SF_From_Marin_Highlands3.jpg",
-      "added_date": "2026-07-17",
-      "draft": false,
-      "reactions": {
-        "like": 21,
-        "gripping": 39,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "year": "1950",
       "image_missing": false
     },
     {
