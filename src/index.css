@@ -517,3 +517,13 @@ select option {
   -webkit-text-fill-color: transparent;
   animation: golden-shimmer 8s linear infinite;
 }
+
+/* Centered Modal Scale-up entry animation */
+@keyframes scaleUpCentered {
+  from { transform: translate(-50%, -48%) scale(0.96); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.animate-fade-in-scale-centered {
+  animation: scaleUpCentered 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

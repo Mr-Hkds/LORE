@@ -133,31 +133,31 @@ export default function SiteFeedback() {
         </button>
       )}
 
-      {/* ── Slide-in panel from right ── */}
+      {/* ── Center Dialog Overlay Modal ── */}
       {open && (
         <>
-          {/* Backdrop */}
+          {/* Backdrop with a slightly heavier blur for focus */}
           <div
             className="fixed inset-0 z-[198] animate-fade-in"
-            style={{ background: 'rgba(4,3,2,0.4)', backdropFilter: 'blur(2px)' }}
+            style={{ background: 'rgba(4,3,2,0.55)', backdropFilter: 'blur(4px)' }}
             onClick={() => setOpen(false)}
           />
 
-          {/* Panel — vertically centered, capped height */}
+          {/* Panel — Centered Modal */}
           <div
             ref={panelRef}
             id="site-feedback-panel"
-            className="fixed z-[199] flex flex-col overflow-hidden animate-slide-in-right"
+            className="fixed z-[199] flex flex-col overflow-hidden animate-fade-in-scale-centered"
             style={{
-              right: 'clamp(12px, 3vw, 24px)', // Float away from right edge to avoid scrollbar overlap
+              left: '50%',
               top: '50%',
-              transform: 'translateY(-50%)',
-              height: 'min(620px, 88vh)',
-              width: 'min(340px, 90vw)',
-              backgroundColor: '#0F0D0A',
-              borderRadius: '14px',
+              height: 'auto',
+              maxHeight: '85vh',
+              width: 'min(390px, 92vw)',
+              backgroundColor: '#0D0C0A',
+              borderRadius: '16px',
               border: '1px solid rgba(197, 160, 110, 0.25)',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.85)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.9)',
             }}
           >
             {/* Gold top accent */}
