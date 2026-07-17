@@ -393,7 +393,6 @@
   ],
   "human_experimentation": [
     "unit_731_experiments",
-    "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
@@ -408,7 +407,8 @@
     "project_100000_mcnamaras_folly",
     "porton_down_experiments",
     "operation_sea_spray_san_francisco",
-    "project_goldfish_chemical_lsd_tests"
+    "project_goldfish_chemical_lsd_tests",
+    "tuskegee_syphilis_study"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -618,28 +618,28 @@
     "the_rat_park_experiment_001"
   ],
   "medical_ethics": [
-    "tuskegee_syphilis_study",
     "project_sunshine_cadaver_collection",
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
     "porton_down_experiments",
     "rosenhan_experiment_001",
-    "the_nocebo_effect_mind_manifests_harm"
+    "the_nocebo_effect_mind_manifests_harm",
+    "tuskegee_syphilis_study"
   ],
   "racial_injustice": [
-    "tuskegee_syphilis_study",
-    "atlanta_child_murders"
+    "atlanta_child_murders",
+    "tuskegee_syphilis_study"
   ],
   "government_misconduct": [
-    "tuskegee_syphilis_study",
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
-    "project_100000_mcnamaras_folly"
+    "project_100000_mcnamaras_folly",
+    "tuskegee_syphilis_study"
   ],
   "public_health_failure": [
-    "tuskegee_syphilis_study",
-    "guatemalan_syphilis_experiment"
+    "guatemalan_syphilis_experiment",
+    "tuskegee_syphilis_study"
   ],
   "psychosis": [
     "folie_a_deux_shared_psychosis",
