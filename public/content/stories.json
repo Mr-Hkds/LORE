@@ -6841,7 +6841,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/project_goldfish_chemical_lsd_tests.jpg",
       "added_date": "2026-07-15",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 26,
         "gripping": 19,
@@ -6849,7 +6849,7 @@
         "mindblown": 12
       },
       "year": "1950s-1970s",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "body_integrity_dysphoria_bid_amputation_desire",
@@ -7226,31 +7226,6 @@
       },
       "year": "2010s",
       "image_missing": false
-    },
-    {
-      "story_id": "chausath_yoginis_cults",
-      "title": "The Unseen Power: Unraveling the Macabre Cults of the Chausath Yoginis",
-      "category": "mythology",
-      "hook": "Imagine finding an ancient, circular stone temple, open to the sky, with sixty-four identical stone figures carved into its walls, their eyes seemingly watching from the past.",
-      "concepts": [
-        "secret_cults",
-        "tantric_practices",
-        "divine_feminine",
-        "ritual_sacrifice",
-        "forbidden_knowledge"
-      ],
-      "severity": "chilling",
-      "hero_image": null,
-      "added_date": "2026-07-16",
-      "draft": false,
-      "reactions": {
-        "like": 35,
-        "gripping": 38,
-        "scared": 6,
-        "mindblown": 6
-      },
-      "year": "Ancient",
-      "image_missing": true
     },
     {
       "story_id": "gef_talking_mongoose_dalby_spook",
@@ -7774,31 +7749,6 @@
       "image_missing": false
     },
     {
-      "story_id": "operation_sea_spray_bio_attack",
-      "title": "Operation Sea-Spray: America's Secret Bio-Attack on Its Own City",
-      "category": "gov_experiments",
-      "hook": "In the autumn of 1950, a silent, invisible cloud drifted over San Francisco, but it wasn't natural fog. It was a secret attack, unleashed by the US Navy on its own people.",
-      "concepts": [
-        "biological_warfare",
-        "human_experimentation",
-        "government_secrecy",
-        "urban_testing",
-        "military_ethics"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/operation_sea_spray_bio_attack.jpg",
-      "added_date": "2026-07-17",
-      "draft": 0,
-      "reactions": {
-        "like": 21,
-        "gripping": 39,
-        "scared": 4,
-        "mindblown": 12
-      },
-      "year": "1950",
-      "image_missing": 0
-    },
-    {
       "story_id": "the_nocebo_effect_mind_manifests_harm",
       "title": "The Nocebo Effect: When the Mind Expects Harm and Manifests It",
       "category": "psychology",
@@ -7822,6 +7772,56 @@
       },
       "year": "1961",
       "image_missing": false
+    },
+    {
+      "story_id": "operation_sea_spray_bio_attack",
+      "title": "Operation Sea-Spray: America's Secret Bio-Attack on Its Own City",
+      "category": "gov_experiments",
+      "hook": "In the autumn of 1950, a silent, invisible cloud drifted over San Francisco, but it wasn't natural fog. It was a secret attack, unleashed by the US Navy on its own people.",
+      "concepts": [
+        "biological_warfare",
+        "human_experimentation",
+        "government_secrecy",
+        "urban_testing",
+        "military_ethics"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/SF_From_Marin_Highlands3.jpg/960px-SF_From_Marin_Highlands3.jpg",
+      "added_date": "2026-07-17",
+      "draft": 0,
+      "reactions": {
+        "like": 21,
+        "gripping": 39,
+        "scared": 4,
+        "mindblown": 12
+      },
+      "year": "1950",
+      "image_missing": 0
+    },
+    {
+      "story_id": "chausath_yoginis_cults",
+      "title": "The Unseen Power: Unraveling the Macabre Cults of the Chausath Yoginis",
+      "category": "mythology",
+      "hook": "Imagine finding an ancient, circular stone temple, open to the sky, with sixty-four identical stone figures carved into its walls, their eyes seemingly watching from the past.",
+      "concepts": [
+        "secret_cults",
+        "tantric_practices",
+        "divine_feminine",
+        "ritual_sacrifice",
+        "forbidden_knowledge"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://beyonder.travel/wp-content/uploads/2020/03/64YoginiTemple_Hirapur-1140x445.jpg",
+      "added_date": "2026-07-16",
+      "draft": 0,
+      "reactions": {
+        "like": 35,
+        "gripping": 38,
+        "scared": 6,
+        "mindblown": 6
+      },
+      "year": "Ancient",
+      "image_missing": 0
     }
   ]
 }
