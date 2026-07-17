@@ -1640,7 +1640,8 @@
     "flame_malware_cyber_espionage",
     "the_shadow_brokers_nsa_leak",
     "the_great_firewall_of_china",
-    "equation_group_firmware_manipulation"
+    "equation_group_firmware_manipulation",
+    "notpetya_cyberattack"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1670,13 +1671,15 @@
     "project_raven_uae_cyber_mercenaries",
     "estonian_cyberattacks_2007",
     "the_shadow_brokers_nsa_leak",
-    "the_great_firewall_of_china"
+    "the_great_firewall_of_china",
+    "notpetya_cyberattack"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
     "operation_aurora_cyber_espionage",
     "target_data_breach",
-    "equation_group_firmware_manipulation"
+    "equation_group_firmware_manipulation",
+    "notpetya_cyberattack"
   ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001",
@@ -1737,7 +1740,8 @@
   ],
   "critical_infrastructure_attack": [
     "ukraine_power_grid_cyber_attack_2015_2016",
-    "estonian_cyberattacks_2007"
+    "estonian_cyberattacks_2007",
+    "notpetya_cyberattack"
   ],
   "power_grid": [
     "ukraine_power_grid_cyber_attack_2015_2016"
@@ -3006,7 +3010,8 @@
     "operation_chariot_alaska_nuclear_harbor"
   ],
   "ransomware": [
-    "aids_trojan_ransomware_1989"
+    "aids_trojan_ransomware_1989",
+    "notpetya_cyberattack"
   ],
   "computer_history": [
     "aids_trojan_ransomware_1989"
