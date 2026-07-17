@@ -58,10 +58,10 @@ export default async function handler(req, res) {
     window.location.href = "/#story-${story_id}-layer-${layerNum}";
   </script>
 </head>
-<body style="background-color: #0D0B08; color: #EDE8DF; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+<body style="background-color: #0D0B08; color: #F5F2EB; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
   <div style="text-align: center; padding: 20px;">
     <h2 style="font-style: italic; font-weight: normal; margin-bottom: 8px;">DECRYPTING DOSSIER...</h2>
-    <p style="color: #8F8A82; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">Please wait while the rabbit hole compiles.</p>
+    <p style="color: #A5A096; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">Please wait while the rabbit hole compiles.</p>
   </div>
 </body>
 </html>`);

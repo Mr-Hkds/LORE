@@ -144,7 +144,7 @@ export default function App() {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.backgroundColor = '#0D0B08';
-      document.body.style.color = '#EDE8DF';
+      document.body.style.color = '#F5F2EB';
       document.body.style.overflow = 'auto';
     }
   }, [phase, activeLayerConfig]);
@@ -732,14 +732,14 @@ function PasscodeScreen({ onUnlock, onCancel }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0D0B08] text-[#EDE8DF] px-6 relative">
+    <div className="min-h-screen flex items-center justify-center bg-[#0D0B08] text-[#F5F2EB] px-6 relative">
       <div className="vignette" />
       <div 
         className="w-full max-w-[420px] p-8 rounded-2xl border bg-[#110F0D] text-center space-y-6 shadow-2xl transition-all duration-300"
-        style={{ borderColor: error ? '#8B2F2F' : 'rgba(237,232,223,0.07)' }}
+        style={{ borderColor: error ? '#8B2F2F' : 'rgba(245,242,235,0.08)' }}
       >
         <div className="flex justify-center mb-2">
-          <LoreMark size={32} color={error ? '#8B2F2F' : '#9E7B4C'} />
+          <LoreMark size={32} color={error ? '#8B2F2F' : '#C5A06E'} />
         </div>
         
         <div className="space-y-2">
@@ -757,7 +757,7 @@ function PasscodeScreen({ onUnlock, onCancel }) {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="SYSTEM PASSWORD"
-            className="w-full text-center px-4 py-3 bg-[#13110E] text-[#EDE8DF] text-sm rounded-lg border border-neutral-800 focus:border-[#9E7B4C] focus:outline-none font-mono tracking-widest transition-colors duration-200"
+            className="w-full text-center px-4 py-3 bg-[#13110E] text-[#F5F2EB] text-sm rounded-lg border border-neutral-800 focus:border-[#C5A06E] focus:outline-none font-mono tracking-widest transition-colors duration-200"
             required
             autoFocus
           />
@@ -766,13 +766,13 @@ function PasscodeScreen({ onUnlock, onCancel }) {
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 py-2.5 border border-neutral-800 text-[#8F8A82] text-[10px] font-bold tracking-widest uppercase rounded hover:bg-white/5 active:scale-95 transition-all cursor-pointer"
+              className="flex-1 py-2.5 border border-neutral-800 text-[#A5A096] text-[10px] font-bold tracking-widest uppercase rounded hover:bg-white/5 active:scale-95 transition-all cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 bg-[#9E7B4C] text-white text-[10px] font-bold tracking-widest uppercase rounded hover:bg-[#b08c5c] active:scale-95 transition-all cursor-pointer"
+              className="flex-1 py-2.5 bg-[#C5A06E] text-white text-[10px] font-bold tracking-widest uppercase rounded hover:bg-[#d8b582] active:scale-95 transition-all cursor-pointer"
             >
               Decrypt
             </button>

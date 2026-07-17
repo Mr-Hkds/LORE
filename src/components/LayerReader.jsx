@@ -637,12 +637,12 @@ export default function LayerReader({
                       {/* Top Dossier Bar with backdrop-blur */}
                       <div className="w-full h-9 z-20 flex-shrink-0 flex items-center justify-between px-3.5 bg-black/45 backdrop-blur-md border-b border-white/5 select-none">
                         <div className="flex items-center gap-1.5">
-                          <LoreMark size={8} color="#9E7B4C" />
+                          <LoreMark size={8} color="#C5A06E" />
                           <span
                             style={{
                               fontFamily: "'Space Mono', monospace",
                               fontSize: '7px',
-                              color: '#EDE8DF',
+                              color: '#F5F2EB',
                               letterSpacing: '0.22em',
                               fontWeight: 700,
                             }}
@@ -1068,14 +1068,14 @@ export default function LayerReader({
           style={{
             left: `${Math.min((typeof window !== 'undefined' ? window.innerWidth : 1000) - (isMobile ? 272 : 336), Math.max(12, lookup.x - (isMobile ? 130 : 160)))}px`,
             top: `${Math.min((typeof window !== 'undefined' ? window.innerHeight : 1000) - 240, Math.max(12, lookup.y > 220 ? lookup.y - 190 : lookup.y + 20))}px`,
-            borderColor: '#9E7B4C',
-            boxShadow: '0 12px 36px rgba(0,0,0,0.85), inset 0 0 12px rgba(158,123,76,0.12)',
-            color: '#EDE8DF',
+            borderColor: '#C5A06E',
+            boxShadow: '0 12px 36px rgba(0,0,0,0.85), inset 0 0 12px rgba(197,160,110,0.12)',
+            color: '#F5F2EB',
           }}
         >
           {/* Header row */}
-          <div className="flex items-center justify-between border-b pb-2 mb-2" style={{ borderColor: 'rgba(158,123,76,0.2)' }}>
-            <div className="flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#9E7B4C] uppercase font-bold">
+          <div className="flex items-center justify-between border-b pb-2 mb-2" style={{ borderColor: 'rgba(197,160,110,0.2)' }}>
+            <div className="flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#C5A06E] uppercase font-bold">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Dossier Look-Up</span>
             </div>
@@ -1094,24 +1094,24 @@ export default function LayerReader({
 
           {lookup.loading ? (
             <div className="py-4 flex flex-col items-center justify-center gap-2">
-              <div className="w-4 h-4 rounded-full border border-[#9E7B4C]/25 border-t-[#9E7B4C] animate-spin" />
+              <div className="w-4 h-4 rounded-full border border-[#C5A06E]/25 border-t-[#C5A06E] animate-spin" />
               <span className="text-[8px] font-mono text-neutral-400 uppercase tracking-widest">Searching dictionary...</span>
             </div>
           ) : (
             <div className="space-y-3">
               {/* Generic definition */}
               {lookup.generic && (
-                <p className="text-xs font-sans leading-relaxed text-[#EDE8DF]/90 font-light">
+                <p className="text-xs font-sans leading-relaxed text-[#F5F2EB]/90 font-light">
                   {lookup.generic}
                 </p>
               )}
               {/* Case-specific context */}
               {lookup.caseNote && (
-                <div className="pt-2.5 border-t" style={{ borderColor: 'rgba(158,123,76,0.15)' }}>
-                  <span className="block text-[8px] font-mono tracking-wider uppercase mb-1 text-[#9E7B4C]">
+                <div className="pt-2.5 border-t" style={{ borderColor: 'rgba(197,160,110,0.15)' }}>
+                  <span className="block text-[8px] font-mono tracking-wider uppercase mb-1 text-[#C5A06E]">
                     ▸ In this case
                   </span>
-                  <p className="text-xs font-sans italic leading-relaxed text-[#EDE8DF]/80">
+                  <p className="text-xs font-sans italic leading-relaxed text-[#F5F2EB]/80">
                     {lookup.caseNote}
                   </p>
                 </div>

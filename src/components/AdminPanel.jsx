@@ -305,9 +305,9 @@ export async function robustFetchWikipediaThumbnail(query) {
 
 export default function AdminPanel({ stories, localStories, setLocalStories, refetchStories, onBack, onStoryDeleted }) {
   const bg = '#0D0B08';
-  const fg = '#EDE8DF';
-  const ac = '#9E7B4C';
-  const ru = 'rgba(237,232,223,0.07)';
+  const fg = '#F5F2EB'; // Brighter, premium warm cream foreground
+  const ac = '#C5A06E'; // Brighter premium bronze/gold accent
+  const ru = 'rgba(245,242,235,0.08)'; // Aligned with new fg
 
   const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 

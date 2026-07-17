@@ -7,7 +7,7 @@
   --font-serif: 'Newsreader', 'Times New Roman', Times, serif;
   --font-sans:  'Instrument Sans', -apple-system, sans-serif;
   --font-slab:  'Zilla Slab', 'Courier New', serif;
-  --ac: #9E7B4C;
+  --ac: #C5A06E;
 }
 
 html { scroll-behavior: smooth; }
@@ -402,7 +402,7 @@ img {
 /* Native select dark theme — for sort dropdown */
 select option {
   background-color: #0D0B08;
-  color: #8F8A82;
+  color: #A5A096;
 }
 
 /* Mobile: better active tap feedback */
