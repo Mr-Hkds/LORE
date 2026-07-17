@@ -120,7 +120,8 @@
     "mahabharat_psychological_epic",
     "salem_witch_trials_001",
     "banality_of_evil_001",
-    "west_memphis_three_001"
+    "west_memphis_three_001",
+    "manson_family_murders_001"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
@@ -543,7 +544,8 @@
     "project_goldfish_chemical_lsd_tests"
   ],
   "cults": [
-    "jonestown_massacre_001"
+    "jonestown_massacre_001",
+    "manson_family_murders_001"
   ],
   "mass_suicide": [
     "jonestown_massacre_001"
@@ -552,7 +554,8 @@
     "jonestown_massacre_001"
   ],
   "charismatic_leaders": [
-    "jonestown_massacre_001"
+    "jonestown_massacre_001",
+    "manson_family_murders_001"
   ],
   "obedience_to_authority": [
     "jonestown_massacre_001",
@@ -938,7 +941,8 @@
   ],
   "hollywood_dark_side": [
     "black_dahlia_murder",
-    "death_of_marilyn_monroe"
+    "death_of_marilyn_monroe",
+    "manson_family_murders_001"
   ],
   "police_misconduct": [
     "black_dahlia_murder"
@@ -3407,5 +3411,8 @@
   ],
   "firmware_manipulation": [
     "equation_group_firmware_manipulation"
+  ],
+  "manipulation": [
+    "manson_family_murders_001"
   ]
 }
