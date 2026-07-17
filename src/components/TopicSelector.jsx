@@ -216,8 +216,16 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
     setTimeout(() => setSubmitStatus(null), 4000);
   };
 
+  const isLoaded = allStories.length > 0;
+
   return (
-    <div className="min-h-screen flex flex-col relative mystery-grid-bg" style={{ color: fg }}>
+    <div className="min-h-screen flex flex-col relative mystery-grid-bg"
+      style={{
+        color: fg,
+        opacity: isLoaded ? 1 : 0,
+        transition: 'opacity 150ms ease-in-out'
+      }}
+    >
 
       {/* Vignette */}
       <div className="vignette" aria-hidden="true" />

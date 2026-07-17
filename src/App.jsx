@@ -11,7 +11,6 @@ import LoreMark from './components/LoreMark';
 import LoadingState from './components/LoadingState';
 import ShareModal from './components/ShareModal';
 import SearchOverlay from './components/SearchOverlay';
-import SplashLoader from './components/SplashLoader';
 import { TOPICS } from './constants/topics';
 
 // Helper to catch chunk load failures (common during new deployments when file hashes change)
@@ -47,7 +46,6 @@ export default function App() {
   const [selectorTab] = useState('for-you');
   const [fullStoryCache, setFullStoryCache] = useState({});
   const [loadingStoryDetails, setLoadingStoryDetails] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
   const [deletedStories, setDeletedStories] = useState(() => {
     try {
       const stored = localStorage.getItem('lore:deleted_stories');
@@ -499,11 +497,6 @@ export default function App() {
   }, []);
 
   // ---------- RENDER ----------
-
-  // Show decryption intro splash screen initially
-  if (showSplash) {
-    return <SplashLoader loading={loading} onComplete={() => setShowSplash(false)} />;
-  }
 
   // Phase: Select topic
   if (phase === 'select') {

@@ -754,8 +754,16 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
 
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
+  const isLoaded = stories.length > 0;
+
   return (
-    <div className="min-h-screen flex flex-col relative catalog-grid-bg" style={{ color: fg }}>
+    <div className="min-h-screen flex flex-col relative catalog-grid-bg"
+      style={{
+        color: fg,
+        opacity: isLoaded ? 1 : 0,
+        transition: 'opacity 150ms ease-in-out'
+      }}
+    >
       <div className="vignette" aria-hidden="true" />
 
       {/* Header */}
