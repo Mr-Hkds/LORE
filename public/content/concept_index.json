@@ -1623,7 +1623,8 @@
     "crypto_ag_scandal_global_espionage",
     "flame_malware_cyber_espionage",
     "unattributed_early_cold_war_cyber_espionage",
-    "opm_data_breach"
+    "opm_data_breach",
+    "equation_group_firmware_manipulation"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1638,7 +1639,8 @@
     "estonian_cyberattacks_2007",
     "flame_malware_cyber_espionage",
     "the_shadow_brokers_nsa_leak",
-    "the_great_firewall_of_china"
+    "the_great_firewall_of_china",
+    "equation_group_firmware_manipulation"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1673,7 +1675,8 @@
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
     "operation_aurora_cyber_espionage",
-    "target_data_breach"
+    "target_data_breach",
+    "equation_group_firmware_manipulation"
   ],
   "government_espionage": [
     "solarwinds_supply_chain_attack_001",
@@ -1685,7 +1688,8 @@
   ],
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage",
-    "flame_malware_cyber_espionage"
+    "flame_malware_cyber_espionage",
+    "equation_group_firmware_manipulation"
   ],
   "botnet": [
     "conficker_worm",
@@ -3395,5 +3399,8 @@
   ],
   "early_internet_security": [
     "wank_worm_nasa_hack"
+  ],
+  "firmware_manipulation": [
+    "equation_group_firmware_manipulation"
   ]
 }
