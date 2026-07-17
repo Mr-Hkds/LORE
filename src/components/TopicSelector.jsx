@@ -217,7 +217,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: bg, color: fg }}>
+    <div className="min-h-screen flex flex-col relative mystery-grid-bg" style={{ color: fg }}>
 
       {/* Vignette */}
       <div className="vignette" aria-hidden="true" />
@@ -317,7 +317,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
           {/* Title */}
           <h1
-            className="font-serif italic leading-none tracking-tight text-white"
+            className="font-serif italic leading-none tracking-tight premium-shimmer-title"
             style={{
               fontSize: 'clamp(2.2rem, 6.8vw, 4.2rem)',
               fontWeight: 400,

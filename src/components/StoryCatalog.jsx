@@ -755,7 +755,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
   const categoryLabel = CATEGORY_LABELS[category] || category;
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: bg, color: fg }}>
+    <div className="min-h-screen flex flex-col relative catalog-grid-bg" style={{ color: fg }}>
       <div className="vignette" aria-hidden="true" />
 
       {/* Header */}
@@ -821,7 +821,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
 
           {/* Title */}
           <div className="mb-3">
-            <h1 className="font-serif italic leading-none tracking-tight text-white"
+            <h1 className="font-serif italic leading-none tracking-tight premium-shimmer-title"
               style={{
                 fontSize: 'clamp(2.2rem, 7vw, 4rem)',
                 fontWeight: 600,

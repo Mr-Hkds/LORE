@@ -481,3 +481,39 @@ select option {
   /* prevent content below from showing through on iOS */
   -webkit-backdrop-filter: blur(0);
 }
+
+/* Premium aesthetic grid backgrounds */
+.mystery-grid-bg {
+  background-color: #0D0C0A;
+  background-image: 
+    linear-gradient(rgba(197, 160, 110, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 160, 110, 0.012) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center top;
+}
+
+.catalog-grid-bg {
+  background-color: #0D0B08;
+  background-image: 
+    linear-gradient(rgba(197, 160, 110, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 160, 110, 0.012) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center top;
+}
+
+/* Premium Animated Shimmer Title */
+.premium-shimmer-title {
+  background: linear-gradient(
+    90deg,
+    #F5F2EB 0%,
+    #F5F2EB 35%,
+    #C5A06E 50%,
+    #F5F2EB 65%,
+    #F5F2EB 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: golden-shimmer 8s linear infinite;
+}
