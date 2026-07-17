@@ -1515,31 +1515,6 @@
       "image_missing": false
     },
     {
-      "story_id": "uss_cyclops_vanishing",
-      "title": "The Unseen Abyss: The Vanishing of the USS Cyclops",
-      "category": "true_crime",
-      "hook": "On March 4, 1918, a massive 542-foot collier, the USS Cyclops, vanished without a trace between Barbados and the Chesapeake Bay, taking with it 306 souls. No wreckage, no distress signal, not a single body was ever found.",
-      "concepts": [
-        "unexplained_disappearance",
-        "maritime_mystery",
-        "world_war_i",
-        "military_disaster",
-        "unsolved_mystery"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/uss_cyclops_vanishing.jpg",
-      "added_date": "2026-06-29",
-      "draft": false,
-      "reactions": {
-        "like": 14,
-        "gripping": 32,
-        "scared": 24,
-        "mindblown": 5
-      },
-      "year": "N/A",
-      "image_missing": false
-    },
-    {
       "story_id": "the_taos_hum",
       "title": "The Taos Hum: An Unseen, Unheard Affliction",
       "category": "paranormal",
@@ -3277,7 +3252,7 @@
       "severity": "disturbing",
       "hero_image": "/content/images/uwe_barschel.jpg",
       "added_date": "2026-06-20",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 27,
         "gripping": 40,
@@ -3285,7 +3260,7 @@
         "mindblown": 45
       },
       "year": "N/A",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "operation_condor_001",
@@ -3304,7 +3279,7 @@
       "severity": "chilling",
       "hero_image": "/content/images/operation_condor_001.jpg",
       "added_date": "2026-07-05",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 48,
         "gripping": 26,
@@ -3312,7 +3287,7 @@
         "mindblown": 61
       },
       "year": "N/A",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "the_sallie_house_haunting",
@@ -4323,7 +4298,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Gray_Barker.jpg",
       "added_date": "2026-07-08",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 16,
         "gripping": 34,
@@ -4331,7 +4306,7 @@
         "mindblown": 34
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "gaslighting_psychological_warfare",
@@ -4346,9 +4321,9 @@
         "reality_distortion"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=800",
+      "hero_image": "https://cdn.aarp.net/content/dam/aarpe/en/home/caregiving/basics/gaslighting/_jcr_content/root/container_main/container_body_main/container_body1/container_body_cf/container_image/articlecontentfragment/cfimage.coreimg.50.932.jpeg/content/dam/aarp/caregiving/2022/12/1140-gaslighting-caregiving.jpg",
       "added_date": "2026-07-09",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 39,
         "gripping": 12,
@@ -4356,7 +4331,7 @@
         "mindblown": 67
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "dakinis_demonic_skywalkers",
@@ -4372,9 +4347,9 @@
         "sacred_feminine"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800",
+      "hero_image": "https://shaktianandayoga.com/wp-content/uploads/2013/06/Vajrayogini.jpg",
       "added_date": "2026-07-08",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 39,
         "gripping": 42,
@@ -4382,7 +4357,7 @@
         "mindblown": 5
       },
       "year": "N/A",
-      "image_missing": true
+      "image_missing": 0
     },
     {
       "story_id": "project_popeye_weather_warfare",
@@ -4397,9 +4372,9 @@
         "environmental_modification"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=80&w=800",
+      "hero_image": "https://www.popsci.com/wp-content/uploads/2019/03/18/NZGV5ELRBX6HIBO2KULXXJDTSA.jpg",
       "added_date": "2026-07-08",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 15,
         "gripping": 18,
@@ -4407,7 +4382,7 @@
         "mindblown": 11
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "goddess_kalis_darker_cults",
@@ -4426,7 +4401,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Kali_by_Raja_Ravi_Varma.jpg/500px-Kali_by_Raja_Ravi_Varma.jpg",
       "added_date": "2026-07-06",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 36,
         "gripping": 29,
@@ -4434,7 +4409,7 @@
         "mindblown": 12
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "legend_of_pretas_indian_mythology",
@@ -4453,7 +4428,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Pyetta_%28hungry_ghosts%29.jpg/500px-Pyetta_%28hungry_ghosts%29.jpg",
       "added_date": "2026-07-04",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 16,
         "gripping": 39,
@@ -4461,7 +4436,7 @@
         "mindblown": 12
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_octopus_murder_conspiracy_danny_casolaro",
@@ -4478,9 +4453,9 @@
         "intelligence_agencies"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800",
+      "hero_image": "https://sbadamsthetower.com/wp-content/uploads/2024/03/AAAABdwx-bhSKxvthzfZcWqtlro7inipwmXNhB9ZrxEl5xMRqt5WLaUsk8calVQSQdi4ZJ4MbpfOSenT8ejGGXtve-avqM4cNSWBAFPv.jpg",
       "added_date": "2026-07-04",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 35,
         "gripping": 43,
@@ -4488,7 +4463,7 @@
         "mindblown": 63
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "amityville_horror_house_possessed",
@@ -4506,9 +4481,9 @@
         "media_sensationalism"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1508349682734-18c0c07d391f?q=80&w=800",
+      "hero_image": "https://www.cinechronicle.com/wp-content/uploads/2025/09/Amityville-La-maison-du-Diable-de-Stuart-Rosenberg.jpeg",
       "added_date": "2026-07-04",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 16,
         "gripping": 24,
@@ -4516,7 +4491,7 @@
         "mindblown": 12
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_bell_witch_haunting",
@@ -4534,7 +4509,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/WmPorterBurnWitch.jpg/500px-WmPorterBurnWitch.jpg",
       "added_date": "2026-07-04",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 37,
         "gripping": 25,
@@ -4542,7 +4517,7 @@
         "mindblown": 3
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "pishachas_flesh_eating_spirits",
@@ -4558,9 +4533,9 @@
         "restless_spirits"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1519074002996-a69e7ac46a42?q=80&w=800",
+      "hero_image": "https://static.wikia.nocookie.net/cryptidz/images/9/95/Pishacha.png/revision/latest?cb=20150624224915",
       "added_date": "2026-07-05",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 43,
         "gripping": 31,
@@ -4568,7 +4543,7 @@
         "mindblown": 4
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "operation_chaos_cia_domestic_surveillance",
@@ -4583,9 +4558,9 @@
         "intelligence_gathering"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=800",
+      "hero_image": "https://res.cloudinary.com/aenetworks/image/upload/c_fill,ar_2,w_1920,h_960,g_auto/dpr_auto/f_auto/q_auto:eco/v1/nixon-and-johnson-pushed-the-cia-to-spy-on-u-s-citizens-declassified-documents-shows-featured-pho?_a=BAVMn6DY0",
       "added_date": "2026-07-05",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 15,
         "gripping": 13,
@@ -4593,7 +4568,7 @@
         "mindblown": 11
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_curse_of_gandhari",
@@ -4610,9 +4585,9 @@
         "divine_justice"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1608155686393-8fdd966d784d?q=80&w=800",
+      "hero_image": "https://static.wixstatic.com/media/fb52ba_2b3c263b7abe4ff4b6ed18eaed986907~mv2.png/v1/fill/w_689,h_387,al_c,lg_1,q_85,enc_avif,quality_auto/fb52ba_2b3c263b7abe4ff4b6ed18eaed986907~mv2.png",
       "added_date": "2026-07-07",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 54,
         "gripping": 42,
@@ -4620,7 +4595,7 @@
         "mindblown": 10
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "undetected_backdoors_early_computing",
@@ -4637,9 +4612,9 @@
         "compiler_backdoor"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800",
+      "hero_image": "https://www.quantamagazine.org/wp-content/uploads/2023/03/UndetectableBackdoors-byHarolBustos-Lede-2048x1152.webp",
       "added_date": "2026-07-07",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 56,
         "gripping": 24,
@@ -4647,7 +4622,7 @@
         "mindblown": 7
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "myth_of_atlantis_plato",
@@ -4664,7 +4639,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Atlantis_Kircher_Mundus_subterraneus_1678.jpg/960px-Atlantis_Kircher_Mundus_subterraneus_1678.jpg",
       "added_date": "2026-01-17",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 43,
         "gripping": 21,
@@ -4672,7 +4647,7 @@
         "mindblown": 41
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_scattered_relics_satis_corpse",
@@ -6508,9 +6483,9 @@
         "groupthink"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800",
+      "hero_image": "https://www.thebritishacademy.ac.uk/media/images/GettyImages-515306046.width-592.jpg",
       "added_date": "2026-07-14",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 36,
         "gripping": 14,
@@ -6518,7 +6493,7 @@
         "mindblown": 44
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "online_poker_superuser_scandal",
@@ -6534,9 +6509,9 @@
         "betrayal_of_trust"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800",
+      "hero_image": "https://imageio.forbes.com/specials-images/imageserve/5d249a8e34a5c400084acbff/GPL-China-Champion-Yu-Linghan/0x0.jpg?width=960&dpr=1.5",
       "added_date": "2026-07-13",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 28,
         "gripping": 26,
@@ -6544,7 +6519,7 @@
         "mindblown": 4
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "reduplicative_paramnesia_001",
@@ -6560,9 +6535,9 @@
         "memory_confabulation"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800",
+      "hero_image": "https://ars.els-cdn.com/content/image/1-s2.0-S0010945223001636-gr6.jpg",
       "added_date": "2026-07-13",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 53,
         "gripping": 30,
@@ -6570,7 +6545,7 @@
         "mindblown": 65
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_murder_of_eliza_jumel",
@@ -6585,9 +6560,9 @@
         "legal_battle"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=800",
+      "hero_image": "https://smallstatebighistory.com/wp-content/uploads/2025/05/Screenshot-2025-05-24-at-9.44.00%E2%80%AFAM.png",
       "added_date": "2026-07-12",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 41,
         "gripping": 14,
@@ -6595,7 +6570,7 @@
         "mindblown": 12
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "the_haunting_of_bhangarh_fort",
@@ -6611,9 +6586,9 @@
         "historical_tragedy"
       ],
       "severity": "chilling",
-      "hero_image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=800",
+      "hero_image": "https://urbanjaipur.com/wp-content/uploads/2023/03/bhangarh-fort.jpg",
       "added_date": "2026-07-12",
-      "draft": false,
+      "draft": 0,
       "reactions": {
         "like": 50,
         "gripping": 38,
@@ -6621,7 +6596,7 @@
         "mindblown": 11
       },
       "year": "N/A",
-      "image_missing": false
+      "image_missing": 0
     },
     {
       "story_id": "melissa_virus_first_global_epidemic",
@@ -6824,32 +6799,6 @@
       },
       "year": "Early 2000s",
       "image_missing": true
-    },
-    {
-      "story_id": "project_goldfish_chemical_lsd_tests",
-      "title": "Project GOLDFISH: The US Army's Secret Chemical and LSD Tests",
-      "category": "gov_experiments",
-      "hook": "Imagine an army experimenting with drugs that twist the mind, not on enemies, but on its own soldiers, in secret, to see how they would break.",
-      "concepts": [
-        "human_experimentation",
-        "unethical_experimentation",
-        "government_secrecy",
-        "chemical_warfare",
-        "psychological_warfare",
-        "drug_experimentation"
-      ],
-      "severity": "chilling",
-      "hero_image": "/content/images/project_goldfish_chemical_lsd_tests.jpg",
-      "added_date": "2026-07-15",
-      "draft": 0,
-      "reactions": {
-        "like": 26,
-        "gripping": 19,
-        "scared": 6,
-        "mindblown": 12
-      },
-      "year": "1950s-1970s",
-      "image_missing": 0
     },
     {
       "story_id": "body_integrity_dysphoria_bid_amputation_desire",
@@ -7788,7 +7737,7 @@
       "severity": "chilling",
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/SF_From_Marin_Highlands3.jpg/960px-SF_From_Marin_Highlands3.jpg",
       "added_date": "2026-07-17",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 21,
         "gripping": 39,
@@ -7796,7 +7745,7 @@
         "mindblown": 12
       },
       "year": "1950",
-      "image_missing": 0
+      "image_missing": false
     },
     {
       "story_id": "chausath_yoginis_cults",
@@ -7813,7 +7762,7 @@
       "severity": "chilling",
       "hero_image": "https://beyonder.travel/wp-content/uploads/2020/03/64YoginiTemple_Hirapur-1140x445.jpg",
       "added_date": "2026-07-16",
-      "draft": 0,
+      "draft": false,
       "reactions": {
         "like": 35,
         "gripping": 38,
@@ -7821,7 +7770,33 @@
         "mindblown": 6
       },
       "year": "Ancient",
-      "image_missing": 0
+      "image_missing": false
+    },
+    {
+      "story_id": "project_goldfish_chemical_lsd_tests",
+      "title": "Project GOLDFISH: The US Army's Secret Chemical and LSD Tests",
+      "category": "gov_experiments",
+      "hook": "Imagine an army experimenting with drugs that twist the mind, not on enemies, but on its own soldiers, in secret, to see how they would break.",
+      "concepts": [
+        "human_experimentation",
+        "unethical_experimentation",
+        "government_secrecy",
+        "chemical_warfare",
+        "psychological_warfare",
+        "drug_experimentation"
+      ],
+      "severity": "chilling",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/f/f5/United_States_Navy_Special_Warfare_insignia.png",
+      "added_date": "2026-07-15",
+      "draft": false,
+      "reactions": {
+        "like": 26,
+        "gripping": 19,
+        "scared": 6,
+        "mindblown": 12
+      },
+      "year": "1950s-1970s",
+      "image_missing": false
     }
   ]
 }

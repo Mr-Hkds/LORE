@@ -98,7 +98,6 @@
     "zinoviev_letter_forgery",
     "operation_acoustic_kitty",
     "olof_palme_assassination_unsolved",
-    "project_goldfish_chemical_lsd_tests",
     "soviet_psychic_warfare_programs",
     "unattributed_early_cold_war_cyber_espionage",
     "operation_sea_spray_san_francisco",
@@ -107,7 +106,8 @@
     "us_military_chemical_experiments_soldiers",
     "project_mkultra_cia_mind_control",
     "assassination_thomas_sankara",
-    "operation_sea_spray_bio_attack"
+    "operation_sea_spray_bio_attack",
+    "project_goldfish_chemical_lsd_tests"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -232,7 +232,6 @@
     "black_dahlia_murder",
     "eilean_mor_lighthouse_mystery",
     "circleville_letters",
-    "uss_cyclops_vanishing",
     "roanoke_colony_disappearance",
     "the_lead_mask_case",
     "amelia_earhart_disappearance",
@@ -420,10 +419,10 @@
     "project_coast_canada_experiments",
     "project_100000_mcnamaras_folly",
     "porton_down_experiments",
-    "project_goldfish_chemical_lsd_tests",
     "operation_sea_spray_san_francisco",
     "us_military_chemical_experiments_soldiers",
-    "operation_sea_spray_bio_attack"
+    "operation_sea_spray_bio_attack",
+    "project_goldfish_chemical_lsd_tests"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -540,11 +539,11 @@
     "operation_midnight_climax",
     "the_gay_bomb_project",
     "operation_acoustic_kitty",
-    "project_goldfish_chemical_lsd_tests",
     "soviet_psychic_warfare_programs",
     "operation_sea_spray_san_francisco",
     "us_military_chemical_experiments_soldiers",
-    "project_mkultra_cia_mind_control"
+    "project_mkultra_cia_mind_control",
+    "project_goldfish_chemical_lsd_tests"
   ],
   "psychological_warfare": [
     "cia_mk_ultra_program",
@@ -557,9 +556,9 @@
     "project_chatter_mind_control",
     "operation_midnight_climax",
     "the_gay_bomb_project",
-    "project_goldfish_chemical_lsd_tests",
     "soviet_psychic_warfare_programs",
-    "project_mkultra_cia_mind_control"
+    "project_mkultra_cia_mind_control",
+    "project_goldfish_chemical_lsd_tests"
   ],
   "cults": [
     "jonestown_massacre_001"
@@ -719,7 +718,6 @@
   ],
   "unexplained_disappearance": [
     "franklin_expedition_lost_ships",
-    "uss_cyclops_vanishing",
     "the_mary_celeste_mystery",
     "amelia_earhart_disappearance",
     "the_bermuda_triangle_mystery"
@@ -994,7 +992,6 @@
   ],
   "maritime_mystery": [
     "eilean_mor_lighthouse_mystery",
-    "uss_cyclops_vanishing",
     "the_mary_celeste_mystery",
     "the_bermuda_triangle_mystery",
     "ss_ourang_medan_mystery"
@@ -1252,12 +1249,6 @@
   ],
   "social_hierarchy": [
     "the_batavia_shipwreck_mutiny"
-  ],
-  "world_war_i": [
-    "uss_cyclops_vanishing"
-  ],
-  "military_disaster": [
-    "uss_cyclops_vanishing"
   ],
   "auditory_perception": [
     "the_taos_hum"
@@ -1907,8 +1898,8 @@
     "project_mk_ultra_001",
     "project_coast_canada_experiments",
     "operation_midnight_climax",
-    "project_goldfish_chemical_lsd_tests",
-    "project_mkultra_cia_mind_control"
+    "project_mkultra_cia_mind_control",
+    "project_goldfish_chemical_lsd_tests"
   ],
   "second_gunman": [
     "assassination_rfk_conspiracy"
