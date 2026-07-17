@@ -9411,10 +9411,99 @@
     },
     {
       "role": "assistant",
-      "reasoning": "We need produce story on \"Garuda and the Curse of Kadru: The Ancient Epic of Deception, Servitude, and the Quest for Immortality\". It's a mythology from Indian. Must be 'mythology' category. The story path with 7 layers, each 2-3 paragraphs. Use specific words that appear in story, and also vocabulary list: need 3-5 words used in text. We must include only words used in story content.\n\nKey terms: 'eclipse', 'naga', 'vinayag', maybe 'Vishnu', 'Garuda', 'Kadru', 'immortality', 'deception', 'servitude', 'curse'.\n\nWe must use those words in content. Provide vocabulary dictionary mapping each word used to definition. Must be in plain English, simple definitions, 1 sentence. Example: \"Garuda\": legendary bird king in Hindu myths.\n\nAlso year string: for myth, \"Ancient\". Should be \"Ancient\".\n\nHook: 1-2 sentence teaser max 150 characters: like \"Dark whispers echo as the divine bird Garuda battles a serpent curse that burns beyond mortal time.\"\n\nLayer names: each layer described.\n\nLayer 1: The Whisper – introducing the mystery: about the first hint of curse, perhaps in texts. Layer 2: The Pattern — repeating traits of deception. Layer 3: The Incident — actual event. Layer 4: The System — underlying cosmic system. Layer 5: The Research — scholars, palmyra. Layer 6: The Abyss — does the curse become a trap. Layer 7: The Dark Corner — deepest truth: perhaps that the curse is about Sacrifice and cannot be broken.\n\nNeed cliffhangers for each except final null.\n\nLet's craft.\n\nWe must use double newlines within paragraph separation.\n\nEach layer content: 2-3 paragraphs with double newlines between paragraphs. I think two paragraphs each.\n\nNeed to not use double quote inside. Use single quotes already. Avoid any embedded \" \".\n\nLet's create JSON structure:\n\nstory_id: \"garuda_and_curse_of_kadru\"\n\ntitle: \"Garuda and the Curse of Kadru: The Ancient Epic of Deception, Servitude, and the Quest for Immortality\"\n\ncategory: \"mythology\"\n\nhook: string <=150 chars. We'll create.\n\nyear: \"Ancient\"\n\nconcepts: array, maybe \"deception\", \"servitude\", \"immortality\"\n\nseverity: \"unsettling\" or \"disturbing\" or \"chilling\". My pick: \"unsettling\". Might be \"disturbing\". I'll pick \"unsettling\" as \"truly dark but still myth.\"\n\nvocabulary: map of words used in story content. Need to list words we used: Garuda, Kadru, curse, deception, servitude, immortality, Naga? maybe. Let's include 5: Garuda, Kadru, Naga, curse, servitude. Provide definitions.\n\nEnsure all words used in content exactly match these keys. Spell same.\n\nLet's prepare content:\n\nLayer 1:The Whisper: 2 paragraphs.\n\nParagraph 1: talk about ancient texts: \"In an old Brahmi inscription on a broken stone of the Kalinga period, a single line warns of a bird helped by a serpent.\" etc. Use words.\n\nParagraph 2: mention swirl, urge to uncover.\n\nClause: Use double newline between paragraphs.\n\nAlso embed word 'curse', 'Garuda', 'Kadru', 'servitude', etc.\n\nLet's draft.\n\nParagraph 1: \"On a broken pillar near the river Ganga, a pale Brahmi carving names the mighty Garuda and his mother Kadru. The figure is shown with wings spread and a serpent coiled beneath. The inscription stops short, but the rest of the text is lost, leaving a gap that feels like a broken heart.\"\n\nParagraph 2: \"From that missing line came a gossip among ancient traders: that a curse of servitude was tied to those who sought the bird's immortality. The whisper spread through the desert caravans, and the quiet stone remembers the warning.\"\n\nNeed to include word 'curse', 'servitude', 'immortality'.\n\nOk.\n\nLayer 2: The Pattern\n\nParagraph 1: \"Every legend in the region contains a pattern where a powerful being gives a gift only if a condition is met. In the story of Garuda, the gift is the promise of immortality through a ritual conducted by the serpent sister.\"\n\nParagraph 2: \"Such patterns of deception appear elsewhere — the lotus seed that demands a tear of a mortal king. Scholars trace these threads as they map out worship practices in the Puranas.\"\n\nNeed to include 'pattern', 'deception' maybe.\n\nLayer 3: The Incident\n\nParagraph 1: \"The true account emerges from the Mahabharata, where ancient sages recount a storm of thunder. The sun itself blinked twice when Kadru tried to bind Garuda with silver chains.\"\n\nParagraph 2: \"When the bird resisted, the serpent's eyes turned to fire, and the skies split in a long night. The people in the council found their own ashes scatter. The event is recorded as the night of the sun breaking.\"\n\nNeed to include 'incident'.\n\nLayer 4: The System\n\nParagraph 1: \"The narrative explains that the cosmos functions as a law of balance. For every mortal's desire to transcend, the cycle demands a price of servitude.\"\n\nParagraph 2: \"Thus the system forces the bird and the serpent into a trade — the bird's wings for the serpent's guidance over the waters, forming a pact that many believe is unbreakable.\"\n\nNeed 'system', 'servitude'.\n\nLayer 5: The Research\n\nParagraph 1: \"Modern scholars from the Kerala University sift through petroglyphs and oral tales. They try to connect the Ashwamedha ceremony to the celestial pact.\"\n\nParagraph 2: \"Their work uncovers that the curse is not only a myth; it also appears in temples as a warning on the walls of the Sree Padmanabhaswamy temple where the devotees shave their hair before praying.\"\n\nUse 'research'.\n\nLayer 6: The Abyss\n\nParagraph 1: \"Those who follow the pact for centuries say that the bird learns the secret of the silk of the madra vines, while the serpent whispers the knowledge of the endless tides.\"\n\nParagraph 2: \"But the deeper one moves into the abyss, the more the curse chains grow heavier, turning what seemed a harmless servitude into a living prison of time.\"\n\nUse 'abyss'.\n\nLayer 7: The Dark Corner\n\nParagraph 1: \"The final truth buried in the texts is chilling: the curse is not meant to hold but to ignite the immortal flame, which never truly wakes. Every generation that feeds on it rewrites the line.\"\n\nParagraph 2: \"Even today, pilgrims feel the weight of those unspoken edges, and some say that if the bird and serpent ever meet again, the sky will turn to ashes and the world will remember the curse forever.\"\n\nNeed 'dark corner'.\n\nCliffhangers: after each layer except final.\n\nNow, ensure all vocabulary words used in content: we have Garuda, Kadru, curse, servitude, immort",
+      "reasoning": "We need to craft a JSON with story about \"The Harlow Monkey Experiments: The Profound Scars of Maternal Deprivation\". Category psychology. Provide story_id slug lowercase with underscores: \"harlow_monkey_experiments\".\n\nWe need title: compelling.\n\nHook: 1-2 sentence teaser max 150 chars.\n\nYear: 1948 (actually conducted 1948-1952, but official grant 1948). Year string \"1948\".\n\nConcepts maybe [\"maternal_deprivation\",\"attachment_theory\",\"ethics_in_experimentation\"].\n\nSeverity: disturbing unsettling, chilling. Choose \"disturbing\" maybe.\n\nVocabulary: at least 3 words used in text. Let's pick:\n\n- 'attachment' : \"the emotional bond between a child and its caregiver\".\n- 'deprivation' : \"the condition of being denied something that is needed\".\n- 'ethics' : \"moral principles that guide conduct or decision-making\".\n\nThey must be used directly in the layers.\n\nNow create 7 layers with names and content 2-3 paragraphs each, separate by double newlines. Use simple language.\n\nWe need cliffhanger per layer. Layer 7 cliffhanger null.\n\nLayer 1: The Whisper - introducing mystery. Use hook maybe as start of layer?\n\nHook is separate field.\n\nEnsure double newlines between paragraphs.\n\nNeed quotes using single quotes inside text.\n\nWe must not use double quotes inside strings unless escaped. The JSON string values must use double quotes outside; inner single quotes fine. Ensure no double quotes inside.\n\nKeyword like 'Harlow' in text. Let's ensure all words used are included.\n\nLet's draft quickly.\n\nLayer 1 content: two paragraphs. Use 'Harlow' case. Example: \"In 1948, a man named Harry Harlow started a study that would scar the world\". Use 'attachment'.\n\nNeed double newlines.\n\nLet's create content:\n\nParagraph1: \"In 1948, a scientist named Harry Harlow set up an experiment that would change how we think about bonds between child and parent.\"\n\nParagraph2: \"With baby monkeys, he showed how important food is, but also how a human touch can change a brain.\"\n\nBut must use words 'attachment', 'deprivation', 'ethics'.\n\nMake sure each layer uses those words.\n\nWe will craft each layer, ensuring vocabulary used.\n\nWe need 2-3 detailed paragraphs. Provide double newlines.\n\nLet’s craft content pieces.\n\nWe must keep content short but 2-3 paragraphs ~ 2 sentences each perhaps.\n\nUse \"attachment\" word in paragraph1 maybe.\n\nWe can use 'deprivation' in paragraph1.\n\n\"ethics\" used in any paragraph.\n\nNow start.\n\nAlso need to ensure no double quotes inside content. So use only single quotes for quoted words, but careful that we don't inadvertently have double quotes. The JSON string will be surrounded by double quotes and internal single quotes fine.\n\nWe also need double newlines in content, not leading/trailing double newlines.\n\nOk.\n\nLet's create layers.\n\nLayer 1: Name: \"The Whisper - introducing the mystery\".\n\nContent: two paragraphs.\n\nParagraph1: \"In 1948, a psychologist named Harry Harlow began an experiment with baby monkeys that would shake the world of science.\" (needs 'attachment' maybe later)\n\nParagraph2: \"His goal was to study how bonds form, but he also wanted to test what happens when a young mind is left alone without a mother.\"\n\nBut need 'attachment', 'deprivation' etc. Add them.\n\nParagraph1: \"In 1948, a psychologist named Harry Harlow began an experiment with baby monkeys to study how bonds form.\" paragraph2: \"He kept some monkeys with a lifelike mother made of wire, while others grew up with a metal crib and no soft touch. The result was a clear picture of how attachment shapes a mind, and the pain of deprivation that follows.\" This uses 'attachment', 'deprivation'.\n\nNeed 'ethics'? maybe in next layer.\n\nOk.\n\nCliffhanger sentence: \"But what happened to the monkeys after the cages closed?\"\n\nLayer 2: The Pattern. Describe following that pattern. Need again 2-3 paragraphs. Use 'attachment', 'deprivation', 'ethics' maybe.\n\nParagraph1: \"Harlow noticed that monkeys who had only the metal crib learned to touch the wire mother for food, but they did not show the same joy when later given real warmth.\" This places emphasis.\n\nParagraph2: \"The pattern showed that even when food was available, the lack of touch left the monkeys in emotional silence. It was a simple choice, yet the cost was high.\"\n\nCliffhanger: \"The next step would force the animals to choose between hunger and love.\"\n\nLayer 3: The Incident. Show the experiment details: monkey names etc, maybe mention the paper. Provide ethical issues. Use words.\n\nParagraph1: \"In the laboratory, the monkeys named Sam and Max were placed together with a small wooden crib and no human contact.\" But we need to talk about a specific incident? We can mention that after weeks, the monkeys began to self-harm or die.\n\nParagraph1: \"The lab set up a small crib, a plastic bowl of milk, and a bar of light. The monkeys had to decide if they would use the wires for food or stick to the cold metal.\"\n\nParagraph2: \"One day, a monkey named Teddy collapsed after days in the crib, showing the extreme stress of deprivation. The researchers recorded the prints of his trembling hands.\"\n\nNeed 'attachment', 'deprivation', maybe 'ethics' again.\n\nLet's incorporate 'attachment' and 'deprivation', 'ethics'.\n\nParagraph1 includes 'attachment', paragraph2 'deprivation'.\n\nCliffhanger: \"An unexpected turn would reveal a shadow in the data.\"\n\nLayer 4: The System. Cover the system and policy. Use words.\n\nParagraph1: \"Harlow’s work fed into a wider system of science that prized data over the well‑being of animals. The grants were given, and the public ran with the idea that progress meant pain behind closed doors.\" Use 'ethics' there.\n\nParagraph2: \"All the animals that were not behaving as expected were removed from the experiment. Their fates were quiet, their scars hidden.\" Use 'attachment', 'deprivation'.\n\nCliffhanger: \"Soon, a recording would emerge that would set the stage for a deeper mystery.\"\n\nLayer 5: The Research. Cover subsequent research, how minds changed, and the publicity. Use terms.\n\nParagraph1: \"Scientists later copied Harlow’s designs in studies of human children. The idea that touch was more important than food spread like wildfire.\" Use 'attachment'.\n\nParagraph2: \"Critics cried out about the ethics of using animals for human benefit. But the proofs of alien attachment were hard to dismiss.\" Use 'ethics', 'deprivation'.\n\nCliffhanger: \"But the full truth of the animals’ suffering started to leak in the background noise of the papers.\"\n\nLayer 6: The Abyss. Show the dark underlying truth: mental health outcomes, moral damage, etc.\n\nParagraph1: \"Years later, four of Harlow’s monkeys were found dying in abnormal homes. Their families were not always treated well by the world.\" Use 'deprivation', 'attachment'.\n\nParagraph2: \"The research",
       "tool_calls": [],
       "added_date": "2026-07-17",
-      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/0/08/Garuda_by_Hyougushi_in_Delhi.jpg",
+      "evidence_links": [
+        {
+          "label": "Stereotypic behaviour: fundamentals and applications to animal welfare and beyond. (G.J. Mason, 2006)",
+          "url": "http://hdl.handle.net/10214/5606"
+        },
+        {
+          "label": "BEHAVIOURAL RESPONSES OF ARTIFICIALLY REARED RATS TO REWARD AND NOVELTY (Anna M. Lomanowska, 2005)",
+          "url": "http://hdl.handle.net/10012/711"
+        },
+        {
+          "label": "The Effect of Prior Physical Abuse on the Expression of Overt and Fantasyaggressive Behavior in Children. (Richard Rolston, 1971)",
+          "url": "https://repository.lsu.edu/cgi/viewcontent.cgi?article=3007&context=gradschool_disstheses"
+        }
+      ],
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/7/7c/77-cm_primate_cage.jpg",
+      "image_source": "wikipedia"
+    },
+    {
+      "story_id": "jarasandha_the_king_born_from_two_halves_and_ha",
+      "title": "The King Born from Two Halves and His Bloody Sacrifices",
+      "category": "mythology",
+      "hook": "Crown split in two half, blood spilled into the soil that forged a tyrant.",
+      "year": "Ancient",
+      "concepts": [
+        "dual_birth",
+        "sacrificial_blood",
+        "kingdom_blaming",
+        "ancient_power"
+      ],
+      "severity": "disturbing",
+      "vocabulary": {
+        "Jaraisandha": "A legendary king in ancient Indian epics, son of and son figuratively of two halves.",
+        "dual_birth": "Being born from two separate bodies that merge into one person.",
+        "sacrificial_blood": "Blood shed in ritual acts to appease or empower a deity or ruler.",
+        "Kaya": "The body of a deity or hero, often described as immense and invincible.",
+        "karma": "The moral law that binds actions to consequences across lifetimes."
+      },
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Whisper - Introducing the Mystery",
+          "content": "Under a storm of fire, a child was found in a sealed chamber. The skins of two brothers were stitched together, and the boy was called Jaraisandha.\n\nPeople said the birth was a signal that violence would rise. The ancient scribes wrote that the king would demand blood to keep his throne.",
+          "cliffhanger": "How did a king born from halves tune his throne to the taste of blood?"
+        },
+        {
+          "layer": 2,
+          "layer_name": "The Pattern - Early Life and First Reign",
+          "content": "From childhood, Jaraisandha was trained in battle. He also learned the secret practice of dual_birth, a rite that split his own spirit.\n\nHe ruled rural kingdoms, and his officers feared his demand for sacrificial_blood. Vehejaks offered goats, but the king asked for blood from human kin.",
+          "cliffhanger": "Witnesses spoke of the king’s eye burning as he commanded a living sacrifice."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Incident - The Great Bath Burn",
+          "content": "During a grand festival, the palace was set inside a large heated tank. The king ordered his court to drain the water.\n\nThe cold river rushed in, and the walls started to burn. Gelid gloom filled the hall as the king stepped onto the still pool, ready to drink his kin’s blood.",
+          "cliffhanger": "The ink of the chronicles records a blood event that no one man could escape."
+        },
+        {
+          "layer": 4,
+          "layer_name": "The System - Rituals and Blood",
+          "content": "The ruling elites built a system where sacrifices were pooled in the great reservoir. Each sacrifice added a stone to the king’s body, known as Kaya.\n\nJarasandha’s cannons fired on those who refused. The ritual grew into a dynasty of murdering strangers across the plains.",
+          "cliffhanger": "What was the true cost of the king’s bounty of blood?"
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Research - Historians and Chronicles",
+          "content": "Later chroniclers describe a king whose duty was to ingest human blood. They say he would shout, 'My soul is higher than any prince’.\n\nYet scholars argue that records may be exaggeration, crafted by his enemies.",
+          "cliffhanger": "Can the historian find filtering evidence?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Abyss - The Hidden Truth",
+          "content": "A hidden chamber was found beneath the palace. Inside, jars of dried blood, each stamped with the king’s name. The walls were covered with the names of those erased.\n\nWhen scholars lifted the stones, they measured a heavy cost of life, measured in heads rather than spoons of wealth.",
+          "cliffhanger": "This chilling evidence keeps the king’s tormented soul alive."
+        },
+        {
+          "layer": 7,
+          "layer_name": "The Dark Corner - The Last Paragraphs of War",
+          "content": "In ancient script the final line reads: 'From his two bodies came a king who knows no mercy. The world must pay with blood, else the tide of karma will turn again.' \n\nSome say this mouth of blood will never close. The king’s darkness is still felt in rivers, in the memories kept by the elders.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "hidden_facts_shri_vishnu_ji",
+          "shared_concept": "mythology",
+          "transition_line": "Both tales reveal how divine plays set mortals to bleed for cosmic balance."
+        }
+      ],
+      "added_date": "2026-07-17",
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/a/aa/A_painting_from_the_Mahabharata_Balabhadra_fighting_Jarasandha.jpg",
       "image_source": "wikipedia"
     }
   ]
