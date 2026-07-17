@@ -1,7 +1,8 @@
 {
   "shared_delusion": [
     "burari_deaths_001",
-    "folie_a_deux_shared_psychosis"
+    "folie_a_deux_shared_psychosis",
+    "koro_syndrome_psychogenic_epidemic"
   ],
   "family_systems": [
     "burari_deaths_001",
@@ -593,11 +594,13 @@
   "mass_psychogenic_illness": [
     "dancing_mania_1518_strasbourg",
     "tanganyika_laughter_epidemic",
-    "the_taos_hum"
+    "the_taos_hum",
+    "koro_syndrome_psychogenic_epidemic"
   ],
   "social_contagion": [
     "dancing_mania_1518_strasbourg",
-    "tanganyika_laughter_epidemic"
+    "tanganyika_laughter_epidemic",
+    "koro_syndrome_psychogenic_epidemic"
   ],
   "historical_epidemics": [
     "dancing_mania_1518_strasbourg"
@@ -2344,7 +2347,8 @@
   "cosmic_balance": [
     "raktabija_blood_demon",
     "halahala_poison_shiva_sacrifice",
-    "tyranny_of_mahishasura"
+    "tyranny_of_mahishasura",
+    "jyestha_devi_dark_goddess"
   ],
   "goddess_power": [
     "raktabija_blood_demon"
@@ -3406,5 +3410,23 @@
   ],
   "corporate_negligence": [
     "target_data_breach"
+  ],
+  "culture_bound_syndrome": [
+    "koro_syndrome_psychogenic_epidemic"
+  ],
+  "panic_attacks": [
+    "koro_syndrome_psychogenic_epidemic"
+  ],
+  "misfortune": [
+    "jyestha_devi_dark_goddess"
+  ],
+  "inauspiciousness": [
+    "jyestha_devi_dark_goddess"
+  ],
+  "divine_duality": [
+    "jyestha_devi_dark_goddess"
+  ],
+  "forgotten_deities": [
+    "jyestha_devi_dark_goddess"
   ]
 }
