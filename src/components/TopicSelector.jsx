@@ -222,11 +222,9 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
       {/* Vignette */}
       <div className="vignette" aria-hidden="true" />
 
-      {/* Header */}
       <header className="px-4 sm:px-8 md:px-10">
         <div
-          className="mx-auto h-14 flex items-center justify-between"
-          style={{ maxWidth: '780px' }}
+          className="mx-auto h-14 flex items-center justify-between max-w-[780px] lg:max-w-[920px]"
         >
           {/* Logo + wordmark — tap 5× for admin */}
           <div
@@ -298,9 +296,8 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
         </div>
       </header>
 
-      {/* Main content */}
       <main className="flex-1 flex flex-col justify-start px-4 sm:px-8 md:px-10 py-16 md:py-24 mobile-bottom-nav-pad">
-        <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
+        <div className="mx-auto w-full max-w-[780px] lg:max-w-[920px]">
 
           {/* Eyebrow — label + dossier count */}
           <div className="flex items-center gap-3 flex-wrap" style={{ marginBottom: '24px' }}>
@@ -322,7 +319,7 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
           <h1
             className="font-serif italic leading-none tracking-tight"
             style={{
-              fontSize: 'clamp(2.2rem, 6.8vw, 3.8rem)',
+              fontSize: 'clamp(2.2rem, 6.8vw, 4.2rem)',
               fontWeight: 400,
               color: fg,
               letterSpacing: '-0.04em',
@@ -335,13 +332,12 @@ export default function TopicSelector({ onSelect, categoryCounts = {}, allStorie
 
           {/* Subtitle */}
           <p
-            className="font-serif leading-relaxed"
+            className="font-serif leading-relaxed max-w-[52ch] lg:max-w-[72ch]"
             style={{
               fontSize: 'clamp(1rem, 2vw, 1.15rem)',
               fontWeight: 400,
               lineHeight: 1.75,
               color: 'rgba(212, 207, 199, 0.75)',
-              maxWidth: '52ch',
               marginBottom: '56px',
             }}
           >

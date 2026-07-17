@@ -760,7 +760,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
 
       {/* Header */}
       <header className="px-4 sm:px-8 md:px-10">
-        <div className="mx-auto h-14 flex items-center justify-between" style={{ maxWidth: '780px' }}>
+        <div className="mx-auto h-14 flex items-center justify-between max-w-[780px] lg:max-w-[920px]">
           {/* Breadcrumb Navigation */}
           <div className="flex items-center gap-2 font-mono text-[9px] font-bold tracking-[0.14em] uppercase select-none">
             <button
@@ -817,7 +817,7 @@ export default function StoryCatalog({ category, stories, allStories, onSelectSt
 
       {/* Main */}
       <main className="flex-1 flex flex-col px-4 sm:px-8 md:px-10 py-12 md:py-16 pb-24 mobile-bottom-nav-pad">
-        <div className="mx-auto w-full" style={{ maxWidth: '780px' }}>
+        <div className="mx-auto w-full max-w-[780px] lg:max-w-[920px]">
 
           {/* Title */}
           <div className="mb-3">
