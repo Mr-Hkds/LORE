@@ -82,7 +82,7 @@ export default function SplashLoader({ loading, onComplete }) {
         <div className="flex justify-between items-center border-b border-[#C5A06E]/20 pb-3 mb-4">
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-full bg-[#C5A06E] animate-pulse" />
-            <span className="text-[#C5A06E] text-xs font-bold tracking-widest">LORE // SECURE_DECRYPT</span>
+            <span className="text-[#C5A06E] text-xs font-bold tracking-widest">SEVEN DESCENTS // SECURE_DECRYPT</span>
           </div>
           <span className="text-[#A5A096] text-[10px]">SYS_VER_2.4</span>
         </div>
