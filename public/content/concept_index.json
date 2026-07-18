@@ -921,7 +921,8 @@
     "body_integrity_identity_disorder_biid",
     "fregoli_delusion_imposter_faces",
     "capgras_delusion_001",
-    "reduplicative_paramnesia_001"
+    "reduplicative_paramnesia_001",
+    "confabulation_false_memories"
   ],
   "frontal_lobe": [
     "phineas_gage_brain_injury"
@@ -1144,7 +1145,8 @@
   "false_memory": [
     "the_mandela_effect",
     "false_memory_syndrome_001",
-    "the_psychology_of_false_confessions"
+    "the_psychology_of_false_confessions",
+    "confabulation_false_memories"
   ],
   "cognitive_bias": [
     "the_mandela_effect"
@@ -1876,7 +1878,8 @@
     "narakasura_demon_princesses"
   ],
   "illusion": [
-    "bhasmasura_mohini_deception"
+    "bhasmasura_mohini_deception",
+    "malevolent_world_of_rakshasas"
   ],
   "data_interception": [
     "project_bullrun_muscular"
@@ -2455,7 +2458,8 @@
     "dakinis_demonic_skywalkers"
   ],
   "demonic_entities": [
-    "dakinis_demonic_skywalkers"
+    "dakinis_demonic_skywalkers",
+    "malevolent_world_of_rakshasas"
   ],
   "spiritual_lore": [
     "dakinis_demonic_skywalkers"
@@ -2940,7 +2944,8 @@
     "narakasura_demon_princesses",
     "halahala_poison_shiva_sacrifice",
     "king_trishanku_suspended_between_worlds",
-    "tyranny_of_mahishasura"
+    "tyranny_of_mahishasura",
+    "malevolent_world_of_rakshasas"
   ],
   "imprisonment": [
     "narakasura_demon_princesses"
@@ -3507,5 +3512,23 @@
   ],
   "encryption": [
     "heartbleed_unseen_exploitation"
+  ],
+  "memory_distortion": [
+    "confabulation_false_memories"
+  ],
+  "self_deception": [
+    "confabulation_false_memories"
+  ],
+  "ancient_fears": [
+    "malevolent_world_of_rakshasas"
+  ],
+  "cosmic_struggle": [
+    "malevolent_world_of_rakshasas"
+  ],
+  "adharma": [
+    "malevolent_world_of_rakshasas"
+  ],
+  "transformation": [
+    "malevolent_world_of_rakshasas"
   ]
 }
