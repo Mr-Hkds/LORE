@@ -106,7 +106,9 @@
     "project_goldfish_chemical_lsd_tests",
     "u2_spy_plane_program",
     "operation_ranch_hand_agent_orange",
-    "operation_whitecoat_bio_experiments"
+    "operation_whitecoat_bio_experiments",
+    "the_kecksburg_ufo_incident",
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -780,7 +782,8 @@
     "skinwalker_ranch_phenomena",
     "travis_walton_abduction",
     "gef_talking_mongoose_dalby_spook",
-    "jatinga_bird_suicides"
+    "jatinga_bird_suicides",
+    "the_kecksburg_ufo_incident"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -853,7 +856,8 @@
     "operation_crossroads_bikini_atoll",
     "soviet_psychic_warfare_programs",
     "project_pluto_nuclear_ramjet",
-    "u2_spy_plane_program"
+    "u2_spy_plane_program",
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing",
@@ -980,7 +984,8 @@
   ],
   "unethical_experiments": [
     "project_iceworm_secret_city",
-    "plum_island_disease_center"
+    "plum_island_disease_center",
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ],
   "climate_change_impact": [
     "project_iceworm_secret_city"
@@ -1321,7 +1326,8 @@
     "the_roswell_incident",
     "rendlesham_forest_incident",
     "men_in_black_phenomenon",
-    "area_51_classified_secrets"
+    "area_51_classified_secrets",
+    "the_kecksburg_ufo_incident"
   ],
   "military_investigations": [
     "project_blue_book_ufo"
@@ -1812,7 +1818,8 @@
     "the_roswell_incident"
   ],
   "military_cover_up": [
-    "the_roswell_incident"
+    "the_roswell_incident",
+    "the_kecksburg_ufo_incident"
   ],
   "cyber_security": [
     "the_cuckoos_egg_kgb_hacker",
@@ -2410,7 +2417,8 @@
   ],
   "witness_testimony": [
     "rendlesham_forest_incident",
-    "travis_walton_abduction"
+    "travis_walton_abduction",
+    "the_kecksburg_ufo_incident"
   ],
   "radiation": [
     "rendlesham_forest_incident"
@@ -3167,11 +3175,13 @@
     "the_haunting_of_bhangarh_fort"
   ],
   "nuclear_testing": [
-    "operation_crossroads_bikini_atoll"
+    "operation_crossroads_bikini_atoll",
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ],
   "environmental_devastation": [
     "operation_crossroads_bikini_atoll",
-    "project_pluto_nuclear_ramjet"
+    "project_pluto_nuclear_ramjet",
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ],
   "radiological_contamination": [
     "operation_crossroads_bikini_atoll"
@@ -3549,5 +3559,8 @@
   ],
   "natural_mystery": [
     "jatinga_bird_suicides"
+  ],
+  "electromagnetic_pulse": [
+    "operation_fishbowl_high_altitude_nuclear_tests"
   ]
 }
