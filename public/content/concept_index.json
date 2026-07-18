@@ -2201,13 +2201,15 @@
     "kevin_mitnick_ghost_in_the_wires",
     "project_100000_mcnamaras_folly",
     "bavarian_illuminati_secret_society",
-    "aids_trojan_ransomware_1989"
+    "aids_trojan_ransomware_1989",
+    "the_melissa_virus"
   ],
   "assassination_attempts": [
     "operation_mongoose_cuban_project"
   ],
   "email_worm": [
-    "the_mydoom_worm_internet_fastest_malware"
+    "the_mydoom_worm_internet_fastest_malware",
+    "the_melissa_virus"
   ],
   "denial_of_service_attack": [
     "the_mydoom_worm_internet_fastest_malware"
@@ -3573,5 +3575,14 @@
   ],
   "unconscious_conflict": [
     "conversion_disorder_mind_manifests_001"
+  ],
+  "macro_virus": [
+    "the_melissa_virus"
+  ],
+  "digital_paralysis": [
+    "the_melissa_virus"
+  ],
+  "cybercrime_investigation": [
+    "the_melissa_virus"
   ]
 }
