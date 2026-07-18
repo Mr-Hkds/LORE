@@ -105,7 +105,8 @@
     "assassination_thomas_sankara",
     "project_goldfish_chemical_lsd_tests",
     "u2_spy_plane_program",
-    "operation_ranch_hand_agent_orange"
+    "operation_ranch_hand_agent_orange",
+    "operation_whitecoat_bio_experiments"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -393,7 +394,8 @@
     "project_mknaomi_cia_biowarfare",
     "plum_island_disease_center",
     "porton_down_experiments",
-    "operation_sea_spray_san_francisco"
+    "operation_sea_spray_san_francisco",
+    "operation_whitecoat_bio_experiments"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -412,7 +414,8 @@
     "porton_down_experiments",
     "operation_sea_spray_san_francisco",
     "project_goldfish_chemical_lsd_tests",
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "operation_whitecoat_bio_experiments"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -634,7 +637,8 @@
     "porton_down_experiments",
     "rosenhan_experiment_001",
     "the_nocebo_effect_mind_manifests_harm",
-    "tuskegee_syphilis_study"
+    "tuskegee_syphilis_study",
+    "operation_whitecoat_bio_experiments"
   ],
   "racial_injustice": [
     "atlanta_child_murders",
@@ -1186,7 +1190,8 @@
   ],
   "vulnerability": [
     "blue_whale_game_001",
-    "shadowy_market_zero_day_exploits"
+    "shadowy_market_zero_day_exploits",
+    "heartbleed_unseen_exploitation"
   ],
   "online_manipulation": [
     "blue_whale_game_001"
@@ -1653,7 +1658,8 @@
     "the_shadow_brokers_nsa_leak",
     "the_great_firewall_of_china",
     "equation_group_firmware_manipulation",
-    "notpetya_cyberattack"
+    "notpetya_cyberattack",
+    "heartbleed_unseen_exploitation"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1811,7 +1817,8 @@
     "morris_worm_first_internet_attack",
     "the_mydoom_worm_internet_fastest_malware",
     "undetected_backdoors_early_computing",
-    "meltdown_spectre_vulnerabilities"
+    "meltdown_spectre_vulnerabilities",
+    "heartbleed_unseen_exploitation"
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
@@ -3491,5 +3498,14 @@
   ],
   "public_safety": [
     "the_great_molasses_flood_1919"
+  ],
+  "military_volunteers": [
+    "operation_whitecoat_bio_experiments"
+  ],
+  "data_breach": [
+    "heartbleed_unseen_exploitation"
+  ],
+  "encryption": [
+    "heartbleed_unseen_exploitation"
   ]
 }
