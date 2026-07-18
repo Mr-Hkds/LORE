@@ -939,7 +939,8 @@
   ],
   "dissociation": [
     "dissociative_identity_disorder_fragmented_self",
-    "depersonalization_derealization_disorder"
+    "depersonalization_derealization_disorder",
+    "conversion_disorder_mind_manifests_001"
   ],
   "trauma_response": [
     "dissociative_identity_disorder_fragmented_self",
@@ -2668,7 +2669,8 @@
   ],
   "psychosomatic_illness": [
     "pseudocyesis_phantom_pregnancy",
-    "the_nocebo_effect_mind_manifests_harm"
+    "the_nocebo_effect_mind_manifests_harm",
+    "conversion_disorder_mind_manifests_001"
   ],
   "hormonal_response": [
     "pseudocyesis_phantom_pregnancy"
@@ -3562,5 +3564,14 @@
   ],
   "electromagnetic_pulse": [
     "operation_fishbowl_high_altitude_nuclear_tests"
+  ],
+  "neurological_symptoms": [
+    "conversion_disorder_mind_manifests_001"
+  ],
+  "stress_response": [
+    "conversion_disorder_mind_manifests_001"
+  ],
+  "unconscious_conflict": [
+    "conversion_disorder_mind_manifests_001"
   ]
 }
