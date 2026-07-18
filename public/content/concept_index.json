@@ -244,7 +244,8 @@
     "olof_palme_assassination_unsolved",
     "the_murder_of_eliza_jumel",
     "tylenol_murders_1982",
-    "keddie_cabin_murders"
+    "keddie_cabin_murders",
+    "the_servant_girl_annihilator"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -473,7 +474,8 @@
     "the_moors_murders",
     "lizzie_borden_axe_murders",
     "west_memphis_three_001",
-    "mary_phagan_leo_frank_lynching"
+    "mary_phagan_leo_frank_lynching",
+    "the_servant_girl_annihilator"
   ],
   "forensic_controversy": [
     "noida_double_murder_case_2008"
@@ -490,7 +492,8 @@
     "wineville_chicken_coop_murders",
     "atlanta_child_murders",
     "the_moors_murders",
-    "belle_gunness_farm_of_horrors"
+    "belle_gunness_farm_of_horrors",
+    "the_servant_girl_annihilator"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -3584,5 +3587,11 @@
   ],
   "cybercrime_investigation": [
     "the_melissa_virus"
+  ],
+  "urban_terror": [
+    "the_servant_girl_annihilator"
+  ],
+  "historical_crime": [
+    "the_servant_girl_annihilator"
   ]
 }
