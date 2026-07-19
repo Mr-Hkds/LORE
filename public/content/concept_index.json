@@ -127,11 +127,13 @@
     "salem_witch_trials_001",
     "banality_of_evil_001",
     "west_memphis_three_001",
-    "manson_family_murders_001"
+    "manson_family_murders_001",
+    "mob_mentality_scapegoating"
   ],
   "social_pressure": [
     "the_asch_conformity_experiments",
-    "blue_whale_game_001"
+    "blue_whale_game_001",
+    "mob_mentality_scapegoating"
   ],
   "false_flag": [
     "operation_northwoods_001",
@@ -306,7 +308,8 @@
   "dehumanization": [
     "stanford_prison_experiment_001",
     "banality_of_evil_001",
-    "rosenhan_experiment_001"
+    "rosenhan_experiment_001",
+    "mob_mentality_scapegoating"
   ],
   "financial_conspiracy": [
     "barney_barnato",
@@ -686,11 +689,13 @@
   ],
   "cyber warfare": [
     "stuxnet_cyberweapon_nuclear_facilities",
-    "shadowy_market_zero_day_exploits"
+    "shadowy_market_zero_day_exploits",
+    "lazarus_group_bangladesh_bank_heist"
   ],
   "state-sponsored hacking": [
     "stuxnet_cyberweapon_nuclear_facilities",
-    "shadowy_market_zero_day_exploits"
+    "shadowy_market_zero_day_exploits",
+    "lazarus_group_bangladesh_bank_heist"
   ],
   "industrial control systems": [
     "stuxnet_cyberweapon_nuclear_facilities"
@@ -1568,7 +1573,8 @@
     "loudun_possessions_001",
     "tylenol_murders_1982",
     "gef_talking_mongoose_dalby_spook",
-    "the_devils_footprints_devon"
+    "the_devils_footprints_devon",
+    "mob_mentality_scapegoating"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -3628,5 +3634,20 @@
   ],
   "mass_manipulation": [
     "project_704_cia_psych_warfare"
+  ],
+  "financial crime": [
+    "lazarus_group_bangladesh_bank_heist"
+  ],
+  "SWIFT system": [
+    "lazarus_group_bangladesh_bank_heist"
+  ],
+  "money laundering": [
+    "lazarus_group_bangladesh_bank_heist"
+  ],
+  "mob_mentality": [
+    "mob_mentality_scapegoating"
+  ],
+  "scapegoating": [
+    "mob_mentality_scapegoating"
   ]
 }
