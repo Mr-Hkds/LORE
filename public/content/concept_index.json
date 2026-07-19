@@ -3243,7 +3243,8 @@
     "mary_bell_child_murderer"
   ],
   "government_cover_up": [
-    "uss_liberty_incident_001"
+    "uss_liberty_incident_001",
+    "the_watergate_scandal_001"
   ],
   "unexplained_attack": [
     "uss_liberty_incident_001"
@@ -3599,5 +3600,17 @@
   ],
   "unknown_creature": [
     "the_devils_footprints_devon"
+  ],
+  "political_corruption": [
+    "the_watergate_scandal_001"
+  ],
+  "abuse_of_power": [
+    "the_watergate_scandal_001"
+  ],
+  "media_investigation": [
+    "the_watergate_scandal_001"
+  ],
+  "obstruction_of_justice": [
+    "the_watergate_scandal_001"
   ]
 }
