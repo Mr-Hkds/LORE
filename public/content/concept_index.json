@@ -1697,7 +1697,8 @@
     "the_great_firewall_of_china",
     "equation_group_firmware_manipulation",
     "notpetya_cyberattack",
-    "heartbleed_unseen_exploitation"
+    "heartbleed_unseen_exploitation",
+    "wannacry_global_ransomware"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1728,7 +1729,8 @@
     "estonian_cyberattacks_2007",
     "the_shadow_brokers_nsa_leak",
     "the_great_firewall_of_china",
-    "notpetya_cyberattack"
+    "notpetya_cyberattack",
+    "wannacry_global_ransomware"
   ],
   "supply_chain_attack": [
     "solarwinds_supply_chain_attack_001",
@@ -1764,7 +1766,8 @@
   ],
   "zero-day_exploits": [
     "conficker_worm",
-    "the_shadow_brokers_nsa_leak"
+    "the_shadow_brokers_nsa_leak",
+    "wannacry_global_ransomware"
   ],
   "global_cyber_threat": [
     "conficker_worm"
@@ -1797,7 +1800,8 @@
   "critical_infrastructure_attack": [
     "ukraine_power_grid_cyber_attack_2015_2016",
     "estonian_cyberattacks_2007",
-    "notpetya_cyberattack"
+    "notpetya_cyberattack",
+    "wannacry_global_ransomware"
   ],
   "power_grid": [
     "ukraine_power_grid_cyber_attack_2015_2016"
@@ -2464,7 +2468,8 @@
     "men_in_black_phenomenon"
   ],
   "witness_intimidation": [
-    "men_in_black_phenomenon"
+    "men_in_black_phenomenon",
+    "franklin_scandal_001"
   ],
   "suppression": [
     "men_in_black_phenomenon"
@@ -3087,7 +3092,8 @@
   ],
   "ransomware": [
     "aids_trojan_ransomware_1989",
-    "notpetya_cyberattack"
+    "notpetya_cyberattack",
+    "wannacry_global_ransomware"
   ],
   "computer_history": [
     "aids_trojan_ransomware_1989"
@@ -3269,7 +3275,8 @@
   ],
   "government_cover_up": [
     "uss_liberty_incident_001",
-    "the_watergate_scandal_001"
+    "the_watergate_scandal_001",
+    "franklin_scandal_001"
   ],
   "unexplained_attack": [
     "uss_liberty_incident_001"
@@ -3627,7 +3634,8 @@
     "the_devils_footprints_devon"
   ],
   "political_corruption": [
-    "the_watergate_scandal_001"
+    "the_watergate_scandal_001",
+    "franklin_scandal_001"
   ],
   "abuse_of_power": [
     "the_watergate_scandal_001"
@@ -3685,5 +3693,14 @@
   ],
   "military_deception": [
     "operation_wandering_soul"
+  ],
+  "child_sex_trafficking": [
+    "franklin_scandal_001"
+  ],
+  "satanic_ritual_abuse_allegations": [
+    "franklin_scandal_001"
+  ],
+  "data_encryption": [
+    "wannacry_global_ransomware"
   ]
 }
