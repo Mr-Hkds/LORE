@@ -349,7 +349,7 @@
     "keddie_cabin_murders",
     "the_monster_of_florence"
   ],
-  "REM atonia": [
+  "rem atonia": [
     "sleep_paralysis_dossier"
   ],
   "hypnagogic hallucinations": [
@@ -650,31 +650,6 @@
     "universe_25_calhouns_mouse_utopia",
     "the_rat_park_experiment_001"
   ],
-  "medical_ethics": [
-    "project_sunshine_cadaver_collection",
-    "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments",
-    "human_radiation_experiments_us",
-    "porton_down_experiments",
-    "rosenhan_experiment_001",
-    "the_nocebo_effect_mind_manifests_harm",
-    "tuskegee_syphilis_study",
-    "operation_whitecoat_bio_experiments"
-  ],
-  "racial_injustice": [
-    "atlanta_child_murders",
-    "tuskegee_syphilis_study"
-  ],
-  "government_misconduct": [
-    "guatemalan_syphilis_experiment",
-    "holmesburg_prison_experiments",
-    "project_100000_mcnamaras_folly",
-    "tuskegee_syphilis_study"
-  ],
-  "public_health_failure": [
-    "guatemalan_syphilis_experiment",
-    "tuskegee_syphilis_study"
-  ],
   "psychosis": [
     "folie_a_deux_shared_psychosis",
     "clinical_lycanthropy",
@@ -918,6 +893,17 @@
   "captivity_syndrome": [
     "stockholm_syndrome_001"
   ],
+  "medical_ethics": [
+    "project_sunshine_cadaver_collection",
+    "guatemalan_syphilis_experiment",
+    "holmesburg_prison_experiments",
+    "human_radiation_experiments_us",
+    "porton_down_experiments",
+    "rosenhan_experiment_001",
+    "the_nocebo_effect_mind_manifests_harm",
+    "tuskegee_syphilis_study",
+    "operation_whitecoat_bio_experiments"
+  ],
   "addiction": [
     "the_rat_park_experiment_001"
   ],
@@ -1061,7 +1047,7 @@
   "parapsychology": [
     "the_ganzfeld_experiment"
   ],
-  "ESP": [
+  "esp": [
     "the_ganzfeld_experiment"
   ],
   "sensory_deprivation": [
@@ -1487,6 +1473,16 @@
   "technological_failure": [
     "the_russian_woodpecker_duga_3",
     "operation_acoustic_kitty"
+  ],
+  "government_misconduct": [
+    "guatemalan_syphilis_experiment",
+    "holmesburg_prison_experiments",
+    "project_100000_mcnamaras_folly",
+    "tuskegee_syphilis_study"
+  ],
+  "public_health_failure": [
+    "guatemalan_syphilis_experiment",
+    "tuskegee_syphilis_study"
   ],
   "vulnerable_populations": [
     "guatemalan_syphilis_experiment",
@@ -3145,6 +3141,10 @@
   "celestial_ascension": [
     "king_trishanku_suspended_between_worlds"
   ],
+  "racial_injustice": [
+    "atlanta_child_murders",
+    "tuskegee_syphilis_study"
+  ],
   "political_forgery": [
     "zinoviev_letter_forgery"
   ],
@@ -3518,7 +3518,7 @@
   "grief_tech": [
     "digital_afterlife_online_presences"
   ],
-  "AI_chatbots": [
+  "ai_chatbots": [
     "digital_afterlife_online_presences"
   ],
   "high_altitude_reconnaissance": [
@@ -3664,7 +3664,7 @@
   "financial crime": [
     "lazarus_group_bangladesh_bank_heist"
   ],
-  "SWIFT system": [
+  "swift system": [
     "lazarus_group_bangladesh_bank_heist"
   ],
   "money laundering": [
