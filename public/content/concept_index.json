@@ -248,7 +248,8 @@
     "the_murder_of_eliza_jumel",
     "tylenol_murders_1982",
     "keddie_cabin_murders",
-    "the_servant_girl_annihilator"
+    "the_servant_girl_annihilator",
+    "the_monster_of_florence"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -345,7 +346,8 @@
     "villisca_axe_murders_001",
     "db_cooper_unsolved_mystery",
     "lizzie_borden_axe_murders",
-    "keddie_cabin_murders"
+    "keddie_cabin_murders",
+    "the_monster_of_florence"
   ],
   "REM atonia": [
     "sleep_paralysis_dossier"
@@ -479,10 +481,12 @@
     "lizzie_borden_axe_murders",
     "west_memphis_three_001",
     "mary_phagan_leo_frank_lynching",
-    "the_servant_girl_annihilator"
+    "the_servant_girl_annihilator",
+    "the_monster_of_florence"
   ],
   "forensic_controversy": [
-    "noida_double_murder_case_2008"
+    "noida_double_murder_case_2008",
+    "the_monster_of_florence"
   ],
   "serial_killer": [
     "jack_the_ripper_001",
@@ -497,7 +501,8 @@
     "atlanta_child_murders",
     "the_moors_murders",
     "belle_gunness_farm_of_horrors",
-    "the_servant_girl_annihilator"
+    "the_servant_girl_annihilator",
+    "the_monster_of_florence"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -978,7 +983,8 @@
     "manson_family_murders_001"
   ],
   "police_misconduct": [
-    "black_dahlia_murder"
+    "black_dahlia_murder",
+    "the_monster_of_florence"
   ],
   "delusion": [
     "clinical_lycanthropy",
@@ -3649,5 +3655,17 @@
   ],
   "scapegoating": [
     "mob_mentality_scapegoating"
+  ],
+  "fate_and_free_will": [
+    "karna_tragic_destiny"
+  ],
+  "identity_crisis": [
+    "karna_tragic_destiny"
+  ],
+  "unjust_suffering": [
+    "karna_tragic_destiny"
+  ],
+  "satanic_cult": [
+    "the_monster_of_florence"
   ]
 }
