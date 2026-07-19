@@ -368,7 +368,8 @@
   ],
   "sacred_geography": [
     "mahadev_and_sati_dossier",
-    "the_scattered_relics_satis_corpse"
+    "the_scattered_relics_satis_corpse",
+    "the_legend_of_chembazhakotta"
   ],
   "cryptography": [
     "cicada_3301",
@@ -609,12 +610,14 @@
     "dancing_mania_1518_strasbourg",
     "tanganyika_laughter_epidemic",
     "the_taos_hum",
-    "koro_syndrome_psychogenic_epidemic"
+    "koro_syndrome_psychogenic_epidemic",
+    "june_bug_epidemic_1962"
   ],
   "social_contagion": [
     "dancing_mania_1518_strasbourg",
     "tanganyika_laughter_epidemic",
-    "koro_syndrome_psychogenic_epidemic"
+    "koro_syndrome_psychogenic_epidemic",
+    "june_bug_epidemic_1962"
   ],
   "historical_epidemics": [
     "dancing_mania_1518_strasbourg"
@@ -1087,7 +1090,8 @@
   ],
   "lost_civilizations": [
     "mystery_of_dwarka",
-    "myth_of_atlantis_plato"
+    "myth_of_atlantis_plato",
+    "the_legend_of_chembazhakotta"
   ],
   "mythology": [
     "mystery_of_dwarka",
@@ -2885,7 +2889,8 @@
     "brahmarakshas_cursed_scholar"
   ],
   "mythological_entities": [
-    "brahmarakshas_cursed_scholar"
+    "brahmarakshas_cursed_scholar",
+    "the_legend_of_chembazhakotta"
   ],
   "unfulfilled_desires": [
     "brahmarakshas_cursed_scholar"
@@ -3610,7 +3615,8 @@
     "conversion_disorder_mind_manifests_001"
   ],
   "stress_response": [
-    "conversion_disorder_mind_manifests_001"
+    "conversion_disorder_mind_manifests_001",
+    "june_bug_epidemic_1962"
   ],
   "unconscious_conflict": [
     "conversion_disorder_mind_manifests_001"
@@ -3702,5 +3708,11 @@
   ],
   "data_encryption": [
     "wannacry_global_ransomware"
+  ],
+  "ancient_curses": [
+    "the_legend_of_chembazhakotta"
+  ],
+  "unexplained_disappearances": [
+    "the_legend_of_chembazhakotta"
   ]
 }
