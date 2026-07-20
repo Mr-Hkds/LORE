@@ -787,7 +787,8 @@
     "the_kecksburg_ufo_incident",
     "the_devils_footprints_devon",
     "the_brown_lady_raynham_hall",
-    "hessdalen_lights_norway"
+    "hessdalen_lights_norway",
+    "the_dybbuk_box_cursed_cabinet"
   ],
   "haunted_house": [
     "winchester_mystery_house",
@@ -1459,7 +1460,8 @@
     "vampire_panic_eastern_europe",
     "the_golem_of_prague",
     "the_beast_of_gevaudan",
-    "spring_heeled_jack_legend"
+    "spring_heeled_jack_legend",
+    "the_vetala_reanimated_corpses"
   ],
   "ultra-low-frequency_sound": [
     "the_bloop_unexplained_sound"
@@ -1877,7 +1879,8 @@
   ],
   "moral_dilemmas": [
     "mahabharat_psychological_epic",
-    "vikram_vetala_tales"
+    "vikram_vetala_tales",
+    "the_vetala_reanimated_corpses"
   ],
   "karma_and_consequence": [
     "mahabharat_psychological_epic",
@@ -1895,12 +1898,14 @@
     "the_sallie_house_haunting",
     "the_bell_witch_haunting",
     "perron_family_haunting",
-    "gelderland_devil_poltergeist"
+    "gelderland_devil_poltergeist",
+    "the_dybbuk_box_cursed_cabinet"
   ],
   "cursed_objects": [
     "hope_diamond_curse",
     "screaming_skull_bettiscombe_manor",
-    "hexham_heads_poltergeist_werewolf"
+    "hexham_heads_poltergeist_werewolf",
+    "the_dybbuk_box_cursed_cabinet"
   ],
   "historical_mysteries": [
     "hope_diamond_curse"
@@ -2100,7 +2105,8 @@
     "kala_bhairava_origin_time_punishment"
   ],
   "undead_entity": [
-    "vikram_vetala_tales"
+    "vikram_vetala_tales",
+    "the_vetala_reanimated_corpses"
   ],
   "kingship_challenges": [
     "vikram_vetala_tales"
@@ -3778,5 +3784,11 @@
   ],
   "blackout_conditions": [
     "blackout_ripper_london_001"
+  ],
+  "spectral_sorcery": [
+    "the_vetala_reanimated_corpses"
+  ],
+  "reanimated_corpses": [
+    "the_vetala_reanimated_corpses"
   ]
 }
