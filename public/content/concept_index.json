@@ -110,7 +110,9 @@
     "the_kecksburg_ufo_incident",
     "operation_fishbowl_high_altitude_nuclear_tests",
     "project_704_cia_psych_warfare",
-    "man_in_iron_mask_royal_prisoner"
+    "man_in_iron_mask_royal_prisoner",
+    "lincoln_assassination_conspiracy",
+    "mustard_gas_experiments_us_soldiers_wwii"
   ],
   "conformity": [
     "the_asch_conformity_experiments",
@@ -286,7 +288,8 @@
     "bavarian_illuminati_secret_society",
     "ss_ourang_medan_mystery",
     "olof_palme_assassination_unsolved",
-    "malcolm_x_assassination_unanswered_questions"
+    "malcolm_x_assassination_unanswered_questions",
+    "lincoln_assassination_conspiracy"
   ],
   "pilot_suicide": [
     "malaysia_airlines_mh370"
@@ -395,7 +398,8 @@
     "bilderberg_group_secret_meetings",
     "bavarian_illuminati_secret_society",
     "skull_and_bones_secret_society",
-    "denver_airport_conspiracy"
+    "denver_airport_conspiracy",
+    "lincoln_assassination_conspiracy"
   ],
   "biological_warfare": [
     "unit_731_experiments",
@@ -427,7 +431,8 @@
     "operation_sea_spray_san_francisco",
     "project_goldfish_chemical_lsd_tests",
     "tuskegee_syphilis_study",
-    "operation_whitecoat_bio_experiments"
+    "operation_whitecoat_bio_experiments",
+    "mustard_gas_experiments_us_soldiers_wwii"
   ],
   "war_crimes": [
     "unit_731_experiments",
@@ -1210,7 +1215,8 @@
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
-    "little_albert_experiment"
+    "little_albert_experiment",
+    "mustard_gas_experiments_us_soldiers_wwii"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1629,7 +1635,8 @@
     "dag_hammarskjold_death_conspiracy",
     "olof_palme_assassination_unsolved",
     "malcolm_x_assassination_unanswered_questions",
-    "assassination_thomas_sankara"
+    "assassination_thomas_sankara",
+    "lincoln_assassination_conspiracy"
   ],
   "lone_gunman": [
     "jfk_assassination_001"
@@ -1955,14 +1962,16 @@
   ],
   "military_misconduct": [
     "project_shad_covert_testing",
-    "project_112_covert_warfare_tests"
+    "project_112_covert_warfare_tests",
+    "mustard_gas_experiments_us_soldiers_wwii"
   ],
   "chemical_warfare": [
     "project_shad_covert_testing",
     "project_112_covert_warfare_tests",
     "porton_down_experiments",
     "project_goldfish_chemical_lsd_tests",
-    "operation_ranch_hand_agent_orange"
+    "operation_ranch_hand_agent_orange",
+    "mustard_gas_experiments_us_soldiers_wwii"
   ],
   "long_term_health_effects": [
     "project_shad_covert_testing",
@@ -3790,5 +3799,8 @@
   ],
   "reanimated_corpses": [
     "the_vetala_reanimated_corpses"
+  ],
+  "civil_war_aftermath": [
+    "lincoln_assassination_conspiracy"
   ]
 }
