@@ -8960,6 +8960,91 @@
       ],
       "hero_image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Little-albert.jpg",
       "image_source": "wikipedia"
+    },
+    {
+      "story_id": "blackout_ripper_london_001",
+      "title": "The Blackout Ripper: London's Wartime Serial Killer",
+      "category": "true_crime",
+      "hook": "During World War II, London plunged into darkness to hide from bombs. But this darkness also hid a monstrous killer.",
+      "year": "1942-1943",
+      "concepts": [
+        "serial_killer",
+        "wartime_crime",
+        "blackout_conditions",
+        "unsolved_mystery"
+      ],
+      "severity": "chilling",
+      "vocabulary": {
+        "Blackout": "The mandatory covering of windows and turning off lights during wartime to prevent enemy aircraft from locating targets.",
+        "Blitz": "The sustained bombing campaign by Nazi Germany against the United Kingdom during World War II, especially against London.",
+        "Air Raid Warden": "A civilian volunteer responsible for ensuring compliance with blackout regulations and helping people during air raids.",
+        "Serial Killer": "A person who commits a series of murders, often with a consistent pattern of behavior or motivation.",
+        "Forensics": "Scientific methods used to investigate crimes, such as analyzing evidence from a crime scene."
+      },
+      "layers": [
+        {
+          "layer": 1,
+          "layer_name": "The Shadow Over London: The Whisper",
+          "content": "Imagine London in the early 1940s. The city was a place of deep shadows and constant fear. World War II was raging, and German planes dropped bombs almost every night. To protect itself from these attacks, London enforced a strict 'Blackout'. Every window was covered, every street light turned off. The city became a maze of absolute darkness.",
+          "cliffhanger": "This total darkness, meant to save lives, also created a perfect hunting ground for a different kind of monster."
+        },
+        {
+          "layer": 2,
+          "layer_name": "Whispers in the Dark: The Pattern",
+          "content": "As the bombs fell, a new kind of terror began to spread among the people. News started to circulate about women being attacked in the dark streets. These attacks were violent and often deadly. Most victims were women, many of them working in prostitution, trying to survive in a war-torn city.",
+          "cliffhanger": "The attacks were brutal and swift, and soon, a chilling detail began to connect them, making people whisper about a 'Blackout Ripper'."
+        },
+        {
+          "layer": 3,
+          "layer_name": "The Hands of Terror: The Incident",
+          "content": "Between February 9th and February 14th, 1942, a wave of horrific murders gripped London. Six women were attacked, and four of them died. Each victim was brutally strangled and often mutilated. The killer moved unseen in the pitch-black streets, striking quickly and silently.",
+          "cliffhanger": "The police, already working hard during the 'Blitz', now faced a phantom who used the war as his shield."
+        },
+        {
+          "layer": 4,
+          "layer_name": "A City Under Siege: The System",
+          "content": "Civilian volunteers, called 'Air Raid Wardens', were supposed to keep the 'Blackout' strict and help during raids. Sometimes, these wardens were the ones who found the victims, adding another layer of horror to their duties. The killer moved through this disorder like a ghost, making him seem impossible to catch.",
+          "cliffhanger": "Yet, amidst the chaos and despair, the police began to focus on one name, a man whose evil acts shocked even a city used to death."
+        },
+        {
+          "layer": 5,
+          "layer_name": "The Suspect Emerges: The Research",
+          "content": "Cummins was a married man with a seemingly normal life. The discovery that an airman, meant to protect the country, was actually a brutal 'Serial Killer' was a terrible blow. His capture was swift, leading to a quick end to his week-long reign of terror.",
+          "cliffhanger": "The evidence against him seemed strong, but would it be enough to connect him to all the dark deeds attributed to the 'Blackout Ripper'?"
+        },
+        {
+          "layer": 6,
+          "layer_name": "The Trial and the Truth: The Abyss",
+          "content": "Despite the challenges of the 'Blackout' conditions, the police and investigators worked tirelessly. Cummins was quickly found guilty of four murders. The quick conviction brought some relief to a terrified city, proving that even in the darkest times, justice could find its way.",
+          "cliffhanger": "Justice was served for these four victims, but the true number of those who fell to the 'Blackout Ripper' remains a haunting question."
+        },
+        {
+          "layer": 7,
+          "layer_name": "Unanswered Questions: The Dark Corner",
+          "content": "The chaos of the 'Blitz' and the deep 'Blackout' created the perfect cover for a 'Serial Killer'. It showed how war, while bringing death from the sky, could also allow a different kind of evil to thrive on the ground, preying on people's vulnerability and fear. The case of the 'Blackout Ripper' remains a dark reminder of the hidden horrors that can emerge when society is under extreme stress.",
+          "cliffhanger": null
+        }
+      ],
+      "connections": [
+        {
+          "story_id": "jack_the_ripper_001",
+          "shared_concept": "serial_killer",
+          "transition_line": "Like the 'Blackout Ripper', another infamous killer, Jack the Ripper, used the shadows of London for his brutal deeds, leaving behind a legacy of terror and unsolved mysteries that continue to haunt us."
+        }
+      ],
+      "added_date": "2026-07-20",
+      "evidence_links": [
+        {
+          "label": "Seriality, Reboots and Iterability on the Anglophone Contemporary Stage (2024)",
+          "url": "https://www.peren-revues.fr/coupdetheatre/1273?file=1"
+        },
+        {
+          "label": "It Always Rains on Sunday: Early Social Realism in Post-War British Cinema (Alistair Billam, 2018)",
+          "url": "http://eprints.hud.ac.uk/id/eprint/34583/1/Alistair%20Billam%20%20FINAL%20THESIS.PDF"
+        }
+      ],
+      "hero_image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Hugh_Gordon_Cummins_1955.jpg/960px-Hugh_Gordon_Cummins_1955.jpg",
+      "image_source": "commons"
     }
   ]
 }

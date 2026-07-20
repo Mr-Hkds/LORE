@@ -250,7 +250,8 @@
     "tylenol_murders_1982",
     "keddie_cabin_murders",
     "the_servant_girl_annihilator",
-    "the_monster_of_florence"
+    "the_monster_of_florence",
+    "blackout_ripper_london_001"
   ],
   "aviation_disaster": [
     "malaysia_airlines_mh370"
@@ -505,7 +506,8 @@
     "belle_gunness_farm_of_horrors",
     "the_servant_girl_annihilator",
     "the_monster_of_florence",
-    "washington_dc_sniper_attacks_a_month_of_terror"
+    "washington_dc_sniper_attacks_a_month_of_terror",
+    "blackout_ripper_london_001"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -3770,5 +3772,11 @@
   ],
   "child_psychology": [
     "little_albert_experiment"
+  ],
+  "wartime_crime": [
+    "blackout_ripper_london_001"
+  ],
+  "blackout_conditions": [
+    "blackout_ripper_london_001"
   ]
 }
