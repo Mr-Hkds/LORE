@@ -504,7 +504,8 @@
     "the_moors_murders",
     "belle_gunness_farm_of_horrors",
     "the_servant_girl_annihilator",
-    "the_monster_of_florence"
+    "the_monster_of_florence",
+    "washington_dc_sniper_attacks_a_month_of_terror"
   ],
   "victorian_era": [
     "jack_the_ripper_001",
@@ -569,7 +570,8 @@
     "project_mkultra_cia_mind_control",
     "project_goldfish_chemical_lsd_tests",
     "project_704_cia_psych_warfare",
-    "operation_wandering_soul"
+    "operation_wandering_soul",
+    "washington_dc_sniper_attacks_a_month_of_terror"
   ],
   "cults": [
     "jonestown_massacre_001",
@@ -832,7 +834,8 @@
     "operation_chariot_alaska_nuclear_harbor",
     "operation_acoustic_kitty",
     "operation_crossroads_bikini_atoll",
-    "project_pluto_nuclear_ramjet"
+    "project_pluto_nuclear_ramjet",
+    "project_harp_supergun_space"
   ],
   "psychic_espionage": [
     "project_stargate_remote_viewing"
@@ -859,7 +862,8 @@
     "project_pluto_nuclear_ramjet",
     "u2_spy_plane_program",
     "operation_fishbowl_high_altitude_nuclear_tests",
-    "project_704_cia_psych_warfare"
+    "project_704_cia_psych_warfare",
+    "project_harp_supergun_space"
   ],
   "paranormal_research": [
     "project_stargate_remote_viewing",
@@ -3090,7 +3094,8 @@
     "operation_chariot_alaska_nuclear_harbor"
   ],
   "unethical_science": [
-    "operation_chariot_alaska_nuclear_harbor"
+    "operation_chariot_alaska_nuclear_harbor",
+    "project_harp_supergun_space"
   ],
   "radioactive_fallout": [
     "operation_chariot_alaska_nuclear_harbor"
@@ -3728,5 +3733,20 @@
   ],
   "unexplained_imprisonment": [
     "man_in_iron_mask_royal_prisoner"
+  ],
+  "mass_panic": [
+    "washington_dc_sniper_attacks_a_month_of_terror"
+  ],
+  "unseen_threat": [
+    "washington_dc_sniper_attacks_a_month_of_terror"
+  ],
+  "indoctrination": [
+    "washington_dc_sniper_attacks_a_month_of_terror"
+  ],
+  "space_exploration": [
+    "project_harp_supergun_space"
+  ],
+  "military_technology": [
+    "project_harp_supergun_space"
   ]
 }
