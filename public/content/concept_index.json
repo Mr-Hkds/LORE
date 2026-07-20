@@ -1206,7 +1206,8 @@
     "monster_study_1939",
     "guatemalan_syphilis_experiment",
     "holmesburg_prison_experiments",
-    "human_radiation_experiments_us"
+    "human_radiation_experiments_us",
+    "little_albert_experiment"
   ],
   "psychological_harm": [
     "monster_study_1939"
@@ -1685,7 +1686,8 @@
     "flame_malware_cyber_espionage",
     "unattributed_early_cold_war_cyber_espionage",
     "opm_data_breach",
-    "equation_group_firmware_manipulation"
+    "equation_group_firmware_manipulation",
+    "project_sauron_regin_cyber_espionage"
   ],
   "state-sponsored_hacking": [
     "moonlight_maze_cyber_espionage",
@@ -1704,7 +1706,8 @@
     "equation_group_firmware_manipulation",
     "notpetya_cyberattack",
     "heartbleed_unseen_exploitation",
-    "wannacry_global_ransomware"
+    "wannacry_global_ransomware",
+    "project_sauron_regin_cyber_espionage"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1756,7 +1759,8 @@
   "advanced_persistent_threat": [
     "ghostnet_global_cyber_espionage",
     "flame_malware_cyber_espionage",
-    "equation_group_firmware_manipulation"
+    "equation_group_firmware_manipulation",
+    "project_sauron_regin_cyber_espionage"
   ],
   "botnet": [
     "conficker_worm",
@@ -3748,5 +3752,23 @@
   ],
   "military_technology": [
     "project_harp_supergun_space"
+  ],
+  "data_exfiltration": [
+    "project_sauron_regin_cyber_espionage"
+  ],
+  "long-term_surveillance": [
+    "project_sauron_regin_cyber_espionage"
+  ],
+  "conditioning": [
+    "little_albert_experiment"
+  ],
+  "fear": [
+    "little_albert_experiment"
+  ],
+  "behaviorism": [
+    "little_albert_experiment"
+  ],
+  "child_psychology": [
+    "little_albert_experiment"
   ]
 }
