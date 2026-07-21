@@ -1,10 +1,11 @@
 {
-  "lastRunAt": 1784633256183,
-  "nextRunAt": 1784635056183,
+  "lastRunAt": 1784638646174,
+  "nextRunAt": 1784640446174,
   "intervalMs": 1800000,
   "isRunning": false,
   "enabled": true,
   "status": "success",
+  "message": "Archive limit reached (>= 350 stories). Auto-generation suspended. Waiting for new recommendations.",
   "error": null,
   "mode": "github-actions"
 }
