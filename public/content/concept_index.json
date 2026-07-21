@@ -751,7 +751,8 @@
     "rosenheim_poltergeist_001",
     "greyfriars_kirkyard_poltergeist",
     "the_stone_tape_theory",
-    "the_brown_lady_raynham_hall"
+    "the_brown_lady_raynham_hall",
+    "hopkinsville_goblins_encounter"
   ],
   "grief_and_madness": [
     "winchester_mystery_house"
@@ -1605,7 +1606,8 @@
     "tylenol_murders_1982",
     "gef_talking_mongoose_dalby_spook",
     "the_devils_footprints_devon",
-    "mob_mentality_scapegoating"
+    "mob_mentality_scapegoating",
+    "hopkinsville_goblins_encounter"
   ],
   "archaeology": [
     "curse_of_tutankhamun"
@@ -1875,7 +1877,8 @@
     "children_past_lives_stevenson_research"
   ],
   "alien_encounter": [
-    "the_roswell_incident"
+    "the_roswell_incident",
+    "hopkinsville_goblins_encounter"
   ],
   "military_cover_up": [
     "the_roswell_incident",
@@ -1940,7 +1943,8 @@
     "bhasmasura_mohini_deception"
   ],
   "unchecked_power": [
-    "bhasmasura_mohini_deception"
+    "bhasmasura_mohini_deception",
+    "tammany_hall_boss_tweed_corruption"
   ],
   "cosmic_justice": [
     "bhasmasura_mohini_deception",
@@ -2061,7 +2065,8 @@
     "vatican_bank_scandal_calvi_p2",
     "the_axeman_of_new_orleans",
     "the_octopus_murder_conspiracy_danny_casolaro",
-    "bulletproof_hosting_networks"
+    "bulletproof_hosting_networks",
+    "tammany_hall_boss_tweed_corruption"
   ],
   "church_corruption": [
     "vatican_bank_scandal_calvi_p2"
@@ -2492,7 +2497,8 @@
   "witness_testimony": [
     "rendlesham_forest_incident",
     "travis_walton_abduction",
-    "the_kecksburg_ufo_incident"
+    "the_kecksburg_ufo_incident",
+    "hopkinsville_goblins_encounter"
   ],
   "radiation": [
     "rendlesham_forest_incident"
@@ -3685,7 +3691,8 @@
   ],
   "political_corruption": [
     "the_watergate_scandal_001",
-    "franklin_scandal_001"
+    "franklin_scandal_001",
+    "tammany_hall_boss_tweed_corruption"
   ],
   "abuse_of_power": [
     "the_watergate_scandal_001"
@@ -3839,5 +3846,11 @@
   ],
   "victim_vulnerability": [
     "green_river_killer_ridgway"
+  ],
+  "public_funds_embezzlement": [
+    "tammany_hall_boss_tweed_corruption"
+  ],
+  "journalistic_exposure": [
+    "tammany_hall_boss_tweed_corruption"
   ]
 }
