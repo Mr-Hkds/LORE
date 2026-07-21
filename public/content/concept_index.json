@@ -413,7 +413,8 @@
     "plum_island_disease_center",
     "porton_down_experiments",
     "operation_sea_spray_san_francisco",
-    "operation_whitecoat_bio_experiments"
+    "operation_whitecoat_bio_experiments",
+    "operation_dark_winter_smallpox_simulation"
   ],
   "human_experimentation": [
     "unit_731_experiments",
@@ -1260,7 +1261,8 @@
   ],
   "government_response": [
     "anthrax_attacks_2001_amerithrax",
-    "phoenix_lights_event"
+    "phoenix_lights_event",
+    "operation_dark_winter_smallpox_simulation"
   ],
   "public_health_crisis": [
     "anthrax_attacks_2001_amerithrax",
@@ -1725,7 +1727,8 @@
     "heartbleed_unseen_exploitation",
     "wannacry_global_ransomware",
     "project_sauron_regin_cyber_espionage",
-    "fancy_bear_apt28_russias_digital_shadows"
+    "fancy_bear_apt28_russias_digital_shadows",
+    "skygofree_invisible_spyware"
   ],
   "data_theft": [
     "moonlight_maze_cyber_espionage",
@@ -1735,7 +1738,8 @@
     "flame_malware_cyber_espionage",
     "meltdown_spectre_vulnerabilities",
     "opm_data_breach",
-    "target_data_breach"
+    "target_data_breach",
+    "skygofree_invisible_spyware"
   ],
   "unseen_warfare": [
     "moonlight_maze_cyber_espionage",
@@ -1796,7 +1800,8 @@
   "zero-day_exploits": [
     "conficker_worm",
     "the_shadow_brokers_nsa_leak",
-    "wannacry_global_ransomware"
+    "wannacry_global_ransomware",
+    "skygofree_invisible_spyware"
   ],
   "global_cyber_threat": [
     "conficker_worm"
@@ -1931,7 +1936,8 @@
     "hope_diamond_curse"
   ],
   "surveillance": [
-    "project_raven_uae_cyber_mercenaries"
+    "project_raven_uae_cyber_mercenaries",
+    "skygofree_invisible_spyware"
   ],
   "cyber_mercenaries": [
     "project_raven_uae_cyber_mercenaries"
@@ -3852,5 +3858,14 @@
   ],
   "journalistic_exposure": [
     "tammany_hall_boss_tweed_corruption"
+  ],
+  "pandemic_preparedness": [
+    "operation_dark_winter_smallpox_simulation"
+  ],
+  "simulated_disaster": [
+    "operation_dark_winter_smallpox_simulation"
+  ],
+  "mobile_spyware": [
+    "skygofree_invisible_spyware"
   ]
 }
