@@ -22,13 +22,30 @@
   },
   "year": "Ancient",
   "image_missing": true,
-  "vocabulary": {
-    "Boon": "A special favor, blessing, or power granted by a god, often with specific conditions.",
-    "Asura": "A class of powerful, often malevolent, beings or demons in Hindu mythology, frequently in conflict with the gods (Devas).",
-    "Swargaloka": "The celestial realm or heaven, considered the dwelling place of the gods in Hindu cosmology.",
-    "Divine Feminine": "The concept of the sacred and powerful female aspect of the divine, embodying creation, protection, and destruction.",
-    "Cosmic Balance": "The idea of a natural order and equilibrium within the universe, maintained by the interplay of various forces and beings."
-  },
+  "evidence_links": [
+    {
+      "label": "Devi Mahatmyam (Markandeya Purana)",
+      "url": "https://www.sacred-texts.com/hin/dmah/index.htm"
+    },
+    {
+      "label": "Hindu Mythology: A Sourcebook",
+      "url": "https://www.amazon.com/Hindu-Mythology-Sourcebook-Classic-Mythology/dp/0195390615"
+    },
+    {
+      "label": "Britannica: Durga",
+      "url": "https://www.britannica.com/topic/Durga"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "hidden_facts_shri_vishnu_ji",
+      "title": "Bhagwan Vishnu Ke Ankahe Raaz: Ek Cosmic Dhokha Ya Ultimate Satya?"
+    },
+    {
+      "story_id": "mahadev_and_sati_dossier",
+      "title": "The God Who Would Not Let Go: Shiva, Sati, and the Anatomy of Cosmic Grief"
+    }
+  ],
   "layers": [
     {
       "layer": 1,
@@ -73,28 +90,11 @@
       "cliffhanger": null
     }
   ],
-  "evidence_links": [
-    {
-      "label": "Devi Mahatmyam (Markandeya Purana)",
-      "url": "https://www.sacred-texts.com/hin/dmah/index.htm"
-    },
-    {
-      "label": "Hindu Mythology: A Sourcebook",
-      "url": "https://www.amazon.com/Hindu-Mythology-Sourcebook-Classic-Mythology/dp/0195390615"
-    },
-    {
-      "label": "Britannica: Durga",
-      "url": "https://www.britannica.com/topic/Durga"
-    }
-  ],
-  "connections": [
-    {
-      "story_id": "hidden_facts_shri_vishnu_ji",
-      "title": "Bhagwan Vishnu Ke Ankahe Raaz: Ek Cosmic Dhokha Ya Ultimate Satya?"
-    },
-    {
-      "story_id": "mahadev_and_sati_dossier",
-      "title": "The God Who Would Not Let Go: Shiva, Sati, and the Anatomy of Cosmic Grief"
-    }
-  ]
+  "vocabulary": {
+    "Boon": "A special favor, blessing, or power granted by a god, often with specific conditions.",
+    "Asura": "A class of powerful, often malevolent, beings or demons in Hindu mythology, frequently in conflict with the gods (Devas).",
+    "Swargaloka": "The celestial realm or heaven, considered the dwelling place of the gods in Hindu cosmology.",
+    "Divine Feminine": "The concept of the sacred and powerful female aspect of the divine, embodying creation, protection, and destruction.",
+    "Cosmic Balance": "The idea of a natural order and equilibrium within the universe, maintained by the interplay of various forces and beings."
+  }
 }

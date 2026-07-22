@@ -1,0 +1,104 @@
+{
+  "story_id": "west_memphis_three_001",
+  "title": "The West Memphis Three: Satanic Panic, Miscarriage of Justice, and a Lingering Shadow",
+  "category": "true_crime",
+  "hook": "Three young boys, eight years old, found brutally murdered in a small town in Arkansas, leading to a dark hunt for a killer that shattered lives.",
+  "concepts": [
+    "satanic_panic",
+    "miscarriage_of_justice",
+    "false_confession",
+    "groupthink",
+    "media_sensationalism"
+  ],
+  "severity": "chilling",
+  "hero_image": "/content/images/west_memphis_three_001.jpg",
+  "added_date": "2026-07-15",
+  "draft": false,
+  "reactions": {
+    "like": 14,
+    "gripping": 42,
+    "scared": 69,
+    "mindblown": 10
+  },
+  "year": "1993",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "HBO Documentary: Paradise Lost",
+      "url": "https://www.hbo.com/documentaries/paradise-lost-the-child-murders-at-robin-hood-hills"
+    },
+    {
+      "label": "Damien Echols' Website & Case Info",
+      "url": "https://www.free-the-wm3.org/"
+    },
+    {
+      "label": "Arkansas Department of Correction Records (historical context)",
+      "url": "https://doc.arkansas.gov/"
+    }
+  ],
+  "connections": [
+    {
+      "id": "the_asch_conformity_experiments",
+      "title": "The Asch Conformity Experiment"
+    },
+    {
+      "id": "milgram_experiment_on_obedience_001",
+      "title": "The Milgram Experiment: The Shocking Truth of Obedience"
+    },
+    {
+      "id": "stanford_prison_experiment_001",
+      "title": "Stanford Prison Experiment : The Psychology of Power"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "The Unthinkable Discovery",
+      "content": "On May 5, 1993, the small, quiet town of West Memphis, Arkansas, was ripped apart by an unimaginable horror. Three eight-year-old boys – Steve Branch, Michael Moore, and Christopher Byers – went missing. Their disappearance quickly turned into a frantic search that involved much of the community, hoping to find the children safe.",
+      "cliffhanger": "The search ended in the most brutal way possible, not with relief, but with a discovery that would forever haunt the town and spark a desperate need for answers."
+    },
+    {
+      "layer": 2,
+      "layer_name": "A Scene of Horrors and Whispers of Evil",
+      "content": "The following day, the bodies of the three boys were found in a muddy ditch in an area known as Robin Hood Hills. They had been tied up, severely beaten, and drowned. The horrific nature of the crime immediately ignited fear and outrage throughout West Memphis, demanding swift justice. The community, already shaken, began to look for explanations for such a monstrous act.",
+      "cliffhanger": "As the town grieved, whispers began to circulate, not just about a killer, but about something far more sinister, something that preyed on the deepest fears of the time."
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Shadow of the Satanic Panic",
+      "content": "In the early 1990s, America was in the grip of the 'Satanic Panic,' a widespread fear that devil-worshipping cults were active and committing heinous crimes. This fear quickly infected the investigation in West Memphis. Local authorities, under immense pressure, began to focus on teenagers who didn't fit the small-town mold: Damien Echols, known for his interest in heavy metal music and dark clothing; Jason Baldwin, his friend; and Jessie Misskelley Jr., who had intellectual disabilities.",
+      "cliffhanger": "These three young men, perceived as outsiders and different, suddenly found themselves at the center of a community's desperate search for a culprit, not based on evidence, but on appearance and unfounded fears."
+    },
+    {
+      "layer": 4,
+      "layer_name": "The Confession and the Arrests",
+      "content": "Police interrogation of Jessie Misskelley Jr. lasted for many hours without his parents or legal counsel present. Despite his intellectual limitations and repeated denials, he eventually gave a confession that was inconsistent and filled with details that did not match the crime scene. This confession, later retracted, implicated Echols and Baldwin, providing the police with the narrative they seemingly sought.",
+      "cliffhanger": "With this coerced confession in hand, the state moved forward, convinced they had their killers, but the foundation of their case was built on shifting sand."
+    },
+    {
+      "layer": 5,
+      "layer_name": "The Trials: Fear Over Fact",
+      "content": "The trials of the West Memphis Three were heavily influenced by the 'Satanic Panic.' Prosecutors presented flimsy evidence, relying heavily on Misskelley's unreliable confession and questionable 'expert' testimony about satanic rituals, despite a lack of actual physical evidence linking the boys to the crime or to satanism. The media sensationalized the case, further fueling public prejudice against the defendants.",
+      "cliffhanger": "Despite serious doubts about the evidence and the fairness of the process, the jury delivered its verdicts, sealing the fate of the three young men and sending them to prison, with Echols receiving a death sentence."
+    },
+    {
+      "layer": 6,
+      "layer_name": "A Decades-Long Fight for Freedom",
+      "content": "For nearly two decades, Damien Echols, Jason Baldwin, and Jessie Misskelley Jr. remained imprisoned. However, their case attracted national attention, with documentaries, books, and celebrity advocates raising awareness about the clear injustices. New legal teams worked tirelessly, and significant new DNA evidence emerged, which did not match any of the West Memphis Three but instead pointed to other, unknown individuals at the crime scene.",
+      "cliffhanger": "The weight of new evidence and growing public pressure finally forced a pivotal moment, but freedom would come with a heavy, complicated price."
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Alford Plea and the Lingering Shadow",
+      "content": "In 2011, after 18 years in prison, the West Memphis Three were released through an unusual legal maneuver called an Alford Plea. This allowed them to maintain their innocence while acknowledging that the state had enough evidence to convict them, effectively ending their appeals. They walked free, but with their names still associated with the horrific murders, and without a full exoneration.",
+      "cliffhanger": null
+    }
+  ],
+  "vocabulary": {
+    "Satanic Panic": "A widespread fear, particularly in the 1980s and 1990s, that organized groups were abusing children and engaging in satanic rituals.",
+    "Miscarriage of Justice": "A situation where the legal system fails to deliver a fair and just outcome, often resulting in an innocent person being wrongly punished.",
+    "False Confession": "An admission of guilt to a crime that the confessor did not commit, often given under duress, coercion, or misunderstanding.",
+    "Alford Plea": "A legal plea in which a defendant does not admit guilt but admits that the prosecution has enough evidence to likely secure a conviction.",
+    "Groupthink": "A psychological phenomenon where people in a group conform to the majority opinion, often suppressing their own critical thoughts, which can lead to poor decision-making."
+  }
+}

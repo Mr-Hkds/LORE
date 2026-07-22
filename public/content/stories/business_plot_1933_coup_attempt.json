@@ -1,0 +1,95 @@
+{
+  "story_id": "business_plot_1933_coup_attempt",
+  "title": "The Business Plot of 1933: America's Unseen Coup Attempt",
+  "category": "conspiracy",
+  "hook": "Imagine powerful men secretly planning to overthrow the US President. This was a chilling allegation from 1933, a documented moment when American democracy faced a hidden threat.",
+  "concepts": [
+    "coup_attempt",
+    "government_conspiracy",
+    "political_intrigue",
+    "military_hero"
+  ],
+  "severity": "chilling",
+  "hero_image": "https://upload.wikimedia.org/wikipedia/commons/7/70/Brigadier_General_Smedley_Butler%2C_1927_%2814773211711%29.jpg",
+  "added_date": "2026-07-15",
+  "draft": false,
+  "reactions": {
+    "like": 29,
+    "gripping": 32,
+    "scared": 3,
+    "mindblown": 52
+  },
+  "year": "1933",
+  "image_missing": false,
+  "evidence_links": [
+    {
+      "label": "McCormack-Dickstein Committee Report (1934)",
+      "url": "https://www.archives.gov/files/legislative/resources/mccormack-dickstein-report.pdf"
+    },
+    {
+      "label": "NPR: 'The Business Plot' of 1934",
+      "url": "https://www.npr.org/2012/07/20/157077983/the-business-plot-of-1934"
+    },
+    {
+      "label": "History.com: The Business Plot",
+      "url": "https://www.history.com/news/business-plot-fdr-coup-smedley-butler"
+    }
+  ],
+  "connections": [
+    {
+      "story_id": "operation_northwoods_001",
+      "title": "Operation Northwoods: The 1962 Plan to Manufacture a War"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 1,
+      "layer_name": "Whispers of Discontent",
+      "content": "In 1933, America was in the grip of the Great Depression. Millions were jobless and hungry. President Franklin D. Roosevelt had just launched his 'New Deal' programs. These programs aimed to help ordinary Americans and regulate big businesses.\n\nHowever, not everyone supported Roosevelt's radical changes. Many powerful industrialists and bankers felt that the New Deal threatened their wealth and control. They saw Roosevelt's policies as too socialist or even communist, believing he was leading the country in the wrong direction. This growing unhappiness created a tense atmosphere where desperate measures might be considered.",
+      "cliffhanger": "But how far were these powerful men willing to go to stop a President they disliked?"
+    },
+    {
+      "layer": 2,
+      "layer_name": "The Unlikely Hero: Smedley Butler",
+      "content": "Into this tense political climate stepped Major General Smedley Butler. He was one of the most decorated Marines in U.S. history, a true war hero. Butler was known for his courage, his strong support for military veterans, and his outspoken anti-war and anti-business views.\n\nDespite his military background, Butler was deeply critical of corporate power and war profiteering. He was a champion of the common soldier and a vocal opponent of what he called 'rackets' in both war and finance. His public image made him an unlikely figure to be approached by those who sought to undermine the government.",
+      "cliffhanger": "Why would powerful businessmen, who typically opposed Butler's views, suddenly seek his help?"
+    },
+    {
+      "layer": 3,
+      "layer_name": "The Secret Approach",
+      "content": "In the summer of 1933, Butler was approached by Gerald MacGuire, a bond salesman with connections to wealthy industrialists. MacGuire claimed to represent a group of powerful businessmen who wanted Butler to lead a new veterans' organization. This organization, they said, would be a strong voice for former soldiers.\n\nMacGuire spoke of creating a massive movement of 500,000 veterans. He hinted that this group could become a powerful force in national politics. Butler, always concerned for veterans, listened, but he also grew suspicious of the true intentions behind this grand proposal.",
+      "cliffhanger": "What was the real purpose of this massive veterans' movement, and what dangerous role did they envision for General Butler?"
+    },
+    {
+      "layer": 4,
+      "layer_name": "A Plan to Overthrow the President",
+      "content": "As discussions continued, the true nature of the plot became clear. MacGuire revealed that the plan was for Butler to lead a massive march of 500,000 veterans on Washington D.C. This march would not be a peaceful protest. Instead, it would be used to pressure President Roosevelt into stepping down.\n\nThe plotters believed Roosevelt was medically unfit to serve, or they would force him out under the pretense of a national emergency. Butler, as the popular leader, would then become a figurehead, essentially a dictator, under the title of 'Secretary of General Affairs.' This new position would allow him to control the government, while the true power would remain with the wealthy men funding the operation. The goal was to replace American democracy with a fascist-style government.",
+      "cliffhanger": "Could such a bold and treasonous plan actually succeed, and what would a decorated war hero like Butler do when faced with this proposition?"
+    },
+    {
+      "layer": 5,
+      "layer_name": "Butler Blows the Whistle",
+      "content": "General Butler was horrified by what he heard. He realized he was being asked to lead a military coup against his own country. Instead of joining the plotters, Butler decided to expose them. He gathered evidence and reported the entire scheme to the authorities.\n\nIn November 1934, Butler testified before the McCormack-Dickstein Committee of the House of Representatives. He laid out the details of the plot, naming the individuals who had approached him and explaining their intentions to install a fascist dictatorship in the United States. His testimony sent shockwaves through the nation.",
+      "cliffhanger": "How did the government and the American people react to these explosive claims, and what became of the powerful men accused of treason?"
+    },
+    {
+      "layer": 6,
+      "layer_name": "The Committee's Confirmation and Public Silence",
+      "content": "The McCormack-Dickstein Committee investigated Butler's allegations. After hearing testimony and reviewing evidence, the committee confirmed that elements of the plot were true. Their final report stated, 'There is no question that these attempts were discussed, were planned, and might have been placed into execution had not General Butler exposed it to the Congress of the United States.'\n\nDespite this official confirmation, no one was ever prosecuted. The powerful men allegedly involved, including prominent Wall Street figures and industrialists, were never called to testify or faced charges. This lack of legal action left many questions unanswered and fueled public skepticism, with some dismissing Butler's story as a hoax or political fantasy.",
+      "cliffhanger": "Why were the powerful plotters never brought to justice, and what does this silence truly reveal about the forces at play in America?"
+    },
+    {
+      "layer": 7,
+      "layer_name": "The Darkest Documented Truth",
+      "content": "The darkest documented truth of the Business Plot is not just that a coup attempt was planned, but that it was taken seriously enough by a Congressional committee to be confirmed. While no one faced legal consequences, the official report leaves no doubt that wealthy individuals considered drastic, illegal measures to overthrow a democratically elected president.\n\nThis incident stands as a chilling reminder of how powerful economic interests can clash with democratic principles. It exposed a willingness among certain elites to undermine the government and install a dictatorial regime, all to protect their financial interests and oppose policies they disliked. The Business Plot remains a stark warning about the hidden threats to democracy, showing how close America may have come to an unseen takeover by its own powerful citizens.",
+      "cliffhanger": null
+    }
+  ],
+  "vocabulary": {
+    "Coup Attempt": "A secret and sudden attempt by a small group to take over the government, often by force.",
+    "New Deal": "President Franklin D. Roosevelt's programs and policies in the 1930s to help the U.S. recover from the Great Depression.",
+    "Fascist": "A political system led by a dictator who has complete power, forces people to obey, and does not allow opposition or criticism.",
+    "McCormack-Dickstein Committee": "A special committee of the U.S. House of Representatives that investigated un-American activities, including the Business Plot allegations.",
+    "Industrialists": "People who own or manage large industrial companies, often with significant wealth and influence."
+  }
+}

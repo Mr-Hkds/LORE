@@ -431,9 +431,9 @@
     "project_coast_canada_experiments",
     "project_100000_mcnamaras_folly",
     "porton_down_experiments",
+    "tuskegee_syphilis_study",
     "operation_sea_spray_san_francisco",
     "project_goldfish_chemical_lsd_tests",
-    "tuskegee_syphilis_study",
     "operation_whitecoat_bio_experiments",
     "mustard_gas_experiments_us_soldiers_wwii"
   ],
@@ -918,9 +918,9 @@
     "holmesburg_prison_experiments",
     "human_radiation_experiments_us",
     "porton_down_experiments",
+    "tuskegee_syphilis_study",
     "rosenhan_experiment_001",
     "the_nocebo_effect_mind_manifests_harm",
-    "tuskegee_syphilis_study",
     "operation_whitecoat_bio_experiments"
   ],
   "addiction": [
@@ -3372,9 +3372,6 @@
   "military_hero": [
     "business_plot_1933_coup_attempt"
   ],
-  "unattributed_attacks": [
-    "unattributed_early_cold_war_cyber_espionage"
-  ],
   "macabre_reality": [
     "ed_gein_silent_butcher"
   ],
@@ -3383,6 +3380,9 @@
   ],
   "graverobbing": [
     "ed_gein_silent_butcher"
+  ],
+  "unattributed_attacks": [
+    "unattributed_early_cold_war_cyber_espionage"
   ],
   "divine_destruction": [
     "pralaya_cosmic_annihilation"
