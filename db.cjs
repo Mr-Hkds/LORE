@@ -615,7 +615,7 @@ async function seed() {
             fullStory.hook || s.hook || null,
             JSON.stringify(fullStory.concepts || s.concepts || []),
             fullStory.severity || s.severity || null,
-            fullStory.hero_image || s.hero_image || null,
+            s.hero_image || fullStory.hero_image || null,
             fullStory.added_date || s.added_date || null,
             fullStory.draft ? 1 : 0,
             JSON.stringify(fullStory.reactions || s.reactions || { gripping: 0, scared: 0, mindblown: 0, like: 0 }),

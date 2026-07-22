@@ -996,6 +996,7 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
           const filesToCommit = [
             { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
             { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+            { path: `public/content/stories/${storyObj.story_id}.json`, content: JSON.stringify(storyObj, null, 2) }
           ];
           if (imageBase64ToCommit) {
             filesToCommit.push({
@@ -1440,7 +1441,8 @@ export default function AdminPanel({ stories, localStories, setLocalStories, ref
         const newConceptIndex = rebuildConceptIndex(updatedStories);
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
-          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) }
+          { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+          { path: `public/content/stories/${storyId}.json`, content: JSON.stringify(adminObj, null, 2) }
         ];
         if (archiveResult.base64Clean) {
           filesToCommit.push({
@@ -1887,6 +1889,7 @@ ${tone}
         const filesToCommit = [
           { path: 'public/content/stories.json', content: JSON.stringify({ stories: updatedStories }, null, 2) },
           { path: 'public/content/concept_index.json', content: JSON.stringify(newConceptIndex, null, 2) },
+          { path: `public/content/stories/${finalId}.json`, content: JSON.stringify(payload, null, 2) },
           ...imageFiles
         ];
         try {
